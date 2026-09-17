@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <img width="220" alt="Open Web App — Planned" src="https://img.shields.io/badge/Open_Web_App-Planned-9ca3af?style=for-the-badge">
+  <a href="https://laurentiustaicu.github.io/romania-macro-financial-dynamics/"><img width="220" alt="Open Web App" src="https://img.shields.io/badge/Open_Web_App-Open-087F73?style=for-the-badge"></a>
   <img width="220" alt="Download Flatpak — Planned" src="https://img.shields.io/badge/Download_Flatpak-Planned-9ca3af?style=for-the-badge">
 </p>
 
@@ -21,9 +21,9 @@
 
 ## Web-first InfoClar product
 
-InfoClar is the primary product surface through scientific maturation to v1. The same browser application under [`web/`](web/) continues to accumulate the defensible model, Theory/Learn, empirical Dashboard and Auxiliary evidence/limitations surface.
+InfoClar is the primary product surface through scientific maturation to v1. The browser application is publicly deployed at [https://laurentiustaicu.github.io/romania-macro-financial-dynamics/](https://laurentiustaicu.github.io/romania-macro-financial-dynamics/) and continues to accumulate the defensible model, Theory/Learn, empirical Dashboard and Auxiliary evidence/limitations surface.
 
-The central view remains specific to the Romanian macro-financial stock-flow system (`H / C / F / G / X / BNR`). The current interface is deliberately read-only for behavioural simulation. It now exposes the longer BIS/ECB monetary vintage, prospective data roles, structural-selection and holdout outcomes, government debt maturity-vs-refixing distinctions and the explicit Alpha 0.6 gate.
+The central view remains specific to the Romanian macro-financial stock-flow system (`H / C / F / G / X / BNR`). The current interface is deliberately read-only for behavioural simulation. It exposes the longer BIS/ECB monetary vintage, prospective data roles, structural-selection and holdout outcomes, government debt maturity-vs-refixing distinctions and the explicit Alpha 0.6 gate.
 
 Native GTK/Granite/Flatpak development remains deferred until the web application is mature at or near v1. No separate application or Advanced mode is introduced.
 
@@ -102,7 +102,7 @@ python -m pip install -e '.[test]'
 python -m pytest
 ```
 
-For the current InfoClar alpha, serve `web/` with a local static HTTP server so `public/model-stage.json` can be fetched by the browser.
+For local inspection of the current InfoClar alpha, serve `web/` with a static HTTP server so `public/model-stage.json` can be fetched by the browser. Production publication is handled by the verified GitHub Pages workflow from `main`.
 
 ## Limitations
 
