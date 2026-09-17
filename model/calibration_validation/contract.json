@@ -1,0 +1,43 @@
+{
+  "contract_version": "0.5.0a0",
+  "purpose": "Calibration and validation without holdout leakage, with practical identifiability treated as a first-class scientific gate.",
+  "hard_invariants": {
+    "accounting_spine_unchanged": true,
+    "dynamic_core_unchanged": true,
+    "infoclar_v1_1_unchanged": true,
+    "alpha_0_4_evidence_history_preserved": true,
+    "missing_values_not_imputed_without_declared_method": true
+  },
+  "data_roles": ["calibration", "structural_selection", "evaluation_holdout"],
+  "role_rules": {
+    "calibration": "estimate parameters and diagnose rank/conditioning using only calibration observations",
+    "structural_selection": "compare admitted/candidate structures and baselines with expanding/rolling time-respecting origins; may inform promotion/degradation",
+    "evaluation_holdout": "inspect once only after model structure and selection judgement are fixed; cannot be reused as independent holdout for a model revised after inspection"
+  },
+  "validation_principles": [
+    "chronology_must_be_respected",
+    "simple_baselines_are_mandatory",
+    "in_sample_fit_is_not_predictive_validation",
+    "optimizer_convergence_is_not_identifiability",
+    "historical_reproduction_is_not_causal_identification",
+    "weakly_identified_parameters_are_reported_not_stabilized_by_hidden_regularization",
+    "a_failed_or_weak_mechanism_is_degraded_instead_of_protected_by_extra_complexity"
+  ],
+  "required_outputs": [
+    "historical_reproduction_metrics",
+    "parameter_assessment",
+    "practical_identifiability_diagnostics",
+    "sensitivity_analysis",
+    "time_respecting_structural_selection",
+    "final_holdout_metrics_where_data_permit",
+    "simple_baseline_comparison",
+    "explicit_uncertainty_and_limitations",
+    "mechanism_disposition"
+  ],
+  "baseline_policy": {
+    "monetary_pass_through": ["persistence", "constant_policy_spread"],
+    "reason": "A behavioural mechanism must demonstrate value beyond simple time-series persistence or a stable spread before it is promoted."
+  },
+  "central_model_rule": "Only mechanisms that pass data sufficiency, practical-identifiability, structural-selection and evaluation gates may enter a validated reference model. Failure at an earlier gate cannot be rescued by inspecting or fitting the final holdout.",
+  "alpha_0_6_gate": "Interactive Web Simulator may expose calibrated behavioural dynamics only if Alpha 0.5 produces at least one scientifically defensible validated reference mechanism; otherwise 0.6 requires a scope decision rather than automatic progression."
+}
