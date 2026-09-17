@@ -1,0 +1,74 @@
+{
+  "contract_version": "1.0",
+  "stage_type": "cross_cutting_product_architecture_recovery",
+  "inherits": {
+    "standard": "InfoClar Model Suite Design Standard v1.1",
+    "workspace": "model/registries/workspace_contract.json",
+    "design_tokens": "model/registries/design_tokens.json"
+  },
+  "scientific_invariance": {
+    "alpha_0_1_through_0_5_2_results_unchanged": true,
+    "accounting_spine_unchanged": true,
+    "dynamic_core_unchanged": true,
+    "empirical_dynamics_results_unchanged": true,
+    "validated_behavioural_reference_mechanisms": 0,
+    "alpha_0_6_gate": "NO_GO",
+    "behavioural_simulator_enabled": false,
+    "household_delta_policy_form_frozen_for_prospective_confirmation": true,
+    "no_synthetic_missing_values": true,
+    "no_new_behavioural_mechanism": true
+  },
+  "product_principle": "overview -> filter/zoom -> details on demand",
+  "model_panel": {
+    "dominant_surface": true,
+    "primary_view": "explorable_macro_financial_map",
+    "required_sectors": ["H", "C", "F", "G", "BNR", "X"],
+    "layers": ["overview", "real", "fiscal", "financial", "balance", "external", "feedback"],
+    "required_relationship_families": ["wages", "consumption", "investment", "taxes", "social_contributions", "transfers", "government_spending", "loans", "deposits", "interest", "government_securities", "refinancing", "exports", "imports", "central_bank_reserves", "monetary_policy_candidate"],
+    "interaction": {
+      "node_selection": ["highlight_incoming", "highlight_outgoing", "highlight_neighbours", "open_contextual_theory", "open_evidence_details"],
+      "edge_selection": ["highlight_endpoints", "show_definition", "show_unit", "show_period", "show_value_if_available", "show_sources", "show_epistemic_role", "show_limit", "open_contextual_theory"],
+      "diagnostic_selection": ["highlight_exact_map_objects", "preserve_diagnostic_context"],
+      "essential_information_requires_hover": false,
+      "keyboard_activation": ["Enter", "Space"]
+    },
+    "epistemic_classes_must_be_distinguishable": ["OBSERVED", "SOURCE_IDENTIFIED", "ACCOUNTING_RELATION", "CONCEPTUAL", "CANDIDATE", "DEFERRED"],
+    "missing_value_rule": "null stays unavailable; never display or imply zero"
+  },
+  "dashboard_panel": {
+    "purpose": "macro_financial_problems_imbalances_and_vulnerabilities",
+    "forbidden_primary_metrics": ["software_version", "alpha_stage", "variable_count", "source_count", "calibration_status_as_product_kpi"],
+    "required_diagnostic_fields": ["problem", "why", "direction", "state", "basis", "uncertainty", "map_objects", "severity_basis"],
+    "required_diagnostics": ["external_imbalance", "fiscal_imbalance", "sovereign_repricing", "fx_sovereign_exposure", "monetary_transmission_gap"],
+    "threshold_rule": "Use an official or well-founded benchmark only when the definition and period match; otherwise state qualitative/institutional/model-evidence criteria explicitly.",
+    "dashboard_to_map_link_required": true
+  },
+  "theory_panel": {
+    "mode": "contextual_excerpt_plus_complete_reader",
+    "bilingual": ["en", "ro"],
+    "default_language": "en",
+    "required_topics": ["money-circuit", "institutional-sectors", "stocks-flows", "flow-of-funds", "bank-money", "credit-deposits", "bnr-monetary-policy", "monetary-transmission", "fiscal-debt", "government-securities", "external-sector", "saving-investment", "assets-liabilities", "feedback-delays", "macro-imbalances", "data-provenance", "calibration-validation", "model-limits"],
+    "full_chapter_access": true,
+    "glossary": true,
+    "references": true,
+    "map_to_theory_link_required": true
+  },
+  "auxiliary_panel": {
+    "reserved_for": ["sources", "provenance", "evidence", "uncertainty", "limitations", "methodological_details", "technical_definitions"],
+    "development_metadata_on_primary_surface": false,
+    "must_not_duplicate_full_theory": true
+  },
+  "accessibility": {
+    "bilingual_controls": true,
+    "keyboard_map_objects": true,
+    "focus_visible": true,
+    "aria_live_context": true,
+    "no_colour_only_semantics": true,
+    "responsive_reflow": true,
+    "model_first_on_small_screens": true
+  },
+  "native": {
+    "flatpak_started": false,
+    "status": "deferred_near_v1"
+  }
+}
