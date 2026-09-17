@@ -1,0 +1,70 @@
+name: InfoClar Pages
+
+on:
+  pull_request:
+    paths:
+      - 'web/**'
+      - 'scripts/build_web.py'
+      - '.github/workflows/pages.yml'
+      - 'model/calibration_validation/**'
+  push:
+    branches:
+      - main
+    paths:
+      - 'web/**'
+      - 'scripts/build_web.py'
+      - '.github/workflows/pages.yml'
+      - 'model/calibration_validation/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Build canonical InfoClar site
+        run: python scripts/build_web.py
+
+      - name: Verify built project-site entrypoint
+        run: |
+          test -f dist/pages/index.html
+          test -f dist/pages/public/model-stage.json
+          grep -q 'InfoClar' dist/pages/index.html
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist/pages
+
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Deploy verified build artifact
+        id: deployment
+        uses: actions/deploy-pages@v4
