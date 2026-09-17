@@ -11,7 +11,9 @@ DESTINATION = ROOT / "dist" / "pages"
 REQUIRED = (
     "index.html",
     "styles.css",
+    "product-v2-overrides.css",
     "app.js",
+    "product-v2-enhancements.js",
     "public/icon.svg",
     "public/model-stage.json",
     "public/product-architecture.json",
@@ -69,6 +71,8 @@ def main() -> None:
     for required_id in ("stock-tab", "flow-tab", "layer-toolbar", "flow-matrix", "diagnostic-cards", "stress-tests", "theory-reader", "research-provenance"):
         if f'id="{required_id}"' not in html:
             raise SystemExit(f"Missing required product surface: {required_id}")
+    if "product-v2-overrides.css" not in html or "product-v2-enhancements.js" not in html:
+        raise SystemExit("Product Recovery v2 responsive/change-status guards are not wired into the published surface")
 
     if DESTINATION.exists():
         shutil.rmtree(DESTINATION)
