@@ -1,0 +1,58 @@
+{
+  "disposition_version": "0.5.1a0",
+  "stage": "Validation Recovery / Empirical Basis Expansion",
+  "validated_reference_behavioural_mechanisms": 0,
+  "mechanisms_tested": [
+    {
+      "id": "monetary_policy_household_housing_lending_pass_through",
+      "boundary": "monthly BNR policy rate -> monthly RON new-business household/NPISH house-purchase lending rate",
+      "candidate_equation": "lend[t] = lend[t-1] + beta * (policy[t]-policy[t-1])",
+      "parameter_provenance": "beta fitted only from observations preceding each structural-selection origin; final frozen beta fitted through 2025-01 before holdout",
+      "identifiability": "PASS_BEFORE_HOLDOUT",
+      "baseline_result": "Structural-selection RMSE 0.168695 vs persistence 0.183521; final holdout candidate RMSE 0.057271 equals persistence 0.057271 because there were zero policy-rate changes.",
+      "sensitivity": "±10% beta has no effect in final holdout because Δpolicy=0 throughout the holdout; this is non-informative sensitivity, not evidence of robustness.",
+      "time_respecting_validation": "25 expanding-origin selection months followed by one first-and-only 10-month fresh holdout.",
+      "rejection_criteria_result": "Fails preregistered final RMSE-improvement gate versus persistence.",
+      "final_verdict": "CANDIDATE",
+      "reason": "Evidence and structural selection support a parsimonious response form, but the fresh evaluation window contains no policy-rate event and therefore cannot independently discriminate pass-through from persistence."
+    },
+    {
+      "id": "monetary_policy_nfc_upto1y_lending_pass_through",
+      "boundary": "monthly BNR policy rate -> monthly RON NFC new-business lending rate with variable/initial fixation up to one year",
+      "candidate_equations_tested": ["delta_policy_contemporaneous","delta_policy_lag1","anchored_partial_adjustment","static_affine_policy_level"],
+      "parameter_provenance": "calibration/expanding-origin estimates from 2017-08..2025-01 only",
+      "identifiability": "SUFFICIENT_DRIVER_VARIATION_FOR_TESTED_FORMS",
+      "baseline_result": "Best direct delta-policy candidate structural-selection RMSE 0.231593 vs persistence 0.216629; no preregistered form passes every selection gate.",
+      "sensitivity": "Final-holdout sensitivity not run because holdout opening was not authorized after selection failure.",
+      "time_respecting_validation": "25 expanding-origin selection months; final holdout deliberately remains unopened.",
+      "rejection_criteria_result": "Fails structural-selection improvement gate before final evaluation.",
+      "final_verdict": "CANDIDATE",
+      "reason": "The existence of monetary transmission is not rejected, but every tested parsimonious NFC form fails the predictive selection gate."
+    },
+    {
+      "id": "government_refinancing_effective_rate",
+      "boundary": "MoF government debt portfolio effective-rate repricing",
+      "candidate_equation": "effective_rate[t] = (1-m[t])*effective_rate[t-1] + m[t]*marginal_market_yield[t]",
+      "parameter_provenance": "No m estimated; no redemption ratio, strategic target or one auction yield is substituted for m.",
+      "identifiability": "NOT_POINT_IDENTIFIABLE_AT_CURRENT_AGGREGATION",
+      "baseline_result": "Not applicable: the boundary-matched inputs required to estimate the aggregate equation do not exist as one reconciled series.",
+      "sensitivity": "Not run because the parameter is not definitionally identified.",
+      "time_respecting_validation": "Not opened; empirical gate fails before estimation.",
+      "rejection_criteria_result": "Aggregate form cannot be calibrated without synthetic allocation across maturity, currency and fixed/floating-rate blocks.",
+      "final_verdict": "DEFERRED",
+      "reason": "Official data distinguish maturity and refixing and provide heterogeneous stock costs and issuance yields; an instrument-level repricing ledger is required before activation."
+    }
+  ],
+  "other_alpha_0_4_mechanisms": {
+    "opened_in_this_cycle": false,
+    "reason": "No additional mechanism was promoted opportunistically after the two priority directions. Each requires its own future prospective data/selection cycle."
+  },
+  "alpha_0_6_gate": "NO_GO",
+  "alpha_0_6_reason": "No behavioural reference mechanism is prospectively validated. The only monetary candidate that passed structural selection cannot be distinguished from persistence on its fresh holdout, and government repricing remains boundary-unidentified.",
+  "next_empirical_path": [
+    "Preserve MIR observations from 2026-08 onward as a prospective confirmation holdout and do not revise the selected household delta-policy form using those observations before first formal confirmation.",
+    "Accumulate a fresh policy-rate easing/tightening episode so the confirmation holdout contains identifying driver variation.",
+    "Build a government repricing ledger by instrument, currency and fixed/floating status, with realized reset/maturity dates, repriced principal and matched old/new effective rates.",
+    "Only after one of these paths passes a newly preregistered validation gate may the Alpha 0.6 behavioural simulator gate be reconsidered."
+  ]
+}
