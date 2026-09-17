@@ -1,0 +1,61 @@
+name: Product Visual Audit
+
+on:
+  push:
+    branches: [product-architecture-recovery-contract-v2]
+  pull_request:
+    paths:
+      - 'web/**'
+      - 'scripts/build_web.py'
+      - 'scripts/capture_product_ui.mjs'
+      - 'tests/test_product_contract_v2.py'
+      - '.github/workflows/product-visual-audit.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  visual-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Build exact Pages artifact
+        run: python scripts/build_web.py
+
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Serve built product
+        run: |
+          python -m http.server 4173 --directory dist/pages > /tmp/rmfd-product-server.log 2>&1 &
+          echo $! > /tmp/rmfd-product-server.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/rmfd-product-server.log
+          exit 1
+
+      - name: Render and inspect desktop/mobile captures
+        env:
+          BASE_URL: http://127.0.0.1:4173/
+        run: node scripts/capture_product_ui.mjs
+
+      - name: Upload visual audit captures
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-visual-audit
+          path: artifacts/ui-audit/*.png
+          if-no-files-found: error
+          retention-days: 14
