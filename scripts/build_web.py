@@ -10,6 +10,7 @@ DESTINATION = ROOT / "dist" / "pages"
 
 REQUIRED = (
     "index.html",
+    "suite-tokens.css",
     "styles.css",
     "app.js",
     "theory-merge.js",
@@ -60,6 +61,10 @@ def main() -> None:
     for forbidden in ('href="/', 'src="/'):
         if forbidden in html:
             raise SystemExit(f"Project-site-incompatible absolute path found: {forbidden}")
+
+    styles = (DESTINATION / "styles.css").read_text(encoding="utf-8")
+    if '@import url("suite-tokens.css")' not in styles:
+        raise SystemExit("Macro must import the World3-canonical suite token file")
 
     print(f"Built InfoClar Pages artifact at {DESTINATION}")
 
