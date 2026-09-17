@@ -1,10 +1,11 @@
 {
-  "registry_version": "0.1.0a0",
-  "default_language": "ro",
-  "supported_languages": ["ro", "en"],
+  "registry_version": "0.2.1a0",
+  "default_language": "en",
+  "supported_languages": ["en", "ro"],
   "benchmark": {"stock_date":"2025-12-31","annual_flow_start":"2025-01-01","annual_flow_end":"2025-12-31"},
   "scientific_statuses": ["ACCOUNTING_IDENTITY","OBSERVED_EMPIRICAL","BEHAVIOURAL_CANDIDATE","CALIBRATED_RELATION","ASSUMPTION","EXOGENOUS_INPUT","DIAGNOSTIC_ONLY"],
   "missing_value_token": "TBD",
   "canonical_model_runtime": "python",
-  "xmile_role": "future_interoperability_export_import"
+  "xmile_role": "future_interoperability_export_import",
+  "product_standard": {"name":"InfoClar Model Suite Design Standard","version":"1.1","scientific_semantics_unchanged":true}
 }
