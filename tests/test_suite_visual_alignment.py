@@ -6,6 +6,7 @@ ROOT = Path(__file__).resolve().parents[1]
 TOKENS = (ROOT / "web/suite-tokens.css").read_text(encoding="utf-8")
 STYLES = (ROOT / "web/styles.css").read_text(encoding="utf-8")
 HTML = (ROOT / "web/index.html").read_text(encoding="utf-8")
+CONTRACT = json.loads((ROOT / "web/world3-visual-parity-contract.json").read_text(encoding="utf-8"))
 
 
 def token(name: str) -> str:
@@ -14,76 +15,117 @@ def token(name: str) -> str:
     return match.group(1).strip()
 
 
-def test_world3_canonical_base_tokens_are_exact():
-    assert "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont" in TOKENS
-    assert token("--suite-root-background") == "#f5f6f8"
-    assert token("--suite-page-background") == "#f8f9fb"
-    assert token("--suite-surface") == "#ffffff"
-    assert token("--suite-border") == "#dfe3e8"
-    assert token("--suite-text") == "#28313d"
-    assert token("--suite-text-muted") == "#687384"
-    assert token("--suite-accent") == "#5d5fef"
-    assert token("--suite-shadow") == "0 8px 28px rgba(35, 45, 60, 0.08)"
-    assert token("--suite-panel-radius") == "14px"
-    assert token("--suite-control-radius") == "9px"
-    assert token("--suite-header-height") == "76px"
-    assert token("--suite-brand-icon-size") == "42px"
-    assert token("--suite-title-size") == "18px"
-    assert token("--suite-subtitle-size") == "12px"
+def test_parity_contract_is_pinned_to_world3_product_recovery():
+    assert CONTRACT["canonical_repository"] == "LaurentiuStaicu/world3-empirical-flatpak"
+    assert CONTRACT["canonical_pr"] == 10
+    assert CONTRACT["canonical_branch"] == "product/world3-usefulness-recovery"
+    assert CONTRACT["canonical_head"] == "51e236b61a0ec169bc8f28d4f8192e450ab6bd6d"
+    assert CONTRACT["canonical_file"] == "web/src/style.css"
+    assert CONTRACT["automatic_dark_mode"] is False
 
 
-def test_macro_cannot_reintroduce_legacy_visual_system():
+def test_world3_product_recovery_shared_primitives_are_exact():
+    p = CONTRACT["shared_primitives"]
+    assert p["font_family"] in TOKENS
+    mapping = {
+        "root_background": "--suite-root-background",
+        "page_background": "--suite-page-background",
+        "surface": "--suite-surface",
+        "text": "--suite-text",
+        "muted_text": "--suite-text-muted",
+        "border": "--suite-border",
+        "link": "--suite-link",
+        "shadow": "--suite-shadow",
+        "panel_radius": "--suite-panel-radius",
+        "control_radius": "--suite-control-radius",
+        "control_border": "--suite-control-border",
+        "control_hover": "--suite-control-hover",
+        "language_active": "--suite-control-active",
+        "language_active_text": "--suite-control-active-text",
+        "header_height": "--suite-header-height",
+        "header_gap": "--suite-header-gap",
+        "brand_gap": "--suite-brand-gap",
+        "brand_icon_size": "--suite-brand-icon-size",
+        "title_size": "--suite-title-size",
+        "subtitle_size": "--suite-subtitle-size",
+        "main_max_width": "--suite-main-max-width",
+        "primary_panel_gap": "--suite-primary-gap",
+        "question_band_min_height": "--suite-question-min-height",
+        "question_band_margin_bottom": "--suite-question-margin-bottom",
+        "mobile_brand_icon_size": "--suite-mobile-brand-icon-size",
+        "mobile_primary_radius": "--suite-mobile-panel-radius",
+    }
+    for contract_key, token_name in mapping.items():
+        assert token(token_name) == p[contract_key], f"{contract_key} drifted from World3"
+    assert f"{token('--suite-header-padding-y')} {token('--suite-header-padding-x')}" == p["header_padding"]
+    assert f"{token('--suite-main-padding-y')} {token('--suite-main-padding-x')} {token('--suite-main-padding-bottom')}" == p["main_padding"]
+    assert f"{token('--suite-mobile-header-padding-y')} {token('--suite-mobile-header-padding-x')}" == p["mobile_header_padding"]
+    assert f"{token('--suite-mobile-main-padding-y')} {token('--suite-mobile-main-padding-x')} {token('--suite-mobile-main-padding-bottom')}" == p["mobile_main_padding"]
+
+
+def test_macro_cannot_reintroduce_old_suite_or_macro_dark_mode():
     assert '@import url("suite-tokens.css")' in STYLES
-    for legacy in ("#2457d6", "#172033", "#d8dfeb", "0 10px 30px rgba(20,38,70,.08)"):
+    for legacy in (
+        "#2457d6", "#172033", "#d8dfeb", "#28313d", "#f5f6f8", "#dfe3e8",
+        "0 8px 28px rgba(35, 45, 60, 0.08)", "76px"
+    ):
         assert legacy not in STYLES
-    assert "border-radius: 16px" not in STYLES
+        assert legacy not in TOKENS
+    assert "color-scheme: light dark" not in STYLES
+    assert "prefers-color-scheme: dark" not in STYLES
+    assert "prefers-color-scheme: dark" not in TOKENS
 
 
-def test_header_uses_world3_suite_grammar_and_integrated_navigation():
-    assert 'class="suite-header"' in HTML
-    assert 'class="brand-icon"' in HTML
-    assert 'class="header-meta"' in HTML
-    assert 'class="language-switch"' in HTML
-    assert 'class="primary-nav"' not in HTML
+def test_header_is_world3_product_recovery_component_grammar():
+    assert 'class="product-header"' in HTML
+    assert 'class="brand"' in HTML
+    assert 'class="lang"' in HTML
+    assert 'class="quiet"' in HTML
+    assert 'class="suite-header"' not in HTML
+    assert 'header-meta' not in HTML
+    assert 'nav-chip' not in HTML
     assert 'width="42" height="42"' in HTML
+    assert "min-height:var(--suite-header-height)" in STYLES
+    assert "gap:var(--suite-header-gap)" in STYLES
 
 
-def test_flow_of_funds_remains_dominant_and_secondary_surfaces_are_progressive():
+def test_page_shell_matches_world3_product_recovery_grammar():
+    assert 'class="question-band"' in HTML
+    assert "max-width:var(--suite-main-max-width)" in STYLES
+    assert "padding:var(--suite-main-padding-y) var(--suite-main-padding-x) var(--suite-main-padding-bottom)" in STYLES
+    assert "box-shadow:var(--suite-shadow)" in STYLES
+    assert "border-radius:var(--suite-panel-radius)" in STYLES
+    assert "grid-template-columns:minmax(0,3fr) minmax(270px,1fr)" in STYLES
+
+
+def test_flow_of_funds_function_and_progressive_disclosure_are_preserved():
     assert HTML.index('id="model-panel"') < HTML.index('id="dashboard-panel"')
     assert 'FLOW-OF-FUNDS / SECTORAL BALANCE-SHEET EXPLORER' in HTML
+    for id_ in ("stock-view", "flow-view", "matrix-tab", "layer-toolbar", "system-map", "map-inspector", "flow-matrix"):
+        assert f'id="{id_}"' in HTML
     assert '<details id="theory-panel"' in HTML
     assert '<details id="stress-panel"' in HTML
     assert '<details id="auxiliary-panel"' in HTML
-    assert "grid-template-columns: minmax(0, 2.1fr) minmax(320px, 0.8fr)" in STYLES
 
 
-def test_map_clutter_controls_are_visual_not_semantic_rewrites():
-    assert ".edge-label" in STYLES
-    assert "opacity: 0" in STYLES
-    assert ".edge-group:hover .edge-label" in STYLES
-    assert ".edge-group:has(.map-edge.related) .edge-label" in STYLES
-    assert ".dimmed { opacity: 0.1 !important; }" in STYLES
+def test_semantic_overlays_do_not_redefine_suite_chrome():
+    for semantic in ("--risk-high", "--risk-moderate", "--risk-low", "--flow-observed", "--flow-conceptual", "--flow-candidate"):
+        assert semantic in STYLES
+    for forbidden_redefinition in ("--suite-page-background:", "--suite-surface:", "--suite-text:", "--suite-border:", "--suite-shadow:"):
+        assert forbidden_redefinition not in STYLES
 
 
-def test_vulnerability_monitor_uses_calm_progressive_strip():
-    assert "grid-auto-flow: column" in STYLES
-    assert "overflow-x: auto" in STYLES
-    assert ".diagnostic-card > p:not(.diag-value) { display: none; }" in STYLES
-    assert ".diagnostic-card.active > p { display: block; }" in STYLES
+def test_responsive_grammar_matches_world3_product_recovery_breakpoints():
+    compact = STYLES.replace(" ", "")
+    assert "@media(max-width:1180px)" in compact
+    assert "@media(max-width:980px)" in compact
+    assert "@media(max-width:680px)" in compact
+    assert "@media(max-width:420px)" in compact
+    assert "overflow-x:clip" in compact
+    assert "@media(prefers-reduced-motion:reduce)" in compact
 
 
-def test_responsive_and_dark_mode_tokens_are_present():
-    assert "@media (max-width: 1120px)" in STYLES
-    assert "@media (max-width: 620px)" in STYLES
-    assert "overflow-x: hidden" in STYLES
-    assert "@media (prefers-color-scheme: dark)" in TOKENS
-    assert "--suite-surface: #20242b" in TOKENS
-    assert "--suite-page-background: #171a1f" in TOKENS
-    assert "--suite-border: #353b44" in TOKENS
-    assert "--suite-text-muted: #a4adba" in TOKENS
-
-
-def test_scientific_state_is_unchanged_by_visual_recovery():
+def test_scientific_state_is_unchanged_by_strict_visual_recovery():
     architecture = json.loads((ROOT / "web/public/product-architecture.json").read_text(encoding="utf-8"))
     science = architecture["scientific_state"]
     assert science["results_alpha_0_1_to_0_5_2_frozen"] is True
