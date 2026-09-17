@@ -4,103 +4,41 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Romania Macro-Financial Dynamics — InfoClar</title>
-  <meta name="description" content="Explore how money, financial claims and macro-financial vulnerabilities connect across Romania's institutional sectors.">
+  <meta name="description" content="Interactive flow-of-funds, sectoral balance-sheet and macro-financial vulnerability map for Romania.">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <a class="skip-link" href="#workspace">Skip to model workspace</a>
-  <header class="app-header">
-    <div class="brand-block">
-      <img src="public/icon.svg" width="46" height="46" alt="">
-      <div>
-        <h1>Romania Macro-Financial Dynamics</h1>
-        <p class="product-subtitle" data-i18n="productSubtitle">Explore how money, financial claims and vulnerabilities connect across the Romanian macro-financial system.</p>
+<a class="skip-link" href="#workspace">Skip to model workspace</a>
+<header class="app-header">
+  <div class="brand-block"><img src="public/icon.svg" width="46" height="46" alt=""><div><h1>Romania Macro-Financial Dynamics</h1><p class="product-subtitle" data-i18n="productSubtitle">Trace who finances whom, who owes whom, where vulnerabilities accumulate and how accounting exposures connect across Romania.</p></div></div>
+  <div class="language-switch" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="ro" aria-pressed="false">RO</button></div>
+</header>
+<nav class="primary-nav" aria-label="Primary navigation"><a href="#model-panel">Flow of Funds</a><a href="#dashboard-panel">Vulnerability Monitor</a><a href="#stress-panel">Accounting Stress</a><a href="#theory-panel">Theory / Learn</a><a href="#auxiliary-panel">Evidence & limits</a></nav>
+<main id="workspace" class="workspace">
+  <section id="model-panel" class="panel model-panel" aria-labelledby="model-heading">
+    <div class="panel-heading-row"><div><p class="eyebrow">FLOW-OF-FUNDS / SECTORAL BALANCE SHEETS</p><h2 id="model-heading">Who finances whom, who owes whom, and through which instrument?</h2><p class="panel-intro">Use layers, select a sector or relationship, or inspect the bilateral matrix. Unknown bilateral values stay unknown; they are never silently treated as zero.</p></div><button id="reset-map" class="secondary-button" type="button">Reset</button></div>
+    <div id="layer-toolbar" class="layer-toolbar" aria-label="Map layers"></div>
+    <div class="map-key"><span><i class="key-line solid"></i>Observed / accounting</span><span><i class="key-line dotted"></i>Conceptual accounting relation</span><span><i class="key-line dashed"></i>Candidate / deferred feedback</span></div>
+    <div class="model-mode-tabs" role="tablist" aria-label="Model view"><button id="map-tab" type="button" role="tab" aria-selected="true">Network map</button><button id="matrix-tab" type="button" role="tab" aria-selected="false">From-whom-to-whom matrix</button></div>
+    <div id="network-view" class="map-shell">
+      <div class="diagram-wrap" role="region" aria-label="Interactive macro-financial map" tabindex="0">
+        <svg id="system-map" class="system-map" viewBox="0 0 920 670" role="img" aria-labelledby="map-title map-desc"><title id="map-title">Romania macro-financial flow-of-funds map</title><desc id="map-desc">Interactive sector map covering real, fiscal, money and credit, balance-sheet, external and dynamic-feedback layers.</desc><defs><marker id="arrow-established" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z"></path></marker><marker id="arrow-conceptual" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z"></path></marker><marker id="arrow-candidate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z"></path></marker></defs><g id="map-edges"></g><g id="map-nodes"></g></svg>
       </div>
+      <aside id="map-inspector" class="map-inspector" aria-live="polite" aria-label="Selected object details"></aside>
     </div>
-    <div class="language-switch" role="group" aria-label="Language">
-      <button type="button" data-lang="en" aria-pressed="true">EN</button>
-      <button type="button" data-lang="ro" aria-pressed="false">RO</button>
-    </div>
-  </header>
+    <div id="matrix-view" hidden><div class="matrix-toolbar"><label>Instrument <select id="matrix-instrument"></select></label><span id="matrix-note"></span></div><div class="table-scroll"><table id="flow-matrix" class="flow-matrix"><caption>Holder / creditor by issuer / debtor matrix</caption><thead></thead><tbody></tbody></table></div></div>
+    <div class="science-guardrail" role="note"><strong>Scientific guardrail:</strong> this surface exposes accounting relations, observed positions and candidate feedbacks. It is not a behavioural forecast simulator; Alpha 0.6 remains NO-GO.</div>
+  </section>
 
-  <nav class="primary-nav" aria-label="Primary navigation">
-    <a href="#model-panel" data-i18n="navModel">Model</a>
-    <a href="#theory-panel" data-i18n="navTheory">Theory / Learn</a>
-    <a href="#dashboard-panel" data-i18n="navDashboard">Dashboard</a>
-    <a href="#auxiliary-panel" data-i18n="navAuxiliary">Evidence & limits</a>
-  </nav>
+  <aside id="theory-panel" class="panel theory-panel" aria-labelledby="theory-heading"><p class="eyebrow">CONTEXTUAL MANUAL</p><h2 id="theory-heading">Theory / Learn</h2><div id="theory-context" class="theory-context" aria-live="polite"></div><div class="reader-actions"><button id="open-chapter" type="button">Open full chapter</button><button id="open-glossary" type="button">Glossary</button><button id="open-references" type="button">References</button></div><div id="theory-reader" class="theory-reader" hidden aria-live="polite"></div></aside>
 
-  <main id="workspace" class="workspace">
-    <section id="model-panel" class="panel model-panel" aria-labelledby="model-heading">
-      <div class="panel-heading-row">
-        <div>
-          <p class="eyebrow" data-i18n="modelEyebrow">Explorable macro-financial system</p>
-          <h2 id="model-heading" data-i18n="modelHeading">How money and financial claims move through the economy</h2>
-          <p class="panel-intro" data-i18n="modelIntro">Start with the whole system, filter a layer, then select a sector or relationship for details. Missing values remain explicitly unavailable.</p>
-        </div>
-        <button id="reset-map" class="secondary-button" type="button" data-i18n="resetMap">Reset view</button>
-      </div>
+  <section id="dashboard-panel" class="panel dashboard-panel" aria-labelledby="dashboard-heading"><p class="eyebrow">MACRO-FINANCIAL IMBALANCE & VULNERABILITY MONITOR</p><h2 id="dashboard-heading">Where are Romania's main macro-financial pressures?</h2><p class="panel-intro">Each diagnostic states its definition, period, source, benchmark only when definitionally compatible, and uncertainty. Selecting a card traces the implicated sectors and relations on the map.</p><div id="diagnostic-cards" class="diagnostic-grid" aria-live="polite"></div></section>
 
-      <div class="layer-toolbar" aria-label="Map layers" id="layer-toolbar"></div>
-      <div class="map-key" aria-label="Epistemic map key">
-        <span><i class="key-line solid"></i><span data-i18n="establishedRelation">Accounting / observed-domain relation</span></span>
-        <span><i class="key-line dotted"></i><span data-i18n="conceptualRelation">Conceptual relation</span></span>
-        <span><i class="key-line dashed"></i><span data-i18n="candidateRelation">Candidate / deferred mechanism</span></span>
-      </div>
+  <section id="stress-panel" class="panel stress-panel" aria-labelledby="stress-heading"><p class="eyebrow">ACCOUNTING / EXPOSURE STRESS</p><h2 id="stress-heading">Mechanical exposure tests — not forecasts</h2><p class="panel-intro">These tests change an accounting price, valuation or stock input and show direct balance-sheet exposure only. They do not simulate consumption, investment, credit supply, FX reactions, fiscal reaction or behavioural feedbacks.</p><div id="stress-tests" class="stress-grid"></div><div id="stress-output" class="stress-output" aria-live="polite"></div></section>
 
-      <div class="map-shell">
-        <div class="diagram-wrap" role="region" aria-label="Interactive macro-financial map" tabindex="0">
-          <svg id="system-map" class="system-map" viewBox="0 0 880 650" role="img" aria-labelledby="map-title map-desc">
-            <title id="map-title">Romania macro-financial system map</title>
-            <desc id="map-desc">Interactive institutional-sector map with real, fiscal, financial, balance-sheet, external and candidate feedback relationships.</desc>
-            <defs>
-              <marker id="arrow-established" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z"></path></marker>
-              <marker id="arrow-conceptual" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z"></path></marker>
-              <marker id="arrow-candidate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z"></path></marker>
-            </defs>
-            <g id="map-edges"></g>
-            <g id="map-nodes"></g>
-          </svg>
-        </div>
-        <aside id="map-inspector" class="map-inspector" aria-live="polite" aria-label="Selected map object details"></aside>
-      </div>
-
-      <div class="science-guardrail" role="note">
-        <strong data-i18n="guardrailTitle">Scientific guardrail:</strong>
-        <span data-i18n="guardrailBody">this is an evidence-aware explanatory map, not a behavioural simulator. Candidate and deferred mechanisms cannot generate simulated outcomes.</span>
-      </div>
-    </section>
-
-    <aside id="theory-panel" class="panel theory-panel" aria-labelledby="theory-heading">
-      <p class="eyebrow" data-i18n="theoryEyebrow">Contextual theory</p>
-      <h2 id="theory-heading" data-i18n="theoryHeading">Theory / Learn</h2>
-      <div id="theory-context" class="theory-context" aria-live="polite"></div>
-      <div class="reader-actions" role="group" aria-label="Theory reader controls">
-        <button id="open-chapter" type="button" data-i18n="openChapter">Open full chapter</button>
-        <button id="open-glossary" type="button" data-i18n="glossary">Glossary</button>
-        <button id="open-references" type="button" data-i18n="references">References</button>
-      </div>
-      <div id="theory-reader" class="theory-reader" hidden aria-live="polite"></div>
-    </aside>
-
-    <section id="dashboard-panel" class="panel dashboard-panel" aria-labelledby="dashboard-heading">
-      <p class="eyebrow" data-i18n="dashboardEyebrow">Macro-financial diagnosis</p>
-      <h2 id="dashboard-heading" data-i18n="dashboardHeading">Problems, imbalances and vulnerabilities</h2>
-      <p class="panel-intro" data-i18n="dashboardIntro">These cards use official institutional assessments, observed composition or explicit model-evidence status. No private severity thresholds are invented.</p>
-      <div id="diagnostic-cards" class="diagnostic-grid" aria-live="polite"></div>
-    </section>
-
-    <aside id="auxiliary-panel" class="panel auxiliary-panel" aria-labelledby="auxiliary-heading">
-      <p class="eyebrow" data-i18n="auxiliaryEyebrow">Evidence and interpretation</p>
-      <h2 id="auxiliary-heading" data-i18n="auxiliaryHeading">Sources, provenance & limits</h2>
-      <div id="auxiliary-content" aria-live="polite"></div>
-    </aside>
-  </main>
-
-  <footer class="app-footer">
-    <p data-i18n="footerText">InfoClar organizes scientific complexity for inspection. Unresolved data stay unresolved, and behavioural simulation stays disabled until its scientific gate is met.</p>
-  </footer>
-
-  <script src="app.js" defer></script>
+  <aside id="auxiliary-panel" class="panel auxiliary-panel" aria-labelledby="auxiliary-heading"><p class="eyebrow">EVIDENCE, PROVENANCE & LIMITS</p><h2 id="auxiliary-heading">What is known, inferred, unresolved or only a candidate?</h2><div id="auxiliary-content" aria-live="polite"></div></aside>
+</main>
+<footer class="app-footer"><p>InfoClar keeps observed facts, accounting identities, conceptual links and behavioural candidates visibly distinct. Missing bilateral data remain missing.</p></footer>
+<script src="app.js" defer></script>
 </body>
 </html>
