@@ -1,0 +1,91 @@
+{
+  "ledger_version": "0.2.0a0",
+  "benchmark": "2025",
+  "principle": "Record residuals and unresolved coverage explicitly; never force accounting closure with invented allocations.",
+  "instrument_gates": [
+    {
+      "instrument": "F3",
+      "priority": 1,
+      "stock_matrix_status": "PARTIAL_SOURCE_COVERAGE",
+      "flow_matrix_status": "TBD",
+      "asset_liability_residual": null,
+      "residual_status": "TBD_UNTIL_COMPARABLE_TOTALS_EXIST",
+      "known_issues": [
+        "Verified government-to-rest-of-world source is long-term only, not all-maturity F3.",
+        "Maastricht debt is consolidated and conceptually broader/different from an F3 WTWTW cell.",
+        "Aggregate non-resident F3 holdings of the total economy cannot be assigned to government without counterpart evidence."
+      ]
+    },
+    {
+      "instrument": "F2",
+      "priority": 2,
+      "stock_matrix_status": "TBD",
+      "flow_matrix_status": "TBD",
+      "asset_liability_residual": null,
+      "residual_status": "TBD_UNTIL_COMPARABLE_TOTALS_EXIST",
+      "known_issues": ["Money aggregates are not substitutes for sectoral ESA F2 positions."]
+    },
+    {
+      "instrument": "F4",
+      "priority": 3,
+      "stock_matrix_status": "AGGREGATE_CONTROL_AVAILABLE",
+      "flow_matrix_status": "TBD",
+      "asset_liability_residual": null,
+      "residual_status": "TBD_UNTIL_COMPARABLE_TOTALS_EXIST",
+      "known_issues": ["Government F4 asset aggregate is not itself a bilateral holder-by-issuer allocation."]
+    },
+    {
+      "instrument": "F8",
+      "priority": 4,
+      "stock_matrix_status": "TBD",
+      "flow_matrix_status": "TBD",
+      "asset_liability_residual": null,
+      "residual_status": "TBD_UNTIL_COMPARABLE_TOTALS_EXIST",
+      "known_issues": ["F8 must not be reduced to pure trade credit."]
+    },
+    {
+      "instrument": "F5",
+      "priority": 5,
+      "stock_matrix_status": "TBD",
+      "flow_matrix_status": "TBD",
+      "asset_liability_residual": null,
+      "residual_status": "TBD_UNTIL_COMPARABLE_TOTALS_EXIST",
+      "known_issues": []
+    },
+    {
+      "instrument": "F6",
+      "priority": 6,
+      "stock_matrix_status": "TBD",
+      "flow_matrix_status": "TBD",
+      "asset_liability_residual": null,
+      "residual_status": "TBD_UNTIL_COMPARABLE_TOTALS_EXIST",
+      "known_issues": []
+    },
+    {
+      "instrument": "F7",
+      "priority": 7,
+      "stock_matrix_status": "TBD_MATERIALITY_CHECK",
+      "flow_matrix_status": "TBD_MATERIALITY_CHECK",
+      "asset_liability_residual": null,
+      "residual_status": "TBD_UNTIL_MATERIALITY_AND_COMPARABLE_TOTALS_EXIST",
+      "known_issues": ["Include explicitly where material; do not assume immateriality without checking."]
+    }
+  ],
+  "b9f_reconciliation": {
+    "status": "TBD",
+    "financial_account_identity": "net acquisition of financial assets - net incurrence of liabilities",
+    "annual_2025_rule": "sum definitionally comparable quarterly transactions for 2025",
+    "b9_comparison_status": "TBD",
+    "residual": null,
+    "rule": "B9 and B9F are separate balancing items; any residual must be reported and methodologically explained."
+  },
+  "closure_checks": [
+    {"id": "stock_flow_distinction", "status": "ENFORCED"},
+    {"id": "counterpart_sector_explicit", "status": "ENFORCED"},
+    {"id": "consolidation_explicit", "status": "ENFORCED"},
+    {"id": "valuation_explicit", "status": "ENFORCED"},
+    {"id": "missing_is_not_zero", "status": "ENFORCED"},
+    {"id": "partial_coverage_labelled", "status": "ENFORCED"},
+    {"id": "forced_closure_prohibited", "status": "ENFORCED"}
+  ]
+}
