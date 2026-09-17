@@ -1,0 +1,39 @@
+{
+  "disposition_version": "0.5.0a0",
+  "rule": "Alpha 0.4 admission status is historical evidence. Alpha 0.5 disposition records what survives calibration/validation; failed mechanisms are not kept central by adding complexity after holdout inspection.",
+  "mechanisms": [
+    {
+      "id": "monetary_policy_lending_rate_pass_through",
+      "alpha_0_4_status": "ACTIVATED",
+      "alpha_0_5_disposition": "DEGRADE_TO_CANDIDATE",
+      "validated_reference_mechanism": false,
+      "gates": {
+        "data_role_separation": "PASS",
+        "calibration_identifiability": "FAIL",
+        "structural_selection_vs_baselines": "FAIL",
+        "final_holdout": "DIAGNOSTIC_ONLY_LOW_N",
+        "sensitivity": "FRAGILE",
+        "causal_identification": "NOT_ESTABLISHED"
+      },
+      "future_action": "Retest a more parsimonious specification on a substantially longer monthly history with multiple easing/tightening episodes and a newly reserved holdout."
+    },
+    {
+      "id": "government_refinancing_effective_rate",
+      "alpha_0_4_status": "ACTIVATED",
+      "alpha_0_5_disposition": "DEFER",
+      "validated_reference_mechanism": false,
+      "gates": {
+        "official_data_materiality": "PASS",
+        "matched_parameter_observability": "FAIL",
+        "point_identifiability": "FAIL",
+        "historical_interest_cost_reproduction": "NOT_RUN_BECAUSE_PARAMETER_GATE_FAILED",
+        "synthetic_allocation": "PROHIBITED"
+      },
+      "future_action": "Assemble matched maturity/refixing schedules, effective debt rates, marginal yields and interest expenditure before calibration."
+    }
+  ],
+  "validated_reference_behavioural_mechanisms": 0,
+  "alpha_0_6_behavioural_simulator_gate": "NO_GO",
+  "web_product_continuation": "GO_READ_ONLY_INFOCLAR",
+  "interpretation": "The web-first InfoClar product may continue to expose structure, theory, empirical dashboards, provenance and validation diagnostics. It must not expose an interactive behavioural simulator as if a validated dynamic reference model existed."
+}

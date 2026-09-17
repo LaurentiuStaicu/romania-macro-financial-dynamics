@@ -1,25 +1,29 @@
-# Architecture — Alpha 0.3.0a0
+# Architecture — Alpha 0.5.0a0
 
-## Layered model
+## Layered scientific model
 
 The project is separated into four scientific layers:
 
 - **L0 — Data & Ontology:** ESA sectors/instruments, units, frequencies, provenance and bilingual definitions.
 - **L1 — Accounting/SFC Spine:** balance sheets, Flow of Funds, From-Whom-to-Whom matrices, B9/B9F and reconciliation.
-- **L2 — Dynamic Causal Engine:** stocks, flows, auxiliaries, delays, feedbacks and later behavioural equations.
-- **L3 — Empirical/Policy Layer:** calibration, validation, sensitivity, scenarios and policy experiments.
+- **L2 — Dynamic Causal Engine:** stocks, flows, auxiliaries, delays, feedbacks and evidence-gated behavioural equations.
+- **L3 — Empirical/Policy Layer:** calibration, validation, sensitivity and later scenarios/policy experiments.
 
-L1 constrains L2 accounting-wise; L2 may explain the endogenous evolution of selected L1 positions only without breaking L1 identities. L3 is not allowed to bypass L0/L1 provenance and reconciliation.
+L1 constrains L2 accounting-wise. L2 may explain endogenous evolution of selected L1 positions only without breaking L1 identities. L3 may not bypass L0/L1 provenance, reconciliation or missing-data semantics.
 
-## Alpha 0.3 structural dynamic core
+## Scientific evolution through Alpha 0.5
 
-Alpha 0.3 introduces the executable substrate of L2 while deliberately deferring behavioural closure.
+### Accounting Spine
 
-The canonical financial dynamic stock is one bilateral position indexed by:
+The canonical financial boundary uses H/C/F/G/X/BNR and ESA financial instruments. Missing bilateral empirical values remain explicit and may not silently become zero.
+
+### Dynamic Core
+
+A canonical financial dynamic stock is one bilateral position indexed by:
 
 `holder × issuer × instrument`
 
-The same represented amount is the holder's financial asset and the issuer's equal financial liability. Sector balance-sheet totals are derived from these positions rather than updated independently, preventing numerical drift between asset and liability views.
+The same amount is the holder's asset and issuer's liability. Sector totals are derived from these positions rather than updated independently.
 
 For period amounts:
 
@@ -29,73 +33,83 @@ For rate-based simulation:
 
 `closing = opening + (transaction_rate + revaluation_rate + other_change_rate) × dt`
 
-Canonical simulation time is measured in **years** with a default reference step of **0.25 year**, matching the preferred quarterly empirical cadence when definitions are comparable.
+Canonical simulation time is in years with default structural reference step `dt = 0.25`. The Accounting Spine-to-dynamics bridge rejects unresolved/source-only cells for numeric initialization.
 
-The Accounting Spine-to-dynamics bridge is guarded: a matrix containing `TBD` or source-only cells cannot initialize a numeric simulation. Missing empirical values therefore cannot silently become zeros.
+### Empirical Dynamics
 
-A reusable first-order delay primitive is available:
+Alpha 0.4 introduced evidence-traceable behavioural forms with explicit `ACTIVATED`, `CANDIDATE`, `DEFERRED` and `REJECTED` statuses. `ACTIVATED` means admitted to calibration, not validated or causal.
 
-`d(delay_state)/dt = (input - delay_state) / tau`
+### Calibration & Validation
 
-Concrete economic delays and behavioural equations remain inactive until their evidence and parameter gates are passed.
+Alpha 0.5 makes practical identifiability and chronological data-role separation first-class contracts. Calibration, structural selection and final evaluation/holdout are separate roles. An inspected holdout cannot subsequently be called independent validation for a revised model.
 
-See `model/dynamics/core_contract.json`, `model/dynamics/feedback_registry.json` and `docs/DYNAMIC_CORE_0.3.0a0.md`.
+The two Alpha 0.4 activated mechanisms fail to become validated reference mechanisms in 0.5: monetary pass-through is degraded to candidate after rank/conditioning/baseline failures; government refinancing/effective-rate repricing is deferred because the required repricing share is not definitionally point-identified by currently assembled official data.
 
-## Feedback architecture
+## Web-first product architecture
 
-Candidate loops are registered for sovereign refinancing/interest costs, issuance/yields, bank credit/balance sheets, monetary-credit transmission and external FX/refinancing. In Alpha 0.3 they are qualitative hypotheses only:
+**InfoClar web is the reference product interface from Alpha 0.5 onward.** It is not a late wrapper around a finished model and not only a design contract. Scientific milestones progressively populate the same browser surface with the strongest currently defensible content.
 
-- `scientific_status = BEHAVIOURAL_CANDIDATE`;
-- `quantitatively_active = false`;
-- delay parameters remain `TBD`;
-- no candidate can affect numerical results.
+The reference workspace remains the adaptive asymmetric InfoClar 2×2 layout:
 
-Behavioural closure begins only in Alpha 0.4 Empirical Dynamics, after explicit equation, units, evidence, parameter-source/estimation, extreme-condition and sensitivity gates.
+- **top-left / dominant — Model:** model-specific macro-financial stock-flow/sector view, Flow-of-Funds matrices and contextual empirical graphs;
+- **top-right — Theory / Learn:** definitions, mechanisms, evidence and explanations linked to the selected scientific object;
+- **bottom-left — Dashboard:** observed empirical values, reconciliation/data quality, validation/performance and only then engine metadata;
+- **bottom-right — Auxiliary:** sources, exact values, mechanism disposition, validation details and limitations.
+
+Small screens stack `model → theory → dashboard → auxiliary`.
+
+Alpha 0.5 implements the first real surface in `web/index.html`, `web/styles.css` and `web/app.js`. It is intentionally read-only because no behavioural reference mechanism has yet passed validation. A model can therefore become increasingly understandable and auditable on the web without falsely implying that interactive simulation is scientifically ready.
+
+## Canonical web data flow
+
+Python remains the authoritative executable scientific runtime. Web UI code must not copy economic equations independently.
+
+Current flow:
+
+`canonical registries/results → tested presentation snapshot (web/public/model-stage.json) → InfoClar panels`
+
+The snapshot is an exported presentation artifact. Tests compare its critical sector/status/data-role values with canonical resources. A later build/export stage should automate snapshot generation further.
+
+The UI may transform presentation state — selected sector, language, layout, formatting — but scientific quantities/statuses come from canonical artifacts.
+
+## Accessibility and interaction
+
+InfoClar targets WCAG 2.2 AA. The implemented surface includes keyboard-operable sector selection, visible focus styling, skip navigation, live status regions and responsive layout. Scientific distinctions are not encoded by colour alone; labels/status text remain explicit.
+
+Interactive simulation must later preserve keyboard/pointer alternatives and predictable context changes rather than relying on drag-only or opaque visual controls.
 
 ## Repository layout
 
 ```text
-src/romania_macro_financial_dynamics/   Python scientific package
+src/romania_macro_financial_dynamics/   authoritative Python scientific package
 model/registries/                       canonical model and product registries
-model/accounting/                       benchmark accounting spine and reconciliation
-model/dynamics/                         dynamic-core and feedback contracts
-data/                                   later raw/processed/provenance manifests
-science/                                later reconciliation/calibration/validation
-schemas/                                later machine-readable contracts
-web/                                    browser application, initially a consumer
-locales/                                bilingual source strings not owned by a view
-tests/                                  scientific/software contract tests
-docs/                                   method, theory, audit and handoff documentation
-.github/workflows/                      CI and later verified deployment
+model/accounting/                       benchmark Accounting Spine and reconciliation
+model/dynamics/                         Dynamic Core contracts
+model/empirical_dynamics/               behavioural forms/evidence/classification
+model/calibration_validation/           validation contracts, results and dispositions
+data/processed/                         frozen empirical analysis datasets
+data/provenance/                        source/role/transformation manifests
+web/                                    InfoClar reference browser application
+locales/                                bilingual source strings where view-independent
+tests/                                  scientific/software/product contract tests
+docs/                                   methods, audits, theory and architecture
+.github/workflows/                      CI and later verified web deployment
 ```
 
-`native/` remains intentionally absent. It will be introduced near v1 after the web/scientific contracts stabilize.
+## Simulator gate
 
-## Scientific core
+Alpha 0.6 is not simply “the next UI feature.” Behavioural simulation is allowed only where a scientifically defensible validated reference model exists or where an explicit later scope decision clearly reclassifies a feature as assumption-driven exploratory modelling.
 
-Python is the authoritative executable model language. Canonical registries live outside individual views. The web layer must consume exported canonical data/results rather than duplicate model equations.
+Current Alpha 0.5 state:
 
-Structural verification currently includes accounting-stock identities, double-entry conservation, dimensional rate×time conversion, extreme conditions, delay steady-state behaviour, incomplete-state rejection and integration-error convergence.
-
-A later compute spike will benchmark in-browser execution before choosing arbitrary interactive browser simulation. The architectural requirement is numerical equivalence, not a preselected runtime.
-
-## Web application
-
-The web application is cross-platform and bilingual EN/RO under InfoClar Model Suite Design Standard v1.1. Initial stages focus on understanding and auditability:
-
-1. theory and guided explanation;
-2. system/sector map;
-3. Flow-of-Funds and balance-sheet explorers;
-4. equations and provenance;
-5. validation diagnostics;
-6. saved reference scenarios when those scenarios actually exist.
-
-Interactive arbitrary simulation is added only after the executable model and validation contracts are stable enough to expose safely.
+- validated behavioural reference mechanisms: `0`;
+- behavioural Interactive Web Simulator: `NO_GO`;
+- read-only structural/empirical/theory InfoClar development: `GO`.
 
 ## Native application
 
-Near v1, add a native elementary OS application using the then-supported GTK/Granite/Meson/Flatpak stack. It must consume the same canonical scientific outputs and registries as the web application. Platform-specific UI code must not fork the economic model.
+There is intentionally no `native/` application tree. Native elementary OS GTK/Granite/Meson/Flatpak packaging begins only **at or near v1**, after the InfoClar web product and scientific contracts have matured. The future native port consumes the same canonical scientific outputs and must prove numerical/reference-output equivalence; it cannot become a second scientific implementation.
 
 ## Version sources
 
-`src/romania_macro_financial_dynamics/__init__.py` and `pyproject.toml` expose the software version. CI tests keep these user-visible/version-contract expectations synchronized. Later release automation will also verify web metadata, model specification and exported-artifact versions.
+`src/romania_macro_financial_dynamics/__init__.py` and `pyproject.toml` expose software version `0.5.0a0`. `model/registries/model_contract.json` records the corresponding scientific/product stage, and `web/public/model-stage.json` exposes a tested presentation snapshot for InfoClar.

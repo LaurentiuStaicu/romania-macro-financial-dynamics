@@ -1,0 +1,22 @@
+# Alpha 0.5 exit checklist
+
+- [x] calibration / structural-selection / final-holdout roles frozen before estimation
+- [x] historical/in-sample reproduction metrics recorded without treating them as predictive validation
+- [x] parameter assessment and practical-identifiability diagnostics completed
+- [x] expanding-origin structural selection completed where estimable
+- [x] persistence and constant-spread baselines compared
+- [x] final holdout inspected only after structural-selection judgement
+- [x] holdout marked contaminated for any future revised-model validation
+- [x] local sensitivity diagnostics recorded
+- [x] uncertainty and structural limitations documented
+- [x] monetary pass-through degraded rather than protected by complexity
+- [x] government refinancing parameter deferred rather than synthesized
+- [x] zero validated behavioural reference mechanisms recorded
+- [x] behavioural Alpha 0.6 simulator gate recorded as NO-GO
+- [x] read-only InfoClar web continuation recorded as GO
+- [x] first real InfoClar browser surface implemented
+- [x] web reference product / native-near-v1 boundary persisted
+- [x] Accounting Spine / Dynamic Core / InfoClar v1.1 invariants preserved
+- [x] full PR CI green on the Alpha 0.5 candidate
+
+Merge and post-merge CI are repository-integration evidence rather than scientific content and are verified in the GitHub PR/Actions history before the milestone is declared integrated.

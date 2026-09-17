@@ -1,0 +1,14 @@
+period,policy_rate_pct,nfc_new_lending_rate_pct,household_new_lending_rate_pct,data_role
+2024-01,7.00,8.74,9.11,calibration
+2024-02,7.00,8.80,9.03,calibration
+2024-03,7.00,8.49,8.52,calibration
+2024-04,7.00,8.44,8.28,calibration
+2024-05,7.00,8.12,8.12,calibration
+2024-06,7.00,8.15,7.96,calibration
+2024-07,6.75,8.00,7.90,structural_selection
+2024-08,6.50,7.84,8.01,structural_selection
+2024-09,6.50,7.95,7.96,structural_selection
+2024-10,6.50,8.18,7.88,structural_selection
+2024-11,6.50,7.96,7.61,evaluation_holdout
+2024-12,6.50,8.26,7.35,evaluation_holdout
+2025-01,6.50,8.14,7.66,evaluation_holdout
