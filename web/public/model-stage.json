@@ -4,7 +4,7 @@
   "stage": {
     "id": "alpha-0.5",
     "name": {"en":"Calibration & Validation","ro":"Calibrare și validare"},
-    "status": "complete_candidate_pending_integration",
+    "status": "complete",
     "interface_mode": "READ_ONLY_SCIENTIFIC",
     "interactive_simulation_enabled": false
   },
@@ -56,7 +56,7 @@
     {"label":"BNR Monthly Bulletin January 2025","href":"https://muzeu.bnr.ro/uploads/2025-03-07monthlybulletinno.012025_documentpdf_545_1743160358.pdf"},
     {"label":"Romanian Ministry of Finance Investor Presentation February 2025","href":"https://www.mfinante.gov.ro/static/10/Mfp/buget/sitebuget/InvestorPresentationFebruary2025.pdf"},
     {"label":"Romanian Ministry of Finance Public Debt Report February 2025","href":"https://mfinante.gov.ro/static/10/Mfp/buletin/executii/Publicdebtreport022025.pdf"},
-    {"label":"Government Debt Management Strategy 2024–2026","href":"https://www.mfinante.gov.ro/static/10/Mfp/buletin/executii/Strategiedeadministrareadatorieipublicuguvernamentale2024_2026en.pdf"}
+    {"label":"Government Debt Management Strategy 2024–2026","href":"https://www.mfinante.gov.ro/static/10/Mfp/buletin/executii/Strategiedeadministrareadatorieipubliceguvernamentale2024_2026en.pdf"}
   ],
   "limitations": [
     {"en":"The monetary diagnostic sample has only 13 months and two policy-rate reductions.","ro":"Eșantionul monetar de diagnostic are doar 13 luni și două reduceri ale ratei de politică."},
