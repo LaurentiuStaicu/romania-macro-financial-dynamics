@@ -64,14 +64,34 @@ Outcome:
 
 Exit gate: **PASS as a completed negative recovery result**. Failure to produce a VALIDATED mechanism is not a milestone failure when the prospective scientific gates are followed.
 
+## 0.5.2a0 — Government Repricing Ledger
+
+The government-debt recovery path is taken without reopening or weakening Alpha 0.5/0.5.1.
+
+Before assessment, the project freezes explicit ledger acceptance criteria: at least 95% coverage of opening principal on the exact MoF portfolio-cost boundary, at least 90% coverage of realized repricing-event principal, stock reconciliation residual no larger than 0.5%, and historical portfolio-cost reconstruction over at least three consecutive published snapshots with no more than 0.10 percentage point error per snapshot and 0.05 percentage point MAE. `VALIDATED` additionally requires a later prospectively reserved non-zero repricing period to pass without respecification.
+
+The audited public ledger reaches instrument-level identity, currency, fixed coupon, maturity and issue/issuance terms for a reproducible MoF/BVB subset. It does **not** expose same-date opening outstanding principal for the matched full portfolio, realized repriced principal, floating/indexed reset schedules or matched old/new effective rates. Issue value is not promoted to outstanding stock, new issuance is not assumed to replace a particular maturity, and maturity/refixing remain distinct.
+
+Outcome:
+
+- Gate 1 ledger completeness: **FAIL**;
+- balance reconciliation and portfolio-cost reconstruction: **NOT OPENED**;
+- parameter estimation: **not run** because it would require prohibited synthetic allocation;
+- government refinancing → effective debt rate remains **DEFERRED**;
+- household delta-policy pass-through remains frozen for future Prospective Monetary Confirmation, with observations from 2026-08 onward reserved and unavailable for pre-test respecification;
+- validated behavioural reference mechanisms remain **0**;
+- Alpha 0.6 remains **NO-GO**;
+- the same InfoClar web application exposes the ledger result and remains read-only.
+
+Exit gate: **PASS as a completed negative identification milestone**. Richer instrument provenance is scientific progress even when the mechanism cannot be promoted.
+
 ### Next justified empirical path inside 0.5.x
 
-Before Alpha 0.6 can be reconsidered, at least one of these must produce a new prospective validation result:
+The next behavioural path is **Prospective Monetary Confirmation**, but it becomes executable only after a genuinely new BNR policy-rate movement creates identifying variation for the already frozen household delta-policy form. Future reserved observations may not be used to change the form before the first confirmation test.
 
-1. **Prospective Monetary Confirmation** — preserve MIR observations from 2026-08 onward and evaluate the already frozen household delta-policy form only after a genuinely new policy-rate easing/tightening event provides identifying variation. Future observations may not be used to revise the form before their first confirmation test.
-2. **Government Repricing Ledger** — assemble instrument × currency × fixed/floating opening principal, maturity/reset dates, repriced principal and matched old/new effective rates, then reproduce published MoF portfolio-cost measures without synthetic allocation.
+Government repricing work should resume only if an official/reproducible source supplies same-date outstanding principal and matched refinancing/reset events and rates over the material MoF portfolio boundary. Repeating aggregate proxy estimation is not a justified substitute.
 
-Other Alpha 0.4 candidates require their own newly preregistered data/selection cycles; they are not opened merely because the priority mechanisms fail.
+Other Alpha 0.4 candidates still require their own newly preregistered data/selection cycles and are not opened opportunistically.
 
 ## 0.6.x — Interactive Web Simulator
 
