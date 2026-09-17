@@ -1,0 +1,11 @@
+{
+  "registry_version": "0.1.0a0",
+  "sectors": [
+    {"id":"H","esa":"S14+S15","label":{"ro":"Gospodării + NPISH","en":"Households + NPISH"},"resident":true},
+    {"id":"C","esa":"S11","label":{"ro":"Companii nefinanciare","en":"Non-financial corporations"},"resident":true},
+    {"id":"F","esa":"S12 excluding S121 when BNR is separate","label":{"ro":"Corporații financiare, fără banca centrală în vizualizarea separată","en":"Financial corporations, excluding the central bank when shown separately"},"resident":true},
+    {"id":"G","esa":"S13","label":{"ro":"Administrație publică","en":"General government"},"resident":true},
+    {"id":"X","esa":"S2","label":{"ro":"Restul lumii","en":"Rest of the world"},"resident":false},
+    {"id":"BNR","esa":"S121","label":{"ro":"Banca Națională a României / banca centrală","en":"National Bank of Romania / central bank"},"resident":true}
+  ]
+}
