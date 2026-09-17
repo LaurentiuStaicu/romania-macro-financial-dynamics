@@ -153,7 +153,8 @@ def empirical_cells_to_state(cells: Iterable[AccountingCell]) -> dict[PositionKe
     """Bridge one complete observed/derived stock matrix into a numeric state.
 
     Unresolved or source-identified-only cells cause a hard failure. This keeps
-    the dynamic layer from interpreting absence as zero.
+    the dynamic layer from interpreting absence as zero. Duplicate matrix cells
+    are also rejected so later entries cannot silently overwrite earlier ones.
     """
 
     cells = tuple(cells)
@@ -166,7 +167,10 @@ def empirical_cells_to_state(cells: Iterable[AccountingCell]) -> dict[PositionKe
         raise ValueError("Bridge one instrument matrix at a time")
 
     expected = {(holder, issuer) for holder in SECTOR_IDS for issuer in SECTOR_IDS}
-    observed = {(cell.holder, cell.issuer) for cell in cells}
+    addresses = [(cell.holder, cell.issuer) for cell in cells]
+    observed = set(addresses)
+    if len(cells) != len(expected) or len(observed) != len(addresses):
+        raise IncompleteEmpiricalState("Matrix must contain exactly one cell for every holder×issuer address")
     if observed != expected:
         missing = sorted(expected - observed)
         extra = sorted(observed - expected)
