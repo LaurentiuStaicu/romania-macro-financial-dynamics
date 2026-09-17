@@ -94,7 +94,7 @@
     "required": true,
     "desktop_viewport":{"width":1440,"height":1100},
     "mobile_viewport":{"width":390,"height":844},
-    "required_captures":["desktop-stock","desktop-flow","desktop-vulnerability","mobile-stock","mobile-flow","mobile-vulnerability"]
+    "required_captures":["desktop-stock","desktop-matrix","desktop-flow","desktop-vulnerability","mobile-stock","mobile-matrix","mobile-flow","mobile-vulnerability"]
   },
   "behavioural_simulation_enabled": false,
   "validated_behavioural_reference_mechanisms": 0,
