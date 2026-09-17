@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.3.0a0 — Dynamic Core
+
+Accounting-constrained executable System Dynamics substrate.
+
+- adds canonical bilateral dynamic positions indexed by holder × issuer × instrument;
+- structurally derives holder assets and issuer liabilities from one represented position, enforcing double-entry conservation;
+- implements the financial stock identity for period amounts and explicit rate × time updates;
+- adopts year as the canonical simulation-time unit and 0.25 year as the default quarterly reference step;
+- adds a guarded Accounting Spine → dynamics bridge that rejects `TBD` and source-only cells rather than treating missing data as zero;
+- adds explicit-Euler structural stepping and a reusable first-order delay primitive;
+- registers sovereign, credit, monetary and external feedback candidates while keeping every behavioural loop quantitatively inactive;
+- adds dimensional, zero-flow, large-value, conservation, delay steady-state, incomplete-initialization and integration-error-convergence tests;
+- documents that consumption, investment, credit, fiscal, monetary-policy, risk/default, FX and refinancing response equations remain deferred to Alpha 0.4 Empirical Dynamics;
+- advances the software version to `0.3.0a0` without claiming forecasting or policy-evaluation capability.
+
 ## 0.2.1a0 — InfoClar Model Suite Design Standard v1.1 alignment
 
 Product-family uniformization after the Accounting Spine milestone.
