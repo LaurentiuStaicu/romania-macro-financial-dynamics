@@ -43,7 +43,37 @@ jobs:
         run: |
           test -f dist/pages/index.html
           test -f dist/pages/public/model-stage.json
-          grep -q 'InfoClar' dist/pages/index.html
+          test -f dist/pages/public/theory-supplement.json
+          grep -q 'FLOW-OF-FUNDS EXPLORER' dist/pages/index.html
+          grep -q 'STOCK / BALANCE-SHEET VIEW' dist/pages/index.html
+          grep -q 'FLOW VIEW' dist/pages/index.html
+
+      - name: Render desktop and mobile visual QA captures
+        run: |
+          mkdir -p visual-qa
+          python -m http.server 8123 --directory dist/pages > /tmp/infoclar-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 2
+          BROWSER="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          if [ -z "$BROWSER" ]; then
+            echo "No Chromium-compatible browser available for mandatory visual QA" >&2
+            exit 1
+          fi
+          COMMON="--headless --disable-gpu --no-sandbox --hide-scrollbars --run-all-compositor-stages-before-draw --virtual-time-budget=5000"
+          "$BROWSER" $COMMON --window-size=1440,1200 --screenshot=visual-qa/desktop-overview.png http://127.0.0.1:8123/
+          "$BROWSER" $COMMON --window-size=1440,1200 --screenshot=visual-qa/desktop-dashboard.png 'http://127.0.0.1:8123/#dashboard-panel'
+          "$BROWSER" $COMMON --window-size=390,844 --screenshot=visual-qa/mobile-overview.png http://127.0.0.1:8123/
+          "$BROWSER" $COMMON --window-size=390,844 --screenshot=visual-qa/mobile-map.png 'http://127.0.0.1:8123/#network-view'
+          "$BROWSER" $COMMON --window-size=390,844 --screenshot=visual-qa/mobile-dashboard.png 'http://127.0.0.1:8123/#dashboard-panel'
+          for capture in visual-qa/*.png; do test -s "$capture"; done
+
+      - name: Upload visual QA captures
+        uses: actions/upload-artifact@v4
+        with:
+          name: infoclar-visual-qa
+          path: visual-qa
+          if-no-files-found: error
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
