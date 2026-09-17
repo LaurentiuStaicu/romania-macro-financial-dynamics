@@ -11,7 +11,7 @@ def load_json(path: str):
 
 
 def test_version():
-    assert __version__ == "0.3.0a0"
+    assert __version__ == "0.4.0a0"
 
 
 def test_sector_ids_are_unique_and_bilingual():
@@ -40,6 +40,8 @@ def test_model_contract_languages_and_benchmark():
         "version": "1.1",
         "scientific_semantics_unchanged": True,
     }
+    assert contract["dynamic_core"]["accounting_spine_is_hard_constraint"] is True
+    assert contract["empirical_dynamics"]["contract"] == "model/empirical_dynamics/contract.json"
 
 
 def test_product_labels_are_unique_bilingual_and_cover_infoclar_navigation():

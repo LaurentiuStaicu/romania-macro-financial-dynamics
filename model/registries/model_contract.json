@@ -1,5 +1,5 @@
 {
-  "registry_version": "0.3.0a0",
+  "registry_version": "0.4.0a0",
   "default_language": "en",
   "supported_languages": ["en", "ro"],
   "benchmark": {"stock_date":"2025-12-31","annual_flow_start":"2025-01-01","annual_flow_end":"2025-12-31"},
@@ -15,5 +15,13 @@
     "default_dt_years": 0.25,
     "behavioural_closure_active": false,
     "accounting_spine_is_hard_constraint": true
+  },
+  "empirical_dynamics": {
+    "contract": "model/empirical_dynamics/contract.json",
+    "mechanism_registry": "model/empirical_dynamics/mechanism_registry.json",
+    "evidence_registry": "model/empirical_dynamics/evidence_registry.json",
+    "activated_means_admitted_for_calibration_not_precalibrated": true,
+    "unparameterized_behaviour_may_not_drive_reference_simulation": true,
+    "next_stage": "0.5.x Calibration & Validation"
   }
 }

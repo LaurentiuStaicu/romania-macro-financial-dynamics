@@ -28,19 +28,23 @@ Exit gate: the dynamic model executes without violating its accounting and dimen
 
 ## 0.4.x — Empirical Dynamics
 
-Add behavioural candidates for consumption, investment, credit demand/supply, fiscal dynamics, monetary transmission, default/risk, FX and refinancing with explicit evidence status.
+Add evidence-traceable behavioural mechanisms for real-economy, credit, sovereign, monetary, risk, FX and refinancing channels. Every mechanism is classified `ACTIVATED`, `CANDIDATE`, `DEFERRED` or `REJECTED`; an `ACTIVATED` form is admitted to calibration but is not considered calibrated or causal.
 
-Exit gate: behavioural equations have traceable assumptions and observables/targets where available.
+Exit gate: every in-scope behavioural mechanism has a functional form or explicit deferral/rejection rationale, sources/evidence, observables, parameter/estimation plan, limitations and rejection/degradation criteria. No empirical coefficient is invented merely to close the milestone.
 
 ## 0.5.x — Calibration & Validation
 
-Historical reproduction, parameter assessment, practical identifiability diagnostics, sensitivity, multi-origin or holdout tests where data permit, and explicit limits.
+Historical reproduction, parameter assessment, practical identifiability diagnostics, sensitivity, time-respecting multi-origin or holdout tests where data permit, comparisons with simpler baselines and explicit uncertainty.
 
-Exit gate: performance and uncertainty are documented separately from software correctness.
+Calibration data, structural-selection data and final evaluation/holdout data are separate roles. Model/candidate selection may use only calibration and structural-selection information. Once final evaluation data have been inspected, they may not later be described as an independent holdout for a revised model.
+
+Convergence, in-sample goodness-of-fit or historical reproduction are not sufficient evidence of predictive validity or causality.
+
+Exit gate: performance, uncertainty, identifiability and limitations are documented separately from software correctness; mechanisms that fail the empirical gates are degraded/rejected rather than protected by added complexity.
 
 ## 0.6.x — Interactive Web Simulator
 
-After a compute benchmark, enable controlled in-browser simulation while preserving one scientific implementation. Add exact-value tables, exports and reproducibility metadata.
+After a compute benchmark, enable controlled in-browser simulation while preserving one scientific implementation. Add exact-value tables, exports and reproducibility metadata. This stage begins only if Alpha 0.5 establishes a scientifically defensible validated reference model for the capabilities exposed.
 
 ## 0.7.x — Scenario Laboratory
 
@@ -56,7 +60,7 @@ Stabilize schemas, terminology, equations, reference scenarios, validation outpu
 
 ## Late 0.9.x — Native Port
 
-Introduce GTK/Granite/Meson/Flatpak for elementary OS, using the currently supported SDK/runtime at that future stage. Preserve the web application and verify numerical equivalence.
+Introduce GTK/Granite/Meson/Flatpak for elementary OS, using the then-supported SDK/runtime at that future stage. Preserve the web application and verify numerical equivalence.
 
 ## 1.0.0 — Mature release
 

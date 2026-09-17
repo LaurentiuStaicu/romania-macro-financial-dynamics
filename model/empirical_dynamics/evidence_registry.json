@@ -1,0 +1,132 @@
+{
+  "registry_version": "0.4.0a0",
+  "as_of": "2026-09-17",
+  "rule": "Evidence supports admission or prioritisation of mechanisms; it does not substitute for parameter estimation, time-respecting validation or causal identification.",
+  "sources": [
+    {
+      "id": "imf_2004_interest_rate_pass_through_romania",
+      "institution": "International Monetary Fund",
+      "title": "Interest Rate Pass-Through in Romania and Other Central European Economies",
+      "year": 2004,
+      "url": "https://www.imf.org/en/publications/wp/issues/2016/12/31/interest-rate-pass-through-in-romania-and-other-central-european-economies-17803",
+      "evidence_type": "historical_empirical",
+      "finding": "Romanian policy-to-market interest-rate pass-through is empirically present and became more pronounced over time.",
+      "limitations": "Historical sample; coefficients cannot be reused as current calibration parameters."
+    },
+    {
+      "id": "imf_2017_romania_monetary_transmission",
+      "institution": "International Monetary Fund",
+      "title": "Romania: Annex VI. Monetary Policy Transmission Mechanism",
+      "year": 2017,
+      "url": "https://www.imf.org/-/media/files/publications/cr/2017/cr17133.pdf",
+      "evidence_type": "institutional_empirical",
+      "finding": "Interest-rate and exchange-rate channels were found to have the strongest effects on output in the reported VAR analysis.",
+      "limitations": "VAR evidence establishes dynamic association/shock responses under its identification assumptions, not a timeless structural coefficient."
+    },
+    {
+      "id": "bnr_2015_bank_lending_channel",
+      "institution": "National Bank of Romania",
+      "title": "Occasional Paper 15/2015 — bank lending channel / prudential regulation",
+      "year": 2015,
+      "url": "https://bnr.ro/files/d/Pubs_en/OP/Op_15_2015.pdf",
+      "evidence_type": "institutional_empirical",
+      "finding": "Romanian bank-level credit dynamics are linked to the policy rate, reserve requirements, real growth and bank characteristics including solvency and loan-to-deposit ratios.",
+      "limitations": "Bank-level specification does not directly identify a single aggregate credit equation."
+    },
+    {
+      "id": "imf_2003_fx_pass_through",
+      "institution": "International Monetary Fund",
+      "title": "Exchange Rate Pass-Through in Romania",
+      "year": 2003,
+      "url": "https://www.imf.org/en/publications/wp/issues/2016/12/30/exchange-rate-pass-through-in-romania-16565",
+      "evidence_type": "historical_empirical",
+      "finding": "FX pass-through to Romanian producer and consumer prices was large and relatively fast in the 1997–2003 sample.",
+      "limitations": "Pre-inflation-targeting regime; historical magnitudes must not be used as current parameters."
+    },
+    {
+      "id": "imf_2015_fx_pass_through_regime_change",
+      "institution": "International Monetary Fund",
+      "title": "Romania: Selected Issues — exchange-rate pass-through after inflation targeting",
+      "year": 2015,
+      "url": "https://www.elibrary.imf.org/view/journals/002/2015/080/article-A004-en.xml",
+      "evidence_type": "institutional_empirical",
+      "finding": "Exchange-rate pass-through remained relevant but diminished after Romania adopted inflation targeting.",
+      "limitations": "Supports regime dependence; argues against hard-coding older coefficients."
+    },
+    {
+      "id": "imf_2025_article_iv",
+      "institution": "International Monetary Fund",
+      "title": "Romania: 2025 Article IV Consultation",
+      "year": 2025,
+      "url": "https://www.imf.org/en/-/media/files/publications/cr/2025/english/1rouea2025001-source-pdf.pdf",
+      "evidence_type": "current_institutional_assessment",
+      "finding": "Large fiscal deficits, rising debt and tighter financing conditions/higher sovereign yields are material current Romanian macro-financial features.",
+      "limitations": "Institutional assessment and descriptive evidence do not identify a stable sovereign-yield structural equation."
+    },
+    {
+      "id": "ec_dsm_2025_romania",
+      "institution": "European Commission",
+      "title": "Debt Sustainability Monitor 2025 — Romania",
+      "year": 2026,
+      "url": "https://economy-finance.ec.europa.eu/document/download/39b3b61d-42c1-46d7-8088-0aad82e8731e_en?filename=ip332_en.pdf",
+      "evidence_type": "current_institutional_assessment",
+      "finding": "Romania had a 10-year sovereign spread versus the German Bund of 391 bps at end-2025 and high short-/medium-term fiscal sustainability risks.",
+      "limitations": "Point-in-time risk assessment; does not identify marginal causal effects of debt or deficit on spreads."
+    },
+    {
+      "id": "ec_2026_romania_forecast",
+      "institution": "European Commission",
+      "title": "Economic forecast for Romania",
+      "year": 2026,
+      "url": "https://economy-finance.ec.europa.eu/economic-surveillance-eu-member-states/country-pages-including-country-reports/romania/economic-forecast-romania_en",
+      "evidence_type": "current_institutional_assessment",
+      "finding": "Fiscal consolidation and high inflation are expected to weigh on domestic consumption while EU-funded investment remains important; financing conditions matter for the recovery.",
+      "limitations": "Forecast narrative is not parameter identification and is not used as calibration data."
+    },
+    {
+      "id": "ecb_mir_household_housing_rate_ro",
+      "institution": "European Central Bank / ESCB",
+      "title": "Bank interest rates — new housing loans, Romania, RON",
+      "year": 2026,
+      "url": "https://data.ecb.europa.eu/data/datasets/MIR/MIR.M.RO.B.A2C.A.R.A.2250.RON.N",
+      "series_key": "MIR.M.RO.B.A2C.A.R.A.2250.RON.N",
+      "evidence_type": "primary_data",
+      "frequency": "monthly",
+      "unit": "percent_per_annum",
+      "role": "observable lending-rate target for monetary pass-through"
+    },
+    {
+      "id": "ecb_mir_corporate_rate_ro",
+      "institution": "European Central Bank / ESCB",
+      "title": "Bank interest rates — new loans to corporations, Romania, RON",
+      "year": 2026,
+      "url": "https://data.ecb.europa.eu/data/datasets/MIR/MIR.M.RO.B.A2A.A.R.A.2240.RON.N",
+      "series_key": "MIR.M.RO.B.A2A.A.R.A.2240.RON.N",
+      "evidence_type": "primary_data",
+      "frequency": "monthly",
+      "unit": "percent_per_annum",
+      "role": "observable corporate lending-rate target for monetary pass-through/investment candidate"
+    },
+    {
+      "id": "eurostat_namq_10_gdp",
+      "institution": "Eurostat / Romanian National Institute of Statistics",
+      "title": "GDP and main components — quarterly data",
+      "year": 2026,
+      "url": "https://ec.europa.eu/eurostat/cache/metadata/EN/namq_10_gdp_esms_ro.htm",
+      "dataset": "namq_10_gdp",
+      "evidence_type": "primary_data_metadata",
+      "frequency": "quarterly",
+      "role": "GDP, household consumption and gross fixed capital formation observables"
+    },
+    {
+      "id": "ecb_convergence_2026_ro",
+      "institution": "European Central Bank",
+      "title": "Convergence Report — Romania, June 2026",
+      "year": 2026,
+      "url": "https://www.ecb.europa.eu/press/other-publications/convergence/html/ecb.cr202606~30e75ae1c2.ro.html",
+      "evidence_type": "current_institutional_assessment",
+      "finding": "Romania remained under a managed-float exchange-rate regime; 2025 deficit and debt ratios and exchange-rate developments are documented.",
+      "limitations": "Regime/context evidence, not a structural FX reaction equation."
+    }
+  ]
+}
