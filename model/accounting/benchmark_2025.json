@@ -1,0 +1,109 @@
+{
+  "schema_version": "0.2.0a0",
+  "benchmark": {
+    "stock_date": "2025-12-31",
+    "stock_period": "2025-Q4",
+    "flow_period": "2025-01-01/2025-12-31",
+    "flow_quarters": ["2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4"],
+    "unit": "million_RON",
+    "primary_accounting_basis": "ESA 2010 quarterly financial accounts",
+    "primary_consolidation": "non-consolidated"
+  },
+  "matrix_axes": {
+    "holders": ["H", "C", "F", "G", "X", "BNR"],
+    "issuers": ["H", "C", "F", "G", "X", "BNR"]
+  },
+  "instrument_priority": ["F3", "F2", "F4", "F8", "F5", "F6", "F7"],
+  "status_vocabulary": ["TBD", "SOURCE_SERIES_IDENTIFIED", "OBSERVED", "DERIVED", "NOT_APPLICABLE"],
+  "matrices": {
+    "F3": {
+      "stock": {
+        "default": {"status": "TBD", "value": null, "unit": "million_RON"},
+        "overrides": [
+          {
+            "holder": "X",
+            "issuer": "G",
+            "status": "SOURCE_SERIES_IDENTIFIED",
+            "value": null,
+            "source_series_key": "QSA.Q.N.RO.W1.S13.S1.N.L.LE.F3.L._Z.XDC._T.S.V.N._T",
+            "note": "Verified ECB QSA liability-side series for Romanian general-government long-term debt securities vis-a-vis the rest of the world. It is partial maturity coverage and therefore is not promoted to an observed all-maturity WTWTW cell until the all-maturity series is retrieved and reconciled."
+          }
+        ]
+      },
+      "flow": {
+        "default": {"status": "TBD", "value": null, "unit": "million_RON"},
+        "overrides": []
+      }
+    },
+    "F2": {
+      "stock": {"default": {"status": "TBD", "value": null, "unit": "million_RON"}, "overrides": []},
+      "flow": {"default": {"status": "TBD", "value": null, "unit": "million_RON"}, "overrides": []}
+    },
+    "F4": {
+      "stock": {"default": {"status": "TBD", "value": null, "unit": "million_RON"}, "overrides": []},
+      "flow": {"default": {"status": "TBD", "value": null, "unit": "million_RON"}, "overrides": []}
+    },
+    "F8": {
+      "stock": {"default": {"status": "TBD", "value": null, "unit": "million_RON"}, "overrides": []},
+      "flow": {"default": {"status": "TBD", "value": null, "unit": "million_RON"}, "overrides": []}
+    },
+    "F5": {
+      "stock": {"default": {"status": "TBD", "value": null, "unit": "million_RON"}, "overrides": []},
+      "flow": {"default": {"status": "TBD", "value": null, "unit": "million_RON"}, "overrides": []}
+    },
+    "F6": {
+      "stock": {"default": {"status": "TBD", "value": null, "unit": "million_RON"}, "overrides": []},
+      "flow": {"default": {"status": "TBD", "value": null, "unit": "million_RON"}, "overrides": []}
+    },
+    "F7": {
+      "stock": {"default": {"status": "TBD", "value": null, "unit": "million_RON"}, "overrides": []},
+      "flow": {"default": {"status": "TBD", "value": null, "unit": "million_RON"}, "overrides": []}
+    }
+  },
+  "observed_anchors": [
+    {
+      "id": "gfs_maastricht_debt_ratio_2025q4",
+      "value": 59.347,
+      "unit": "percent_of_annual_moving_sum_GDP",
+      "period": "2025-Q4",
+      "series_key": "GFS.Q.N.RO.W0.S13.S1.C.L.LE.GD.T._Z.XDC_R_B1GQ_CY._T.F.V.N._T",
+      "role": "consolidated government-finance control only; not an ESA F3 WTWTW cell"
+    },
+    {
+      "id": "qsa_nonresident_debt_securities_total_economy_2025q4",
+      "value": 493246.93,
+      "unit": "million_RON",
+      "period": "2025-Q4",
+      "series_key": "QSA.Q.N.RO.W1.S1.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+      "role": "QSA availability and external-holder control; it must not be relabelled as government debt"
+    },
+    {
+      "id": "qsa_government_loan_assets_2025q4",
+      "value": 69359.98,
+      "unit": "million_RON",
+      "period": "2025-Q4",
+      "series_key": "QSA.Q.N.RO.W0.S13.S1.N.A.LE.F4.T._Z.XDC._T.S.V.N._T",
+      "role": "government asset-side F4 aggregate control; not a bilateral allocation"
+    }
+  ],
+  "b9f": {
+    "status": "TBD",
+    "definition": "net acquisition of financial assets minus net incurrence of liabilities",
+    "period": "2025-01-01/2025-12-31",
+    "unit": "million_RON",
+    "notes": "Populate only after the four quarterly 2025 transaction observations are retrieved on a definitionally consistent basis."
+  },
+  "balance_sheet_contract": {
+    "assets": "holder-side closing positions by instrument",
+    "liabilities": "issuer-side closing positions by instrument",
+    "valuation": "standard ESA/SNA valuation unless a control series explicitly states otherwise",
+    "consolidation": "non-consolidated for the accounting spine; consolidated GFS is a separate control layer"
+  },
+  "closure": {
+    "all_6x6_cells_explicit_via_default_rule": true,
+    "all_priority_instruments_have_stock_and_flow_matrices": true,
+    "unresolved_cells_are_not_imputed": true,
+    "zero_is_never_used_as_a_missing_value": true,
+    "partial_source_coverage_is_labelled": true
+  }
+}

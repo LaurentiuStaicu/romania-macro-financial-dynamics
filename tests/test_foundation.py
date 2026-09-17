@@ -11,7 +11,7 @@ def load_json(path: str):
 
 
 def test_version():
-    assert __version__ == "0.1.0a0"
+    assert __version__ == "0.2.0a0"
 
 
 def test_sector_ids_are_unique_and_bilingual():

@@ -1,0 +1,85 @@
+{
+  "registry_version": "0.2.0a0",
+  "retrieved_at": "2026-09-17",
+  "sources": [
+    {
+      "id": "ecb_qsa",
+      "institution": "European Central Bank",
+      "dataset": "QSA — Quarterly sector accounts",
+      "role": "primary financial-accounts source for sector/instrument/counterpart positions and transactions",
+      "api_base": "https://data-api.ecb.europa.eu/service/data/QSA/",
+      "accounting_basis": "ESA 2010 quarterly sector financial accounts",
+      "preferred_consolidation": "non-consolidated",
+      "notes": "Use series dimensions explicitly. Do not infer a bilateral allocation from an aggregate or from a partial maturity series."
+    },
+    {
+      "id": "eurostat_gov_10q_ggfa",
+      "institution": "Eurostat",
+      "dataset": "gov_10q_ggfa — Quarterly financial accounts for general government",
+      "role": "government-finance control and reconciliation source",
+      "notes": "Keep consolidated government-finance controls distinct from the non-consolidated WTWTW accounting spine."
+    },
+    {
+      "id": "ecb_gfs",
+      "institution": "European Central Bank",
+      "dataset": "GFS — Government Finance Statistics",
+      "role": "government-debt control layer",
+      "notes": "Maastricht debt is a control concept and must not be relabelled as an ESA F3 bilateral matrix cell."
+    }
+  ],
+  "verified_series": [
+    {
+      "id": "f3_gov_liability_rest_world_long_term_stock",
+      "source_id": "ecb_qsa",
+      "series_key": "QSA.Q.N.RO.W1.S13.S1.N.L.LE.F3.L._Z.XDC._T.S.V.N._T",
+      "periodicity": "quarterly",
+      "measure": "closing_position",
+      "instrument": "F3",
+      "holder": "X",
+      "issuer": "G",
+      "maturity": "long_term",
+      "unit": "million_RON",
+      "status": "SOURCE_SERIES_IDENTIFIED",
+      "use": "partial F3 source coverage; retrieve all-maturity or reconcile maturity components before promotion to OBSERVED"
+    },
+    {
+      "id": "f3_nonresident_total_economy_stock_2025q4",
+      "source_id": "ecb_qsa",
+      "series_key": "QSA.Q.N.RO.W1.S1.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+      "period": "2025-Q4",
+      "value": 493246.93,
+      "unit": "million_RON",
+      "status": "OBSERVED_EMPIRICAL_CONTROL",
+      "use": "external-holder aggregate control; not a government-only bilateral allocation"
+    },
+    {
+      "id": "f4_government_assets_2025q4",
+      "source_id": "ecb_qsa",
+      "series_key": "QSA.Q.N.RO.W0.S13.S1.N.A.LE.F4.T._Z.XDC._T.S.V.N._T",
+      "period": "2025-Q4",
+      "value": 69359.98,
+      "unit": "million_RON",
+      "status": "OBSERVED_EMPIRICAL_CONTROL",
+      "use": "government F4 asset aggregate control; not a bilateral allocation"
+    },
+    {
+      "id": "maastricht_debt_ratio_2025q4",
+      "source_id": "ecb_gfs",
+      "series_key": "GFS.Q.N.RO.W0.S13.S1.C.L.LE.GD.T._Z.XDC_R_B1GQ_CY._T.F.V.N._T",
+      "period": "2025-Q4",
+      "value": 59.347,
+      "unit": "percent_of_annual_moving_sum_GDP",
+      "status": "OBSERVED_EMPIRICAL_CONTROL",
+      "use": "consolidated Maastricht-debt control only"
+    }
+  ],
+  "retrieval_rules": {
+    "require_exact_period": true,
+    "require_exact_instrument_definition": true,
+    "require_explicit_counterpart_sector": true,
+    "require_explicit_consolidation": true,
+    "require_explicit_valuation": true,
+    "quarterly_2025_flows_must_be_summed_only_after_definition_check": true,
+    "aggregate_controls_must_not_be_disaggregated_without_evidence": true
+  }
+}
