@@ -86,8 +86,8 @@ def test_accessibility_and_adaptive_contract_is_present_in_actual_web_files():
     assert 'role="region"' in html
     assert ':focus-visible' in css
     compact_css = css.replace(" ", "")
-    assert '@media(max-width:1120px)' in compact_css
-    assert '@media(max-width:620px)' in compact_css
+    assert '@media(max-width:980px)' in compact_css
+    assert '@media(max-width:680px)' in compact_css
     assert '@media(prefers-reduced-motion:reduce)' in compact_css
     assert ("e.key==='Enter'" in js or "event.key === 'Enter'" in js)
     assert ("e.key===' '" in js or "event.key === ' '" in js)
