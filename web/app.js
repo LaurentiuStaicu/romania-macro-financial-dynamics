@@ -1,4 +1,4 @@
-const state = { lang: 'en', data: null, selectedSector: 'F' };
+const state = { lang: 'en', data: null, selectedSector: 'G' };
 
 const strings = {
   en: {
@@ -8,7 +8,7 @@ const strings = {
     modelIntro: 'Select a sector to connect the diagram with its theory, evidence and current empirical status.',
     readOnlyTitle: 'Current capability:', readOnlyBody: 'structural and empirical inspection only. Behavioural simulation remains disabled while the Alpha 0.6 gate is NO-GO.',
     theoryEyebrow: 'Contextual explanation', theoryHeading: 'Theory / Learn',
-    dashboardEyebrow: 'Empirical status before engine metadata', dashboardHeading: 'Validation recovery dashboard',
+    dashboardEyebrow: 'Empirical status before engine metadata', dashboardHeading: 'Scientific validation dashboard',
     auxiliaryEyebrow: 'Evidence, provenance and limitations', auxiliaryHeading: 'Auxiliary',
     footerText: 'InfoClar is the reference web interface. Native packaging remains deferred until the web product is mature near v1.',
     readOnlyMode: 'Read-only scientific interface',
@@ -19,7 +19,9 @@ const strings = {
     noValidated: 'No validated behavioural mechanism',
     passThrough: 'Household pass-through', refinancing: 'Government refinancing',
     policyHistory: 'policy-rate observations', mirHistory: 'observations / lending target',
-    selectionSignal: 'selection RMSE', finalHoldout: 'final holdout RMSE', alpha06: 'Alpha 0.6 gate'
+    selectionSignal: 'selection RMSE', finalHoldout: 'final holdout RMSE', alpha06: 'Alpha 0.6 gate',
+    ledgerRows: 'audited ledger rows', openingPrincipal: 'opening-principal rows', matchedRepricing: 'matched repricing rows',
+    maturityVsRefixing: 'maturity / refixing <1y', completenessGate: 'ledger completeness gate'
   },
   ro: {
     navModel: 'Model', navTheory: 'Teorie / Învățare', navDashboard: 'Dashboard', navAuxiliary: 'Surse și limite',
@@ -28,7 +30,7 @@ const strings = {
     modelIntro: 'Selectează un sector pentru a conecta diagrama cu teoria, dovezile și starea empirică actuală.',
     readOnlyTitle: 'Capabilitate curentă:', readOnlyBody: 'doar inspecție structurală și empirică. Simularea comportamentală rămâne dezactivată cât timp poarta Alpha 0.6 este NO-GO.',
     theoryEyebrow: 'Explicație contextuală', theoryHeading: 'Teorie / Învățare',
-    dashboardEyebrow: 'Starea empirică înaintea metadatelor motorului', dashboardHeading: 'Dashboard recuperare validare',
+    dashboardEyebrow: 'Starea empirică înaintea metadatelor motorului', dashboardHeading: 'Dashboard de validare științifică',
     auxiliaryEyebrow: 'Dovezi, proveniență și limitări', auxiliaryHeading: 'Auxiliar',
     footerText: 'InfoClar este interfața web de referință. Împachetarea nativă rămâne amânată până când produsul web se maturizează aproape de v1.',
     readOnlyMode: 'Interfață științifică read-only',
@@ -39,7 +41,9 @@ const strings = {
     noValidated: 'Niciun mecanism comportamental validat',
     passThrough: 'Pass-through gospodării', refinancing: 'Refinanțare publică',
     policyHistory: 'observații rata de politică', mirHistory: 'observații / țintă creditare',
-    selectionSignal: 'RMSE selecție', finalHoldout: 'RMSE holdout final', alpha06: 'Poarta Alpha 0.6'
+    selectionSignal: 'RMSE selecție', finalHoldout: 'RMSE holdout final', alpha06: 'Poarta Alpha 0.6',
+    ledgerRows: 'rânduri auditate în ledger', openingPrincipal: 'rânduri cu principal de deschidere', matchedRepricing: 'rânduri cu repricing potrivit',
+    maturityVsRefixing: 'maturitate / refixare <1 an', completenessGate: 'poarta de completitudine a ledgerului'
   }
 };
 
@@ -80,14 +84,28 @@ function renderDashboard() {
   if (!state.data) return;
   const d = state.data.empirical_dashboard;
   const v = state.data.validation.monetary_pass_through;
-  const cards = [
-    metric(d.policy_rate_observations, t('policyHistory'), d.policy_rate_coverage),
-    metric(d.mir_target_observations_each, t('mirHistory'), d.mir_target_coverage),
-    metric(d.validated_behavioural_mechanisms, t('validatedMechanisms'), t('noValidated')),
-    metric(v.household_selection_rmse.toFixed(3), t('selectionSignal'), `persistence ${v.household_persistence_rmse.toFixed(3)} · ${v.household_selection}`),
-    metric(v.household_candidate_holdout_rmse.toFixed(3), t('finalHoldout'), `persistence ${v.household_persistence_holdout_rmse.toFixed(3)} · Δpolicy events ${v.household_holdout_policy_changes}`),
-    metric(state.data.validation.alpha_0_6_gate.replace('_FOR_BEHAVIOURAL_SIMULATION', ''), t('alpha06'), `${t('calibration')} ${d.calibration_months} · ${t('structuralSelection')} ${d.structural_selection_months} · ${t('holdout')} ${d.fresh_household_holdout_months}`)
-  ];
+  const g = state.data.validation.government_refinancing;
+  let cards;
+
+  if (state.selectedSector === 'G') {
+    cards = [
+      metric(d.government_ledger_rows, t('ledgerRows'), `${d.government_ledger_currencies} currencies · fixed-rate public subset`),
+      metric(d.government_rows_with_opening_outstanding_principal, t('openingPrincipal'), `required coverage ≥ ${g.minimum_opening_principal_coverage_pct}%`),
+      metric(d.government_rows_with_matched_repricing, t('matchedRepricing'), `required event-principal coverage ≥ ${g.minimum_repricing_event_principal_coverage_pct}%`),
+      metric(`${d.government_2024_12_maturing_1y_pct.toFixed(0)}% / ${d.government_2024_12_refixing_1y_pct.toFixed(0)}%`, t('maturityVsRefixing'), 'MoF 2024-12 · distinct concepts'),
+      metric(g.gate_1, t('completenessGate'), `cost reconstruction ${g.gate_3} · estimation ${g.estimation_run ? 'RUN' : 'NOT RUN'}`),
+      metric(state.data.validation.alpha_0_6_gate.replace('_FOR_BEHAVIOURAL_SIMULATION', ''), t('alpha06'), `${d.validated_behavioural_mechanisms} ${t('validatedMechanisms')}`)
+    ];
+  } else {
+    cards = [
+      metric(d.policy_rate_observations, t('policyHistory'), d.policy_rate_coverage),
+      metric(d.mir_target_observations_each, t('mirHistory'), d.mir_target_coverage),
+      metric(d.validated_behavioural_mechanisms, t('validatedMechanisms'), t('noValidated')),
+      metric(v.household_selection_rmse.toFixed(3), t('selectionSignal'), `persistence ${v.household_persistence_rmse.toFixed(3)} · ${v.household_selection}`),
+      metric(v.household_candidate_holdout_rmse.toFixed(3), t('finalHoldout'), `persistence ${v.household_persistence_holdout_rmse.toFixed(3)} · Δpolicy events ${v.household_holdout_policy_changes}`),
+      metric(state.data.validation.alpha_0_6_gate.replace('_FOR_BEHAVIOURAL_SIMULATION', ''), t('alpha06'), `${t('calibration')} ${d.calibration_months} · ${t('structuralSelection')} ${d.structural_selection_months} · ${t('holdout')} ${d.fresh_household_holdout_months}`)
+    ];
+  }
   document.getElementById('dashboard-cards').innerHTML = cards.join('');
   document.getElementById('validation-note').textContent = state.data.validation.headline[state.lang];
 }
