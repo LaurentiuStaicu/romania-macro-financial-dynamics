@@ -1,0 +1,103 @@
+{
+  "schema_version": "2.0",
+  "central_question": {
+    "en": "How do finances circulate through Romania's economy, who funds whom, who owes whom, where do vulnerabilities accumulate, and how can shocks transmit?",
+    "ro": "Cum circulă finanțele în economia României, cine finanțează pe cine, cine datorează cui, unde se acumulează vulnerabilități și cum se pot transmite șocurile?"
+  },
+  "primary_object": "FLOW_OF_FUNDS_EXPLORER",
+  "accounting_spine_first": true,
+  "default_perspective": "stock",
+  "default_layer": "balance",
+  "perspectives": [
+    {"id":"stock","label":{"en":"STOCK / BALANCE-SHEET VIEW","ro":"STOC / VEDERE BILANȚIERĂ"},"classes":["STOCK"],"description":{"en":"Financial assets and liabilities at a point in time, with holder, issuer, instrument, value, period and source when observed.","ro":"Active și pasive financiare la un moment dat, cu deținător, emitent, instrument, valoare, perioadă și sursă atunci când sunt observate."}},
+    {"id":"flow","label":{"en":"FLOW VIEW","ro":"VEDERE FLUXURI"},"classes":["FLOW","REVALUATION_OTHER_FLOW"],"description":{"en":"Transactions, new financing, repayments, interest, revaluations and other changes over a period. Real and fiscal flows appear only where supported.","ro":"Tranzacții, finanțare nouă, rambursări, dobânzi, reevaluări și alte modificări într-o perioadă. Fluxurile reale și fiscale apar numai unde sunt susținute."}}
+  ],
+  "layer_order": ["real","fiscal","financial","balance","external","feedback"],
+  "layer_labels": {
+    "real":{"en":"REAL ECONOMY","ro":"ECONOMIA REALĂ"},
+    "fiscal":{"en":"FISCAL","ro":"FISCAL"},
+    "financial":{"en":"MONEY & CREDIT","ro":"MONEDĂ ȘI CREDIT"},
+    "balance":{"en":"BALANCE SHEETS","ro":"BILANȚURI"},
+    "external":{"en":"EXTERNAL","ro":"EXTERN"},
+    "feedback":{"en":"DYNAMIC FEEDBACKS","ro":"FEEDBACK-URI DINAMICE"}
+  },
+  "normal_ui_forbidden": [
+    "internal sector codes",
+    "registry names",
+    "file paths",
+    "Alpha metadata",
+    "test counts",
+    "software implementation details",
+    "raw epistemic enum names"
+  ],
+  "epistemic_labels": {
+    "OBSERVED":{"en":"Observed","ro":"Observat"},
+    "ACCOUNTING":{"en":"Accounting relation","ro":"Relație contabilă"},
+    "CONCEPTUAL":{"en":"Conceptual / unquantified","ro":"Conceptual / necuantificat"},
+    "CANDIDATE":{"en":"Behavioural candidate","ro":"Mecanism comportamental candidat"},
+    "DEFERRED":{"en":"Deferred / not identified","ro":"Amânat / neidentificat"}
+  },
+  "sector_questions": [
+    {"id":"funded_by","en":"WHO FUNDS IT?","ro":"CINE ÎL FINANȚEAZĂ?"},
+    {"id":"funds","en":"WHO DOES IT FUND?","ro":"PE CINE FINANȚEAZĂ?"},
+    {"id":"owns","en":"WHAT DOES IT OWN?","ro":"CE ACTIVE DEȚINE?"},
+    {"id":"owes","en":"WHAT DOES IT OWE?","ro":"CE PASIVE ARE?"},
+    {"id":"instrument","en":"THROUGH WHICH INSTRUMENT?","ro":"PRIN CE INSTRUMENT?"},
+    {"id":"amount","en":"HOW MUCH?","ro":"CÂT?"},
+    {"id":"change","en":"HOW HAS IT CHANGED?","ro":"CUM S-A SCHIMBAT?"}
+  ],
+  "relation_detail_fields": ["description","amount","unit","period","instrument","holder","issuer","source","epistemic_status","limitations"],
+  "feedback_overrides": {
+    "policy_rate": {
+      "mechanism":{"en":"Policy-rate changes may pass through to bank lending rates.","ro":"Modificările ratei de politică se pot transmite către ratele bancare de creditare."},
+      "hypothetical_sign":{"en":"Positive pass-through expected in sign, magnitude not prospectively confirmed.","ro":"Se așteaptă un pass-through pozitiv ca semn, magnitudinea nefiind confirmată prospectiv."},
+      "evidence_status":{"en":"Historical candidate; prospective confirmation is still required.","ro":"Candidat istoric; este încă necesară confirmarea prospectivă."},
+      "parameter_status":{"en":"Frozen candidate form; parameter must not be respecified using reserved observations.","ro":"Formă candidat înghețată; parametrul nu trebuie respecificat folosind observațiile rezervate."},
+      "validation_status":{"en":"Not validated for behavioural simulation.","ro":"Nevalidat pentru simulare comportamentală."},
+      "required_before_simulation":{"en":"A genuinely new policy-rate movement must discriminate the frozen candidate from persistence on reserved future observations.","ro":"O mișcare cu adevărat nouă a ratei de politică trebuie să discrimineze candidatul înghețat de persistence pe observațiile viitoare rezervate."}
+    },
+    "government_refinancing": {
+      "mechanism":{"en":"Rollover and repricing of public debt may change the portfolio's effective interest cost.","ro":"Rollover-ul și repricing-ul datoriei publice pot modifica costul efectiv al dobânzii portofoliului."},
+      "hypothetical_sign":{"en":"Higher refinancing yields would mechanically raise cost on repriced principal, but the aggregate behavioural mapping is unidentified.","ro":"Randamentele mai mari de refinanțare ar crește mecanic costul principalului repriced, dar relația comportamentală agregată este neidentificată."},
+      "evidence_status":{"en":"Instrument-level provenance improved, but required principal and repricing coverage failed the preregistered completeness gate.","ro":"Proveniența la nivel de instrument s-a îmbunătățit, dar acoperirea necesară pentru principal și repricing a eșuat la poarta preînregistrată de completitudine."},
+      "parameter_status":{"en":"No point-identified parameter; no estimation run.","ro":"Niciun parametru identificat punctual; nicio estimare rulată."},
+      "validation_status":{"en":"Deferred; not validated for behavioural simulation.","ro":"Amânat; nevalidat pentru simulare comportamentală."},
+      "required_before_simulation":{"en":"Matched opening outstanding principal, realized repriced principal, contractual reset dates and old/new effective rates must satisfy the frozen completeness contract before estimation.","ro":"Principalul outstanding inițial potrivit, principalul efectiv repriced, datele contractuale de reset și ratele efective vechi/noi trebuie să satisfacă contractul înghețat de completitudine înainte de estimare."}
+    }
+  },
+  "vulnerability_monitor": {
+    "title":{"en":"Macro-Financial Imbalance & Vulnerability Monitor","ro":"Monitor de dezechilibre și vulnerabilități macro-financiare"},
+    "required_questions":["problem","current_value_direction","why_it_matters","who_is_exposed","propagation","evidence","uncertainty"],
+    "methodological_references":["Eurostat / EC MIP","ECB","BNR","IMF Balance Sheet Approach","BIS","Romanian Ministry of Finance"],
+    "compatibility_rule":"Thresholds or severity labels may be used only when the displayed observation matches the institutional definition, population, boundary, frequency and transformation required by that benchmark. Otherwise show NOT ASSESSED or UNRESOLVED."
+  },
+  "stress_contract": {
+    "label":"ACCOUNTING / EXPOSURE STRESS TEST",
+    "forecast":false,
+    "allowed":["direct FX revaluation","direct asset-value loss allocation","near-term maturity rollover exposure","direct bilateral stock double-entry change"],
+    "forbidden":["consumption response","investment response","credit-supply response","endogenous FX response","fiscal reaction","behavioural feedback simulation"]
+  },
+  "theory_required_topics": [
+    "money","bank-money-creation","institutional-sectors","assets-liabilities","stocks-flows","double-entry","flow-of-funds","from-whom-to-whom","esa-instruments","households","nfc","financial-sector","bnr","government","external-sector","credit","deposits","interest","securities","deficit","public-debt","refinancing","fx","current-account","niip","saving-investment","maturity-mismatch","currency-mismatch","feedback-loops","delays","macro-financial-imbalances","accounting-stress","behavioural-simulation","calibration","validation","model-limits"
+  ],
+  "usefulness_gate": [
+    "who_funds_government",
+    "who_holds_sector_claims",
+    "net_creditor_debtor_when_supported",
+    "main_imbalances",
+    "exposed_sectors",
+    "mechanical_shock_transmission",
+    "observed_vs_candidate",
+    "simulation_limits"
+  ],
+  "visual_audit": {
+    "required": true,
+    "desktop_viewport":{"width":1440,"height":1100},
+    "mobile_viewport":{"width":390,"height":844},
+    "required_captures":["desktop-stock","desktop-flow","desktop-vulnerability","mobile-stock","mobile-flow","mobile-vulnerability"]
+  },
+  "behavioural_simulation_enabled": false,
+  "validated_behavioural_reference_mechanisms": 0,
+  "prospective_monetary_confirmation_unchanged": true,
+  "flatpak_started": false
+}
