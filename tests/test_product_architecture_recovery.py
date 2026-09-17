@@ -110,7 +110,7 @@ def test_accounting_stress_tests_are_mechanical_and_not_behavioural_forecasts():
     js = (ROOT / "web/app.js").read_text(encoding="utf-8")
     tests = {s["id"]: s for s in architecture["stress_tests"]}
     assert {"stress_fx_sovereign", "stress_rollover", "stress_security_value", "stress_bilateral_stock"} <= set(tests)
-    assert 'id="stress-panel"' in html and "ACCOUNTING / EXPOSURE STRESS TEST" in html
+    assert 'id="stress-panel"' in html and "ACCOUNTING STRESS" in html
     assert "NOT A FORECAST" in js
     assert "fx_share_revaluation" in js and "rollover_share" in js and "market_value" in js and "bilateral_stock" in js
     assert tests["stress_fx_sovereign"]["exposure_share_pct"] == 53
@@ -152,8 +152,8 @@ def test_usefulness_gate_is_wired_end_to_end():
     assert 'id="stress-tests"' in html and "runStress" in js
     # 7 Observed/accounting vs candidate
     assert "epistemicClass" in js and "roleLabel" in js
-    # 8 Explicit simulation boundary
-    assert "behavioural simulation remains unavailable" in html
+    # 8 Explicit simulation boundary in user-facing language
+    assert "behavioural simulation is not yet validated" in html
 
 
 def test_accessibility_adaptive_layout_and_no_flatpak_regression():
@@ -163,8 +163,8 @@ def test_accessibility_adaptive_layout_and_no_flatpak_regression():
     assert 'class="skip-link"' in html
     assert 'aria-live="polite"' in html
     assert ':focus-visible' in css
-    assert '@media(max-width:900px)' in css
-    assert '@media(max-width:560px)' in css
-    assert '@media(prefers-reduced-motion:reduce)' in css
+    assert '@media (max-width: 1120px)' in css
+    assert '@media (max-width: 620px)' in css
+    assert '@media (prefers-reduced-motion: reduce)' in css
     assert "e.key==='Enter'" in js and "e.key===' '" in js
     assert not (ROOT / "native").exists()
