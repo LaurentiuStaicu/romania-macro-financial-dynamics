@@ -138,21 +138,13 @@ def test_complete_bilingual_reader_covers_explicit_product_topics():
 def test_usefulness_gate_is_wired_end_to_end():
     html = (ROOT / "web/index.html").read_text(encoding="utf-8")
     js = (ROOT / "web/app.js").read_text(encoding="utf-8")
-    # 1 Who funds government? sector liabilities + bilateral matrix
     assert "WHO FUNDS IT?" in js and 'id="flow-matrix"' in html
-    # 2 Who holds sector claims? holder/issuer matrix and sector assets
     assert "WHO DOES IT FUND?" in js and "Holder / creditor" in js
-    # 3 Net creditor/debtor status where supportable
     assert "NET FINANCIAL POSITION" in js
-    # 4 Main imbalances
     assert 'id="diagnostic-cards"' in html
-    # 5 Exposed sectors and direct propagation
     assert "Can directly affect" in js and "selectDiagnostic" in js
-    # 6 Mechanical shock channel
     assert 'id="stress-tests"' in html and "runStress" in js
-    # 7 Observed/accounting vs candidate
     assert "epistemicClass" in js and "roleLabel" in js
-    # 8 Explicit simulation boundary in user-facing language
     assert "behavioural simulation is not yet validated" in html
 
 
@@ -163,8 +155,9 @@ def test_accessibility_adaptive_layout_and_no_flatpak_regression():
     assert 'class="skip-link"' in html
     assert 'aria-live="polite"' in html
     assert ':focus-visible' in css
-    assert '@media (max-width: 1120px)' in css
-    assert '@media (max-width: 620px)' in css
-    assert '@media (prefers-reduced-motion: reduce)' in css
+    compact = css.replace(" ", "")
+    assert '@media(max-width:980px)' in compact
+    assert '@media(max-width:680px)' in compact
+    assert '@media(prefers-reduced-motion:reduce)' in compact
     assert "e.key==='Enter'" in js and "e.key===' '" in js
     assert not (ROOT / "native").exists()
