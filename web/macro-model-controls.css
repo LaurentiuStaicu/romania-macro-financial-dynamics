@@ -1,0 +1,4 @@
+/* Macro-specific primary-visualization control sizing only.
+ * Suite-level chrome remains defined by the World3 parity contract.
+ */
+.layer-button { min-height: 32px; }
