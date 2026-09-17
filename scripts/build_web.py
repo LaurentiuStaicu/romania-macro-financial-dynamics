@@ -27,7 +27,7 @@ def main() -> None:
         raise SystemExit("Pages build must publish the canonical InfoClar web surface")
     if snapshot["stage"]["interactive_simulation_enabled"] is not False:
         raise SystemExit("Behavioural simulation must remain disabled while the scientific gate is NO-GO")
-    if snapshot["validation_recovery"]["alpha_0_6_gate"] != "NO_GO_FOR_BEHAVIOURAL_SIMULATION":
+    if snapshot["validation"]["alpha_0_6_gate"] != "NO_GO_FOR_BEHAVIOURAL_SIMULATION":
         raise SystemExit("Pages build refuses to publish a simulator-ready claim inconsistent with Alpha 0.5.1")
 
     if DESTINATION.exists():
