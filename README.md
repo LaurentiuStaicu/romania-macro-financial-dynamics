@@ -7,7 +7,7 @@
 <p align="center">Empirical stock-flow-consistent System Dynamics model of Romania's macro-financial system in an evidence-aware InfoClar interface.</p>
 
 <p align="center">
-  <img alt="Version 0.5.1a0" src="https://img.shields.io/badge/Version-0.5.1a0-4e9a06">
+  <img alt="Version 0.5.2a0" src="https://img.shields.io/badge/Version-0.5.2a0-4e9a06">
   <img alt="elementary OS planned" src="https://img.shields.io/badge/elementary_OS-Planned-64baff">
   <a href="LICENSE"><img alt="License MIT" src="https://img.shields.io/badge/License-MIT-blue"></a>
 </p>
@@ -17,81 +17,83 @@
   <img width="220" alt="Download Flatpak — Planned" src="https://img.shields.io/badge/Download_Flatpak-Planned-9ca3af?style=for-the-badge">
 </p>
 
-> **Alpha 0.5.1a0 — Validation Recovery / Empirical Basis Expansion.** The empirical basis is now much longer and prospectively partitioned. One parsimonious household monetary-pass-through form passed structural selection, but its fresh holdout contained no policy-rate changes and therefore could not outperform persistence. NFC forms failed before holdout. Government repricing remains boundary-unidentified at the aggregate level. **Validated behavioural reference mechanisms remain 0; Alpha 0.6 remains NO-GO.**
+> **Alpha 0.5.2a0 — Government Repricing Ledger.** The project now contains an audited instrument-level public ledger and a prospectively frozen reconciliation contract for the government refinancing → effective debt-rate mechanism. Public sources identify useful instrument terms, but they still do not provide the full matched opening outstanding principal, realized repriced principal, reset dates and old/new effective rates required by the equation. The completeness gate therefore fails before estimation. **Government repricing remains DEFERRED; validated behavioural reference mechanisms remain 0; Alpha 0.6 remains NO-GO.**
 
 ## Web-first InfoClar product
 
-InfoClar is the primary product surface through scientific maturation to v1. The browser application is publicly deployed at [https://laurentiustaicu.github.io/romania-macro-financial-dynamics/](https://laurentiustaicu.github.io/romania-macro-financial-dynamics/) and continues to accumulate the defensible model, Theory/Learn, empirical Dashboard and Auxiliary evidence/limitations surface.
+InfoClar remains the single reference product surface and is publicly deployed at [https://laurentiustaicu.github.io/romania-macro-financial-dynamics/](https://laurentiustaicu.github.io/romania-macro-financial-dynamics/). The same adaptive Model / Theory-Learn / Dashboard / Auxiliary interface now exposes the government repricing ledger, the maturity-versus-refixing distinction, the frozen acceptance gates, source provenance and the negative identifiability result.
 
-The central view remains specific to the Romanian macro-financial stock-flow system (`H / C / F / G / X / BNR`). The current interface is deliberately read-only for behavioural simulation. It exposes the longer BIS/ECB monetary vintage, prospective data roles, structural-selection and holdout outcomes, government debt maturity-vs-refixing distinctions and the explicit Alpha 0.6 gate.
+Behavioural simulation remains disabled. Native GTK/Granite/Flatpak development remains deferred until the web application and scientific contracts are mature at or near v1; the Flatpak CTA therefore remains visibly Planned and deliberately has no link.
 
-Native GTK/Granite/Flatpak development remains deferred until the web application is mature at or near v1. No separate application or Advanced mode is introduced.
+## Alpha 0.5.2a0 — Government Repricing Ledger
 
-## Alpha 0.5.x validation recovery
+### Prospective contract before assessment
 
-### Monetary transmission — longer official data
+The acceptance contract was committed before the ledger assessment in [`government_repricing_ledger_contract.json`](model/calibration_validation/government_repricing_ledger_contract.json). Its hard rules include:
 
-The reproducible recovery workflow captures a frozen official-source vintage:
+- no synthetic allocation of missing principal;
+- no substitution of redemption or maturity share for repricing share;
+- no pairing of an aggregate refixing share with one auction yield;
+- no use of issue size as same-date outstanding principal without explicit confirmation;
+- no assumption that a new issuance refinances a specific maturity;
+- no cross-currency aggregation without a matched valuation basis.
 
-- BIS central-bank policy rate for Romania (`M.RO`), source origin National Bank of Romania: **260 monthly observations, 2005-01..2026-08**;
-- ECB MIR household/NPISH RON new-business house-purchase rate: **108 observations, 2017-08..2026-07**;
-- ECB MIR NFC RON new-business rate with variable / initial fixation up to one year: **108 observations, 2017-08..2026-07**.
+The frozen completeness thresholds require at least **95%** coverage of opening principal on the exact MoF portfolio boundary and at least **90%** coverage of realized repricing-event principal. Before a historical reconstruction may support CANDIDATE status, instrument/block balances must reconcile to published stock within **0.5%**, and published portfolio cost must be reproduced over at least three consecutive snapshots with maximum absolute error **0.10 pp** per snapshot and MAE **0.05 pp**. VALIDATED additionally requires a later prospectively reserved non-zero repricing period to pass without post-observation respecification.
 
-The alternative NFC total series contains official missing observations and is not imputed.
+### Public ledger built without synthetic filling
 
-Roles were frozen before recovery estimation: calibration **2017-08..2022-12**, structural selection **2023-01..2025-01**, fresh final evaluation **2025-02..2025-11**. The previously inspected Nov-2024..Jan-2025 Alpha 0.5 holdout is permanently reclassified as structural-selection information. Observations from 2026-08 onward are reserved prospectively for later confirmation as they become available for all targets.
+[`government_repricing_ledger_0.5.2a0.csv`](data/processed/government_repricing_ledger_0.5.2a0.csv) records seven auditable public rows from Ministry of Finance issuance terms and BVB-listed Ministry securities. The observed subset contains RON and EUR fixed-rate securities and preserves ISIN, coupon, maturity, issue value or announced amount where actually published, source date and provenance.
 
-### Household lending-rate pass-through
+The ledger deliberately keeps the following fields missing when they are not publicly matched on the required boundary:
 
-The only form that passes every preregistered structural-selection gate is the one-parameter contemporaneous change relation:
+- opening outstanding principal at the reconciliation date;
+- realized principal refinanced or contractually refixed;
+- contractual refixing/reset dates for floating or indexed debt;
+- old effective rate and new/reset effective rate on the same repriced principal.
+
+Five BVB rows provide actual published issue values, totalling RON 923.2642 million across the observed RON examples and EUR 151.6391 million for the observed EUR example. These totals are **diagnostic issue-size sums only**. They are not interpreted as current portfolio stock or as coverage of the MoF debt boundary.
+
+### Maturity is still not refixing
+
+The newer MoF risk snapshot retained in the Alpha 0.5.2 provenance reports, as of 30 December 2024, about **10%** of debt maturing within one year versus **12%** refixing within one year, with ATM **6.9 years** and ATR **6.7 years**. For local-currency debt, the corresponding one-year shares are **17%** maturing and **15%** refixing. These are separate risk concepts and cannot be collapsed into one repricing parameter.
+
+The existing MoF portfolio-average interest-rate reference path remains **3.8% (2019), 3.3% (2020), 3.1% (2021), 3.3% (2022), 4.2% (2023)**. It remains the historical reconstruction target under its own source definition rather than being replaced by a market yield.
+
+Eurostat's 2025 apparent cost for Romania, **5.2%**, and its report that **53%** of Maastricht general-government debt was denominated in foreign currencies are retained only as external diagnostics. Eurostat defines apparent cost as accrual interest expenditure divided by average outstanding Maastricht debt; that general-government boundary is not substituted for the Ministry portfolio-cost boundary.
+
+### Gate result
+
+The public ledger has **0 rows** with same-date opening outstanding principal, **0 rows** with realized principal repriced and **0 rows** with a matched old/new effective-rate pair. Consequently the 95%/90% completeness gate cannot pass. Balance reconciliation, portfolio-cost reconstruction and parameter estimation are therefore **not opened**; running them would require exactly the synthetic allocations prohibited by the preregistration.
+
+Final government mechanism disposition: **DEFERRED**.
+
+See [`government_repricing_ledger_assessment.json`](model/calibration_validation/government_repricing_ledger_assessment.json), [`government_repricing_ledger_contract.json`](model/calibration_validation/government_repricing_ledger_contract.json), the [provenance record](data/provenance/government_repricing_ledger_0.5.2a0.json) and the [Alpha 0.5.2 final audit](docs/GOVERNMENT_REPRICING_LEDGER_AUDIT_0.5.2a0.md).
+
+## Monetary confirmation remains frozen
+
+Alpha 0.5.2 does not respecify the Alpha 0.5.1 household candidate. The selected one-parameter contemporaneous relation remains:
 
 `lend[t] = lend[t-1] + beta × (policy[t] - policy[t-1])`
 
-Across 25 expanding origins, beta remains approximately **0.476–0.501**. Structural-selection RMSE is **0.1687 pp**, versus **0.1835 pp** for persistence, an improvement of about **8.1%**.
-
-The model form was frozen before opening the fresh 10-month holdout. That holdout contains **zero policy-rate changes**, so the candidate becomes exactly persistence: both have RMSE **0.05727 pp**. It therefore fails the preregistered independent-evaluation improvement gate.
-
-Disposition: **CANDIDATE — not VALIDATED**.
-
-### NFC lending-rate pass-through
-
-None of the four preregistered parsimonious forms passes structural selection. The direct contemporaneous delta-policy form has RMSE **0.2316 pp**, versus **0.2166 pp** for persistence. The NFC final holdout is intentionally not opened.
-
-Disposition: **CANDIDATE**; the tested forms fail, while the broader existence of monetary transmission is not declared rejected.
-
-### Government refinancing → effective debt rate
-
-Official MoF evidence now distinguishes debt maturity from rate refixing and provides portfolio-average debt costs, ATM/ATR indicators and maturity-specific auction yields. These observables are useful but not interchangeable.
-
-For October 2024, the MoF reports roughly **10%** of debt maturing within one year versus **11%** refixing within one year, with ATM **7.0 years** and ATR **6.9 years**. The published portfolio cost and individual auction yields also refer to different instrument/currency boundaries.
-
-Therefore redemption/debt, a strategic target, an aggregate refixing share or a single auction yield is not substituted for the model's repricing share `m`. Valid estimation requires an instrument × currency × fixed/floating repricing ledger with matched principal and old/new effective rates.
-
-Disposition: **DEFERRED**.
-
-See [Alpha 0.5.x final audit](docs/VALIDATION_RECOVERY_AUDIT_0.5.1a0.md), [`validation_recovery_selection.json`](model/calibration_validation/validation_recovery_selection.json), [`validation_recovery_holdout.json`](model/calibration_validation/validation_recovery_holdout.json), [`validation_recovery_disposition.json`](model/calibration_validation/validation_recovery_disposition.json) and [`government_refinancing_recovery_assessment.json`](model/calibration_validation/government_refinancing_recovery_assessment.json).
+Observations from **2026-08 onward** remain prospectively reserved. They may not be used to revise the form before the first confirmation test containing genuinely new BNR policy-rate variation. The NFC result and its unopened final holdout are likewise unchanged.
 
 ## Scientific foundations
 
-- **Alpha 0.2 — Accounting Spine:** auditable 2025 holder-by-issuer accounting, provenance, B9F/reconciliation and explicit unresolved-value semantics.
-- **Alpha 0.3 — Dynamic Core:** executable stocks/flows/delays, year-based time semantics, double-entry conservation and structural verification.
-- **Alpha 0.4 — Empirical Dynamics:** evidence-linked behavioural candidates with explicit activation/defer/rejection contracts.
-- **Alpha 0.5 — Calibration & Validation:** first time-respecting validation cycle, correctly closed with zero validated mechanisms.
+- **Alpha 0.1 — Foundation:** project constitution, registries, bilingual and methodological contracts, CI.
+- **Alpha 0.2 — Accounting Spine:** auditable 2025 bilateral accounting and explicit unresolved-value semantics.
+- **Alpha 0.2.1 — InfoClar Model Suite Design Standard v1.1:** common adaptive product grammar without forcing model-specific diagrams into one shape.
+- **Alpha 0.3 — Dynamic Core:** executable stocks/flows/delays, dimensional consistency and conservation tests.
+- **Alpha 0.4 — Empirical Dynamics:** evidence-linked behavioural candidates and explicit mechanism classifications.
+- **Alpha 0.5.0 — Calibration & Validation:** first time-respecting cycle, closed with zero validated behavioural mechanisms.
+- **Alpha 0.5.1 — Validation Recovery:** expanded official monetary and government-debt evidence without weakening the validation gate.
 
-These remain unchanged foundations for the recovery work.
+These foundations remain unchanged by Alpha 0.5.2.
 
-## Current gate and next path
+## Current gate and next justified path
 
-Validated behavioural reference mechanisms: **0**.
+Validated behavioural reference mechanisms: **0**. Therefore **Alpha 0.6 Interactive Web Simulator remains NO-GO** and must not be reopened merely because the instrument ledger is richer.
 
-Therefore **Alpha 0.6 Interactive Web Simulator remains NO-GO**. InfoClar itself remains GO as the primary read-only structural/empirical/theory web product.
-
-The next justified empirical work remains inside the Alpha 0.5.x family:
-
-1. preserve future MIR observations from **2026-08 onward** for a first prospective confirmation of the frozen household change-pass-through form when a new policy-rate movement occurs;
-2. build the government instrument/currency/fixed-floating repricing ledger and reconcile it to published MoF portfolio costs.
-
-Only a prospectively successful confirmation or a definitionally matched validated debt-repricing mechanism can reopen the Alpha 0.6 simulator decision.
+The next prospectively justified behavioural path is **Prospective Monetary Confirmation**, but it becomes executable only when a genuinely new BNR policy-rate movement provides identifying variation for the already frozen household delta-policy form. On the government side, further work is justified only if an official/reproducible source supplies same-date outstanding principal and matched refinancing/reset rates across the material MoF portfolio boundary; repeating aggregate proxy fitting is not justified.
 
 ## Development
 
@@ -102,15 +104,15 @@ python -m pip install -e '.[test]'
 python -m pytest
 ```
 
-For local inspection of the current InfoClar alpha, serve `web/` with a static HTTP server so `public/model-stage.json` can be fetched by the browser. Production publication is handled by the verified GitHub Pages workflow from `main`.
+For local inspection, serve `web/` with a static HTTP server so `public/model-stage.json` can be fetched by the browser. Production publication is handled by the verified GitHub Pages workflow from `main`.
 
 ## Limitations
 
 - no behavioural mechanism has yet passed all prospective validation gates;
-- the fresh household holdout contains no policy-rate event and cannot independently identify pass-through;
-- the NFC holdout remains unopened after structural-selection failure;
-- MIR new-business rates are flow-contract rates, not effective rates on outstanding loan stocks;
-- government maturity, refixing, portfolio cost and issuance yields do not share a single aggregation boundary;
+- government instrument issue size is not equivalent to same-date outstanding principal;
+- the public ledger does not expose the full floating/indexed reset structure or matched repricing principal/rates;
+- Ministry portfolio cost and Eurostat Maastricht apparent cost have different boundaries;
+- reserved future monetary observations remain unavailable for respecification before their first prospective confirmation use;
 - some Accounting Spine bilateral cells remain unresolved;
 - no forecast, causal effect, policy recommendation or behavioural simulation is claimed.
 
