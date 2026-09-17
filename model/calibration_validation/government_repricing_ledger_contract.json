@@ -1,0 +1,82 @@
+{
+  "contract_version": "0.5.2a0",
+  "stage": "Government Repricing Ledger",
+  "frozen_before_ledger_assessment": true,
+  "frozen_date": "2026-09-17",
+  "mechanism_id": "government_refinancing_effective_rate",
+  "historical_results_immutable": [
+    "Alpha 0.5.0a0 Calibration & Validation",
+    "Alpha 0.5.1a0 Validation Recovery / Empirical Basis Expansion"
+  ],
+  "scientific_boundary": {
+    "primary_target": "Ministry of Finance government public debt portfolio under the same national-legislation boundary used by the published portfolio cost and debt-risk indicators, excluding temporary financing where the source definition excludes it",
+    "external_diagnostic_only": "Eurostat Maastricht general-government gross debt and apparent cost; this boundary must not be substituted for the MoF direct government-debt portfolio boundary",
+    "required_dimensions": [
+      "instrument",
+      "currency",
+      "fixed_or_floating",
+      "opening_outstanding_principal",
+      "maturity_date",
+      "contractual_reset_or_refixing_date",
+      "event_type",
+      "principal_repriced",
+      "old_effective_rate",
+      "new_or_reset_effective_rate",
+      "interest_cost_definition",
+      "source_and_provenance"
+    ]
+  },
+  "event_semantics": {
+    "MATURITY": "contractual principal maturity; not automatically a refinancing or repricing event",
+    "REFINANCING": "observed replacement financing linked to the represented matured/refinanced principal; linkage may not be inferred from aggregate financing needs",
+    "CONTRACTUAL_REFIXING": "rate reset on an existing floating/indexed instrument without principal maturity",
+    "NEW_ISSUANCE": "new borrowing; not automatically the new rate for any specific maturing principal",
+    "PORTFOLIO_REFERENCE": "published aggregate or sub-portfolio measure used only for reconciliation"
+  },
+  "hard_prohibitions": {
+    "synthetic_allocation_of_missing_principal": true,
+    "redemption_share_as_repricing_share": true,
+    "maturity_share_as_refixing_share": true,
+    "aggregate_refixing_share_paired_with_one_auction_yield": true,
+    "issue_size_as_opening_outstanding_principal_without_same_date_confirmation": true,
+    "new_issuance_assumed_to_refinance_specific_maturity": true,
+    "mismatched_interest_expenditure_divided_by_debt_stock_to_manufacture_effective_rate": true,
+    "cross_currency_principal_aggregation_without_matched_valuation_basis": true,
+    "missing_value_as_zero": true
+  },
+  "prospective_acceptance_gates": {
+    "gate_1_ledger_completeness": {
+      "minimum_opening_principal_coverage_pct": 95.0,
+      "minimum_repricing_event_principal_coverage_pct": 90.0,
+      "rule": "Coverage is computed only on the exact MoF portfolio boundary and exact testing period. Issuance size, redemption schedules and strategy targets do not count as observed opening/repriced principal."
+    },
+    "gate_2_balance_reconciliation": {
+      "maximum_absolute_principal_residual_pct_of_published_stock": 0.5,
+      "rule": "Instrument/block principal must sum to the published matched-boundary stock within tolerance before portfolio-cost reconstruction."
+    },
+    "gate_3_portfolio_cost_reconstruction": {
+      "minimum_consecutive_published_snapshots": 3,
+      "maximum_absolute_error_pp_each_snapshot": 0.10,
+      "maximum_mean_absolute_error_pp": 0.05,
+      "maximum_currency_subportfolio_absolute_error_pp": 0.15,
+      "rule": "Only source-compatible interest-cost definitions and same-boundary principals may be weighted."
+    },
+    "gate_4_parameter_identification": {
+      "rule": "A repricing share or transition parameter is estimable only from observed matched repriced principal and matched old/new or reset rates. No aggregate residual parameter may absorb missing instrument, currency or fixed/floating allocations."
+    },
+    "gate_5_prospective_confirmation_for_validated_status": {
+      "rule": "Historical reconstruction can at most support CANDIDATE. VALIDATED additionally requires a prospectively reserved later period containing non-zero repricing/reset events to pass the same boundary, completeness and portfolio-cost tolerances without respecification after seeing that period."
+    }
+  },
+  "status_rules": {
+    "DEFERRED": "Any boundary/completeness gate fails before defensible estimation, or reconstruction would require prohibited synthetic allocation.",
+    "CANDIDATE": "Ledger completeness, balance reconciliation, historical portfolio-cost reconstruction and parameter identification pass prospectively frozen criteria, but prospective confirmation has not yet passed.",
+    "VALIDATED": "CANDIDATE requirements plus the prospectively reserved confirmation period pass without post-observation respecification."
+  },
+  "household_delta_policy_freeze": {
+    "status": "FROZEN_FOR_PROSPECTIVE_MONETARY_CONFIRMATION",
+    "future_observations_reserved_from": "2026-08",
+    "may_respecify_before_first_new_policy_rate_event_test": false
+  },
+  "alpha_0_6_rule": "Remain NO-GO while validated behavioural reference mechanisms equal zero."
+}

@@ -1,10 +1,10 @@
 {
   "schema_version": "1.1",
-  "software_version": "0.5.1a0",
+  "software_version": "0.5.2a0",
   "stage": {
-    "id": "alpha-0.5.x",
-    "name": {"en":"Validation Recovery / Empirical Basis Expansion","ro":"Recuperarea validării / Extinderea bazei empirice"},
-    "status": "complete_candidate_pending_integration",
+    "id": "alpha-0.5.2a0",
+    "name": {"en":"Government Repricing Ledger","ro":"Registrul de repricing al datoriei publice"},
+    "status": "complete_negative_result",
     "interface_mode": "READ_ONLY_SCIENTIFIC",
     "interactive_simulation_enabled": false
   },
@@ -15,12 +15,12 @@
     "native_flatpak_status": "DEFERRED_NEAR_V1"
   },
   "sectors": [
-    {"id":"H","label":{"en":"Households & NPISH","ro":"Gospodării și NPISH"},"theory":{"en":"Households hold financial assets, borrow and generate consumption demand. A parsimonious housing-lending-rate pass-through form passed structural selection but did not validate on the fresh holdout because the policy-rate driver did not move during that window.","ro":"Gospodăriile dețin active financiare, se împrumută și generează cerere de consum. O formă parcimonioasă de pass-through pentru rata creditelor ipotecare a trecut selecția structurală, dar nu s-a validat pe noul holdout deoarece rata de politică nu s-a modificat în acea perioadă."}},
-    {"id":"C","label":{"en":"Non-financial corporations","ro":"Societăți nefinanciare"},"theory":{"en":"NFC financing costs are represented by a complete monthly RON new-business series with initial fixation up to one year. None of the preregistered parsimonious pass-through forms beat simple baselines strongly enough during structural selection.","ro":"Costurile de finanțare ale companiilor sunt reprezentate printr-o serie lunară completă pentru credite noi în lei cu fixare inițială de până la un an. Niciuna dintre formele parcimonioase preînregistrate de pass-through nu a depășit suficient baseline-urile simple în selecția structurală."}},
-    {"id":"F","label":{"en":"Financial corporations","ro":"Societăți financiare"},"theory":{"en":"Romanian evidence supports monetary transmission, but predictive reference use requires more than mechanism plausibility. Alpha 0.5.x expands the empirical basis to 2017–2026 and keeps the mechanism as CANDIDATE after prospective validation gates are not fully passed.","ro":"Dovezile pentru România susțin transmisia monetară, dar utilizarea predictivă de referință necesită mai mult decât plauzibilitatea mecanismului. Alpha 0.5.x extinde baza empirică la 2017–2026 și păstrează mecanismul ca CANDIDATE deoarece porțile prospective de validare nu sunt trecute integral."}},
-    {"id":"G","label":{"en":"General government","ro":"Administrația publică"},"theory":{"en":"MoF data distinguish debt maturity from interest-rate refixing and report heterogeneous portfolio costs and issuance yields. The aggregate repricing equation remains DEFERRED because one repricing share and one marginal yield cannot be matched to the full multi-instrument, multi-currency debt stock without synthetic allocation.","ro":"Datele MF disting maturitatea datoriei de refixarea ratei și raportează costuri ale portofoliului și randamente de emisiune eterogene. Ecuația agregată de repricing rămâne DEFERRED deoarece o singură pondere de repricing și un singur randament marginal nu pot fi potrivite întregului stoc multi-instrument și multi-valută fără alocări sintetice."}},
-    {"id":"X","label":{"en":"Rest of the world","ro":"Restul lumii"},"theory":{"en":"The external sector closes cross-border positions and exposes the model to external rates, currencies and sovereign-market conditions. Currency-specific refinancing remains deferred until instrument-level exposures can be reconciled.","ro":"Sectorul extern închide pozițiile transfrontaliere și expune modelul la dobânzi externe, valute și condiții de piață suverană. Refinanțarea pe valute rămâne amânată până când expunerile pot fi reconciliate la nivel de instrument."}},
-    {"id":"BNR","label":{"en":"National Bank of Romania","ro":"Banca Națională a României"},"theory":{"en":"The BNR policy-rate history is now represented by the BIS monthly central-bank policy-rate series sourced from the National Bank of Romania. It spans multiple tightening and easing cycles and is used as an observed driver, not as an estimated policy reaction function.","ro":"Istoricul ratei de politică BNR este acum reprezentat de seria lunară BIS a ratei băncii centrale, având ca sursă Banca Națională a României. Seria acoperă mai multe cicluri de înăsprire și relaxare și este utilizată ca factor observat, nu ca funcție estimată de reacție a politicii monetare."}}
+    {"id":"H","label":{"en":"Households & NPISH","ro":"Gospodării și NPISH"},"theory":{"en":"The one-parameter household delta-policy form remains frozen exactly as selected in Alpha 0.5.1. Observations from 2026-08 onward are reserved for the first prospective confirmation after a genuinely new BNR policy-rate movement and are not used to respecify the form in Alpha 0.5.2.","ro":"Forma cu un parametru delta-policy pentru gospodării rămâne înghețată exact cum a fost selectată în Alpha 0.5.1. Observațiile din 2026-08 înainte sunt rezervate primei confirmări prospective după o mișcare cu adevărat nouă a ratei BNR și nu sunt folosite pentru respecificare în Alpha 0.5.2."}},
+    {"id":"C","label":{"en":"Non-financial corporations","ro":"Societăți nefinanciare"},"theory":{"en":"NFC monetary pass-through remains a historical CANDIDATE from Alpha 0.5.1. Its unopened final holdout and failed structural-selection result are not modified by the government ledger stage.","ro":"Pass-through-ul monetar pentru companii rămâne un CANDIDATE istoric din Alpha 0.5.1. Holdout-ul final nedeschis și eșecul selecției structurale nu sunt modificate de etapa ledgerului guvernamental."}},
+    {"id":"F","label":{"en":"Financial corporations","ro":"Societăți financiare"},"theory":{"en":"The financial transmission layer remains evidence-aware and read-only. Alpha 0.5.2 does not create a behavioural simulator or reinterpret the monetary-validation results.","ro":"Stratul de transmisie financiară rămâne orientat pe dovezi și read-only. Alpha 0.5.2 nu creează un simulator comportamental și nu reinterpretează rezultatele validării monetare."}},
+    {"id":"G","label":{"en":"General government","ro":"Administrația publică"},"theory":{"en":"Alpha 0.5.2 builds the maximum defensible public repricing ledger found from MoF and institutional sources. Instrument identity, currency, fixed coupon, maturity and issue terms can be observed for a public subset, but issue size is not the same as same-date outstanding principal. The public sources inspected do not supply full-portfolio matched opening principal, realized repriced principal, contractual reset dates and old/new effective rates. The mechanism therefore remains DEFERRED without estimation.","ro":"Alpha 0.5.2 construiește ledgerul public de repricing la nivelul maxim defensabil găsit în sursele MF și instituționale. Pentru un subset public pot fi observate identitatea instrumentului, valuta, cuponul fix, scadența și termenii emisiunii, dar valoarea emisiunii nu este același lucru cu principalul outstanding la aceeași dată. Sursele publice inspectate nu furnizează pentru întreg portofoliul principalul de deschidere potrivit, principalul efectiv repriced, datele de reset contractual și ratele efective vechi/noi. Mecanismul rămâne deci DEFERRED fără estimare."}},
+    {"id":"X","label":{"en":"Rest of the world","ro":"Restul lumii"},"theory":{"en":"Currency structure remains material: Eurostat reports 53% of Romania's Maastricht general-government debt in foreign currencies at end-2025. That ESA boundary is retained as an external diagnostic and is not mixed into the MoF portfolio-cost equation.","ro":"Structura valutară rămâne materială: Eurostat raportează 53% din datoria Maastricht a administrației publice a României în valute străine la sfârșitul lui 2025. Acest boundary ESA este păstrat ca diagnostic extern și nu este amestecat în ecuația costului portofoliului MF."}},
+    {"id":"BNR","label":{"en":"National Bank of Romania","ro":"Banca Națională a României"},"theory":{"en":"The BNR policy-rate history remains an observed driver for the frozen monetary candidate. Alpha 0.5.2 does not use reserved future MIR observations to alter that form.","ro":"Istoricul ratei BNR rămâne un driver observat pentru candidatul monetar înghețat. Alpha 0.5.2 nu folosește observațiile MIR viitoare rezervate pentru a modifica forma."}}
   ],
   "empirical_dashboard": {
     "policy_rate_observations": 260,
@@ -36,12 +36,19 @@
       "household_monetary_pass_through": "CANDIDATE",
       "nfc_monetary_pass_through": "CANDIDATE",
       "government_refinancing_effective_rate": "DEFERRED"
-    }
+    },
+    "government_ledger_rows": 7,
+    "government_ledger_currencies": 2,
+    "government_rows_with_issue_size": 5,
+    "government_rows_with_opening_outstanding_principal": 0,
+    "government_rows_with_matched_repricing": 0,
+    "government_2024_12_maturing_1y_pct": 10.0,
+    "government_2024_12_refixing_1y_pct": 12.0
   },
   "validation": {
     "headline": {
-      "en":"Validation recovery improved the evidence base, but no behavioural reference mechanism passed every prospective gate. Alpha 0.6 remains NO-GO.",
-      "ro":"Recuperarea validării a îmbunătățit baza de dovezi, dar niciun mecanism comportamental de referință nu a trecut toate porțile prospective. Alpha 0.6 rămâne NO-GO."
+      "en":"The government ledger improves instrument-level provenance but fails the preregistered completeness gate before estimation. No behavioural reference mechanism is validated; Alpha 0.6 remains NO-GO.",
+      "ro":"Ledgerul guvernamental îmbunătățește proveniența la nivel de instrument, dar eșuează la poarta preînregistrată de completitudine înainte de estimare. Niciun mecanism comportamental de referință nu este validat; Alpha 0.6 rămâne NO-GO."
     },
     "monetary_pass_through": {
       "household_selection": "PASS_TO_FINAL_EVALUATION",
@@ -57,18 +64,36 @@
       "nfc_selection": "FAIL_BEFORE_HOLDOUT",
       "nfc_holdout_opened": false,
       "final_verdict": "CANDIDATE",
-      "interpretation":{"en":"The longer official series repairs Alpha 0.5's identification problem substantially: 20 non-zero policy-rate changes exist before selection end and the one-parameter household form is stable across selection origins. However, the fresh 2025 holdout contains zero policy-rate changes, so the candidate collapses to persistence and cannot satisfy the preregistered independent-evaluation gate. NFC forms fail earlier, during structural selection.","ro":"Seria oficială mai lungă repară substanțial problema de identificare din Alpha 0.5: există 20 de modificări nenule ale ratei de politică până la finalul selecției, iar forma cu un parametru pentru gospodării este stabilă între originile de selecție. Totuși, noul holdout din 2025 conține zero modificări ale ratei de politică, astfel candidatul devine echivalent cu persistence și nu poate trece poarta preînregistrată de evaluare independentă. Formele pentru companii eșuează mai devreme, în selecția structurală."}
+      "future_confirmation_from": "2026-08",
+      "form_frozen_in_alpha_0_5_2": true,
+      "interpretation":{"en":"Alpha 0.5.2 leaves the Alpha 0.5.1 monetary result untouched. The household delta-policy form remains prospectively frozen until a new policy-rate event can discriminate it from persistence.","ro":"Alpha 0.5.2 lasă neschimbat rezultatul monetar Alpha 0.5.1. Forma delta-policy pentru gospodării rămâne înghețată prospectiv până când un nou eveniment al ratei de politică o poate discrimina de persistence."}
     },
     "government_refinancing": {
-      "average_interest_rate_coverage": "2019..2023",
-      "maturity_and_refixing_separated": true,
-      "2024_10_maturing_1y_pct": 10.0,
-      "2024_10_refixing_1y_pct": 11.0,
-      "2024_10_atm_years": 7.0,
-      "2024_10_atr_years": 6.9,
+      "acceptance_contract_frozen_before_assessment": true,
+      "minimum_opening_principal_coverage_pct": 95.0,
+      "minimum_repricing_event_principal_coverage_pct": 90.0,
+      "maximum_cost_error_pp_each_snapshot": 0.10,
+      "maximum_cost_mae_pp": 0.05,
+      "ledger_rows": 7,
+      "currencies_observed": ["RON","EUR"],
+      "rate_types_observed": ["FIXED"],
+      "rows_with_opening_outstanding_principal": 0,
+      "rows_with_realized_principal_repriced": 0,
+      "rows_with_matched_old_new_rates": 0,
+      "2024_12_maturing_1y_pct": 10.0,
+      "2024_12_refixing_1y_pct": 12.0,
+      "2024_12_atm_years": 6.9,
+      "2024_12_atr_years": 6.7,
+      "eurostat_2025_maastricht_foreign_currency_share_pct": 53.0,
+      "eurostat_2025_apparent_cost_pct": 5.2,
+      "eurostat_boundary_used_for_mof_estimation": false,
+      "gate_1": "FAIL",
+      "gate_2": "NOT_OPENED",
+      "gate_3": "NOT_OPENED",
+      "estimation_run": false,
       "parameter_status": "NOT_POINT_IDENTIFIED",
       "final_verdict": "DEFERRED",
-      "interpretation":{"en":"Official MoF data now document realized maturity and refixing risk, portfolio average rates and auction yields, but their boundaries differ. The next valid empirical step is an instrument × currency × fixed/floating repricing ledger rather than substituting redemption, refixing targets or one auction yield for m.","ro":"Datele oficiale MF documentează acum riscul realizat de maturitate și refixare, ratele medii ale portofoliului și randamentele la licitații, dar boundary-urile lor diferă. Următorul pas empiric valid este un ledger de repricing pe instrument × valută × fix/variabil, nu substituirea răscumpărărilor, țintelor de refixare sau a unui singur randament de licitație pentru m."}
+      "interpretation":{"en":"The ledger now preserves identifiable securities and issuance terms without promoting issue size to outstanding stock or market YTM to a repricing rate. Because the public subset contains no same-date opening outstanding principal and no realized repriced principal with matched old/new rates, the 95%/90% completeness gate cannot pass. Portfolio-cost reconstruction is therefore not run.","ro":"Ledgerul păstrează acum titlurile identificabile și termenii emisiunii fără a promova valoarea emisiunii la stoc outstanding sau YTM-ul de piață la rată de repricing. Deoarece subsetul public nu conține principal outstanding la aceeași dată și nici principal efectiv repriced cu rate vechi/noi potrivite, poarta de completitudine 95%/90% nu poate fi trecută. Reconstrucția costului portofoliului nu este deci rulată."}
     },
     "alpha_0_6_gate": "NO_GO_FOR_BEHAVIOURAL_SIMULATION"
   },
@@ -76,16 +101,18 @@
     {"label":"BIS central bank policy rates — Romania M.RO","href":"https://data.bis.org/topics/CBPOL/data"},
     {"label":"ECB MIR — household housing new business, RON","href":"https://data.ecb.europa.eu/data/datasets/MIR/MIR.M.RO.B.A2C.A.R.A.2250.RON.N"},
     {"label":"ECB MIR — NFC new business up to one-year fixation, RON","href":"https://data.ecb.europa.eu/data/datasets/MIR/MIR.M.RO.B.A2A.F.R.A.2240.RON.N"},
-    {"label":"MoF Government Debt Management Strategy 2024–2026","href":"https://www.mfinante.gov.ro/static/10/Mfp/buletin/executii/Strategiedeadministrareadatorieipubliceguvernamentale2024_2026en.pdf"},
-    {"label":"MoF Investor Presentation December 2024","href":"https://www.mfinante.gov.ro/static/10/Mfp/buget/sitebuget/InvestorPresentationDecember2024.pdf"},
-    {"label":"MoF Public Debt Flash Report — February 2025 auctions","href":"https://www.mfinante.gov.ro/static/10/Mfp/buget/sitebuget/FlashReportonRomanianPublicDebtJanuary2025.pdf"}
+    {"label":"MoF Investor Presentation — March 2025","href":"https://www.mfinante.gov.ro/static/10/Mfp/buget/sitebuget/InvestorPresentationMarch2025.pdf"},
+    {"label":"MoF January 2025 benchmark issuance terms","href":"https://www.mfinante.gov.ro/static/10/Mfp/trezorerie/OMF6826_ianuarie2025.pdf"},
+    {"label":"MoF May 2025 EUR reopening terms","href":"https://mfinante.gov.ro/static/10/Mfp/trezorerie/OMF775mai2025.pdf"},
+    {"label":"BVB Ministry of Finance listed government securities","href":"https://bvb.ro/FinancialInstruments/Markets/Bonds"},
+    {"label":"Eurostat — government debt currency structure and apparent cost, 2025","href":"https://ec.europa.eu/eurostat/en/web/products-eurostat-news/w/ddn-20260608-1"}
   ],
   "limitations": [
-    {"en":"The new household final holdout has ten observations but zero policy-rate changes; it measures level persistence during a plateau, not a fresh pass-through event.","ro":"Noul holdout final pentru gospodării are zece observații, dar zero modificări ale ratei de politică; el măsoară persistența nivelului într-un platou, nu un nou eveniment de pass-through."},
-    {"en":"The NFC final holdout remains unopened because no candidate passed structural selection.","ro":"Holdout-ul final pentru companii rămâne nedeschis deoarece niciun candidat nu a trecut selecția structurală."},
-    {"en":"MIR new-business rates are contract-flow rates, not effective rates on outstanding loan stocks.","ro":"Ratele MIR pentru credite noi sunt rate aferente fluxului de contracte, nu rate efective pe stocul de credite existent."},
-    {"en":"Government debt maturity, interest-rate refixing, portfolio cost and auction yields have different boundaries and cannot be collapsed into one repricing parameter without an instrument-level ledger.","ro":"Maturitatea datoriei publice, refixarea ratei, costul portofoliului și randamentele licitațiilor au boundary-uri diferite și nu pot fi reduse la un singur parametru de repricing fără un ledger la nivel de instrument."},
-    {"en":"Several Accounting Spine bilateral cells remain explicitly unresolved; no missing value is converted to zero.","ro":"Mai multe celule bilaterale din Accounting Spine rămân explicit nerezolvate; nicio valoare lipsă nu este transformată în zero."},
+    {"en":"Issue value is not treated as the same-date outstanding principal needed for portfolio reconstruction.","ro":"Valoarea emisiunii nu este tratată drept principalul outstanding la aceeași dată necesar reconstrucției portofoliului."},
+    {"en":"Maturity, refinancing, contractual refixing and new issuance remain distinct event classes; none is substituted for another.","ro":"Maturitatea, refinanțarea, refixarea contractuală și emisiunea nouă rămân clase distincte de evenimente; niciuna nu este substituită alteia."},
+    {"en":"The public ledger subset contains fixed-rate securities but does not expose full floating/indexed reset schedules and repriced principal.","ro":"Subsetul public al ledgerului conține titluri cu rată fixă, dar nu expune complet calendarele de reset pentru datoria variabilă/indexată și principalul repriced."},
+    {"en":"Eurostat Maastricht apparent cost has a different general-government boundary from the MoF portfolio-cost series and is diagnostic only.","ro":"Costul aparent Maastricht Eurostat are un boundary diferit al administrației publice față de seria MF a costului portofoliului și este doar diagnostic."},
+    {"en":"The household delta-policy form is frozen; observations reserved from 2026-08 onward are not used for respecification before the first new policy-rate event test.","ro":"Forma delta-policy pentru gospodării este înghețată; observațiile rezervate din 2026-08 înainte nu sunt folosite pentru respecificare înaintea primului test cu un nou eveniment al ratei de politică."},
     {"en":"Interactive behavioural simulation remains disabled while Alpha 0.6 is NO-GO.","ro":"Simularea comportamentală interactivă rămâne dezactivată cât timp Alpha 0.6 este NO-GO."}
   ]
 }
