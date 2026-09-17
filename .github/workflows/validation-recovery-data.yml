@@ -1,0 +1,30 @@
+name: Validation recovery data
+
+on:
+  push:
+    branches:
+      - alpha-0.5.1a0-validation-recovery
+    paths:
+      - scripts/fetch_validation_recovery_data.py
+      - .github/workflows/validation-recovery-data.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch official validation-recovery data
+        run: python scripts/fetch_validation_recovery_data.py
+      - name: Upload frozen source vintage
+        uses: actions/upload-artifact@v4
+        with:
+          name: validation-recovery-official-vintage
+          path: recovery_artifacts/
+          if-no-files-found: error
