@@ -1,0 +1,64 @@
+{
+  "contract_version": "1.1",
+  "default_language": "en",
+  "supported_languages": ["en", "ro"],
+  "language_switch": {"persistent": true, "labels": {"en": "EN", "ro": "RO"}},
+  "header": {
+    "shows_product_name": true,
+    "shows_software_version": true,
+    "shows_language_switch": true,
+    "compact_chrome": true
+  },
+  "desktop_layout": {
+    "type": "asymmetric_2x2",
+    "columns": ["2fr", "1fr"],
+    "rows": ["minmax(420px, 1.5fr)", "minmax(260px, 1fr)"],
+    "areas": [
+      ["model", "theory"],
+      ["dashboard", "auxiliary"]
+    ]
+  },
+  "panels": {
+    "model": {
+      "priority": 1,
+      "role": "dominant scientific workspace",
+      "content": ["stock_flow_sector_diagram", "flow_of_funds_matrix", "real_data_graphs_when_contextually_selected"],
+      "requirements": ["interactive_selection", "exact_values", "visible_legend_or_direct_labels", "mechanism_links"]
+    },
+    "theory": {
+      "priority": 2,
+      "role": "theory, tutorial and contextual explanation",
+      "content": ["complete_theory_reader", "definitions", "mechanism_explanations", "data_provenance_links"],
+      "requirements": ["context_follows_selected_model_element", "reader_width_66_to_72_ch", "deep_links_to_relevant_scientific_objects"]
+    },
+    "dashboard": {
+      "priority": 3,
+      "role": "major empirical indicators",
+      "content": ["key_stock_values", "key_flow_values", "reconciliation_status", "later_dynamic_indicators"],
+      "ordering": "impact_or_importance_when_evidence_supports_ordering",
+      "requirements": ["unit_and_period_visible", "status_visible", "no_colour_only_semantics"]
+    },
+    "auxiliary": {
+      "priority": 4,
+      "role": "model-specific secondary context",
+      "content": ["sources", "validation", "limitations", "selection_details", "exports_when_available"],
+      "requirements": ["contextual_not_generic", "does_not_duplicate_theory_panel"]
+    }
+  },
+  "responsive": {
+    "small_screen_mode": "stack",
+    "stack_order": ["model", "theory", "dashboard", "auxiliary"],
+    "no_horizontal_page_scroll": true,
+    "scientific_diagrams_may_use_internal_two_dimensional_pan_zoom_when_necessary": true
+  },
+  "navigation": {
+    "canonical_sections": ["understand", "system_map", "flow_of_funds", "dynamics", "simulation", "scenarios", "validation", "data_sources"],
+    "current_stage_enabled": ["understand", "system_map", "flow_of_funds", "validation", "data_sources"],
+    "future_sections_must_not_claim_availability_before_implementation": true
+  },
+  "scientific_invariance": {
+    "uniformization_may_change_scientific_results": false,
+    "uniformization_may_redefine_accounting_semantics": false,
+    "domain_specific_visual_language_is_preserved": true
+  }
+}
