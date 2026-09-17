@@ -116,3 +116,41 @@ jobs:
       - name: Deploy verified build artifact
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Inspect deployed public URL
+        env:
+          PUBLIC_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          set -euo pipefail
+          test -n "$PUBLIC_URL"
+          echo "Inspecting deployed public endpoint: $PUBLIC_URL"
+
+          live_ok=false
+          for attempt in $(seq 1 12); do
+            if curl --fail --silent --show-error --location \
+              "${PUBLIC_URL}?sha=${GITHUB_SHA}&attempt=${attempt}" -o /tmp/live-index.html \
+              && grep -q 'class="suite-header"' /tmp/live-index.html \
+              && grep -q 'FLOW-OF-FUNDS / SECTORAL BALANCE-SHEET EXPLORER' /tmp/live-index.html \
+              && grep -q 'SCIENTIFIC / TECHNICAL PROVENANCE' /tmp/live-index.html; then
+              live_ok=true
+              break
+            fi
+            sleep 5
+          done
+          test "$live_ok" = true
+
+          curl --fail --silent --show-error --location \
+            "${PUBLIC_URL}styles.css?sha=${GITHUB_SHA}" -o /tmp/live-styles.css
+          curl --fail --silent --show-error --location \
+            "${PUBLIC_URL}suite-tokens.css?sha=${GITHUB_SHA}" -o /tmp/live-suite-tokens.css
+
+          grep -q '@import url("suite-tokens.css")' /tmp/live-styles.css
+          grep -q -- '--suite-accent: #5d5fef' /tmp/live-suite-tokens.css
+          grep -q -- '--suite-text: #28313d' /tmp/live-suite-tokens.css
+          grep -q -- '--suite-border: #dfe3e8' /tmp/live-suite-tokens.css
+          grep -q -- '--suite-panel-radius: 14px' /tmp/live-suite-tokens.css
+          if grep -q '#2457d6\|#172033\|#d8dfeb' /tmp/live-styles.css; then
+            echo 'Legacy Macro base design token found on public surface' >&2
+            exit 1
+          fi
+          echo "Public Pages smoke inspection passed for ${GITHUB_SHA}."
