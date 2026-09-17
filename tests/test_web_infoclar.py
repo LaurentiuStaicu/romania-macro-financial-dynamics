@@ -20,7 +20,11 @@ def test_infoclar_is_real_reference_web_surface_not_only_design_contract():
     assert 'id="theory-panel"' in html
     assert 'id="dashboard-panel"' in html
     assert 'id="auxiliary-panel"' in html
-    assert 'public/model-stage.json' not in html
+    assert 'id="system-map"' in html
+    assert 'id="layer-toolbar"' in html
+    assert 'id="map-inspector"' in html
+    assert 'id="diagnostic-cards"' in html
+    assert 'id="theory-reader"' in html
     assert 'data-lang="en"' in html and 'data-lang="ro"' in html
 
 
@@ -39,7 +43,7 @@ def test_web_snapshot_matches_canonical_sector_and_mechanism_registries():
     assert snapshot["product"]["native_flatpak_status"] == "DEFERRED_NEAR_V1"
 
 
-def test_web_dashboard_preserves_validation_recovery_vintage_and_freeze():
+def test_web_preserves_validation_recovery_vintage_and_freeze():
     snapshot = load_json("web/public/model-stage.json")
     split = load_json("data/provenance/validation_recovery_split_0.5.1a0.json")
     disposition = load_json("model/calibration_validation/validation_recovery_disposition.json")
@@ -58,7 +62,7 @@ def test_web_dashboard_preserves_validation_recovery_vintage_and_freeze():
     assert snapshot["validation"]["alpha_0_6_gate"] == "NO_GO_FOR_BEHAVIOURAL_SIMULATION"
 
 
-def test_web_exposes_government_ledger_negative_result_without_proxy_promotion():
+def test_web_preserves_government_ledger_negative_result_without_proxy_promotion():
     snapshot = load_json("web/public/model-stage.json")
     dashboard = snapshot["empirical_dashboard"]
     government = snapshot["validation"]["government_refinancing"]
@@ -92,12 +96,15 @@ def test_accessibility_and_adaptive_contract_is_present_in_actual_web_files():
     js = (ROOT / "web/app.js").read_text(encoding="utf-8")
     assert 'class="skip-link"' in html
     assert 'aria-live="polite"' in html
+    assert 'role="region"' in html
     assert ':focus-visible' in css
-    assert '@media (max-width: 900px)' in css
+    assert '@media (max-width:900px)' in css
+    assert '@media (prefers-reduced-motion:reduce)' in css
     assert "event.key === 'Enter'" in js and "event.key === ' '" in js
-    assert "Behavioural simulation remains disabled" in js
-    assert "government_ledger_rows" in js
+    assert "selectDiagnostic" in js and "selectMapObject" in js
+    assert "NO_GO_FOR_BEHAVIOURAL_SIMULATION" in js
+    assert "product-architecture.json" in js and "theory-corpus.json" in js
 
 
-def test_flatpak_is_not_started_inside_web_first_stage():
+def test_flatpak_is_not_started_inside_product_recovery_stage():
     assert not (ROOT / "native").exists()
