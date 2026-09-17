@@ -88,8 +88,8 @@ def test_accessibility_and_adaptive_contract_is_present_in_actual_web_files():
     compact_css = css.replace(" ", "")
     assert '@media(max-width:900px)' in compact_css
     assert '@media(prefers-reduced-motion:reduce)' in compact_css
-    compact_js = js.replace(" ", "")
-    assert "key==='Enter'" in compact_js and "key===' '" in compact_js
+    assert ("e.key==='Enter'" in js or "event.key === 'Enter'" in js)
+    assert ("e.key===' '" in js or "event.key === ' '" in js)
     assert "selectDiagnostic" in js and "selectMapObject" in js
     assert "NO_GO_FOR_BEHAVIOURAL_SIMULATION" in js
     assert "product-architecture.json" in js and "theory-corpus.json" in js
