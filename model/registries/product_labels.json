@@ -1,0 +1,16 @@
+{
+  "default_language": "ro",
+  "supported_languages": ["ro", "en"],
+  "labels": [
+    {"id": "understand", "label": {"ro": "Înțelege", "en": "Understand"}},
+    {"id": "system_map", "label": {"ro": "Harta sistemului", "en": "System map"}},
+    {"id": "flow_of_funds", "label": {"ro": "Fluxuri financiare", "en": "Flow of funds"}},
+    {"id": "dynamics", "label": {"ro": "Dinamică", "en": "Dynamics"}},
+    {"id": "simulation", "label": {"ro": "Simulare", "en": "Simulation"}},
+    {"id": "scenarios", "label": {"ro": "Scenarii", "en": "Scenarios"}},
+    {"id": "validation", "label": {"ro": "Validare", "en": "Validation"}},
+    {"id": "data_sources", "label": {"ro": "Date și surse", "en": "Data & sources"}},
+    {"id": "open_app", "label": {"ro": "Deschide aplicația", "en": "Open app"}},
+    {"id": "language", "label": {"ro": "Limbă", "en": "Language"}}
+  ]
+}
