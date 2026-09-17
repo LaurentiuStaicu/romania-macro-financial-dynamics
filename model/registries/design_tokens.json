@@ -1,0 +1,55 @@
+{
+  "standard": "InfoClar Model Suite Design Standard",
+  "version": "1.1",
+  "profile": "romania-macro-financial-dynamics",
+  "principles": [
+    "clarity_over_decoration",
+    "quiet_scientific_interface",
+    "shared_family_not_identical_ui",
+    "model_specific_visualization",
+    "accessible_without_colour_alone",
+    "web_native_semantic_parity_not_pixel_parity"
+  ],
+  "typography": {
+    "web_family": "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    "native_family": "platform_system_sans",
+    "reader_max_width_ch": 72,
+    "scale_rem": {"xs": 0.75, "sm": 0.875, "body": 1.0, "lg": 1.125, "xl": 1.375, "2xl": 1.75, "3xl": 2.25},
+    "line_height": {"compact": 1.25, "ui": 1.4, "reader": 1.6}
+  },
+  "spacing_px": {"1": 4, "2": 8, "3": 12, "4": 16, "5": 20, "6": 24, "8": 32, "10": 40, "12": 48},
+  "radius_px": {"control": 8, "card": 12, "hero": 16},
+  "brand": {
+    "gradient_start": "#3689e6",
+    "gradient_end": "#0e9a83",
+    "warm_accent": "#f9c440",
+    "primary_action": "#087F73"
+  },
+  "surfaces": {
+    "light": {"canvas": "#ffffff", "panel": "#f7f7f7", "raised": "#ffffff", "border": "#d8d8d8", "text": "#1f1f1f", "muted_text": "#616161"},
+    "dark": {"canvas": "#1f1f1f", "panel": "#292929", "raised": "#303030", "border": "#4a4a4a", "text": "#f4f4f4", "muted_text": "#b8b8b8"}
+  },
+  "interaction": {
+    "minimum_target_px": 24,
+    "preferred_target_px": 36,
+    "focus_ring_px": 2,
+    "focus_must_remain_visible": true,
+    "hover_must_not_be_only_information_channel": true,
+    "selected_state_requires_non_colour_signal": true
+  },
+  "components": {
+    "buttons": "concise labels, one primary action per local context",
+    "badges": "semantic status only; never decorative",
+    "tooltips": "supplementary exact/contextual information; never sole access to essential information",
+    "cards": "few purposeful panels; spacing-led hierarchy instead of card proliferation",
+    "legends": "direct labels where feasible; line pattern/symbol plus colour for scientific series",
+    "navigation": "stable canonical labels and persistent EN/RO switch"
+  },
+  "scientific_visuals": {
+    "branding_palette_is_not_a_data_scale": true,
+    "exact_value_view_required": true,
+    "colour_only_encoding_prohibited": true,
+    "model_specific_representation": "stock-flow and sector network plus real-data graphs and major indicators"
+  },
+  "accessibility_target": "WCAG 2.2 AA"
+}

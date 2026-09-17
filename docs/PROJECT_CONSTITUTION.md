@@ -1,8 +1,10 @@
-# Project Constitution — Alpha 0.1.0a0
+# Project Constitution — current contract
+
+Originally established in Alpha 0.1.0a0; product-language presentation amended by InfoClar Model Suite Design Standard v1.1 in Alpha 0.2.1a0. Scientific definitions and accounting semantics are unchanged by that amendment.
 
 ## 1. Mission
 
-Build an empirical macro-financial model of Romania that is simultaneously accounting-consistent, dynamically explicit, numerically auditable and understandable to non-specialist users through a bilingual RO/EN application.
+Build an empirical macro-financial model of Romania that is simultaneously accounting-consistent, dynamically explicit, numerically auditable and understandable to non-specialist users through a bilingual EN/RO application.
 
 ## 2. System boundary
 
@@ -92,13 +94,15 @@ Every quantitative relation must be identifiable as one or more of:
 
 Software correctness and empirical validity are separate gates.
 
-## 10. Bilingual contract
+## 10. Bilingual product contract
 
-Romanian is the default product language and English is a first-class equivalent language.
+English is the default product language under InfoClar Model Suite Design Standard v1.1. Romanian is a persistent first-class equivalent language exposed through the `EN / RO` switch.
 
-Stable IDs, code symbols, equations, data keys and schema fields are language-neutral. Human-readable labels, definitions, explanations, limitations and UI strings must have `ro` and `en` forms where user-facing.
+Stable IDs, code symbols, equations, data keys and schema fields are language-neutral. Human-readable labels, definitions, explanations, limitations and UI strings must have `en` and `ro` forms where user-facing.
 
-A translation must preserve the scientific meaning rather than follow literal word order.
+A translation must preserve scientific meaning rather than follow literal word order.
+
+The change of default display language is a product-layer decision only. It does not alter Romanian source data, economic definitions, model semantics or numerical outputs.
 
 ## 11. Platform contract
 
@@ -128,3 +132,5 @@ After Alpha 0.1.0a0 closes, the first task is bilateral F3 for general governmen
 - reconciliation of government F3 liabilities against counterpart holdings under matched definitions.
 
 Unknown values remain `TBD`.
+
+Alpha 0.2.0a0 closes the accounting architecture/audit gate with explicit partial empirical coverage; it does not fabricate unavailable bilateral observations.

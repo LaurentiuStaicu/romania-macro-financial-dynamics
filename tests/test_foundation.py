@@ -11,7 +11,7 @@ def load_json(path: str):
 
 
 def test_version():
-    assert __version__ == "0.2.0a0"
+    assert __version__ == "0.2.1a0"
 
 
 def test_sector_ids_are_unique_and_bilingual():
@@ -32,17 +32,41 @@ def test_financial_instruments_are_unique_and_bilingual():
 
 def test_model_contract_languages_and_benchmark():
     contract = load_json("model/registries/model_contract.json")
-    assert contract["default_language"] == "ro"
-    assert contract["supported_languages"] == ["ro", "en"]
+    assert contract["default_language"] == "en"
+    assert contract["supported_languages"] == ["en", "ro"]
     assert contract["benchmark"]["stock_date"] == "2025-12-31"
+    assert contract["product_standard"] == {
+        "name": "InfoClar Model Suite Design Standard",
+        "version": "1.1",
+        "scientific_semantics_unchanged": True,
+    }
 
 
-def test_product_labels_are_unique_and_bilingual():
+def test_product_labels_are_unique_bilingual_and_cover_infoclar_navigation():
     registry = load_json("model/registries/product_labels.json")
-    assert registry["default_language"] == "ro"
-    assert registry["supported_languages"] == ["ro", "en"]
+    assert registry["default_language"] == "en"
+    assert registry["supported_languages"] == ["en", "ro"]
     labels = registry["labels"]
     ids = [item["id"] for item in labels]
     assert len(ids) == len(set(ids))
-    assert {"understand", "system_map", "flow_of_funds", "dynamics", "simulation", "scenarios", "validation", "data_sources", "open_app", "language"} == set(ids)
+    required = {
+        "understand",
+        "system_map",
+        "flow_of_funds",
+        "dynamics",
+        "simulation",
+        "scenarios",
+        "validation",
+        "data_sources",
+        "open_app",
+        "language",
+        "model",
+        "theory",
+        "learn",
+        "dashboard",
+        "auxiliary",
+        "sources",
+        "limitations",
+    }
+    assert required <= set(ids)
     assert all(item["label"]["ro"] and item["label"]["en"] for item in labels)

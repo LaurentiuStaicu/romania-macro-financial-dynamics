@@ -1,76 +1,103 @@
-# Product Presentation Contract
+# Product Presentation Contract — InfoClar Model Suite v1.1
 
-This document defines the shared presentation grammar for Romania Macro-Financial Dynamics and is intentionally aligned with the user's Cognitive Epistemic Model and World3 Empirical family.
+Romania Macro-Financial Dynamics shares a product-family grammar with Cognitive Epistemic Model and World3 Empirical while preserving its own macro-financial scientific representation.
 
 ## Repository / landing presentation
 
-Use the following order consistently:
+Use this order consistently:
 
 1. centered application icon;
 2. centered product title;
-3. concise centered bilingual-compatible description;
-4. centered status badges;
-5. one centered primary launch button only after a verified public web deployment exists;
-6. current scientific-development status and limitations;
-7. user-facing capabilities and scientific scope.
+3. software version;
+4. concise centered description;
+5. one centered primary Web-app launch control only after a verified public deployment exists;
+6. concise status badges;
+7. a truthful model-specific visual once such a view exists;
+8. model explanation and current scientific stage;
+9. data and provenance;
+10. theory / learning material;
+11. validation and reconciliation;
+12. installation / development entry points;
+13. limitations;
+14. licence.
 
-### Status badges
+Do not invent screenshots, model views, deployments or capabilities merely to keep the family visually symmetrical.
 
-Keep badges concise and stable. The initial set is:
+## Status badges
+
+Keep badges concise and factual. The common set is:
 
 - software version;
 - development stage;
 - available application/platform;
-- languages RO/EN;
+- languages EN/RO;
 - elementary OS Flatpak status;
-- code license.
+- code licence.
 
-Use the same visual family as Cognitive Epistemic Model where the semantics match:
+Shared semantics retain these family colours:
 
 - version: `#4e9a06`;
 - alpha/stage: `#e5a50a`;
 - Web/application: `#4a90d9`;
 - elementary OS / Flatpak: `#64baff`;
-- bilingual/product-family accent: teal `#0e9a83`;
-- primary launch control: deep teal `#087F73`, `for-the-badge` style.
+- bilingual/product-family accent: `#0e9a83`;
+- primary launch control: `#087F73`, `for-the-badge` style.
 
-A badge must describe reality. Do not label Web or Flatpak as available until a verified artifact/deployment exists.
+A badge must describe reality. Web and Flatpak may not be labelled available until verified artifacts/deployments exist.
 
-## Primary launch button
+## Primary launch control
 
-When GitHub Pages is deployed from a CI-verified artifact, expose exactly one prominent centered launch control in the README/landing presentation:
+When GitHub Pages is deployed from a CI-verified artifact, expose exactly one prominent centered launch control:
 
-- RO: `Deschide aplicația`
 - EN: `Open app`
-- combined repository label: `Deschide aplicația / Open app`
+- RO: `Deschide aplicația`
 
-The control must target the verified public web deployment, not a branch preview or an unverified build. Before deployment, show only a development-status badge; do not create a misleading launch link.
+Before deployment, show a development-status control rather than a misleading link.
+
+## Language contract
+
+InfoClar Model Suite v1.1 uses **English as the default product language** and Romanian as a persistent first-class alternative. The header exposes a compact `EN / RO` switch.
+
+Translations must preserve scientific meaning. Stable model IDs, equations, dataset keys and schema fields remain language-neutral.
 
 ## Canonical user-facing labels
 
-Scientific IDs remain language-neutral. Any label that appears in more than one view must be canonical rather than re-declared by each view. The future web application should follow the same pattern already used by Cognitive Epistemic Model's shared `labels.ts` layer.
+Any repeated interface term comes from `model/registries/product_labels.json`, never from view-local copies. The shared long-term navigation vocabulary is:
 
-Each shared label record must provide RO and EN forms and, where useful, a short form for constrained controls. Romanian is the default UI language.
-
-Examples of future canonical navigation concepts:
-
-| ID | RO | EN |
+| ID | EN | RO |
 |---|---|---|
-| `understand` | Înțelege | Understand |
-| `system_map` | Harta sistemului | System map |
-| `flow_of_funds` | Fluxuri financiare | Flow of funds |
-| `dynamics` | Dinamică | Dynamics |
-| `simulation` | Simulare | Simulation |
-| `scenarios` | Scenarii | Scenarios |
-| `validation` | Validare | Validation |
-| `data_sources` | Date și surse | Data & sources |
+| `understand` | Understand | Înțelege |
+| `system_map` | System map | Harta sistemului |
+| `flow_of_funds` | Flow of funds | Fluxuri financiare |
+| `dynamics` | Dynamics | Dinamică |
+| `simulation` | Simulation | Simulare |
+| `scenarios` | Scenarios | Scenarii |
+| `validation` | Validation | Validare |
+| `data_sources` | Data & sources | Date și surse |
 
-These are product labels, not scientific variables.
+Only implemented sections may be presented as active.
+
+## Shared workspace grammar
+
+Desktop uses the InfoClar v1.1 asymmetric 2×2 workspace:
+
+- top-left, dominant: model / mechanisms;
+- top-right: Theory / Learn / context;
+- bottom-left: dashboard / major indicators;
+- bottom-right: auxiliary details.
+
+Small screens stack these areas. The complete machine-readable contract lives in `model/registries/workspace_contract.json`.
+
+## Theory / Learn
+
+The theory surface is detailed and connected to the scientific view. Selecting a sector, instrument, matrix cell, graph or later causal mechanism should expose the relevant explanation, definition and provenance. Concise interface chrome must not reduce scientific depth.
 
 ## Web/native continuity
 
-The future elementary OS application should preserve product identity and terminology while using native GTK/Granite controls rather than copying web CSS. Icon, semantic naming, major information architecture and scientific outputs must remain recognizable across Web and Flatpak.
+The future elementary OS application preserves semantic naming, information architecture, scientific outputs and icon identity while using native GTK/Granite controls rather than copied web CSS. Web/native parity is semantic and scientific, not pixel parity.
 
 ## Cross-project family
 
-Romania Macro-Financial Dynamics, Cognitive Epistemic Model and World3 Empirical should feel like related applications without becoming visually or semantically indistinguishable. Shared family elements include the blue-to-teal icon background, restrained typography, centered repository presentation, status-badge grammar and a common primary-launch treatment. Each application keeps a domain-specific icon symbol and its own information architecture.
+The shared family includes restrained typography, spacing-led hierarchy, common interaction/status grammar, the blue-to-teal icon family and the same repository presentation sequence. Each application retains domain-specific symbols, diagrams, graphs and data views.
+
+See `docs/INFOCLAR_MODEL_SUITE_DESIGN_STANDARD_V1.1.md`, `model/registries/design_tokens.json` and `model/registries/workspace_contract.json`.

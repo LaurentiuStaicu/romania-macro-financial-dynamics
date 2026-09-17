@@ -14,6 +14,12 @@ Priority sequence: `F3 -> F2 -> F4 -> F8 -> F5 -> F6`, with F7 added where mater
 
 Exit gate: benchmark 2025 accounting structure is internally auditable; unresolved cells are explicit rather than imputed silently.
 
+### 0.2.1a0 — InfoClar Model Suite Design Standard v1.1 alignment
+
+Cross-cutting product uniformization after the Accounting Spine gate and before the next scientific module. Standardize EN-default/RO-switch product language, shared design tokens, adaptive 2×2 workspace grammar, Theory/Learn integration, repository presentation and accessibility requirements while preserving model-specific scientific visualization and all accounting semantics.
+
+Exit gate: product contracts are internally consistent and CI-verified; the uniformization layer cannot alter scientific results.
+
 ## 0.3.x — Dynamic Core
 
 Convert the validated conceptual map into executable stocks, flows, auxiliaries, feedbacks and delays. Introduce dimensional-consistency and extreme-condition tests.
@@ -61,7 +67,7 @@ Acceptance requires, within the model's declared scope:
 - empirical grounding and documented validation;
 - data/equation provenance;
 - reproducibility;
-- understandable RO/EN explanations;
+- understandable EN/RO explanations;
 - uncertainty and limitation disclosure;
 - verified cross-platform web application;
 - reproducible elementary OS Flatpak;
