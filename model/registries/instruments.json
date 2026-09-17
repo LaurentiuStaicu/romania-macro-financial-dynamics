@@ -1,0 +1,12 @@
+{
+  "registry_version": "0.1.0a0",
+  "instruments": [
+    {"id":"F2","label":{"ro":"Numerar și depozite","en":"Currency and deposits"}},
+    {"id":"F3","label":{"ro":"Titluri de natura datoriei","en":"Debt securities"}},
+    {"id":"F4","label":{"ro":"Împrumuturi","en":"Loans"}},
+    {"id":"F5","label":{"ro":"Acțiuni și unități de fond de investiții","en":"Equity and investment fund shares/units"}},
+    {"id":"F6","label":{"ro":"Asigurări, pensii și scheme de garanții standardizate","en":"Insurance, pension and standardised guarantee schemes"}},
+    {"id":"F7","label":{"ro":"Instrumente financiare derivate și opțiuni pe acțiuni ale angajaților","en":"Financial derivatives and employee stock options"}},
+    {"id":"F8","label":{"ro":"Alte conturi de primit/de plătit","en":"Other accounts receivable/payable"}}
+  ]
+}

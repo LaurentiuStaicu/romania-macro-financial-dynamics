@@ -1,0 +1,10 @@
+{
+  "registry_version": "0.1.0a0",
+  "default_language": "ro",
+  "supported_languages": ["ro", "en"],
+  "benchmark": {"stock_date":"2025-12-31","annual_flow_start":"2025-01-01","annual_flow_end":"2025-12-31"},
+  "scientific_statuses": ["ACCOUNTING_IDENTITY","OBSERVED_EMPIRICAL","BEHAVIOURAL_CANDIDATE","CALIBRATED_RELATION","ASSUMPTION","EXOGENOUS_INPUT","DIAGNOSTIC_ONLY"],
+  "missing_value_token": "TBD",
+  "canonical_model_runtime": "python",
+  "xmile_role": "future_interoperability_export_import"
+}
