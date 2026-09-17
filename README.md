@@ -5,11 +5,11 @@
 <h1 align="center">Romania Macro-Financial Dynamics</h1>
 
 <p align="center">
-  <img alt="Version 0.2.1a0" src="https://img.shields.io/badge/version-0.2.1a0-4e9a06">
+  <img alt="Version 0.3.0a0" src="https://img.shields.io/badge/version-0.3.0a0-4e9a06">
 </p>
 
 <p align="center">
-  Empirical stock-flow-consistent <strong>System Dynamics</strong> model for exploring Romania's macro-financial system through sectors, financial instruments, balance sheets, Flow of Funds and later dynamic feedbacks.
+  Empirical stock-flow-consistent <strong>System Dynamics</strong> model for exploring Romania's macro-financial system through sectors, financial instruments, balance sheets, Flow of Funds and dynamic feedbacks.
 </p>
 
 <p align="center">
@@ -28,26 +28,43 @@
   <a href="LICENSE"><img alt="Code license: MIT" src="https://img.shields.io/badge/code_license-MIT-blue"></a>
 </p>
 
-> **Alpha 0.2.1a0 — InfoClar Model Suite v1.1 alignment.** Alpha 0.2 Accounting Spine is integrated and CI-verified. This patch standardizes product language, layout, design tokens, repository presentation and accessibility contracts without changing accounting semantics or scientific values. A clickable `Open app` control will replace the development status only after a CI-verified public web deployment exists.
+> **Alpha 0.3.0a0 — Dynamic Core.** The project now has an executable structural System Dynamics substrate constrained by the CI-verified 2025 Accounting Spine. Stock identities, double-entry conservation, time/units, delays and structural verification are executable. Behavioural response equations remain deliberately inactive until the next empirical gate. No forecasting or policy-evaluation capability is claimed yet.
 
 ## Model
 
-The project connects six top-level analytical sectors — households/NPISH (`H`), non-financial corporations (`C`), financial corporations excluding the separately shown central bank (`F`), general government (`G`), rest of the world (`X`) and the National Bank of Romania (`BNR`) — through ESA 2010 financial instruments and accounting relationships.
+The project connects six top-level analytical sectors — households/NPISH (`H`), non-financial corporations (`C`), financial corporations excluding the separately shown central bank (`F`), general government (`G`), rest of the world (`X`) and the National Bank of Romania (`BNR`) — through ESA 2010 financial instruments, balance sheets and later causal feedbacks.
 
 The reference application workspace follows InfoClar Model Suite Design Standard v1.1:
 
 - a dominant stock-flow/sector and Flow-of-Funds workspace;
 - a contextual Theory / Learn panel linked to selected scientific objects;
-- a dashboard for major empirical/accounting indicators;
+- a dashboard for major empirical/accounting/dynamic indicators;
 - an auxiliary panel for sources, validation, limitations and selection details.
 
-The layout is adaptive. On small screens these areas stack rather than forcing a desktop grid. The model visualization itself remains macro-financial and is not copied from World3 Empirical or Cognitive Epistemic Model.
+The layout is adaptive. On small screens these areas stack rather than forcing a desktop grid. The model visualization remains macro-financial and is not copied from World3 Empirical or Cognitive Epistemic Model.
 
-A truthful interactive model image is intentionally not shown yet: the browser model view is not implemented in Alpha 0.2.x.
+A truthful interactive model image is intentionally not shown yet: the browser model view is not implemented in Alpha 0.3.x.
 
 ## Current scientific stage
 
-Alpha 0.2 established the auditable Accounting/SFC Spine for the 2025 benchmark:
+Alpha 0.3 adds the structural Dynamic Core on top of the Accounting Spine:
+
+- one canonical bilateral financial position per holder × issuer × instrument;
+- holder assets and issuer liabilities derived from that same position, preserving double-entry conservation;
+- `closing = opening + transactions + revaluations + other changes`;
+- explicit rate × time updates with year as the canonical time unit and `dt = 0.25` year as the default quarterly reference step;
+- a guarded Accounting Spine → dynamics bridge that rejects unresolved cells rather than interpreting missing values as zero;
+- a reusable first-order delay primitive;
+- candidate sovereign, credit, monetary and external feedback structures that are documented but quantitatively inactive;
+- structural tests for dimensional consistency, extreme conditions, conservation and integration-error convergence.
+
+Behavioural functions for consumption, investment, credit, fiscal reaction, monetary policy, default/risk, FX and refinancing are **not** silently assumed in this milestone. Their empirical specification belongs to Alpha 0.4.
+
+See [Dynamic Core](docs/DYNAMIC_CORE_0.3.0a0.md), [`model/dynamics/core_contract.json`](model/dynamics/core_contract.json) and [`model/dynamics/feedback_registry.json`](model/dynamics/feedback_registry.json).
+
+## Accounting Spine & data provenance
+
+Alpha 0.2 established the auditable 2025 Accounting/SFC Spine:
 
 - 6×6 holder-by-issuer address spaces for F3, F2, F4, F8, F5, F6 and F7;
 - separate closing-position and financial-transaction contracts;
@@ -56,9 +73,7 @@ Alpha 0.2 established the auditable Accounting/SFC Spine for the 2025 benchmark:
 - B9F and asset/liability reconciliation logic;
 - a reconciliation ledger that prohibits forced closure and zero-as-missing.
 
-The stage distinguishes **accounting architecture** from **empirical coverage**. A missing definitionally matched bilateral value stays unresolved; an aggregate or partial-maturity series is not converted into a fabricated exact cell.
-
-## Data & provenance
+The project distinguishes **accounting architecture** from **empirical coverage**. A missing definitionally matched bilateral value stays unresolved; an aggregate or partial-maturity series is not converted into a fabricated exact cell.
 
 Primary benchmark hierarchy:
 
@@ -74,11 +89,11 @@ Benchmark convention:
 - annual financial transactions: 01.01.2025–31.12.2025;
 - primary WTWTW accounting basis: non-consolidated ESA 2010 quarterly financial accounts.
 
-See [`model/accounting/benchmark_2025.json`](model/accounting/benchmark_2025.json), [`model/accounting/source_registry.json`](model/accounting/source_registry.json) and [Data and Reconciliation](docs/DATA_AND_RECONCILIATION.md).
+See [`model/accounting/benchmark_2025.json`](model/accounting/benchmark_2025.json), [`model/accounting/source_registry.json`](model/accounting/source_registry.json), [Alpha 0.2 Accounting Spine exit audit](docs/ACCOUNTING_SPINE_AUDIT_0.2.0a0.md) and [Data and Reconciliation](docs/DATA_AND_RECONCILIATION.md).
 
 ## Theory / Learn
 
-The mature application will not separate theory from use. Selecting a sector, instrument, matrix cell, empirical graph or later causal mechanism will expose the matching definition, explanation and provenance while a complete sequential theory reader remains available.
+The mature application will not separate theory from use. Selecting a sector, instrument, matrix cell, empirical graph or causal mechanism will expose the matching definition, explanation, scientific status and provenance while a complete sequential theory reader remains available.
 
 The project architecture separates:
 
@@ -89,11 +104,23 @@ The project architecture separates:
 
 See [Project Constitution](docs/PROJECT_CONSTITUTION.md), [Architecture](docs/ARCHITECTURE.md) and [InfoClar Model Suite Design Standard v1.1 profile](docs/INFOCLAR_MODEL_SUITE_DESIGN_STANDARD_V1.1.md).
 
-## Validation & reconciliation
+## Validation & verification
 
-Software correctness and empirical validity are separate gates. Alpha 0.2 CI enforces matrix address-space integrity, missing-data semantics, partial-source status and reconciliation identities. Empirical controls remain labelled separately from complete bilateral observations.
+Software correctness, structural model verification and empirical validity are separate gates.
 
-See [Alpha 0.2 Accounting Spine exit audit](docs/ACCOUNTING_SPINE_AUDIT_0.2.0a0.md) and [`model/accounting/reconciliation_2025.json`](model/accounting/reconciliation_2025.json).
+Current CI checks include:
+
+- complete Accounting Spine address spaces and missing-data semantics;
+- financial stock identities;
+- double-entry conservation;
+- explicit rate × time dimensional conversion;
+- zero-flow and large-finite-value extreme conditions;
+- rejection of incomplete empirical initial states;
+- first-order delay steady state;
+- lower Euler integration error after halving the time step;
+- inactive status of all behavioural feedback candidates.
+
+Passing these tests does not establish empirical predictive validity.
 
 ## Installation / development
 
@@ -112,8 +139,9 @@ The web application remains in development. A native elementary OS Flatpak is in
 
 - No calibrated forecasting model is claimed yet.
 - No policy recommendation engine exists yet.
+- Behavioural feedback candidates are inactive and have no calibrated parameters.
 - Many bilateral empirical cells remain explicitly unresolved where matched public data have not been established.
-- Dynamics, Simulation and Scenarios are roadmap capabilities, not current application features.
+- Simulation and Scenario Laboratory are roadmap capabilities, not current user-facing application features.
 - The absence of a clickable launch button or model screenshot is deliberate until a verified implementation exists.
 
 ## Product standard
@@ -131,7 +159,7 @@ Canonical resources:
 
 ## Roadmap
 
-The next scientific milestone after this uniformization pass is **Alpha 0.3 — Dynamic Core**: executable stocks, flows, auxiliaries, feedbacks and delays constrained by the validated accounting spine. See [Roadmap](docs/ROADMAP.md).
+The next scientific milestone is **Alpha 0.4 — Empirical Dynamics**: evidence-traceable behavioural candidates for consumption, investment, credit, fiscal dynamics, monetary transmission, risk/default, FX and refinancing. This is the point where model-closure choices begin to change substantive dynamic behaviour rather than infrastructure alone. See [Roadmap](docs/ROADMAP.md).
 
 ## License
 
