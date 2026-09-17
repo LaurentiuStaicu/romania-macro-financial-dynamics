@@ -1,122 +1,78 @@
-# Product Architecture Recovery — cross-cutting web stage
+# Product Architecture Recovery — Flow-of-Funds usefulness recovery
 
 Date: 2026-09-17
 
-## Scope
+## Product criterion
 
-This is a cross-cutting product-architecture correction, not a new behavioural milestone and not Alpha 0.6. It leaves Alpha 0.1–0.5.2 scientific results, the Accounting Spine, Dynamic Core, empirical classifications and prospective validation gates unchanged.
+The reference web product must let a user see how finances circulate through the Romanian economy, who finances whom, who owes whom, where macro-financial vulnerabilities accumulate and how accounting exposures can propagate. A more elaborate version of the former six-circle diagram is not sufficient.
 
-Hard invariants:
+The primary object is therefore an interactive **Flow-of-Funds / sectoral balance-sheet map** backed by the existing Accounting Spine and Dynamic Core semantics. It preserves the canonical sectors H, C, F, G, BNR and X and adds subsectorisation only when observed data justify it.
 
-- validated behavioural reference mechanisms remain 0;
-- Alpha 0.6 behavioural simulation remains NO-GO;
-- the household contemporaneous delta-policy form remains frozen for Prospective Monetary Confirmation after a genuinely new BNR policy-rate movement;
-- observations reserved from 2026-08 onward are not used for respecification before that confirmation test;
-- government refinancing → effective debt rate remains DEFERRED after Alpha 0.5.2;
-- missing bilateral values are never converted to zero or synthetically allocated;
-- native/Flatpak work remains deferred.
+## Scientific invariants
 
-## Product problem being corrected
+This is a cross-cutting product recovery, not Alpha 0.6. Alpha 0.1–0.5.2 results remain unchanged. Accounting Spine and Dynamic Core remain unchanged. Validated behavioural reference mechanisms remain 0. Alpha 0.6 remains NO-GO. Prospective Monetary Confirmation remains frozen under its existing conditions. Government refinancing → effective debt rate remains DEFERRED. Missing bilateral values are never converted to zero or synthetically allocated. Flatpak work remains deferred.
 
-The prior browser implementation rendered the six institutional sectors as a small static network and used scientific-development status metrics as much of the Dashboard. That implementation under-expressed the already approved InfoClar contract, which requires a model-specific macro-financial stock-flow view, contextual theory, empirical diagnosis and evidence/limitations.
+## Main model surface
 
-The recovery applies the product principle:
+The model offers two complementary views of the same accounting system:
 
-**overview → filter/zoom → details on demand**
+1. an interactive network map for tracing circuits and propagation paths;
+2. a from-whom-to-whom matrix with holder/creditor sectors on rows and issuer/debtor sectors on columns.
 
-The 2×2 InfoClar workspace remains an organizational skeleton. The model map is the dominant application surface.
+Layers are REAL ECONOMY, FISCAL, MONEY & CREDIT, BALANCE SHEETS, EXTERNAL and DYNAMIC FEEDBACKS. The interface distinguishes non-financial flows, fiscal flows, financial transactions, stocks, revaluations/other flows and behavioural candidates/deferred mechanisms.
 
-## Map architecture
+The map covers wages, household consumption, taxes, social contributions, transfers, government purchases/investment, deposits, loans, interest, reserves, government securities, refinancing, exports/imports, external financing and foreign-currency revaluation. ESA instruments F2/F3/F4 are represented directly where current Accounting Spine relations exist; the product contract retains F2–F8 as the instrument family to expose whenever the underlying model has valid observations or relations.
 
-The map keeps the six canonical institutional sectors: households and NPISH (H), non-financial corporations (C), financial corporations (F), general government (G), BNR and the rest of the world (X).
+Selecting a sector answers: what claims/assets are represented; what liabilities/funding are represented; counterparties; instruments; incoming and outgoing relations; net position only where supported; vulnerability channels and limitations.
 
-Relationships are separated into explorable layers:
+Selecting a relationship exposes: definition, direction, instrument, accounting class, value only when observed and definitionally matched, period, unit, provenance/source, epistemic role, affected sectors and limitations.
 
-1. real economy;
-2. fiscal;
-3. financial / credit;
-4. balance sheets / stocks;
-5. external sector;
-6. dynamic feedback candidates;
-7. overview combining supported relationships.
+## Macro-Financial Imbalance & Vulnerability Monitor
 
-The map includes wages, consumption, investment, taxes, social contributions, transfers, government spending, deposits, loans, interest, central-bank reserves, government securities, refinancing, exports, imports and external financing where those relationships are supported as accounting objects, observed-domain relationships or explicit conceptual relations.
+The dashboard is no longer a software-status dashboard. It focuses on Romanian macro-financial problems and data-supported vulnerability classes.
 
-Each relationship carries an epistemic role. Accounting Spine F2/F3/F4 links, conceptual ESA flows, observed-domain links, candidate mechanisms and DEFERRED objects are not rendered as if they had the same evidential status. Null remains unavailable; it is not displayed as zero.
+Currently represented diagnostics include: current-account imbalance; NIIP/external position; public debt and refinancing; sovereign FX exposure; household debt/debt-service burden; NFC leverage/external funding; bank–sovereign exposure; maturity mismatch; and credit growth/credit-to-GDP gap.
 
-## Dashboard basis
+A diagnostic can be `NOT ASSESSED` or `UNRESOLVED EXPOSURE` when the required definitionally compatible series is absent. This is intentional. Missing evidence is not transformed into a low-risk classification.
 
-The Dashboard is reorganized around macro-financial problems and vulnerabilities rather than software metadata.
+Benchmarks are applied only when unit, period, statistical boundary and institutional definition match. For example, the MIP current-account threshold uses a three-year backward moving average and is therefore not applied directly to an annual Commission forecast or a quarterly Eurostat balance. The MIP NIIP, household-debt, NFC-debt and credit-flow thresholds are not applied until the matched series is present. BIS debt-service and credit-gap definitions remain methodologically separate from national or ad-hoc proxies.
 
-The current diagnostic set is deliberately limited to areas that can be linked to both official evidence and represented model relationships:
+Each diagnostic links back to exact sectors and relations on the central map.
 
-- external imbalance;
-- fiscal deficit and debt accumulation;
-- sovereign refinancing / repricing pressure;
-- foreign-currency sovereign exposure;
-- monetary-transmission evidence gap.
+## Accounting / Exposure Stress
 
-No custom numerical severity thresholds are introduced. The interface states whether a judgement comes from an institutional assessment, observed composition, an existing scientific validation status or an official surveillance framework.
+The recovery adds mechanical accounting stress tests explicitly labelled **ACCOUNTING / EXPOSURE STRESS**. They are not forecasts and do not reopen Alpha 0.6.
 
-External context used for product diagnosis is not silently promoted into the frozen model calibration. For example, the European Commission Spring 2026 forecast reports Romania's general-government balance at -7.9% of GDP in 2025 and -6.2% in 2026, gross public debt at 59.3% and 61.6%, and current-account balances at -7.9% and -6.9%. Eurostat reports a Romanian current-account deficit of EUR 5.3 billion in Q1 2026. The Commission's 2026 Semester assessment classifies Romania as continuing to experience excessive macroeconomic imbalances. These are presentation/evidence inputs with their original definitions and periods, not replacements for Accounting Spine observations.
+Permitted tests implemented in the reference product include:
+
+- RON depreciation applied mechanically to the documented foreign-currency share of Maastricht government debt;
+- one-year maturity exposure translated into principal mechanically subject to rollover;
+- mark-to-market change on a selected government-security exposure without fabricating the missing bilateral holding amount;
+- a bilateral stock change that preserves equal asset/liability double-entry entries.
+
+No consumption, investment, credit-supply, endogenous FX, fiscal reaction or unvalidated feedback response is simulated.
 
 ## Theory / Learn
 
-Theory/Learn is expanded into a bilingual EN/RO corpus rather than a paragraph-per-sector aid. The corpus covers:
+Theory remains a bilingual EN/RO contextual reader plus complete manual. It covers the circuit of money; institutional sectors; stocks vs flows; Flow of Funds and double entry; bank-money creation; credit, deposits and interest; BNR and central-bank money; monetary transmission; fiscal flows, deficit and debt; government securities; external accounts; saving and investment; assets/liabilities; feedbacks and delays; macro-financial imbalances; provenance; calibration/validation and model limits.
 
-- circuit of money;
-- institutional sectors;
-- stocks versus flows;
-- Flow of Funds and double-entry consistency;
-- bank-money creation and destruction;
-- credit, deposits and interest;
-- BNR and central-bank money;
-- monetary transmission;
-- fiscal flows, deficit and debt;
-- government securities, maturity, refinancing and refixing;
-- external sector and balance of payments;
-- saving and investment;
-- assets, liabilities and net positions;
-- feedbacks and delays;
-- macro-financial imbalances;
-- data provenance and boundaries;
-- calibration, structural selection and prospective validation;
-- model capabilities and limits.
+The map and diagnostics open the contextually relevant theory while the full reader, glossary and references remain available without requiring README access.
 
-The panel shows the chapter relevant to the current map selection and gives immediate access to the complete chapter, glossary and references.
+## Institutional methodological basis
 
-## Interaction contract
+The recovery uses Eurostat / ESA 2010 for sector and financial-account semantics, ECB from-whom-to-whom financial-account guidance, European Commission MIP methodology, IMF Balance Sheet Approach, BIS credit-gap and debt-service methodology, BNR where compatible national evidence is integrated, and Ministry of Finance debt-risk evidence already frozen in Alpha 0.5.2. Boundaries are not mixed for convenience.
 
-Every sector and relationship is keyboard- and pointer-selectable. A selection highlights relevant neighbours and relations. Dashboard diagnostics highlight the exact map objects associated with the issue. Map selections update Theory/Learn and Auxiliary evidence.
+## Usefulness Gate
 
-The inspector exposes, where applicable:
+PR #11 is mergeable only if all eight conditions are genuinely satisfied:
 
-- natural-language name and definition;
-- object type;
-- epistemic role;
-- unit and period;
-- value only when definitionally available;
-- source/provenance;
-- interpretation limitation.
+1. a user can trace at least one complete financial circuit through the economy;
+2. a user can identify who holds liabilities of a sector;
+3. a user can see the main imbalances currently supported by evidence;
+4. an imbalance can highlight the sectors and relations explaining it;
+5. observed, accounting, conceptual, candidate and deferred objects are distinguishable;
+6. pure accounting stress tests can be run without being confused with forecasts;
+7. necessary theory can be understood without README;
+8. a user can state concrete, source-aware findings about Romania's macro-financial system.
 
-Essential information does not require hover. Enter and Space activate map objects, focus is visible, semantics are not colour-only and the layout reflows with the model first on smaller screens.
-
-## External reference basis
-
-Primary institutional references used in the recovery include:
-
-- Eurostat / European Commission, ESA 2010;
-- ECB Sector Accounts methodology;
-- ECB explanations of money and monetary-policy transmission;
-- European Commission Spring 2026 economic forecast for Romania;
-- European Commission Excessive Deficit Procedure page for Romania;
-- European Commission 2026 Semester assessment of macroeconomic imbalances;
-- Eurostat Q1 2026 current-account release;
-- MoF debt-risk evidence already frozen in Alpha 0.5.2;
-- Eurostat 2025 government-debt currency/composition diagnostics already separated from the MoF repricing boundary in Alpha 0.5.2.
-
-## Success condition
-
-The recovery is successful only if the deployed reference product lets a new user see how sectors are connected, distinguish real/fiscal/financial/external relations, trace documented vulnerabilities through the system, and immediately reach the relevant theory and evidence — while preserving all scientific uncertainty and NO-GO gates.
-
-A four-panel layout alone is not evidence of success. Regression back to a six-node symbolic diagram, software-version Dashboard or fragmentary theory is explicitly rejected by tests and Pages build guards.
+The test suite now makes these product conditions executable guards against regression.
