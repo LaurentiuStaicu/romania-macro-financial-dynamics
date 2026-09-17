@@ -6,12 +6,15 @@
     if (parentDetails) parentDetails.open = true;
   }
 
-  function scrollToRequestedSection() {
-    if (!location.hash) return;
-    const target = document.querySelector(location.hash);
+  function scrollTargetIntoView(target, smooth = false) {
     if (!target) return;
     revealTarget(target);
-    target.scrollIntoView({behavior: 'auto', block: 'start'});
+    target.scrollIntoView({behavior: smooth ? 'smooth' : 'auto', block: 'start'});
+  }
+
+  function scrollToRequestedSection() {
+    if (!location.hash) return;
+    scrollTargetIntoView(document.querySelector(location.hash));
   }
 
   function rectanglesOverlap(a, b) {
@@ -38,7 +41,7 @@
     }
     const smallControls = [...document.querySelectorAll('button, select, input')]
       .filter(el => !el.closest('[hidden]') && getComputedStyle(el).display !== 'none')
-      .filter(el => el.getBoundingClientRect().height > 0 && el.getBoundingClientRect().height < 34)
+      .filter(el => el.getBoundingClientRect().height > 0 && el.getBoundingClientRect().height < 24)
       .map(el => el.id || el.textContent.trim().slice(0, 40) || el.tagName);
     const result = {
       viewport: [innerWidth, innerHeight],
@@ -54,10 +57,14 @@
   }
 
   document.addEventListener('click', event => {
-    const link = event.target.closest?.('a[href^="#"]');
-    if (!link) return;
-    const target = document.querySelector(link.getAttribute('href'));
-    revealTarget(target);
+    const anchor = event.target.closest?.('a[href^="#"]');
+    const button = event.target.closest?.('button[data-scroll-target]');
+    const selector = anchor?.getAttribute('href') || button?.dataset.scrollTarget;
+    if (!selector) return;
+    const target = document.querySelector(selector);
+    if (!target) return;
+    scrollTargetIntoView(target, Boolean(button));
+    if (button) history.replaceState(null, '', selector);
   });
 
   window.addEventListener('load', () => {
