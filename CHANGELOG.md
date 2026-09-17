@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.4.0a0 — Empirical Dynamics
+
+Evidence-traceable behavioural layer prepared for calibration without fabricated parameters.
+
+- adds a canonical behavioural mechanism registry with explicit `ACTIVATED`, `CANDIDATE`, `REJECTED` and `DEFERRED` classifications;
+- activates only monetary-policy → lending-rate pass-through and government refinancing → effective-rate repricing for the initial Alpha 0.5 calibration set;
+- keeps consumption, investment, aggregate credit, sovereign-yield and FX pass-through relations as candidates pending identifiability/out-of-sample gates;
+- defers credit-risk/NPL, fiscal reaction, monetary-policy reaction and currency-specific external refinancing mechanisms where observability or regime identification is insufficient;
+- rejects direct policy-rate → FX and debt-stock-only → default-risk shortcuts as structurally under-specified;
+- adds explicit pure-Python behavioural forms with no convenience/default empirical coefficients;
+- adds an evidence registry linking IMF, BNR, ECB/ESCB, Eurostat and European Commission sources/series to the relevant mechanisms;
+- documents observables, estimation plans, limitations and mechanism-specific rejection/degradation criteria;
+- prevents historical Romanian coefficient estimates from being silently transferred to the current regime;
+- defines the Alpha 0.5 data-separation contract: calibration, structural selection and independent evaluation/holdout are distinct;
+- preserves Accounting Spine, Dynamic Core and InfoClar Model Suite Design Standard v1.1 as hard invariants;
+- advances the software version to `0.4.0a0` without claiming calibration, forecasting, predictive validity or causality.
+
 ## 0.3.0a0 — Dynamic Core
 
 Accounting-constrained executable System Dynamics substrate.
