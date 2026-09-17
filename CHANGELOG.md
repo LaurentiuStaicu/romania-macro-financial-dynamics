@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.5.1a0 — Validation Recovery / Empirical Basis Expansion
+
+Prospective recovery attempt after the scientifically correct Alpha 0.5 NO-GO result.
+
+- adds a reproducible GitHub Actions fetch of the BIS Romania monthly policy-rate series and ECB MIR household/NFC lending-rate series, including source hashes and retrieval metadata;
+- expands the monetary basis to 260 policy-rate observations (2005-01..2026-08) and two complete 108-observation MIR target series (2017-08..2026-07);
+- freezes a new role split before recovery estimation: calibration 2017-08..2022-12, structural selection 2023-01..2025-01 and fresh final evaluation 2025-02..2025-11;
+- permanently reclassifies the inspected Nov-2024..Jan-2025 Alpha 0.5 holdout as structural-selection information and reserves 2026-08 onward prospectively for later confirmation;
+- preregisters only four parsimonious monetary candidates (maximum two parameters) plus persistence and constant-policy-spread baselines;
+- finds that the one-parameter household contemporaneous delta-policy form passes every structural-selection gate, improving RMSE versus persistence by about 8.1% across 25 expanding origins with stable beta around 0.48–0.50;
+- freezes that form before opening the fresh household holdout; the 10-month holdout contains zero policy-rate changes, making the candidate exactly persistence and causing failure of the preregistered final-evaluation improvement gate;
+- keeps the household mechanism `CANDIDATE` rather than interpreting the non-informative holdout as validation;
+- finds that no preregistered NFC form passes structural selection and deliberately leaves the NFC final holdout unopened;
+- expands official MoF government-debt evidence with portfolio average-rate history, realized maturity-vs-refixing risk indicators and maturity-specific auction-yield examples;
+- records that debt maturity, interest-rate refixing, portfolio effective cost, auction yields and consolidated-budget interest expenditure have different boundaries and therefore cannot be collapsed into one aggregate repricing parameter without an instrument-level ledger;
+- keeps government refinancing/effective-rate `DEFERRED` and refuses redemption/debt ratios, strategic targets or a single auction yield as substitutes for the repricing share `m`;
+- records zero newly validated behavioural reference mechanisms and preserves the Alpha 0.6 behavioural-simulator `NO_GO` gate;
+- updates the same read-only InfoClar reference web interface with longer data coverage, selection/holdout outcomes, government boundary reconciliation, evidence and limitations;
+- preserves Accounting Spine, Dynamic Core and InfoClar Model Suite Design Standard v1.1 unchanged, and does not start native/Flatpak development;
+- advances the software version to `0.5.1a0`.
+
 ## 0.5.0a0 — Calibration & Validation + InfoClar web reference surface
 
 Time-respecting validation with explicit negative results where mechanisms fail scientific gates.
