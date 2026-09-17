@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'web/**'
+      - 'tests/test_suite_visual_alignment.py'
       - 'scripts/build_web.py'
       - '.github/workflows/pages.yml'
       - 'model/calibration_validation/**'
@@ -12,6 +13,7 @@ on:
       - main
     paths:
       - 'web/**'
+      - 'tests/test_suite_visual_alignment.py'
       - 'scripts/build_web.py'
       - '.github/workflows/pages.yml'
       - 'model/calibration_validation/**'
@@ -42,36 +44,75 @@ jobs:
       - name: Verify built project-site entrypoint
         run: |
           test -f dist/pages/index.html
+          test -f dist/pages/suite-tokens.css
           test -f dist/pages/public/model-stage.json
           test -f dist/pages/public/theory-supplement.json
-          grep -q 'FLOW-OF-FUNDS EXPLORER' dist/pages/index.html
+          grep -q 'FLOW-OF-FUNDS / SECTORAL BALANCE-SHEET EXPLORER' dist/pages/index.html
           grep -q 'STOCK / BALANCE-SHEET VIEW' dist/pages/index.html
           grep -q 'FLOW VIEW' dist/pages/index.html
+          grep -q 'suite-tokens.css' dist/pages/styles.css
 
-      - name: Render desktop and mobile visual QA captures
+      - name: Install visual comparison helper
+        run: python -m pip install --disable-pip-version-check pillow
+
+      - name: Render Suite Visual Alignment Gate captures
         run: |
-          mkdir -p visual-qa
+          set -euo pipefail
+          mkdir -p visual-qa/macro visual-qa/world3 visual-qa/side-by-side visual-qa/audit
           python -m http.server 8123 --directory dist/pages > /tmp/infoclar-http.log 2>&1 &
           SERVER_PID=$!
           trap 'kill $SERVER_PID || true' EXIT
           sleep 2
+
+          WORLD3_URL='https://laurentiustaicu.github.io/world3-empirical-flatpak/'
+          curl --fail --silent --show-error --location "$WORLD3_URL" -o /tmp/world3-index.html
+
           BROWSER="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
           if [ -z "$BROWSER" ]; then
             echo "No Chromium-compatible browser available for mandatory visual QA" >&2
             exit 1
           fi
-          COMMON="--headless --disable-gpu --no-sandbox --hide-scrollbars --run-all-compositor-stages-before-draw --virtual-time-budget=5000"
-          "$BROWSER" $COMMON --window-size=1440,1200 --screenshot=visual-qa/desktop-overview.png http://127.0.0.1:8123/
-          "$BROWSER" $COMMON --window-size=1440,1200 --screenshot=visual-qa/desktop-dashboard.png 'http://127.0.0.1:8123/#dashboard-panel'
-          "$BROWSER" $COMMON --window-size=390,844 --screenshot=visual-qa/mobile-overview.png http://127.0.0.1:8123/
-          "$BROWSER" $COMMON --window-size=390,844 --screenshot=visual-qa/mobile-map.png 'http://127.0.0.1:8123/#network-view'
-          "$BROWSER" $COMMON --window-size=390,844 --screenshot=visual-qa/mobile-dashboard.png 'http://127.0.0.1:8123/#dashboard-panel'
-          for capture in visual-qa/*.png; do test -s "$capture"; done
+          COMMON="--headless --disable-gpu --no-sandbox --hide-scrollbars --run-all-compositor-stages-before-draw --virtual-time-budget=6000"
 
-      - name: Upload visual QA captures
+          for viewport in 1440x900 1366x768 390x844; do
+            width="${viewport%x*}"
+            height="${viewport#*x}"
+            "$BROWSER" $COMMON --window-size="$width,$height" --screenshot="visual-qa/macro/${viewport}.png" "http://127.0.0.1:8123/"
+            "$BROWSER" $COMMON --window-size="$width,$height" --screenshot="visual-qa/world3/${viewport}.png" "$WORLD3_URL"
+            "$BROWSER" $COMMON --window-size="$width,$height" --dump-dom "http://127.0.0.1:8123/?visual-audit=1" > "visual-qa/audit/${viewport}.html"
+            grep -q '"horizontalOverflow":false' "visual-qa/audit/${viewport}.html"
+            grep -q '"panelOverlaps":\[\]' "visual-qa/audit/${viewport}.html"
+            grep -q '"smallControls":\[\]' "visual-qa/audit/${viewport}.html"
+          done
+
+          "$BROWSER" $COMMON --force-dark-mode --enable-features=WebUIDarkMode --window-size=1440,900 --screenshot="visual-qa/macro/1440x900-dark.png" "http://127.0.0.1:8123/"
+          "$BROWSER" $COMMON --force-dark-mode --enable-features=WebUIDarkMode --window-size=1440,900 --screenshot="visual-qa/world3/1440x900-dark.png" "$WORLD3_URL"
+
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageDraw
+
+          root = Path('visual-qa')
+          for name in ('1440x900', '1366x768', '390x844', '1440x900-dark'):
+              left = Image.open(root / 'world3' / f'{name}.png').convert('RGB')
+              right = Image.open(root / 'macro' / f'{name}.png').convert('RGB')
+              canvas = Image.new('RGB', (left.width + right.width, max(left.height, right.height) + 34), 'white')
+              canvas.paste(left, (0, 34))
+              canvas.paste(right, (left.width, 34))
+              draw = ImageDraw.Draw(canvas)
+              draw.text((12, 10), f'WORLD3 — canonical | {name}', fill='black')
+              draw.text((left.width + 12, 10), f'MACRO — aligned | {name}', fill='black')
+              canvas.save(root / 'side-by-side' / f'{name}.png')
+          PY
+
+          for capture in visual-qa/macro/*.png visual-qa/world3/*.png visual-qa/side-by-side/*.png; do
+            test -s "$capture"
+          done
+
+      - name: Upload Suite Visual Alignment Gate artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: infoclar-visual-qa
+          name: suite-visual-alignment-qa
           path: visual-qa
           if-no-files-found: error
 
