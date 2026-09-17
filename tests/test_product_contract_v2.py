@@ -33,22 +33,27 @@ def test_stock_and_flow_are_separate_primary_perspectives():
     contract = load_json("web/public/product-contract-v2.json")
     html = (ROOT / "web/index.html").read_text(encoding="utf-8")
     js = (ROOT / "web/app.js").read_text(encoding="utf-8")
+    overrides = (ROOT / "web/product-v2-overrides.css").read_text(encoding="utf-8")
     assert {p["id"] for p in contract["perspectives"]} == {"stock", "flow"}
     assert 'id="stock-tab"' in html and 'id="flow-tab"' in html
     assert "perspectiveClasses" in js and "REVALUATION_OTHER_FLOW" in js
     assert 'id="matrix-tab"' in html and 'id="flow-matrix"' in html
     assert "renderMatrix" in js
+    assert "[hidden]" in overrides and "display:none!important" in overrides.replace(" ", "")
 
 
 def test_sector_explorer_can_answer_all_seven_product_questions_without_internal_codes():
     contract = load_json("web/public/product-contract-v2.json")
     js = (ROOT / "web/app.js").read_text(encoding="utf-8")
+    enhancements = (ROOT / "web/product-v2-enhancements.js").read_text(encoding="utf-8")
     expected = {"funded_by", "funds", "owns", "owes", "instrument", "amount", "change"}
     assert expected == {q["id"] for q in contract["sector_questions"]}
     for text in ("WHO FUNDS IT?", "WHO DOES IT FUND?", "WHAT DOES IT OWN?", "WHAT DOES IT OWE?", "MAJOR COUNTERPARTIES"):
         assert text in js
+    assert "HOW HAS IT CHANGED?" in enhancements
+    assert "No compatible bilateral change series" in enhancements
     assert "node-code" not in js
-    assert "n.id" not in js or "node.id" in js  # internal ids may drive logic but are not rendered as node labels
+    assert "n.id" not in js or "node.id" in js  # ids may drive logic but are not rendered as normal labels
 
 
 def test_relationship_inspector_uses_human_epistemic_labels_and_complete_fields():
@@ -148,7 +153,9 @@ def test_visual_audit_is_required_for_desktop_and_mobile_before_merge():
     assert contract["visual_audit"]["required"] is True
     assert contract["visual_audit"]["desktop_viewport"] == {"width": 1440, "height": 1100}
     assert contract["visual_audit"]["mobile_viewport"] == {"width": 390, "height": 844}
+    assert {"desktop-matrix", "mobile-matrix"} <= set(contract["visual_audit"]["required_captures"])
     for name in contract["visual_audit"]["required_captures"]:
         assert name in capture
+    assert "Stock-only matrix controls are visible in FLOW VIEW" in capture
     assert "playwright" in workflow.lower()
     assert "upload-artifact" in workflow
