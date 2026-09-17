@@ -3,8 +3,8 @@
   "mechanism_id": "government_refinancing_effective_rate",
   "contract": "model/calibration_validation/government_repricing_ledger_contract.json",
   "contract_frozen_before_assessment": true,
-  "ledger": "data/processed/government_repricing_ledger_0.5.2a0.csv",
-  "provenance": "data/provenance/government_repricing_ledger_0.5.2a0.json",
+  "ledger": "data/processed/government_repricing_ledger.csv",
+  "provenance": "data/provenance/government_repricing_ledger.json",
   "observed_ledger_diagnostics": {
     "rows": 7,
     "currencies": ["EUR", "RON"],
@@ -29,7 +29,7 @@
       "2021": 3.1,
       "2022": 3.3,
       "2023": 4.2,
-      "source": "existing canonical MoF strategy extracts retained from Alpha 0.5.1"
+      "source": "canonical MoF strategy extracts"
     },
     "mof_risk_snapshot_2024_12_30": {
       "debt_maturing_within_1y_pct": 10.0,
@@ -99,16 +99,12 @@
   "candidate_eligibility": false,
   "validated_eligibility": false,
   "validated_reference_behavioural_mechanisms_after_stage": 0,
-  "alpha_0_6_gate": "NO_GO",
-  "alpha_0_6_reason": "Government repricing remains structurally unidentified and no prior mechanism becomes validated. A negative ledger result is preserved rather than converted into a fitted aggregate proxy.",
   "household_delta_policy": {
     "status": "FROZEN_FOR_PROSPECTIVE_MONETARY_CONFIRMATION",
-    "observations_reserved_from": "2026-08",
-    "respecified_in_alpha_0_5_2": false,
-    "used_in_alpha_0_5_2_estimation": false
+    "observations_reserved_from": "2026-08"
   },
   "next_justified_path": {
-    "primary": "Prospective Monetary Confirmation when a genuinely new BNR policy-rate movement supplies identifying variation; until then the frozen household form and reserved observations remain untouched.",
+    "primary": "Prospective monetary confirmation when a genuinely new BNR policy-rate movement supplies identifying variation; until then the frozen household form and reserved observations remain untouched.",
     "government_data_path": "Continue only if an official/reproducible source becomes available that supplies same-date outstanding principal plus matched reset/refinancing rates across the material MoF portfolio boundary. Repeating aggregate proxy fitting is not justified."
   }
 }
