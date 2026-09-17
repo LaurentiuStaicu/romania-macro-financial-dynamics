@@ -8,7 +8,20 @@
   Bilingual <strong>RO/EN</strong> empirical stock-flow-consistent <strong>System Dynamics</strong> model and web application for exploring Romania's macro-financial system.
 </p>
 
-> **Alpha 0.1.0a0 — Project Constitution & Architecture.** The project is in foundation stage. No calibrated forecasting or policy model is claimed yet.
+<p align="center">
+  <img alt="Version 0.1.0a0" src="https://img.shields.io/badge/version-0.1.0a0-4e9a06">
+  <img alt="Development stage: alpha" src="https://img.shields.io/badge/stage-alpha-e5a50a">
+  <img alt="Web application: in development" src="https://img.shields.io/badge/app-Web_in_development-4a90d9">
+  <img alt="Languages: RO and EN" src="https://img.shields.io/badge/languages-RO_%2F_EN-0e9a83">
+  <img alt="elementary OS Flatpak: planned" src="https://img.shields.io/badge/elementary_OS_Flatpak-planned-64baff">
+  <a href="LICENSE"><img alt="Code license: MIT" src="https://img.shields.io/badge/code_license-MIT-blue"></a>
+</p>
+
+<p align="center">
+  <img alt="Web application in development / Aplicație web în dezvoltare" src="https://img.shields.io/badge/Aplica%C8%9Bie_web_%C3%AEn_dezvoltare_%2F_Web_app_in_development-087F73?style=for-the-badge">
+</p>
+
+> **Alpha 0.1.0a0 — Project Constitution & Architecture.** The project is in foundation stage. No calibrated forecasting or policy model is claimed yet. The large launch-style control above is intentionally non-clickable until a CI-verified public web deployment exists.
 
 ## Purpose / Scop
 
@@ -30,13 +43,13 @@ The intended mature product combines:
 
 The application is **web-first**. A verified browser application will remain available across operating systems. A native **elementary OS Flatpak** using GTK/Granite is planned near v1, after the scientific model and web contracts are stable. Web and native interfaces must consume the same scientific core rather than reimplementing the equations independently.
 
-The user interface and explanatory material are bilingual from the start: **Romanian is the default language, with English available through a persistent RO/EN switch.** Stable model IDs, equations and data keys are language-neutral.
+The user interface and explanatory material are bilingual from the start: **Romanian is the default language, with English available through a persistent RO/EN switch.** Stable model IDs, equations and data keys are language-neutral. Shared user-facing names are stored canonically in [`model/registries/product_labels.json`](model/registries/product_labels.json) rather than being independently re-declared by views.
 
-The visual identity belongs to the same family as World3 Empirical and Cognitive Epistemic Model: a rounded blue-to-teal tile, white structural geometry and a warm-yellow accent, while retaining a distinct macro-financial circulation symbol. See [Visual Identity](docs/VISUAL_IDENTITY.md).
+The visual identity belongs to the same family as World3 Empirical and Cognitive Epistemic Model: a rounded blue-to-teal tile, white structural geometry and a warm-yellow accent, while retaining a distinct macro-financial circulation symbol. The repository presentation also follows the same icon → title → description → status badges → launch-control grammar. See [Visual Identity](docs/VISUAL_IDENTITY.md) and [Product Presentation Contract](docs/PRODUCT_PRESENTATION_CONTRACT.md).
 
 ## Current stage
 
-Alpha 0.1.0a0 establishes the project constitution, system boundary, data/model architecture, bilingual contract, canonical registries and release roadmap. The first empirical modelling task after this foundation is the bilateral **F3 government debt-securities matrix** for stocks at 31.12.2025 and transactions during 2025.
+Alpha 0.1.0a0 establishes the project constitution, system boundary, data/model architecture, bilingual contract, canonical registries, product-presentation contract and release roadmap. The first empirical modelling task after this foundation is the bilateral **F3 government debt-securities matrix** for stocks at 31.12.2025 and transactions during 2025.
 
 See:
 
@@ -45,6 +58,7 @@ See:
 - [Roadmap](docs/ROADMAP.md)
 - [Data and Reconciliation](docs/DATA_AND_RECONCILIATION.md)
 - [Visual Identity](docs/VISUAL_IDENTITY.md)
+- [Product Presentation Contract](docs/PRODUCT_PRESENTATION_CONTRACT.md)
 
 ## Scientific boundary
 
