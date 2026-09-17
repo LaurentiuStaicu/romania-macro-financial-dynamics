@@ -1,0 +1,39 @@
+{
+  "freeze_version": "0.5.1a0-final-evaluation-gate",
+  "frozen_at": "2026-09-17T15:48:00Z",
+  "selection_result_commit": "7019970f165108c5d2c14fe276bb42b0f2ee2973",
+  "selection_result": "model/calibration_validation/validation_recovery_selection.json",
+  "model_form_changes_after_this_freeze_allowed_before_holdout": false,
+  "targets": {
+    "household_housing": {
+      "selection_verdict": "PASS_TO_FINAL_EVALUATION",
+      "selected_candidate": "delta_policy_contemporaneous",
+      "equation": "lend[t] = lend[t-1] + beta * (policy[t]-policy[t-1])",
+      "free_parameters": ["beta"],
+      "selection_origins": 25,
+      "selection_rmse": 0.16869505991928369,
+      "persistence_rmse": 0.18352111595127135,
+      "rmse_improvement_vs_persistence_fraction": 0.08078664929175938,
+      "selection_beta_median": 0.501449275362319,
+      "selection_beta_min": 0.4764705882352942,
+      "selection_beta_max": 0.501449275362319,
+      "parameter_domain_fraction": 1.0,
+      "final_holdout_may_be_opened": true
+    },
+    "nfc_upto1y": {
+      "selection_verdict": "FAIL_BEFORE_HOLDOUT",
+      "selected_candidate": null,
+      "final_holdout_may_be_opened": false,
+      "reason": "No preregistered candidate improved RMSE by the required margin versus both simple baselines while satisfying all other gates. The contemporaneous delta-policy candidate had RMSE 0.231593 versus persistence 0.216629, so the final NFC holdout remains unopened."
+    }
+  },
+  "final_evaluation_policy": {
+    "period": "2025-02..2025-11",
+    "open_values_for": ["household_housing"],
+    "keep_unopened_for": ["nfc_upto1y"],
+    "parameter_fitting_window": "2017-08..2025-01",
+    "parameter_refit_during_holdout": false,
+    "candidate_may_not_be_respecified_after_holdout": true,
+    "holdout_cannot_rescue_failed_structural_selection": true
+  }
+}
