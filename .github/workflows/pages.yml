@@ -30,7 +30,7 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 env:
   WORLD3_CANONICAL_SHA: 51e236b61a0ec169bc8f28d4f8192e450ab6bd6d
@@ -181,7 +181,7 @@ jobs:
           grep -q -- '--suite-root-background: #f3f5f7' /tmp/live-suite-tokens.css
           grep -q -- '--suite-text: #222a34' /tmp/live-suite-tokens.css
           grep -q -- '--suite-border: #dce1e7' /tmp/live-suite-tokens.css
-          grep -q -- '--suite-shadow: 0 10px 35px rgba(31, 42, 55, 0.07)' /tmp/live-suite-tokens.css
+          grep -q -- '--suite-shadow: 0 10px 35px rgba(31,42,55,.07)' /tmp/live-suite-tokens.css
           grep -q -- '--suite-header-height: 72px' /tmp/live-suite-tokens.css
           grep -q -- '--suite-panel-radius: 14px' /tmp/live-suite-tokens.css
           grep -q '51e236b61a0ec169bc8f28d4f8192e450ab6bd6d' /tmp/live-parity.json
