@@ -5,8 +5,10 @@ on:
     paths:
       - 'web/**'
       - 'tests/test_suite_visual_alignment.py'
+      - 'tests/test_web_infoclar.py'
       - 'scripts/build_web.py'
       - 'scripts/run_suite_visual_gate.py'
+      - 'docs/WORLD3_VISUAL_ALIGNMENT_AUDIT.md'
       - '.github/workflows/pages.yml'
       - 'model/calibration_validation/**'
   push:
@@ -15,8 +17,10 @@ on:
     paths:
       - 'web/**'
       - 'tests/test_suite_visual_alignment.py'
+      - 'tests/test_web_infoclar.py'
       - 'scripts/build_web.py'
       - 'scripts/run_suite_visual_gate.py'
+      - 'docs/WORLD3_VISUAL_ALIGNMENT_AUDIT.md'
       - '.github/workflows/pages.yml'
       - 'model/calibration_validation/**'
   workflow_dispatch:
@@ -28,11 +32,14 @@ concurrency:
   group: pages
   cancel-in-progress: false
 
+env:
+  WORLD3_CANONICAL_SHA: 51e236b61a0ec169bc8f28d4f8192e450ab6bd6d
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout Macro
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -40,33 +47,58 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Build canonical InfoClar site
+      - name: Set up Node for canonical World3 build
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Build canonical Macro site
         run: python scripts/build_web.py
 
-      - name: Verify built project-site entrypoint
+      - name: Verify strict Macro shell and parity contract
         run: |
+          set -euo pipefail
           test -f dist/pages/index.html
           test -f dist/pages/suite-tokens.css
+          test -f dist/pages/world3-visual-parity-contract.json
           test -f dist/pages/public/model-stage.json
           test -f dist/pages/public/theory-supplement.json
+          grep -q 'class="product-header"' dist/pages/index.html
+          grep -q 'class="question-band"' dist/pages/index.html
           grep -q 'FLOW-OF-FUNDS / SECTORAL BALANCE-SHEET EXPLORER' dist/pages/index.html
           grep -q 'STOCK / BALANCE-SHEET VIEW' dist/pages/index.html
           grep -q 'FLOW VIEW' dist/pages/index.html
           grep -q 'suite-tokens.css' dist/pages/styles.css
+          ! grep -q 'prefers-color-scheme: dark' dist/pages/styles.css
+          ! grep -q 'prefers-color-scheme: dark' dist/pages/suite-tokens.css
+
+      - name: Build pinned World3 Product Recovery golden master
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/world3-canonical
+          git clone --filter=blob:none --no-checkout https://github.com/LaurentiuStaicu/world3-empirical-flatpak.git /tmp/world3-canonical
+          git -C /tmp/world3-canonical fetch origin "$WORLD3_CANONICAL_SHA" --depth=1
+          git -C /tmp/world3-canonical checkout --detach "$WORLD3_CANONICAL_SHA"
+          test "$(git -C /tmp/world3-canonical rev-parse HEAD)" = "$WORLD3_CANONICAL_SHA"
+          cd /tmp/world3-canonical/web
+          npm install --no-audit --no-fund
+          npm run check
+          npm run build
+          test -f dist/index.html
+          grep -q 'World3 Empirical' dist/index.html
 
       - name: Install visual comparison helpers
         run: python -m pip install --disable-pip-version-check pillow playwright
 
-      - name: Render exact-viewport Suite Visual Alignment Gate
+      - name: Render six-view Strict World3 Visual Alignment Gate
         run: |
           set -euo pipefail
-          python -m http.server 8123 --directory dist/pages > /tmp/infoclar-http.log 2>&1 &
-          SERVER_PID=$!
-          trap 'kill $SERVER_PID || true' EXIT
+          python -m http.server 8123 --directory dist/pages > /tmp/macro-http.log 2>&1 &
+          MACRO_PID=$!
+          python -m http.server 8124 --directory /tmp/world3-canonical/web/dist > /tmp/world3-http.log 2>&1 &
+          WORLD3_PID=$!
+          trap 'kill $MACRO_PID $WORLD3_PID || true' EXIT
           sleep 2
-
-          WORLD3_URL='https://laurentiustaicu.github.io/world3-empirical-flatpak/'
-          curl --fail --silent --show-error --location "$WORLD3_URL" -o /tmp/world3-index.html
 
           BROWSER="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
           if [ -z "$BROWSER" ]; then
@@ -77,19 +109,22 @@ jobs:
           python scripts/run_suite_visual_gate.py \
             --browser "$BROWSER" \
             --macro-url 'http://127.0.0.1:8123/' \
-            --world3-url "$WORLD3_URL" \
+            --world3-url 'http://127.0.0.1:8124/' \
             --output visual-qa
 
           test -s visual-qa/audit/visual-gate-report.json
-          grep -q '"viewport": \[' visual-qa/audit/visual-gate-report.json
-          for capture in visual-qa/macro/*.png visual-qa/world3/*.png visual-qa/side-by-side/*.png; do
-            test -s "$capture"
+          grep -q '"css_parity": "PASS"' visual-qa/audit/visual-gate-report.json
+          grep -q '"functional_layout": "PASS"' visual-qa/audit/visual-gate-report.json
+          for viewport in 1920x1080 1600x900 1440x900 1366x768 820x1180 390x844; do
+            test -s "visual-qa/macro/${viewport}.png"
+            test -s "visual-qa/world3/${viewport}.png"
+            test -s "visual-qa/side-by-side/${viewport}.png"
           done
 
-      - name: Upload Suite Visual Alignment Gate artifacts
+      - name: Upload Strict World3 Visual Alignment artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: suite-visual-alignment-qa
+          name: strict-world3-visual-alignment-qa
           path: visual-qa
           if-no-files-found: error
 
@@ -117,19 +152,18 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-      - name: Inspect deployed public URL
+      - name: Inspect deployed public URL against strict World3 shell contract
         env:
           PUBLIC_URL: ${{ steps.deployment.outputs.page_url }}
         run: |
           set -euo pipefail
           test -n "$PUBLIC_URL"
-          echo "Inspecting deployed public endpoint: $PUBLIC_URL"
-
           live_ok=false
           for attempt in $(seq 1 12); do
             if curl --fail --silent --show-error --location \
               "${PUBLIC_URL}?sha=${GITHUB_SHA}&attempt=${attempt}" -o /tmp/live-index.html \
-              && grep -q 'class="suite-header"' /tmp/live-index.html \
+              && grep -q 'class="product-header"' /tmp/live-index.html \
+              && grep -q 'class="question-band"' /tmp/live-index.html \
               && grep -q 'FLOW-OF-FUNDS / SECTORAL BALANCE-SHEET EXPLORER' /tmp/live-index.html \
               && grep -q 'SCIENTIFIC / TECHNICAL PROVENANCE' /tmp/live-index.html; then
               live_ok=true
@@ -139,18 +173,18 @@ jobs:
           done
           test "$live_ok" = true
 
-          curl --fail --silent --show-error --location \
-            "${PUBLIC_URL}styles.css?sha=${GITHUB_SHA}" -o /tmp/live-styles.css
-          curl --fail --silent --show-error --location \
-            "${PUBLIC_URL}suite-tokens.css?sha=${GITHUB_SHA}" -o /tmp/live-suite-tokens.css
+          curl --fail --silent --show-error --location "${PUBLIC_URL}styles.css?sha=${GITHUB_SHA}" -o /tmp/live-styles.css
+          curl --fail --silent --show-error --location "${PUBLIC_URL}suite-tokens.css?sha=${GITHUB_SHA}" -o /tmp/live-suite-tokens.css
+          curl --fail --silent --show-error --location "${PUBLIC_URL}world3-visual-parity-contract.json?sha=${GITHUB_SHA}" -o /tmp/live-parity.json
 
           grep -q '@import url("suite-tokens.css")' /tmp/live-styles.css
-          grep -q -- '--suite-accent: #5d5fef' /tmp/live-suite-tokens.css
-          grep -q -- '--suite-text: #28313d' /tmp/live-suite-tokens.css
-          grep -q -- '--suite-border: #dfe3e8' /tmp/live-suite-tokens.css
+          grep -q -- '--suite-root-background: #f3f5f7' /tmp/live-suite-tokens.css
+          grep -q -- '--suite-text: #222a34' /tmp/live-suite-tokens.css
+          grep -q -- '--suite-border: #dce1e7' /tmp/live-suite-tokens.css
+          grep -q -- '--suite-shadow: 0 10px 35px rgba(31, 42, 55, 0.07)' /tmp/live-suite-tokens.css
+          grep -q -- '--suite-header-height: 72px' /tmp/live-suite-tokens.css
           grep -q -- '--suite-panel-radius: 14px' /tmp/live-suite-tokens.css
-          if grep -q '#2457d6\|#172033\|#d8dfeb' /tmp/live-styles.css; then
-            echo 'Legacy Macro base design token found on public surface' >&2
-            exit 1
-          fi
-          echo "Public Pages smoke inspection passed for ${GITHUB_SHA}."
+          grep -q '51e236b61a0ec169bc8f28d4f8192e450ab6bd6d' /tmp/live-parity.json
+          ! grep -q 'prefers-color-scheme: dark' /tmp/live-styles.css
+          ! grep -q 'prefers-color-scheme: dark' /tmp/live-suite-tokens.css
+          echo "Strict public Pages visual-shell inspection passed for ${GITHUB_SHA}."
