@@ -1,0 +1,89 @@
+{
+  "assessment_version": "0.5.1a0",
+  "mechanism_id": "government_refinancing_effective_rate",
+  "alpha_0_4_form": "effective_rate[t] = (1-m[t])*effective_rate[t-1] + m[t]*marginal_market_yield[t]",
+  "boundary_required_by_equation": {
+    "stock": "same government debt portfolio represented by effective_rate",
+    "m": "fraction of that exact stock whose effective coupon/rate is replaced or reset during the period",
+    "marginal_rate": "new effective rate applicable to the same repriced portion of that stock",
+    "time_step": "definitionally matched period"
+  },
+  "official_evidence": [
+    {
+      "id": "mof_strategy_2021_2023",
+      "url": "https://www.mfinante.gov.ro/static/10/Mfp/buletin/executii/Strategie2021-2023_en.pdf",
+      "observable": "portfolio average interest rate",
+      "values": {"2019":3.8,"2020":3.3},
+      "definition": "MoF average interest rates for selected debt instruments aggregated from the government debt portfolio; the strategy footnote describes a forecast-interest-payment / end-period-balance calculation for the instrument-level cost measure."
+    },
+    {
+      "id": "mof_strategy_2023_2025",
+      "url": "https://www.mfinante.gov.ro/static/10/Mfp/buletin/executii/GovernmentDebtManagementStrategy2023-2025.pdf",
+      "observable": "portfolio average interest rate",
+      "values": {"2021":3.1,"2022":3.3},
+      "definition": "MoF average interest rate by debt portfolio/instrument; national- and foreign-currency costs reported separately."
+    },
+    {
+      "id": "mof_strategy_2024_2026",
+      "url": "https://www.mfinante.gov.ro/static/10/Mfp/buletin/executii/Strategiedeadministrareadatorieipubliceguvernamentale2024_2026en.pdf",
+      "observable": "portfolio average interest rate and risk definitions",
+      "values": {"2023_average_interest_rate_pct":4.2},
+      "definition": "Refinancing risk (debt due within one year / ATM) is explicitly separate from interest-rate risk (debt changing rate within one year / ATR)."
+    },
+    {
+      "id": "mof_investor_presentation_dec_2024",
+      "url": "https://www.mfinante.gov.ro/static/10/Mfp/buget/sitebuget/InvestorPresentationDecember2024.pdf",
+      "observable": "realized portfolio risk snapshots",
+      "values": {
+        "2023_12": {"maturing_1y_pct":11.0,"refixing_1y_pct":11.0,"ATM_years":7.4,"ATR_years":7.3},
+        "2024_10": {"maturing_1y_pct":10.0,"refixing_1y_pct":11.0,"ATM_years":7.0,"ATR_years":6.9}
+      },
+      "definition": "Risk indicators calculated under national-legislation debt boundary; ATM and ATR are separately defined."
+    },
+    {
+      "id": "mof_flash_report_feb_2025",
+      "url": "https://www.mfinante.gov.ro/static/10/Mfp/buget/sitebuget/FlashReportonRomanianPublicDebtJanuary2025.pdf",
+      "observable": "domestic auction marginal/accepted yields by residual maturity",
+      "examples": [
+        {"date":"2025-02-03","remaining_maturity_years":4.22,"yield_pct":7.54},
+        {"date":"2025-02-04","remaining_maturity_years":0.56,"yield_pct":6.47},
+        {"date":"2025-02-06","remaining_maturity_years":3.21,"yield_pct":7.23},
+        {"date":"2025-02-06","remaining_maturity_years":9.47,"yield_pct":7.45},
+        {"date":"2025-02-10","remaining_maturity_years":5.46,"yield_pct":7.39}
+      ],
+      "definition": "Auction yields vary materially by maturity and apply only to issued domestic securities, not the entire stock or all refixing events."
+    },
+    {
+      "id": "mof_budget_execution_2025",
+      "url": "https://mfinante.gov.ro/static/10/Mfp/buletin/executii/nota_bgc28022025.pdf",
+      "observable": "general consolidated budget interest expenditure",
+      "example": {"period":"2025-01..2025-02","interest_expenditure_billion_RON":10.06},
+      "definition": "Budget-execution interest expenditure is a flow for the consolidated budget and is not itself the effective rate on the exact MoF direct-debt stock used in the portfolio-cost tables."
+    }
+  ],
+  "reconciliation": {
+    "maturity_is_not_refixing": true,
+    "redemption_ratio_may_not_substitute_for_m": true,
+    "strategic_target_may_not_substitute_for_realized_m": true,
+    "refixing_share_is_closer_to_m_but_not_sufficient_for_aggregate_equation": true,
+    "reason": "The refixing share combines debt that matures/refinances and debt whose contractual rate resets. A single marginal auction yield is not applicable to floating-rate resets, foreign-currency bonds, EU/IFI loans or all domestic maturities. The effective-rate stock is also an aggregate across currencies/instruments with heterogeneous costs.",
+    "interest_expenditure_boundary_matches_effective_rate_stock": false,
+    "marginal_yield_boundary_matches_all_refixing_events": false
+  },
+  "identifiability_diagnostic": {
+    "point_identifiable_under_current_aggregate_equation": false,
+    "available_observables_are_material": true,
+    "missing_matched_inputs": [
+      "period-by-period realized repriced principal by instrument/currency/rate-reset type",
+      "new/reset effective rate for each repriced block under the same classification",
+      "definitionally matched opening/closing debt stock and interest-cost measure"
+    ],
+    "why_no_estimation_is_run": "Estimating m from aggregate average interest rates, redemptions and market yields would require synthetic allocation across currencies, maturity buckets and floating/fixed-rate resets, violating the preregistered boundary rule."
+  },
+  "final_verdict": "DEFERRED",
+  "rejection_or_recovery_path": {
+    "next_empirical_design": "instrument-and-currency-level repricing ledger",
+    "minimum_fields": ["instrument_id","currency","fixed_or_floating","opening_principal","maturity_or_reset_date","principal_repriced","old_effective_rate","new_effective_rate","interest_cost_concept","source_id"],
+    "activation_gate": "Only after the repricing ledger can reconstruct the published portfolio average-rate path within an explicit reconciliation tolerance without synthetic allocation."
+  }
+}
