@@ -1,0 +1,114 @@
+{
+  "assessment_version": "0.5.2a0",
+  "mechanism_id": "government_refinancing_effective_rate",
+  "contract": "model/calibration_validation/government_repricing_ledger_contract.json",
+  "contract_frozen_before_assessment": true,
+  "ledger": "data/processed/government_repricing_ledger_0.5.2a0.csv",
+  "provenance": "data/provenance/government_repricing_ledger_0.5.2a0.json",
+  "observed_ledger_diagnostics": {
+    "rows": 7,
+    "currencies": ["EUR", "RON"],
+    "rate_types_observed": ["FIXED"],
+    "bvb_instrument_rows_with_issue_size": 5,
+    "official_mof_issuance_or_reopening_terms_rows": 2,
+    "observed_issue_value_sum_by_currency_diagnostic_only": {
+      "RON": 923264200,
+      "EUR": 151639100
+    },
+    "rows_with_opening_outstanding_principal": 0,
+    "rows_with_realized_principal_repriced": 0,
+    "rows_with_matched_old_and_new_effective_rate": 0,
+    "rows_with_contractual_refixing_date": 0,
+    "floating_rate_instruments_with_reset_schedule": 0,
+    "synthetic_allocations": 0
+  },
+  "published_reference_reconciliation": {
+    "mof_portfolio_average_interest_rate_pct": {
+      "2019": 3.8,
+      "2020": 3.3,
+      "2021": 3.1,
+      "2022": 3.3,
+      "2023": 4.2,
+      "source": "existing canonical MoF strategy extracts retained from Alpha 0.5.1"
+    },
+    "mof_risk_snapshot_2024_12_30": {
+      "debt_maturing_within_1y_pct": 10.0,
+      "debt_refixing_within_1y_pct": 12.0,
+      "average_time_to_maturity_years": 6.9,
+      "average_time_to_refixing_years": 6.7,
+      "local_debt_maturing_within_1y_pct": 17.0,
+      "local_debt_refixing_within_1y_pct": 15.0,
+      "local_atm_years": 4.6,
+      "local_atr_years": 4.6,
+      "domestic_currency_share_pct": 48.5,
+      "eur_share_of_foreign_currency_debt_pct": 79.7,
+      "source": "MoF Investor Presentation March 2025",
+      "interpretation": "Maturity and refixing remain distinct observed concepts. The two-percentage-point total-debt gap at this snapshot alone rules out treating the maturity share as the refixing share."
+    },
+    "eurostat_external_diagnostic_2025": {
+      "maastricht_foreign_currency_share_pct": 53.0,
+      "maastricht_apparent_cost_pct": 5.2,
+      "definition": "accrual interest expenditure divided by average outstanding Maastricht debt",
+      "boundary_match_to_mof_portfolio_cost": false,
+      "use_in_estimation": false
+    }
+  },
+  "gate_results": {
+    "gate_1_ledger_completeness": {
+      "status": "FAIL",
+      "opening_principal_coverage_pct": null,
+      "repricing_event_principal_coverage_pct": null,
+      "reason": "Public instrument terms and issue sizes do not provide same-date opening outstanding principal or realized repriced/reset principal for the full MoF cost boundary. Coverage cannot be manufactured by treating issue size, redemption schedules or financing needs as the missing stock/event principal."
+    },
+    "gate_2_balance_reconciliation": {
+      "status": "NOT_OPENED",
+      "reason": "Gate 1 failed; no definitionally matched instrument/block principal can be summed against the MoF published stock."
+    },
+    "gate_3_portfolio_cost_reconstruction": {
+      "status": "NOT_OPENED",
+      "reason": "The ledger does not contain the opening principal and effective old rate for at least 95% of the matched portfolio, nor matched new/reset rates for at least 90% of repricing-event principal. Published 2019-2023 portfolio costs therefore cannot be reconstructed without prohibited allocation."
+    },
+    "gate_4_parameter_identification": {
+      "status": "FAIL_BEFORE_ESTIMATION",
+      "reason": "No matched event-level principal/old-rate/new-rate blocks exist in the public ledger subset. An aggregate m would absorb unobserved instrument, currency and fixed/floating structure."
+    },
+    "gate_5_prospective_confirmation_for_validated_status": {
+      "status": "NOT_OPENED",
+      "reason": "Historical reconstruction did not reach CANDIDATE eligibility."
+    }
+  },
+  "estimation": {
+    "run": false,
+    "reason": "The prospective completeness gate failed. Running an estimator would necessarily convert missing public debt structure into synthetic allocation."
+  },
+  "what_is_reconciled": [
+    "instrument identity, currency, fixed coupon, maturity and issue-size/terms for a reproducible public subset of Ministry of Finance securities",
+    "new issuance/reopening terms are kept semantically separate from refinancing and contractual refixing",
+    "MoF risk snapshots preserve separate maturity and refixing measures rather than collapsing them",
+    "MoF portfolio-average cost observations remain reference targets with their original boundary",
+    "Eurostat Maastricht apparent cost and currency shares are retained as external diagnostics only, not mixed into the MoF cost equation"
+  ],
+  "what_remains_unidentified": [
+    "full matched opening outstanding principal by instrument/currency/fixed-floating under the MoF cost boundary",
+    "realized principal refinanced in each period linked to the maturing block it replaces",
+    "contractual reset dates and realized repriced principal for floating/indexed debt",
+    "old effective rate and new/reset effective rate on the same repriced principal",
+    "same-boundary interest-cost decomposition sufficient to reproduce published MoF portfolio cost within the frozen tolerance"
+  ],
+  "final_verdict": "DEFERRED",
+  "candidate_eligibility": false,
+  "validated_eligibility": false,
+  "validated_reference_behavioural_mechanisms_after_stage": 0,
+  "alpha_0_6_gate": "NO_GO",
+  "alpha_0_6_reason": "Government repricing remains structurally unidentified and no prior mechanism becomes validated. A negative ledger result is preserved rather than converted into a fitted aggregate proxy.",
+  "household_delta_policy": {
+    "status": "FROZEN_FOR_PROSPECTIVE_MONETARY_CONFIRMATION",
+    "observations_reserved_from": "2026-08",
+    "respecified_in_alpha_0_5_2": false,
+    "used_in_alpha_0_5_2_estimation": false
+  },
+  "next_justified_path": {
+    "primary": "Prospective Monetary Confirmation when a genuinely new BNR policy-rate movement supplies identifying variation; until then the frozen household form and reserved observations remain untouched.",
+    "government_data_path": "Continue only if an official/reproducible source becomes available that supplies same-date outstanding principal plus matched reset/refinancing rates across the material MoF portfolio boundary. Repeating aggregate proxy fitting is not justified."
+  }
+}
