@@ -43,7 +43,34 @@ jobs:
         run: |
           test -f dist/pages/index.html
           test -f dist/pages/public/model-stage.json
-          grep -q 'InfoClar' dist/pages/index.html
+          test -f dist/pages/public/theory-supplement.json
+          grep -q 'FLOW-OF-FUNDS EXPLORER' dist/pages/index.html
+          grep -q 'STOCK / BALANCE-SHEET VIEW' dist/pages/index.html
+          grep -q 'FLOW VIEW' dist/pages/index.html
+
+      - name: Render desktop and mobile visual QA captures
+        run: |
+          mkdir -p visual-qa
+          python -m http.server 8123 --directory dist/pages > /tmp/infoclar-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 2
+          BROWSER="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          if [ -z "$BROWSER" ]; then
+            echo "No Chromium-compatible browser available for mandatory visual QA" >&2
+            exit 1
+          fi
+          "$BROWSER" --headless --disable-gpu --no-sandbox --hide-scrollbars --run-all-compositor-stages-before-draw --virtual-time-budget=5000 --window-size=1440,1200 --screenshot=visual-qa/desktop.png http://127.0.0.1:8123/
+          "$BROWSER" --headless --disable-gpu --no-sandbox --hide-scrollbars --run-all-compositor-stages-before-draw --virtual-time-budget=5000 --window-size=390,844 --screenshot=visual-qa/mobile.png http://127.0.0.1:8123/
+          test -s visual-qa/desktop.png
+          test -s visual-qa/mobile.png
+
+      - name: Upload visual QA captures
+        uses: actions/upload-artifact@v4
+        with:
+          name: infoclar-visual-qa
+          path: visual-qa
+          if-no-files-found: error
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
