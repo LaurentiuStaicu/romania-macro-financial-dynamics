@@ -4,19 +4,17 @@
 
 <h1 align="center">Romania Macro-Financial Dynamics</h1>
 
-<p align="center"><img alt="Version 0.5.1a0" src="https://img.shields.io/badge/version-0.5.1a0-4e9a06"></p>
+<p align="center">Empirical stock-flow-consistent System Dynamics model of Romania's macro-financial system in an evidence-aware InfoClar interface.</p>
 
 <p align="center">
-  Empirical stock-flow-consistent <strong>System Dynamics</strong> model of Romania's macro-financial system with an implemented <strong>InfoClar EN/RO web reference interface</strong>.
+  <img alt="Version 0.5.1a0" src="https://img.shields.io/badge/Version-0.5.1a0-4e9a06">
+  <img alt="elementary OS planned" src="https://img.shields.io/badge/elementary_OS-Planned-64baff">
+  <a href="LICENSE"><img alt="License MIT" src="https://img.shields.io/badge/License-MIT-blue"></a>
 </p>
 
 <p align="center">
-  <img alt="Development stage: alpha" src="https://img.shields.io/badge/stage-alpha-e5a50a">
-  <img alt="InfoClar web: reference interface" src="https://img.shields.io/badge/InfoClar_Web-reference_interface-4a90d9">
-  <img alt="Behavioural simulator: NO-GO" src="https://img.shields.io/badge/behavioural_simulator-NO--GO-e5a50a">
-  <img alt="Languages: EN and RO" src="https://img.shields.io/badge/languages-EN_%2F_RO-0e9a83">
-  <img alt="elementary OS Flatpak: deferred near v1" src="https://img.shields.io/badge/Flatpak-deferred_near_v1-64baff">
-  <a href="LICENSE"><img alt="Code license: MIT" src="https://img.shields.io/badge/code_license-MIT-blue"></a>
+  <img width="220" alt="Open Web App — Planned" src="https://img.shields.io/badge/Open_Web_App-Planned-9ca3af?style=for-the-badge">
+  <img width="220" alt="Download Flatpak — Planned" src="https://img.shields.io/badge/Download_Flatpak-Planned-9ca3af?style=for-the-badge">
 </p>
 
 > **Alpha 0.5.1a0 — Validation Recovery / Empirical Basis Expansion.** The empirical basis is now much longer and prospectively partitioned. One parsimonious household monetary-pass-through form passed structural selection, but its fresh holdout contained no policy-rate changes and therefore could not outperform persistence. NFC forms failed before holdout. Government repricing remains boundary-unidentified at the aggregate level. **Validated behavioural reference mechanisms remain 0; Alpha 0.6 remains NO-GO.**
