@@ -35,3 +35,14 @@ def test_model_contract_languages_and_benchmark():
     assert contract["default_language"] == "ro"
     assert contract["supported_languages"] == ["ro", "en"]
     assert contract["benchmark"]["stock_date"] == "2025-12-31"
+
+
+def test_product_labels_are_unique_and_bilingual():
+    registry = load_json("model/registries/product_labels.json")
+    assert registry["default_language"] == "ro"
+    assert registry["supported_languages"] == ["ro", "en"]
+    labels = registry["labels"]
+    ids = [item["id"] for item in labels]
+    assert len(ids) == len(set(ids))
+    assert {"understand", "system_map", "flow_of_funds", "dynamics", "simulation", "scenarios", "validation", "data_sources", "open_app", "language"} == set(ids)
+    assert all(item["label"]["ro"] and item["label"]["en"] for item in labels)
