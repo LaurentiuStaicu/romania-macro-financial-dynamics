@@ -14,7 +14,7 @@
     "muted_text": "#667180",
     "border": "#dce1e7",
     "link": "#326b9f",
-    "shadow": "0 10px 35px rgba(31, 42, 55, 0.07)",
+    "shadow": "0 10px 35px rgba(31,42,55,.07)",
     "panel_radius": "14px",
     "control_radius": "9px",
     "control_border": "#ccd3db",
