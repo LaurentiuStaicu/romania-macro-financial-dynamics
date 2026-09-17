@@ -13,6 +13,7 @@ REQUIRED = (
     "styles.css",
     "app.js",
     "theory-merge.js",
+    "anchor-scroll.js",
     "public/icon.svg",
     "public/model-stage.json",
     "public/product-architecture.json",
