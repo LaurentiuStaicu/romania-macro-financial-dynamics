@@ -4,58 +4,98 @@
 
 <h1 align="center">Romania Macro-Financial Dynamics</h1>
 
-<p align="center"><img alt="Version 0.4.0a0" src="https://img.shields.io/badge/version-0.4.0a0-4e9a06"></p>
+<p align="center"><img alt="Version 0.5.0a0" src="https://img.shields.io/badge/version-0.5.0a0-4e9a06"></p>
 
 <p align="center">
-  Empirical stock-flow-consistent <strong>System Dynamics</strong> model of Romania's macro-financial system, with evidence-traceable behavioural mechanisms and an <strong>EN/RO</strong> product contract.
+  Empirical stock-flow-consistent <strong>System Dynamics</strong> model of Romania's macro-financial system with an implemented <strong>InfoClar EN/RO web reference interface</strong>.
 </p>
 
 <p align="center">
   <img alt="Development stage: alpha" src="https://img.shields.io/badge/stage-alpha-e5a50a">
-  <img alt="Web application: in development" src="https://img.shields.io/badge/app-Web_in_development-4a90d9">
+  <img alt="InfoClar web: reference interface" src="https://img.shields.io/badge/InfoClar_Web-reference_interface-4a90d9">
+  <img alt="Behavioural simulator: validation gated" src="https://img.shields.io/badge/behavioural_simulator-validation_gated-e5a50a">
   <img alt="Languages: EN and RO" src="https://img.shields.io/badge/languages-EN_%2F_RO-0e9a83">
-  <img alt="elementary OS Flatpak: planned" src="https://img.shields.io/badge/elementary_OS_Flatpak-planned-64baff">
+  <img alt="elementary OS Flatpak: deferred near v1" src="https://img.shields.io/badge/Flatpak-deferred_near_v1-64baff">
   <a href="LICENSE"><img alt="Code license: MIT" src="https://img.shields.io/badge/code_license-MIT-blue"></a>
 </p>
 
-> **Alpha 0.4.0a0 — Empirical Dynamics.** Behavioural mechanisms are now classified and evidence-linked, but they are not yet calibrated. `ACTIVATED` means admitted to Alpha 0.5 calibration/validation, not numerically validated. No historical coefficient or missing value is silently inserted into the model.
+> **Alpha 0.5.0a0 — Calibration & Validation.** The first admitted behavioural forms were tested under frozen time-respecting data roles. Neither passed the full validation gate. This negative result is preserved rather than hidden by added complexity. InfoClar is now an actual read-only browser interface for the stock-flow model, Theory/Learn, empirical validation dashboard and evidence/limitations surface. Behavioural simulation remains disabled.
+
+## Web-first product
+
+InfoClar is the project's primary product surface through scientific maturation to v1. It is implemented under [`web/`](web/) and follows InfoClar Model Suite Design Standard v1.1.
+
+The current browser surface contains the common adaptive workspace:
+
+- a dominant model-specific H/C/F/G/X/BNR macro-financial stock-flow/sector view;
+- contextual **Theory / Learn** linked to the selected scientific object;
+- an empirical **Dashboard** where data quality/validation status appears before engine metadata;
+- an **Auxiliary** panel for sources, mechanism disposition, validation details and limitations;
+- persistent EN/RO switching and keyboard-accessible sector selection.
+
+It is deliberately read-only. Interactive behavioural simulation is not presented as available because Alpha 0.5 found zero validated behavioural reference mechanisms. The web product can continue to mature structurally and empirically without overstating model validity.
+
+Native GTK/Granite/Flatpak development is deferred until the web application is mature at or near v1. There is no parallel native model implementation in the current repository.
 
 ## Scientific architecture
 
-The project retains four layers: **L0 Data & Ontology → L1 Accounting/SFC Spine → L2 Dynamic Causal Engine → L3 Empirical/Policy Layer**. Alpha 0.4 adds the first empirical-behavioural layer while preserving the Accounting Spine, Alpha 0.3 stock/flow/delay semantics and InfoClar Model Suite Design Standard v1.1.
+The project retains four layers: **L0 Data & Ontology → L1 Accounting/SFC Spine → L2 Dynamic Causal Engine → L3 Empirical/Policy Layer**.
 
-The canonical model boundary remains `H / C / F / G / X / BNR`. Bilateral financial positions remain represented once as a holder asset and issuer liability, so behavioural equations cannot bypass double-entry conservation or reinterpret unresolved Accounting Spine cells as zero.
+The canonical model boundary remains `H / C / F / G / X / BNR`. Bilateral financial positions are represented once as holder assets and issuer liabilities, preserving double-entry conservation. Missing Accounting Spine values remain explicit and are never converted to simulation zero implicitly.
 
-## Alpha 0.4 mechanism status
+## Alpha 0.5 validation result
 
-The initial calibration set is deliberately small:
+### Monetary-policy → lending-rate pass-through
 
-- **ACTIVATED:** monetary-policy → lending-rate partial adjustment; government refinancing → effective debt-rate repricing;
-- **CANDIDATE:** household consumption, corporate investment, aggregate bank credit, sovereign spread/yield, FX pass-through to inflation;
-- **DEFERRED:** credit-risk/NPL response, fiscal primary-balance reaction, monetary-policy reaction function, currency-specific external FX/refinancing feedback;
-- **REJECTED:** direct bivariate policy-rate → FX shortcut; debt-stock-only → default-risk shortcut.
+The Alpha 0.4 three-parameter partial-adjustment mechanism was tested on a frozen 13-month BNR sample with roles declared before estimation:
 
-Every mechanism has a canonical functional form or explicit reason for deferral/rejection, source/evidence references, observables, parameter or estimation plan, limitations and rejection/degradation criteria. See [`model/empirical_dynamics/mechanism_registry.json`](model/empirical_dynamics/mechanism_registry.json), [`evidence_registry.json`](model/empirical_dynamics/evidence_registry.json) and the [Alpha 0.4 final audit](docs/EMPIRICAL_DYNAMICS_AUDIT_0.4.0a0.md).
+- calibration: Jan–Jun 2024;
+- structural selection: Jul–Oct 2024;
+- final holdout: Nov 2024–Jan 2025.
 
-## Parameter discipline
+Calibration-only identification fails because the policy rate is constant throughout the six-month calibration slice: design rank is `2/3` for both NFC and household lending rates.
 
-Implemented behavioural functions are explicit pure-Python equations. Empirical coefficients are required arguments rather than hidden defaults. Historical Romanian estimates support mechanism plausibility but are not reused automatically under a different monetary, inflation-targeting or exchange-rate regime.
+On the common Aug–Oct structural-selection window, the candidate loses to simpler persistence and constant-policy-spread baselines for both NFC and households. Parameters are also poorly conditioned and unstable. The final three-month holdout is retained as a one-time diagnostic but does not reverse the failed structural-selection result.
 
-Alpha 0.5 must determine whether admitted forms are practically identifiable and whether they improve on simpler baselines with time-respecting validation. Candidate mechanisms can be promoted only using structural-selection data; the final evaluation holdout cannot be used for model selection.
+Disposition: **ACTIVATED → CANDIDATE; not validated**.
 
-## Accounting Spine & Dynamic Core
+### Government refinancing → effective debt rate
 
-Alpha 0.2 provides the auditable 2025 From-Whom-to-Whom/balance-sheet structure, provenance, B9F/reconciliation logic and explicit `TBD` semantics. Alpha 0.3 provides executable stocks/flows, year-based time semantics (`dt = 0.25` reference step), structural delays, dimensional tests, double-entry conservation and guarded empirical initialization.
+Official Ministry of Finance data establish material refinancing needs. A diagnostic 2025 redemption/opening-debt proxy is approximately `7.3241%`, but this is not substituted for the model's repricing share because redemption, refixing, prefunding and debt-stock definitions are not identical.
 
-See [Accounting Spine audit](docs/ACCOUNTING_SPINE_AUDIT_0.2.0a0.md), [Dynamic Core](docs/DYNAMIC_CORE_0.3.0a0.md) and [Dynamic Core audit](docs/DYNAMIC_CORE_AUDIT_0.3.0a0.md).
+Disposition: **ACTIVATED → DEFERRED; not point identified** until definitionally matched maturity/refixing, effective-rate, marginal-yield and interest-expenditure data are assembled.
 
-## InfoClar Model Suite v1.1
+See [Alpha 0.5 final audit](docs/CALIBRATION_VALIDATION_AUDIT_0.5.0a0.md), [`monetary_pass_through_results.json`](model/calibration_validation/monetary_pass_through_results.json), [`government_refinancing_assessment.json`](model/calibration_validation/government_refinancing_assessment.json) and [`mechanism_disposition.json`](model/calibration_validation/mechanism_disposition.json).
 
-The shared product contract remains unchanged: English default with persistent Romanian alternative; adaptive asymmetric 2×2 workspace; a dominant macro-financial stock-flow/sector view; contextual Theory/Learn; an empirical/dashboard panel; and an auxiliary source/validation/limitations panel. Scientific meaning may not depend on colour alone and the model-specific central diagram is not replaced by a generic suite diagram.
+## Earlier scientific layers
 
-## Validation status
+- **Alpha 0.2 — Accounting Spine:** auditable 2025 6×6 holder-by-issuer structures, provenance, B9F/reconciliation and explicit unresolved-value semantics.
+- **Alpha 0.3 — Dynamic Core:** executable stocks/flows/delays, year-based time semantics, double-entry conservation, dimensional/extreme-condition/integration tests.
+- **Alpha 0.4 — Empirical Dynamics:** evidence-linked behavioural forms classified `ACTIVATED`, `CANDIDATE`, `DEFERRED` or `REJECTED`, with no convenience empirical parameters.
 
-Alpha 0.4 is **not** a forecasting or causal-validation milestone. Passing CI proves software/contract consistency only. Calibration, historical reproduction, practical identifiability, sensitivity and time-respecting out-of-sample validation belong to **Alpha 0.5 — Calibration & Validation**.
+These remain hard foundations for later work.
+
+## Validation discipline
+
+Software correctness, accounting consistency, structural verification, parameter identifiability, predictive validation and causal interpretation are distinct claims.
+
+Alpha 0.5 enforces:
+
+- separate calibration / structural-selection / final-holdout roles;
+- time-respecting expanding-origin diagnostics;
+- mandatory simple baselines;
+- explicit practical-identifiability failure rather than hidden regularisation;
+- sensitivity analysis;
+- final-holdout contamination after first inspection;
+- no promotion of a mechanism merely because a tiny holdout happens to look favourable.
+
+## Current gate
+
+Validated behavioural reference mechanisms: **0**.
+
+Therefore **behavioural Alpha 0.6 Interactive Web Simulator is NO-GO as currently scoped**. InfoClar itself remains GO as the primary read-only structural/empirical/theory web interface and should continue to evolve with subsequent scientific work.
+
+A future simulator requires either new data/model evidence that passes validation or an explicit change of scientific scope. Native packaging remains later, at or near v1.
 
 ## Development
 
@@ -66,19 +106,21 @@ python -m pip install -e '.[test]'
 python -m pytest
 ```
 
-The Web simulator and native Flatpak are intentionally not implemented yet.
+For the current static InfoClar alpha, serve `web/` with any local static HTTP server so `public/model-stage.json` can be fetched by the browser.
 
 ## Limitations
 
-- behavioural coefficients are not calibrated in Alpha 0.4;
-- several mechanisms remain candidates/deferred because aggregation, observability or regime stability is insufficiently established;
-- some bilateral Accounting Spine cells remain explicitly unresolved;
+- no behavioural mechanism has yet passed full validation;
+- the monetary diagnostic sample is very short and the final holdout has only three observations;
+- the tested pass-through form is practically weakly identified;
+- government refinancing/repricing observables are not yet definitionally matched for a point-calibrated `m`;
+- some Accounting Spine bilateral cells remain unresolved;
 - no forecast, scenario ranking, policy recommendation or causal effect is claimed;
-- the future Web simulator remains outside the current milestone.
+- behavioural simulation, scenario laboratory and policy laboratory remain gated.
 
 ## Roadmap
 
-The next scientific milestone is **Alpha 0.5 — Calibration & Validation**: strict data-role separation, historical reproduction, parameter assessment, practical-identifiability diagnostics, sensitivity analysis, time-respecting multi-origin/holdout evaluation where data permit, simpler baselines and explicit uncertainty. See [Roadmap](docs/ROADMAP.md).
+Development remains **web-first**. InfoClar accumulates scientifically defensible structure, theory, data, validation and later simulation/scenario capabilities in one continuous browser surface. Flatpak development begins only after the web/scientific product is mature near v1. See [Roadmap](docs/ROADMAP.md).
 
 ## License
 
