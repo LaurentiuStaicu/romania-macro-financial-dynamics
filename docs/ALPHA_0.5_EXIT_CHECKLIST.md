@@ -17,6 +17,6 @@
 - [x] first real InfoClar browser surface implemented
 - [x] web reference product / native-near-v1 boundary persisted
 - [x] Accounting Spine / Dynamic Core / InfoClar v1.1 invariants preserved
-- [ ] PR CI green
-- [ ] merged to main
-- [ ] post-merge CI green
+- [x] full PR CI green on the Alpha 0.5 candidate
+
+Merge and post-merge CI are repository-integration evidence rather than scientific content and are verified in the GitHub PR/Actions history before the milestone is declared integrated.
