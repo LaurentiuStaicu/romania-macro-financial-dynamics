@@ -9,36 +9,37 @@
 </head>
 <body>
 <a class="skip-link" href="#workspace">Skip to model workspace</a>
-<header class="suite-header">
+<header class="product-header">
   <div class="brand">
-    <img class="brand-icon" src="public/icon.svg" width="42" height="42" alt="">
+    <img src="public/icon.svg" width="42" height="42" alt="">
     <div>
       <h1>Romania Macro-Financial Dynamics</h1>
-      <p>Trace who finances whom, who owes whom, where vulnerabilities accumulate and how direct accounting exposures connect across Romania.</p>
+      <p>Financial flows, sectoral balance sheets and vulnerability channels</p>
     </div>
   </div>
-  <nav class="header-meta" aria-label="Primary navigation">
-    <a class="nav-chip" href="#model-panel">Flow of Funds</a>
-    <a class="nav-chip" href="#dashboard-panel">Vulnerabilities</a>
-    <a class="nav-chip" href="#theory-panel">Theory / Learn</a>
-    <a class="nav-chip" href="#stress-panel">Accounting Stress</a>
-    <a class="nav-chip" href="#auxiliary-panel">Scientific provenance</a>
+  <nav aria-label="Product tools">
+    <a class="quiet" href="#theory-panel">Theory / Learn</a>
+    <a class="quiet" href="#auxiliary-panel">Evidence &amp; limits</a>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang="ro" aria-pressed="false">RO</button>
+    </div>
   </nav>
-  <div class="language-switch" role="group" aria-label="Language">
-    <button type="button" data-lang="en" aria-pressed="true">EN</button>
-    <button type="button" data-lang="ro" aria-pressed="false">RO</button>
-  </div>
 </header>
 
-<main id="workspace" class="workspace">
-  <section id="model-panel" class="panel model-panel" aria-labelledby="model-heading">
+<main id="workspace">
+  <section class="question-band" aria-label="Primary product question">
+    <p>Who finances whom, who owes whom, where do macro-financial vulnerabilities accumulate, and through which balance-sheet relationships can direct accounting shocks propagate?</p>
+  </section>
+
+  <section id="model-panel" class="primary-product model-panel" aria-labelledby="model-heading">
     <div class="panel-heading-row">
       <div>
         <p class="eyebrow">FLOW-OF-FUNDS / SECTORAL BALANCE-SHEET EXPLORER</p>
         <h2 id="model-heading">How are financial claims and funding relationships distributed across Romania?</h2>
         <p class="panel-intro">Choose STOCK or FLOW first, then a layer. Select a sector to isolate its funding, claims and counterparties, or select a relationship for amount, instrument, period, evidence and limitations. Missing bilateral values remain explicitly unresolved.</p>
       </div>
-      <button id="reset-map" class="secondary-button" type="button">Reset</button>
+      <button id="reset-map" class="quiet" type="button">Reset</button>
     </div>
 
     <div class="perspective-switch" role="tablist" aria-label="Accounting perspective">
@@ -78,17 +79,16 @@
     <div class="science-guardrail" role="note"><strong>Simulation boundary:</strong> behavioural simulation is not yet validated. Candidate feedbacks remain inspectable, but this surface does not turn them into forecasts.</div>
   </section>
 
-  <section id="dashboard-panel" class="panel dashboard-panel" aria-labelledby="dashboard-heading">
-    <p class="eyebrow">MACRO-FINANCIAL IMBALANCE & VULNERABILITY MONITOR</p>
-    <h2 id="dashboard-heading">Where are Romania's main macro-financial pressures?</h2>
-    <p class="panel-intro">The strip prioritizes the main pressures without competing with the Flow-of-Funds map. Focus or select a pressure to reveal its full explanation and trace the implicated sectors and relationships on the map.</p>
+  <section id="dashboard-panel" class="analysis-section dashboard-panel" aria-labelledby="dashboard-heading">
+    <div class="section-heading">
+      <div><p class="eyebrow">MACRO-FINANCIAL IMBALANCE &amp; VULNERABILITY MONITOR</p><h2 id="dashboard-heading">Where are Romania's main macro-financial pressures?</h2></div>
+      <p>The strip prioritizes the main pressures without competing with the Flow-of-Funds map. Select a pressure to reveal its explanation and trace implicated sectors and relationships.</p>
+    </div>
     <div id="diagnostic-cards" class="diagnostic-grid" aria-live="polite"></div>
   </section>
 
-  <details id="theory-panel" class="panel secondary-view theory-panel">
-    <summary>
-      <span class="secondary-view-summary"><span>THEORY / LEARN</span><strong>Understand the mechanism behind the selected map object</strong><small>Contextual preview + complete bilingual reader</small></span>
-    </summary>
+  <details id="theory-panel" class="analysis-section secondary-view theory-panel">
+    <summary><span class="secondary-view-summary"><span>THEORY / LEARN</span><strong>Understand the mechanism behind the selected map object</strong><small>Contextual preview + complete bilingual reader</small></span></summary>
     <div class="secondary-view-content">
       <div id="theory-context" class="theory-context" aria-live="polite"></div>
       <div class="reader-actions">
@@ -101,10 +101,8 @@
     </div>
   </details>
 
-  <details id="stress-panel" class="panel secondary-view stress-panel">
-    <summary>
-      <span class="secondary-view-summary"><span>ACCOUNTING STRESS</span><strong>Mechanical exposure tests</strong><small>Direct balance-sheet effects only — not macroeconomic forecasts</small></span>
-    </summary>
+  <details id="stress-panel" class="analysis-section secondary-view stress-panel">
+    <summary><span class="secondary-view-summary"><span>ACCOUNTING STRESS</span><strong>Mechanical exposure tests</strong><small>Direct balance-sheet effects only — not macroeconomic forecasts</small></span></summary>
     <div class="secondary-view-content">
       <p class="panel-intro">These tests change an accounting price, valuation or stock input and show only direct balance-sheet exposure. They do not simulate consumption, investment, credit supply, exchange-rate reactions, fiscal reaction or unvalidated behavioural feedbacks.</p>
       <div id="stress-tests" class="stress-grid"></div>
@@ -112,10 +110,8 @@
     </div>
   </details>
 
-  <details id="auxiliary-panel" class="panel secondary-view auxiliary-panel">
-    <summary>
-      <span class="secondary-view-summary"><span>SCIENTIFIC / TECHNICAL PROVENANCE</span><strong>Evidence, uncertainty and methodological boundaries</strong><small>Secondary research detail kept outside the normal product surface</small></span>
-    </summary>
+  <details id="auxiliary-panel" class="analysis-section secondary-view auxiliary-panel">
+    <summary><span class="secondary-view-summary"><span>SCIENTIFIC / TECHNICAL PROVENANCE</span><strong>Evidence, uncertainty and methodological boundaries</strong><small>Secondary research detail kept outside the normal product surface</small></span></summary>
     <div class="secondary-view-content"><div id="auxiliary-content" aria-live="polite"></div></div>
   </details>
 </main>
