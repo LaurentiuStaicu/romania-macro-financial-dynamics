@@ -6,6 +6,7 @@ on:
       - 'web/**'
       - 'tests/test_suite_visual_alignment.py'
       - 'scripts/build_web.py'
+      - 'scripts/run_suite_visual_gate.py'
       - '.github/workflows/pages.yml'
       - 'model/calibration_validation/**'
   push:
@@ -15,6 +16,7 @@ on:
       - 'web/**'
       - 'tests/test_suite_visual_alignment.py'
       - 'scripts/build_web.py'
+      - 'scripts/run_suite_visual_gate.py'
       - '.github/workflows/pages.yml'
       - 'model/calibration_validation/**'
   workflow_dispatch:
@@ -52,13 +54,12 @@ jobs:
           grep -q 'FLOW VIEW' dist/pages/index.html
           grep -q 'suite-tokens.css' dist/pages/styles.css
 
-      - name: Install visual comparison helper
-        run: python -m pip install --disable-pip-version-check pillow
+      - name: Install visual comparison helpers
+        run: python -m pip install --disable-pip-version-check pillow playwright
 
-      - name: Render Suite Visual Alignment Gate captures
+      - name: Render exact-viewport Suite Visual Alignment Gate
         run: |
           set -euo pipefail
-          mkdir -p visual-qa/macro visual-qa/world3 visual-qa/side-by-side visual-qa/audit
           python -m http.server 8123 --directory dist/pages > /tmp/infoclar-http.log 2>&1 &
           SERVER_PID=$!
           trap 'kill $SERVER_PID || true' EXIT
@@ -72,39 +73,15 @@ jobs:
             echo "No Chromium-compatible browser available for mandatory visual QA" >&2
             exit 1
           fi
-          COMMON="--headless --disable-gpu --no-sandbox --hide-scrollbars --run-all-compositor-stages-before-draw --virtual-time-budget=6000"
 
-          for viewport in 1440x900 1366x768 390x844; do
-            width="${viewport%x*}"
-            height="${viewport#*x}"
-            "$BROWSER" $COMMON --window-size="$width,$height" --screenshot="visual-qa/macro/${viewport}.png" "http://127.0.0.1:8123/"
-            "$BROWSER" $COMMON --window-size="$width,$height" --screenshot="visual-qa/world3/${viewport}.png" "$WORLD3_URL"
-            "$BROWSER" $COMMON --window-size="$width,$height" --dump-dom "http://127.0.0.1:8123/?visual-audit=1" > "visual-qa/audit/${viewport}.html"
-            grep -q '"horizontalOverflow":false' "visual-qa/audit/${viewport}.html"
-            grep -q '"panelOverlaps":\[\]' "visual-qa/audit/${viewport}.html"
-            grep -q '"smallControls":\[\]' "visual-qa/audit/${viewport}.html"
-          done
+          python scripts/run_suite_visual_gate.py \
+            --browser "$BROWSER" \
+            --macro-url 'http://127.0.0.1:8123/' \
+            --world3-url "$WORLD3_URL" \
+            --output visual-qa
 
-          "$BROWSER" $COMMON --force-dark-mode --enable-features=WebUIDarkMode --window-size=1440,900 --screenshot="visual-qa/macro/1440x900-dark.png" "http://127.0.0.1:8123/"
-          "$BROWSER" $COMMON --force-dark-mode --enable-features=WebUIDarkMode --window-size=1440,900 --screenshot="visual-qa/world3/1440x900-dark.png" "$WORLD3_URL"
-
-          python - <<'PY'
-          from pathlib import Path
-          from PIL import Image, ImageDraw
-
-          root = Path('visual-qa')
-          for name in ('1440x900', '1366x768', '390x844', '1440x900-dark'):
-              left = Image.open(root / 'world3' / f'{name}.png').convert('RGB')
-              right = Image.open(root / 'macro' / f'{name}.png').convert('RGB')
-              canvas = Image.new('RGB', (left.width + right.width, max(left.height, right.height) + 34), 'white')
-              canvas.paste(left, (0, 34))
-              canvas.paste(right, (left.width, 34))
-              draw = ImageDraw.Draw(canvas)
-              draw.text((12, 10), f'WORLD3 — canonical | {name}', fill='black')
-              draw.text((left.width + 12, 10), f'MACRO — aligned | {name}', fill='black')
-              canvas.save(root / 'side-by-side' / f'{name}.png')
-          PY
-
+          test -s visual-qa/audit/visual-gate-report.json
+          grep -q '"viewport": \[' visual-qa/audit/visual-gate-report.json
           for capture in visual-qa/macro/*.png visual-qa/world3/*.png visual-qa/side-by-side/*.png; do
             test -s "$capture"
           done
