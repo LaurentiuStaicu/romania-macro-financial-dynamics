@@ -62,9 +62,7 @@ def main() -> None:
     if len(holdout_indices) < contract["final_holdout_gates_if_opened"]["minimum_observations"]:
         raise RuntimeError("Final holdout is shorter than preregistered minimum")
 
-    candidate_fit = fit_delta_policy(
-        lending, policy, training_transitions, lag=0
-    )
+    candidate_fit = fit_delta_policy(lending, policy, training_transitions, lag=0)
     spread_fit = fit_constant_spread(lending, policy, training_indices)
 
     actual = [lending[i] for i in holdout_indices]
@@ -144,8 +142,8 @@ def main() -> None:
         "gates": gates,
         "passes_all_final_holdout_gates": passes,
         "final_mechanism_verdict": "VALIDATED" if passes else "CANDIDATE",
-        "causal_claim": false,
-        "nfc_final_holdout_opened": false,
+        "causal_claim": False,
+        "nfc_final_holdout_opened": False,
         "nfc_verdict": "CANDIDATE",
         "alpha_0_6_behavioural_gate": "RECONSIDER" if passes else "NO_GO",
         "interpretation_rule": "If the holdout contains insufficient policy-rate variation, performance cannot by itself identify pass-through; failure to beat persistence remains a valid negative result under the preregistered gate."
