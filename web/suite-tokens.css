@@ -1,85 +1,61 @@
 /*
- * InfoClar Model Suite — canonical visual tokens for Macro.
- * Source of truth audited directly from:
- * LaurentiuStaicu/world3-empirical-flatpak/web/src/style.css (main, 2026-09-17).
+ * InfoClar Model Suite — strict shared visual primitives.
+ * Canonical source: LaurentiuStaicu/world3-empirical-flatpak
+ * PR #10, branch product/world3-usefulness-recovery,
+ * head 51e236b61a0ec169bc8f28d4f8192e450ab6bd6d,
+ * web/src/style.css.
  *
- * These tokens intentionally reproduce World3's visual base exactly.
- * Model-specific colours belong in styles.css only as semantic overlays.
+ * Suite-level primitive values below are copied exactly from the
+ * World3 Product Recovery. Macro-specific scientific colours belong
+ * in styles.css only as semantic overlays.
  */
 :root {
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #28313d;
-  background: #f5f6f8;
+  color: #222a34;
+  background: #f3f5f7;
   font-synthesis: none;
 
-  --suite-root-background: #f5f6f8;
-  --suite-page-background: #f8f9fb;
+  --suite-root-background: #f3f5f7;
+  --suite-page-background: #f3f5f7;
   --suite-surface: #ffffff;
-  --suite-surface-muted: #f8f9fb;
-  --suite-border: #dfe3e8;
-  --suite-text: #28313d;
-  --suite-text-muted: #687384;
-  --suite-accent: #5d5fef;
-  --suite-link: #356da8;
-  --suite-shadow: 0 8px 28px rgba(35, 45, 60, 0.08);
+  --suite-soft: #f7f8fa;
+  --suite-text: #222a34;
+  --suite-text-muted: #667180;
+  --suite-border: #dce1e7;
+  --suite-link: #326b9f;
+  --suite-link-button: #356c9c;
+  --suite-shadow: 0 10px 35px rgba(31, 42, 55, 0.07);
 
   --suite-panel-radius: 14px;
-  --suite-panel-radius-mobile: 12px;
   --suite-control-radius: 9px;
-  --suite-control-radius-compact: 8px;
-  --suite-pill-radius: 999px;
+  --suite-control-border: #ccd3db;
+  --suite-control-hover: #f4f6f8;
+  --suite-control-active: #e8ebf0;
+  --suite-control-active-text: #20262e;
 
-  --suite-header-height: 76px;
-  --suite-header-gap: 18px;
-  --suite-header-padding-y: 12px;
-  --suite-header-padding-x: 22px;
-  --suite-header-padding-mobile-y: 10px;
-  --suite-header-padding-mobile-x: 12px;
+  --suite-header-height: 72px;
+  --suite-header-padding-y: 10px;
+  --suite-header-padding-x: 24px;
+  --suite-header-gap: 20px;
   --suite-brand-gap: 12px;
   --suite-brand-icon-size: 42px;
-  --suite-brand-icon-size-mobile: 36px;
   --suite-title-size: 18px;
   --suite-subtitle-size: 12px;
 
-  --suite-space-1: 4px;
-  --suite-space-2: 7px;
-  --suite-space-3: 10px;
-  --suite-space-4: 12px;
-  --suite-space-5: 16px;
-  --suite-space-6: 18px;
-  --suite-space-7: 22px;
+  --suite-main-max-width: 1680px;
+  --suite-main-padding-y: 18px;
+  --suite-main-padding-x: 22px;
+  --suite-main-padding-bottom: 44px;
+  --suite-primary-gap: 16px;
+  --suite-question-min-height: 54px;
+  --suite-question-margin-bottom: 16px;
+  --suite-eyebrow: #7c8795;
 
-  --suite-control-min-height: 34px;
-  --suite-control-border: #ccd3db;
-  --suite-control-active: #e9ecf1;
-  --suite-control-active-text: #252b34;
-  --suite-control-hover: #f2f4f7;
-  --suite-focus-ring: 0 0 0 3px rgba(93, 95, 239, 0.32);
-
-  --suite-tooltip-background: rgba(32, 38, 47, 0.95);
-  --suite-tooltip-text: #ffffff;
-  --suite-tooltip-muted: #dbe1e7;
-  --suite-tooltip-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
-  --suite-tooltip-radius: 9px;
-
-  --suite-responsive-gap: 10px;
-  --suite-responsive-padding: 10px;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --suite-root-background: #171a1f;
-    --suite-page-background: #171a1f;
-    --suite-surface: #20242b;
-    --suite-surface-muted: #171a1f;
-    --suite-border: #353b44;
-    --suite-text: #e7ebf0;
-    --suite-text-muted: #a4adba;
-    --suite-link: #82b7ec;
-    --suite-shadow: none;
-    --suite-control-border: #414852;
-    --suite-control-active: #3a414b;
-    --suite-control-active-text: #ffffff;
-    --suite-control-hover: #2d333c;
-  }
+  --suite-mobile-header-padding-y: 9px;
+  --suite-mobile-header-padding-x: 12px;
+  --suite-mobile-brand-icon-size: 36px;
+  --suite-mobile-main-padding-y: 12px;
+  --suite-mobile-main-padding-x: 10px;
+  --suite-mobile-main-padding-bottom: 28px;
+  --suite-mobile-panel-radius: 11px;
 }
