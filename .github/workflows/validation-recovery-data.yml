@@ -10,18 +10,35 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   fetch:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: alpha-0.5.1a0-validation-recovery
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
       - name: Fetch official validation-recovery data
         run: python scripts/fetch_validation_recovery_data.py
+      - name: Persist normalized frozen vintage on recovery branch
+        run: |
+          mkdir -p data/raw/validation_recovery
+          cp recovery_artifacts/normalized_bis_policy_rate.csv data/raw/validation_recovery/policy_rate_bis_monthly.csv
+          cp recovery_artifacts/normalized_ecb_household_housing_new_business_ron.csv data/raw/validation_recovery/household_housing_mir_monthly.csv
+          cp recovery_artifacts/normalized_ecb_nfc_new_business_upto1y_ron.csv data/raw/validation_recovery/nfc_upto1y_mir_monthly.csv
+          cp recovery_artifacts/normalized_ecb_nfc_new_business_total_ron.csv data/raw/validation_recovery/nfc_total_mir_available_observations.csv
+          cp recovery_artifacts/fetch_manifest.json data/raw/validation_recovery/fetch_manifest.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/raw/validation_recovery
+          if ! git diff --cached --quiet; then
+            git commit -m "data: persist official validation-recovery vintage"
+            git push origin HEAD:alpha-0.5.1a0-validation-recovery
+          fi
       - name: Upload frozen source vintage
         uses: actions/upload-artifact@v4
         with:
