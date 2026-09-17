@@ -1,0 +1,85 @@
+{
+  "provenance_version": "0.5.2a0",
+  "retrieved_or_verified_date": "2026-09-17",
+  "principle": "Record only source-observed instrument terms, issue sizes/announced amounts and published portfolio references. Do not infer outstanding principal, refinancing linkage, contractual refixing or matched old/new rates when the source does not provide them.",
+  "sources": [
+    {
+      "id": "bvb_r2802a",
+      "institution": "Bursa de Valori Bucuresti",
+      "url": "https://m.bvb.ro/FinancialInstruments/Details/FinancialInstrumentsDetails.aspx?s=R2802A",
+      "observed": {"symbol":"R2802A","isin":"ROOBSYD57S94","coupon_pct":7.65,"issue_value":319611900,"currency":"RON","maturity":"2028-02-19","secondary_market_ytm_pct":7.07},
+      "semantic_limit": "Issue value is not asserted to equal outstanding principal at the Alpha 0.5.2 reconciliation date. Secondary-market YTM is not a matched refinancing/reset rate."
+    },
+    {
+      "id": "bvb_r3109a",
+      "institution": "Bursa de Valori Bucuresti",
+      "url": "https://m.bvb.ro/FinancialInstruments/Details/FinancialInstrumentsDetails.aspx?s=R3109A",
+      "observed": {"symbol":"R3109A","isin":"ROHIGDV2GZL6","coupon_pct":7.90,"issue_value":77691400,"currency":"RON","maturity":"2031-09-17","secondary_market_ytm_pct":7.74},
+      "semantic_limit": "Same issue-size/outstanding-stock and market-yield/repricing-rate restrictions."
+    },
+    {
+      "id": "bvb_r2710b",
+      "institution": "Bursa de Valori Bucuresti",
+      "url": "https://www.bvb.ro/FinancialInstruments/Details/FinancialInstrumentsDetails.aspx?s=R2710B",
+      "observed": {"symbol":"R2710B","isin":"ROAFKL8W9QE5","coupon_pct":8.20,"issue_value":143718700,"currency":"RON","maturity":"2027-10-22","secondary_market_ytm_pct":6.91},
+      "semantic_limit": "Same issue-size/outstanding-stock and market-yield/repricing-rate restrictions."
+    },
+    {
+      "id": "bvb_r2912a",
+      "institution": "Bursa de Valori Bucuresti",
+      "url": "https://m.bvb.ro/FinancialInstruments/Details/FinancialInstrumentsDetails.aspx?s=R2912A",
+      "observed": {"symbol":"R2912A","isin":"RO5U8HYGYHX8","coupon_pct":7.60,"issue_value":382242200,"currency":"RON","maturity":"2029-12-23","secondary_market_ytm_pct":7.57},
+      "semantic_limit": "Same issue-size/outstanding-stock and market-yield/repricing-rate restrictions."
+    },
+    {
+      "id": "bvb_r3601ae",
+      "institution": "Bursa de Valori Bucuresti",
+      "url": "https://www.bvb.ro/FinancialInstruments/Details/FinancialInstrumentsDetails.aspx?s=R3601AE",
+      "observed": {"symbol":"R3601AE","isin":"ROWSNY06IUC9","coupon_pct":6.20,"issue_value":151639100,"currency":"EUR","maturity":"2036-01-28","secondary_market_ytm_pct":6.36},
+      "semantic_limit": "Same issue-size/outstanding-stock and market-yield/repricing-rate restrictions."
+    },
+    {
+      "id": "mof_jan_2025_benchmark_terms",
+      "institution": "Romania Ministry of Finance",
+      "url": "https://www.mfinante.gov.ro/static/10/Mfp/trezorerie/OMF6826_ianuarie2025.pdf",
+      "observed": {"isin":"ROJVM8ELBDU4","currency":"RON","maturity":"2029-04-25","coupon_pct":6.30,"reference_auction_nominal_lei":500000000,"sson_nominal_lei":75000000},
+      "semantic_limit": "Announced auction/SSON nominal is not converted into actual allocated or opening outstanding principal; no specific maturing instrument is assumed to be refinanced by this issue."
+    },
+    {
+      "id": "mof_may_2025_eur_reopening_terms",
+      "institution": "Romania Ministry of Finance",
+      "url": "https://mfinante.gov.ro/static/10/Mfp/trezorerie/OMF775mai2025.pdf",
+      "observed": {"isin":"ROACGEG6O7E2","currency":"EUR","maturity":"2026-12-14","coupon_pct":4.90,"prospect_total_nominal_eur":200000000},
+      "semantic_limit": "Reopening terms do not identify the old-rate block or a one-to-one refinancing link."
+    },
+    {
+      "id": "mof_investor_presentation_march_2025",
+      "institution": "Romania Ministry of Finance",
+      "url": "https://www.mfinante.gov.ro/static/10/Mfp/buget/sitebuget/InvestorPresentationMarch2025.pdf",
+      "observed": {"as_of":"2024-12-30","debt_maturing_1y_pct":10.0,"debt_refixing_1y_pct":12.0,"atm_years":6.9,"atr_years":6.7,"local_maturing_1y_pct":17.0,"local_refixing_1y_pct":15.0,"local_atm_years":4.6,"local_atr_years":4.6},
+      "boundary": "national-legislation government debt risk indicators excluding temporary financing as defined by the source",
+      "semantic_limit": "The aggregate refixing share is a risk indicator, not sufficient matched principal/rate data for the model transition equation."
+    },
+    {
+      "id": "eurostat_debt_structure_2025",
+      "institution": "Eurostat",
+      "url": "https://ec.europa.eu/eurostat/en/web/products-eurostat-news/w/ddn-20260608-1",
+      "observed": {"period":"2025","romania_foreign_currency_share_pct":53.0,"romania_apparent_cost_pct":5.2},
+      "definition": "Apparent cost = accrual interest expenditure divided by average outstanding Maastricht debt during the year.",
+      "semantic_limit": "ESA/Maastricht general-government boundary is an external diagnostic and is not substituted for the MoF portfolio-average cost boundary."
+    }
+  ],
+  "existing_canonical_references_reused_without_rewriting": [
+    "data/processed/government_debt_average_interest_rate_mof_2019_2023.csv",
+    "data/processed/government_debt_risk_snapshots_mof_2023_2024.csv",
+    "model/calibration_validation/government_refinancing_recovery_assessment.json"
+  ],
+  "missing_publicly_matched_fields": [
+    "same-date opening outstanding principal by instrument/currency/fixed-floating for the full MoF cost boundary",
+    "realized period-by-period principal that actually refinanced or contractually refixed",
+    "matched old effective rate on that exact principal",
+    "matched new/reset effective rate on that exact principal",
+    "floating-rate index/spread/reset schedule coverage across the full portfolio",
+    "instrument-level mapping sufficient to reconcile at least 95% of the published MoF stock boundary"
+  ]
+}
