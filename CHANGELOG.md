@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.5.0a0 — Calibration & Validation + InfoClar web reference surface
+
+Time-respecting validation with explicit negative results where mechanisms fail scientific gates.
+
+- freezes a 13-month BNR monetary-pass-through diagnostic sample before estimation with distinct calibration, structural-selection and final-holdout roles;
+- records that the calibration-only three-parameter partial-adjustment design is rank-deficient (`2/3`) for both NFC and household lending rates;
+- adds expanding-origin structural-selection diagnostics and mandatory persistence / constant-policy-spread baselines;
+- finds that the partial-adjustment candidate loses to both simpler baselines on the common August–October 2024 structural-selection slice for NFC and households;
+- persists pre-holdout fits, first-and-only final holdout diagnostics, practical-conditioning/parameter-instability evidence and ±10% local sensitivity results;
+- degrades the monetary-policy → lending-rate mechanism from Alpha 0.4 `ACTIVATED` to `CANDIDATE` rather than using the tiny final holdout to rescue a failed selection result;
+- assembles official Ministry of Finance refinancing/debt evidence and computes a 7.3241% redemption/debt diagnostic proxy while explicitly refusing to substitute it for the definitionally different effective repricing share `m`;
+- defers the government refinancing/effective-rate mechanism because point identification and matched historical interest-cost reproduction are not yet possible without synthetic allocation;
+- records zero validated behavioural reference mechanisms and a `NO_GO` gate for behavioural Alpha 0.6 simulation;
+- permits continued **read-only web-first InfoClar** development of structure, theory, empirical dashboards, provenance and validation diagnostics;
+- implements the first real InfoClar browser surface under `web/`: model-specific H/C/F/G/X/BNR map, contextual Theory/Learn, empirical validation dashboard, Auxiliary evidence/limitations, persistent EN/RO, adaptive 2×2 layout and keyboard/focus accessibility;
+- makes InfoClar web the reference product interface through scientific maturation to v1 and explicitly defers GTK/Granite/Flatpak native packaging until at or near v1;
+- preserves Accounting Spine, Dynamic Core, Alpha 0.4 evidence history and InfoClar Model Suite Design Standard v1.1 invariants;
+- advances the software version to `0.5.0a0` without claiming forecasting, causal validation or an interactive behavioural simulator.
+
 ## 0.4.0a0 — Empirical Dynamics
 
 Evidence-traceable behavioural layer prepared for calibration without fabricated parameters.
