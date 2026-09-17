@@ -8,10 +8,16 @@ Accounting-constrained executable System Dynamics substrate.
 - structurally derives holder assets and issuer liabilities from one represented position, enforcing double-entry conservation;
 - implements the financial stock identity for period amounts and explicit rate × time updates;
 - adopts year as the canonical simulation-time unit and 0.25 year as the default quarterly reference step;
-- adds a guarded Accounting Spine → dynamics bridge that rejects `TBD` and source-only cells rather than treating missing data as zero;
+- adds a guarded Accounting Spine → dynamics bridge that rejects `TBD`, source-only and duplicate cells rather than treating missing/ambiguous data as zero;
 - adds explicit-Euler structural stepping and a reusable first-order delay primitive;
 - registers sovereign, credit, monetary and external feedback candidates while keeping every behavioural loop quantitatively inactive;
-- adds dimensional, zero-flow, large-value, conservation, delay steady-state, incomplete-initialization and integration-error-convergence tests;
+- adds a machine-readable dimensional registry for stock, flow-rate, time, delay and dimensionless variables;
+- adds the stage-specific InfoClar v1.1 presentation binding without modifying the shared v1.1 workspace/design foundations;
+- fixes the central scientific view as a macro-financial stock-flow/sector network with position, transaction, revaluation/other-change and candidate-feedback layers;
+- binds empirical/reconciliation indicators, contextual Theory/Learn and auxiliary source/verification/limitation details to the common 2×2 architecture;
+- adds canonical Python presentation payload builders so future web/native UIs consume scientific state rather than reimplement accounting logic;
+- adds dimensional, zero-flow, large-value, conservation, boundary, delay steady-state, duplicate/incomplete-initialization, presentation-contract and integration-error-convergence tests;
+- records explicitly that the user's exploratory schema/draft is not a repository artifact;
 - documents that consumption, investment, credit, fiscal, monetary-policy, risk/default, FX and refinancing response equations remain deferred to Alpha 0.4 Empirical Dynamics;
 - advances the software version to `0.3.0a0` without claiming forecasting or policy-evaluation capability.
 
