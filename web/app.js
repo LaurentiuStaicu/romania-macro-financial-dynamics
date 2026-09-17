@@ -6,36 +6,40 @@ const strings = {
     modelEyebrow: 'Macro-financial stock-flow system', modelHeading: 'Sector network and financial positions',
     positions: 'Positions', candidate: 'Candidate feedback',
     modelIntro: 'Select a sector to connect the diagram with its theory, evidence and current empirical status.',
-    readOnlyTitle: 'Current capability:', readOnlyBody: 'structural and empirical inspection only. Interactive simulation is deliberately not enabled before Alpha 0.6.',
+    readOnlyTitle: 'Current capability:', readOnlyBody: 'structural and empirical inspection only. Behavioural simulation remains disabled while the Alpha 0.6 gate is NO-GO.',
     theoryEyebrow: 'Contextual explanation', theoryHeading: 'Theory / Learn',
-    dashboardEyebrow: 'Empirical status before engine metadata', dashboardHeading: 'Calibration & validation dashboard',
+    dashboardEyebrow: 'Empirical status before engine metadata', dashboardHeading: 'Validation recovery dashboard',
     auxiliaryEyebrow: 'Evidence, provenance and limitations', auxiliaryHeading: 'Auxiliary',
     footerText: 'InfoClar is the reference web interface. Native packaging remains deferred until the web product is mature near v1.',
     readOnlyMode: 'Read-only scientific interface',
     selected: 'Selected sector', empiricalStatus: 'Empirical status', evidence: 'Evidence status',
-    sources: 'Sources', limitations: 'Limitations',
-    months: 'months', validatedMechanisms: 'validated behavioural mechanisms', mechanismAudit: 'Alpha 0.4 mechanisms',
-    calibration: 'Calibration', structuralSelection: 'Structural selection', holdout: 'Final holdout',
+    sources: 'Sources', limitations: 'Limitations', months: 'months',
+    validatedMechanisms: 'validated behavioural mechanisms', mechanismAudit: 'Alpha 0.4 mechanisms',
+    calibration: 'Calibration', structuralSelection: 'Structural selection', holdout: 'Fresh holdout',
     noValidated: 'No validated behavioural mechanism',
-    passThrough: 'Monetary pass-through', refinancing: 'Government refinancing'
+    passThrough: 'Household pass-through', refinancing: 'Government refinancing',
+    policyHistory: 'policy-rate observations', mirHistory: 'observations / lending target',
+    selectionSignal: 'selection RMSE', finalHoldout: 'final holdout RMSE', alpha06: 'Alpha 0.6 gate'
   },
   ro: {
     navModel: 'Model', navTheory: 'Teorie / Învățare', navDashboard: 'Dashboard', navAuxiliary: 'Surse și limite',
     modelEyebrow: 'Sistem macro-financiar stock-flow', modelHeading: 'Rețea sectorială și poziții financiare',
     positions: 'Poziții', candidate: 'Feedback candidat',
     modelIntro: 'Selectează un sector pentru a conecta diagrama cu teoria, dovezile și starea empirică actuală.',
-    readOnlyTitle: 'Capabilitate curentă:', readOnlyBody: 'doar inspecție structurală și empirică. Simularea interactivă nu este activată înainte de Alpha 0.6.',
+    readOnlyTitle: 'Capabilitate curentă:', readOnlyBody: 'doar inspecție structurală și empirică. Simularea comportamentală rămâne dezactivată cât timp poarta Alpha 0.6 este NO-GO.',
     theoryEyebrow: 'Explicație contextuală', theoryHeading: 'Teorie / Învățare',
-    dashboardEyebrow: 'Starea empirică înaintea metadatelor motorului', dashboardHeading: 'Dashboard calibrare și validare',
+    dashboardEyebrow: 'Starea empirică înaintea metadatelor motorului', dashboardHeading: 'Dashboard recuperare validare',
     auxiliaryEyebrow: 'Dovezi, proveniență și limitări', auxiliaryHeading: 'Auxiliar',
     footerText: 'InfoClar este interfața web de referință. Împachetarea nativă rămâne amânată până când produsul web se maturizează aproape de v1.',
     readOnlyMode: 'Interfață științifică read-only',
     selected: 'Sector selectat', empiricalStatus: 'Stare empirică', evidence: 'Starea dovezilor',
-    sources: 'Surse', limitations: 'Limitări',
-    months: 'luni', validatedMechanisms: 'mecanisme comportamentale validate', mechanismAudit: 'Mecanisme Alpha 0.4',
-    calibration: 'Calibrare', structuralSelection: 'Selecție structurală', holdout: 'Holdout final',
+    sources: 'Surse', limitations: 'Limitări', months: 'luni',
+    validatedMechanisms: 'mecanisme comportamentale validate', mechanismAudit: 'Mecanisme Alpha 0.4',
+    calibration: 'Calibrare', structuralSelection: 'Selecție structurală', holdout: 'Holdout nou',
     noValidated: 'Niciun mecanism comportamental validat',
-    passThrough: 'Pass-through monetar', refinancing: 'Refinanțare publică'
+    passThrough: 'Pass-through gospodării', refinancing: 'Refinanțare publică',
+    policyHistory: 'observații rata de politică', mirHistory: 'observații / țintă creditare',
+    selectionSignal: 'RMSE selecție', finalHoldout: 'RMSE holdout final', alpha06: 'Poarta Alpha 0.6'
   }
 };
 
@@ -75,31 +79,39 @@ function metric(value, label, detail='') {
 function renderDashboard() {
   if (!state.data) return;
   const d = state.data.empirical_dashboard;
+  const v = state.data.validation.monetary_pass_through;
   const cards = [
-    metric(d.monetary_sample_months, t('months'), `${t('calibration')} ${d.calibration_months} · ${t('structuralSelection')} ${d.structural_selection_months} · ${t('holdout')} ${d.evaluation_holdout_months}`),
+    metric(d.policy_rate_observations, t('policyHistory'), d.policy_rate_coverage),
+    metric(d.mir_target_observations_each, t('mirHistory'), d.mir_target_coverage),
     metric(d.validated_behavioural_mechanisms, t('validatedMechanisms'), t('noValidated')),
-    metric(`${d.alpha_0_4_mechanism_counts.ACTIVATED}/${d.alpha_0_4_mechanism_counts.CANDIDATE}`, t('mechanismAudit'), 'ACTIVATED / CANDIDATE'),
-    metric(state.data.validation.monetary_pass_through.calibration_rank, t('passThrough'), state.data.validation.monetary_pass_through.structural_selection)
+    metric(v.household_selection_rmse.toFixed(3), t('selectionSignal'), `persistence ${v.household_persistence_rmse.toFixed(3)} · ${v.household_selection}`),
+    metric(v.household_candidate_holdout_rmse.toFixed(3), t('finalHoldout'), `persistence ${v.household_persistence_holdout_rmse.toFixed(3)} · Δpolicy events ${v.household_holdout_policy_changes}`),
+    metric(state.data.validation.alpha_0_6_gate.replace('_FOR_BEHAVIOURAL_SIMULATION', ''), t('alpha06'), `${t('calibration')} ${d.calibration_months} · ${t('structuralSelection')} ${d.structural_selection_months} · ${t('holdout')} ${d.fresh_household_holdout_months}`)
   ];
   document.getElementById('dashboard-cards').innerHTML = cards.join('');
   document.getElementById('validation-note').textContent = state.data.validation.headline[state.lang];
 }
 
+function dispositionForSector() {
+  const d = state.data.empirical_dashboard.alpha_0_5x_dispositions;
+  if (state.selectedSector === 'G') return d.government_refinancing_effective_rate;
+  if (state.selectedSector === 'C') return d.nfc_monetary_pass_through;
+  return d.household_monetary_pass_through;
+}
+
+function interpretationForSector() {
+  if (state.selectedSector === 'G') return state.data.validation.government_refinancing.interpretation[state.lang];
+  return state.data.validation.monetary_pass_through.interpretation[state.lang];
+}
+
 function renderAuxiliary() {
   if (!state.data) return;
-  const selected = state.selectedSector;
-  const disposition = selected === 'G'
-    ? state.data.empirical_dashboard.alpha_0_5_dispositions.government_refinancing_effective_rate
-    : state.data.empirical_dashboard.alpha_0_5_dispositions.monetary_policy_lending_rate_pass_through;
-  const interpretation = selected === 'G'
-    ? state.data.validation.government_refinancing.interpretation[state.lang]
-    : state.data.validation.monetary_pass_through.interpretation[state.lang];
   const sources = state.data.sources.map(source => `<li><a href="${source.href}" rel="noreferrer">${source.label}</a></li>`).join('');
   const limits = state.data.limitations.map(item => `<li>${item[state.lang]}</li>`).join('');
   document.getElementById('auxiliary-content').innerHTML = `
     <div class="aux-block">
-      <h3>${t('empiricalStatus')} <span class="status-chip">${disposition}</span></h3>
-      <p>${interpretation}</p>
+      <h3>${t('empiricalStatus')} <span class="status-chip">${dispositionForSector()}</span></h3>
+      <p>${interpretationForSector()}</p>
     </div>
     <div class="aux-block"><h3>${t('sources')}</h3><ul class="context-list">${sources}</ul></div>
     <div class="aux-block"><h3>${t('limitations')}</h3><ul class="context-list">${limits}</ul></div>`;
