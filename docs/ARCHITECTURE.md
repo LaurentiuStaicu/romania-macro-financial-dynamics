@@ -1,4 +1,4 @@
-# Architecture — Alpha 0.5.0a0
+# Architecture — Alpha 0.5.1a0
 
 ## Layered scientific model
 
@@ -11,7 +11,7 @@ The project is separated into four scientific layers:
 
 L1 constrains L2 accounting-wise. L2 may explain endogenous evolution of selected L1 positions only without breaking L1 identities. L3 may not bypass L0/L1 provenance, reconciliation or missing-data semantics.
 
-## Scientific evolution through Alpha 0.5
+## Scientific evolution through Alpha 0.5.x
 
 ### Accounting Spine
 
@@ -19,11 +19,7 @@ The canonical financial boundary uses H/C/F/G/X/BNR and ESA financial instrument
 
 ### Dynamic Core
 
-A canonical financial dynamic stock is one bilateral position indexed by:
-
-`holder × issuer × instrument`
-
-The same amount is the holder's asset and issuer's liability. Sector totals are derived from these positions rather than updated independently.
+A canonical financial dynamic stock is one bilateral position indexed by `holder × issuer × instrument`. The same amount is the holder's asset and issuer's liability. Sector totals are derived rather than updated independently.
 
 For period amounts:
 
@@ -39,15 +35,28 @@ Canonical simulation time is in years with default structural reference step `dt
 
 Alpha 0.4 introduced evidence-traceable behavioural forms with explicit `ACTIVATED`, `CANDIDATE`, `DEFERRED` and `REJECTED` statuses. `ACTIVATED` means admitted to calibration, not validated or causal.
 
-### Calibration & Validation
+### Calibration, validation and recovery
 
-Alpha 0.5 makes practical identifiability and chronological data-role separation first-class contracts. Calibration, structural selection and final evaluation/holdout are separate roles. An inspected holdout cannot subsequently be called independent validation for a revised model.
+Alpha 0.5 makes practical identifiability and chronological data-role separation first-class contracts and correctly closes with zero validated reference mechanisms.
 
-The two Alpha 0.4 activated mechanisms fail to become validated reference mechanisms in 0.5: monetary pass-through is degraded to candidate after rank/conditioning/baseline failures; government refinancing/effective-rate repricing is deferred because the required repricing share is not definitionally point-identified by currently assembled official data.
+Alpha 0.5.1 adds a prospective recovery architecture rather than weakening that result:
+
+`official-source vintage → frozen prospective split → preregistered parsimonious candidates + simple baselines → expanding-origin structural selection → model-form freeze → eligible final holdout only → final disposition`
+
+The long policy/lending-rate vintage is persisted by a reproducible GitHub Actions fetch. Source hashes and retrieval metadata are stored with the normalized data. The selection runner does not parse values beyond the selection cutoff. The final holdout workflow can open only a target explicitly authorized by the immutable selection-freeze artifact.
+
+Current recovery outcome:
+
+- household contemporaneous one-parameter delta-policy form: passes structural selection, fails fresh final evaluation versus persistence because the holdout contains zero policy-rate changes → `CANDIDATE`;
+- NFC parsimonious forms: fail structural selection; final holdout remains unopened → `CANDIDATE`;
+- government refinancing/effective-rate: official maturity, refixing, portfolio-cost and issuance-yield evidence expanded, but aggregate repricing boundary remains unmatched → `DEFERRED`;
+- validated reference mechanisms: `0`.
+
+The government recovery path is no longer an aggregate proxy exercise. The next valid representation requires an instrument/currency/fixed-floating repricing ledger that can reconstruct published portfolio-cost measures without synthetic allocation.
 
 ## Web-first product architecture
 
-**InfoClar web is the reference product interface from Alpha 0.5 onward.** It is not a late wrapper around a finished model and not only a design contract. Scientific milestones progressively populate the same browser surface with the strongest currently defensible content.
+**InfoClar web is the reference product interface.** It is not a late wrapper around a finished model and not only a design contract. Scientific milestones progressively populate the same browser surface with the strongest currently defensible content.
 
 The reference workspace remains the adaptive asymmetric InfoClar 2×2 layout:
 
@@ -58,7 +67,7 @@ The reference workspace remains the adaptive asymmetric InfoClar 2×2 layout:
 
 Small screens stack `model → theory → dashboard → auxiliary`.
 
-Alpha 0.5 implements the first real surface in `web/index.html`, `web/styles.css` and `web/app.js`. It is intentionally read-only because no behavioural reference mechanism has yet passed validation. A model can therefore become increasingly understandable and auditable on the web without falsely implying that interactive simulation is scientifically ready.
+The Alpha 0.5.x surface remains read-only for behavioural simulation. It exposes longer empirical coverage, prospective validation roles, negative/positive selection signals, the fresh holdout result and government boundary reconciliation without turning them into simulator controls.
 
 ## Canonical web data flow
 
@@ -68,15 +77,11 @@ Current flow:
 
 `canonical registries/results → tested presentation snapshot (web/public/model-stage.json) → InfoClar panels`
 
-The snapshot is an exported presentation artifact. Tests compare its critical sector/status/data-role values with canonical resources. A later build/export stage should automate snapshot generation further.
-
-The UI may transform presentation state — selected sector, language, layout, formatting — but scientific quantities/statuses come from canonical artifacts.
+The snapshot is an exported presentation artifact. Tests compare its critical sector/status/data-role/validation values with canonical resources. A later build/export stage can automate snapshot generation further.
 
 ## Accessibility and interaction
 
 InfoClar targets WCAG 2.2 AA. The implemented surface includes keyboard-operable sector selection, visible focus styling, skip navigation, live status regions and responsive layout. Scientific distinctions are not encoded by colour alone; labels/status text remain explicit.
-
-Interactive simulation must later preserve keyboard/pointer alternatives and predictable context changes rather than relying on drag-only or opaque visual controls.
 
 ## Repository layout
 
@@ -86,25 +91,28 @@ model/registries/                       canonical model and product registries
 model/accounting/                       benchmark Accounting Spine and reconciliation
 model/dynamics/                         Dynamic Core contracts
 model/empirical_dynamics/               behavioural forms/evidence/classification
-model/calibration_validation/           validation contracts, results and dispositions
-data/processed/                         frozen empirical analysis datasets
+model/calibration_validation/           validation/recovery contracts, freezes, results and dispositions
+data/raw/validation_recovery/           frozen official recovery vintage
+data/processed/                         processed empirical evidence tables
 data/provenance/                        source/role/transformation manifests
+scripts/                                reproducible data/validation runners
 web/                                    InfoClar reference browser application
 locales/                                bilingual source strings where view-independent
 tests/                                  scientific/software/product contract tests
 docs/                                   methods, audits, theory and architecture
-.github/workflows/                      CI and later verified web deployment
+.github/workflows/                      CI and reproducible empirical-recovery jobs
 ```
 
 ## Simulator gate
 
-Alpha 0.6 is not simply “the next UI feature.” Behavioural simulation is allowed only where a scientifically defensible validated reference model exists or where an explicit later scope decision clearly reclassifies a feature as assumption-driven exploratory modelling.
+Alpha 0.6 is not simply the next UI feature. Behavioural simulation is allowed only where a scientifically defensible reference mechanism has passed the appropriate prospective validation gate.
 
-Current Alpha 0.5 state:
+Current Alpha 0.5.1 state:
 
 - validated behavioural reference mechanisms: `0`;
 - behavioural Interactive Web Simulator: `NO_GO`;
-- read-only structural/empirical/theory InfoClar development: `GO`.
+- read-only structural/empirical/theory InfoClar development: `GO`;
+- next empirical confirmation observations: prospectively reserved from `2026-08` onward as they become available for all targets.
 
 ## Native application
 
@@ -112,4 +120,4 @@ There is intentionally no `native/` application tree. Native elementary OS GTK/G
 
 ## Version sources
 
-`src/romania_macro_financial_dynamics/__init__.py` and `pyproject.toml` expose software version `0.5.0a0`. `model/registries/model_contract.json` records the corresponding scientific/product stage, and `web/public/model-stage.json` exposes a tested presentation snapshot for InfoClar.
+`src/romania_macro_financial_dynamics/__init__.py` and `pyproject.toml` expose software version `0.5.1a0`. `model/registries/model_contract.json` records the scientific/product stage, and `web/public/model-stage.json` exposes a tested presentation snapshot for InfoClar.
