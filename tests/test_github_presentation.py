@@ -3,7 +3,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_readme_header_matches_infoclar_suite_contract_before_pages_activation():
+def test_readme_header_matches_infoclar_suite_contract_after_pages_activation():
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     header = readme.split("> **Alpha", 1)[0]
 
@@ -23,10 +23,13 @@ def test_readme_header_matches_infoclar_suite_contract_before_pages_activation()
     ):
         assert forbidden not in header
 
-    # Equal-width CTAs; activation happens only after public deployment is verified.
-    assert 'width="220" alt="Open Web App — Planned"' in header
+    # Equal-width CTAs. Web is active only after verified Pages deployment;
+    # Flatpak remains visibly planned and unlinked.
+    public_url = 'https://laurentiustaicu.github.io/romania-macro-financial-dynamics/'
+    assert f'<a href="{public_url}"><img width="220" alt="Open Web App"' in header
+    assert 'badge/Open_Web_App-Open-087F73?style=for-the-badge' in header
     assert 'width="220" alt="Download Flatpak — Planned"' in header
-    assert '<a href="https://laurentiustaicu.github.io/romania-macro-financial-dynamics/">' not in header
+    assert 'badge/Download_Flatpak-Planned-9ca3af?style=for-the-badge' in header
 
 
 def test_pages_workflow_separates_build_from_main_only_deployment():
