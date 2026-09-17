@@ -1,0 +1,41 @@
+{
+  "dataset_id": "monetary_pass_through_bnr_2024_2025",
+  "frozen_at": "2026-09-17",
+  "purpose": "Alpha 0.5 practical-identifiability and time-respecting validation diagnostic for the Alpha 0.4 monetary-policy to lending-rate partial-adjustment mechanism.",
+  "source": {
+    "institution": "National Bank of Romania",
+    "publication": "Monthly Bulletin — January 2025",
+    "url": "https://muzeu.bnr.ro/uploads/2025-03-07monthlybulletinno.012025_documentpdf_545_1743160358.pdf",
+    "interest_rate_table": "10.5.2. Lei-denominated loans — New business, page 51",
+    "policy_rate_table": "3.1. Monetary policy indicators, page 23",
+    "policy_rate_context": "NBR Annual Report 2023 states the policy rate remained 7.00 percent through the first half of 2024; the January 2025 bulletin records 6.75 in July and 6.50 from August 2024 onward."
+  },
+  "definitions": {
+    "policy_rate_pct": "NBR policy rate, end of period, percent per annum",
+    "nfc_new_lending_rate_pct": "Total interest rate on new lei-denominated loans to non-financial corporations, percent per annum",
+    "household_new_lending_rate_pct": "Total interest rate on new lei-denominated loans to households/NPISH, percent per annum"
+  },
+  "data_roles": {
+    "calibration": {"start":"2024-01","end":"2024-06","observations":6,"reason":"frozen before estimation; deliberately contains no policy-rate change, making lack of driver variation visible rather than hiding it"},
+    "structural_selection": {"start":"2024-07","end":"2024-10","observations":4,"reason":"contains the July/August 2024 policy easing and is used for rolling-origin diagnostics and baseline comparison"},
+    "evaluation_holdout": {"start":"2024-11","end":"2025-01","observations":3,"reason":"kept untouched until model form and structural-selection judgement are fixed; small size makes any evaluation low-power"}
+  },
+  "holdout_policy": {
+    "first_inspection_stage": "Alpha 0.5 final evaluation",
+    "may_be_reused_as_independent_holdout_after_inspection": false,
+    "rule": "Any future revision informed by these three observations must use a new temporal holdout for independent evaluation."
+  },
+  "known_limitations": [
+    "The frozen public sample is only 13 monthly observations and contains only two policy-rate reductions.",
+    "New-business lending rates are volatile and are not effective rates on outstanding loan stocks.",
+    "Policy-rate changes are endogenous policy decisions; the sample cannot establish a causal monetary-policy effect.",
+    "The calibration segment has a constant policy rate and therefore cannot separately identify long-run pass-through from the intercept in the three-parameter partial-adjustment model.",
+    "No seasonal adjustment or exogenous control is introduced because the sample is too small to support a larger specification without worsening identifiability."
+  ],
+  "transformations": [
+    "No imputation.",
+    "No smoothing.",
+    "No rescaling beyond retaining published percentage-point units.",
+    "For one-step prediction, the previous observed lending rate is used exactly as available at each origin."
+  ]
+}
