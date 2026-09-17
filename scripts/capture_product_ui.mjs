@@ -8,9 +8,11 @@ await mkdir(outputDir, { recursive: true });
 
 const requiredNames = [
   'desktop-stock',
+  'desktop-matrix',
   'desktop-flow',
   'desktop-vulnerability',
   'mobile-stock',
+  'mobile-matrix',
   'mobile-flow',
   'mobile-vulnerability',
 ];
@@ -53,8 +55,15 @@ try {
     await page.getByRole('button', { name: 'General government' }).first().click();
   });
 
+  await capture(browser, 'desktop-matrix', desktop, async page => {
+    await page.locator('#stock-tab').click();
+    await page.locator('#matrix-tab').click();
+    await page.locator('#flow-matrix').waitFor({ state: 'visible' });
+  });
+
   await capture(browser, 'desktop-flow', desktop, async page => {
     await page.locator('#flow-tab').click();
+    if (await page.locator('#stock-subview-controls').isVisible()) throw new Error('Stock-only matrix controls are visible in FLOW VIEW');
     await page.locator('[data-layer="fiscal"]').click();
     await page.getByRole('button', { name: 'General government' }).first().click();
   });
@@ -68,8 +77,15 @@ try {
     await page.getByRole('button', { name: 'General government' }).first().click();
   });
 
+  await capture(browser, 'mobile-matrix', mobile, async page => {
+    await page.locator('#stock-tab').click();
+    await page.locator('#matrix-tab').click();
+    await page.locator('#flow-matrix').waitFor({ state: 'visible' });
+  });
+
   await capture(browser, 'mobile-flow', mobile, async page => {
     await page.locator('#flow-tab').click();
+    if (await page.locator('#stock-subview-controls').isVisible()) throw new Error('Stock-only matrix controls are visible in FLOW VIEW');
     await page.locator('[data-layer="fiscal"]').click();
     await page.getByRole('button', { name: 'General government' }).first().click();
   });
