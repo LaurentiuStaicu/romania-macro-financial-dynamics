@@ -11,7 +11,7 @@ def test_readme_header_matches_infoclar_suite_contract_after_pages_activation():
     assert '<h1 align="center">Romania Macro-Financial Dynamics</h1>' in header
 
     # Exactly the three status badges requested for the suite header.
-    assert 'badge/Version-0.5.1a0-' in header
+    assert 'badge/Version-0.5.2a0-' in header
     assert 'badge/elementary_OS-Planned-' in header
     assert 'badge/License-MIT-' in header
     for forbidden in (
