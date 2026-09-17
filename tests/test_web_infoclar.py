@@ -1,3 +1,4 @@
+import csv
 import json
 from pathlib import Path
 
@@ -8,13 +9,18 @@ def load_json(path: str):
     return json.loads((ROOT / path).read_text(encoding="utf-8"))
 
 
+def count_csv(path: str) -> int:
+    with (ROOT / path).open(encoding="utf-8") as fh:
+        return sum(1 for _ in csv.DictReader(fh))
+
+
 def test_infoclar_is_real_reference_web_surface_not_only_design_contract():
     html = (ROOT / "web/index.html").read_text(encoding="utf-8")
     assert 'id="model-panel"' in html
     assert 'id="theory-panel"' in html
     assert 'id="dashboard-panel"' in html
     assert 'id="auxiliary-panel"' in html
-    assert 'public/model-stage.json' not in html  # consumed by app.js, not duplicated inline
+    assert 'public/model-stage.json' not in html
     assert 'data-lang="en"' in html and 'data-lang="ro"' in html
 
 
@@ -26,24 +32,38 @@ def test_web_snapshot_matches_canonical_sector_and_mechanism_registries():
     for mechanism in mechanisms:
         counts[mechanism["classification"]] += 1
 
+    assert snapshot["software_version"] == "0.5.1a0"
     assert {item["id"] for item in snapshot["sectors"]} == {item["id"] for item in sectors}
     assert snapshot["empirical_dashboard"]["alpha_0_4_mechanism_counts"] == counts
     assert snapshot["product"]["web_is_reference_product"] is True
     assert snapshot["product"]["native_flatpak_status"] == "DEFERRED_NEAR_V1"
 
 
-def test_web_dashboard_matches_frozen_validation_data_roles_and_dispositions():
+def test_web_dashboard_matches_validation_recovery_vintage_and_disposition():
     snapshot = load_json("web/public/model-stage.json")
-    provenance = load_json("data/provenance/monetary_pass_through_bnr_2024_2025.json")
-    disposition = load_json("model/calibration_validation/mechanism_disposition.json")
+    split = load_json("data/provenance/validation_recovery_split_0.5.1a0.json")
+    disposition = load_json("model/calibration_validation/validation_recovery_disposition.json")
+    holdout = load_json("model/calibration_validation/validation_recovery_holdout.json")
 
     dashboard = snapshot["empirical_dashboard"]
-    assert dashboard["calibration_months"] == provenance["data_roles"]["calibration"]["observations"]
-    assert dashboard["structural_selection_months"] == provenance["data_roles"]["structural_selection"]["observations"]
-    assert dashboard["evaluation_holdout_months"] == provenance["data_roles"]["evaluation_holdout"]["observations"]
-    assert dashboard["validated_behavioural_mechanisms"] == disposition["validated_reference_behavioural_mechanisms"]
+    assert dashboard["policy_rate_observations"] == count_csv("data/raw/validation_recovery/policy_rate_bis_monthly.csv")
+    assert dashboard["mir_target_observations_each"] == count_csv("data/raw/validation_recovery/household_housing_mir_monthly.csv")
+    assert dashboard["calibration_months"] == split["roles"]["calibration"]["months"]
+    assert dashboard["structural_selection_months"] == split["roles"]["structural_selection"]["months"]
+    assert dashboard["fresh_household_holdout_months"] == holdout["holdout_period"]["n"]
+    assert dashboard["validated_behavioural_mechanisms"] == disposition["validated_reference_behavioural_mechanisms"] == 0
     assert snapshot["stage"]["interactive_simulation_enabled"] is False
     assert snapshot["validation"]["alpha_0_6_gate"] == "NO_GO_FOR_BEHAVIOURAL_SIMULATION"
+
+
+def test_web_exposes_recovery_result_without_claiming_validation():
+    snapshot = load_json("web/public/model-stage.json")
+    monetary = snapshot["validation"]["monetary_pass_through"]
+    assert monetary["household_selection"] == "PASS_TO_FINAL_EVALUATION"
+    assert monetary["household_final_holdout"] == "FAIL_VS_PERSISTENCE"
+    assert monetary["household_holdout_policy_changes"] == 0
+    assert monetary["final_verdict"] == "CANDIDATE"
+    assert snapshot["validation"]["government_refinancing"]["final_verdict"] == "DEFERRED"
 
 
 def test_accessibility_and_adaptive_contract_is_present_in_actual_web_files():
@@ -55,6 +75,7 @@ def test_accessibility_and_adaptive_contract_is_present_in_actual_web_files():
     assert ':focus-visible' in css
     assert '@media (max-width: 900px)' in css
     assert "event.key === 'Enter'" in js and "event.key === ' '" in js
+    assert "Behavioural simulation remains disabled" in js
 
 
 def test_flatpak_is_not_started_inside_web_first_stage():

@@ -1,0 +1,71 @@
+{
+  "result_version": "0.5.1a0-final-evaluation",
+  "selection_freeze": "model/calibration_validation/validation_recovery_selection_freeze.json",
+  "target": "household_housing",
+  "candidate": "delta_policy_contemporaneous",
+  "equation": "lend[t] = lend[t-1] + beta * (policy[t]-policy[t-1])",
+  "training_period": {
+    "start": "2017-08",
+    "end": "2025-01"
+  },
+  "holdout_period": {
+    "start": "2025-02",
+    "end": "2025-11",
+    "n": 10
+  },
+  "frozen_beta": 0.49746478873239447,
+  "driver_sum_squares_training": 4.4375,
+  "holdout_nonzero_policy_changes": 0,
+  "metrics": {
+    "candidate": {
+      "n": 10,
+      "rmse": 0.05727128425310537,
+      "mae": 0.046,
+      "bias_actual_minus_predicted": -0.020000000000000018
+    },
+    "persistence": {
+      "n": 10,
+      "rmse": 0.05727128425310537,
+      "mae": 0.046,
+      "bias_actual_minus_predicted": -0.020000000000000018
+    },
+    "constant_policy_spread": {
+      "n": 10,
+      "rmse": 2.4618535248421622,
+      "mae": 2.4613333333333336,
+      "bias_actual_minus_predicted": -2.4613333333333336
+    }
+  },
+  "rmse_improvement_vs_baselines": {
+    "persistence": 0.0,
+    "constant_policy_spread": 0.9767365183691108
+  },
+  "sensitivity_plus_minus_10pct": {
+    "minus_10pct": {
+      "n": 10,
+      "rmse": 0.05727128425310537,
+      "mae": 0.046,
+      "bias_actual_minus_predicted": -0.020000000000000018
+    },
+    "plus_10pct": {
+      "n": 10,
+      "rmse": 0.05727128425310537,
+      "mae": 0.046,
+      "bias_actual_minus_predicted": -0.020000000000000018
+    }
+  },
+  "gates": {
+    "minimum_observations": true,
+    "rmse_vs_each_baseline": false,
+    "mae_vs_best_baseline": true,
+    "absolute_bias": true,
+    "sensitivity": true
+  },
+  "passes_all_final_holdout_gates": false,
+  "final_mechanism_verdict": "CANDIDATE",
+  "causal_claim": false,
+  "nfc_final_holdout_opened": false,
+  "nfc_verdict": "CANDIDATE",
+  "alpha_0_6_behavioural_gate": "NO_GO",
+  "interpretation_rule": "If the holdout contains insufficient policy-rate variation, performance cannot by itself identify pass-through; failure to beat persistence remains a valid negative result under the preregistered gate."
+}

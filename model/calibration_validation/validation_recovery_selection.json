@@ -1,0 +1,468 @@
+{
+  "result_version": "0.5.1a0-selection",
+  "holdout_opened": false,
+  "holdout_period": {
+    "start": "2025-02",
+    "end": "2025-11",
+    "months": 10,
+    "inspection_status_at_freeze": "UNINSPECTED_FOR_VALUES",
+    "scientific_reason": "Fresh independent evaluation window relative to prior Alpha 0.5 work. It is reserved before estimation/selection and will be opened once only after model form and structural-selection verdict are frozen.",
+    "limitation": "The policy rate is expected to be much less variable than in earlier cycles, so passing this holdout alone cannot validate pass-through dynamics."
+  },
+  "old_alpha_0_5_holdout_status": "CONTAMINATED_RECLASSIFIED_AS_STRUCTURAL_SELECTION",
+  "targets": {
+    "household_housing": {
+      "target_id": "household_housing",
+      "analysis_period": {
+        "start": "2017-08",
+        "end": "2025-01"
+      },
+      "calibration_months": 65,
+      "selection_months": 25,
+      "nonzero_policy_changes_through_selection_end": 20,
+      "identifiability_minimum_policy_changes": 8,
+      "baseline_results": {
+        "persistence": {
+          "metrics": {
+            "n": 25,
+            "rmse": 0.18352111595127135,
+            "mae": 0.128,
+            "bias_actual_minus_predicted": -0.0384
+          },
+          "origins": 25,
+          "parameter_summary": {
+            "n": 0
+          }
+        },
+        "constant_policy_spread": {
+          "metrics": {
+            "n": 25,
+            "rmse": 2.2094127823948813,
+            "mae": 2.189288026722397,
+            "bias_actual_minus_predicted": -2.189288026722397
+          },
+          "origins": 25,
+          "parameter_summary": {
+            "n": 25,
+            "domain_fraction": 1.0,
+            "spread": {
+              "median": 2.171038961038961,
+              "min": 1.8332584269662922,
+              "max": 2.510153846153846,
+              "mean": 2.172888026722397
+            }
+          }
+        }
+      },
+      "candidate_results": {
+        "delta_policy_contemporaneous": {
+          "calibration_fit": {
+            "parameters": {
+              "beta": 0.4764705882352942
+            },
+            "training_observations": 64,
+            "driver_sum_squares": 4.25,
+            "design_rank": 1
+          },
+          "calibration_identifiability_error": null,
+          "selection_metrics": {
+            "n": 25,
+            "rmse": 0.16869505991928369,
+            "mae": 0.11886121544269876,
+            "bias_actual_minus_predicted": -0.033138784557301196
+          },
+          "selection_parameter_summary": {
+            "n": 25,
+            "domain_fraction": 1.0,
+            "beta": {
+              "median": 0.501449275362319,
+              "min": 0.4764705882352942,
+              "max": 0.501449275362319,
+              "mean": 0.49964097382247463
+            }
+          },
+          "rmse_improvement_vs_baselines": {
+            "persistence": 0.08078664929175938,
+            "constant_policy_spread": 0.9236471060258701
+          },
+          "gates": {
+            "minimum_origins": true,
+            "enough_policy_changes": true,
+            "rmse_vs_each_baseline": true,
+            "mae_vs_best_baseline": true,
+            "absolute_bias": true,
+            "parameter_domain_consistency": true
+          },
+          "passes_all_selection_gates": true
+        },
+        "delta_policy_lag1": {
+          "calibration_fit": {
+            "parameters": {
+              "beta": 0.23235294117647065
+            },
+            "training_observations": 63,
+            "driver_sum_squares": 4.25,
+            "design_rank": 1
+          },
+          "calibration_identifiability_error": null,
+          "selection_metrics": {
+            "n": 25,
+            "rmse": 0.18196429273948703,
+            "mae": 0.12327705029838025,
+            "bias_actual_minus_predicted": -0.03600410912190963
+          },
+          "selection_parameter_summary": {
+            "n": 25,
+            "domain_fraction": 1.0,
+            "beta": {
+              "median": 0.2359420289855073,
+              "min": 0.23235294117647065,
+              "max": 0.2360000000000001,
+              "mean": 0.23540508771297872
+            }
+          },
+          "rmse_improvement_vs_baselines": {
+            "persistence": 0.008483074025103954,
+            "constant_policy_spread": 0.9176413324891477
+          },
+          "gates": {
+            "minimum_origins": true,
+            "enough_policy_changes": true,
+            "rmse_vs_each_baseline": false,
+            "mae_vs_best_baseline": true,
+            "absolute_bias": true,
+            "parameter_domain_consistency": true
+          },
+          "passes_all_selection_gates": false
+        },
+        "anchored_partial_adjustment": {
+          "calibration_fit": {
+            "parameters": {
+              "spread": 2.510153846153846,
+              "lambda": 0.13145232502153514
+            },
+            "training_observations": 64,
+            "driver_sum_squares": 79.60645689940829,
+            "design_rank": 1
+          },
+          "calibration_identifiability_error": null,
+          "selection_metrics": {
+            "n": 25,
+            "rmse": 0.2625199988721119,
+            "mae": 0.22197180191444218,
+            "bias_actual_minus_predicted": -0.2036583153685511
+          },
+          "selection_parameter_summary": {
+            "n": 25,
+            "domain_fraction": 1.0,
+            "lambda": {
+              "median": 0.07170442021233368,
+              "min": 0.03343944620496327,
+              "max": 0.13695722296901777,
+              "mean": 0.07972582940214738
+            },
+            "spread": {
+              "median": 2.171038961038961,
+              "min": 1.8332584269662922,
+              "max": 2.510153846153846,
+              "mean": 2.172888026722397
+            }
+          },
+          "rmse_improvement_vs_baselines": {
+            "persistence": -0.43046208885203385,
+            "constant_policy_spread": 0.8811810989037754
+          },
+          "gates": {
+            "minimum_origins": true,
+            "enough_policy_changes": true,
+            "rmse_vs_each_baseline": false,
+            "mae_vs_best_baseline": false,
+            "absolute_bias": true,
+            "parameter_domain_consistency": true
+          },
+          "passes_all_selection_gates": false
+        },
+        "static_affine_policy_level": {
+          "calibration_fit": {
+            "parameters": {
+              "alpha": 3.9822799514427123,
+              "beta": 0.3972397049210944
+            },
+            "training_observations": 65,
+            "driver_sum_squares": 102.97115384615384,
+            "design_rank": 2
+          },
+          "calibration_identifiability_error": null,
+          "selection_metrics": {
+            "n": 25,
+            "rmse": 0.5500698475212072,
+            "mae": 0.5133672563130375,
+            "bias_actual_minus_predicted": -0.19149660287113346
+          },
+          "selection_parameter_summary": {
+            "n": 25,
+            "domain_fraction": 1.0,
+            "alpha": {
+              "median": 3.829036513803732,
+              "min": 3.747448742072053,
+              "max": 3.9822799514427123,
+              "mean": 3.83639636713945
+            },
+            "beta": {
+              "median": 0.4703965076614274,
+              "min": 0.3972397049210944,
+              "max": 0.5093456503755129,
+              "mean": 0.46657782295048966
+            }
+          },
+          "rmse_improvement_vs_baselines": {
+            "persistence": -1.9973109343300974,
+            "constant_policy_spread": 0.7510334637763062
+          },
+          "gates": {
+            "minimum_origins": true,
+            "enough_policy_changes": true,
+            "rmse_vs_each_baseline": false,
+            "mae_vs_best_baseline": false,
+            "absolute_bias": true,
+            "parameter_domain_consistency": true
+          },
+          "passes_all_selection_gates": false
+        }
+      },
+      "passed_candidates": [
+        "delta_policy_contemporaneous"
+      ],
+      "selection_verdict": "PASS_TO_FINAL_EVALUATION"
+    },
+    "nfc_upto1y": {
+      "target_id": "nfc_upto1y",
+      "analysis_period": {
+        "start": "2017-08",
+        "end": "2025-01"
+      },
+      "calibration_months": 65,
+      "selection_months": 25,
+      "nonzero_policy_changes_through_selection_end": 20,
+      "identifiability_minimum_policy_changes": 8,
+      "baseline_results": {
+        "persistence": {
+          "metrics": {
+            "n": 25,
+            "rmse": 0.21662871462481617,
+            "mae": 0.18640000000000007,
+            "bias_actual_minus_predicted": -0.07280000000000002
+          },
+          "origins": 25,
+          "parameter_summary": {
+            "n": 0
+          }
+        },
+        "constant_policy_spread": {
+          "metrics": {
+            "n": 25,
+            "rmse": 1.392523544128358,
+            "mae": 1.3626345755706746,
+            "bias_actual_minus_predicted": -1.3626345755706746
+          },
+          "origins": 25,
+          "parameter_summary": {
+            "n": 25,
+            "domain_fraction": 1.0,
+            "spread": {
+              "median": 3.0115584415584418,
+              "min": 2.7924719101123596,
+              "max": 3.214153846153846,
+              "mean": 3.0086345755706745
+            }
+          }
+        }
+      },
+      "candidate_results": {
+        "delta_policy_contemporaneous": {
+          "calibration_fit": {
+            "parameters": {
+              "beta": 0.8488235294117649
+            },
+            "training_observations": 64,
+            "driver_sum_squares": 4.25,
+            "design_rank": 1
+          },
+          "calibration_identifiability_error": null,
+          "selection_metrics": {
+            "n": 25,
+            "rmse": 0.23159305925680146,
+            "mae": 0.18452997442455252,
+            "bias_actual_minus_predicted": -0.06508649616368292
+          },
+          "selection_parameter_summary": {
+            "n": 25,
+            "domain_fraction": 1.0,
+            "beta": {
+              "median": 0.8121739130434784,
+              "min": 0.8080000000000003,
+              "max": 0.8488235294117649,
+              "mean": 0.8127282994128455
+            }
+          },
+          "rmse_improvement_vs_baselines": {
+            "persistence": -0.06907830597574449,
+            "constant_policy_spread": 0.833688227223644
+          },
+          "gates": {
+            "minimum_origins": true,
+            "enough_policy_changes": true,
+            "rmse_vs_each_baseline": false,
+            "mae_vs_best_baseline": true,
+            "absolute_bias": true,
+            "parameter_domain_consistency": true
+          },
+          "passes_all_selection_gates": false
+        },
+        "delta_policy_lag1": {
+          "calibration_fit": {
+            "parameters": {
+              "beta": 0.5105882352941178
+            },
+            "training_observations": 63,
+            "driver_sum_squares": 4.25,
+            "design_rank": 1
+          },
+          "calibration_identifiability_error": null,
+          "selection_metrics": {
+            "n": 25,
+            "rmse": 0.22060443386677475,
+            "mae": 0.19155449518938014,
+            "bias_actual_minus_predicted": -0.06786306661795152
+          },
+          "selection_parameter_summary": {
+            "n": 25,
+            "domain_fraction": 1.0,
+            "beta": {
+              "median": 0.4997101449275365,
+              "min": 0.49014084507042277,
+              "max": 0.5105882352941178,
+              "mean": 0.4992437555254805
+            }
+          },
+          "rmse_improvement_vs_baselines": {
+            "persistence": -0.01835268814129387,
+            "constant_policy_spread": 0.8415793867206312
+          },
+          "gates": {
+            "minimum_origins": true,
+            "enough_policy_changes": true,
+            "rmse_vs_each_baseline": false,
+            "mae_vs_best_baseline": false,
+            "absolute_bias": true,
+            "parameter_domain_consistency": true
+          },
+          "passes_all_selection_gates": false
+        },
+        "anchored_partial_adjustment": {
+          "calibration_fit": {
+            "parameters": {
+              "spread": 3.214153846153846,
+              "lambda": 0.3484990444784451
+            },
+            "training_observations": 64,
+            "driver_sum_squares": 11.628668899408288,
+            "design_rank": 1
+          },
+          "calibration_identifiability_error": null,
+          "selection_metrics": {
+            "n": 25,
+            "rmse": 0.3070005955235899,
+            "mae": 0.26326215060983615,
+            "bias_actual_minus_predicted": -0.1973821176781584
+          },
+          "selection_parameter_summary": {
+            "n": 25,
+            "domain_fraction": 1.0,
+            "lambda": {
+              "median": 0.08288288062546363,
+              "min": 0.005044256635316648,
+              "max": 0.3484990444784451,
+              "mean": 0.1186707155551768
+            },
+            "spread": {
+              "median": 3.0115584415584418,
+              "min": 2.7924719101123596,
+              "max": 3.214153846153846,
+              "mean": 3.0086345755706745
+            }
+          },
+          "rmse_improvement_vs_baselines": {
+            "persistence": -0.4171740623365221,
+            "constant_policy_spread": 0.7795365135346741
+          },
+          "gates": {
+            "minimum_origins": true,
+            "enough_policy_changes": true,
+            "rmse_vs_each_baseline": false,
+            "mae_vs_best_baseline": false,
+            "absolute_bias": true,
+            "parameter_domain_consistency": true
+          },
+          "passes_all_selection_gates": false
+        },
+        "static_affine_policy_level": {
+          "calibration_fit": {
+            "parameters": {
+              "alpha": 2.7335467363899517,
+              "beta": 1.1967840134466339
+            },
+            "training_observations": 65,
+            "driver_sum_squares": 102.97115384615384,
+            "design_rank": 2
+          },
+          "calibration_identifiability_error": null,
+          "selection_metrics": {
+            "n": 25,
+            "rmse": 1.107496304638564,
+            "mae": 1.0688560801424751,
+            "bias_actual_minus_predicted": -1.0688560801424751
+          },
+          "selection_parameter_summary": {
+            "n": 25,
+            "domain_fraction": 1.0,
+            "alpha": {
+              "median": 3.4114827429021344,
+              "min": 2.7335467363899517,
+              "max": 3.6088399355797205,
+              "mean": 3.3400703010900528
+            },
+            "beta": {
+              "median": 0.8731445058559656,
+              "min": 0.7757507584364348,
+              "max": 1.1967840134466339,
+              "mean": 0.9067638662002196
+            }
+          },
+          "rmse_improvement_vs_baselines": {
+            "persistence": -4.112416913688751,
+            "constant_policy_spread": 0.20468396436931002
+          },
+          "gates": {
+            "minimum_origins": true,
+            "enough_policy_changes": true,
+            "rmse_vs_each_baseline": false,
+            "mae_vs_best_baseline": false,
+            "absolute_bias": false,
+            "parameter_domain_consistency": true
+          },
+          "passes_all_selection_gates": false
+        }
+      },
+      "passed_candidates": [],
+      "selection_verdict": "FAIL_BEFORE_HOLDOUT"
+    }
+  },
+  "candidates_eligible_for_final_evaluation": {
+    "household_housing": [
+      "delta_policy_contemporaneous"
+    ]
+  },
+  "open_final_holdout": true,
+  "selection_stage_verdict": "OPEN_FINAL_HOLDOUT_FOR_ELIGIBLE_TARGETS"
+}

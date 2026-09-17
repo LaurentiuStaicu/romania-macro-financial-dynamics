@@ -1,0 +1,96 @@
+{
+  "contract_version": "0.5.1a0",
+  "frozen_before_recovery_estimation": true,
+  "purpose": "Attempt to recover a scientifically defensible monetary-transmission reference mechanism without bypassing Alpha 0.5's negative validation result.",
+  "hard_invariants": {
+    "accounting_spine_unchanged": true,
+    "dynamic_core_unchanged": true,
+    "infoclar_v1_1_unchanged": true,
+    "no_holdout_reuse_from_alpha_0_5": true,
+    "no_missing_value_imputation": true,
+    "no_extra_controls_added_for_fit": true,
+    "no_alpha_0_6_simulator_until_gate_reconsideration": true
+  },
+  "targets": [
+    "household_housing_new_lending_rate_pct",
+    "nfc_new_lending_rate_upto1y_pct"
+  ],
+  "baseline_models": [
+    {
+      "id": "persistence",
+      "equation": "lend[t] = lend[t-1]",
+      "estimated_parameters": 0
+    },
+    {
+      "id": "constant_policy_spread",
+      "equation": "lend[t] = policy[t] + mean_train(lend-policy)",
+      "estimated_parameters": 1
+    }
+  ],
+  "candidate_models": [
+    {
+      "id": "delta_policy_contemporaneous",
+      "equation": "lend[t] = lend[t-1] + beta * (policy[t]-policy[t-1])",
+      "estimated_parameters": 1,
+      "parameter_domain_for_validation": {"beta":[0.0,2.0]},
+      "interpretation": "Immediate monthly pass-through in changes without intercept."
+    },
+    {
+      "id": "delta_policy_lag1",
+      "equation": "lend[t] = lend[t-1] + beta * (policy[t-1]-policy[t-2])",
+      "estimated_parameters": 1,
+      "parameter_domain_for_validation": {"beta":[0.0,2.0]},
+      "interpretation": "One-month delayed pass-through in changes without intercept."
+    },
+    {
+      "id": "anchored_partial_adjustment",
+      "equation": "spread = mean_train(lend-policy); lend[t] = lend[t-1] + lambda * ((policy[t]+spread)-lend[t-1])",
+      "estimated_parameters": 2,
+      "parameter_domain_for_validation": {"lambda":[0.0,1.0]},
+      "interpretation": "Parsimonious mean-spread anchor plus one adjustment-speed parameter; simpler than Alpha 0.5's free alpha/beta/lambda form."
+    },
+    {
+      "id": "static_affine_policy_level",
+      "equation": "lend[t] = alpha + beta * policy[t]",
+      "estimated_parameters": 2,
+      "parameter_domain_for_validation": {"beta":[0.0,2.0]},
+      "interpretation": "Static level relationship used as a deliberately simple comparator; not interpreted causally."
+    }
+  ],
+  "estimation": {
+    "calibration": "Fit on 2017-08..2022-12 only for calibration diagnostics.",
+    "structural_selection": "Expanding-origin one-step predictions over 2023-01..2025-01. At each origin only observations strictly earlier than the target month may be used to fit parameters.",
+    "final_evaluation": "2025-02..2025-11 may be opened only if at least one candidate passes every structural-selection gate. A failed selection result cannot be rescued by final evaluation.",
+    "future_confirmation": "MIR observations from 2026-08 onward remain prospectively reserved regardless of the current result."
+  },
+  "identifiability_gates": {
+    "minimum_calibration_months": 48,
+    "minimum_nonzero_policy_changes_before_selection_end": 8,
+    "one_parameter_driver_sum_squares_must_be_positive": true,
+    "two_parameter_design_rank_must_be_full": true,
+    "parameter_must_be_finite": true,
+    "parameter_domain_must_hold_for_at_least_fraction_of_estimable_origins": 0.8
+  },
+  "structural_selection_gates": {
+    "minimum_origins": 18,
+    "candidate_rmse_improvement_vs_each_baseline_fraction": 0.05,
+    "candidate_mae_may_not_exceed_best_baseline_by_more_than_fraction": 0.02,
+    "candidate_absolute_bias_max_percentage_points": 0.50,
+    "parameter_sign_or_domain_consistency_fraction": 0.80,
+    "rule": "A candidate passes only if every gate passes for the target. Selection is target-specific; success for one target does not validate the other."
+  },
+  "final_holdout_gates_if_opened": {
+    "minimum_observations": 8,
+    "rmse_improvement_vs_each_baseline_fraction": 0.02,
+    "mae_may_not_exceed_best_baseline_by_more_than_fraction": 0.02,
+    "absolute_bias_max_percentage_points": 0.50,
+    "sensitivity": "±10% perturbation of each free parameter must not more than double RMSE relative to the unperturbed candidate.",
+    "causal_claim_allowed": false
+  },
+  "verdict_rules": {
+    "VALIDATED": "Target mechanism passes identifiability, structural selection, final holdout and sensitivity gates. This supports reference predictive use within the tested boundary, not causal identification.",
+    "CANDIDATE": "Evidence supports the mechanism but predictive/identifiability gates are incomplete or failed without a structural contradiction.",
+    "DEFERRED": "Required observables or boundary-matched parameters are unavailable.",
+    "REJECTED": "The tested form fails decisively or is structurally invalid; mechanism existence may still be reconsidered only with a newly preregistered form/data cycle."
+  }
+}

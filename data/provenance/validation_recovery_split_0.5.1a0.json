@@ -1,0 +1,64 @@
+{
+  "split_version": "0.5.1a0",
+  "frozen_at": "2026-09-17T15:42:00Z",
+  "frozen_before_estimation": true,
+  "purpose": "Prospective role assignment for monetary-transmission validation recovery after official-source coverage inspection and before any Alpha 0.5.x model estimation or selection.",
+  "series": {
+    "policy_rate": {
+      "source": "BIS central bank policy rates, M.RO",
+      "source_origin": "National Bank of Romania",
+      "frequency": "monthly",
+      "available_coverage_at_freeze": "2005-01..2026-08",
+      "unit": "percent_per_annum_end_of_period"
+    },
+    "household_target": {
+      "series_key": "MIR.M.RO.B.A2C.A.R.A.2250.RON.N",
+      "definition": "RON new-business lending for house purchase, households/NPISH, AAR/NDER, total initial fixation",
+      "available_coverage_at_freeze": "2017-08..2026-07",
+      "complete_over_analysis_window": true
+    },
+    "nfc_target": {
+      "series_key": "MIR.M.RO.B.A2A.F.R.A.2240.RON.N",
+      "definition": "RON new-business loans to NFCs, variable rate / initial rate fixation up to one year, AAR/NDER, total amount category",
+      "available_coverage_at_freeze": "2017-08..2026-07",
+      "complete_over_analysis_window": true,
+      "reason_selected_over_total_series": "The total-maturity NFC series contains numerous official missing observations; no imputation is permitted."
+    }
+  },
+  "roles": {
+    "calibration": {
+      "start": "2017-08",
+      "end": "2022-12",
+      "months": 65,
+      "scientific_reason": "Includes the 2018 tightening episode, 2020 easing and the 2021-2022 tightening cycle; used only to estimate parsimonious parameters."
+    },
+    "structural_selection": {
+      "start": "2023-01",
+      "end": "2025-01",
+      "months": 25,
+      "scientific_reason": "Includes the extended 7 percent plateau and July-August 2024 easing. Previously inspected Nov-2024..Jan-2025 observations are allowed here because this window is not claimed as independent validation."
+    },
+    "final_evaluation_holdout": {
+      "start": "2025-02",
+      "end": "2025-11",
+      "months": 10,
+      "inspection_status_at_freeze": "UNINSPECTED_FOR_VALUES",
+      "scientific_reason": "Fresh independent evaluation window relative to prior Alpha 0.5 work. It is reserved before estimation/selection and will be opened once only after model form and structural-selection verdict are frozen.",
+      "limitation": "The policy rate is expected to be much less variable than in earlier cycles, so passing this holdout alone cannot validate pass-through dynamics."
+    },
+    "coverage_inspected_not_independent": {
+      "periods": ["2025-12", "2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07"],
+      "role": "POST_EVALUATION_DIAGNOSTIC_ONLY",
+      "reason": "Tail values were inspected during source-coverage verification before this split was frozen; they are permanently ineligible as independent evaluation for Alpha 0.5.x."
+    },
+    "future_confirmation_holdout": {
+      "start": "2026-08",
+      "end": null,
+      "status": "PROSPECTIVE_NOT_YET_AVAILABLE_FOR_ALL_TARGETS",
+      "rule": "Future MIR observations from 2026-08 onward are reserved for later confirmation and may not be used to revise the Alpha 0.5.x selected structure before their first formal evaluation."
+    }
+  },
+  "model_selection_rule": "Only calibration and structural-selection windows may influence model form, lag choice among predeclared parsimonious candidates, or parameter estimation procedure. Final evaluation cannot rescue a structure that fails structural selection.",
+  "old_holdout_rule": "Nov-2024..Jan-2025 from Alpha 0.5 has already been inspected and is explicitly reclassified as structural-selection information, never independent validation.",
+  "missing_data_rule": "No interpolation, carry-forward, synthetic allocation or zero-fill is permitted for missing lending-rate observations."
+}
