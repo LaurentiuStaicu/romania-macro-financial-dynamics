@@ -15,8 +15,12 @@ const requiredNames = [
   'mobile-vulnerability',
 ];
 
-async function assertProductSurface(page) {
+async function assertProductSurface(page, expectedViewport) {
   await page.waitForFunction(() => document.querySelectorAll('#map-nodes .node').length === 6);
+  const viewport = await page.evaluate(() => ({ width: window.innerWidth, height: window.innerHeight }));
+  if (viewport.width !== expectedViewport.width || viewport.height !== expectedViewport.height) {
+    throw new Error(`Viewport contract failed: expected ${expectedViewport.width}x${expectedViewport.height}, got ${viewport.width}x${viewport.height}`);
+  }
   const bodyText = await page.locator('body').innerText();
   if (bodyText.includes('Alpha 0.6') || bodyText.includes('ALL LAYERS') || bodyText.includes('TOATE STRATURILE')) {
     throw new Error('Normal product surface exposes forbidden Alpha/all-layer metadata');
@@ -28,13 +32,13 @@ async function assertProductSurface(page) {
 }
 
 async function capture(browser, name, viewport, action) {
-  const context = await browser.newContext({ viewportSize: viewport, deviceScaleFactor: 1 });
+  const context = await browser.newContext({ viewport, deviceScaleFactor: 1 });
   const page = await context.newPage();
   await page.goto(baseUrl, { waitUntil: 'networkidle' });
-  await assertProductSurface(page);
+  await assertProductSurface(page, viewport);
   if (action) await action(page);
   await page.waitForTimeout(250);
-  await assertProductSurface(page);
+  await assertProductSurface(page, viewport);
   await page.screenshot({ path: path.join(outputDir, `${name}.png`), fullPage: true });
   await context.close();
 }
@@ -74,7 +78,7 @@ try {
     await page.getByRole('button', { name: /Public debt and refinancing pressure/ }).click();
   });
 
-  console.log(`Created ${requiredNames.length} visual-audit captures in ${outputDir}`);
+  console.log(`Created ${requiredNames.length} viewport-verified visual-audit captures in ${outputDir}`);
 } finally {
   await browser.close();
 }
