@@ -1,0 +1,115 @@
+{
+  "contract_version": "0.3.0a0",
+  "purpose": "Executable structural dynamic core constrained by the Alpha 0.2 Accounting Spine; behavioural closure is deferred to Alpha 0.4.",
+  "time": {
+    "canonical_unit": "year",
+    "default_dt_years": 0.25,
+    "default_step_label": "quarter",
+    "rationale": "Quarterly is the preferred empirical frequency where definitions remain compatible; smaller dt values are used for integration-error tests."
+  },
+  "boundary": {
+    "sectors": ["H", "C", "F", "G", "X", "BNR"],
+    "financial_instruments": ["F3", "F2", "F4", "F8", "F5", "F6", "F7"],
+    "closed_for_double_entry_conservation": true
+  },
+  "stocks": [
+    {
+      "id": "bilateral_financial_position",
+      "index": ["holder", "issuer", "instrument"],
+      "unit": "million_RON",
+      "meaning": "Financial asset of holder and equal financial liability of issuer represented once.",
+      "scientific_status": "ACCOUNTING_IDENTITY"
+    },
+    {
+      "id": "generic_first_order_delay_state",
+      "index": ["mechanism_instance"],
+      "unit": "same_as_delay_input",
+      "meaning": "Reusable first-order delay state; concrete mechanism assignment requires explicit later documentation.",
+      "scientific_status": "ACCOUNTING_IDENTITY"
+    }
+  ],
+  "flows": [
+    {
+      "id": "financial_transaction_rate",
+      "unit": "million_RON_per_year",
+      "stock_effect": "bilateral_financial_position",
+      "source_relation": "Observed period transaction amount / period length in years when a rate representation is required. The transformation must be recorded.",
+      "scientific_status": "OBSERVED_EMPIRICAL_or_later_behavioural_equation"
+    },
+    {
+      "id": "revaluation_rate",
+      "unit": "million_RON_per_year",
+      "stock_effect": "bilateral_financial_position",
+      "scientific_status": "OBSERVED_EMPIRICAL_or_exogenous_input"
+    },
+    {
+      "id": "other_change_rate",
+      "unit": "million_RON_per_year",
+      "stock_effect": "bilateral_financial_position",
+      "scientific_status": "OBSERVED_EMPIRICAL_or_exogenous_input"
+    }
+  ],
+  "auxiliaries": [
+    {"id":"sector_financial_assets","unit":"million_RON","definition":"sum of bilateral positions where sector is holder"},
+    {"id":"sector_financial_liabilities","unit":"million_RON","definition":"sum of bilateral positions where sector is issuer"},
+    {"id":"sector_net_financial_worth","unit":"million_RON","definition":"financial assets minus financial liabilities"},
+    {"id":"system_net_financial_worth","unit":"million_RON","definition":"sum of sector net financial worth over H/C/F/G/X/BNR; must equal zero up to numerical tolerance for a complete represented financial boundary"},
+    {"id":"safe_ratio","unit":"dimensionless","definition":"numerator / denominator, undefined rather than forced when denominator is zero"}
+  ],
+  "equations": [
+    {
+      "id": "financial_stock_identity_period_amounts",
+      "equation": "closing = opening + transactions + revaluations + other_changes",
+      "units": "million_RON = million_RON + million_RON + million_RON + million_RON",
+      "scientific_status": "ACCOUNTING_IDENTITY"
+    },
+    {
+      "id": "financial_stock_identity_rates",
+      "equation": "closing = opening + (transaction_rate + revaluation_rate + other_change_rate) * dt",
+      "units": "million_RON = million_RON + million_RON_per_year * year",
+      "scientific_status": "ACCOUNTING_IDENTITY"
+    },
+    {
+      "id": "first_order_delay",
+      "equation": "d(delay_state)/dt = (input - delay_state) / tau",
+      "units": "input_unit_per_year = input_unit / year",
+      "scientific_status": "ACCOUNTING_IDENTITY_as_dynamic_primitive"
+    }
+  ],
+  "integration": {
+    "baseline_method": "explicit_euler",
+    "reason": "transparent reference integrator for structural tests; later validated simulation may add another integrator only with equivalence/error tests",
+    "integration_error_test_required": true
+  },
+  "empirical_initialization_gate": {
+    "unresolved_accounting_cells_allowed": false,
+    "source_series_identified_without_value_allowed": false,
+    "not_applicable_cells_map_to_numeric_zero": true,
+    "observed_or_derived_finite_values_required": true,
+    "rule": "Raw Alpha 0.2 matrices with TBD cells cannot initialize a numeric dynamic state. Missing data must never become simulation zero implicitly."
+  },
+  "behavioural_closure": {
+    "included_in_alpha_0_3": false,
+    "deferred_to": "0.4.x Empirical Dynamics",
+    "forbidden_in_0_3_without_explicit_status": [
+      "consumption_response",
+      "investment_response",
+      "credit_demand_or_supply_response",
+      "fiscal_reaction_function",
+      "monetary_policy_reaction_function",
+      "default_or_risk_response",
+      "exchange_rate_response",
+      "refinancing_response"
+    ]
+  },
+  "required_tests": [
+    "stock_identity",
+    "double_entry_conservation",
+    "dimensional_consistency",
+    "zero_flow_extreme_condition",
+    "finite_large_value_extreme_condition",
+    "delay_steady_state",
+    "integration_error_convergence",
+    "incomplete_empirical_initialization_rejected"
+  ]
+}

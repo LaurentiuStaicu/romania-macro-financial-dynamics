@@ -1,0 +1,141 @@
+{
+  "contract_version": "0.3.0a0",
+  "inherits": {
+    "workspace": "model/registries/workspace_contract.json",
+    "design_tokens": "model/registries/design_tokens.json",
+    "product_labels": "model/registries/product_labels.json",
+    "standard": "InfoClar Model Suite Design Standard v1.1"
+  },
+  "foundation_invariance": {
+    "accounting_spine_unchanged": true,
+    "infoclar_v1_1_unchanged": true,
+    "draft_user_schema_in_repository": false
+  },
+  "model_panel": {
+    "workspace_area": "model",
+    "primary_view": "macro_financial_stock_flow_network",
+    "not_generic_network_diagram": true,
+    "nodes": [
+      {"id":"H","kind":"institutional_sector","label_ref":"sector:H","semantic_role":"holder_and_issuer"},
+      {"id":"C","kind":"institutional_sector","label_ref":"sector:C","semantic_role":"holder_and_issuer"},
+      {"id":"F","kind":"institutional_sector","label_ref":"sector:F","semantic_role":"holder_and_issuer"},
+      {"id":"G","kind":"institutional_sector","label_ref":"sector:G","semantic_role":"holder_and_issuer"},
+      {"id":"X","kind":"institutional_sector","label_ref":"sector:X","semantic_role":"holder_and_issuer"},
+      {"id":"BNR","kind":"institutional_sector","label_ref":"sector:BNR","semantic_role":"holder_and_issuer"}
+    ],
+    "edge_layers": [
+      {
+        "id":"financial_positions",
+        "kind":"stock_relationship",
+        "source":"bilateral_financial_position",
+        "direction":"issuer_to_holder_asset_claim",
+        "instrument_dimension":["F3","F2","F4","F8","F5","F6","F7"],
+        "required_encodings":["instrument_label","exact_value","period","data_status"],
+        "colour_only_forbidden":true
+      },
+      {
+        "id":"transactions",
+        "kind":"flow_overlay",
+        "source":"financial_transaction_rate_or_period_amount",
+        "required_encodings":["direction","value_or_unresolved_status","unit","period"],
+        "visible_only_when_definitionally_available":true
+      },
+      {
+        "id":"revaluations_and_other_changes",
+        "kind":"stock_change_overlay",
+        "source":"revaluation_rate_and_other_change_rate",
+        "default_visibility":"off",
+        "required_encodings":["change_type","value_or_unresolved_status","unit","period"]
+      },
+      {
+        "id":"candidate_feedbacks",
+        "kind":"causal_hypothesis_overlay",
+        "source":"model/dynamics/feedback_registry.json",
+        "default_visibility":"off",
+        "render_rule":"candidate_dashed_and_status_labelled",
+        "must_never_look_empirically_confirmed":true,
+        "must_never_modify_numeric_state_in_alpha_0_3":true
+      }
+    ],
+    "interaction": {
+      "select_sector": ["highlight_assets","highlight_liabilities","open_theory_context","open_auxiliary_details"],
+      "select_position": ["show_holder","show_issuer","show_instrument","show_exact_value","show_status","show_provenance","open_theory_context"],
+      "select_feedback_candidate": ["show_scientific_status","show_path","show_inactive_state","show_activation_gate","open_theory_context"],
+      "pan_zoom":"internal_only_when_needed",
+      "essential_information_requires_hover":false
+    },
+    "view_modes": [
+      "stock_positions",
+      "financial_transactions",
+      "balance_sheet_focus",
+      "flow_of_funds_matrix_linked_view",
+      "candidate_feedback_overlay"
+    ]
+  },
+  "theory_panel": {
+    "workspace_area":"theory",
+    "selection_contexts": [
+      {"selection":"sector","content":["definition","accounting_role","dynamic_role","data_scope","limitations"]},
+      {"selection":"financial_position","content":["stock_identity","holder_asset_issuer_liability","instrument_definition","provenance","missing_data_semantics"]},
+      {"selection":"transaction_or_change","content":["stock_flow_distinction","units","period_conversion","source_transformation"]},
+      {"selection":"feedback_candidate","content":["hypothesized_causal_path","evidence_status","why_inactive","activation_requirements","candidate_delays"]},
+      {"selection":"delay","content":["first_order_delay_equation","tau_definition","dimensional_contract","parameter_status"]}
+    ],
+    "complete_reader_docs":[
+      "docs/PROJECT_CONSTITUTION.md",
+      "docs/ACCOUNTING_SPINE_AUDIT_0.2.0a0.md",
+      "docs/DYNAMIC_CORE_0.3.0a0.md"
+    ],
+    "must_link_back_to_model_object":true
+  },
+  "dashboard_panel": {
+    "workspace_area":"dashboard",
+    "indicator_groups": [
+      {
+        "id":"empirical_benchmark",
+        "priority":1,
+        "indicators":[
+          {"id":"benchmark_stock_date","source":"model/accounting/benchmark_2025.json#/benchmark/stock_date","kind":"metadata"},
+          {"id":"benchmark_flow_period","source":"model/accounting/benchmark_2025.json#/benchmark/flow_period","kind":"metadata"},
+          {"id":"observed_anchor_count","source":"model/accounting/benchmark_2025.json#/observed_anchors","kind":"derived_count"},
+          {"id":"unresolved_bilateral_coverage","source":"model/accounting/benchmark_2025.json#/matrices","kind":"derived_status","display":"count_and_fraction_not_colour_only"}
+        ]
+      },
+      {
+        "id":"accounting_reconciliation",
+        "priority":2,
+        "indicators":[
+          {"id":"b9f_status","source":"model/accounting/benchmark_2025.json#/b9f/status","kind":"status"},
+          {"id":"forced_closure","source":"model/accounting/reconciliation_2025.json#/closure_checks","kind":"guardrail_status"}
+        ]
+      },
+      {
+        "id":"dynamic_structure",
+        "priority":3,
+        "indicators":[
+          {"id":"canonical_time_unit","source":"model/dynamics/core_contract.json#/time/canonical_unit","kind":"metadata"},
+          {"id":"default_dt_years","source":"model/dynamics/core_contract.json#/time/default_dt_years","kind":"numeric"},
+          {"id":"behavioural_closure_active","source":"model/dynamics/core_contract.json#/behavioural_closure/included_in_alpha_0_3","kind":"status"},
+          {"id":"candidate_feedback_count","source":"model/dynamics/feedback_registry.json#/loops","kind":"derived_count"},
+          {"id":"active_feedback_count","source":"model/dynamics/feedback_registry.json#/loops","kind":"derived_count_filtered","filter":{"quantitatively_active":true}}
+        ]
+      }
+    ],
+    "requirements":["unit_and_period_visible_where_applicable","scientific_status_visible","unresolved_is_not_zero","no_colour_only_semantics"]
+  },
+  "auxiliary_panel": {
+    "workspace_area":"auxiliary",
+    "tabs": [
+      {"id":"selection_details","content":["selected_object_ids","exact_values","units","periods","scientific_status"]},
+      {"id":"sources","content":["institution","dataset","series_key","retrieved_at","transformation"]},
+      {"id":"verification","content":["structural_tests","conservation_status","integration_error_test","extreme_condition_tests"]},
+      {"id":"limitations","content":["unresolved_cells","inactive_behavioural_closure","unestimated_delays","no_forecast_claim"]}
+    ],
+    "must_not_duplicate_theory":true
+  },
+  "responsive": {
+    "inherits_stack_order":["model","theory","dashboard","auxiliary"],
+    "central_diagram_remains_first":true,
+    "matrix_or_network_may_pan_zoom_internally":true
+  }
+}
