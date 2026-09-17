@@ -17,36 +17,20 @@
 <main id="workspace" class="workspace">
   <section id="model-panel" class="panel model-panel" aria-labelledby="model-heading">
     <div class="panel-heading-row"><div><p class="eyebrow">FLOW-OF-FUNDS EXPLORER</p><h2 id="model-heading">How are financial claims and funding relationships distributed across Romania?</h2><p class="panel-intro">Choose STOCK or FLOW first, then a layer. Select a sector to isolate its funding, claims and counterparties, or select a relationship for amount, instrument, period, evidence and limitations. Missing bilateral values remain explicitly unresolved.</p></div><button id="reset-map" class="secondary-button" type="button">Reset</button></div>
-
-    <div class="perspective-switch" role="tablist" aria-label="Accounting perspective">
-      <button id="stock-view" type="button" role="tab" aria-selected="true">STOCK / BALANCE-SHEET VIEW</button>
-      <button id="flow-view" type="button" role="tab" aria-selected="false">FLOW VIEW</button>
-      <button id="matrix-tab" type="button" role="tab" aria-selected="false">FROM-WHOM-TO-WHOM MATRIX</button>
-    </div>
+    <div class="perspective-switch" role="tablist" aria-label="Accounting perspective"><button id="stock-view" type="button" role="tab" aria-selected="true">STOCK / BALANCE-SHEET VIEW</button><button id="flow-view" type="button" role="tab" aria-selected="false">FLOW VIEW</button><button id="matrix-tab" type="button" role="tab" aria-selected="false">FROM-WHOM-TO-WHOM MATRIX</button></div>
     <p id="perspective-note" class="perspective-note" aria-live="polite"></p>
     <div id="layer-toolbar" class="layer-toolbar" aria-label="Map layers"></div>
     <div class="map-key"><span><i class="key-line solid"></i>Observed / accounting</span><span><i class="key-line dotted"></i>Conceptual accounting relation</span><span><i class="key-line dashed"></i>Candidate / deferred feedback</span></div>
-
-    <div id="network-view" class="map-shell">
-      <div class="diagram-wrap" role="region" aria-label="Interactive macro-financial map" tabindex="0">
-        <svg id="system-map" class="system-map" viewBox="0 0 920 670" role="img" aria-labelledby="map-title map-desc"><title id="map-title">Romania macro-financial flow-of-funds map</title><desc id="map-desc">Interactive sector map covering real, fiscal, money and credit, balance-sheet, external and dynamic-feedback layers.</desc><defs><marker id="arrow-established" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z"></path></marker><marker id="arrow-conceptual" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z"></path></marker><marker id="arrow-candidate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z"></path></marker></defs><g id="map-edges"></g><g id="map-nodes"></g></svg>
-      </div>
-      <aside id="map-inspector" class="map-inspector" aria-live="polite" aria-label="Selected object details"></aside>
-    </div>
-
+    <div id="network-view" class="map-shell"><div class="diagram-wrap" role="region" aria-label="Interactive macro-financial map" tabindex="0"><svg id="system-map" class="system-map" viewBox="0 0 920 670" role="img" aria-labelledby="map-title map-desc"><title id="map-title">Romania macro-financial flow-of-funds map</title><desc id="map-desc">Interactive sector map covering real, fiscal, money and credit, balance-sheet, external and dynamic-feedback layers.</desc><defs><marker id="arrow-established" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z"></path></marker><marker id="arrow-conceptual" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z"></path></marker><marker id="arrow-candidate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z"></path></marker></defs><g id="map-edges"></g><g id="map-nodes"></g></svg></div><aside id="map-inspector" class="map-inspector" aria-live="polite" aria-label="Selected object details"></aside></div>
     <div id="matrix-view" hidden><div class="matrix-toolbar"><label>Instrument <select id="matrix-instrument"></select></label><span id="matrix-note"></span></div><div class="table-scroll"><table id="flow-matrix" class="flow-matrix"><caption>Holder / creditor by issuer / debtor matrix</caption><thead></thead><tbody></tbody></table></div></div>
     <div class="science-guardrail" role="note"><strong>Boundary:</strong> candidate feedbacks may be inspected, but behavioural simulation remains unavailable until the relevant mechanisms are prospectively validated.</div>
   </section>
-
   <aside id="theory-panel" class="panel theory-panel" aria-labelledby="theory-heading"><p class="eyebrow">CONTEXTUAL MANUAL</p><h2 id="theory-heading">Theory / Learn</h2><div id="theory-context" class="theory-context" aria-live="polite"></div><div class="reader-actions"><button id="open-chapter" type="button">Open relevant chapter</button><button id="open-manual" type="button">Open complete reader</button><button id="open-glossary" type="button">Glossary</button><button id="open-references" type="button">References</button></div><div id="theory-reader" class="theory-reader" hidden aria-live="polite"></div></aside>
-
   <section id="dashboard-panel" class="panel dashboard-panel" aria-labelledby="dashboard-heading"><p class="eyebrow">MACRO-FINANCIAL IMBALANCE & VULNERABILITY MONITOR</p><h2 id="dashboard-heading">Where are Romania's main macro-financial pressures?</h2><p class="panel-intro">Each diagnostic states what the problem is, its current value or direction when available, why it matters, who is exposed, how direct propagation can occur, the evidence and the uncertainty. Selecting a card traces the implicated sectors and relations on the map.</p><div id="diagnostic-cards" class="diagnostic-grid" aria-live="polite"></div></section>
-
   <section id="stress-panel" class="panel stress-panel" aria-labelledby="stress-heading"><p class="eyebrow">ACCOUNTING / EXPOSURE STRESS TEST</p><h2 id="stress-heading">Mechanical exposure tests — not macroeconomic forecasts</h2><p class="panel-intro">These tests change an accounting price, valuation or stock input and show only direct balance-sheet exposure. They do not simulate consumption, investment, credit supply, exchange-rate reactions, fiscal reaction or unvalidated behavioural feedbacks.</p><div id="stress-tests" class="stress-grid"></div><div id="stress-output" class="stress-output" aria-live="polite"></div></section>
-
   <aside id="auxiliary-panel" class="panel auxiliary-panel" aria-labelledby="auxiliary-heading"><p class="eyebrow">RESEARCH / TECHNICAL PROVENANCE</p><h2 id="auxiliary-heading">Evidence, uncertainty and methodological boundaries</h2><div id="auxiliary-content" aria-live="polite"></div></aside>
 </main>
 <footer class="app-footer"><p>Observed facts, accounting relations, conceptual links and behavioural candidates remain visibly distinct. Missing bilateral data are never converted to zero.</p></footer>
-<script src="app.js" defer></script>
+<script src="theory-merge.js"></script><script src="app.js" defer></script>
 </body>
 </html>
