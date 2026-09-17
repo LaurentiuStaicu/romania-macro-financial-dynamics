@@ -60,10 +60,13 @@ jobs:
             echo "No Chromium-compatible browser available for mandatory visual QA" >&2
             exit 1
           fi
-          "$BROWSER" --headless --disable-gpu --no-sandbox --hide-scrollbars --run-all-compositor-stages-before-draw --virtual-time-budget=5000 --window-size=1440,1200 --screenshot=visual-qa/desktop.png http://127.0.0.1:8123/
-          "$BROWSER" --headless --disable-gpu --no-sandbox --hide-scrollbars --run-all-compositor-stages-before-draw --virtual-time-budget=5000 --window-size=390,844 --screenshot=visual-qa/mobile.png http://127.0.0.1:8123/
-          test -s visual-qa/desktop.png
-          test -s visual-qa/mobile.png
+          COMMON="--headless --disable-gpu --no-sandbox --hide-scrollbars --run-all-compositor-stages-before-draw --virtual-time-budget=5000"
+          "$BROWSER" $COMMON --window-size=1440,1200 --screenshot=visual-qa/desktop-overview.png http://127.0.0.1:8123/
+          "$BROWSER" $COMMON --window-size=1440,1200 --screenshot=visual-qa/desktop-dashboard.png 'http://127.0.0.1:8123/#dashboard-panel'
+          "$BROWSER" $COMMON --window-size=390,844 --screenshot=visual-qa/mobile-overview.png http://127.0.0.1:8123/
+          "$BROWSER" $COMMON --window-size=390,844 --screenshot=visual-qa/mobile-map.png 'http://127.0.0.1:8123/#network-view'
+          "$BROWSER" $COMMON --window-size=390,844 --screenshot=visual-qa/mobile-dashboard.png 'http://127.0.0.1:8123/#dashboard-panel'
+          for capture in visual-qa/*.png; do test -s "$capture"; done
 
       - name: Upload visual QA captures
         uses: actions/upload-artifact@v4
