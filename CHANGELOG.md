@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.2.1a0 — InfoClar Model Suite Design Standard v1.1 alignment
+
+Product-family uniformization after the Accounting Spine milestone.
+
+- adopts English as the default product language with persistent Romanian switching;
+- adds canonical InfoClar v1.1 design tokens for typography, spacing, neutral surfaces, interaction, focus, components and scientific-visualization accessibility;
+- adds the adaptive asymmetric 2×2 workspace contract: model / theory / dashboard / auxiliary;
+- preserves macro-financial stock-flow, sector, Flow-of-Funds and real-data views as the model-specific visualization grammar;
+- defines contextual Theory/Learn behaviour linked to selected scientific objects and provenance;
+- expands canonical EN/RO product labels and navigation vocabulary;
+- aligns repository presentation order, status controls and web/native semantic continuity across the InfoClar family;
+- targets WCAG 2.2 AA and prohibits colour-only scientific meaning;
+- explicitly prevents the uniformization layer from altering scientific results or accounting semantics;
+- does not fabricate a web deployment, model screenshot or unavailable Dynamics/Simulation/Scenario capability.
+
 ## 0.2.0a0 — Accounting Spine
 
 Auditable L1 accounting/SFC spine.
@@ -23,7 +38,7 @@ Foundation candidate.
 - establishes explicit BNR/S121 handling to avoid double counting when the central bank is shown separately;
 - establishes four canonical registries;
 - records benchmark stock/flow dates;
-- establishes the RO/EN contract with Romanian as default;
+- establishes the initial RO/EN contract;
 - establishes the web-first, native-near-v1 platform sequence;
 - establishes the shared World3/Cognitive visual-family palette with a distinct macro-financial icon;
 - aligns repository presentation with Cognitive Epistemic Model: centered icon/title/description, status badges and a launch-style primary control;
