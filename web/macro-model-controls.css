@@ -1,5 +1,15 @@
-/* Macro-specific primary-visualization control sizing only.
+/* Macro-specific primary-visualization and long-product-name accommodations only.
  * Suite-level chrome remains defined by the World3 parity contract.
  */
 .layer-button { min-height: 32px; }
 #reset-map { min-height: 32px; }
+
+@media (max-width: 420px) {
+  .brand h1 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    max-height: 2.2em;
+  }
+}
