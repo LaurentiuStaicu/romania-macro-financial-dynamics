@@ -4,118 +4,41 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Romania Macro-Financial Dynamics — InfoClar</title>
-  <meta name="description" content="InfoClar web interface for the Romania Macro-Financial Dynamics scientific model.">
+  <meta name="description" content="Interactive flow-of-funds, sectoral balance-sheet and macro-financial vulnerability map for Romania.">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <a class="skip-link" href="#workspace">Skip to model workspace</a>
-  <header class="app-header">
-    <div class="brand-block">
-      <img src="public/icon.svg" width="44" height="44" alt="">
-      <div>
-        <h1>Romania Macro-Financial Dynamics</h1>
-        <p id="stage-label" class="stage-label">Loading scientific stage…</p>
+<a class="skip-link" href="#workspace">Skip to model workspace</a>
+<header class="app-header">
+  <div class="brand-block"><img src="public/icon.svg" width="46" height="46" alt=""><div><h1>Romania Macro-Financial Dynamics</h1><p class="product-subtitle" data-i18n="productSubtitle">Trace who finances whom, who owes whom, where vulnerabilities accumulate and how accounting exposures connect across Romania.</p></div></div>
+  <div class="language-switch" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="ro" aria-pressed="false">RO</button></div>
+</header>
+<nav class="primary-nav" aria-label="Primary navigation"><a href="#model-panel">Flow of Funds</a><a href="#dashboard-panel">Vulnerability Monitor</a><a href="#stress-panel">Accounting Stress</a><a href="#theory-panel">Theory / Learn</a><a href="#auxiliary-panel">Evidence & limits</a></nav>
+<main id="workspace" class="workspace">
+  <section id="model-panel" class="panel model-panel" aria-labelledby="model-heading">
+    <div class="panel-heading-row"><div><p class="eyebrow">FLOW-OF-FUNDS / SECTORAL BALANCE SHEETS</p><h2 id="model-heading">Who finances whom, who owes whom, and through which instrument?</h2><p class="panel-intro">Use layers, select a sector or relationship, or inspect the bilateral matrix. Unknown bilateral values stay unknown; they are never silently treated as zero.</p></div><button id="reset-map" class="secondary-button" type="button">Reset</button></div>
+    <div id="layer-toolbar" class="layer-toolbar" aria-label="Map layers"></div>
+    <div class="map-key"><span><i class="key-line solid"></i>Observed / accounting</span><span><i class="key-line dotted"></i>Conceptual accounting relation</span><span><i class="key-line dashed"></i>Candidate / deferred feedback</span></div>
+    <div class="model-mode-tabs" role="tablist" aria-label="Model view"><button id="map-tab" type="button" role="tab" aria-selected="true">Network map</button><button id="matrix-tab" type="button" role="tab" aria-selected="false">From-whom-to-whom matrix</button></div>
+    <div id="network-view" class="map-shell">
+      <div class="diagram-wrap" role="region" aria-label="Interactive macro-financial map" tabindex="0">
+        <svg id="system-map" class="system-map" viewBox="0 0 920 670" role="img" aria-labelledby="map-title map-desc"><title id="map-title">Romania macro-financial flow-of-funds map</title><desc id="map-desc">Interactive sector map covering real, fiscal, money and credit, balance-sheet, external and dynamic-feedback layers.</desc><defs><marker id="arrow-established" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z"></path></marker><marker id="arrow-conceptual" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z"></path></marker><marker id="arrow-candidate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z"></path></marker></defs><g id="map-edges"></g><g id="map-nodes"></g></svg>
       </div>
+      <aside id="map-inspector" class="map-inspector" aria-live="polite" aria-label="Selected object details"></aside>
     </div>
-    <div class="header-actions" aria-label="Application controls">
-      <span class="mode-badge" id="mode-badge">Read-only scientific interface</span>
-      <div class="language-switch" role="group" aria-label="Language">
-        <button type="button" data-lang="en" aria-pressed="true">EN</button>
-        <button type="button" data-lang="ro" aria-pressed="false">RO</button>
-      </div>
-    </div>
-  </header>
+    <div id="matrix-view" hidden><div class="matrix-toolbar"><label>Instrument <select id="matrix-instrument"></select></label><span id="matrix-note"></span></div><div class="table-scroll"><table id="flow-matrix" class="flow-matrix"><caption>Holder / creditor by issuer / debtor matrix</caption><thead></thead><tbody></tbody></table></div></div>
+    <div class="science-guardrail" role="note"><strong>Scientific guardrail:</strong> this surface exposes accounting relations, observed positions and candidate feedbacks. It is not a behavioural forecast simulator; Alpha 0.6 remains NO-GO.</div>
+  </section>
 
-  <nav class="primary-nav" aria-label="Primary navigation">
-    <a href="#model-panel" data-i18n="navModel">Model</a>
-    <a href="#theory-panel" data-i18n="navTheory">Theory / Learn</a>
-    <a href="#dashboard-panel" data-i18n="navDashboard">Dashboard</a>
-    <a href="#auxiliary-panel" data-i18n="navAuxiliary">Sources & limits</a>
-  </nav>
+  <aside id="theory-panel" class="panel theory-panel" aria-labelledby="theory-heading"><p class="eyebrow">CONTEXTUAL MANUAL</p><h2 id="theory-heading">Theory / Learn</h2><div id="theory-context" class="theory-context" aria-live="polite"></div><div class="reader-actions"><button id="open-chapter" type="button">Open full chapter</button><button id="open-glossary" type="button">Glossary</button><button id="open-references" type="button">References</button></div><div id="theory-reader" class="theory-reader" hidden aria-live="polite"></div></aside>
 
-  <main id="workspace" class="workspace">
-    <section id="model-panel" class="panel model-panel" aria-labelledby="model-heading">
-      <div class="panel-heading-row">
-        <div>
-          <p class="eyebrow" data-i18n="modelEyebrow">Macro-financial stock-flow system</p>
-          <h2 id="model-heading" data-i18n="modelHeading">Sector network and financial positions</h2>
-        </div>
-        <div class="layer-legend" aria-label="Diagram legend">
-          <span><i class="legend-line solid"></i><span data-i18n="positions">Positions</span></span>
-          <span><i class="legend-line dashed"></i><span data-i18n="candidate">Candidate feedback</span></span>
-        </div>
-      </div>
+  <section id="dashboard-panel" class="panel dashboard-panel" aria-labelledby="dashboard-heading"><p class="eyebrow">MACRO-FINANCIAL IMBALANCE & VULNERABILITY MONITOR</p><h2 id="dashboard-heading">Where are Romania's main macro-financial pressures?</h2><p class="panel-intro">Each diagnostic states its definition, period, source, benchmark only when definitionally compatible, and uncertainty. Selecting a card traces the implicated sectors and relations on the map.</p><div id="diagnostic-cards" class="diagnostic-grid" aria-live="polite"></div></section>
 
-      <p class="panel-intro" data-i18n="modelIntro">Select a sector to connect the diagram with its theory, evidence and current empirical status.</p>
+  <section id="stress-panel" class="panel stress-panel" aria-labelledby="stress-heading"><p class="eyebrow">ACCOUNTING / EXPOSURE STRESS</p><h2 id="stress-heading">Mechanical exposure tests — not forecasts</h2><p class="panel-intro">These tests change an accounting price, valuation or stock input and show direct balance-sheet exposure only. They do not simulate consumption, investment, credit supply, FX reactions, fiscal reaction or behavioural feedbacks.</p><div id="stress-tests" class="stress-grid"></div><div id="stress-output" class="stress-output" aria-live="polite"></div></section>
 
-      <div class="diagram-wrap" role="region" aria-label="Macro-financial sector map">
-        <svg class="system-map" viewBox="0 0 900 520" role="img" aria-labelledby="map-title map-desc">
-          <title id="map-title">Romania macro-financial stock-flow sector network</title>
-          <desc id="map-desc">Six sectors connected by financial positions. Candidate dynamic feedback is visually distinguished and is not a calibrated result.</desc>
-          <defs>
-            <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z"></path></marker>
-          </defs>
-
-          <g class="edges" aria-hidden="true">
-            <path d="M180 260 C300 120 600 120 720 260" class="position-edge"></path>
-            <path d="M180 260 C300 400 600 400 720 260" class="position-edge"></path>
-            <path d="M450 100 L450 420" class="position-edge"></path>
-            <path d="M180 260 L450 100" class="position-edge"></path>
-            <path d="M720 260 L450 420" class="position-edge"></path>
-            <path d="M450 100 C610 120 680 180 720 260" class="candidate-edge"></path>
-          </g>
-
-          <g class="sector" data-sector="H" tabindex="0" role="button" aria-label="Households and NPISH">
-            <circle cx="180" cy="260" r="62"></circle><text x="180" y="252">H</text><text x="180" y="278" class="sector-name">Households</text>
-          </g>
-          <g class="sector" data-sector="C" tabindex="0" role="button" aria-label="Non-financial corporations">
-            <circle cx="450" cy="100" r="62"></circle><text x="450" y="92">C</text><text x="450" y="118" class="sector-name">Corporations</text>
-          </g>
-          <g class="sector" data-sector="F" tabindex="0" role="button" aria-label="Financial corporations excluding the central bank">
-            <circle cx="720" cy="260" r="62"></circle><text x="720" y="252">F</text><text x="720" y="278" class="sector-name">Finance</text>
-          </g>
-          <g class="sector" data-sector="G" tabindex="0" role="button" aria-label="General government">
-            <circle cx="450" cy="420" r="62"></circle><text x="450" y="412">G</text><text x="450" y="438" class="sector-name">Government</text>
-          </g>
-          <g class="sector compact" data-sector="X" tabindex="0" role="button" aria-label="Rest of the world">
-            <circle cx="110" cy="90" r="48"></circle><text x="110" y="84">X</text><text x="110" y="106" class="sector-name">RoW</text>
-          </g>
-          <g class="sector compact" data-sector="BNR" tabindex="0" role="button" aria-label="National Bank of Romania">
-            <circle cx="790" cy="90" r="48"></circle><text x="790" y="84">BNR</text><text x="790" y="106" class="sector-name">Central bank</text>
-          </g>
-        </svg>
-      </div>
-
-      <div class="model-note" role="note">
-        <strong data-i18n="readOnlyTitle">Current capability:</strong>
-        <span data-i18n="readOnlyBody">structural and empirical inspection only. Interactive simulation is deliberately not enabled before Alpha 0.6.</span>
-      </div>
-    </section>
-
-    <aside id="theory-panel" class="panel theory-panel" aria-labelledby="theory-heading">
-      <p class="eyebrow" data-i18n="theoryEyebrow">Contextual explanation</p>
-      <h2 id="theory-heading" data-i18n="theoryHeading">Theory / Learn</h2>
-      <div id="theory-content" aria-live="polite"></div>
-    </aside>
-
-    <section id="dashboard-panel" class="panel dashboard-panel" aria-labelledby="dashboard-heading">
-      <p class="eyebrow" data-i18n="dashboardEyebrow">Empirical status before engine metadata</p>
-      <h2 id="dashboard-heading" data-i18n="dashboardHeading">Calibration & validation dashboard</h2>
-      <div id="dashboard-cards" class="dashboard-grid" aria-live="polite"></div>
-      <div class="status-note" id="validation-note"></div>
-    </section>
-
-    <aside id="auxiliary-panel" class="panel auxiliary-panel" aria-labelledby="auxiliary-heading">
-      <p class="eyebrow" data-i18n="auxiliaryEyebrow">Evidence, provenance and limitations</p>
-      <h2 id="auxiliary-heading" data-i18n="auxiliaryHeading">Auxiliary</h2>
-      <div id="auxiliary-content" aria-live="polite"></div>
-    </aside>
-  </main>
-
-  <footer class="app-footer">
-    <p data-i18n="footerText">InfoClar is the reference web interface. Native packaging remains deferred until the web product is mature near v1.</p>
-  </footer>
-
-  <script src="app.js" defer></script>
+  <aside id="auxiliary-panel" class="panel auxiliary-panel" aria-labelledby="auxiliary-heading"><p class="eyebrow">EVIDENCE, PROVENANCE & LIMITS</p><h2 id="auxiliary-heading">What is known, inferred, unresolved or only a candidate?</h2><div id="auxiliary-content" aria-live="polite"></div></aside>
+</main>
+<footer class="app-footer"><p>InfoClar keeps observed facts, accounting identities, conceptual links and behavioural candidates visibly distinct. Missing bilateral data remain missing.</p></footer>
+<script src="app.js" defer></script>
 </body>
 </html>

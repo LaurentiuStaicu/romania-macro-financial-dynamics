@@ -1,178 +1,33 @@
-const state = { lang: 'en', data: null, selectedSector: 'G' };
-
-const strings = {
-  en: {
-    navModel: 'Model', navTheory: 'Theory / Learn', navDashboard: 'Dashboard', navAuxiliary: 'Sources & limits',
-    modelEyebrow: 'Macro-financial stock-flow system', modelHeading: 'Sector network and financial positions',
-    positions: 'Positions', candidate: 'Candidate feedback',
-    modelIntro: 'Select a sector to connect the diagram with its theory, evidence and current empirical status.',
-    readOnlyTitle: 'Current capability:', readOnlyBody: 'structural and empirical inspection only. Behavioural simulation remains disabled while the Alpha 0.6 gate is NO-GO.',
-    theoryEyebrow: 'Contextual explanation', theoryHeading: 'Theory / Learn',
-    dashboardEyebrow: 'Empirical status before engine metadata', dashboardHeading: 'Scientific validation dashboard',
-    auxiliaryEyebrow: 'Evidence, provenance and limitations', auxiliaryHeading: 'Auxiliary',
-    footerText: 'InfoClar is the reference web interface. Native packaging remains deferred until the web product is mature near v1.',
-    readOnlyMode: 'Read-only scientific interface',
-    selected: 'Selected sector', empiricalStatus: 'Empirical status', evidence: 'Evidence status',
-    sources: 'Sources', limitations: 'Limitations', months: 'months',
-    validatedMechanisms: 'validated behavioural mechanisms', mechanismAudit: 'Alpha 0.4 mechanisms',
-    calibration: 'Calibration', structuralSelection: 'Structural selection', holdout: 'Fresh holdout',
-    noValidated: 'No validated behavioural mechanism',
-    passThrough: 'Household pass-through', refinancing: 'Government refinancing',
-    policyHistory: 'policy-rate observations', mirHistory: 'observations / lending target',
-    selectionSignal: 'selection RMSE', finalHoldout: 'final holdout RMSE', alpha06: 'Alpha 0.6 gate',
-    ledgerRows: 'audited ledger rows', openingPrincipal: 'opening-principal rows', matchedRepricing: 'matched repricing rows',
-    maturityVsRefixing: 'maturity / refixing <1y', completenessGate: 'ledger completeness gate'
-  },
-  ro: {
-    navModel: 'Model', navTheory: 'Teorie / Învățare', navDashboard: 'Dashboard', navAuxiliary: 'Surse și limite',
-    modelEyebrow: 'Sistem macro-financiar stock-flow', modelHeading: 'Rețea sectorială și poziții financiare',
-    positions: 'Poziții', candidate: 'Feedback candidat',
-    modelIntro: 'Selectează un sector pentru a conecta diagrama cu teoria, dovezile și starea empirică actuală.',
-    readOnlyTitle: 'Capabilitate curentă:', readOnlyBody: 'doar inspecție structurală și empirică. Simularea comportamentală rămâne dezactivată cât timp poarta Alpha 0.6 este NO-GO.',
-    theoryEyebrow: 'Explicație contextuală', theoryHeading: 'Teorie / Învățare',
-    dashboardEyebrow: 'Starea empirică înaintea metadatelor motorului', dashboardHeading: 'Dashboard de validare științifică',
-    auxiliaryEyebrow: 'Dovezi, proveniență și limitări', auxiliaryHeading: 'Auxiliar',
-    footerText: 'InfoClar este interfața web de referință. Împachetarea nativă rămâne amânată până când produsul web se maturizează aproape de v1.',
-    readOnlyMode: 'Interfață științifică read-only',
-    selected: 'Sector selectat', empiricalStatus: 'Stare empirică', evidence: 'Starea dovezilor',
-    sources: 'Surse', limitations: 'Limitări', months: 'luni',
-    validatedMechanisms: 'mecanisme comportamentale validate', mechanismAudit: 'Mecanisme Alpha 0.4',
-    calibration: 'Calibrare', structuralSelection: 'Selecție structurală', holdout: 'Holdout nou',
-    noValidated: 'Niciun mecanism comportamental validat',
-    passThrough: 'Pass-through gospodării', refinancing: 'Refinanțare publică',
-    policyHistory: 'observații rata de politică', mirHistory: 'observații / țintă creditare',
-    selectionSignal: 'RMSE selecție', finalHoldout: 'RMSE holdout final', alpha06: 'Poarta Alpha 0.6',
-    ledgerRows: 'rânduri auditate în ledger', openingPrincipal: 'rânduri cu principal de deschidere', matchedRepricing: 'rânduri cu repricing potrivit',
-    maturityVsRefixing: 'maturitate / refixare <1 an', completenessGate: 'poarta de completitudine a ledgerului'
-  }
-};
-
-function t(key) { return strings[state.lang][key] ?? key; }
-
-function applyLanguage() {
-  document.documentElement.lang = state.lang;
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.dataset.i18n;
-    if (strings[state.lang][key]) el.textContent = strings[state.lang][key];
-  });
-  document.querySelectorAll('.language-switch button').forEach(button => {
-    button.setAttribute('aria-pressed', String(button.dataset.lang === state.lang));
-  });
-  document.getElementById('mode-badge').textContent = t('readOnlyMode');
-  renderAll();
-}
-
-function renderTheory() {
-  if (!state.data) return;
-  const sector = state.data.sectors.find(item => item.id === state.selectedSector) ?? state.data.sectors[0];
-  const html = `
-    <h3 class="context-title">${sector.id} · ${sector.label[state.lang]}</h3>
-    <p class="context-meta">${t('selected')}</p>
-    <p>${sector.theory[state.lang]}</p>
-    <div class="model-note">
-      <strong>${t('evidence')}:</strong>
-      ${state.data.validation.headline[state.lang]}
-    </div>`;
-  document.getElementById('theory-content').innerHTML = html;
-}
-
-function metric(value, label, detail='') {
-  return `<article class="metric-card"><span class="value">${value}</span><span class="label">${label}</span>${detail ? `<span class="detail">${detail}</span>` : ''}</article>`;
-}
-
-function renderDashboard() {
-  if (!state.data) return;
-  const d = state.data.empirical_dashboard;
-  const v = state.data.validation.monetary_pass_through;
-  const g = state.data.validation.government_refinancing;
-  let cards;
-
-  if (state.selectedSector === 'G') {
-    cards = [
-      metric(d.government_ledger_rows, t('ledgerRows'), `${d.government_ledger_currencies} currencies · fixed-rate public subset`),
-      metric(d.government_rows_with_opening_outstanding_principal, t('openingPrincipal'), `required coverage ≥ ${g.minimum_opening_principal_coverage_pct}%`),
-      metric(d.government_rows_with_matched_repricing, t('matchedRepricing'), `required event-principal coverage ≥ ${g.minimum_repricing_event_principal_coverage_pct}%`),
-      metric(`${d.government_2024_12_maturing_1y_pct.toFixed(0)}% / ${d.government_2024_12_refixing_1y_pct.toFixed(0)}%`, t('maturityVsRefixing'), 'MoF 2024-12 · distinct concepts'),
-      metric(g.gate_1, t('completenessGate'), `cost reconstruction ${g.gate_3} · estimation ${g.estimation_run ? 'RUN' : 'NOT RUN'}`),
-      metric(state.data.validation.alpha_0_6_gate.replace('_FOR_BEHAVIOURAL_SIMULATION', ''), t('alpha06'), `${d.validated_behavioural_mechanisms} ${t('validatedMechanisms')}`)
-    ];
-  } else {
-    cards = [
-      metric(d.policy_rate_observations, t('policyHistory'), d.policy_rate_coverage),
-      metric(d.mir_target_observations_each, t('mirHistory'), d.mir_target_coverage),
-      metric(d.validated_behavioural_mechanisms, t('validatedMechanisms'), t('noValidated')),
-      metric(v.household_selection_rmse.toFixed(3), t('selectionSignal'), `persistence ${v.household_persistence_rmse.toFixed(3)} · ${v.household_selection}`),
-      metric(v.household_candidate_holdout_rmse.toFixed(3), t('finalHoldout'), `persistence ${v.household_persistence_holdout_rmse.toFixed(3)} · Δpolicy events ${v.household_holdout_policy_changes}`),
-      metric(state.data.validation.alpha_0_6_gate.replace('_FOR_BEHAVIOURAL_SIMULATION', ''), t('alpha06'), `${t('calibration')} ${d.calibration_months} · ${t('structuralSelection')} ${d.structural_selection_months} · ${t('holdout')} ${d.fresh_household_holdout_months}`)
-    ];
-  }
-  document.getElementById('dashboard-cards').innerHTML = cards.join('');
-  document.getElementById('validation-note').textContent = state.data.validation.headline[state.lang];
-}
-
-function dispositionForSector() {
-  const d = state.data.empirical_dashboard.alpha_0_5x_dispositions;
-  if (state.selectedSector === 'G') return d.government_refinancing_effective_rate;
-  if (state.selectedSector === 'C') return d.nfc_monetary_pass_through;
-  return d.household_monetary_pass_through;
-}
-
-function interpretationForSector() {
-  if (state.selectedSector === 'G') return state.data.validation.government_refinancing.interpretation[state.lang];
-  return state.data.validation.monetary_pass_through.interpretation[state.lang];
-}
-
-function renderAuxiliary() {
-  if (!state.data) return;
-  const sources = state.data.sources.map(source => `<li><a href="${source.href}" rel="noreferrer">${source.label}</a></li>`).join('');
-  const limits = state.data.limitations.map(item => `<li>${item[state.lang]}</li>`).join('');
-  document.getElementById('auxiliary-content').innerHTML = `
-    <div class="aux-block">
-      <h3>${t('empiricalStatus')} <span class="status-chip">${dispositionForSector()}</span></h3>
-      <p>${interpretationForSector()}</p>
-    </div>
-    <div class="aux-block"><h3>${t('sources')}</h3><ul class="context-list">${sources}</ul></div>
-    <div class="aux-block"><h3>${t('limitations')}</h3><ul class="context-list">${limits}</ul></div>`;
-}
-
-function renderAll() {
-  if (!state.data) return;
-  document.getElementById('stage-label').textContent = `${state.data.stage.name[state.lang]} · ${state.data.software_version}`;
-  document.querySelectorAll('.sector').forEach(node => node.classList.toggle('selected', node.dataset.sector === state.selectedSector));
-  renderTheory(); renderDashboard(); renderAuxiliary();
-}
-
-function selectSector(id) {
-  state.selectedSector = id;
-  renderAll();
-}
-
-async function boot() {
-  try {
-    const response = await fetch('public/model-stage.json', { cache: 'no-store' });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    state.data = await response.json();
-    renderAll();
-  } catch (error) {
-    document.getElementById('stage-label').textContent = 'Scientific stage snapshot unavailable';
-    document.getElementById('validation-note').textContent = `Cannot load canonical web snapshot: ${error.message}`;
-  }
-}
-
-document.querySelectorAll('.language-switch button').forEach(button => button.addEventListener('click', () => {
-  state.lang = button.dataset.lang;
-  localStorage.setItem('infoclar-language', state.lang);
-  applyLanguage();
-}));
-
-document.querySelectorAll('.sector').forEach(node => {
-  node.addEventListener('click', () => selectSector(node.dataset.sector));
-  node.addEventListener('keydown', event => {
-    if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); selectSector(node.dataset.sector); }
-  });
-});
-
-const storedLanguage = localStorage.getItem('infoclar-language');
-if (storedLanguage === 'ro' || storedLanguage === 'en') state.lang = storedLanguage;
-applyLanguage();
-boot();
+const state={lang:'en',science:null,architecture:null,theory:null,activeLayer:'overview',selection:null,diagnostic:null,readerMode:null,view:'map'};
+const SVG_NS='http://www.w3.org/2000/svg';
+const L=v=>v?.[state.lang]??v?.en??v??'';
+const nodeById=id=>state.architecture?.nodes.find(x=>x.id===id);
+const edgeById=id=>state.architecture?.edges.find(x=>x.id===id);
+const sourceById=id=>state.architecture?.sources.find(x=>x.id===id);
+const chapterById=id=>state.theory?.chapters.find(x=>x.id===id);
+const fmt=v=>v===null||v===undefined||v===''?'Unavailable / not asserted':String(v);
+const epistemicClass=e=>/CANDIDATE|DEFERRED/.test(e.epistemic_role)?'candidate':/CONCEPTUAL/.test(e.epistemic_role)?'conceptual':'established';
+const visibleEdges=()=>state.activeLayer==='overview'?state.architecture.edges:state.architecture.edges.filter(e=>e.layer===state.activeLayer);
+function highlighted(){const nodes=new Set(),edges=new Set();if(state.diagnostic){state.diagnostic.map_objects.forEach(id=>{const e=edgeById(id);if(e){edges.add(id);nodes.add(e.from);nodes.add(e.to)}else if(nodeById(id))nodes.add(id)});return{nodes,edges,active:true}}if(!state.selection)return{nodes,edges,active:false};if(state.selection.kind==='node'){nodes.add(state.selection.id);visibleEdges().forEach(e=>{if(e.from===state.selection.id||e.to===state.selection.id){edges.add(e.id);nodes.add(e.from);nodes.add(e.to)}})}else{const e=edgeById(state.selection.id);if(e){edges.add(e.id);nodes.add(e.from);nodes.add(e.to)}}return{nodes,edges,active:true}}
+function pathForEdge(e){const a=nodeById(e.from),b=nodeById(e.to);if(!a||!b)return{d:'',lx:0,ly:0};if(a.id===b.id){return{d:`M ${a.x+42} ${a.y-20} C ${a.x+130} ${a.y-115}, ${a.x-130} ${a.y-115}, ${a.x-42} ${a.y-20}`,lx:a.x,ly:a.y-120}}const dx=b.x-a.x,dy=b.y-a.y,d=Math.max(1,Math.hypot(dx,dy)),ux=dx/d,uy=dy/d,trim=68,x1=a.x+ux*trim,y1=a.y+uy*trim,x2=b.x-ux*trim,y2=b.y-uy*trim,mx=(x1+x2)/2,my=(y1+y2)/2,c=e.curve||0,cx=mx-uy*c,cy=my+ux*c;return{d:`M ${x1} ${y1} Q ${cx} ${cy} ${x2} ${y2}`,lx:.25*x1+.5*cx+.25*x2,ly:.25*y1+.5*cy+.25*y2-6}}
+function renderLayerToolbar(){const root=document.getElementById('layer-toolbar');root.innerHTML='';state.architecture.layers.forEach(layer=>{const b=document.createElement('button');b.type='button';b.className='layer-button';b.dataset.layer=layer.id;b.textContent=L(layer.label);b.setAttribute('aria-pressed',String(layer.id===state.activeLayer));b.onclick=()=>{state.activeLayer=layer.id;state.selection=null;state.diagnostic=null;renderAll()};root.appendChild(b)})}
+function activate(el,kind,id){const run=()=>selectMapObject(kind,id);el.onclick=run;el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();run()}}}
+function renderMap(){const er=document.getElementById('map-edges'),nr=document.getElementById('map-nodes'),h=highlighted();er.innerHTML='';nr.innerHTML='';visibleEdges().forEach(e=>{const p=pathForEdge(e),g=document.createElementNS(SVG_NS,'g');g.classList.add('edge-group');g.dataset.edge=e.id;g.setAttribute('tabindex','0');g.setAttribute('role','button');g.setAttribute('aria-label',L(e.label));const path=document.createElementNS(SVG_NS,'path');path.setAttribute('d',p.d);path.classList.add('map-edge',`epistemic-${epistemicClass(e)}`);const hit=document.createElementNS(SVG_NS,'path');hit.setAttribute('d',p.d);hit.classList.add('edge-hit');const txt=document.createElementNS(SVG_NS,'text');txt.setAttribute('x',p.lx);txt.setAttribute('y',p.ly);txt.setAttribute('text-anchor','middle');txt.classList.add('edge-label');txt.textContent=L(e.label);if(h.active&&!h.edges.has(e.id)){path.classList.add('dimmed');txt.classList.add('dimmed')}if(h.edges.has(e.id))path.classList.add('related');g.append(path,hit,txt);activate(g,'edge',e.id);er.appendChild(g)});state.architecture.nodes.forEach(n=>{const g=document.createElementNS(SVG_NS,'g');g.classList.add('node');g.dataset.sector=n.id;g.setAttribute('tabindex','0');g.setAttribute('role','button');g.setAttribute('aria-label',L(n.label));if(h.active&&!h.nodes.has(n.id))g.classList.add('dimmed');if(h.nodes.has(n.id))g.classList.add('related');if(state.selection?.kind==='node'&&state.selection.id===n.id)g.classList.add('selected');const r=document.createElementNS(SVG_NS,'rect');r.setAttribute('x',n.x-68);r.setAttribute('y',n.y-40);r.setAttribute('width',136);r.setAttribute('height',80);const c=document.createElementNS(SVG_NS,'text');c.setAttribute('x',n.x);c.setAttribute('y',n.y-7);c.classList.add('node-code');c.textContent=n.id;const name=document.createElementNS(SVG_NS,'text');name.setAttribute('x',n.x);name.setAttribute('y',n.y+17);name.classList.add('node-name');name.textContent=L(n.short_label||n.label);g.append(r,c,name);activate(g,'node',n.id);nr.appendChild(g)})}
+function selectMapObject(kind,id){state.selection={kind,id};state.diagnostic=null;state.view='map';setView('map');renderMap();renderInspector();renderTheory();renderAuxiliary();document.getElementById('model-panel').scrollIntoView({behavior:'smooth',block:'start'})}
+function sectorRelations(id){return state.architecture.edges.filter(e=>e.from===id||e.to===id)}
+function instrumentLabel(e){return e.instrument||e.esa_instrument||'—'}
+function renderInspector(){const root=document.getElementById('map-inspector');if(!state.selection){root.innerHTML='<h3>System overview</h3><p>Select a sector to answer: what assets does it hold, what liabilities does it have, to whom, through which instruments, what enters and exits, and which relations create vulnerability.</p><p>Select a relationship for definition, direction, instrument, value/period when observed, source, epistemic role, accounting type and propagation links.</p>';return}if(state.selection.kind==='edge'){const e=edgeById(state.selection.id),sources=(e.sources||[]).map(sourceById).filter(Boolean);root.innerHTML=`<p class="object-kicker">RELATIONSHIP</p><h3>${L(e.label)}</h3><dl><dt>Definition</dt><dd>${L(e.definition)}</dd><dt>Direction</dt><dd>${L(nodeById(e.from).label)} → ${L(nodeById(e.to).label)}</dd><dt>Instrument</dt><dd>${instrumentLabel(e)}</dd><dt>Accounting class</dt><dd>${e.accounting_class||e.object_kind}</dd><dt>Epistemic role</dt><dd><span class="status-pill">${e.epistemic_role}</span></dd><dt>Value</dt><dd>${fmt(e.value)}</dd><dt>Period</dt><dd>${e.period||'—'}</dd><dt>Unit</dt><dd>${e.unit||'—'}</dd><dt>Propagation / affected sectors</dt><dd>${(e.affects||[e.from,e.to]).map(x=>L(nodeById(x)?.label)||x).join(', ')}</dd><dt>Limit</dt><dd>${L(e.limit)}</dd></dl><h4>Sources</h4>${sources.length?sources.map(s=>`<p><a href="${s.href}" target="_blank" rel="noreferrer">${L(s.label)}</a></p>`).join(''):'<p>No matched empirical source; conceptual relation only.</p>'}`;return}const n=nodeById(state.selection.id),rels=sectorRelations(n.id),assets=rels.filter(e=>e.to===n.id&&e.balance_side==='asset'||e.from===n.id&&e.holder===n.id),liabs=rels.filter(e=>e.from===n.id&&e.balance_side==='liability'||e.to===n.id&&e.issuer===n.id),incoming=rels.filter(e=>e.to===n.id),outgoing=rels.filter(e=>e.from===n.id);const list=arr=>arr.length?`<ul>${arr.map(e=>`<li><button class="link-button" data-edge="${e.id}">${L(e.label)} <small>${instrumentLabel(e)}</small></button></li>`).join('')}</ul>`:'<p>None represented at this boundary.</p>';root.innerHTML=`<p class="object-kicker">SECTOR</p><h3>${L(n.label)}</h3><p>${L(n.definition)}</p><div class="net-position"><strong>Net position:</strong> ${L(n.net_position)}</div><h4>Assets / claims represented</h4>${list(n.asset_edges?.map(edgeById).filter(Boolean)||assets)}<h4>Liabilities / funding represented</h4>${list(n.liability_edges?.map(edgeById).filter(Boolean)||liabs)}<h4>Incoming relations</h4>${list(incoming)}<h4>Outgoing relations</h4>${list(outgoing)}<h4>Vulnerability channels</h4><p>${L(n.vulnerability)}</p><p class="limit-note">${L(n.limit)}</p>`;root.querySelectorAll('[data-edge]').forEach(b=>b.onclick=()=>selectMapObject('edge',b.dataset.edge))}
+function renderMatrix(){const select=document.getElementById('matrix-instrument'),thead=document.querySelector('#flow-matrix thead'),tbody=document.querySelector('#flow-matrix tbody');const instruments=[...new Set(state.architecture.edges.map(e=>e.instrument).filter(Boolean))];if(!select.options.length){select.innerHTML='<option value="ALL">All financial instruments</option>'+instruments.map(x=>`<option>${x}</option>`).join('');select.onchange=renderMatrix}const inst=select.value||'ALL',sectors=state.architecture.nodes;thead.innerHTML=`<tr><th>Holder / creditor ↓<br>Issuer / debtor →</th>${sectors.map(n=>`<th>${n.id}<br><small>${L(n.short_label||n.label)}</small></th>`).join('')}</tr>`;tbody.innerHTML='';sectors.forEach(holder=>{const tr=document.createElement('tr');tr.innerHTML=`<th>${holder.id}<br><small>${L(holder.short_label||holder.label)}</small></th>`;sectors.forEach(issuer=>{const matches=state.architecture.edges.filter(e=>e.is_financial_position&&(e.holder===holder.id||e.from===holder.id)&&(e.issuer===issuer.id||e.to===issuer.id)&&(inst==='ALL'||e.instrument===inst));const td=document.createElement('td');if(matches.length){td.innerHTML=matches.map(e=>`<button class="matrix-link" data-edge="${e.id}"><strong>${e.instrument}</strong><br>${L(e.label)}<br><span>${fmt(e.value)} ${e.value!==null&&e.unit?e.unit:''}</span></button>`).join('');}else td.innerHTML='<span class="matrix-missing">not represented / unresolved</span>';tr.appendChild(td)});tbody.appendChild(tr)});tbody.querySelectorAll('[data-edge]').forEach(b=>b.onclick=()=>selectMapObject('edge',b.dataset.edge));document.getElementById('matrix-note').textContent='Cells show only represented bilateral claims. Blank/unresolved is not zero.'}
+function setView(v){state.view=v;document.getElementById('network-view').hidden=v!=='map';document.getElementById('matrix-view').hidden=v!=='matrix';document.getElementById('map-tab').setAttribute('aria-selected',String(v==='map'));document.getElementById('matrix-tab').setAttribute('aria-selected',String(v==='matrix'));if(v==='matrix')renderMatrix()}
+function selectDiagnostic(id){state.diagnostic=state.architecture.diagnostics.find(d=>d.id===id);state.selection=null;state.view='map';setView('map');renderMap();renderDiagnostics();renderAuxiliary();document.getElementById('model-panel').scrollIntoView({behavior:'smooth',block:'start'})}
+function renderDiagnostics(){const root=document.getElementById('diagnostic-cards');root.innerHTML='';state.architecture.diagnostics.forEach(d=>{const b=document.createElement('button');b.type='button';b.className='diagnostic-card'+(state.diagnostic?.id===d.id?' active':'');b.innerHTML=`<span class="diag-state ${d.state_code||'info'}">${L(d.state)}</span><h3>${L(d.problem)}</h3><p class="diag-value">${L(d.value_trend)}</p>${d.benchmark?`<p><strong>Benchmark:</strong> ${L(d.benchmark)}</p>`:''}<p>${L(d.why)}</p><p class="diag-meta"><strong>Propagation:</strong> ${L(d.propagation)}</p><p class="diag-source">${L(d.source_note)}</p>`;b.onclick=()=>selectDiagnostic(d.id);root.appendChild(b)})}
+function relevantChapterId(){if(state.selection){const o=state.selection.kind==='node'?nodeById(state.selection.id):edgeById(state.selection.id);if(o?.theory)return o.theory}if(state.diagnostic?.theory)return state.diagnostic.theory;return'money-circuit'}
+function renderTheory(){const ch=chapterById(relevantChapterId())||state.theory.chapters[0],root=document.getElementById('theory-context');root.innerHTML=`<p class="context-tag">Relevant chapter</p><h3>${L(ch.title)}</h3><p>${L(ch.summary)}</p>`;if(!state.readerMode)document.getElementById('theory-reader').hidden=true}
+function showReader(mode){state.readerMode=mode;const root=document.getElementById('theory-reader');root.hidden=false;if(mode==='chapter'){const ch=chapterById(relevantChapterId())||state.theory.chapters[0];root.innerHTML=`<h3>${L(ch.title)}</h3>${ch.sections.map(s=>`<section><h4>${L(s.heading)}</h4>${L(s.paragraphs).map(p=>`<p>${p}</p>`).join('')}</section>`).join('')}`}else if(mode==='glossary'){root.innerHTML='<h3>Glossary / Glosar</h3>'+state.theory.glossary.map(g=>`<p><strong>${L(g.term)}</strong> — ${L(g.definition)}</p>`).join('')}else{root.innerHTML='<h3>References / Referințe</h3>'+state.theory.references.map(r=>`<p><a href="${r.href}" target="_blank" rel="noreferrer">${L(r.label)}</a></p>`).join('')}}
+function renderAuxiliary(){const root=document.getElementById('auxiliary-content');if(state.diagnostic){const d=state.diagnostic;root.innerHTML=`<h3>${L(d.problem)}</h3><dl><dt>Definition</dt><dd>${L(d.definition)}</dd><dt>Evidence / source</dt><dd>${L(d.source_note)}</dd><dt>Uncertainty / limitations</dt><dd>${L(d.uncertainty)}</dd><dt>Epistemic status</dt><dd>${d.epistemic_status}</dd></dl><p><strong>Highlighted map objects:</strong> ${d.map_objects.join(', ')}</p>`;return}if(state.selection){const o=state.selection.kind==='node'?nodeById(state.selection.id):edgeById(state.selection.id);root.innerHTML=`<h3>Selected object provenance</h3><p><strong>Role:</strong> ${o.epistemic_role}</p><p><strong>Limit:</strong> ${L(o.limit)}</p><p>Missing observations are not imputed. Accounting identities and conceptual relations are visually separated from observed data and behavioural candidates.</p>`;return}root.innerHTML=`<h3>Evidence contract</h3><p>Observed values are shown only when unit, period, boundary and definition are matched. Conceptual relationships may be displayed to explain accounting structure, but they never acquire fabricated values.</p><h3>Behavioural status</h3><p><strong>Validated behavioural mechanisms: 0.</strong> Alpha 0.6 remains <strong>NO-GO</strong>. Prospective Monetary Confirmation remains frozen and unchanged.</p>`}
+function renderStressTests(){const root=document.getElementById('stress-tests');root.innerHTML='';state.architecture.stress_tests.forEach(s=>{const card=document.createElement('div');card.className='stress-card';card.innerHTML=`<span class="stress-label">ACCOUNTING / EXPOSURE STRESS</span><h3>${L(s.name)}</h3><p>${L(s.description)}</p><label>${L(s.input_label)} <input type="number" step="${s.step}" value="${s.default_input}" min="${s.min}" max="${s.max}" data-stress-input="${s.id}"></label><button type="button" data-stress-run="${s.id}">Run mechanical test</button><p class="limit-note">${L(s.limit)}</p>`;root.appendChild(card)});root.querySelectorAll('[data-stress-run]').forEach(b=>b.onclick=()=>runStress(b.dataset.stressRun))}
+function runStress(id){const s=state.architecture.stress_tests.find(x=>x.id===id),input=Number(document.querySelector(`[data-stress-input="${id}"]`).value),out=document.getElementById('stress-output');let text='';if(s.formula==='fx_share_revaluation'){const affected=s.exposure_share_pct;const approx=affected*input/100;text=`A ${input.toFixed(1)}% RON depreciation is applied only as a mechanical FX revaluation to the documented ${affected}% foreign-currency share. Approximate gross debt-stock valuation sensitivity: ${approx.toFixed(2)}% of the relevant debt stock, before hedges, currency composition details or behavioural responses.`}else if(s.formula==='rollover_share'){text=`With the documented near-term maturity share of ${s.base_share_pct}%, an assumed ${input.toFixed(0)}% rollover coverage requirement marks ${(s.base_share_pct*input/100).toFixed(2)}% of the relevant debt stock as mechanically exposed to refinancing during the stated horizon. No refinancing rate or fiscal reaction is simulated.`}else if(s.formula==='market_value'){text=`A direct ${input.toFixed(1)}% market-value shock would create an accounting loss of the same ${Math.abs(input).toFixed(1)}% on the selected marked-to-market exposure. The application does not infer holder losses where bilateral holdings are unresolved.`}else if(s.formula==='bilateral_stock'){text=`A mechanical change of ${input.toFixed(1)}% to the selected bilateral stock changes the holder's asset and issuer's liability by the same amount, preserving double-entry. No secondary behaviour is generated.`}out.innerHTML=`<h3>${L(s.name)}</h3><p>${text}</p><p><strong>Not a forecast.</strong> ${L(s.limit)}</p>`;state.diagnostic=null;state.selection={kind:'edge',id:s.map_edge};renderMap();renderInspector()}
+function renderAll(){renderLayerToolbar();renderMap();renderInspector();renderDiagnostics();renderTheory();renderAuxiliary();renderStressTests();if(state.view==='matrix')renderMatrix()}
+function applyLanguage(lang){state.lang=lang;document.documentElement.lang=lang;document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===lang)));renderAll()}
+async function boot(){const [science,architecture,theory]=await Promise.all([fetch('public/model-stage.json').then(r=>r.json()),fetch('public/product-architecture.json').then(r=>r.json()),fetch('public/theory-corpus.json').then(r=>r.json())]);state.science=science;state.architecture=architecture;state.theory=theory;if(science.validation.alpha_0_6_gate!=='NO_GO_FOR_BEHAVIOURAL_SIMULATION')throw new Error('Scientific guardrail mismatch');if(science.empirical_dashboard.validated_behavioural_mechanisms!==0)throw new Error('Product recovery must not promote behavioural validation');document.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>applyLanguage(b.dataset.lang));document.getElementById('reset-map').onclick=()=>{state.activeLayer='overview';state.selection=null;state.diagnostic=null;renderAll()};document.getElementById('map-tab').onclick=()=>setView('map');document.getElementById('matrix-tab').onclick=()=>setView('matrix');document.getElementById('open-chapter').onclick=()=>showReader('chapter');document.getElementById('open-glossary').onclick=()=>showReader('glossary');document.getElementById('open-references').onclick=()=>showReader('references');renderAll()}
+boot().catch(err=>{document.getElementById('auxiliary-content').innerHTML=`<p role="alert">Application data could not be loaded: ${err.message}</p>`});
