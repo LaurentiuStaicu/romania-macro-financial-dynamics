@@ -1,0 +1,100 @@
+name: Temporary F3 Source Vintage Materialization
+
+on:
+  push:
+    branches:
+      - accounting/f3-materialization
+
+permissions:
+  contents: write
+
+jobs:
+  materialize-f3-vintage:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v7
+        with:
+          ref: accounting/f3-materialization
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Re-run the preregistered F3 QSA audit
+        env:
+          ACCOUNTING_AUDIT_OUT: f3_vintage
+        run: python scripts/audit_qsa_accounting_coverage.py
+
+      - name: Build immutable snapshot manifest
+        env:
+          SNAPSHOT_COMMIT_SHA: ${{ github.sha }}
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          import shutil
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          source = Path("f3_vintage")
+          target = Path("data/source_vintages/accounting-f3-2025-vintage-2026-09-18")
+          if target.exists():
+              shutil.rmtree(target)
+          shutil.copytree(source, target)
+
+          def sha256_file(path):
+              h = hashlib.sha256()
+              with path.open("rb") as fh:
+                  for block in iter(lambda: fh.read(1024 * 1024), b""):
+                      h.update(block)
+              return h.hexdigest()
+
+          files = []
+          for path in sorted(p for p in target.rglob("*") if p.is_file()):
+              files.append({
+                  "path": str(path.relative_to(target)),
+                  "bytes": path.stat().st_size,
+                  "sha256": sha256_file(path),
+              })
+
+          audit_script = Path("scripts/audit_qsa_accounting_coverage.py")
+          manifest = {
+              "snapshot_version": "0.1",
+              "snapshot_id": "accounting-f3-2025-vintage-2026-09-18",
+              "captured_at_utc": datetime.now(timezone.utc).isoformat(),
+              "capture_commit_sha": os.environ["SNAPSHOT_COMMIT_SHA"],
+              "institution": "European Central Bank",
+              "dataset": "QSA — Quarterly sector accounts",
+              "purpose": "Immutable source vintage for RMD F3 Accounting Empirical Recovery",
+              "audit_script": "scripts/audit_qsa_accounting_coverage.py",
+              "audit_script_sha256": sha256_file(audit_script),
+              "files": files,
+              "rules": {
+                  "raw_responses_retained": True,
+                  "network_required_for_reproduction": False,
+                  "benchmark_generation_must_use_this_snapshot_only": True,
+                  "source_revision_overwrite_allowed": False,
+              },
+          }
+          (target / "snapshot_manifest.json").write_text(
+              json.dumps(manifest, indent=2, ensure_ascii=False) + "\n",
+              encoding="utf-8",
+          )
+          PY
+
+      - name: Commit immutable F3 source vintage
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/source_vintages/accounting-f3-2025-vintage-2026-09-18
+          if git diff --cached --quiet; then
+            echo "No source-vintage changes."
+            exit 0
+          fi
+          git commit -m "data: retain immutable QSA F3 2025 source vintage"
+          git push origin HEAD:accounting/f3-materialization
