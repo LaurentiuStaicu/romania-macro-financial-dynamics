@@ -46,6 +46,12 @@ jobs:
       - name: Run scientific invariant tests
         run: python -m unittest discover -s tests -v
 
+      - name: Recompute dimensional consistency independently
+        run: python scripts/audit_dimensional_consistency.py
+
+      - name: Run System Dynamics conformity gate explicitly
+        run: python scripts/audit_system_dynamics_conformity.py
+
       - name: Verify retained source-vintage provenance state offline
         run: python scripts/verify_validation_recovery_provenance.py
 
