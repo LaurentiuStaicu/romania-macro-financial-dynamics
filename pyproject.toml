@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "romanian-monetary-dynamics"
-version = "0.1"
+version = "0.1.0"
 description = "Empirical stock-flow-consistent system-dynamics model of Romania's monetary and macro-financial system"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -15,3 +15,6 @@ classifiers = [
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3.12"
 ]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/romania_macro_financial_dynamics"]

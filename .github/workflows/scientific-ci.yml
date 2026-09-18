@@ -1,0 +1,63 @@
+name: Scientific CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-baseline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Build source and wheel distributions
+        run: |
+          python -m pip install --upgrade pip build
+          python -m build
+
+      - name: Verify clean wheel installation and import
+        run: |
+          python -m venv /tmp/rmd-clean
+          /tmp/rmd-clean/bin/python -m pip install --no-deps dist/*.whl
+          (
+            cd /tmp
+            /tmp/rmd-clean/bin/python -c "import romania_macro_financial_dynamics as rmd; assert rmd.__version__ == '0.1.0'"
+          )
+
+      - name: Install built wheel for repository tests
+        run: python -m pip install --no-deps dist/*.whl
+
+      - name: Compile Python sources
+        run: python -m compileall -q src scripts tests
+
+      - name: Run scientific invariant tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Preserve retained validation artifacts
+        run: |
+          cp model/calibration_validation/validation_recovery_selection.json /tmp/retained_selection.json
+          cp model/calibration_validation/validation_recovery_holdout.json /tmp/retained_holdout.json
+
+      - name: Reproduce validation-recovery selection
+        run: python scripts/run_validation_recovery_selection.py
+
+      - name: Reproduce authorized household holdout
+        run: python scripts/run_validation_recovery_holdout.py
+
+      - name: Verify retained validation artifacts are semantically unchanged
+        run: |
+          python scripts/check_json_semantic_equivalence.py             /tmp/retained_selection.json             model/calibration_validation/validation_recovery_selection.json
+          python scripts/check_json_semantic_equivalence.py             /tmp/retained_holdout.json             model/calibration_validation/validation_recovery_holdout.json
