@@ -1,5 +1,5 @@
 {
-  "ledger_version": "0.5",
+  "ledger_version": "0.6",
   "benchmark": "2025",
   "principle": "Record residuals and unresolved coverage explicitly; never force accounting closure with invented allocations.",
   "instrument_gates": [
@@ -60,7 +60,9 @@
         "The F2M deposits component is materialized separately and must not be relabelled as total F2.",
         "Direct QSA bilateral F21 cells are unavailable in the tested W2 asset-side and liability-side orientations.",
         "The exact QSA bridge W1 F21(holder)=W1 F2(holder)-W1 F2M(holder) is blocked because holder-specific W1 total-F2 series are unavailable, even though total-economy W1 F2 is published.",
-        "The next source gate is BPS/BOP-IIP sector-structure reconciliation. Coarse BOP sectors must not be split synthetically and BPM6/ESA instrument differences must be explicit."
+        "ECB BPS publishes external F2 for S121, S12T, S13, S1P, S12M and S1V, allowing an exact candidate financial-sector grouping F = S12T + S12M, but it does not publish S11 and S1M separately for the tested Romania F2 series.",
+        "The remaining external holder blocker is therefore the S1V = S11 + S1M split. It must not be allocated synthetically.",
+        "BPS follows BPM6 functional-category conventions and is not presumed definitionally identical to QSA ESA F2. Eurostat bop_iip6_q is the next independent dissemination layer to audit for S11/S1M detail."
       ],
       "component_materialization": {
         "instrument": "F2M",
@@ -106,6 +108,30 @@
         "flow_2025_W1_total_F21_million_RON": 393.43,
         "holder_specific_W1_F2_available": false,
         "next_gate": "BPS/BOP external-sector sector-structure audit",
+        "total_F2_promotion_allowed": false
+      },
+      "currency_F21_bps_structure": {
+        "status": "PARTIAL_SECTOR_STRUCTURE_H_C_SPLIT_BLOCKED",
+        "assessment": "model/accounting/bps_f2_sector_structure_assessment.json",
+        "stock_RON_million": {
+          "total_S1": 79126,
+          "BNR_S121": 804,
+          "MFI_S12T": 58273,
+          "government_S13": 117,
+          "other_sectors_S1P": 19932,
+          "other_financial_S12M": 334,
+          "NFC_plus_households_S1V": 19598,
+          "RMD_F_candidate_S12T_plus_S12M": 58607
+        },
+        "exact_stock_identities": [
+          "S1 = S121 + S12T + S13 + S1P",
+          "S1P = S12M + S1V"
+        ],
+        "unavailable_required_detail": [
+          "S11",
+          "S1M"
+        ],
+        "next_gate": "Eurostat bop_iip6_q detailed-sector dissemination audit",
         "total_F2_promotion_allowed": false
       }
     },
@@ -233,6 +259,10 @@
     {
       "id": "f21_qsa_external_instrument_bridge",
       "status": "NEGATIVE_RESULT_HOLDER_W1_F2_UNAVAILABLE"
+    },
+    {
+      "id": "f21_bps_sector_structure",
+      "status": "PARTIAL_PASS_S12M_AVAILABLE_S11_S1M_UNAVAILABLE"
     }
   ]
 }
