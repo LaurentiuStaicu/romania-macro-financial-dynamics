@@ -1,5 +1,5 @@
 {
-  "ledger_version": "1.7",
+  "ledger_version": "1.8",
   "benchmark": "2025",
   "principle": "Record residuals and unresolved coverage explicitly; never force accounting closure with invented allocations.",
   "instrument_gates": [
@@ -314,16 +314,16 @@
     {
       "instrument": "F5",
       "priority": 5,
-      "stock_matrix_status": "F511_PARTIAL_F512_F519_BILATERAL_UNAVAILABLE_F5_UNRESOLVED",
-      "flow_matrix_status": "F511_PARTIAL_F512_F519_BILATERAL_UNAVAILABLE_F5_UNRESOLVED",
+      "stock_matrix_status": "FROZEN_COMPONENT_EVIDENCE_ONLY_ZERO_UNCONDITIONAL_TOTAL_F5_CELLS",
+      "flow_matrix_status": "FROZEN_COMPONENT_EVIDENCE_ONLY_ZERO_UNCONDITIONAL_TOTAL_F5_CELLS",
       "asset_liability_residual": null,
-      "residual_status": "EQUITY_DECOMPOSITION_PASS_TOTAL_F51_BILATERAL_ZERO_OF_35",
+      "residual_status": "COMPONENT_RANK_73_NULLITY_67_ZERO_UNIQUE_F51_AND_F5_TOTAL_CELLS",
       "known_issues": [
-        "F52 issuer applicability and seven applicable bilateral F52 cells per measure are retained from Phase B.",
-        "F511 listed shares resolve 11 bilateral cells per measure, but F512 unlisted shares and F519 other equity resolve zero bilateral cells.",
-        "All eight total-economy F51=F511+F512+F519 controls pass within 0.1 million RON; F512 and F519 are material and F511 must not substitute for F51.",
-        "No bilateral F51 or total-F5 cell is reconstructed because every cell lacks at least F512 and F519 coverage.",
-        "The next gate is component-aware exact rank/nullspace analysis using direct F511, direct/structural F52 and aggregate component controls before any freeze/materialization decision."
+        "F511 listed shares retain 11 unique bilateral cells per measure and F52 retains 31 unique direct/structural component cells per measure.",
+        "F512 unlisted shares and F519 other equity remain bilaterally unavailable in the tested QSA layer and are quantitatively material.",
+        "The component-aware system has rank 73 over 140 component variables, leaving 67 degrees of freedom for both stock and flow.",
+        "No bilateral F51 linear combination and no bilateral total-F5 linear combination is invariant over the exact nullspace.",
+        "F5 is therefore frozen at the current public-data boundary; component evidence is retained, but no total-F5 bilateral matrix or partial total-F5 artifact is promoted."
       ],
       "coverage_assessment": {
         "status": "AGGREGATES_AVAILABLE_BILATERAL_TOTAL_F5_NOT_PUBLISHED",
@@ -392,6 +392,30 @@
         },
         "total_F51_decomposition_controls": "PASS_8_OF_8_TOTAL_ECONOMY",
         "next_gate": "F5 component-aware exact rank/nullspace audit",
+        "materialization_allowed": false
+      },
+      "component_rank_assessment": {
+        "status": "FREEZE_F5_PUBLIC_DATA_BOUNDARY",
+        "assessment": "model/accounting/f5_component_aware_rank_assessment.json",
+        "stock": {
+          "variables": 140,
+          "equations": 98,
+          "rank": 73,
+          "nullity": 67,
+          "unique_component_variables": 42,
+          "unique_F51_total_cells": 0,
+          "unique_F5_total_cells": 0
+        },
+        "flow": {
+          "variables": 140,
+          "equations": 98,
+          "rank": 73,
+          "nullity": 67,
+          "unique_component_variables": 42,
+          "unique_F51_total_cells": 0,
+          "unique_F5_total_cells": 0
+        },
+        "next_priority": "F6 coverage screening",
         "materialization_allowed": false
       }
     },
@@ -556,6 +580,14 @@
     {
       "id": "f5_equity_subcomponent_bridge",
       "status": "PARTIAL_F511_11_PER_MEASURE_F512_F519_ZERO_BILATERAL_F51_ZERO"
+    },
+    {
+      "id": "f5_component_aware_rank",
+      "status": "PASS_RANK_73_NULLITY_67_ZERO_UNCONDITIONAL_F51_OR_F5_TOTAL_CELLS"
+    },
+    {
+      "id": "f5_freeze_public_data_boundary",
+      "status": "ENFORCED_NO_SYNTHETIC_TOTAL_F5_ALLOCATION"
     }
   ]
 }
