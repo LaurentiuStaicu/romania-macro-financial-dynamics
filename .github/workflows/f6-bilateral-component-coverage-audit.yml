@@ -31,4 +31,4 @@ jobs:
           name: f6-bilateral-components-${{ github.sha }}
           path: f6_component_artifacts/
           if-no-files-found: error
-          retention-days: 30
+          retention-days: 90
