@@ -1,0 +1,2213 @@
+{
+  "materialization_version": "0.1",
+  "instrument": "F3",
+  "source_vintage": "accounting-f3-2025-vintage-2026-09-18",
+  "benchmark_stock_period": "2025-Q4",
+  "benchmark_flow_period": "2025-Q1..2025-Q4",
+  "value_rule": "official published precision from the retained ECB QSA audit",
+  "sector_identity": "F = S12 - S121",
+  "counts": {
+    "stock": {
+      "OBSERVED": 24,
+      "DERIVED": 11,
+      "NOT_APPLICABLE": 1
+    },
+    "flow": {
+      "OBSERVED": 0,
+      "DERIVED": 35,
+      "NOT_APPLICABLE": 1
+    }
+  },
+  "aggregate_reconciliation": [
+    {
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "sector": "H",
+      "canonical_row_sum_million_RON": 38434.23,
+      "published_total_assets_million_RON": 38434.24,
+      "asset_residual_million_RON": -0.00999999999476131,
+      "asset_reconciliation": "PASS",
+      "canonical_column_sum_million_RON": 0.0,
+      "published_total_liabilities_million_RON": 0.0,
+      "liability_residual_million_RON": 0.0,
+      "liability_reconciliation": "PASS",
+      "published_assets_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S1M.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 38434.24
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "published_liabilities_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S1M.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      }
+    },
+    {
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "sector": "C",
+      "canonical_row_sum_million_RON": 18395.76,
+      "published_total_assets_million_RON": 18395.76,
+      "asset_residual_million_RON": 0.0,
+      "asset_reconciliation": "PASS",
+      "canonical_column_sum_million_RON": 13744.07,
+      "published_total_liabilities_million_RON": 13744.07,
+      "liability_residual_million_RON": 0.0,
+      "liability_reconciliation": "PASS",
+      "published_assets_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S11.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 18395.76
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "published_liabilities_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S11.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 13744.07
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      }
+    },
+    {
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "sector": "F",
+      "canonical_row_sum_million_RON": 450285.61,
+      "published_total_assets_million_RON": 450285.62,
+      "asset_residual_million_RON": -0.010000000009313226,
+      "asset_reconciliation": "PASS",
+      "canonical_column_sum_million_RON": 44847.15,
+      "published_total_liabilities_million_RON": 44847.12,
+      "liability_residual_million_RON": 0.029999999998835847,
+      "liability_reconciliation": "PASS",
+      "published_assets_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S12.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 675599.62
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W0.S121.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 225314.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "published_liabilities_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S12.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 44847.12
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W0.S121.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      }
+    },
+    {
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "sector": "G",
+      "canonical_row_sum_million_RON": 13900.099999999999,
+      "published_total_assets_million_RON": 13900.1,
+      "asset_residual_million_RON": -1.8189894035458565e-12,
+      "asset_reconciliation": "PASS",
+      "canonical_column_sum_million_RON": 916941.2799999999,
+      "published_total_liabilities_million_RON": 916941.29,
+      "liability_residual_million_RON": -0.010000000125728548,
+      "liability_reconciliation": "PASS",
+      "published_assets_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S13.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 13900.1
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "published_liabilities_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S13.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 916941.29
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      }
+    },
+    {
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "sector": "BNR",
+      "canonical_row_sum_million_RON": 225314.00999999998,
+      "published_total_assets_million_RON": 225314.0,
+      "asset_residual_million_RON": 0.009999999980209395,
+      "asset_reconciliation": "PASS",
+      "canonical_column_sum_million_RON": 0.0,
+      "published_total_liabilities_million_RON": 0.0,
+      "liability_residual_million_RON": 0.0,
+      "liability_reconciliation": "PASS",
+      "published_assets_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S121.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 225314.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "published_liabilities_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S121.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      }
+    },
+    {
+      "measure": "flow",
+      "qsa_measure": "F",
+      "sector": "H",
+      "canonical_row_sum_million_RON": 8114.41,
+      "published_total_assets_million_RON": 8114.429999999999,
+      "asset_residual_million_RON": -0.019999999999527063,
+      "asset_reconciliation": "PASS",
+      "canonical_column_sum_million_RON": 0.0,
+      "published_total_liabilities_million_RON": 0.0,
+      "liability_residual_million_RON": 0.0,
+      "liability_reconciliation": "PASS",
+      "published_assets_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S1M.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 6361.78,
+              "2025-Q2": 1896.2,
+              "2025-Q3": 556.16,
+              "2025-Q4": -699.71
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "published_liabilities_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S1M.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      }
+    },
+    {
+      "measure": "flow",
+      "qsa_measure": "F",
+      "sector": "C",
+      "canonical_row_sum_million_RON": 2400.5600000000004,
+      "published_total_assets_million_RON": 2400.56,
+      "asset_residual_million_RON": 4.547473508864641e-13,
+      "asset_reconciliation": "PASS",
+      "canonical_column_sum_million_RON": 8312.52,
+      "published_total_liabilities_million_RON": 8312.52,
+      "liability_residual_million_RON": 0.0,
+      "liability_reconciliation": "PASS",
+      "published_assets_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S11.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 2038.72,
+              "2025-Q2": -1211.56,
+              "2025-Q3": 1589.99,
+              "2025-Q4": -16.59
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "published_liabilities_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S11.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 168.7,
+              "2025-Q2": -13.05,
+              "2025-Q3": 2574.95,
+              "2025-Q4": 5581.92
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      }
+    },
+    {
+      "measure": "flow",
+      "qsa_measure": "F",
+      "sector": "F",
+      "canonical_row_sum_million_RON": 58121.16000000001,
+      "published_total_assets_million_RON": 58121.130000000005,
+      "asset_residual_million_RON": 0.030000000006111804,
+      "asset_reconciliation": "PASS",
+      "canonical_column_sum_million_RON": 7470.14,
+      "published_total_liabilities_million_RON": 7470.13,
+      "liability_residual_million_RON": 0.010000000000218279,
+      "liability_reconciliation": "PASS",
+      "published_assets_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S12.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 3923.86,
+              "2025-Q2": 781.95,
+              "2025-Q3": 62240.62,
+              "2025-Q4": 16972.67
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W0.S121.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": -6025.49,
+              "2025-Q2": -20444.38,
+              "2025-Q3": 54493.07,
+              "2025-Q4": -2225.23
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "published_liabilities_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S12.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 764.11,
+              "2025-Q2": -0.3,
+              "2025-Q3": 1636.6,
+              "2025-Q4": 5069.72
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W0.S121.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      }
+    },
+    {
+      "measure": "flow",
+      "qsa_measure": "F",
+      "sector": "G",
+      "canonical_row_sum_million_RON": 2023.8100000000002,
+      "published_total_assets_million_RON": 2023.8200000000002,
+      "asset_residual_million_RON": -0.009999999999990905,
+      "asset_reconciliation": "PASS",
+      "canonical_column_sum_million_RON": 130538.49,
+      "published_total_liabilities_million_RON": 130538.47,
+      "liability_residual_million_RON": 0.020000000004074536,
+      "liability_reconciliation": "PASS",
+      "published_assets_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S13.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 946.61,
+              "2025-Q2": 525.82,
+              "2025-Q3": 292.68,
+              "2025-Q4": 258.71
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "published_liabilities_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S13.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 35951.48,
+              "2025-Q2": 40310.62,
+              "2025-Q3": 38188.28,
+              "2025-Q4": 16088.09
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      }
+    },
+    {
+      "measure": "flow",
+      "qsa_measure": "F",
+      "sector": "BNR",
+      "canonical_row_sum_million_RON": 25797.969999999998,
+      "published_total_assets_million_RON": 25797.969999999998,
+      "asset_residual_million_RON": 0.0,
+      "asset_reconciliation": "PASS",
+      "canonical_column_sum_million_RON": 0.0,
+      "published_total_liabilities_million_RON": 0.0,
+      "liability_residual_million_RON": 0.0,
+      "liability_reconciliation": "PASS",
+      "published_assets_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S121.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": -6025.49,
+              "2025-Q2": -20444.38,
+              "2025-Q3": 54493.07,
+              "2025-Q4": -2225.23
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "published_liabilities_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S121.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      }
+    }
+  ],
+  "maturity_reconciliation": [
+    {
+      "measure": "stock",
+      "cell": "X->G",
+      "all_maturity_million_RON": 448235.66,
+      "short_maturity_million_RON": 1520.41,
+      "long_maturity_million_RON": 446715.26,
+      "short_plus_long_million_RON": 448235.67,
+      "residual_million_RON": -0.010000000009313226,
+      "reconciliation": "PASS",
+      "short_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S13.S1.N.L.LE.F3.S._Z.XDC._T.S.V.N._T",
+            "side": "X_to_G_S",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 1520.41
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "long_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S13.S1.N.L.LE.F3.L._Z.XDC._T.S.V.N._T",
+            "side": "X_to_G_L",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 446715.26
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      }
+    },
+    {
+      "measure": "flow",
+      "cell": "X->G",
+      "all_maturity_million_RON": 67153.17,
+      "short_maturity_million_RON": -553.35,
+      "long_maturity_million_RON": 67706.52,
+      "short_plus_long_million_RON": 67153.17,
+      "residual_million_RON": 0.0,
+      "reconciliation": "PASS",
+      "short_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S13.S1.N.L.F.F3.S._Z.XDC._T.S.V.N._T",
+            "side": "X_to_G_S",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 632.75,
+              "2025-Q2": -220.9,
+              "2025-Q3": -131.76,
+              "2025-Q4": -833.44
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "long_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S13.S1.N.L.F.F3.L._Z.XDC._T.S.V.N._T",
+            "side": "X_to_G_L",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 15483.14,
+              "2025-Q2": 13628.14,
+              "2025-Q3": 30282.23,
+              "2025-Q4": 8313.01
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      }
+    }
+  ],
+  "cells": [
+    {
+      "holder": "H",
+      "issuer": "H",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "OBSERVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S1M.S1M.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S1M.S1M.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "H",
+      "issuer": "C",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "OBSERVED",
+      "value": 199.92,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S1M.S11.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S1M.S11.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "H",
+      "issuer": "F",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "DERIVED",
+      "value": 152.31,
+      "unit": "million_RON",
+      "source_series_key": null,
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S1M.S12.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        },
+        {
+          "coefficient": -1.0,
+          "series_key": "QSA.Q.N.RO.W2.S1M.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S1M.S12.N.A.LE.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S1M.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+    },
+    {
+      "holder": "H",
+      "issuer": "G",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "OBSERVED",
+      "value": 36382.75,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S1M.S13.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S1M.S13.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "H",
+      "issuer": "X",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "OBSERVED",
+      "value": 1699.25,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W1.S1M.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W1.S1M.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "H",
+      "issuer": "BNR",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "OBSERVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S1M.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S1M.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "C",
+      "issuer": "H",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "OBSERVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S11.S1M.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S11.S1M.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "C",
+      "issuer": "C",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "OBSERVED",
+      "value": 90.95,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S11.S11.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S11.S11.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "C",
+      "issuer": "F",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "DERIVED",
+      "value": 1156.39,
+      "unit": "million_RON",
+      "source_series_key": null,
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S11.S12.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        },
+        {
+          "coefficient": -1.0,
+          "series_key": "QSA.Q.N.RO.W2.S11.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S11.S12.N.A.LE.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S11.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+    },
+    {
+      "holder": "C",
+      "issuer": "G",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "OBSERVED",
+      "value": 16661.8,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S11.S13.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S11.S13.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "C",
+      "issuer": "X",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "OBSERVED",
+      "value": 486.62,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W1.S11.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W1.S11.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "C",
+      "issuer": "BNR",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "OBSERVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S11.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S11.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "F",
+      "issuer": "H",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "DERIVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": null,
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S12.S1M.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        },
+        {
+          "coefficient": -1.0,
+          "series_key": "QSA.Q.N.RO.W2.S121.S1M.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S12.S1M.N.A.LE.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S121.S1M.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+    },
+    {
+      "holder": "F",
+      "issuer": "C",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "DERIVED",
+      "value": 1361.14,
+      "unit": "million_RON",
+      "source_series_key": null,
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S12.S11.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        },
+        {
+          "coefficient": -1.0,
+          "series_key": "QSA.Q.N.RO.W2.S121.S11.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S12.S11.N.A.LE.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S121.S11.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+    },
+    {
+      "holder": "F",
+      "issuer": "F",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "DERIVED",
+      "value": 10619.24,
+      "unit": "million_RON",
+      "source_series_key": null,
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S12.S12.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        },
+        {
+          "coefficient": -1.0,
+          "series_key": "QSA.Q.N.RO.W2.S12.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        },
+        {
+          "coefficient": -1.0,
+          "series_key": "QSA.Q.N.RO.W2.S121.S12.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        },
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S121.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S12.S12.N.A.LE.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S12.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S121.S12.N.A.LE.F3.T._Z.XDC._T.S.V.N._T + +1*QSA.Q.N.RO.W2.S121.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+    },
+    {
+      "holder": "F",
+      "issuer": "G",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "DERIVED",
+      "value": 403504.78,
+      "unit": "million_RON",
+      "source_series_key": null,
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S12.S13.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        },
+        {
+          "coefficient": -1.0,
+          "series_key": "QSA.Q.N.RO.W2.S121.S13.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S12.S13.N.A.LE.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S121.S13.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+    },
+    {
+      "holder": "F",
+      "issuer": "X",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "DERIVED",
+      "value": 34800.45,
+      "unit": "million_RON",
+      "source_series_key": null,
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W1.S12.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        },
+        {
+          "coefficient": -1.0,
+          "series_key": "QSA.Q.N.RO.W1.S121.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W1.S12.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W1.S121.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+    },
+    {
+      "holder": "F",
+      "issuer": "BNR",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "DERIVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": null,
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S12.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        },
+        {
+          "coefficient": -1.0,
+          "series_key": "QSA.Q.N.RO.W2.S121.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S12.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S121.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+    },
+    {
+      "holder": "G",
+      "issuer": "H",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "OBSERVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S13.S1M.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S13.S1M.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "G",
+      "issuer": "C",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "OBSERVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S13.S11.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S13.S11.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "G",
+      "issuer": "F",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "DERIVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": null,
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S13.S12.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        },
+        {
+          "coefficient": -1.0,
+          "series_key": "QSA.Q.N.RO.W2.S13.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S13.S12.N.A.LE.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S13.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+    },
+    {
+      "holder": "G",
+      "issuer": "G",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "OBSERVED",
+      "value": 10606.39,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S13.S13.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S13.S13.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "G",
+      "issuer": "X",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "OBSERVED",
+      "value": 3293.71,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W1.S13.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W1.S13.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "G",
+      "issuer": "BNR",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "OBSERVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S13.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S13.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "X",
+      "issuer": "H",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "OBSERVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W1.S1M.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W1.S1M.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "X",
+      "issuer": "C",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "OBSERVED",
+      "value": 12092.06,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W1.S11.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W1.S11.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "X",
+      "issuer": "F",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "DERIVED",
+      "value": 32919.21,
+      "unit": "million_RON",
+      "source_series_key": null,
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W1.S12.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T"
+        },
+        {
+          "coefficient": -1.0,
+          "series_key": "QSA.Q.N.RO.W1.S121.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W1.S12.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W1.S121.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T"
+    },
+    {
+      "holder": "X",
+      "issuer": "G",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "OBSERVED",
+      "value": 448235.66,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W1.S13.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W1.S13.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "X",
+      "issuer": "X",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "NOT_APPLICABLE",
+      "value": null,
+      "unit": "million_RON",
+      "source_series_key": null,
+      "source_terms": [],
+      "note": "Outside the Romanian national financial-accounts boundary: RMD represents resident-sector positions vis-a-vis the rest of the world, not positions among non-residents themselves."
+    },
+    {
+      "holder": "X",
+      "issuer": "BNR",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "OBSERVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W1.S121.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W1.S121.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "BNR",
+      "issuer": "H",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "OBSERVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S121.S1M.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S121.S1M.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "BNR",
+      "issuer": "C",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "OBSERVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S121.S11.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S121.S11.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "BNR",
+      "issuer": "F",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "DERIVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": null,
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S121.S12.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        },
+        {
+          "coefficient": -1.0,
+          "series_key": "QSA.Q.N.RO.W2.S121.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S121.S12.N.A.LE.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S121.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+    },
+    {
+      "holder": "BNR",
+      "issuer": "G",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "OBSERVED",
+      "value": 1549.9,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S121.S13.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S121.S13.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "BNR",
+      "issuer": "X",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "OBSERVED",
+      "value": 223764.11,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W1.S121.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W1.S121.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "BNR",
+      "issuer": "BNR",
+      "instrument": "F3",
+      "measure": "stock",
+      "status": "OBSERVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S121.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S121.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "H",
+      "issuer": "H",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S1M.S1M.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S1M.S1M.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "H",
+      "issuer": "C",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": -25.86,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S1M.S11.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S1M.S11.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "H",
+      "issuer": "F",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 7.3,
+      "unit": "million_RON",
+      "source_series_key": null,
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S1M.S12.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        },
+        {
+          "coefficient": -1.0,
+          "series_key": "QSA.Q.N.RO.W2.S1M.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation Q1+Q2+Q3+Q4 plus additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S1M.S12.N.A.F.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S1M.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+    },
+    {
+      "holder": "H",
+      "issuer": "G",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 7902.27,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S1M.S13.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S1M.S13.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "H",
+      "issuer": "X",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 230.7,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W1.S1M.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W1.S1M.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "H",
+      "issuer": "BNR",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S1M.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S1M.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "C",
+      "issuer": "H",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S11.S1M.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S11.S1M.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "C",
+      "issuer": "C",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": -19.63,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S11.S11.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S11.S11.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "C",
+      "issuer": "F",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 55.75,
+      "unit": "million_RON",
+      "source_series_key": null,
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S11.S12.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        },
+        {
+          "coefficient": -1.0,
+          "series_key": "QSA.Q.N.RO.W2.S11.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation Q1+Q2+Q3+Q4 plus additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S11.S12.N.A.F.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S11.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+    },
+    {
+      "holder": "C",
+      "issuer": "G",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 2139.95,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S11.S13.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S11.S13.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "C",
+      "issuer": "X",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 224.49,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W1.S11.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W1.S11.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "C",
+      "issuer": "BNR",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S11.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S11.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "F",
+      "issuer": "H",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": null,
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S12.S1M.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        },
+        {
+          "coefficient": -1.0,
+          "series_key": "QSA.Q.N.RO.W2.S121.S1M.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation Q1+Q2+Q3+Q4 plus additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S12.S1M.N.A.F.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S121.S1M.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+    },
+    {
+      "holder": "F",
+      "issuer": "C",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 574.31,
+      "unit": "million_RON",
+      "source_series_key": null,
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S12.S11.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        },
+        {
+          "coefficient": -1.0,
+          "series_key": "QSA.Q.N.RO.W2.S121.S11.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation Q1+Q2+Q3+Q4 plus additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S12.S11.N.A.F.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S121.S11.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+    },
+    {
+      "holder": "F",
+      "issuer": "F",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 2373.54,
+      "unit": "million_RON",
+      "source_series_key": null,
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S12.S12.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        },
+        {
+          "coefficient": -1.0,
+          "series_key": "QSA.Q.N.RO.W2.S12.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        },
+        {
+          "coefficient": -1.0,
+          "series_key": "QSA.Q.N.RO.W2.S121.S12.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        },
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S121.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation Q1+Q2+Q3+Q4 plus additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S12.S12.N.A.F.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S12.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S121.S12.N.A.F.F3.T._Z.XDC._T.S.V.N._T + +1*QSA.Q.N.RO.W2.S121.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+    },
+    {
+      "holder": "F",
+      "issuer": "G",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 53044.88,
+      "unit": "million_RON",
+      "source_series_key": null,
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S12.S13.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        },
+        {
+          "coefficient": -1.0,
+          "series_key": "QSA.Q.N.RO.W2.S121.S13.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation Q1+Q2+Q3+Q4 plus additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S12.S13.N.A.F.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S121.S13.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+    },
+    {
+      "holder": "F",
+      "issuer": "X",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 2128.43,
+      "unit": "million_RON",
+      "source_series_key": null,
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W1.S12.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        },
+        {
+          "coefficient": -1.0,
+          "series_key": "QSA.Q.N.RO.W1.S121.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation Q1+Q2+Q3+Q4 plus additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W1.S12.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W1.S121.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+    },
+    {
+      "holder": "F",
+      "issuer": "BNR",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": null,
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S12.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        },
+        {
+          "coefficient": -1.0,
+          "series_key": "QSA.Q.N.RO.W2.S121.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation Q1+Q2+Q3+Q4 plus additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S12.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S121.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+    },
+    {
+      "holder": "G",
+      "issuer": "H",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S13.S1M.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S13.S1M.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "G",
+      "issuer": "C",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S13.S11.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S13.S11.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "G",
+      "issuer": "F",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": null,
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S13.S12.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        },
+        {
+          "coefficient": -1.0,
+          "series_key": "QSA.Q.N.RO.W2.S13.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation Q1+Q2+Q3+Q4 plus additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S13.S12.N.A.F.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S13.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+    },
+    {
+      "holder": "G",
+      "issuer": "G",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 1901.9,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S13.S13.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S13.S13.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "G",
+      "issuer": "X",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 121.91,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W1.S13.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W1.S13.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "G",
+      "issuer": "BNR",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S13.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S13.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "X",
+      "issuer": "H",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W1.S1M.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W1.S1M.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "X",
+      "issuer": "C",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 7783.7,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W1.S11.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W1.S11.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "X",
+      "issuer": "F",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 5033.55,
+      "unit": "million_RON",
+      "source_series_key": null,
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W1.S12.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T"
+        },
+        {
+          "coefficient": -1.0,
+          "series_key": "QSA.Q.N.RO.W1.S121.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation Q1+Q2+Q3+Q4 plus additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W1.S12.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W1.S121.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T"
+    },
+    {
+      "holder": "X",
+      "issuer": "G",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 67153.17,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W1.S13.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W1.S13.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "X",
+      "issuer": "X",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "NOT_APPLICABLE",
+      "value": null,
+      "unit": "million_RON",
+      "source_series_key": null,
+      "source_terms": [],
+      "note": "Outside the Romanian national financial-accounts boundary: RMD represents resident-sector positions vis-a-vis the rest of the world, not positions among non-residents themselves."
+    },
+    {
+      "holder": "X",
+      "issuer": "BNR",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W1.S121.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W1.S121.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "BNR",
+      "issuer": "H",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S121.S1M.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S121.S1M.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "BNR",
+      "issuer": "C",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S121.S11.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S121.S11.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "BNR",
+      "issuer": "F",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": null,
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S121.S12.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        },
+        {
+          "coefficient": -1.0,
+          "series_key": "QSA.Q.N.RO.W2.S121.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation Q1+Q2+Q3+Q4 plus additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S121.S12.N.A.F.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S121.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+    },
+    {
+      "holder": "BNR",
+      "issuer": "G",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": -1603.68,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S121.S13.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S121.S13.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "BNR",
+      "issuer": "X",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 27401.65,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W1.S121.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W1.S121.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18."
+    },
+    {
+      "holder": "BNR",
+      "issuer": "BNR",
+      "instrument": "F3",
+      "measure": "flow",
+      "status": "DERIVED",
+      "value": 0.0,
+      "unit": "million_RON",
+      "source_series_key": "QSA.Q.N.RO.W2.S121.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+      "source_terms": [
+        {
+          "coefficient": 1.0,
+          "series_key": "QSA.Q.N.RO.W2.S121.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+        }
+      ],
+      "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18."
+    }
+  ]
+}
