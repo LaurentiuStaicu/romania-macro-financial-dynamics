@@ -1,0 +1,74 @@
+{
+  "contract_version": "0.1",
+  "phase": "Accounting Empirical Recovery / Phase A — QSA source-coverage audit",
+  "purpose": "Determine which canonical RMD bilateral accounting cells can be populated from exact ECB QSA observations or exact algebraic sector aggregation before changing benchmark values or statuses.",
+  "scope": {
+    "first_priority_instrument": "F3",
+    "benchmark_stock_period": "2025-Q4",
+    "benchmark_flow_period": "2025-Q1..2025-Q4",
+    "benchmark_flow_aggregation": "sum of four definitionally identical quarterly transactions",
+    "repository_mutation_from_live_audit": false
+  },
+  "hard_rules": {
+    "no_synthetic_bilateral_allocation": true,
+    "no_missing_value_to_zero": true,
+    "no_benchmark_cell_promotion_during_source_coverage_audit": true,
+    "no_aggregate_control_relabelled_as_bilateral_cell": true,
+    "asset_liability_mirror_checked_when_both_sides_are_public": true,
+    "all_derived_sector_values_require_exact_additive_identity": true,
+    "failed_or_missing_series_are_scientific_results": true
+  },
+  "qsa_definition": {
+    "frequency": "Q",
+    "adjustment": "N",
+    "reference_area": "RO",
+    "consolidation": "N",
+    "unit": "XDC",
+    "required_unit_multiplier": 6,
+    "currency_denominator": "_T",
+    "valuation": "S",
+    "prices": "V",
+    "transformation": "N",
+    "custom_breakdown": "_T",
+    "domestic_counterpart_area": "W2",
+    "rest_of_world_counterpart_area": "W1",
+    "stock_code": "LE",
+    "transaction_code": "F",
+    "maturity": "T",
+    "cofog": "_Z"
+  },
+  "sector_mapping": {
+    "H": {"qsa_identity": "S1M", "meaning": "Households and NPISH"},
+    "C": {"qsa_identity": "S11", "meaning": "Non-financial corporations"},
+    "G": {"qsa_identity": "S13", "meaning": "General government"},
+    "BNR": {"qsa_identity": "S121", "meaning": "Central bank"},
+    "F": {
+      "qsa_identity": "S12 - S121",
+      "meaning": "Financial corporations excluding the central bank",
+      "derivation": "Exact additive subtraction only, using definitionally identical QSA series. If any required component is absent, the canonical cell remains unresolved."
+    },
+    "X": {
+      "qsa_identity": "non-resident counterpart",
+      "meaning": "Rest of the world",
+      "encoding_rule": "Represent resident-vs-rest-of-world positions through counterpart area W1 with counterpart sector S1 on the resident reference-sector side. Do not invent an S2 bilateral series when the national QSA WTWTW boundary is encoded by counterpart area."
+    }
+  },
+  "canonical_orientation": {
+    "domestic_holder_domestic_issuer": "asset-side QSA series with reference sector = holder and counterpart sector = issuer; liability-side mirror is an independent reconciliation check",
+    "resident_holder_rest_of_world_issuer": "resident holder asset-side QSA series with counterpart area W1 and counterpart sector S1",
+    "rest_of_world_holder_resident_issuer": "resident issuer liability-side QSA series with counterpart area W1 and counterpart sector S1",
+    "rest_of_world_holder_rest_of_world_issuer": "outside the Romanian national-accounts bilateral boundary; candidate for NOT_APPLICABLE only after boundary audit, not changed in this phase"
+  },
+  "financial_sector_exact_identity": {
+    "single_axis": "F = S12 - S121",
+    "both_axes": "F→F = S12→S12 - S121→S12 - S12→S121 + S121→S121",
+    "status": "DERIVATION_CANDIDATE_PENDING_LIVE_COVERAGE_AND_MIRROR_CHECK"
+  },
+  "promotion_gate_after_audit": [
+    "exact series definition matches the canonical holder, issuer, instrument, measure, maturity, consolidation, valuation, currency and unit",
+    "required 2025 observation or all four quarterly transactions exist and are finite",
+    "all exact-derivation components exist when a composite sector is used",
+    "asset/liability mirror residual is within the preregistered tolerance when both sides are available",
+    "raw source payload and normalized audit output receive provenance hashes before any value is committed to the benchmark"
+  ]
+}
