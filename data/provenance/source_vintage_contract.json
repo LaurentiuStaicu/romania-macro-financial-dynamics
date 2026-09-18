@@ -1,0 +1,51 @@
+{
+  "contract_version": "0.1",
+  "purpose": "Make every empirical source snapshot reproducible from retained raw bytes through normalized series to retained scientific artifacts without relying on a later live refetch.",
+  "principles": {
+    "raw_bytes_are_immutable": true,
+    "hash_raw_before_transformation": true,
+    "retain_exact_request_url_and_accept_header": true,
+    "retain_response_metadata_when_available": true,
+    "retain_normalized_output_hash": true,
+    "retain_transformation_code_hash": true,
+    "missing_raw_bytes_may_not_be_reconstructed_by_assumption": true,
+    "later_live_refetch_is_not_the_original_vintage_unless_sha256_matches": true,
+    "source_revisions_must_not_silently_replace_a_retained_vintage": true
+  },
+  "required_manifest_fields": {
+    "snapshot": [
+      "snapshot_id",
+      "fetched_at_utc",
+      "fetcher_script",
+      "fetcher_script_sha256"
+    ],
+    "raw_source": [
+      "name",
+      "institution",
+      "url",
+      "accept",
+      "status",
+      "bytes",
+      "sha256",
+      "path"
+    ],
+    "normalized_output": [
+      "path",
+      "sha256",
+      "derived_from_raw_sha256",
+      "normalizer"
+    ]
+  },
+  "source_reuse": {
+    "ECB": {
+      "policy": "Public ESCB statistics may be reused free of charge with source attribution; revisions and updates may change published values.",
+      "policy_url": "https://www.ecb.europa.eu/stats/ecb_statistics/governance_and_quality_framework/html/usage_policy.en.html"
+    },
+    "BIS": {
+      "policy": "BIS statistics may be reproduced subject to the BIS permitted-use conditions and source attribution.",
+      "policy_url": "https://data.bis.org/help/legal"
+    }
+  },
+  "release_rule": "A release may claim exact source-vintage reproducibility only when every source used by a retained scientific result has repository-retained raw bytes whose SHA-256 matches its manifest and every normalized derivative has a recorded SHA-256 and transformation provenance.",
+  "legacy_rule": "A historical manifest that contains hashes but not the hashed raw payloads is retained as evidence of what was fetched, but is classified HASH_ONLY_LEGACY and must not be represented as exactly reproducible from that release."
+}

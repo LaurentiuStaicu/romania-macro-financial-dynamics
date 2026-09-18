@@ -46,6 +46,9 @@ jobs:
       - name: Run scientific invariant tests
         run: python -m unittest discover -s tests -v
 
+      - name: Verify retained source-vintage provenance state offline
+        run: python scripts/verify_validation_recovery_provenance.py
+
       - name: Preserve retained validation artifacts
         run: |
           cp model/calibration_validation/validation_recovery_selection.json /tmp/retained_selection.json
@@ -59,5 +62,9 @@ jobs:
 
       - name: Verify retained validation artifacts are semantically unchanged
         run: |
-          python scripts/check_json_semantic_equivalence.py             /tmp/retained_selection.json             model/calibration_validation/validation_recovery_selection.json
-          python scripts/check_json_semantic_equivalence.py             /tmp/retained_holdout.json             model/calibration_validation/validation_recovery_holdout.json
+          python scripts/check_json_semantic_equivalence.py \
+            /tmp/retained_selection.json \
+            model/calibration_validation/validation_recovery_selection.json
+          python scripts/check_json_semantic_equivalence.py \
+            /tmp/retained_holdout.json \
+            model/calibration_validation/validation_recovery_holdout.json

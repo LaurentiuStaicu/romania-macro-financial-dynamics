@@ -1,0 +1,55 @@
+name: Provenance Audit
+
+on:
+  pull_request:
+    paths:
+      - "scripts/fetch_validation_recovery_data.py"
+      - "scripts/compare_live_to_legacy_vintage.py"
+      - "scripts/compare_live_normalized_to_retained.py"
+      - "data/provenance/**"
+      - ".github/workflows/provenance-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compare-live-source-vintage:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Fetch current official-source payloads without changing the repository
+        env:
+          RECOVERY_OUT: provenance_live
+          RECOVERY_SNAPSHOT_ID: live-audit-${{ github.sha }}
+        run: python scripts/fetch_validation_recovery_data.py
+
+      - name: Compare current raw payload hashes with the v0.1.0 legacy hashes
+        run: |
+          python scripts/compare_live_to_legacy_vintage.py \
+            provenance_live/snapshot_manifest.json \
+            data/raw/validation_recovery/fetch_manifest.json \
+            provenance_live/comparison_to_v0.1.0.json
+
+      - name: Compare normalized statistical inputs with retained model data
+        run: |
+          python scripts/compare_live_normalized_to_retained.py \
+            provenance_live \
+            data/raw/validation_recovery \
+            provenance_live/normalized_comparison_to_retained.json
+
+      - name: Upload exact fetched bytes and comparisons as audit evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: validation-recovery-live-provenance-${{ github.sha }}
+          path: provenance_live/
+          if-no-files-found: error
+          retention-days: 30

@@ -1,0 +1,51 @@
+{
+  "registry_version": "0.2",
+  "scope": "validation-recovery official-source data",
+  "baseline_release": "v0.1.0",
+  "vintages": [
+    {
+      "id": "validation-recovery-2026-09-17",
+      "manifest": "data/raw/validation_recovery/fetch_manifest.json",
+      "recovery_manifest": "data/source_vintages/validation-recovery-2026-09-17/recovery_manifest.json",
+      "fetched_at_utc": "2026-09-17T15:42:48.557026+00:00",
+      "status": "PARTIAL_RAW_RECOVERY",
+      "known_raw_sha256_count": 4,
+      "raw_payloads_materialized_in_repository": 3,
+      "raw_payloads_not_recovered": 1,
+      "exact_vintage_reproducible_from_repository": false,
+      "byte_identical_recovered_sources": [
+        "ecb_household_housing_new_business_ron",
+        "ecb_nfc_new_business_total_ron",
+        "ecb_nfc_new_business_upto1y_ron"
+      ],
+      "unrecovered_raw_sources": [
+        "bis_policy_rate_xml"
+      ],
+      "live_audit_2026_09_18": {
+        "all_three_ecb_raw_payloads_match_legacy_sha256": true,
+        "bis_raw_payload_matches_legacy_sha256": false,
+        "all_normalized_statistical_inputs_match_retained_model_inputs": true,
+        "normalized_series_counts": {
+          "household_housing": 108,
+          "nfc_upto1y": 108,
+          "nfc_total": 88,
+          "bis_policy_rate": 260
+        },
+        "interpretation": "The retained statistical rows used by the model reconcile exactly with the 2026-09-18 live official-source fetch. The BIS transport XML is not byte-identical to the historical raw response; current BIS XML contains response-level identifiers and preparation/extraction timestamps, so a raw-envelope mismatch alone is not treated as evidence of a changed normalized policy-rate series."
+      },
+      "reason": "v0.1.0 retained all four raw SHA-256 digests but not the raw payloads. Three ECB payloads were recovered on 2026-09-18 because their live responses were byte-identical to the legacy hashes. The BIS raw response did not match and is therefore not relabelled as the historical payload.",
+      "recovery_rule": "Do not claim complete exact raw-vintage reproducibility unless the missing BIS historical payload is independently recovered with its recorded SHA-256. The normalized statistical inputs are separately reconciled and must not be conflated with raw transport-envelope reproducibility."
+    }
+  ],
+  "future_capture_policy": {
+    "status_required_for_release": "ARCHIVED_RAW_VERIFIED",
+    "retain_raw_payloads": true,
+    "retain_normalized_payloads": true,
+    "record_raw_sha256": true,
+    "record_normalized_sha256": true,
+    "record_fetcher_script_sha256": true,
+    "record_source_request_and_response_metadata": true,
+    "network_refetch_required_for_reproduction": false,
+    "allow_revision_overwrite": false
+  }
+}
