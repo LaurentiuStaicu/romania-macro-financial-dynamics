@@ -1,1 +1,46 @@
-name: F2M External Identity Audit\n\non:\n  pull_request:\n    paths:\n      - "model/accounting/f2m_external_identity_contract.json"\n      - "scripts/audit_qsa_f2m_external_identity.py"\n      - ".github/workflows/f2m-external-identity-audit.yml"\n  workflow_dispatch:\n\npermissions:\n  contents: read\n\njobs:\n  audit-f2m-external-complement:\n    runs-on: ubuntu-latest\n\n    steps:\n      - name: Check out repository\n        uses: actions/checkout@v7\n\n      - name: Set up Python 3.12\n        uses: actions/setup-python@v7\n        with:\n          python-version: "3.12"\n\n      - name: Re-run Phase A1 F2M coverage audit\n        env:\n          F2M_AUDIT_OUT: f2m_audit_artifacts\n        run: python scripts/audit_qsa_f2m_deposit_coverage.py\n\n      - name: Test QSA W0/W2/W1 external complement identities\n        env:\n          F2M_AUDIT_IN: f2m_audit_artifacts\n          F2M_EXTERNAL_AUDIT_OUT: f2m_external_audit_artifacts\n        run: python scripts/audit_qsa_f2m_external_identity.py\n\n      - name: Upload Phase A1 and A2 audit evidence\n        uses: actions/upload-artifact@v4\n        with:\n          name: f2m-external-identity-${{ github.sha }}\n          path: |\n            f2m_audit_artifacts/\n            f2m_external_audit_artifacts/\n          if-no-files-found: error\n          retention-days: 30\n
+name: F2M External Identity Audit
+
+on:
+  pull_request:
+    paths:
+      - "model/accounting/f2m_external_identity_contract.json"
+      - "scripts/audit_qsa_f2m_external_identity.py"
+      - ".github/workflows/f2m-external-identity-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit-f2m-external-complement:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Re-run Phase A1 F2M coverage audit
+        env:
+          F2M_AUDIT_OUT: f2m_audit_artifacts
+        run: python scripts/audit_qsa_f2m_deposit_coverage.py
+
+      - name: Test QSA W0/W2/W1 external complement identities
+        env:
+          F2M_AUDIT_IN: f2m_audit_artifacts
+          F2M_EXTERNAL_AUDIT_OUT: f2m_external_audit_artifacts
+        run: python scripts/audit_qsa_f2m_external_identity.py
+
+      - name: Upload Phase A1 and A2 audit evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: f2m-external-identity-${{ github.sha }}
+          path: |
+            f2m_audit_artifacts/
+            f2m_external_audit_artifacts/
+          if-no-files-found: error
+          retention-days: 30
