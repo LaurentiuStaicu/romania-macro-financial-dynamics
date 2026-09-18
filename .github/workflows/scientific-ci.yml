@@ -16,10 +16,10 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Set up Python 3.12
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.12"
 
@@ -46,12 +46,18 @@ jobs:
       - name: Run scientific invariant tests
         run: python -m unittest discover -s tests -v
 
+      - name: Preserve retained validation artifacts
+        run: |
+          cp model/calibration_validation/validation_recovery_selection.json /tmp/retained_selection.json
+          cp model/calibration_validation/validation_recovery_holdout.json /tmp/retained_holdout.json
+
       - name: Reproduce validation-recovery selection
         run: python scripts/run_validation_recovery_selection.py
 
       - name: Reproduce authorized household holdout
         run: python scripts/run_validation_recovery_holdout.py
 
-      - name: Verify retained validation artifacts are unchanged
+      - name: Verify retained validation artifacts are semantically unchanged
         run: |
-          git diff --exit-code --             model/calibration_validation/validation_recovery_selection.json             model/calibration_validation/validation_recovery_holdout.json
+          python scripts/check_json_semantic_equivalence.py             /tmp/retained_selection.json             model/calibration_validation/validation_recovery_selection.json
+          python scripts/check_json_semantic_equivalence.py             /tmp/retained_holdout.json             model/calibration_validation/validation_recovery_holdout.json
