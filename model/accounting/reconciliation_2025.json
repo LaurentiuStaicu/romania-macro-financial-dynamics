@@ -1,5 +1,5 @@
 {
-  "ledger_version": "0.4",
+  "ledger_version": "0.5",
   "benchmark": "2025",
   "principle": "Record residuals and unresolved coverage explicitly; never force accounting closure with invented allocations.",
   "instrument_gates": [
@@ -58,8 +58,9 @@
       "known_issues": [
         "Money aggregates are not substitutes for sectoral ESA F2 positions.",
         "The F2M deposits component is materialized separately and must not be relabelled as total F2.",
-        "The F21 QSA coverage audit found aggregate holder/issuer controls but no published bilateral F21 cells in either tested W2 asset-side or liability-side orientation.",
-        "F21 therefore remains unresolved at the holder-by-issuer level. The next exact-identity gate is holder-specific W1 F2 minus the materialized W1 F2M component; aggregate currency totals must not be synthetically allocated."
+        "Direct QSA bilateral F21 cells are unavailable in the tested W2 asset-side and liability-side orientations.",
+        "The exact QSA bridge W1 F21(holder)=W1 F2(holder)-W1 F2M(holder) is blocked because holder-specific W1 total-F2 series are unavailable, even though total-economy W1 F2 is published.",
+        "The next source gate is BPS/BOP-IIP sector-structure reconciliation. Coarse BOP sectors must not be split synthetically and BPM6/ESA instrument differences must be explicit."
       ],
       "component_materialization": {
         "instrument": "F2M",
@@ -94,6 +95,17 @@
         "flow_2025_external_liabilities_W1_million_RON": 0,
         "bilateral_cells_observable": 0,
         "next_gate": "F21 external instrument bridge: W1 F2 minus W1 F2M",
+        "total_F2_promotion_allowed": false
+      },
+      "currency_F21_external_bridge": {
+        "status": "BLOCKED_HOLDER_SPECIFIC_W1_F2_UNAVAILABLE",
+        "assessment": "model/accounting/f21_f2_external_bridge_assessment.json",
+        "stock_W1_total_F2_million_RON": 172401.07,
+        "stock_W1_total_F21_million_RON": 6438.8,
+        "flow_2025_W1_total_F2_million_RON": -5106.8200000000015,
+        "flow_2025_W1_total_F21_million_RON": 393.43,
+        "holder_specific_W1_F2_available": false,
+        "next_gate": "BPS/BOP external-sector sector-structure audit",
         "total_F2_promotion_allowed": false
       }
     },
@@ -217,6 +229,10 @@
     {
       "id": "f21_direct_bilateral_qsa_coverage",
       "status": "NEGATIVE_RESULT_AGGREGATES_ONLY"
+    },
+    {
+      "id": "f21_qsa_external_instrument_bridge",
+      "status": "NEGATIVE_RESULT_HOLDER_W1_F2_UNAVAILABLE"
     }
   ]
 }
