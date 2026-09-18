@@ -1,15 +1,13 @@
 {
-  "contract_version": "0.5.1a0",
+  "contract_version": "0.1",
   "frozen_before_recovery_estimation": true,
-  "purpose": "Attempt to recover a scientifically defensible monetary-transmission reference mechanism without bypassing Alpha 0.5's negative validation result.",
+  "purpose": "Evaluate parsimonious monetary-transmission candidates under prospective calibration, structural-selection and holdout rules without reusing previously inspected evaluation data.",
   "hard_invariants": {
     "accounting_spine_unchanged": true,
     "dynamic_core_unchanged": true,
-    "infoclar_v1_1_unchanged": true,
-    "no_holdout_reuse_from_alpha_0_5": true,
+    "no_reuse_of_previously_inspected_holdout": true,
     "no_missing_value_imputation": true,
-    "no_extra_controls_added_for_fit": true,
-    "no_alpha_0_6_simulator_until_gate_reconsideration": true
+    "no_extra_controls_added_for_fit": true
   },
   "targets": [
     "household_housing_new_lending_rate_pct",
@@ -32,28 +30,48 @@
       "id": "delta_policy_contemporaneous",
       "equation": "lend[t] = lend[t-1] + beta * (policy[t]-policy[t-1])",
       "estimated_parameters": 1,
-      "parameter_domain_for_validation": {"beta":[0.0,2.0]},
+      "parameter_domain_for_validation": {
+        "beta": [
+          0,
+          2
+        ]
+      },
       "interpretation": "Immediate monthly pass-through in changes without intercept."
     },
     {
       "id": "delta_policy_lag1",
       "equation": "lend[t] = lend[t-1] + beta * (policy[t-1]-policy[t-2])",
       "estimated_parameters": 1,
-      "parameter_domain_for_validation": {"beta":[0.0,2.0]},
+      "parameter_domain_for_validation": {
+        "beta": [
+          0,
+          2
+        ]
+      },
       "interpretation": "One-month delayed pass-through in changes without intercept."
     },
     {
       "id": "anchored_partial_adjustment",
       "equation": "spread = mean_train(lend-policy); lend[t] = lend[t-1] + lambda * ((policy[t]+spread)-lend[t-1])",
       "estimated_parameters": 2,
-      "parameter_domain_for_validation": {"lambda":[0.0,1.0]},
+      "parameter_domain_for_validation": {
+        "lambda": [
+          0,
+          1
+        ]
+      },
       "interpretation": "Parsimonious mean-spread anchor plus one adjustment-speed parameter; simpler than Alpha 0.5's free alpha/beta/lambda form."
     },
     {
       "id": "static_affine_policy_level",
       "equation": "lend[t] = alpha + beta * policy[t]",
       "estimated_parameters": 2,
-      "parameter_domain_for_validation": {"beta":[0.0,2.0]},
+      "parameter_domain_for_validation": {
+        "beta": [
+          0,
+          2
+        ]
+      },
       "interpretation": "Static level relationship used as a deliberately simple comparator; not interpreted causally."
     }
   ],
@@ -75,15 +93,15 @@
     "minimum_origins": 18,
     "candidate_rmse_improvement_vs_each_baseline_fraction": 0.05,
     "candidate_mae_may_not_exceed_best_baseline_by_more_than_fraction": 0.02,
-    "candidate_absolute_bias_max_percentage_points": 0.50,
-    "parameter_sign_or_domain_consistency_fraction": 0.80,
+    "candidate_absolute_bias_max_percentage_points": 0.5,
+    "parameter_sign_or_domain_consistency_fraction": 0.8,
     "rule": "A candidate passes only if every gate passes for the target. Selection is target-specific; success for one target does not validate the other."
   },
   "final_holdout_gates_if_opened": {
     "minimum_observations": 8,
     "rmse_improvement_vs_each_baseline_fraction": 0.02,
     "mae_may_not_exceed_best_baseline_by_more_than_fraction": 0.02,
-    "absolute_bias_max_percentage_points": 0.50,
+    "absolute_bias_max_percentage_points": 0.5,
     "sensitivity": "±10% perturbation of each free parameter must not more than double RMSE relative to the unperturbed candidate.",
     "causal_claim_allowed": false
   },

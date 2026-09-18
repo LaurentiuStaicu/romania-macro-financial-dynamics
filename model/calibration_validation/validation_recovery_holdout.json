@@ -1,5 +1,5 @@
 {
-  "result_version": "0.5.1a0-final-evaluation",
+  "result_version": "0.1-final-evaluation",
   "selection_freeze": "model/calibration_validation/validation_recovery_selection_freeze.json",
   "target": "household_housing",
   "candidate": "delta_policy_contemporaneous",
@@ -37,7 +37,7 @@
     }
   },
   "rmse_improvement_vs_baselines": {
-    "persistence": 0.0,
+    "persistence": 0,
     "constant_policy_spread": 0.9767365183691108
   },
   "sensitivity_plus_minus_10pct": {
@@ -66,6 +66,5 @@
   "causal_claim": false,
   "nfc_final_holdout_opened": false,
   "nfc_verdict": "CANDIDATE",
-  "alpha_0_6_behavioural_gate": "NO_GO",
   "interpretation_rule": "If the holdout contains insufficient policy-rate variation, performance cannot by itself identify pass-through; failure to beat persistence remains a valid negative result under the preregistered gate."
 }

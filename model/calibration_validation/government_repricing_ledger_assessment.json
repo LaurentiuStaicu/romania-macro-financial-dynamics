@@ -1,5 +1,5 @@
 {
-  "assessment_version": "0.5.2a0",
+  "assessment_version": "0.1",
   "mechanism_id": "government_refinancing_effective_rate",
   "contract": "model/calibration_validation/government_repricing_ledger_contract.json",
   "contract_frozen_before_assessment": true,
@@ -7,8 +7,13 @@
   "provenance": "data/provenance/government_repricing_ledger.json",
   "observed_ledger_diagnostics": {
     "rows": 7,
-    "currencies": ["EUR", "RON"],
-    "rate_types_observed": ["FIXED"],
+    "currencies": [
+      "EUR",
+      "RON"
+    ],
+    "rate_types_observed": [
+      "FIXED"
+    ],
     "bvb_instrument_rows_with_issue_size": 5,
     "official_mof_issuance_or_reopening_terms_rows": 2,
     "observed_issue_value_sum_by_currency_diagnostic_only": {
@@ -32,12 +37,12 @@
       "source": "canonical MoF strategy extracts"
     },
     "mof_risk_snapshot_2024_12_30": {
-      "debt_maturing_within_1y_pct": 10.0,
-      "debt_refixing_within_1y_pct": 12.0,
+      "debt_maturing_within_1y_pct": 10,
+      "debt_refixing_within_1y_pct": 12,
       "average_time_to_maturity_years": 6.9,
       "average_time_to_refixing_years": 6.7,
-      "local_debt_maturing_within_1y_pct": 17.0,
-      "local_debt_refixing_within_1y_pct": 15.0,
+      "local_debt_maturing_within_1y_pct": 17,
+      "local_debt_refixing_within_1y_pct": 15,
       "local_atm_years": 4.6,
       "local_atr_years": 4.6,
       "domestic_currency_share_pct": 48.5,
@@ -46,7 +51,7 @@
       "interpretation": "Maturity and refixing remain distinct observed concepts. The two-percentage-point total-debt gap at this snapshot alone rules out treating the maturity share as the refixing share."
     },
     "eurostat_external_diagnostic_2025": {
-      "maastricht_foreign_currency_share_pct": 53.0,
+      "maastricht_foreign_currency_share_pct": 53,
       "maastricht_apparent_cost_pct": 5.2,
       "definition": "accrual interest expenditure divided by average outstanding Maastricht debt",
       "boundary_match_to_mof_portfolio_cost": false,

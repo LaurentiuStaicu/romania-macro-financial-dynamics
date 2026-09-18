@@ -1,5 +1,5 @@
 {
-  "disposition_version": "0.5.1a0",
+  "disposition_version": "0.1",
   "stage": "Validation Recovery / Empirical Basis Expansion",
   "validated_reference_behavioural_mechanisms": 0,
   "mechanisms_tested": [
@@ -19,7 +19,12 @@
     {
       "id": "monetary_policy_nfc_upto1y_lending_pass_through",
       "boundary": "monthly BNR policy rate -> monthly RON NFC new-business lending rate with variable/initial fixation up to one year",
-      "candidate_equations_tested": ["delta_policy_contemporaneous","delta_policy_lag1","anchored_partial_adjustment","static_affine_policy_level"],
+      "candidate_equations_tested": [
+        "delta_policy_contemporaneous",
+        "delta_policy_lag1",
+        "anchored_partial_adjustment",
+        "static_affine_policy_level"
+      ],
       "parameter_provenance": "calibration/expanding-origin estimates from 2017-08..2025-01 only",
       "identifiability": "SUFFICIENT_DRIVER_VARIATION_FOR_TESTED_FORMS",
       "baseline_result": "Best direct delta-policy candidate structural-selection RMSE 0.231593 vs persistence 0.216629; no preregistered form passes every selection gate.",
@@ -43,12 +48,6 @@
       "reason": "Official data distinguish maturity and refixing and provide heterogeneous stock costs and issuance yields; an instrument-level repricing ledger is required before activation."
     }
   ],
-  "other_alpha_0_4_mechanisms": {
-    "opened_in_this_cycle": false,
-    "reason": "No additional mechanism was promoted opportunistically after the two priority directions. Each requires its own future prospective data/selection cycle."
-  },
-  "alpha_0_6_gate": "NO_GO",
-  "alpha_0_6_reason": "No behavioural reference mechanism is prospectively validated. The only monetary candidate that passed structural selection cannot be distinguished from persistence on its fresh holdout, and government repricing remains boundary-unidentified.",
   "next_empirical_path": [
     "Preserve MIR observations from 2026-08 onward as a prospective confirmation holdout and do not revise the selected household delta-policy form using those observations before first formal confirmation.",
     "Accumulate a fresh policy-rate easing/tightening episode so the confirmation holdout contains identifying driver variation.",

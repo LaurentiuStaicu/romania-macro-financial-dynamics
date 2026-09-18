@@ -1,15 +1,14 @@
 {
-  "result_version": "0.5.1a0-selection",
+  "result_version": "0.1-selection",
   "holdout_opened": false,
   "holdout_period": {
     "start": "2025-02",
     "end": "2025-11",
     "months": 10,
     "inspection_status_at_freeze": "UNINSPECTED_FOR_VALUES",
-    "scientific_reason": "Fresh independent evaluation window relative to prior Alpha 0.5 work. It is reserved before estimation/selection and will be opened once only after model form and structural-selection verdict are frozen.",
+    "scientific_reason": "Fresh independent evaluation window relative to the previously inspected evaluation window. It is reserved before estimation/selection and will be opened once only after model form and structural-selection verdict are frozen.",
     "limitation": "The policy rate is expected to be much less variable than in earlier cycles, so passing this holdout alone cannot validate pass-through dynamics."
   },
-  "old_alpha_0_5_holdout_status": "CONTAMINATED_RECLASSIFIED_AS_STRUCTURAL_SELECTION",
   "targets": {
     "household_housing": {
       "target_id": "household_housing",
@@ -44,7 +43,7 @@
           "origins": 25,
           "parameter_summary": {
             "n": 25,
-            "domain_fraction": 1.0,
+            "domain_fraction": 1,
             "spread": {
               "median": 2.171038961038961,
               "min": 1.8332584269662922,
@@ -73,7 +72,7 @@
           },
           "selection_parameter_summary": {
             "n": 25,
-            "domain_fraction": 1.0,
+            "domain_fraction": 1,
             "beta": {
               "median": 0.501449275362319,
               "min": 0.4764705882352942,
@@ -113,7 +112,7 @@
           },
           "selection_parameter_summary": {
             "n": 25,
-            "domain_fraction": 1.0,
+            "domain_fraction": 1,
             "beta": {
               "median": 0.2359420289855073,
               "min": 0.23235294117647065,
@@ -154,7 +153,7 @@
           },
           "selection_parameter_summary": {
             "n": 25,
-            "domain_fraction": 1.0,
+            "domain_fraction": 1,
             "lambda": {
               "median": 0.07170442021233368,
               "min": 0.03343944620496327,
@@ -201,7 +200,7 @@
           },
           "selection_parameter_summary": {
             "n": 25,
-            "domain_fraction": 1.0,
+            "domain_fraction": 1,
             "alpha": {
               "median": 3.829036513803732,
               "min": 3.747448742072053,
@@ -268,7 +267,7 @@
           "origins": 25,
           "parameter_summary": {
             "n": 25,
-            "domain_fraction": 1.0,
+            "domain_fraction": 1,
             "spread": {
               "median": 3.0115584415584418,
               "min": 2.7924719101123596,
@@ -297,7 +296,7 @@
           },
           "selection_parameter_summary": {
             "n": 25,
-            "domain_fraction": 1.0,
+            "domain_fraction": 1,
             "beta": {
               "median": 0.8121739130434784,
               "min": 0.8080000000000003,
@@ -337,7 +336,7 @@
           },
           "selection_parameter_summary": {
             "n": 25,
-            "domain_fraction": 1.0,
+            "domain_fraction": 1,
             "beta": {
               "median": 0.4997101449275365,
               "min": 0.49014084507042277,
@@ -378,7 +377,7 @@
           },
           "selection_parameter_summary": {
             "n": 25,
-            "domain_fraction": 1.0,
+            "domain_fraction": 1,
             "lambda": {
               "median": 0.08288288062546363,
               "min": 0.005044256635316648,
@@ -425,7 +424,7 @@
           },
           "selection_parameter_summary": {
             "n": 25,
-            "domain_fraction": 1.0,
+            "domain_fraction": 1,
             "alpha": {
               "median": 3.4114827429021344,
               "min": 2.7335467363899517,
@@ -464,5 +463,6 @@
     ]
   },
   "open_final_holdout": true,
-  "selection_stage_verdict": "OPEN_FINAL_HOLDOUT_FOR_ELIGIBLE_TARGETS"
+  "selection_stage_verdict": "OPEN_FINAL_HOLDOUT_FOR_ELIGIBLE_TARGETS",
+  "previous_holdout_status": "CONTAMINATED_RECLASSIFIED_AS_STRUCTURAL_SELECTION"
 }
