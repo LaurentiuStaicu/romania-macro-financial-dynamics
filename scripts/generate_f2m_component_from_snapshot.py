@@ -178,3 +178,93 @@ def build_component(source_manifest: dict, a1: dict, a2: dict) -> tuple[dict, di
                     out["value"] = round(float(candidate["candidate_value_million_RON"]), 2)
                     control = holder_controls[(measure, holder)]
                     out["derivation"] = {
+                        "identity": "holder_W0_F2M_assets - complete_resident_issuer_F2M_submatrix",
+                        "published_holder_W0_million_RON": control["official_aggregate_million_RON"],
+                        "resident_issuer_submatrix_million_RON": control["bilateral_sum_million_RON"],
+                        "independent_control": "A2 domestic partition + resident-holder W0 aggregation + published W1 aggregate all PASS",
+                    }
+                    out["source_terms"] = control.get("terms", [])
+                else:
+                    value = raw["value_million_RON"]
+                    if value is None or not math.isfinite(float(value)):
+                        raise RuntimeError(f"Numeric F2M cell missing for {measure} {holder}->{issuer}")
+                    out["value"] = round(float(value), 2)
+                    out["source_terms"] = raw.get("terms", [])
+                    if measure == "flow":
+                        out["temporal_derivation"] = "exact_sum_2025_Q1_Q2_Q3_Q4_transactions"
+                    if classification == "DERIVED" and len(raw.get("terms", [])) > 1:
+                        out["sector_derivation"] = "exact_S12_minus_S121_identity_with_inclusion_exclusion_where_required"
+                matrices[measure].append(out)
+
+    counts = {
+        m: dict(sorted(Counter(x["status"] for x in matrices[m]).items()))
+        for m in ("stock", "flow")
+    }
+    expected_counts = {
+        "stock": {"DERIVED": 13, "NOT_APPLICABLE": 13, "OBSERVED": 10},
+        "flow": {"DERIVED": 23, "NOT_APPLICABLE": 13},
+    }
+    if counts != expected_counts:
+        raise RuntimeError(f"Unexpected F2M materialization counts: {counts}")
+
+    component = {
+        "component_version": "0.1",
+        "instrument": "F2M",
+        "meaning": "Deposits only; component of F2 currency and deposits",
+        "benchmark_stock_period": "2025-Q4",
+        "benchmark_flow_period": "2025-Q1..2025-Q4",
+        "source_vintage": "data/source_vintages/accounting-f2m-2025-vintage-2026-09-18",
+        "component_only": True,
+        "canonical_total_F2_population_allowed": False,
+        "F21_currency_status": "UNRESOLVED_BILATERAL_CURRENCY_ALLOCATION",
+        "matrices": matrices,
+    }
+
+    reconciliations = []
+    for measure in ("stock", "flow"):
+        vals = {(x["holder"], x["issuer"]): x["value"] for x in matrices[measure]}
+        for rec in a1["aggregate_reconciliation"]:
+            if rec["measure"] != measure:
+                continue
+            sector = rec["sector"]
+            if rec["kind"] == "holder_total":
+                materialized = sum(v for (h, _), v in vals.items() if h == sector and v is not None)
+            else:
+                materialized = sum(v for (_, i), v in vals.items() if i == sector and v is not None)
+            official = rec["official_aggregate_million_RON"]
+            if official is None:
+                status = "STRUCTURAL_CONTROL_UNAVAILABLE"
+                residual = None
+            else:
+                residual = materialized - float(official)
+                status = "PASS" if abs(residual) <= TOL else "FAIL"
+                if status != "PASS":
+                    raise RuntimeError(f"Rounded F2M reconciliation failed: {measure} {rec['kind']} {sector}")
+            reconciliations.append({
+                "measure": measure,
+                "kind": rec["kind"],
+                "sector": sector,
+                "materialized_total_million_RON": materialized,
+                "published_control_million_RON": official,
+                "residual_million_RON": residual,
+                "status": status,
+            })
+
+    manifest = {
+        "materialization_version": "0.1",
+        "instrument": "F2M",
+        "component_path": "model/accounting/f2m_component_2025.json",
+        "source_vintage": "accounting-f2m-2025-vintage-2026-09-18",
+        "source_workflow_artifact_id": source_manifest["workflow_artifact_id"],
+        "source_workflow_artifact_sha256": source_manifest["decoded_archive_sha256"],
+        "counts": counts,
+        "reconciliation_tolerance_million_RON": TOL,
+        "aggregate_reconciliation": reconciliations,
+        "external_complement_controls": a2["measure_results"],
+        "total_F2_status": "INCOMPLETE_BLOCKED_BY_F21_CURRENCY",
+        "canonical_total_F2_benchmark_changed": False,
+        "behavioural_closure_changed": False,
+    }
+    return component, manifest
+
+
