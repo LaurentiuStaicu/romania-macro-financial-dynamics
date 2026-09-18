@@ -46,7 +46,7 @@
       ],
       "unit": "same_as_delay_input",
       "meaning": "Reusable first-order delay state; concrete mechanism assignment requires explicit later documentation.",
-      "scientific_status": "ACCOUNTING_IDENTITY"
+      "scientific_status": "STRUCTURAL_DYNAMIC_PRIMITIVE"
     }
   ],
   "flows": [
@@ -114,7 +114,7 @@
       "id": "first_order_delay",
       "equation": "d(delay_state)/dt = (input - delay_state) / tau",
       "units": "input_unit_per_year = input_unit / year",
-      "scientific_status": "ACCOUNTING_IDENTITY_as_dynamic_primitive"
+      "scientific_status": "STRUCTURAL_DYNAMIC_PRIMITIVE"
     }
   ],
   "integration": {
@@ -132,6 +132,9 @@
   "behavioural_closure": {
     "active": false,
     "rule": "Behavioural mechanisms may enter the reference simulation only with explicit scientific status, observed or defensibly estimated parameters, and passed empirical/identifiability gates.",
+    "system_dynamics_conformity_gate": "model/dynamics/system_dynamics_conformity_gate.json",
+    "reference_modes": "model/dynamics/reference_modes.json",
+    "activation_requires_all_feedback_gate_items": true,
     "candidate_mechanisms": [
       "consumption_response",
       "investment_response",
