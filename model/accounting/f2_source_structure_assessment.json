@@ -1,0 +1,70 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F2 Phase A0 — source-structure assessment",
+  "audit_head_sha": "a44b9dbb3707a8a1c6f15ca5bc4f77c92e9497f0",
+  "workflow_run_id": 35353483296,
+  "workflow_artifact_sha256": "623526d54770387c3ccaf65f2a42c7820929462e25bf11a5e5e833dba5402328",
+  "official_framework": {
+    "esa_F2": "Currency and deposits",
+    "components": [
+      "F21 currency",
+      "F22 transferable deposits",
+      "F29 other deposits"
+    ],
+    "qsa_deposit_aggregate": "F2M deposits"
+  },
+  "probe_results": {
+    "requests": 500,
+    "available": 122,
+    "http_error": 378,
+    "available_by_instrument": {
+      "F2": 18,
+      "F21": 16,
+      "F2M": 60,
+      "F22": 14,
+      "F29": 14
+    },
+    "aggregate_identity_comparisons": 28,
+    "maximum_aggregate_identity_residual_million_RON": 0.06,
+    "proposed_reconciliation_tolerance_million_RON": 0.1
+  },
+  "findings": [
+    {
+      "id": "F2_AGGREGATE_DECOMPOSITION",
+      "status": "PASS_WITH_PUBLISHED_ROUNDING",
+      "finding": "Where the required W0 components are published, F2 reconciles to F21 + F2M and, where F22/F29 are also published, to F21 + F22 + F29 within 0.1 million RON.",
+      "implication": "F2M is a deposit component of F2, not a substitute for total F2."
+    },
+    {
+      "id": "F2M_BILATERAL_PUBLICATION_ORIENTATION",
+      "status": "PASS",
+      "finding": "The tested domestic who-to-whom deposit relations are published from the issuer liability side using F2M, including S12K/S12T/S12/S121/S13 issuer-sector variants.",
+      "implication": "The later deposit submatrix audit must orient canonical holder-to-issuer cells from issuer liabilities rather than mechanically reuse the F3 asset-side convention."
+    },
+    {
+      "id": "F21_BILATERAL_CURRENCY_COVERAGE",
+      "status": "BLOCKER_FOR_TOTAL_F2_MATERIALIZATION",
+      "finding": "The tested domestic bilateral issuer-side families publish F2M deposits but not bilateral F21 currency or total F2 at the same holder/issuer granularity.",
+      "implication": "A complete F2 holder-by-issuer matrix cannot yet be claimed from QSA alone. Currency must be solved as a separate official-data identification problem."
+    },
+    {
+      "id": "F2_DIRECT_W0_CONTROLS",
+      "status": "PASS",
+      "finding": "Direct W0 F2 controls are available for the relevant resident sectors tested and can be used to reconcile any later deposit-plus-currency construction.",
+      "implication": "Aggregate totals remain controls and must not be converted into bilateral allocations."
+    }
+  ],
+  "prohibited_inferences": [
+    "Do not assign all resident F21 currency holdings to BNR merely because BNR issues Romanian currency.",
+    "Do not ignore foreign-currency holdings embedded in F21 assets.",
+    "Do not relabel F2M deposits as total F2.",
+    "Do not allocate an aggregate currency residual across holder sectors by shares, proportions or balancing.",
+    "Do not promote any F2 benchmark cell from this source-structure probe."
+  ],
+  "next_gate": {
+    "name": "F2 Deposit Submatrix Coverage Audit",
+    "scope": "Audit F2M holder-by-issuer positions and 2025 transactions using issuer-liability QSA publication, exact RMD sector mappings and W0/W1 reconciliation controls.",
+    "parallel_open_question": "Search official BNR/ECB/Eurostat sources for a defensible sector-by-issuer allocation of F21 currency. If unavailable, record non-identifiability rather than inventing allocation.",
+    "total_F2_materialization_allowed_now": false
+  }
+}
