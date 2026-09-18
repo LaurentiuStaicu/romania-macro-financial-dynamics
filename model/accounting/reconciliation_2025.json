@@ -1,5 +1,5 @@
 {
-  "ledger_version": "0.8",
+  "ledger_version": "0.9",
   "benchmark": "2025",
   "principle": "Record residuals and unresolved coverage explicitly; never force accounting closure with invented allocations.",
   "instrument_gates": [
@@ -171,13 +171,35 @@
     {
       "instrument": "F4",
       "priority": 3,
-      "stock_matrix_status": "AGGREGATE_CONTROL_AVAILABLE",
-      "flow_matrix_status": "TBD",
+      "stock_matrix_status": "PARTIAL_QSA_COVERAGE_EXACT_COMPLEMENT_AUDIT_REQUIRED",
+      "flow_matrix_status": "PARTIAL_QSA_COVERAGE_EXACT_COMPLEMENT_AUDIT_REQUIRED",
       "asset_liability_residual": null,
-      "residual_status": "TBD_UNTIL_COMPARABLE_TOTALS_EXIST",
+      "residual_status": "W0_CONTROLS_AVAILABLE_DIRECT_BILATERAL_COVERAGE_INCOMPLETE",
       "known_issues": [
-        "Government F4 asset aggregate is not itself a bilateral holder-by-issuer allocation."
-      ]
+        "Direct QSA coverage resolves 12 of 35 in-boundary F4 cells for stock and 12 of 35 for 2025 flow; 23 remain unresolved in each measure.",
+        "Missing cells are concentrated in the composite financial-sector F, BNR and rest-of-world-holder portions of the matrix.",
+        "All 20 resident W0 holder/issuer aggregate controls are available, but direct bilateral coverage is not complete enough for reconciliation.",
+        "BNR F4 liabilities are zero in every 2025 quarter and BNR F4 assets are a constant 6.1 million RON; a stock-only structural-zero/complement gate is required before using this information bilaterally.",
+        "Zero aggregate BNR F4 transactions do not justify setting bilateral flow cells to zero."
+      ],
+      "coverage_assessment": {
+        "status": "PARTIAL_QSA_WHO_TO_WHOM_COVERAGE",
+        "assessment": "model/accounting/f4_loans_coverage_assessment.json",
+        "stock_cells": {
+          "resolved": 12,
+          "unresolved": 23,
+          "not_applicable": 1
+        },
+        "flow_cells": {
+          "resolved": 12,
+          "unresolved": 23,
+          "not_applicable": 1
+        },
+        "maturity_conflicts": 0,
+        "network_errors": false,
+        "next_gate": "F4 exact aggregate-complement and BNR structural-zero audit",
+        "materialization_allowed": false
+      }
     },
     {
       "instrument": "F8",
@@ -304,6 +326,10 @@
     {
       "id": "f21_bpm6_esa_concept_bridge",
       "status": "NEGATIVE_RESULT_DIRECT_INVESTMENT_F2_DETAIL_UNAVAILABLE"
+    },
+    {
+      "id": "f4_direct_qsa_coverage",
+      "status": "PARTIAL_12_OF_35_IN_BOUNDARY_CELLS_PER_MEASURE"
     }
   ]
 }

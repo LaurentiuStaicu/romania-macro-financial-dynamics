@@ -1,0 +1,41 @@
+name: F4 Loans Coverage Audit
+
+on:
+  pull_request:
+    paths:
+      - "model/accounting/f4_loans_coverage_contract.json"
+      - "scripts/audit_qsa_f4_loans_coverage.py"
+      - "tests/test_f4_loans_coverage_contract.py"
+      - ".github/workflows/f4-loans-coverage-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit-f4-loans-coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify F4 coverage contract
+        run: python -m unittest tests.test_f4_loans_coverage_contract -v
+
+      - name: Probe exact ECB QSA F4 coverage
+        env:
+          F4_AUDIT_OUT: f4_audit_artifacts
+        run: python scripts/audit_qsa_f4_loans_coverage.py
+
+      - name: Upload F4 coverage evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: f4-loans-coverage-${{ github.sha }}
+          path: f4_audit_artifacts/
+          if-no-files-found: error
+          retention-days: 30

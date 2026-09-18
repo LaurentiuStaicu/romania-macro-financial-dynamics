@@ -1,0 +1,153 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F4 Phase A — Loans Coverage Audit",
+  "audit_head_sha": "221098e8f08169782bb92928180ebd42f72bf915",
+  "workflow_run_id": 35369670544,
+  "workflow_run_attempt": 2,
+  "workflow_artifact_id": 10558246682,
+  "workflow_artifact_sha256": "1a7a099dfa86c3e594a77eae0b8169948093306d717f32ddba86d9e90ac0de54",
+  "verdict": "PARTIAL_QSA_WHO_TO_WHOM_COVERAGE_EXACT_COMPLEMENT_GATE_REQUIRED",
+  "result": {
+    "series_requested": 420,
+    "series_status_counts": {
+      "AVAILABLE": 178,
+      "HTTP_ERROR": 242
+    },
+    "network_errors_present": false,
+    "maturity_conflict_count": 0,
+    "stock_cells": {
+      "observable_or_exact_derivation": 12,
+      "unresolved_source_coverage": 23,
+      "outside_boundary_not_applicable": 1
+    },
+    "flow_cells": {
+      "observable_or_exact_derivation": 12,
+      "unresolved_source_coverage": 23,
+      "outside_boundary_not_applicable": 1
+    },
+    "aggregate_controls": {
+      "available": 20,
+      "reconciled_bilateral_complete": 0,
+      "status": "ALL_CONTROLS_AVAILABLE_BUT_DIRECT_BILATERAL_COVERAGE_INCOMPLETE"
+    },
+    "materialization_allowed": false
+  },
+  "directly_resolved_topology": {
+    "stock": [
+      "H→H",
+      "H→C",
+      "H→G",
+      "H→X",
+      "C→H",
+      "C→C",
+      "C→G",
+      "C→X",
+      "G→H",
+      "G→C",
+      "G→G",
+      "G→X"
+    ],
+    "flow": [
+      "H→H",
+      "H→C",
+      "H→G",
+      "H→X",
+      "C→H",
+      "C→C",
+      "C→G",
+      "C→X",
+      "G→H",
+      "G→C",
+      "G→G",
+      "G→X"
+    ],
+    "interpretation": "Direct QSA asset-side coverage is strong for H/C/G holders and their H/C/G/X counterparties. Missing coverage is concentrated in cells involving the composite financial sector F, BNR, and rest-of-world holders."
+  },
+  "aggregate_controls_million_RON": {
+    "stock": {
+      "holder_totals": {
+        "H": 40907.27,
+        "C": 61307.83,
+        "F": 598705.275,
+        "G": 69359.98,
+        "BNR": 6.1
+      },
+      "issuer_totals": {
+        "H": 236395.43,
+        "C": 535765.04,
+        "F": 66890.296875,
+        "G": 231017.73,
+        "BNR": 0
+      }
+    },
+    "flow_2025": {
+      "holder_totals": {
+        "H": 14749.93,
+        "C": -521.97,
+        "F": 52315.400634765625,
+        "G": 8369,
+        "BNR": 0
+      },
+      "issuer_totals": {
+        "H": 23337.37,
+        "C": 30867.58,
+        "F": 4818.429840087891,
+        "G": 45097.27,
+        "BNR": 0
+      }
+    }
+  },
+  "bnr_boundary_evidence": {
+    "stock_F4_assets_W0_million_RON": {
+      "2025-Q1": 6.1,
+      "2025-Q2": 6.1,
+      "2025-Q3": 6.1,
+      "2025-Q4": 6.1
+    },
+    "stock_F4_liabilities_W0_million_RON": {
+      "2025-Q1": 0,
+      "2025-Q2": 0,
+      "2025-Q3": 0,
+      "2025-Q4": 0
+    },
+    "quarterly_F4_asset_transactions_million_RON": {
+      "2025-Q1": 0,
+      "2025-Q2": 0,
+      "2025-Q3": 0,
+      "2025-Q4": 0
+    },
+    "quarterly_F4_liability_transactions_million_RON": {
+      "2025-Q1": 0,
+      "2025-Q2": 0,
+      "2025-Q3": 0,
+      "2025-Q4": 0
+    },
+    "interpretation": [
+      "BNR has a small constant aggregate F4 asset position of 6.1 million RON through 2025 and zero aggregate F4 liabilities.",
+      "For stock only, a zero aggregate liability position combined with the non-negative nature of loan positions is a candidate exact structural-zero constraint for the BNR issuer column; this must be preregistered and tested in a separate gate before use.",
+      "Zero aggregate transactions do not by themselves prove every bilateral BNR flow is zero because offsetting transactions are possible; no flow cell is inferred from this aggregate."
+    ]
+  },
+  "scientific_interpretation": [
+    "No maturity inconsistency was detected among published T/S/L representations.",
+    "The unavailable liability-side mirrors are not treated as zeros; asset-side observations remain the preferred direct representation where present.",
+    "The F = S12 - S121 identity is blocked cell-by-cell primarily because the S121 counterpart detail is not disseminated, even where the corresponding S12 asset-side series exists.",
+    "The existence of complete W0 row/column controls means a later algebraic-complement gate can test whether missing stock cells are uniquely identifiable without synthetic allocation."
+  ],
+  "next_gate": {
+    "name": "F4 Phase B — exact aggregate-complement and BNR structural-zero audit",
+    "required_checks": [
+      "retain the exact Phase A artifact and raw QSA payloads as immutable evidence",
+      "probe total-economy W1 F4 asset/liability controls for stock and flow",
+      "for stock only, test whether W0 BNR F4 liabilities=0 can formally force every BNR-issuer cell to zero under the non-negative stock-position partition",
+      "derive H/C/G→F stock only when both W0 row complements and direct S12 asset-side values agree within tolerance",
+      "derive X→resident stock cells only from complete resident-holder column sums plus published W0 issuer totals and independent W1 total controls",
+      "use S12 holder-side observations only through exact F+BNR aggregation identities; do not allocate the 6.1 million RON BNR asset row without counterpart evidence",
+      "calculate the rank and remaining degrees of freedom of stock and flow accounting equations explicitly",
+      "do not infer bilateral flow zeros from zero aggregate BNR transactions",
+      "materialization remains blocked unless every promoted cell is uniquely observed or exactly derived"
+    ],
+    "likely_stock_residual_boundary": "BNR-holder counterpart allocation of the 6.1 million RON F4 asset position unless an official counterpart source resolves it.",
+    "behavioural_closure_may_change": false
+  }
+}

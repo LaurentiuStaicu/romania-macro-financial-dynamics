@@ -1,0 +1,47 @@
+{
+  "contract_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F4 Phase A — Loans Coverage Audit",
+  "instrument": "F4",
+  "meaning": "Loans under ESA 2010",
+  "benchmark_stock_period": "2025-Q4",
+  "benchmark_flow_period": "2025-Q1..2025-Q4",
+  "purpose": "Determine exact ECB QSA who-to-whom coverage and maturity coverage for the RMD F4 holder-by-issuer matrix before materialization.",
+  "sector_mapping": {
+    "H": "S1M",
+    "C": "S11",
+    "G": "S13",
+    "BNR": "S121",
+    "F": "S12 - S121",
+    "X": "rest-of-world counterpart"
+  },
+  "source_orientations": {
+    "domestic_holder_asset": "W2; reference sector=holder; counterpart sector=issuer; entry=A",
+    "domestic_issuer_liability": "W2; reference sector=issuer; counterpart sector=holder; entry=L",
+    "resident_holder_to_X": "W1; reference sector=holder; counterpart sector=S1; entry=A",
+    "X_holder_to_resident_issuer": "W1; reference sector=issuer; counterpart sector=S1; entry=L"
+  },
+  "maturity_rule": {
+    "preferred": "direct all-original-maturities T",
+    "exact_fallback": "S + L only when both short- and long-term series are available on identical dimensions",
+    "control": "when T, S and L are all available, T must reconcile to S+L within 0.1 million RON"
+  },
+  "hard_rules": {
+    "no_benchmark_mutation": true,
+    "no_materialization_in_coverage_phase": true,
+    "no_missing_to_zero": true,
+    "no_synthetic_allocation": true,
+    "F_composite_only_by_exact_S12_minus_S121": true,
+    "annual_flow_only_by_exact_Q1_Q2_Q3_Q4_sum": true,
+    "dual_W2_orientations_must_be_probed": true,
+    "orientation_conflict_blocks_cell": true,
+    "maturity_T_may_be_derived_only_as_exact_S_plus_L": true,
+    "maturity_conflict_blocks_cell": true,
+    "W0_holder_and_issuer_controls_required_where_published": true,
+    "X_to_X_is_outside_Romanian_national_accounts_boundary": true,
+    "network_errors_block_positive_coverage_claims": true,
+    "behavioural_closure_may_change": false
+  },
+  "reconciliation_tolerance_million_RON": 0.1,
+  "promotion_rule": "A later F4 materialization gate may proceed only for cells that are directly observed or exactly derived from S+L and/or S12-S121, with no orientation conflict and with all available aggregate controls passing. This phase only records coverage.",
+  "system_dynamics_conformity": "Accounting-only recovery. No behavioural feedback, delay, nonlinearity or closure status may change."
+}
