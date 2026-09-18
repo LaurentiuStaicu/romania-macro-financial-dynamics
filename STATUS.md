@@ -42,3 +42,17 @@ A fresh prospective confirmation path is reserved from 2026-08 onward. Previousl
 - an end-user application.
 
 Future releases should update this file whenever a candidate mechanism changes status, a prospective validation gate is opened, or the central behavioural closure changes.
+
+## System Dynamics maturity
+
+RMD is currently an **accounting-constrained stock-flow-consistent dynamic model with a qualitative candidate feedback architecture**, not yet a complete endogenous System Dynamics model.
+
+The Accounting / Stock-Flow Core is structurally implemented and guarded by stock identities, double-entry conservation, dimensional checks, explicit numerical integration and empirical-initialization gates. Empirical completion remains instrument-specific.
+
+The Feedback Architecture contains candidate loops for government refinancing–interest, government issuance–yield, bank credit–balance-sheet, monetary–credit transmission and external FX–refinancing. All remain quantitatively inactive.
+
+Behavioural Closure is inactive. A feedback loop may not be activated merely to make the model appear methodologically complete. Activation requires equation, units, evidence status, parameter source or estimation plan, identifiability assessment, endogenous/exogenous classification, polarity/path, delay specification where relevant, nonlinearity documentation where relevant, extreme-condition testing, sensitivity plan, validation gate, reference-mode linkage and preservation of accounting conservation.
+
+Reference modes are registered in `model/dynamics/reference_modes.json`. Observed modes already exist for the policy rate and household/NFC lending rates; credit, government interest/refinancing/effective-rate and full multi-instrument financial-position modes remain partial or unresolved. Missing reference modes block integrated behavioural-closure validation, not the accounting core.
+
+The executable conformity gate is `scripts/audit_system_dynamics_conformity.py`, backed by `model/dynamics/system_dynamics_conformity_gate.json`. The empirical-dynamics label `ACTIVATED` means admitted to calibration/validation only and must never be interpreted as quantitative feedback activation in the reference simulation.

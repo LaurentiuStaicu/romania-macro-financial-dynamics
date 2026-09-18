@@ -1,7 +1,7 @@
 {
-  "registry_version": "0.1",
+  "registry_version": "0.2",
   "purpose": "Qualitative feedback skeleton for the Dynamic Core. Every loop remains a behavioural candidate until its evidence, equation and parameter gates are passed.",
-  "status_rule": "Presence in this registry does not establish causality, parameter sign stability, empirical materiality or predictive validity.",
+  "status_rule": "Presence in this registry does not establish causality, parameter sign stability, empirical materiality, predictive validity, or System Dynamics activation. A loop remains quantitatively inactive until every item in activation_gate passes.",
   "loops": [
     {
       "id": "government_refinancing_interest_loop",
@@ -241,7 +241,20 @@
     "requires_units": true,
     "requires_evidence_status": true,
     "requires_parameter_source_or_estimation_plan": true,
+    "requires_identifiability_assessment": true,
+    "requires_endogenous_exogenous_classification": true,
+    "requires_polarity_and_loop_path": true,
+    "requires_delay_specification_when_delay_claimed": true,
+    "requires_nonlinearity_documentation_when_present": true,
     "requires_extreme_condition_test": true,
-    "requires_sensitivity_plan": true
+    "requires_sensitivity_plan": true,
+    "requires_validation_gate": true,
+    "requires_reference_mode_link": true,
+    "requires_accounting_conservation_preservation": true,
+    "all_requirements_must_pass_before_quantitative_activation": true
+  },
+  "empirical_registry_semantics": {
+    "activated_label_is_not_system_dynamics_activation": true,
+    "rule": "A mechanism labelled ACTIVATED in the empirical-dynamics registry is only admitted to calibration/validation. It does not activate a feedback loop or behavioural closure in the reference simulation."
   }
 }
