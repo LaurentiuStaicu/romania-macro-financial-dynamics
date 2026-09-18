@@ -5,6 +5,7 @@ import hashlib
 import importlib.util
 import io
 import json
+import sys
 import tempfile
 from pathlib import Path
 
@@ -191,6 +192,7 @@ def main() -> None:
     if spec is None or spec.loader is None:
         raise RuntimeError(f"Could not load audit script: {AUDIT_SCRIPT}")
     audit_module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = audit_module
     spec.loader.exec_module(audit_module)
 
     original_fetch = audit_module.fetch_series
