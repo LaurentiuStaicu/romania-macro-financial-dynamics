@@ -1,0 +1,84 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F8 Phase C — Exact Aggregate-Control Rank Audit",
+  "audit_head_sha": "92c17108b8c870db52f3cfdaa9926ec436cbd2d9",
+  "workflow_run_id": 35374754702,
+  "workflow_artifact_id": 10559174442,
+  "workflow_artifact_sha256": "82d4b1afb608f3890092111cf5d6e48c0416cdeacc6dda0922496af3ae99d162",
+  "verdict": "FREEZE_F8_AGGREGATE_ONLY_PUBLIC_DATA_BOUNDARY",
+  "source_reproduction": {
+    "series_requested": 444,
+    "series_status_counts": {
+      "AVAILABLE": 76,
+      "HTTP_ERROR": 368
+    },
+    "bilateral_total_F8_cells_resolved": 0,
+    "network_errors_present": false
+  },
+  "unconditional_identification": {
+    "stock": {
+      "variables": 35,
+      "equations": 12,
+      "rank": 11,
+      "nullity": 24,
+      "unique_cell_count": 0,
+      "nonunique_cell_count": 35
+    },
+    "flow": {
+      "variables": 35,
+      "equations": 12,
+      "rank": 11,
+      "nullity": 24,
+      "unique_cell_count": 0,
+      "nonunique_cell_count": 35
+    }
+  },
+  "RHS_accounting_identity": {
+    "stock": {
+      "domestic_from_assets_million_RON": 984118.6309374999,
+      "domestic_from_liabilities_million_RON": 984118.6204687501,
+      "residual_million_RON": 0.010468749795109034,
+      "status": "PASS_WITHIN_0.1_MILLION_RON"
+    },
+    "flow_2025": {
+      "domestic_from_assets_million_RON": 12716.499943847655,
+      "domestic_from_liabilities_million_RON": 12716.490045776365,
+      "residual_million_RON": 0.009898071290081134,
+      "status": "PASS_WITHIN_0.1_MILLION_RON"
+    }
+  },
+  "conditional_stock_BNR_zero_scenario": {
+    "source_condition_pass": true,
+    "variables": 35,
+    "equations": 18,
+    "rank": 16,
+    "nullity": 19,
+    "unique_cell_count": 6,
+    "unique_cells": [
+      "H→BNR",
+      "C→BNR",
+      "F→BNR",
+      "G→BNR",
+      "X→BNR",
+      "BNR→BNR"
+    ],
+    "promoted": false,
+    "interpretation": "These six stock zeros are unique only after imposing the explicit non-negative partition-zero premise from BNR aggregate F8 liabilities=0. Phase C does not promote them."
+  },
+  "scientific_interpretation": [
+    "The 12 aggregate equations contain one accounting linear dependency, giving exact rank 11 rather than 12.",
+    "No bilateral coordinate is invariant across the unconditional nullspace. Aggregate F8 data therefore constrain subspaces but identify no single holder-by-issuer cell.",
+    "The stock-only BNR zero-liability scenario adds five independent constraints because the sixth zero is redundant with the already-published BNR column-total equation.",
+    "Zero aggregate BNR F8 flow is not used as a bilateral constraint.",
+    "Because neither total F8 nor F81/F89 has bilateral publication and aggregate rank identifies no unconditional cell, further numerical completion would require synthetic allocation."
+  ],
+  "disposition": {
+    "F8_status": "FROZEN_AGGREGATE_ONLY_PUBLIC_DATA_BOUNDARY",
+    "bilateral_materialization": false,
+    "conditional_stock_zero_materialization": false,
+    "benchmark_changed": false,
+    "behavioural_closure": "UNCHANGED_INACTIVE",
+    "accounting_recovery_next_priority": "F5 equity and investment fund shares/units coverage screening"
+  },
+  "reopen_F8_when": "A definitionally comparable official source provides bilateral F8, bilateral F81/F89, or additional exact counterparty constraints sufficient to reduce the unconditional nullspace."
+}
