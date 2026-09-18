@@ -122,10 +122,25 @@ def fetch(series_key: str) -> dict[str, object]:
             numeric = float(value)
         except ValueError:
             continue
+        decimals_raw = row.get("DECIMALS")
+        try:
+            decimals = (
+                int(decimals_raw)
+                if decimals_raw not in (None, "")
+                else None
+            )
+        except ValueError:
+            decimals = None
+
         parsed.append(
             {
                 "period": period,
-                "value": numeric,
+                "value_raw": numeric,
+                "value_published_precision": (
+                    round(numeric, decimals)
+                    if decimals is not None
+                    else numeric
+                ),
                 "instrument": row.get("INSTR_ASSET"),
                 "reference_sector": row.get("REF_SECTOR"),
                 "counterpart_sector": row.get("COUNTERPART_SECTOR"),
@@ -135,7 +150,7 @@ def fetch(series_key: str) -> dict[str, object]:
                 "maturity": row.get("MATURITY"),
                 "unit": row.get("UNIT_MEASURE") or row.get("UNIT"),
                 "unit_mult": row.get("UNIT_MULT"),
-                "decimals": row.get("DECIMALS"),
+                "decimals": decimals,
                 "obs_status": row.get("OBS_STATUS"),
             }
         )
@@ -311,7 +326,7 @@ def main() -> None:
 
     def period_map(item: dict[str, object]) -> dict[str, float]:
         return {
-            str(row["period"]): float(row["value"])
+            str(row["period"]): float(row["value_published_precision"])
             for row in item.get("rows", [])
         }
 
