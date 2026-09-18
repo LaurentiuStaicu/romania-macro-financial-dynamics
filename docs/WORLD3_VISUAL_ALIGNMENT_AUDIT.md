@@ -1,6 +1,6 @@
 # WORLD3 VISUAL ALIGNMENT AUDIT
 
-Canonical visual source: `LaurentiuStaicu/world3-empirical-flatpak`, PR #10, branch `product/world3-usefulness-recovery`, head `51e236b61a0ec169bc8f28d4f8192e450ab6bd6d`, `web/src/style.css`.
+Canonical visual source: `LaurentiuStaicu/empirical-world3-dynamics`, PR #10, branch `product/world3-usefulness-recovery`, head `51e236b61a0ec169bc8f28d4f8192e450ab6bd6d`, `web/src/style.css`.
 
 Scope: product shell and design-system recovery only. Accounting Spine, Dynamic Core, Flow-of-Funds semantics, datasets, indicators, vulnerability content, Theory/Learn content, accounting stress semantics, candidate mechanisms, validation status, Alpha 0.6 NO-GO and the count of validated behavioural reference mechanisms remain frozen.
 
