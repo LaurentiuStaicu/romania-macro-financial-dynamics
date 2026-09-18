@@ -3,7 +3,12 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from audit_dimensional_consistency import audit_registry
+try:
+    from scripts.audit_dimensional_consistency import audit_registry
+except ModuleNotFoundError:
+    # Direct execution via "python scripts/audit_system_dynamics_conformity.py"
+    # puts scripts/ rather than the repository root on sys.path.
+    from audit_dimensional_consistency import audit_registry
 
 ROOT = Path(__file__).resolve().parents[1]
 
