@@ -1,0 +1,77 @@
+name: F2M Component Materialization Audit
+
+on:
+  pull_request:
+    paths:
+      - "data/source_vintages/accounting-f2m-2025-vintage-2026-09-18/**"
+      - "model/accounting/f2m_materialization_contract.json"
+      - "model/accounting/f2m_component_2025.json"
+      - "model/accounting/f2m_materialization_manifest.json"
+      - "model/accounting/source_registry.json"
+      - "model/accounting/reconciliation_2025.json"
+      - "scripts/generate_f2m_component_from_snapshot.py"
+      - "scripts/verify_f2m_source_vintage.py"
+      - "tests/test_f2m_materialization.py"
+      - ".github/workflows/f2m-materialization-audit.yml"
+      - "STATUS.md"
+  push:
+    branches:
+      - main
+    paths:
+      - "data/source_vintages/accounting-f2m-2025-vintage-2026-09-18/**"
+      - "model/accounting/f2m_materialization_contract.json"
+      - "model/accounting/f2m_component_2025.json"
+      - "model/accounting/f2m_materialization_manifest.json"
+      - "model/accounting/source_registry.json"
+      - "model/accounting/reconciliation_2025.json"
+      - "scripts/generate_f2m_component_from_snapshot.py"
+      - "scripts/verify_f2m_source_vintage.py"
+      - "tests/test_f2m_materialization.py"
+      - ".github/workflows/f2m-materialization-audit.yml"
+      - "STATUS.md"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-f2m-component:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify immutable F2M source vintage offline
+        run: python scripts/verify_f2m_source_vintage.py
+
+      - name: Run F2M materialization tests
+        run: python -m unittest tests.test_f2m_materialization -v
+
+      - name: Regenerate F2M component entirely offline
+        run: |
+          mkdir -p generated
+          python scripts/generate_f2m_component_from_snapshot.py \
+            --component-output generated/f2m_component_2025.json \
+            --manifest-output generated/f2m_materialization_manifest.json
+
+      - name: Require deterministic semantic reproduction
+        run: |
+          python scripts/check_json_semantic_equivalence.py \
+            model/accounting/f2m_component_2025.json \
+            generated/f2m_component_2025.json
+          python scripts/check_json_semantic_equivalence.py \
+            model/accounting/f2m_materialization_manifest.json \
+            generated/f2m_materialization_manifest.json
+
+      - name: Upload regenerated evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: f2m-component-materialization-${{ github.sha }}
+          path: generated/
+          if-no-files-found: error
+          retention-days: 30
