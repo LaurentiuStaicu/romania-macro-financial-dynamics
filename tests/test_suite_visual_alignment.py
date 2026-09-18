@@ -16,7 +16,7 @@ def token(name: str) -> str:
 
 
 def test_parity_contract_is_pinned_to_world3_product_recovery():
-    assert CONTRACT["canonical_repository"] == "LaurentiuStaicu/world3-empirical-flatpak"
+    assert CONTRACT["canonical_repository"] == "LaurentiuStaicu/empirical-world3-dynamics"
     assert CONTRACT["canonical_pr"] == 10
     assert CONTRACT["canonical_branch"] == "product/world3-usefulness-recovery"
     assert CONTRACT["canonical_head"] == "51e236b61a0ec169bc8f28d4f8192e450ab6bd6d"
