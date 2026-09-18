@@ -422,16 +422,17 @@
     {
       "instrument": "F6",
       "priority": 6,
-      "stock_matrix_status": "AGGREGATE_ONLY_NO_TOTAL_OR_COMPONENT_BILATERAL_COVERAGE",
-      "flow_matrix_status": "AGGREGATE_ONLY_NO_TOTAL_OR_COMPONENT_BILATERAL_COVERAGE",
+      "stock_matrix_status": "FROZEN_AGGREGATE_ONLY_NO_UNCONDITIONAL_BILATERAL_IDENTIFICATION",
+      "flow_matrix_status": "FROZEN_AGGREGATE_ONLY_NO_UNCONDITIONAL_BILATERAL_IDENTIFICATION",
       "asset_liability_residual": null,
-      "residual_status": "W0_W1_TOTAL_F6_CONTROLS_ONLY_EXACT_RANK_REQUIRED",
+      "residual_status": "ACCOUNTING_RHS_PASS_RANK_11_NULLITY_24_ZERO_UNCONDITIONAL_UNIQUE_CELLS",
       "known_issues": [
         "No tested bilateral total-F6 cell is published for stock or 2025 flow.",
         "No tested bilateral F61/F62/F63/F64/F65/F66 or F63_F64_F65 cell is published in the W2/W1 layer.",
         "F62 and F63 remain useful aggregate controls only; their aggregate publication does not identify counterpart structure.",
-        "Neither exact component representation reconstructs any bilateral F6 cell.",
-        "The next gate computes exact rank/nullspace from the published W0/W1 total-F6 controls before freeze or any further recovery decision."
+        "The exact aggregate-control system has rank 11 over 35 in-boundary variables and nullity 24 for both stock and flow, with zero unconditional rank-unique bilateral cells.",
+        "The stock and 2025-flow aggregate RHS accounting identities pass within 0.1 million RON; the limitation is identification rather than accounting inconsistency.",
+        "No issuer-applicability, non-negativity or missing-to-zero premise is introduced; F6 is frozen rather than synthetically allocated."
       ],
       "coverage_assessment": {
         "status": "TOTAL_F6_AGGREGATES_AVAILABLE_BILATERAL_NOT_PUBLISHED",
@@ -470,7 +471,24 @@
           "stock": 0,
           "flow": 0
         },
-        "next_gate": "F6 exact aggregate-control rank/nullspace audit",
+        "next_gate": "F6 exact aggregate-control rank/nullspace audit — completed",
+        "materialization_allowed": false
+      },
+      "rank_assessment": {
+        "status": "FREEZE_F6_AGGREGATE_ONLY_PUBLIC_DATA_BOUNDARY",
+        "assessment": "model/accounting/f6_aggregate_rank_assessment.json",
+        "stock": {
+          "rank": 11,
+          "nullity": 24,
+          "unique_cells": 0
+        },
+        "flow_2025": {
+          "rank": 11,
+          "nullity": 24,
+          "unique_cells": 0
+        },
+        "RHS_controls": "PASS_STOCK_AND_FLOW_WITHIN_0.1_MILLION_RON",
+        "next_priority": "F7 materiality/source-coverage audit",
         "materialization_allowed": false
       }
     },
@@ -642,6 +660,14 @@
     {
       "id": "f6_bilateral_component_coverage",
       "status": "NEGATIVE_ZERO_BILATERAL_F6_COMPONENT_CELLS"
+    },
+    {
+      "id": "f6_exact_rank_identification",
+      "status": "PASS_RANK_11_NULLITY_24_ZERO_UNCONDITIONAL_UNIQUE_CELLS"
+    },
+    {
+      "id": "f6_freeze_aggregate_only",
+      "status": "ENFORCED_NO_SYNTHETIC_BILATERAL_ALLOCATION"
     }
   ]
 }
