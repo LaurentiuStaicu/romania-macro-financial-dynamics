@@ -1,5 +1,5 @@
 {
-  "ledger_version": "0.6",
+  "ledger_version": "0.7",
   "benchmark": "2025",
   "principle": "Record residuals and unresolved coverage explicitly; never force accounting closure with invented allocations.",
   "instrument_gates": [
@@ -60,9 +60,9 @@
         "The F2M deposits component is materialized separately and must not be relabelled as total F2.",
         "Direct QSA bilateral F21 cells are unavailable in the tested W2 asset-side and liability-side orientations.",
         "The exact QSA bridge W1 F21(holder)=W1 F2(holder)-W1 F2M(holder) is blocked because holder-specific W1 total-F2 series are unavailable, even though total-economy W1 F2 is published.",
-        "ECB BPS publishes external F2 for S121, S12T, S13, S1P, S12M and S1V, allowing an exact candidate financial-sector grouping F = S12T + S12M, but it does not publish S11 and S1M separately for the tested Romania F2 series.",
-        "The remaining external holder blocker is therefore the S1V = S11 + S1M split. It must not be allocated synthetically.",
-        "BPS follows BPM6 functional-category conventions and is not presumed definitionally identical to QSA ESA F2. Eurostat bop_iip6_q is the next independent dissemination layer to audit for S11/S1M detail."
+        "ECB BPS supplies the coarse/intermediate external F2 structure but does not expose S11/S1M separately.",
+        "Eurostat bop_iip6_q does publish direct 2025-Q4 S11 and S1M Other-Investment F2 assets for Romania, resolving the external H/C sector-detail blocker at published source precision.",
+        "The remaining blocker is conceptual, not sectoral: BPM6 Other-Investment F2 is not yet reconciled to ESA/QSA F2. Reserve-assets F2 for BNR and any BPM6-versus-ESA classification differences must be bridged explicitly before F21 or total F2 can be materialized."
       ],
       "component_materialization": {
         "instrument": "F2M",
@@ -132,6 +132,23 @@
           "S1M"
         ],
         "next_gate": "Eurostat bop_iip6_q detailed-sector dissemination audit",
+        "total_F2_promotion_allowed": false
+      },
+      "currency_F21_eurostat_sector_detail": {
+        "status": "SECTOR_DETAIL_RECOVERED_CONCEPT_BRIDGE_PENDING",
+        "assessment": "model/accounting/eurostat_f2_sector_detail_assessment.json",
+        "stock_MIO_NAC": {
+          "S121": 804,
+          "S12T": 58273,
+          "S13": 117,
+          "S12M": 334,
+          "S11": 8898,
+          "S1M": 10701
+        },
+        "direct_S11_S1M_observations_available": true,
+        "S11_plus_S1M_vs_S1V_residual_MIO_NAC": 1,
+        "source_precision_tolerance_MIO_NAC": 1.5,
+        "next_gate": "BPM6-to-ESA F2 concept bridge",
         "total_F2_promotion_allowed": false
       }
     },
@@ -263,6 +280,10 @@
     {
       "id": "f21_bps_sector_structure",
       "status": "PARTIAL_PASS_S12M_AVAILABLE_S11_S1M_UNAVAILABLE"
+    },
+    {
+      "id": "f21_eurostat_S11_S1M_detail",
+      "status": "PASS_DIRECT_OBSERVATIONS_SOURCE_PRECISION"
     }
   ]
 }
