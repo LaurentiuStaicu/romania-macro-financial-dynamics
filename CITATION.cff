@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use Romanian Monetary Dynamics in research, please cite this version."
+type: software
+title: "Romanian Monetary Dynamics"
+version: 0.1.0
+date-released: 2026-09-18
+authors:
+  - family-names: "Staicu"
+    given-names: "Laurentiu"
+repository-code: "https://github.com/LaurentiuStaicu/romanian-monetary-dynamics"
+url: "https://github.com/LaurentiuStaicu/romanian-monetary-dynamics"
+license: MIT
+abstract: "An empirical stock-flow-consistent system-dynamics research model of Romania's monetary and macro-financial system."
+keywords:
+  - Romania
+  - monetary dynamics
+  - stock-flow consistency
+  - macro-financial modeling
+  - research software
