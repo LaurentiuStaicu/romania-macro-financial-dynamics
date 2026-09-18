@@ -5,6 +5,7 @@ on:
     paths:
       - "model/accounting/empirical_recovery_contract.json"
       - "scripts/audit_qsa_accounting_coverage.py"
+      - "scripts/reconcile_qsa_f3_controls.py"
       - "tests/test_accounting_recovery_contract.py"
       - ".github/workflows/accounting-coverage-audit.yml"
   workflow_dispatch:
@@ -33,7 +34,13 @@ jobs:
           ACCOUNTING_AUDIT_OUT: accounting_audit_artifacts
         run: python scripts/audit_qsa_accounting_coverage.py
 
+      - name: Reconcile F3 bilateral matrix against published QSA W0/W1 controls
+        env:
+          ACCOUNTING_AUDIT_OUT: accounting_audit_artifacts
+        run: python scripts/reconcile_qsa_f3_controls.py
+
       - name: Upload raw responses and audit reports
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: accounting-qsa-f3-coverage-${{ github.sha }}
