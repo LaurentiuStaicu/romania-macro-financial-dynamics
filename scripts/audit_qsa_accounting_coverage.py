@@ -242,7 +242,7 @@ def fetch_series(key: str) -> dict[str, object]:
             {
                 "period": period,
                 "value": numeric,
-                "unit": row.get("UNIT"),
+                "unit": row.get("UNIT_MEASURE") or row.get("UNIT"),
                 "unit_mult": row.get("UNIT_MULT"),
                 "obs_status": row.get("OBS_STATUS"),
                 "decimals": row.get("DECIMALS"),
