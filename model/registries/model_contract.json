@@ -39,7 +39,10 @@
       "Behavioural Closure": "INACTIVE",
       "Empirical Parameterization": "PARTIAL_AND_MECHANISM_SPECIFIC",
       "Validation": "PARTIAL_RETROSPECTIVE_WITH_NO_VALIDATED_REFERENCE_BEHAVIOURAL_MECHANISM"
-    }
+    },
+    "accounting_readiness_gate": "model/accounting/accounting_readiness_gate.json",
+    "canonical_multi_instrument_stock_initialization_ready": false,
+    "canonical_full_2025_stock_flow_benchmark_ready": false
   },
   "empirical_dynamics": {
     "contract": "model/empirical_dynamics/contract.json",

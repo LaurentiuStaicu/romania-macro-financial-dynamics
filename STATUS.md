@@ -38,7 +38,7 @@ This does **not** complete total F2. The F21 coverage audit finds published sect
 
 ## Model architecture boundary
 
-The accounting spine is a hard constraint. Behavioural closure is not active in the canonical dynamic core. Candidate behavioural mechanisms may be admitted for calibration/testing only under their explicit contracts and may not drive the central reference simulation without justified parameters and validation.
+The accounting spine is a hard constraint. The executable canonical accounting-readiness gate is `scripts/audit_accounting_readiness.py`, backed by `model/accounting/accounting_readiness_gate.json`. At the current benchmark only F3 is a complete canonical stock-and-flow instrument matrix; F2 remains incomplete, F4 remains partial outside the canonical benchmark, and F5/F6/F7/F8 are retained at component or aggregate-only identification boundaries. Consequently the canonical multi-instrument stock state and the full 2025 stock-flow benchmark are both explicitly **not ready**. Instrument-specific diagnostics may use a complete declared boundary such as F3, but must not be represented as the full RMD empirical state. Behavioural closure is not active in the canonical dynamic core. Candidate behavioural mechanisms may be admitted for calibration/testing only under their explicit contracts and may not drive the central reference simulation without justified parameters and validation.
 
 A fresh prospective confirmation path is reserved from 2026-08 onward. Previously inspected evaluation data cannot later be reported as independent validation.
 

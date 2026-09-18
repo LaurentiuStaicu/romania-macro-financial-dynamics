@@ -110,6 +110,7 @@ def main() -> None:
     disposition = load(
         "model/calibration_validation/validation_recovery_disposition.json"
     )
+    accounting_readiness = load("model/accounting/accounting_readiness_gate.json")
 
     check(
         model["dynamic_core"]["accounting_spine_is_hard_constraint"] is True,
@@ -126,6 +127,23 @@ def main() -> None:
     check(
         core["behavioural_closure"]["active"] is False,
         "Core behavioural closure unexpectedly active",
+    )
+    check(
+        model["dynamic_core"]["canonical_multi_instrument_stock_initialization_ready"]
+        is False,
+        "Canonical multi-instrument stock initialization is not yet empirically ready",
+    )
+    check(
+        model["dynamic_core"]["canonical_full_2025_stock_flow_benchmark_ready"]
+        is False,
+        "Canonical full stock-flow benchmark is not yet empirically ready",
+    )
+    check(
+        accounting_readiness["hard_rules"][
+            "behavioural_closure_may_not_override_accounting_readiness"
+        ]
+        is True,
+        "Behavioural closure must not override incomplete Accounting Spine readiness",
     )
 
     structures = feedback["loops"]
@@ -296,6 +314,8 @@ def main() -> None:
 
     report = {
         "Accounting / Stock-Flow Core": "PASS_WITH_EMPIRICAL_COMPLETENESS_LIMIT",
+        "Canonical Multi-Instrument Stock Initialization": "BLOCKED_INCOMPLETE",
+        "Canonical Full 2025 Stock-Flow Benchmark": "BLOCKED_INCOMPLETE",
         "Feedback Architecture": "PASS_WITH_OPEN_CHAIN_EXPLICITLY_BLOCKED",
         "Behavioural Closure": "PASS_INACTIVE",
         "Empirical Parameterization": "PARTIAL",

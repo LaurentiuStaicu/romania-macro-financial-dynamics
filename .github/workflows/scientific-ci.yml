@@ -46,6 +46,9 @@ jobs:
       - name: Run scientific invariant tests
         run: python -m unittest discover -s tests -v
 
+      - name: Audit canonical Accounting Spine readiness
+        run: python scripts/audit_accounting_readiness.py
+
       - name: Recompute dimensional consistency independently
         run: python scripts/audit_dimensional_consistency.py
 
