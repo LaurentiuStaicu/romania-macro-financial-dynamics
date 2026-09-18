@@ -41,4 +41,4 @@ jobs:
           name: f21-bpm6-esa-concept-bridge-${{ github.sha }}
           path: f21_concept_bridge_artifacts/
           if-no-files-found: error
-          retention-days: 30
+          retention-days: 90

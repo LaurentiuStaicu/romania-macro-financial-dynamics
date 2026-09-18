@@ -39,4 +39,4 @@ jobs:
           name: f21-f2-external-bridge-${{ github.sha }}
           path: f21_bridge_artifacts/
           if-no-files-found: error
-          retention-days: 30
+          retention-days: 90

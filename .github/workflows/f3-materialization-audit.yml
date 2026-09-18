@@ -83,4 +83,4 @@ jobs:
           name: f3-materialization-regeneration-${{ github.sha }}
           path: generated/
           if-no-files-found: error
-          retention-days: 30
+          retention-days: 90

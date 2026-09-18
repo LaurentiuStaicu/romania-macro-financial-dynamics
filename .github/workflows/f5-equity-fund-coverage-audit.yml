@@ -38,4 +38,4 @@ jobs:
           name: f5-equity-fund-coverage-${{ github.sha }}
           path: f5_audit_artifacts/
           if-no-files-found: error
-          retention-days: 30
+          retention-days: 90

@@ -39,4 +39,4 @@ jobs:
           name: accounting-qsa-f3-coverage-${{ github.sha }}
           path: accounting_audit_artifacts/
           if-no-files-found: error
-          retention-days: 30
+          retention-days: 90

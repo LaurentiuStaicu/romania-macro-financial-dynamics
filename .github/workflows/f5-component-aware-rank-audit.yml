@@ -48,4 +48,4 @@ jobs:
             f5_phase_c_artifacts/
             f5_rank_artifacts/
           if-no-files-found: error
-          retention-days: 30
+          retention-days: 90

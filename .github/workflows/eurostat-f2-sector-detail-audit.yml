@@ -39,4 +39,4 @@ jobs:
           name: eurostat-f2-sector-detail-${{ github.sha }}
           path: eurostat_f2_audit_artifacts/
           if-no-files-found: error
-          retention-days: 30
+          retention-days: 90

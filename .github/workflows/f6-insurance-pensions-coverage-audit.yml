@@ -38,4 +38,4 @@ jobs:
           name: f6-insurance-pensions-coverage-${{ github.sha }}
           path: f6_audit_artifacts/
           if-no-files-found: error
-          retention-days: 30
+          retention-days: 90
