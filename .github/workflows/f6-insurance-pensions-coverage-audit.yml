@@ -1,0 +1,41 @@
+name: F6 Insurance Pensions Coverage Audit
+
+on:
+  pull_request:
+    paths:
+      - "model/accounting/f6_insurance_pensions_coverage_contract.json"
+      - "scripts/audit_qsa_f6_insurance_pensions_coverage.py"
+      - "tests/test_f6_insurance_pensions_coverage_contract.py"
+      - ".github/workflows/f6-insurance-pensions-coverage-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit-f6-coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify F6 coverage contract
+        run: python -m unittest tests.test_f6_insurance_pensions_coverage_contract -v
+
+      - name: Probe total F6 and aggregate decomposition coverage
+        env:
+          F6_AUDIT_OUT: f6_audit_artifacts
+        run: python scripts/audit_qsa_f6_insurance_pensions_coverage.py
+
+      - name: Upload F6 coverage evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: f6-insurance-pensions-coverage-${{ github.sha }}
+          path: f6_audit_artifacts/
+          if-no-files-found: error
+          retention-days: 30
