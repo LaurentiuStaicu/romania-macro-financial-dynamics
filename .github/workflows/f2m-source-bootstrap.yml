@@ -1,0 +1,58 @@
+name: F2M source bootstrap
+
+on:
+  push:
+    branches:
+      - accounting/f2m-component-materialization
+    paths:
+      - ".github/workflows/f2m-source-bootstrap.yml"
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  retain-exact-source-artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v7
+        with:
+          ref: accounting/f2m-component-materialization
+          fetch-depth: 0
+
+      - name: Download exact retained A2 workflow artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ARTIFACT_ID: "10553225559"
+          EXPECTED_SHA256: "efc2704388911d79c182d1ad0cffce32bc7728b1c9f7669714ec3a518ef2f227"
+        run: |
+          set -euo pipefail
+          tmp_zip="${RUNNER_TEMP}/f2m-a2-artifact.zip"
+          curl --fail --location --silent --show-error \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/${ARTIFACT_ID}/zip" \
+            --output "${tmp_zip}"
+          echo "${EXPECTED_SHA256}  ${tmp_zip}" | sha256sum --check --strict
+
+          out="data/source_vintages/accounting-f2m-2025-vintage-2026-09-18/workflow_artifact_10553225559.zip.b64"
+          mkdir -p "$(dirname "${out}")"
+          base64 --wrap=76 "${tmp_zip}" > "${out}"
+          base64 --decode "${out}" > "${RUNNER_TEMP}/roundtrip.zip"
+          echo "${EXPECTED_SHA256}  ${RUNNER_TEMP}/roundtrip.zip" | sha256sum --check --strict
+
+          rm -f "data/source_vintages/accounting-f2m-2025-vintage-2026-09-18/workflow_artifact_10553225559.zip.b64.rebuild"
+
+      - name: Commit exact retained source and remove bootstrap workflow
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/source_vintages/accounting-f2m-2025-vintage-2026-09-18/workflow_artifact_10553225559.zip.b64
+          git add -u data/source_vintages/accounting-f2m-2025-vintage-2026-09-18/
+          git rm .github/workflows/f2m-source-bootstrap.yml
+          git commit -m "Retain exact F2M source audit artifact"
+          git push origin HEAD:accounting/f2m-component-materialization
