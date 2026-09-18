@@ -1,5 +1,5 @@
 {
-  "registry_version": "0.3",
+  "registry_version": "0.4",
   "retrieved_at": "2026-09-18",
   "sources": [
     {
@@ -25,6 +25,15 @@
       "dataset": "GFS — Government Finance Statistics",
       "role": "government-debt control layer",
       "notes": "Maastricht debt is a control concept and must not be relabelled as an ESA F3 bilateral matrix cell."
+    },
+    {
+      "id": "ecb_bps",
+      "institution": "European Central Bank",
+      "dataset": "BPS — Balance of Payments and International Investment Position",
+      "role": "external-sector source-structure and BPM6/ESA reconciliation layer for candidate cross-border instrument recovery",
+      "api_base": "https://data-api.ecb.europa.eu/service/data/BPS/",
+      "accounting_basis": "BPM6 balance of payments and international investment position",
+      "notes": "Do not promote BPS values directly into the ESA/QSA Accounting Spine. Sector structure, functional category, maturity, unit and BPM6-versus-ESA instrument boundaries require an explicit bridge."
     }
   ],
   "verified_series": [
