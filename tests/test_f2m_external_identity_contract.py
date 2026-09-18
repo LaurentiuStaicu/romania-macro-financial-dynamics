@@ -28,8 +28,10 @@ class F2MExternalIdentityContractTests(unittest.TestCase):
 
     def test_external_control_is_independent(self) -> None:
         rule = self.contract["control_independence_rule"]
-        self.assertIn("without using any holder→X candidate", rule)
-        self.assertIn("published independently", rule)
+        self.assertIn("domestic bilateral submatrix", rule)
+        self.assertIn("resident holder W0 aggregates", rule)
+        self.assertIn("holder→X complements", rule)
+        self.assertIn("None uses an allocated share", rule)
 
     def test_residual_allocation_remains_prohibited(self) -> None:
         prohibited = " ".join(self.contract["prohibited"])
