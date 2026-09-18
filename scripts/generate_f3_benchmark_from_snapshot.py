@@ -36,7 +36,7 @@ def direct_or_derived(cell: dict[str, object]) -> tuple[str, str | None, str]:
             raise RuntimeError(
                 f"Direct F3 cell {holder}->{issuer} does not have one exact source"
             )
-        key = str(terms[0]["key"])
+        key = "QSA." + str(terms[0]["key"])
         return (
             "OBSERVED",
             key,
@@ -44,7 +44,7 @@ def direct_or_derived(cell: dict[str, object]) -> tuple[str, str | None, str]:
         )
 
     expression = " + ".join(
-        f"{float(term['coefficient']):+g}*{term['key']}"
+        f"{float(term['coefficient']):+g}*QSA.{term['key']}"
         for term in terms
     )
     return (
@@ -102,7 +102,13 @@ def build_materialization(audit: dict[str, object]) -> dict[str, object]:
                 "value": value,
                 "unit": "million_RON",
                 "source_series_key": source_key,
-                "canonical_terms": cell["canonical_terms"],
+                "source_terms": [
+                    {
+                        "coefficient": term["coefficient"],
+                        "series_key": "QSA." + str(term["key"]),
+                    }
+                    for term in cell["canonical_terms"]
+                ],
                 "note": note,
             }
         )
