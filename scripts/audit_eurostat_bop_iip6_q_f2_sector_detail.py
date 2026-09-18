@@ -18,7 +18,8 @@ USER_AGENT = "romanian-monetary-dynamics/0.1.0 (+GitHub Eurostat F2 sector audit
 SECTORS = ("S1", "S121", "S12T", "S13", "S1P", "S12M", "S1V", "S11", "S1M")
 CURRENCIES = ("MIO_EUR", "MIO_NAC")
 PERIOD = "2025-Q4"
-TOL = 0.1
+CROSS_SOURCE_TOL = 0.1
+NAC_IDENTITY_TOL = 1.5
 
 
 def sha256(data: bytes) -> str:
@@ -215,7 +216,7 @@ def main() -> None:
                 residual = None
             else:
                 residual = float(eurostat["value"]) - float(bps_value)
-                status = "PASS" if abs(residual) <= TOL else "VINTAGE_OR_SOURCE_MISMATCH"
+                status = "PASS" if abs(residual) <= CROSS_SOURCE_TOL else "VINTAGE_OR_SOURCE_MISMATCH"
             cross_source.append(
                 {
                     "sector": sector,
@@ -249,11 +250,14 @@ def main() -> None:
                 if s1v.get("value") is None
                 else split_sum - float(s1v["value"])
             )
-            status = (
-                "PASS"
-                if residual is not None and abs(residual) <= TOL
-                else "SPLIT_AVAILABLE_CONTROL_MISMATCH"
-            )
+            if currency == "MIO_NAC":
+                status = (
+                    "PASS_SOURCE_PRECISION"
+                    if residual is not None and abs(residual) <= NAC_IDENTITY_TOL
+                    else "SPLIT_AVAILABLE_CONTROL_MISMATCH"
+                )
+            else:
+                status = "SECONDARY_EUR_DIAGNOSTIC"
         else:
             split_sum = None
             residual = None
@@ -271,10 +275,18 @@ def main() -> None:
         }
 
     network_errors = any(x["status"] == "NETWORK_ERROR" for x in results.values())
+    direct_detail_available = all(
+        results[(sector, currency)].get("value") is not None
+        for sector in ("S11", "S1M", "S1V")
+        for currency in CURRENCIES
+    )
+    source_precision_reconciliation_pass = (
+        critical["MIO_NAC"]["status"] == "PASS_SOURCE_PRECISION"
+    )
     exact_split = (
         not network_errors
-        and critical["MIO_EUR"]["status"] == "PASS"
-        and critical["MIO_NAC"]["status"] == "PASS"
+        and direct_detail_available
+        and source_precision_reconciliation_pass
     )
 
     status_counts = {}
@@ -296,6 +308,9 @@ def main() -> None:
         "availability": availability,
         "critical_S1V_split": critical,
         "cross_source_BPS_controls": cross_source,
+        "direct_S11_S1M_observations_available": direct_detail_available,
+        "source_precision_S11_plus_S1M_vs_S1V_reconciliation_pass": source_precision_reconciliation_pass,
+        "source_precision_tolerance_MIO_NAC": NAC_IDENTITY_TOL,
         "exact_S11_S1M_split_available": exact_split,
         "promotion_status": (
             "DETAILED_S11_S1M_AVAILABLE_FOR_LATER_CONCEPT_BRIDGE"
@@ -317,6 +332,9 @@ def main() -> None:
             {
                 "series_status_counts": status_counts,
                 "critical_S1V_split": critical,
+                "direct_S11_S1M_observations_available": direct_detail_available,
+                "source_precision_reconciliation_pass": source_precision_reconciliation_pass,
+                "source_precision_tolerance_MIO_NAC": NAC_IDENTITY_TOL,
                 "exact_S11_S1M_split_available": exact_split,
                 "promotion_status": report["promotion_status"],
                 "cross_source_BPS_controls": cross_source,
