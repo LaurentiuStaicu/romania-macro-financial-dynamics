@@ -1,0 +1,52 @@
+{
+  "contract_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F4 Phase B — Exact Complement and Rank Audit",
+  "purpose": "Determine which missing F4 holder-by-issuer cells are uniquely identified by Phase A observations, published W0/W1 controls, exact S12=F+BNR sector identities, and a separately declared stock-only BNR zero-liability structural scenario.",
+  "inputs": {
+    "phase_A_contract": "model/accounting/f4_loans_coverage_contract.json",
+    "phase_A_assessment": "model/accounting/f4_loans_coverage_assessment.json",
+    "phase_A_audit_runtime": "scripts/audit_qsa_f4_loans_coverage.py",
+    "additional_controls": "ECB QSA total-economy W1 F4 assets/liabilities, T/S/L, stock and transactions"
+  },
+  "canonical_variables": "35 in-boundary holder→issuer cells over H/C/F/G/X/BNR; X→X is outside the Romanian national-accounts boundary",
+  "equation_families": [
+    "Phase A directly observed or exact S+L / S12-S121 derived cells",
+    "published resident W0 holder totals",
+    "published resident W0 issuer totals",
+    "published total-economy W1 asset and liability controls",
+    "exact S12-holder identity: S12 holder = RMD F holder + BNR holder where the corresponding S12 source is directly usable",
+    "stock-only conditional BNR issuer zero constraints when the published non-consolidated BNR W0 F4 liability stock is exactly zero"
+  ],
+  "stock_BNR_zero_scenario": {
+    "status": "EXPLICIT_CONDITIONAL_STRUCTURAL_SCENARIO",
+    "premise": "A zero non-consolidated aggregate F4 liability stock for BNR is treated as a candidate partition-zero constraint for loan positions, never for transactions.",
+    "required_source_condition": "BNR W0 F4 liability stock must be directly published as zero on all-original-maturity T with no maturity conflict.",
+    "scope": "stock only",
+    "prohibited_extension": "Zero aggregate F4 transactions do not imply zero bilateral transactions because positive and negative transactions may offset."
+  },
+  "hard_rules": {
+    "no_benchmark_mutation": true,
+    "no_materialization_in_phase_B": true,
+    "no_missing_to_zero_except_explicit_stock_BNR_zero_scenario": true,
+    "no_synthetic_allocation": true,
+    "rank_and_nullity_must_use_exact_rational_coefficient_arithmetic": true,
+    "unique_cell_status_requires_zero_loading_on_every_nullspace_basis_vector": true,
+    "F_plus_BNR_holder_identity_only_from_direct_S12_source_terms": true,
+    "W1_controls_must_use_direct_T_or_exact_S_plus_L_only": true,
+    "maturity_conflict_blocks_W1_control": true,
+    "published_rounding_residuals_must_be_reported_not_forced_to_zero": true,
+    "BNR_asset_row_6_1_million_RON_must_not_be_allocated_without_counterpart_evidence": true,
+    "zero_BNR_aggregate_flow_must_not_create_bilateral_flow_zeros": true,
+    "network_errors_block_positive_source_claims": true,
+    "behavioural_closure_may_change": false
+  },
+  "outputs": [
+    "rank, nullity and unique-variable topology before and after the stock-only BNR zero scenario",
+    "exact row/column complement candidates and independent source/control residuals",
+    "W1 total asset/liability control reconciliation",
+    "explicit unresolved degrees of freedom for stock and flow",
+    "next-source requirement for any remaining non-unique cells"
+  ],
+  "promotion_rule": "This phase identifies algebraic uniqueness only. F4 materialization requires a later immutable-source-vintage gate and may promote only directly observed or exactly derived cells whose provenance and reconciliation are reproducible offline.",
+  "system_dynamics_conformity": "Accounting-only recovery; no feedback loop, delay, behavioural equation or closure status changes."
+}
