@@ -38,4 +38,4 @@ jobs:
           name: bps-f2-sector-structure-${{ github.sha }}
           path: bps_f2_audit_artifacts/
           if-no-files-found: error
-          retention-days: 90
+          retention-days: 30

@@ -52,4 +52,4 @@ jobs:
           name: validation-recovery-live-provenance-${{ github.sha }}
           path: provenance_live/
           if-no-files-found: error
-          retention-days: 90
+          retention-days: 30

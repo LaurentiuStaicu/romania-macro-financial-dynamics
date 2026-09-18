@@ -38,4 +38,4 @@ jobs:
           name: f21-currency-coverage-${{ github.sha }}
           path: f21_audit_artifacts/
           if-no-files-found: error
-          retention-days: 90
+          retention-days: 30
