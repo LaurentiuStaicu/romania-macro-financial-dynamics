@@ -1,0 +1,77 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F8 Phase B — Bilateral Component Bridge",
+  "audit_head_sha": "2c95a93d5a8e5b73f02e1056337e3c13e516892c",
+  "workflow_run_id": 35374250015,
+  "workflow_artifact_id": 10559073500,
+  "workflow_artifact_sha256": "df0a3180d90802a7ad990fb08211a039600f84baea7213566e8333547c838e42",
+  "verdict": "BILATERAL_F81_AND_F89_NOT_PUBLISHED_COMPONENT_BRIDGE_RECOVERS_ZERO_CELLS",
+  "result": {
+    "series_requested": 268,
+    "series_status_counts": {
+      "AVAILABLE": 28,
+      "HTTP_ERROR": 240
+    },
+    "network_errors_present": false,
+    "component_orientation_conflicts": {
+      "F81": 0,
+      "F89": 0
+    },
+    "F81_cells": {
+      "resolved": 0,
+      "unresolved": 70
+    },
+    "F89_cells": {
+      "resolved": 0,
+      "unresolved": 70
+    },
+    "derived_total_F8_cells": {
+      "resolved": 0,
+      "unresolved": 70,
+      "not_applicable": 2
+    },
+    "aggregate_reconciliation": {
+      "bilateral_coverage_incomplete": 20
+    },
+    "external_controls": {
+      "bilateral_coverage_incomplete": 4
+    },
+    "materialization_allowed": false
+  },
+  "scientific_interpretation": [
+    "The F81/F89 component decomposition is available at aggregate levels but not at the tested bilateral W2/W1 level for Romania.",
+    "No bilateral total-F8 cell can therefore be reconstructed from components.",
+    "The negative result is stronger than the Phase A total-F8 result: neither the total instrument nor its two ESA subcomponents provide bilateral source coverage in QSA.",
+    "Published W0 resident totals and W1 external totals remain usable accounting equations, but they do not by themselves constitute bilateral observations."
+  ],
+  "rank_preview": {
+    "variables_per_measure": 35,
+    "equation_families": [
+      "5 resident holder W0 totals",
+      "5 resident issuer W0 totals",
+      "1 W1 total asset equation",
+      "1 W1 total liability equation"
+    ],
+    "known_linear_dependency": "sum(resident holder totals)-W1 assets = sum(resident issuer totals)-W1 liabilities",
+    "expected_max_rank_from_these_12_equations": 11,
+    "expected_min_nullity_before_any_structural_stock_constraint": 24,
+    "note": "This preview is not a rank verdict; exact rational rank/nullspace must be computed in the next gate."
+  },
+  "BNR_boundary": {
+    "stock_F8_liability_total_million_RON": 0,
+    "flow_2025_F8_liability_total_million_RON": 0,
+    "rule": "A stock-only non-negativity/partition-zero scenario may be audited separately. The zero flow total never implies bilateral zero flows."
+  },
+  "next_gate": {
+    "name": "F8 Phase C — exact aggregate-control rank audit",
+    "required_checks": [
+      "compute exact rational rank/nullity for the 35 in-boundary cells using all published W0/W1 F8 equations",
+      "identify any unconditional unique coordinates from the nullspace",
+      "separately evaluate, without promotion, a stock-only BNR zero-liability partition scenario",
+      "do not infer any bilateral flow zero from BNR aggregate zero flow",
+      "report the exact unresolved topology and degrees of freedom",
+      "if no useful unconditional bilateral core exists, freeze F8 at aggregate-only coverage and advance Accounting Empirical Recovery rather than inventing a matrix"
+    ],
+    "behavioural_closure_may_change": false
+  }
+}
