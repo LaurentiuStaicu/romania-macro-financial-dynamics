@@ -1,0 +1,41 @@
+name: Eurostat F2 Detailed Sector Audit
+
+on:
+  pull_request:
+    paths:
+      - "model/accounting/eurostat_f2_detailed_sector_contract.json"
+      - "scripts/audit_eurostat_f2_detailed_sectors.py"
+      - "tests/test_eurostat_f2_detailed_sector_contract.py"
+      - ".github/workflows/eurostat-f2-detailed-sector-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit-eurostat-f2-detailed-sectors:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify Eurostat detailed-sector contract
+        run: python -m unittest tests.test_eurostat_f2_detailed_sector_contract -v
+
+      - name: Probe Eurostat detailed F2 sectors
+        env:
+          EUROSTAT_F2_AUDIT_OUT: eurostat_f2_audit_artifacts
+        run: python scripts/audit_eurostat_f2_detailed_sectors.py
+
+      - name: Upload Eurostat source-structure evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: eurostat-f2-detailed-sector-${{ github.sha }}
+          path: eurostat_f2_audit_artifacts/
+          if-no-files-found: error
+          retention-days: 30
