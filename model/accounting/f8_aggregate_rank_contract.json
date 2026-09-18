@@ -1,0 +1,41 @@
+{
+  "contract_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F8 Phase C — Exact Aggregate-Control Rank Audit",
+  "purpose": "Quantify exactly how much of the 35-cell in-boundary F8 matrix is identified by published W0/W1 total-F8 controls after direct and component-bilateral source coverage both failed.",
+  "inputs": {
+    "phase_A_runtime": "scripts/audit_qsa_f8_other_accounts_coverage.py",
+    "phase_A_assessment": "model/accounting/f8_other_accounts_coverage_assessment.json",
+    "phase_B_assessment": "model/accounting/f8_bilateral_component_bridge_assessment.json"
+  },
+  "canonical_variables": "35 in-boundary holder→issuer F8 cells over H/C/F/G/X/BNR; X→X is outside the Romanian national-accounts boundary",
+  "equation_families": [
+    "5 resident W0 holder asset totals",
+    "5 resident W0 issuer liability totals",
+    "1 W1 total asset equation for resident holders→X",
+    "1 W1 total liability equation for X→resident issuers"
+  ],
+  "known_accounting_dependency": "sum(resident W0 holder assets) - W1 assets equals sum(resident W0 issuer liabilities) - W1 liabilities, subject to published precision",
+  "stock_BNR_zero_scenario": {
+    "status": "EXPLICIT_CONDITIONAL_STRUCTURAL_SCENARIO",
+    "premise": "Published non-consolidated BNR W0 F8 liability stock is zero. Under the non-negative stock-position partition premise, holder→BNR stock cells are tested as zero constraints.",
+    "scope": "stock only",
+    "promotion": false,
+    "prohibited_extension": "Zero aggregate F8 transactions do not imply bilateral zero flows because transaction signs can offset."
+  },
+  "hard_rules": {
+    "no_benchmark_mutation": true,
+    "no_materialization_in_phase_C": true,
+    "rank_and_nullity_must_use_exact_rational_coefficient_arithmetic": true,
+    "unique_cell_status_requires_zero_loading_on_every_nullspace_basis_vector": true,
+    "aggregate_RHS_identity_residual_must_be_reported": true,
+    "published_rounding_residuals_must_not_be_forced_to_zero": true,
+    "no_unconditional_bilateral_value_from_aggregate_equations_unless_rank_unique": true,
+    "conditional_BNR_zero_stock_cells_must_not_be_promoted": true,
+    "zero_BNR_aggregate_flow_must_not_create_bilateral_flow_zeros": true,
+    "no_synthetic_allocation": true,
+    "behavioural_closure_may_change": false
+  },
+  "reconciliation_tolerance_million_RON": 0.1,
+  "disposition_rule": "If no useful unconditional bilateral core is rank-unique, freeze F8 at the aggregate-only public-data boundary and advance accounting recovery rather than inventing a matrix.",
+  "system_dynamics_conformity": "Accounting-only recovery; no feedback, delay, behavioural equation or closure status changes."
+}
