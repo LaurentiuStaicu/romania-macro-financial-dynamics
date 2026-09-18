@@ -1,0 +1,80 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F2 Phase C3 — BPS/BOP External Sector Structure Audit",
+  "audit_head_sha": "dae83b0906e5a9455be6f05b9f807f3bba7aa92f",
+  "workflow_run_id": 35366524496,
+  "workflow_artifact_id": 10556671887,
+  "workflow_artifact_sha256": "218218bcbd4f56b026bcb84dcda3ee3136972fd7b2388e9336f671663fa7b81a",
+  "verdict": "BPS_COARSE_AND_INTERMEDIATE_SECTORS_AVAILABLE_S11_S1M_UNAVAILABLE",
+  "result": {
+    "series_requested": 168,
+    "series_available": 72,
+    "series_http_error": 96,
+    "network_errors_present": false,
+    "exact_RMD_sector_mapping_available": false
+  },
+  "published_structure": {
+    "stock_RON_million": {
+      "S1": 79126,
+      "S121": 804,
+      "S12T": 58273,
+      "S13": 117,
+      "S1P": 19932,
+      "S12M": 334,
+      "S1V": 19598,
+      "S11": null,
+      "S1M": null,
+      "RMD_F_candidate_S12T_plus_S12M": 58607
+    },
+    "flow_2025_RON_million": {
+      "S1": -1366,
+      "S121": -1063,
+      "S12T": 1488,
+      "S13": -31,
+      "S1P": -1760,
+      "S12M": -1480,
+      "S1V": -281,
+      "S11": null,
+      "S1M": null,
+      "RMD_F_candidate_S12T_plus_S12M": 8
+    },
+    "stock_EUR_million": {
+      "S1": 15524.643,
+      "S121": 157.746,
+      "S12T": 11433.252,
+      "S13": 22.956,
+      "S1P": 3910.689,
+      "S12M": 65.531,
+      "S1V": 3845.158,
+      "S11": null,
+      "S1M": null,
+      "RMD_F_candidate_S12T_plus_S12M": 11498.783
+    }
+  },
+  "identity_results": [
+    "S1 = S121 + S12T + S13 + S1P passes exactly for 2025-Q4 stock in EUR and RON and within published precision for 2025 annual flow.",
+    "S1P = S12M + S1V passes exactly for 2025-Q4 stock in EUR and RON.",
+    "The annual-flow S1P = S12M + S1V check has a residual of -0.202 million EUR / -1 million RON and therefore does not pass the preregistered 0.1-million tolerance; flow use requires a separate vintage/definition reconciliation.",
+    "S11 and S1M are unavailable for the probed Romania F2 series, so S1V cannot be split into non-financial corporations and households/NPISH.",
+    "S12M is published directly, so the non-central-bank RMD financial-sector external F2 candidate can be represented structurally as S12T + S12M without splitting S1P."
+  ],
+  "conceptual_boundary": [
+    "BPS F2 is organised by BPM6 functional category. The probed series are Other Investment (O), while central-bank reserve assets are a separate Reserve Assets functional category.",
+    "Therefore BPS Other-Investment F2 totals are not presumed equal to QSA W1 F2 totals. Any later bridge for BNR must account explicitly for reserve-assets F2 rather than substituting one functional category for another.",
+    "Romania's Eurostat BOP metadata records BPM6-versus-ESA differences in the deposit/loan boundary for deposit-taking corporations; BPS F2 cannot enter the QSA Accounting Spine without a concept bridge.",
+    "Both EUR and RON versions are published for the coarse/intermediate structure, but they are not mixed; each unit is assessed independently."
+  ],
+  "blocker": "The remaining H/C split is S1V = S11 + S1M. BPS does not publish S11 or S1M separately for the tested Romania F2 series, so exact H and C external F2 cannot be recovered from this BPS layer.",
+  "next_gate": {
+    "name": "Eurostat bop_iip6_q detailed-sector dissemination audit",
+    "purpose": "Test whether Eurostat's own quarterly BOP/IIP dissemination exposes S11 and household/NPISH detail for Romania F2 even where ECB BPS does not.",
+    "rationale": "Eurostat metadata states that financial-account/IIP data can be disseminated with financial corporations other than MFIs, non-financial corporations, and households/NPISH sector breakdowns, so this independent official dissemination layer should be tested before declaring the H/C split unavailable.",
+    "prohibited": [
+      "splitting S1V or S1P by shares",
+      "using national financial-account domestic holdings as a proxy for external holdings",
+      "assuming Eurostat and ECB BPS vintages are identical without reconciliation",
+      "promoting F21 or total F2",
+      "changing behavioural closure"
+    ]
+  }
+}
