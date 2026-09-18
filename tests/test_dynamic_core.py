@@ -13,6 +13,8 @@ from romania_macro_financial_dynamics.dynamics import (
     advance_position,
     empirical_cells_to_state,
     first_order_delay_derivative,
+    first_order_delay_timestep_is_adequate,
+    first_order_delay_timestep_ratio,
     simulate_first_order_delay_euler,
     system_net_financial_worth,
 )
@@ -61,21 +63,41 @@ class DynamicCoreTests(unittest.TestCase):
 
     def test_integration_error_convergence(self) -> None:
         exact = 1.0 - math.exp(-1.0)
-        coarse = simulate_first_order_delay_euler(
-            initial=0.0,
-            input_value=1.0,
-            tau_years=1.0,
-            horizon_years=1.0,
-            dt_years=0.25,
-        )
-        fine = simulate_first_order_delay_euler(
-            initial=0.0,
-            input_value=1.0,
-            tau_years=1.0,
-            horizon_years=1.0,
-            dt_years=0.125,
-        )
-        self.assertLess(abs(fine - exact), abs(coarse - exact))
+        results = [
+            simulate_first_order_delay_euler(
+                initial=0.0,
+                input_value=1.0,
+                tau_years=1.0,
+                horizon_years=1.0,
+                dt_years=dt,
+            )
+            for dt in (0.25, 0.125, 0.0625)
+        ]
+        errors = [abs(value - exact) for value in results]
+        self.assertLess(errors[1], errors[0])
+        self.assertLess(errors[2], errors[1])
+
+    def test_delay_time_step_ratio_gate(self) -> None:
+        self.assertEqual(first_order_delay_timestep_ratio(0.25, 1.0), 0.25)
+        self.assertTrue(first_order_delay_timestep_is_adequate(0.25, 1.0))
+        self.assertFalse(first_order_delay_timestep_is_adequate(1.0 / 3.0, 1.0))
+        self.assertFalse(first_order_delay_timestep_is_adequate(0.5, 1.0))
+
+    def test_coarse_euler_delay_step_is_rejected(self) -> None:
+        with self.assertRaises(ValueError):
+            simulate_first_order_delay_euler(
+                initial=0.0,
+                input_value=1.0,
+                tau_years=0.5,
+                horizon_years=1.0,
+                dt_years=0.25,
+            )
+
+    def test_delay_extreme_conditions_reject_invalid_time_constants(self) -> None:
+        with self.assertRaises(ValueError):
+            first_order_delay_derivative(1.0, 0.0, 0.0)
+        with self.assertRaises(ValueError):
+            first_order_delay_timestep_ratio(0.25, float("inf"))
 
     def test_complete_f3_empirical_initialization_succeeds(self) -> None:
         benchmark = json.loads(
