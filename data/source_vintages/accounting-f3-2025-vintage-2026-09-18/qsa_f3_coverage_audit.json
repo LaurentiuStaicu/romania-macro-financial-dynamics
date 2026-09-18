@@ -1,0 +1,6237 @@
+{
+  "audit_version": "0.2",
+  "purpose": "Non-mutating source-coverage and aggregate-reconciliation audit for the first-priority F3 Accounting Spine matrices.",
+  "benchmark": {
+    "stock_period": "2025-Q4",
+    "flow_period": "2025-Q1..2025-Q4"
+  },
+  "rules": {
+    "benchmark_changed": false,
+    "synthetic_allocation": false,
+    "aggregate_absolute_tolerance_million_RON": 0.1,
+    "required_unit": "XDC",
+    "required_unit_multiplier": "6",
+    "stored_value_candidate": "OBS_VALUE rounded to the official DECIMALS attribute; raw OBS_VALUE is retained in provenance"
+  },
+  "series_requested": 144,
+  "series_status_counts": {
+    "AVAILABLE": 94,
+    "HTTP_ERROR": 50
+  },
+  "cell_status_counts": {
+    "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE": 50,
+    "OBSERVABLE_NONRESIDENT_BOUNDARY": 20,
+    "OUTSIDE_BOUNDARY_CANDIDATE_NOT_APPLICABLE": 2
+  },
+  "aggregate_reconciliation_status_counts": {
+    "PASS": 20
+  },
+  "maturity_reconciliation_status_counts": {
+    "PASS": 2
+  },
+  "cells": [
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "H",
+      "issuer": "H",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S1M.S1M.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S1M.S1M.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S1M.S1M.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S1M.S1M.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "H",
+      "issuer": "C",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S1M.S11.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S11.S1M.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 199.92,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S1M.S11.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 199.92
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S11.S1M.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "H",
+      "issuer": "F",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S1M.S12.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S1M.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S12.S1M.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S121.S1M.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 152.31,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S1M.S12.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 152.31
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S1M.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S12.S1M.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "H",
+      "issuer": "G",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S1M.S13.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S13.S1M.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 36382.75,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S1M.S13.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 36382.75
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S13.S1M.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "H",
+      "issuer": "X",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W1.S1M.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "holder_asset_against_nonresident"
+        }
+      ],
+      "mirror_terms": [],
+      "canonical_value_million_RON": 1699.25,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_NONRESIDENT_BOUNDARY",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S1M.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "holder_asset_against_nonresident",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 1699.25
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "OUTSIDE_BOUNDARY"
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "H",
+      "issuer": "BNR",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S1M.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S121.S1M.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S1M.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S1M.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "C",
+      "issuer": "H",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S11.S1M.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S1M.S11.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S11.S1M.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S1M.S11.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "C",
+      "issuer": "C",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S11.S11.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S11.S11.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 90.95,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S11.S11.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 90.95
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S11.S11.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "C",
+      "issuer": "F",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S11.S12.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S11.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S12.S11.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S121.S11.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 1156.39,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S11.S12.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 1156.39
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S11.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S12.S11.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "C",
+      "issuer": "G",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S11.S13.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S13.S11.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 16661.8,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S11.S13.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 16661.8
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S13.S11.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "C",
+      "issuer": "X",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W1.S11.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "holder_asset_against_nonresident"
+        }
+      ],
+      "mirror_terms": [],
+      "canonical_value_million_RON": 486.62,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_NONRESIDENT_BOUNDARY",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S11.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "holder_asset_against_nonresident",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 486.62
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "OUTSIDE_BOUNDARY"
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "C",
+      "issuer": "BNR",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S11.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S121.S11.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S11.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S11.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "F",
+      "issuer": "H",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S12.S1M.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S121.S1M.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S1M.S12.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S1M.S121.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S12.S1M.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S121.S1M.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S1M.S12.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "F",
+      "issuer": "C",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S12.S11.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S121.S11.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S11.S12.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S11.S121.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 1361.14,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S12.S11.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 1361.14
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S121.S11.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S11.S12.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "F",
+      "issuer": "F",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S12.S12.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S12.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S121.S12.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        },
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S121.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S12.S12.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S12.S121.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S121.S12.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        },
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S121.S121.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 10619.24,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S12.S12.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 10619.24
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S12.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S121.S12.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S12.S12.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "F",
+      "issuer": "G",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S12.S13.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S121.S13.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S13.S12.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S13.S121.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 403504.77999999997,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S12.S13.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 405054.68
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S121.S13.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 1549.9
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S13.S12.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "F",
+      "issuer": "X",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W1.S12.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "holder_asset_against_nonresident"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W1.S121.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "holder_asset_against_nonresident"
+        }
+      ],
+      "mirror_terms": [],
+      "canonical_value_million_RON": 34800.45000000001,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_NONRESIDENT_BOUNDARY",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S12.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "holder_asset_against_nonresident",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 258564.56
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W1.S121.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "holder_asset_against_nonresident",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 223764.11
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "OUTSIDE_BOUNDARY"
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "F",
+      "issuer": "BNR",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S12.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S121.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S121.S12.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S121.S121.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S12.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S121.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S12.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "G",
+      "issuer": "H",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S13.S1M.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S1M.S13.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S13.S1M.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S1M.S13.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "G",
+      "issuer": "C",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S13.S11.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S11.S13.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S13.S11.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S11.S13.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "G",
+      "issuer": "F",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S13.S12.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S13.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S12.S13.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S121.S13.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S13.S12.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S13.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S12.S13.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "G",
+      "issuer": "G",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S13.S13.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S13.S13.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 10606.39,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S13.S13.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 10606.39
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S13.S13.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "G",
+      "issuer": "X",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W1.S13.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "holder_asset_against_nonresident"
+        }
+      ],
+      "mirror_terms": [],
+      "canonical_value_million_RON": 3293.71,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_NONRESIDENT_BOUNDARY",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S13.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "holder_asset_against_nonresident",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 3293.71
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "OUTSIDE_BOUNDARY"
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "G",
+      "issuer": "BNR",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S13.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S121.S13.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S13.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S13.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "X",
+      "issuer": "H",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W1.S1M.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "issuer_liability_to_nonresident"
+        }
+      ],
+      "mirror_terms": [],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_NONRESIDENT_BOUNDARY",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S1M.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "issuer_liability_to_nonresident",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "OUTSIDE_BOUNDARY"
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "X",
+      "issuer": "C",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W1.S11.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "issuer_liability_to_nonresident"
+        }
+      ],
+      "mirror_terms": [],
+      "canonical_value_million_RON": 12092.06,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_NONRESIDENT_BOUNDARY",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S11.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "issuer_liability_to_nonresident",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 12092.06
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "OUTSIDE_BOUNDARY"
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "X",
+      "issuer": "F",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W1.S12.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "issuer_liability_to_nonresident"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W1.S121.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "issuer_liability_to_nonresident"
+        }
+      ],
+      "mirror_terms": [],
+      "canonical_value_million_RON": 32919.21,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_NONRESIDENT_BOUNDARY",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S12.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "issuer_liability_to_nonresident",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 32919.21
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W1.S121.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "issuer_liability_to_nonresident",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "OUTSIDE_BOUNDARY"
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "X",
+      "issuer": "G",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W1.S13.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "issuer_liability_to_nonresident"
+        }
+      ],
+      "mirror_terms": [],
+      "canonical_value_million_RON": 448235.66,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_NONRESIDENT_BOUNDARY",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S13.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "issuer_liability_to_nonresident",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 448235.66
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "OUTSIDE_BOUNDARY"
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "X",
+      "issuer": "X",
+      "canonical_terms": [],
+      "mirror_terms": [],
+      "canonical_value_million_RON": null,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OUTSIDE_BOUNDARY_CANDIDATE_NOT_APPLICABLE",
+      "canonical_detail": {
+        "status": "OUTSIDE_BOUNDARY"
+      },
+      "mirror_detail": {
+        "status": "OUTSIDE_BOUNDARY"
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "X",
+      "issuer": "BNR",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W1.S121.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "issuer_liability_to_nonresident"
+        }
+      ],
+      "mirror_terms": [],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_NONRESIDENT_BOUNDARY",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S121.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "issuer_liability_to_nonresident",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "OUTSIDE_BOUNDARY"
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "BNR",
+      "issuer": "H",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S121.S1M.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S1M.S121.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S1M.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S1M.S121.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "BNR",
+      "issuer": "C",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S121.S11.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S11.S121.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S11.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S11.S121.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "BNR",
+      "issuer": "F",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S121.S12.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S121.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S12.S121.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S121.S121.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S12.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S121.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S12.S121.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "BNR",
+      "issuer": "G",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S121.S13.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S13.S121.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 1549.9,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S13.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 1549.9
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S13.S121.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "BNR",
+      "issuer": "X",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W1.S121.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "holder_asset_against_nonresident"
+        }
+      ],
+      "mirror_terms": [],
+      "canonical_value_million_RON": 223764.11,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_NONRESIDENT_BOUNDARY",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S121.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "holder_asset_against_nonresident",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 223764.11
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "OUTSIDE_BOUNDARY"
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "holder": "BNR",
+      "issuer": "BNR",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S121.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S121.S121.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S121.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "H",
+      "issuer": "H",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S1M.S1M.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S1M.S1M.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S1M.S1M.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S1M.S1M.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q1": null,
+              "2025-Q2": null,
+              "2025-Q3": null,
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "H",
+      "issuer": "C",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S1M.S11.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S11.S1M.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": -25.86,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S1M.S11.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": -6.33,
+              "2025-Q2": -11.95,
+              "2025-Q3": -1.79,
+              "2025-Q4": -5.79
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S11.S1M.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q1": null,
+              "2025-Q2": null,
+              "2025-Q3": null,
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "H",
+      "issuer": "F",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S1M.S12.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S1M.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S12.S1M.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S121.S1M.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 7.300000000000001,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S1M.S12.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.77,
+              "2025-Q2": 1.62,
+              "2025-Q3": -3.8,
+              "2025-Q4": 8.71
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S1M.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S12.S1M.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q1": null,
+              "2025-Q2": null,
+              "2025-Q3": null,
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "H",
+      "issuer": "G",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S1M.S13.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S13.S1M.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 7902.2699999999995,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S1M.S13.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 6237.49,
+              "2025-Q2": 1963.15,
+              "2025-Q3": 560.88,
+              "2025-Q4": -859.25
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S13.S1M.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q1": null,
+              "2025-Q2": null,
+              "2025-Q3": null,
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "H",
+      "issuer": "X",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W1.S1M.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "holder_asset_against_nonresident"
+        }
+      ],
+      "mirror_terms": [],
+      "canonical_value_million_RON": 230.7,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_NONRESIDENT_BOUNDARY",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S1M.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "holder_asset_against_nonresident",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 129.84,
+              "2025-Q2": -56.62,
+              "2025-Q3": 0.88,
+              "2025-Q4": 156.6
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "OUTSIDE_BOUNDARY"
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "H",
+      "issuer": "BNR",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S1M.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S121.S1M.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S1M.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S1M.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q1": null,
+              "2025-Q2": null,
+              "2025-Q3": null,
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "C",
+      "issuer": "H",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S11.S1M.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S1M.S11.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S11.S1M.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S1M.S11.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q1": null,
+              "2025-Q2": null,
+              "2025-Q3": null,
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "C",
+      "issuer": "C",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S11.S11.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S11.S11.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": -19.63,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S11.S11.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": -13.6,
+              "2025-Q2": -1.0,
+              "2025-Q3": -6.51,
+              "2025-Q4": 1.48
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S11.S11.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q1": null,
+              "2025-Q2": null,
+              "2025-Q3": null,
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "C",
+      "issuer": "F",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S11.S12.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S11.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S12.S11.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S121.S11.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 55.75,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S11.S12.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": -3.87,
+              "2025-Q2": 10.36,
+              "2025-Q3": 49.39,
+              "2025-Q4": -0.13
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S11.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S12.S11.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q1": null,
+              "2025-Q2": null,
+              "2025-Q3": null,
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "C",
+      "issuer": "G",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S11.S13.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S13.S11.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 2139.9500000000003,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S11.S13.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 1911.67,
+              "2025-Q2": -1328.82,
+              "2025-Q3": 1543.77,
+              "2025-Q4": 13.33
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S13.S11.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q1": null,
+              "2025-Q2": null,
+              "2025-Q3": null,
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "C",
+      "issuer": "X",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W1.S11.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "holder_asset_against_nonresident"
+        }
+      ],
+      "mirror_terms": [],
+      "canonical_value_million_RON": 224.49,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_NONRESIDENT_BOUNDARY",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S11.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "holder_asset_against_nonresident",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 144.52,
+              "2025-Q2": 107.9,
+              "2025-Q3": 3.34,
+              "2025-Q4": -31.27
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "OUTSIDE_BOUNDARY"
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "C",
+      "issuer": "BNR",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S11.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S121.S11.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S11.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S11.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q1": null,
+              "2025-Q2": null,
+              "2025-Q3": null,
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "F",
+      "issuer": "H",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S12.S1M.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S121.S1M.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S1M.S12.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S1M.S121.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S12.S1M.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S121.S1M.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S1M.S12.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q1": null,
+              "2025-Q2": null,
+              "2025-Q3": null,
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "F",
+      "issuer": "C",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S12.S11.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S121.S11.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S11.S12.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S11.S121.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 574.3100000000001,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S12.S11.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 35.28,
+              "2025-Q2": 1.1,
+              "2025-Q3": 204.63,
+              "2025-Q4": 333.3
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S121.S11.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S11.S12.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q1": null,
+              "2025-Q2": null,
+              "2025-Q3": null,
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "F",
+      "issuer": "F",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S12.S12.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S12.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S121.S12.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        },
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S121.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S12.S12.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S12.S121.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S121.S12.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        },
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S121.S121.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 2373.54,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S12.S12.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 31.04,
+              "2025-Q2": 13.12,
+              "2025-Q3": 912.79,
+              "2025-Q4": 1416.59
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S12.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S121.S12.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S12.S12.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q1": null,
+              "2025-Q2": null,
+              "2025-Q3": null,
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "F",
+      "issuer": "G",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S12.S13.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S121.S13.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S13.S12.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S13.S121.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 53044.880000000005,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S12.S13.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 10745.18,
+              "2025-Q2": 25639.59,
+              "2025-Q3": 5674.81,
+              "2025-Q4": 9381.62
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S121.S13.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": -447.15,
+              "2025-Q2": 0.0,
+              "2025-Q3": -256.53,
+              "2025-Q4": -900.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S13.S12.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q1": null,
+              "2025-Q2": null,
+              "2025-Q3": null,
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "F",
+      "issuer": "X",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W1.S12.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "holder_asset_against_nonresident"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W1.S121.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "holder_asset_against_nonresident"
+        }
+      ],
+      "mirror_terms": [],
+      "canonical_value_million_RON": 2128.430000000004,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_NONRESIDENT_BOUNDARY",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S12.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "holder_asset_against_nonresident",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": -6887.65,
+              "2025-Q2": -24871.84,
+              "2025-Q3": 55448.4,
+              "2025-Q4": 5841.17
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W1.S121.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "holder_asset_against_nonresident",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": -5578.34,
+              "2025-Q2": -20444.38,
+              "2025-Q3": 54749.6,
+              "2025-Q4": -1325.23
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "OUTSIDE_BOUNDARY"
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "F",
+      "issuer": "BNR",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S12.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S121.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S121.S12.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S121.S121.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S12.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S121.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S12.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q1": null,
+              "2025-Q2": null,
+              "2025-Q3": null,
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "G",
+      "issuer": "H",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S13.S1M.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S1M.S13.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S13.S1M.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S1M.S13.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q1": null,
+              "2025-Q2": null,
+              "2025-Q3": null,
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "G",
+      "issuer": "C",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S13.S11.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S11.S13.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S13.S11.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S11.S13.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q1": null,
+              "2025-Q2": null,
+              "2025-Q3": null,
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "G",
+      "issuer": "F",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S13.S12.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S13.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S12.S13.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S121.S13.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S13.S12.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S13.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S12.S13.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q1": null,
+              "2025-Q2": null,
+              "2025-Q3": null,
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "G",
+      "issuer": "G",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S13.S13.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S13.S13.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 1901.9,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S13.S13.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 941.25,
+              "2025-Q2": 629.48,
+              "2025-Q3": 258.36,
+              "2025-Q4": 72.81
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S13.S13.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q1": null,
+              "2025-Q2": null,
+              "2025-Q3": null,
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "G",
+      "issuer": "X",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W1.S13.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "holder_asset_against_nonresident"
+        }
+      ],
+      "mirror_terms": [],
+      "canonical_value_million_RON": 121.91,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_NONRESIDENT_BOUNDARY",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S13.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "holder_asset_against_nonresident",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 5.36,
+              "2025-Q2": -103.66,
+              "2025-Q3": 34.32,
+              "2025-Q4": 185.89
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "OUTSIDE_BOUNDARY"
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "G",
+      "issuer": "BNR",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S13.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S121.S13.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S13.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S13.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q1": null,
+              "2025-Q2": null,
+              "2025-Q3": null,
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "X",
+      "issuer": "H",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W1.S1M.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "issuer_liability_to_nonresident"
+        }
+      ],
+      "mirror_terms": [],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_NONRESIDENT_BOUNDARY",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S1M.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "issuer_liability_to_nonresident",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "OUTSIDE_BOUNDARY"
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "X",
+      "issuer": "C",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W1.S11.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "issuer_liability_to_nonresident"
+        }
+      ],
+      "mirror_terms": [],
+      "canonical_value_million_RON": 7783.7,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_NONRESIDENT_BOUNDARY",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S11.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "issuer_liability_to_nonresident",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 153.35,
+              "2025-Q2": -1.2,
+              "2025-Q3": 2378.62,
+              "2025-Q4": 5252.93
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "OUTSIDE_BOUNDARY"
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "X",
+      "issuer": "F",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W1.S12.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "issuer_liability_to_nonresident"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W1.S121.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "issuer_liability_to_nonresident"
+        }
+      ],
+      "mirror_terms": [],
+      "canonical_value_million_RON": 5033.55,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_NONRESIDENT_BOUNDARY",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S12.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "issuer_liability_to_nonresident",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 736.16,
+              "2025-Q2": -25.4,
+              "2025-Q3": 678.24,
+              "2025-Q4": 3644.55
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W1.S121.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "issuer_liability_to_nonresident",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "OUTSIDE_BOUNDARY"
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "X",
+      "issuer": "G",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W1.S13.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "issuer_liability_to_nonresident"
+        }
+      ],
+      "mirror_terms": [],
+      "canonical_value_million_RON": 67153.17,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_NONRESIDENT_BOUNDARY",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S13.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "issuer_liability_to_nonresident",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 16115.89,
+              "2025-Q2": 13407.24,
+              "2025-Q3": 30150.47,
+              "2025-Q4": 7479.57
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "OUTSIDE_BOUNDARY"
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "X",
+      "issuer": "X",
+      "canonical_terms": [],
+      "mirror_terms": [],
+      "canonical_value_million_RON": null,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OUTSIDE_BOUNDARY_CANDIDATE_NOT_APPLICABLE",
+      "canonical_detail": {
+        "status": "OUTSIDE_BOUNDARY"
+      },
+      "mirror_detail": {
+        "status": "OUTSIDE_BOUNDARY"
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "X",
+      "issuer": "BNR",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W1.S121.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "issuer_liability_to_nonresident"
+        }
+      ],
+      "mirror_terms": [],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_NONRESIDENT_BOUNDARY",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S121.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "issuer_liability_to_nonresident",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "OUTSIDE_BOUNDARY"
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "BNR",
+      "issuer": "H",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S121.S1M.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S1M.S121.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S1M.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S1M.S121.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q1": null,
+              "2025-Q2": null,
+              "2025-Q3": null,
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "BNR",
+      "issuer": "C",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S121.S11.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S11.S121.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S11.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S11.S121.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q1": null,
+              "2025-Q2": null,
+              "2025-Q3": null,
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "BNR",
+      "issuer": "F",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S121.S12.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S121.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S12.S121.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        },
+        {
+          "coefficient": -1.0,
+          "key": "Q.N.RO.W2.S121.S121.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S12.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S121.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S12.S121.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q1": null,
+              "2025-Q2": null,
+              "2025-Q3": null,
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "BNR",
+      "issuer": "G",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S121.S13.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S13.S121.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": -1603.6799999999998,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S13.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": -447.15,
+              "2025-Q2": 0.0,
+              "2025-Q3": -256.53,
+              "2025-Q4": -900.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S13.S121.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q1": null,
+              "2025-Q2": null,
+              "2025-Q3": null,
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "BNR",
+      "issuer": "X",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W1.S121.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "holder_asset_against_nonresident"
+        }
+      ],
+      "mirror_terms": [],
+      "canonical_value_million_RON": 27401.649999999998,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_NONRESIDENT_BOUNDARY",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S121.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "holder_asset_against_nonresident",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": -5578.34,
+              "2025-Q2": -20444.38,
+              "2025-Q3": 54749.6,
+              "2025-Q4": -1325.23
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "OUTSIDE_BOUNDARY"
+      }
+    },
+    {
+      "instrument": "F3",
+      "measure": "flow",
+      "qsa_measure": "F",
+      "holder": "BNR",
+      "issuer": "BNR",
+      "canonical_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S121.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "asset"
+        }
+      ],
+      "mirror_terms": [
+        {
+          "coefficient": 1.0,
+          "key": "Q.N.RO.W2.S121.S121.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+          "side": "liability_mirror"
+        }
+      ],
+      "canonical_value_million_RON": 0.0,
+      "mirror_value_million_RON": null,
+      "mirror_residual_million_RON": null,
+      "status": "OBSERVABLE_CANONICAL_MIRROR_UNAVAILABLE",
+      "canonical_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "asset",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "mirror_detail": {
+        "status": "UNRESOLVED_COMPONENT",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S121.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "liability_mirror",
+            "series_status": "HTTP_ERROR",
+            "period_values": {
+              "2025-Q1": null,
+              "2025-Q2": null,
+              "2025-Q3": null,
+              "2025-Q4": null
+            },
+            "unit_values": null,
+            "unit_mult_values": null,
+            "decimal_values": null,
+            "definitionally_usable": false
+          }
+        ]
+      }
+    }
+  ],
+  "aggregate_controls": [
+    {
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "sector": "H",
+      "canonical_row_sum_million_RON": 38434.23,
+      "published_total_assets_million_RON": 38434.24,
+      "asset_residual_million_RON": -0.00999999999476131,
+      "asset_reconciliation": "PASS",
+      "canonical_column_sum_million_RON": 0.0,
+      "published_total_liabilities_million_RON": 0.0,
+      "liability_residual_million_RON": 0.0,
+      "liability_reconciliation": "PASS",
+      "published_assets_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S1M.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 38434.24
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "published_liabilities_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S1M.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      }
+    },
+    {
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "sector": "C",
+      "canonical_row_sum_million_RON": 18395.76,
+      "published_total_assets_million_RON": 18395.76,
+      "asset_residual_million_RON": 0.0,
+      "asset_reconciliation": "PASS",
+      "canonical_column_sum_million_RON": 13744.07,
+      "published_total_liabilities_million_RON": 13744.07,
+      "liability_residual_million_RON": 0.0,
+      "liability_reconciliation": "PASS",
+      "published_assets_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S11.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 18395.76
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "published_liabilities_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S11.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 13744.07
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      }
+    },
+    {
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "sector": "F",
+      "canonical_row_sum_million_RON": 450285.61,
+      "published_total_assets_million_RON": 450285.62,
+      "asset_residual_million_RON": -0.010000000009313226,
+      "asset_reconciliation": "PASS",
+      "canonical_column_sum_million_RON": 44847.15,
+      "published_total_liabilities_million_RON": 44847.12,
+      "liability_residual_million_RON": 0.029999999998835847,
+      "liability_reconciliation": "PASS",
+      "published_assets_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S12.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 675599.62
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W0.S121.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 225314.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "published_liabilities_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S12.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 44847.12
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W0.S121.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      }
+    },
+    {
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "sector": "G",
+      "canonical_row_sum_million_RON": 13900.099999999999,
+      "published_total_assets_million_RON": 13900.1,
+      "asset_residual_million_RON": -1.8189894035458565e-12,
+      "asset_reconciliation": "PASS",
+      "canonical_column_sum_million_RON": 916941.2799999999,
+      "published_total_liabilities_million_RON": 916941.29,
+      "liability_residual_million_RON": -0.010000000125728548,
+      "liability_reconciliation": "PASS",
+      "published_assets_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S13.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 13900.1
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "published_liabilities_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S13.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 916941.29
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      }
+    },
+    {
+      "measure": "stock",
+      "qsa_measure": "LE",
+      "sector": "BNR",
+      "canonical_row_sum_million_RON": 225314.00999999998,
+      "published_total_assets_million_RON": 225314.0,
+      "asset_residual_million_RON": 0.009999999980209395,
+      "asset_reconciliation": "PASS",
+      "canonical_column_sum_million_RON": 0.0,
+      "published_total_liabilities_million_RON": 0.0,
+      "liability_residual_million_RON": 0.0,
+      "liability_reconciliation": "PASS",
+      "published_assets_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S121.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 225314.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "published_liabilities_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S121.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      }
+    },
+    {
+      "measure": "flow",
+      "qsa_measure": "F",
+      "sector": "H",
+      "canonical_row_sum_million_RON": 8114.41,
+      "published_total_assets_million_RON": 8114.429999999999,
+      "asset_residual_million_RON": -0.019999999999527063,
+      "asset_reconciliation": "PASS",
+      "canonical_column_sum_million_RON": 0.0,
+      "published_total_liabilities_million_RON": 0.0,
+      "liability_residual_million_RON": 0.0,
+      "liability_reconciliation": "PASS",
+      "published_assets_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S1M.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 6361.78,
+              "2025-Q2": 1896.2,
+              "2025-Q3": 556.16,
+              "2025-Q4": -699.71
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "published_liabilities_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S1M.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      }
+    },
+    {
+      "measure": "flow",
+      "qsa_measure": "F",
+      "sector": "C",
+      "canonical_row_sum_million_RON": 2400.5600000000004,
+      "published_total_assets_million_RON": 2400.56,
+      "asset_residual_million_RON": 4.547473508864641e-13,
+      "asset_reconciliation": "PASS",
+      "canonical_column_sum_million_RON": 8312.52,
+      "published_total_liabilities_million_RON": 8312.52,
+      "liability_residual_million_RON": 0.0,
+      "liability_reconciliation": "PASS",
+      "published_assets_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S11.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 2038.72,
+              "2025-Q2": -1211.56,
+              "2025-Q3": 1589.99,
+              "2025-Q4": -16.59
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "published_liabilities_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S11.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 168.7,
+              "2025-Q2": -13.05,
+              "2025-Q3": 2574.95,
+              "2025-Q4": 5581.92
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      }
+    },
+    {
+      "measure": "flow",
+      "qsa_measure": "F",
+      "sector": "F",
+      "canonical_row_sum_million_RON": 58121.16000000001,
+      "published_total_assets_million_RON": 58121.130000000005,
+      "asset_residual_million_RON": 0.030000000006111804,
+      "asset_reconciliation": "PASS",
+      "canonical_column_sum_million_RON": 7470.14,
+      "published_total_liabilities_million_RON": 7470.13,
+      "liability_residual_million_RON": 0.010000000000218279,
+      "liability_reconciliation": "PASS",
+      "published_assets_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S12.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 3923.86,
+              "2025-Q2": 781.95,
+              "2025-Q3": 62240.62,
+              "2025-Q4": 16972.67
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W0.S121.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": -6025.49,
+              "2025-Q2": -20444.38,
+              "2025-Q3": 54493.07,
+              "2025-Q4": -2225.23
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "published_liabilities_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S12.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 764.11,
+              "2025-Q2": -0.3,
+              "2025-Q3": 1636.6,
+              "2025-Q4": 5069.72
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W0.S121.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      }
+    },
+    {
+      "measure": "flow",
+      "qsa_measure": "F",
+      "sector": "G",
+      "canonical_row_sum_million_RON": 2023.8100000000002,
+      "published_total_assets_million_RON": 2023.8200000000002,
+      "asset_residual_million_RON": -0.009999999999990905,
+      "asset_reconciliation": "PASS",
+      "canonical_column_sum_million_RON": 130538.49,
+      "published_total_liabilities_million_RON": 130538.47,
+      "liability_residual_million_RON": 0.020000000004074536,
+      "liability_reconciliation": "PASS",
+      "published_assets_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S13.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 946.61,
+              "2025-Q2": 525.82,
+              "2025-Q3": 292.68,
+              "2025-Q4": 258.71
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "published_liabilities_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S13.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 35951.48,
+              "2025-Q2": 40310.62,
+              "2025-Q3": 38188.28,
+              "2025-Q4": 16088.09
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      }
+    },
+    {
+      "measure": "flow",
+      "qsa_measure": "F",
+      "sector": "BNR",
+      "canonical_row_sum_million_RON": 25797.969999999998,
+      "published_total_assets_million_RON": 25797.969999999998,
+      "asset_residual_million_RON": 0.0,
+      "asset_reconciliation": "PASS",
+      "canonical_column_sum_million_RON": 0.0,
+      "published_total_liabilities_million_RON": 0.0,
+      "liability_residual_million_RON": 0.0,
+      "liability_reconciliation": "PASS",
+      "published_assets_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S121.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": -6025.49,
+              "2025-Q2": -20444.38,
+              "2025-Q3": 54493.07,
+              "2025-Q4": -2225.23
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "published_liabilities_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S121.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T",
+            "side": "published_total",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 0.0,
+              "2025-Q2": 0.0,
+              "2025-Q3": 0.0,
+              "2025-Q4": 0.0
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      }
+    }
+  ],
+  "maturity_controls": [
+    {
+      "measure": "stock",
+      "cell": "X->G",
+      "all_maturity_million_RON": 448235.66,
+      "short_maturity_million_RON": 1520.41,
+      "long_maturity_million_RON": 446715.26,
+      "short_plus_long_million_RON": 448235.67,
+      "residual_million_RON": -0.010000000009313226,
+      "reconciliation": "PASS",
+      "short_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S13.S1.N.L.LE.F3.S._Z.XDC._T.S.V.N._T",
+            "side": "X_to_G_S",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 1520.41
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "long_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S13.S1.N.L.LE.F3.L._Z.XDC._T.S.V.N._T",
+            "side": "X_to_G_L",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q4": 446715.26
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      }
+    },
+    {
+      "measure": "flow",
+      "cell": "X->G",
+      "all_maturity_million_RON": 67153.17,
+      "short_maturity_million_RON": -553.35,
+      "long_maturity_million_RON": 67706.52,
+      "short_plus_long_million_RON": 67153.17,
+      "residual_million_RON": 0.0,
+      "reconciliation": "PASS",
+      "short_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S13.S1.N.L.F.F3.S._Z.XDC._T.S.V.N._T",
+            "side": "X_to_G_S",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 632.75,
+              "2025-Q2": -220.9,
+              "2025-Q3": -131.76,
+              "2025-Q4": -833.44
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      },
+      "long_detail": {
+        "status": "EXACT_QSA_OR_EXACT_AGGREGATION",
+        "components": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S13.S1.N.L.F.F3.L._Z.XDC._T.S.V.N._T",
+            "side": "X_to_G_L",
+            "series_status": "AVAILABLE",
+            "period_values": {
+              "2025-Q1": 15483.14,
+              "2025-Q2": 13628.14,
+              "2025-Q3": 30282.23,
+              "2025-Q4": 8313.01
+            },
+            "unit_values": [
+              "XDC"
+            ],
+            "unit_mult_values": [
+              "6"
+            ],
+            "decimal_values": [
+              "2"
+            ],
+            "definitionally_usable": true
+          }
+        ],
+        "published_precision": true
+      }
+    }
+  ]
+}

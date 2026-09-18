@@ -16,6 +16,16 @@ The NFC short-fixation lending pass-through candidates fail the preregistered st
 
 The government refinancing/effective-rate mechanism is deferred. At the present aggregation and public-data boundary, the required repricing parameter is not point-identifiable. The government repricing ledger fails the completeness gate before estimation, and no synthetic allocation is permitted to fill the missing instrument-level structure.
 
+## Accounting empirical recovery
+
+The frozen `v0.1.0` release retains its original incomplete Accounting Spine. In the current post-`v0.1.0` development state, the first-priority F3 debt-securities matrices have completed Accounting Empirical Recovery for the 2025 benchmark.
+
+F3 stock at 2025-Q4 contains 24 direct `OBSERVED` cells, 11 exact `DERIVED` cells required by the RMD financial-sector identity `F = S12 - S121`, and one `NOT_APPLICABLE` X→X cell outside the Romanian national financial-accounts boundary. The 2025 F3 flow matrix contains 35 `DERIVED` cells because annual flows are exact sums of the four published quarterly transactions, plus one `NOT_APPLICABLE` X→X cell.
+
+The F3 source vintage is retained immutably. Twenty out of twenty published QSA aggregate asset/liability controls and both preregistered X→G maturity controls reconcile within the 0.1 million RON tolerance. The unavailable W2 liability-side counterpart mirrors are recorded as unavailable publication coverage and are not treated as zeros.
+
+This is **not** completion of the Accounting Spine. F2, F4, F8, F5, F6 and F7 remain unresolved or only partially controlled, so the full multi-instrument empirical state is still not ready for canonical system simulation.
+
 ## Model architecture boundary
 
 The accounting spine is a hard constraint. Behavioural closure is not active in the canonical dynamic core. Candidate behavioural mechanisms may be admitted for calibration/testing only under their explicit contracts and may not drive the central reference simulation without justified parameters and validation.

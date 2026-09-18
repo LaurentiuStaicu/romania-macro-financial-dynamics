@@ -1,0 +1,54 @@
+{
+  "contract_version": "0.1",
+  "phase": "Accounting Empirical Recovery / Phase B — F3 materialization",
+  "purpose": "Retain one immutable ECB QSA source vintage and populate only the F3 stock and transaction matrices from direct observations or exact sector identities already verified in Phase A.",
+  "baseline_parent": "40c21cc2d3304dcbccc3244333a5930e7c440a83",
+  "source_vintage_path": "data/source_vintages/accounting-f3-2025-vintage-2026-09-18",
+  "scope": {
+    "instrument": "F3",
+    "stock_period": "2025-Q4",
+    "flow_period": "2025-Q1..2025-Q4",
+    "other_instruments_may_change": false,
+    "behavioural_model_may_change": false
+  },
+  "hard_rules": {
+    "network_not_allowed_during_benchmark_generation": true,
+    "raw_qsa_payloads_must_be_retained": true,
+    "raw_qsa_payloads_must_have_sha256": true,
+    "derived_audit_artifacts_must_have_sha256": true,
+    "financial_sector_composite_cells_are_derived_only_by_exact_identity": true,
+    "missing_or_failed_source_may_not_be_imputed": true,
+    "published_zero_is_distinct_from_missing": true,
+    "aggregate_reconciliation_must_pass_before_promotion": true,
+    "maturity_reconciliation_must_pass_before_replacing_partial_coverage": true,
+    "x_to_x_is_not_a_numeric_zero": true,
+    "benchmark_generation_must_be_deterministic": true,
+    "direct_qsa_stock_cells_are_observed": true,
+    "annual_flow_cells_are_derived_by_exact_quarterly_sum": true
+  },
+  "classification": {
+    "OBSERVED": "Stock cell value comes from one exact canonical ECB QSA closing-position series at 2025-Q4 with no sector aggregation.",
+    "DERIVED": "Cell value is produced by an exact documented transformation only: annual flow = sum of Q1–Q4 transactions and/or RMD F = S12 minus S121.",
+    "NOT_APPLICABLE": "The X→X position lies outside the Romanian national financial-accounts boundary and is excluded structurally rather than set to an observed zero."
+  },
+  "rounding": {
+    "benchmark_value": "Use values rounded to the ECB-published 2-decimal precision verified for the retained F3 vintage; exact raw OBS_VALUE remains in provenance.",
+    "raw_value": "Retain the raw API OBS_VALUE in the immutable source vintage.",
+    "reason": "Avoid storing binary transport representation as more precise than the published statistical observation."
+  },
+  "required_offline_checks": [
+    "all 35 in-boundary F3 stock cells have a finite observed or exact-derived value",
+    "all 35 in-boundary F3 flow cells have a finite observed or exact-derived value",
+    "X→X stock and flow are NOT_APPLICABLE rather than zero",
+    "F3 stock row sums reconcile to published QSA total assets for H/C/F/G/BNR",
+    "F3 stock column sums reconcile to published QSA total liabilities for H/C/F/G/BNR",
+    "F3 flow row sums reconcile to published QSA total transactions in assets for H/C/F/G/BNR",
+    "F3 flow column sums reconcile to published QSA total transactions in liabilities for H/C/F/G/BNR",
+    "X→G total maturity reconciles to short plus long maturity for stock and flow",
+    "external-holder F3 stock row reproduces 493246.93 million RON control",
+    "regenerating F3 benchmark from the retained source vintage produces no semantic diff",
+    "all numeric materialized benchmark values are stored at two-decimal published precision",
+    "annual 2025 flow cells are DERIVED rather than mislabelled as directly observed annual data"
+  ],
+  "promotion_rule": "Only F3 may change from TBD/SOURCE_SERIES_IDENTIFIED to OBSERVED, DERIVED or NOT_APPLICABLE in this phase. All other instruments and scientific mechanism statuses remain unchanged."
+}

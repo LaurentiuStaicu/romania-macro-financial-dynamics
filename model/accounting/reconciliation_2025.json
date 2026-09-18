@@ -1,20 +1,52 @@
 {
-  "ledger_version": "0.1",
+  "ledger_version": "0.2",
   "benchmark": "2025",
   "principle": "Record residuals and unresolved coverage explicitly; never force accounting closure with invented allocations.",
   "instrument_gates": [
     {
       "instrument": "F3",
       "priority": 1,
-      "stock_matrix_status": "PARTIAL_SOURCE_COVERAGE",
-      "flow_matrix_status": "TBD",
+      "stock_matrix_status": "COMPLETE_QSA_MATERIALIZED_RECONCILED",
+      "flow_matrix_status": "COMPLETE_QSA_QUARTERLY_TRANSACTIONS_AGGREGATED_RECONCILED",
       "asset_liability_residual": null,
-      "residual_status": "TBD_UNTIL_COMPARABLE_TOTALS_EXIST",
+      "residual_status": "20_OF_20_PUBLISHED_QSA_AGGREGATE_CONTROLS_PASS_WITHIN_0.1_MILLION_RON",
       "known_issues": [
-        "Verified government-to-rest-of-world source is long-term only, not all-maturity F3.",
-        "Maastricht debt is consolidated and conceptually broader/different from an F3 WTWTW cell.",
-        "Aggregate non-resident F3 holdings of the total economy cannot be assigned to government without counterpart evidence."
-      ]
+        "W2 liability-side counterpart mirrors are not published for the tested domestic F3 who-to-whom cells; this absence is not interpreted as zero.",
+        "Canonical W2 asset-side counterpart detail is independently reconciled to published W0 total F3 assets and liabilities for H/C/F/G/BNR.",
+        "RMD F cells are DERIVED only through the exact identity S12 - S121 (with inclusion-exclusion when F is on both axes).",
+        "Annual 2025 F3 flows are DERIVED as the exact sum of Q1-Q4 quarterly transactions, not labelled as direct annual observations.",
+        "X→X is NOT_APPLICABLE because positions among non-residents lie outside the Romanian national financial-accounts boundary.",
+        "Published two-decimal precision creates reconciliation residuals up to 0.03 million RON; all are below the preregistered 0.1 million RON tolerance."
+      ],
+      "source_vintage": "data/source_vintages/accounting-f3-2025-vintage-2026-09-18",
+      "materialization_manifest": "model/accounting/f3_materialization_manifest.json",
+      "materialization_counts": {
+        "stock": {
+          "OBSERVED": 24,
+          "DERIVED": 11,
+          "NOT_APPLICABLE": 1
+        },
+        "flow": {
+          "OBSERVED": 0,
+          "DERIVED": 35,
+          "NOT_APPLICABLE": 1
+        }
+      },
+      "maturity_control": {
+        "status": "2_OF_2_PASS",
+        "stock": {
+          "all_maturity_million_RON": 448235.66,
+          "short_maturity_million_RON": 1520.41,
+          "long_maturity_million_RON": 446715.26,
+          "residual_million_RON": -0.01
+        },
+        "flow_2025": {
+          "all_maturity_million_RON": 67153.17,
+          "short_maturity_million_RON": -553.35,
+          "long_maturity_million_RON": 67706.52,
+          "residual_million_RON": 0
+        }
+      }
     },
     {
       "instrument": "F2",
@@ -114,6 +146,22 @@
     },
     {
       "id": "forced_closure_prohibited",
+      "status": "ENFORCED"
+    },
+    {
+      "id": "f3_immutable_source_vintage",
+      "status": "ENFORCED"
+    },
+    {
+      "id": "f3_aggregate_qsa_reconciliation",
+      "status": "PASS_20_OF_20"
+    },
+    {
+      "id": "f3_maturity_reconciliation",
+      "status": "PASS_2_OF_2"
+    },
+    {
+      "id": "f3_deterministic_offline_regeneration",
       "status": "ENFORCED"
     }
   ]

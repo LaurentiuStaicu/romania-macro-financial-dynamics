@@ -58,12 +58,316 @@
         },
         "overrides": [
           {
+            "holder": "H",
+            "issuer": "H",
+            "status": "OBSERVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S1M.S1M.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "H",
+            "issuer": "C",
+            "status": "OBSERVED",
+            "value": 199.92,
+            "unit": "million_RON",
+            "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S1M.S11.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "H",
+            "issuer": "F",
+            "status": "DERIVED",
+            "value": 152.31,
+            "unit": "million_RON",
+            "note": "Exact additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S1M.S12.N.A.LE.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S1M.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "H",
+            "issuer": "G",
+            "status": "OBSERVED",
+            "value": 36382.75,
+            "unit": "million_RON",
+            "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S1M.S13.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "H",
+            "issuer": "X",
+            "status": "OBSERVED",
+            "value": 1699.25,
+            "unit": "million_RON",
+            "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W1.S1M.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "H",
+            "issuer": "BNR",
+            "status": "OBSERVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S1M.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "C",
+            "issuer": "H",
+            "status": "OBSERVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S11.S1M.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "C",
+            "issuer": "C",
+            "status": "OBSERVED",
+            "value": 90.95,
+            "unit": "million_RON",
+            "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S11.S11.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "C",
+            "issuer": "F",
+            "status": "DERIVED",
+            "value": 1156.39,
+            "unit": "million_RON",
+            "note": "Exact additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S11.S12.N.A.LE.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S11.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "C",
+            "issuer": "G",
+            "status": "OBSERVED",
+            "value": 16661.8,
+            "unit": "million_RON",
+            "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S11.S13.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "C",
+            "issuer": "X",
+            "status": "OBSERVED",
+            "value": 486.62,
+            "unit": "million_RON",
+            "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W1.S11.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "C",
+            "issuer": "BNR",
+            "status": "OBSERVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S11.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "F",
+            "issuer": "H",
+            "status": "DERIVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Exact additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S12.S1M.N.A.LE.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S121.S1M.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "F",
+            "issuer": "C",
+            "status": "DERIVED",
+            "value": 1361.14,
+            "unit": "million_RON",
+            "note": "Exact additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S12.S11.N.A.LE.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S121.S11.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "F",
+            "issuer": "F",
+            "status": "DERIVED",
+            "value": 10619.24,
+            "unit": "million_RON",
+            "note": "Exact additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S12.S12.N.A.LE.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S12.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S121.S12.N.A.LE.F3.T._Z.XDC._T.S.V.N._T + +1*QSA.Q.N.RO.W2.S121.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "F",
+            "issuer": "G",
+            "status": "DERIVED",
+            "value": 403504.78,
+            "unit": "million_RON",
+            "note": "Exact additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S12.S13.N.A.LE.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S121.S13.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "F",
+            "issuer": "X",
+            "status": "DERIVED",
+            "value": 34800.45,
+            "unit": "million_RON",
+            "note": "Exact additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W1.S12.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W1.S121.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "F",
+            "issuer": "BNR",
+            "status": "DERIVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Exact additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S12.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S121.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "G",
+            "issuer": "H",
+            "status": "OBSERVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S13.S1M.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "G",
+            "issuer": "C",
+            "status": "OBSERVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S13.S11.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "G",
+            "issuer": "F",
+            "status": "DERIVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Exact additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S13.S12.N.A.LE.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S13.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "G",
+            "issuer": "G",
+            "status": "OBSERVED",
+            "value": 10606.39,
+            "unit": "million_RON",
+            "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S13.S13.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "G",
+            "issuer": "X",
+            "status": "OBSERVED",
+            "value": 3293.71,
+            "unit": "million_RON",
+            "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W1.S13.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "G",
+            "issuer": "BNR",
+            "status": "OBSERVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S13.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "X",
+            "issuer": "H",
+            "status": "OBSERVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W1.S1M.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "X",
+            "issuer": "C",
+            "status": "OBSERVED",
+            "value": 12092.06,
+            "unit": "million_RON",
+            "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W1.S11.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "X",
+            "issuer": "F",
+            "status": "DERIVED",
+            "value": 32919.21,
+            "unit": "million_RON",
+            "note": "Exact additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W1.S12.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W1.S121.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
             "holder": "X",
             "issuer": "G",
-            "status": "SOURCE_SERIES_IDENTIFIED",
+            "status": "OBSERVED",
+            "value": 448235.66,
+            "unit": "million_RON",
+            "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W1.S13.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "X",
+            "issuer": "X",
+            "status": "NOT_APPLICABLE",
             "value": null,
-            "source_series_key": "QSA.Q.N.RO.W1.S13.S1.N.L.LE.F3.L._Z.XDC._T.S.V.N._T",
-            "note": "Verified ECB QSA liability-side series for Romanian general-government long-term debt securities vis-a-vis the rest of the world. It is partial maturity coverage and therefore is not promoted to an observed all-maturity WTWTW cell until the all-maturity series is retrieved and reconciled."
+            "unit": "million_RON",
+            "note": "Outside the Romanian national financial-accounts boundary: RMD represents resident-sector positions vis-a-vis the rest of the world, not positions among non-residents themselves."
+          },
+          {
+            "holder": "X",
+            "issuer": "BNR",
+            "status": "OBSERVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W1.S121.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "BNR",
+            "issuer": "H",
+            "status": "OBSERVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S121.S1M.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "BNR",
+            "issuer": "C",
+            "status": "OBSERVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S121.S11.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "BNR",
+            "issuer": "F",
+            "status": "DERIVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Exact additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S121.S12.N.A.LE.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S121.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "BNR",
+            "issuer": "G",
+            "status": "OBSERVED",
+            "value": 1549.9,
+            "unit": "million_RON",
+            "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S121.S13.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "BNR",
+            "issuer": "X",
+            "status": "OBSERVED",
+            "value": 223764.11,
+            "unit": "million_RON",
+            "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W1.S121.S1.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "BNR",
+            "issuer": "BNR",
+            "status": "OBSERVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S121.S121.N.A.LE.F3.T._Z.XDC._T.S.V.N._T"
           }
         ]
       },
@@ -73,7 +377,320 @@
           "value": null,
           "unit": "million_RON"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "holder": "H",
+            "issuer": "H",
+            "status": "DERIVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S1M.S1M.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "H",
+            "issuer": "C",
+            "status": "DERIVED",
+            "value": -25.86,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S1M.S11.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "H",
+            "issuer": "F",
+            "status": "DERIVED",
+            "value": 7.3,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation Q1+Q2+Q3+Q4 plus additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S1M.S12.N.A.F.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S1M.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "H",
+            "issuer": "G",
+            "status": "DERIVED",
+            "value": 7902.27,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S1M.S13.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "H",
+            "issuer": "X",
+            "status": "DERIVED",
+            "value": 230.7,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W1.S1M.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "H",
+            "issuer": "BNR",
+            "status": "DERIVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S1M.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "C",
+            "issuer": "H",
+            "status": "DERIVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S11.S1M.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "C",
+            "issuer": "C",
+            "status": "DERIVED",
+            "value": -19.63,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S11.S11.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "C",
+            "issuer": "F",
+            "status": "DERIVED",
+            "value": 55.75,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation Q1+Q2+Q3+Q4 plus additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S11.S12.N.A.F.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S11.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "C",
+            "issuer": "G",
+            "status": "DERIVED",
+            "value": 2139.95,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S11.S13.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "C",
+            "issuer": "X",
+            "status": "DERIVED",
+            "value": 224.49,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W1.S11.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "C",
+            "issuer": "BNR",
+            "status": "DERIVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S11.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "F",
+            "issuer": "H",
+            "status": "DERIVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation Q1+Q2+Q3+Q4 plus additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S12.S1M.N.A.F.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S121.S1M.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "F",
+            "issuer": "C",
+            "status": "DERIVED",
+            "value": 574.31,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation Q1+Q2+Q3+Q4 plus additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S12.S11.N.A.F.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S121.S11.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "F",
+            "issuer": "F",
+            "status": "DERIVED",
+            "value": 2373.54,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation Q1+Q2+Q3+Q4 plus additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S12.S12.N.A.F.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S12.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S121.S12.N.A.F.F3.T._Z.XDC._T.S.V.N._T + +1*QSA.Q.N.RO.W2.S121.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "F",
+            "issuer": "G",
+            "status": "DERIVED",
+            "value": 53044.88,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation Q1+Q2+Q3+Q4 plus additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S12.S13.N.A.F.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S121.S13.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "F",
+            "issuer": "X",
+            "status": "DERIVED",
+            "value": 2128.43,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation Q1+Q2+Q3+Q4 plus additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W1.S12.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W1.S121.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "F",
+            "issuer": "BNR",
+            "status": "DERIVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation Q1+Q2+Q3+Q4 plus additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S12.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S121.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "G",
+            "issuer": "H",
+            "status": "DERIVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S13.S1M.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "G",
+            "issuer": "C",
+            "status": "DERIVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S13.S11.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "G",
+            "issuer": "F",
+            "status": "DERIVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation Q1+Q2+Q3+Q4 plus additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S13.S12.N.A.F.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S13.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "G",
+            "issuer": "G",
+            "status": "DERIVED",
+            "value": 1901.9,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S13.S13.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "G",
+            "issuer": "X",
+            "status": "DERIVED",
+            "value": 121.91,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W1.S13.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "G",
+            "issuer": "BNR",
+            "status": "DERIVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S13.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "X",
+            "issuer": "H",
+            "status": "DERIVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W1.S1M.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "X",
+            "issuer": "C",
+            "status": "DERIVED",
+            "value": 7783.7,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W1.S11.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "X",
+            "issuer": "F",
+            "status": "DERIVED",
+            "value": 5033.55,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation Q1+Q2+Q3+Q4 plus additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W1.S12.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W1.S121.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "X",
+            "issuer": "G",
+            "status": "DERIVED",
+            "value": 67153.17,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W1.S13.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "X",
+            "issuer": "X",
+            "status": "NOT_APPLICABLE",
+            "value": null,
+            "unit": "million_RON",
+            "note": "Outside the Romanian national financial-accounts boundary: RMD represents resident-sector positions vis-a-vis the rest of the world, not positions among non-residents themselves."
+          },
+          {
+            "holder": "X",
+            "issuer": "BNR",
+            "status": "DERIVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W1.S121.S1.N.L.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "BNR",
+            "issuer": "H",
+            "status": "DERIVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S121.S1M.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "BNR",
+            "issuer": "C",
+            "status": "DERIVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S121.S11.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "BNR",
+            "issuer": "F",
+            "status": "DERIVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation Q1+Q2+Q3+Q4 plus additive sector derivation required by RMD F = S12 - S121; snapshot=accounting-f3-2025-vintage-2026-09-18; formula=+1*QSA.Q.N.RO.W2.S121.S12.N.A.F.F3.T._Z.XDC._T.S.V.N._T + -1*QSA.Q.N.RO.W2.S121.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "BNR",
+            "issuer": "G",
+            "status": "DERIVED",
+            "value": -1603.68,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S121.S13.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "BNR",
+            "issuer": "X",
+            "status": "DERIVED",
+            "value": 27401.65,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W1.S121.S1.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+          },
+          {
+            "holder": "BNR",
+            "issuer": "BNR",
+            "status": "DERIVED",
+            "value": 0.0,
+            "unit": "million_RON",
+            "note": "Exact temporal aggregation of observed ECB QSA quarterly transactions: 2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot=accounting-f3-2025-vintage-2026-09-18.",
+            "source_series_key": "QSA.Q.N.RO.W2.S121.S121.N.A.F.F3.T._Z.XDC._T.S.V.N._T"
+          }
+        ]
       }
     },
     "F2": {
@@ -195,20 +812,20 @@
       "role": "consolidated government-finance control only; not an ESA F3 WTWTW cell"
     },
     {
-      "id": "qsa_nonresident_debt_securities_total_economy_2025q4",
-      "value": 493246.93,
-      "unit": "million_RON",
-      "period": "2025-Q4",
-      "series_key": "QSA.Q.N.RO.W1.S1.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
-      "role": "QSA availability and external-holder control; it must not be relabelled as government debt"
-    },
-    {
       "id": "qsa_government_loan_assets_2025q4",
       "value": 69359.98,
       "unit": "million_RON",
       "period": "2025-Q4",
       "series_key": "QSA.Q.N.RO.W0.S13.S1.N.A.LE.F4.T._Z.XDC._T.S.V.N._T",
       "role": "government asset-side F4 aggregate control; not a bilateral allocation"
+    },
+    {
+      "id": "qsa_nonresident_debt_securities_total_economy_2025q4",
+      "value": 493246.93,
+      "unit": "million_RON",
+      "period": "2025-Q4",
+      "series_key": "QSA.Q.N.RO.W1.S1.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+      "role": "independent external-holder aggregate control; exactly reproduced by the populated canonical F3 X row"
     }
   ],
   "b9f": {
