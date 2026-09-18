@@ -1,0 +1,169 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F5 Phase C — Bilateral Equity Subcomponent Bridge",
+  "audit_head_sha": "a354e9813e4ec199a5a8fc03f0437c235fb968f1",
+  "workflow_run_id": 35378085975,
+  "workflow_artifact_id": 10560634702,
+  "workflow_artifact_sha256": "922b70a7efe32ff2253e2e8675965312c06d80627eb4df963d8a6697b50c0274",
+  "verdict": "F511_PARTIAL_BILATERAL_F512_F519_UNAVAILABLE_F51_AND_F5_UNRESOLVED",
+  "result": {
+    "series_requested": 532,
+    "series_status_counts": {
+      "AVAILABLE": 180,
+      "HTTP_ERROR": 352
+    },
+    "network_errors_present": false,
+    "equity_components": {
+      "F511": {
+        "resolved": 22,
+        "unresolved": 48
+      },
+      "F512": {
+        "resolved": 0,
+        "unresolved": 70
+      },
+      "F519": {
+        "resolved": 0,
+        "unresolved": 70
+      }
+    },
+    "F51": {
+      "resolved": 0,
+      "unresolved": 70
+    },
+    "F52": {
+      "structural_nonissuer": 48,
+      "resolved": 14,
+      "unresolved": 8
+    },
+    "total_F5": {
+      "resolved": 0,
+      "unresolved_due_F51": 70,
+      "not_applicable": 2
+    },
+    "sector_F51_decomposition": {
+      "PASS": 10,
+      "CONTROL_INCOMPLETE": 10
+    },
+    "total_F51_decomposition": {
+      "PASS": 8
+    },
+    "aggregate_reconciliation": {
+      "bilateral_coverage_incomplete": 20
+    },
+    "external_controls": {
+      "bilateral_coverage_incomplete": 4
+    },
+    "materialization_allowed": false
+  },
+  "F511_resolved_topology": {
+    "stock": [
+      "H→C",
+      "H→G",
+      "H→X",
+      "C→C",
+      "C→G",
+      "C→X",
+      "G→C",
+      "G→G",
+      "G→X",
+      "X→C",
+      "X→G"
+    ],
+    "flow": [
+      "H→C",
+      "H→G",
+      "H→X",
+      "C→C",
+      "C→G",
+      "C→X",
+      "G→C",
+      "G→G",
+      "G→X",
+      "X→C",
+      "X→G"
+    ]
+  },
+  "total_economy_F51_decomposition_million_RON": {
+    "stock": {
+      "W0_assets": {
+        "F51": 863724.73,
+        "F511": 253143.38,
+        "F512": 215374.32,
+        "F519": 395207.02,
+        "residual": 0.01
+      },
+      "W0_liabilities": {
+        "F51": 1329174.33,
+        "F511": 296435.65,
+        "F512": 328573.56,
+        "F519": 704165.12,
+        "residual": 0
+      },
+      "W1_assets": {
+        "F51": 64278.06,
+        "F511": 21626.93,
+        "F512": 35572.36,
+        "F519": 7078.78,
+        "residual": -0.01
+      },
+      "W1_liabilities": {
+        "F51": 529727.67,
+        "F511": 64919.19,
+        "F512": 148771.6,
+        "F519": 316036.87,
+        "residual": 0.01
+      }
+    },
+    "flow_2025": {
+      "W0_assets": {
+        "F51": 28195.18,
+        "F511": 7233.51,
+        "F512": 8226.8,
+        "F519": 12734.85,
+        "residual": 0.02
+      },
+      "W0_liabilities": {
+        "F51": 53463.98,
+        "F511": 4148.69,
+        "F512": 15452.04,
+        "F519": 33863.25,
+        "residual": 0
+      },
+      "W1_assets": {
+        "F51": 4604.41,
+        "F511": 1701.32,
+        "F512": 2160.72,
+        "F519": 742.37,
+        "residual": 0
+      },
+      "W1_liabilities": {
+        "F51": 29873.22,
+        "F511": -1383.51,
+        "F512": 9385.96,
+        "F519": 21870.77,
+        "residual": 0
+      }
+    }
+  },
+  "scientific_interpretation": [
+    "The equity decomposition is strongly validated at total-economy level: all eight F51=F511+F512+F519 controls pass within 0.1 million RON.",
+    "F511 listed shares provide partial bilateral source coverage, but F512 unlisted shares and F519 other equity provide none in the tested W2/W1 layer.",
+    "F512 and F519 are quantitatively material. At 2025-Q4 W0 assets they sum to 610581.34 million RON versus 253143.38 million RON F511, so listed shares cannot substitute for total equity.",
+    "The F52 Phase B issuer rule remains useful but cannot recover total F5 while F51 is unresolved.",
+    "A simple total-F5 aggregate rank would discard useful lower-level information. The next gate should compute rank over the component system and test uniqueness of the total-F5 cell linear combinations."
+  ],
+  "next_gate": {
+    "name": "F5 Phase D — component-aware exact rank/nullspace audit",
+    "required_checks": [
+      "represent F511, F512, F519 and F52 bilateral cells as component variables, with F52 resident non-fund issuer structural zeros retained exactly",
+      "use direct F511 bilateral observations and direct/structural F52 evidence as equations",
+      "use published resident W0 and total-economy W1 aggregate controls for F511/F512/F519/F51/F52/F5 only where definitionally available",
+      "treat each total F5 cell as the linear combination F511+F512+F519+F52 and test whether that combination is invariant over the exact nullspace",
+      "report component rank, total-F5 unique-cell topology and remaining degrees of freedom separately for stock and flow",
+      "do not convert zero aggregate transactions into bilateral zero-flow equations",
+      "if no useful unconditional F5 core exists, freeze F5 at the public-data boundary and advance to F6 rather than allocate"
+    ],
+    "behavioural_closure_may_change": false
+  }
+}
