@@ -1,0 +1,72 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F2 Phase C5 — BPM6-to-ESA F2 Concept Bridge",
+  "audit_head_sha": "d86dfc57ce0de7a096bce61c6954c084e2137c7e",
+  "workflow_run_id": 35369238080,
+  "workflow_artifact_id": 10557544056,
+  "workflow_artifact_sha256": "f76a81234c06849db71f64daeba73acb8a258117bfa5db8f2b2dcdd0260e882f",
+  "verdict": "BLOCKED_DIRECT_INVESTMENT_F2_SUBINSTRUMENT_NOT_DISSEMINATED",
+  "official_concept": "ESA F2 currency and deposits spans BPM6 functional categories. Other Investment F2 is residual; a complete bridge requires the F2 portions of Direct Investment, Other Investment and Reserve Assets where applicable.",
+  "result": {
+    "series_status_counts": {
+      "AVAILABLE": 7,
+      "NO_OBSERVATION": 8,
+      "FILTER_VALUE_NOT_IN_DATASET_CONSTRAINT": 14
+    },
+    "reserve_assets_F2": {
+      "status": "AVAILABLE",
+      "MIO_NAC": 90278,
+      "MIO_EUR": 17712.7,
+      "selected_representation": "FA__R__F2 / S121 / sectpart S1"
+    },
+    "direct_investment_F2": {
+      "item": "FA__D__F2",
+      "MIO_NAC_available_for_required_sectors": false,
+      "MIO_EUR_available_for_required_sectors": false,
+      "total_S1_available": false,
+      "dataset_constraint_result": "bop_item dimension size 0 for every one of the 14 sector×unit probes",
+      "interpretation": "The direct-investment F2 subinstrument is not disseminated in bop_iip6_q under this item code and is not treated as zero."
+    },
+    "direct_investment_debt_diagnostic": {
+      "item": "FA__D__FL",
+      "total_S1_MIO_NAC": 88635,
+      "S12M_MIO_NAC": 1530,
+      "S12T_MIO_NAC": 0,
+      "S13_MIO_NAC": 0,
+      "S121_MIO_NAC": 0,
+      "S11_status": "NO_OBSERVATION",
+      "S1M_status": "NO_OBSERVATION",
+      "use": "DIAGNOSTIC_ONLY_NOT_F2_SUBSTITUTE"
+    },
+    "known_functional_components": {
+      "components": "Other-Investment F2 plus Reserve-Assets F2 only",
+      "sector_sum_MIO_NAC": 169405,
+      "QSA_W1_total_F2_million_RON": 172401.07,
+      "gap_million_RON": -2996.07,
+      "status": "DIAGNOSTIC_ONLY_FUNCTIONAL_CATEGORY_COVERAGE_INCOMPLETE"
+    },
+    "functional_category_F2_coverage_complete": false,
+    "concept_bridge_pass": false,
+    "promotion_status": "BPM6_ESA_F2_CONCEPT_BRIDGE_BLOCKED"
+  },
+  "interpretation": [
+    "The earlier negative holder diagnostics from Other-Investment F2 plus Reserve-Assets F2 are not interpreted as negative currency positions because those functional components are incomplete without the Direct-Investment F2 subinstrument.",
+    "The 2996.07 million RON gap to QSA W1 total F2 remains unallocated. It is not labelled as F21 or Direct-Investment F2 because the required F2 breakdown is not published.",
+    "FA__D__FL is a composite direct-investment debt-instruments item and cannot be substituted for F2; it may contain currency and deposits together with other debt instruments.",
+    "The reserve-assets F2 component is directly observable and explains why BNR Other-Investment F2 alone was far below the QSA deposits component.",
+    "The public Eurostat/ECB route has recovered sector structure but not the final functional-category instrument bridge required to construct holder-specific ESA F2/F21."
+  ],
+  "public_source_boundary": {
+    "status": "PUBLIC_DISSEMINATION_INSUFFICIENT_FOR_CANONICAL_F21_MATERIALIZATION",
+    "BNR_note": "BNR public external-sector publications and metadata expose Direct Investment primarily as equity and debt instruments and provide an interactive database, but no current public evidence was established here for a 2025 Direct-Investment currency-and-deposits subinstrument suitable for the RMD bridge.",
+    "rule": "Do not infer unavailable direct-investment F2 from broad debt instruments, historical proportions, or the residual gap."
+  },
+  "disposition": {
+    "F2M": "REMAINS_MATERIALIZED",
+    "F21": "REMAINS_UNRESOLVED",
+    "total_F2": "REMAINS_INCOMPLETE",
+    "behavioural_closure": "UNCHANGED_INACTIVE",
+    "accounting_recovery_next_priority": "F4 loans source-coverage and materialization screening",
+    "reopen_F21_when": "A source with definitionally comparable Direct-Investment F2 subinstrument detail or an equivalent exact ESA/BPM6 bridge becomes available."
+  }
+}
