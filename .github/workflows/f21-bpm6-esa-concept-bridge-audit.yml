@@ -1,0 +1,44 @@
+name: F21 BPM6 ESA Concept Bridge Audit
+
+on:
+  pull_request:
+    paths:
+      - "model/accounting/f21_bpm6_esa_concept_bridge_contract.json"
+      - "model/accounting/eurostat_f2_sector_detail_assessment.json"
+      - "model/accounting/f2m_component_2025.json"
+      - "model/accounting/f21_f2_external_bridge_assessment.json"
+      - "scripts/audit_f21_bpm6_esa_concept_bridge.py"
+      - "tests/test_f21_bpm6_esa_concept_bridge_contract.py"
+      - ".github/workflows/f21-bpm6-esa-concept-bridge-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit-f21-bpm6-esa-concept-bridge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify BPM6-to-ESA bridge contract
+        run: python -m unittest tests.test_f21_bpm6_esa_concept_bridge_contract -v
+
+      - name: Test BPM6-to-ESA external F2 concept bridge
+        env:
+          F21_CONCEPT_BRIDGE_OUT: f21_concept_bridge_artifacts
+        run: python scripts/audit_f21_bpm6_esa_concept_bridge.py
+
+      - name: Upload concept-bridge evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: f21-bpm6-esa-concept-bridge-${{ github.sha }}
+          path: f21_concept_bridge_artifacts/
+          if-no-files-found: error
+          retention-days: 30
