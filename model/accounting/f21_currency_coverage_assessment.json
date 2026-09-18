@@ -1,0 +1,89 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F2 Phase C1 — F21 Currency Coverage Audit",
+  "instrument": "F21",
+  "audit_head_sha": "7b18cc04d2541065493bc8b56c13a6447f738b01",
+  "workflow_run_id": 35365118155,
+  "workflow_artifact_id": 10555937369,
+  "workflow_artifact_sha256": "f07d5a57c536a6f47903690892c8437e5a71b9ab39ce60197f3d2da495b5f160",
+  "verdict": "QSA_AGGREGATES_AVAILABLE_BILATERAL_F21_NOT_PUBLISHED",
+  "result": {
+    "series_requested": 148,
+    "series_available": 24,
+    "series_http_error": 124,
+    "bilateral_cells": {
+      "observable_or_exact_derivation": 0,
+      "unresolved_source_coverage": 70,
+      "outside_boundary_not_applicable": 2,
+      "orientation_conflicts": 0
+    }
+  },
+  "aggregate_controls": {
+    "stock": {
+      "W0_assets_million_RON": 160868.55,
+      "W0_liabilities_million_RON": 154429.76,
+      "W1_assets_million_RON": 6438.8,
+      "W1_liabilities_million_RON": 0,
+      "external_balance_identity_residual_million_RON": -0.01,
+      "status": "PASS_WITH_PUBLISHED_PRECISION"
+    },
+    "flow_2025": {
+      "W0_assets_million_RON": 14144.09,
+      "W0_liabilities_million_RON": 13750.66,
+      "W1_assets_million_RON": 393.43,
+      "W1_liabilities_million_RON": 0,
+      "external_balance_identity_residual_million_RON": 0,
+      "status": "PASS"
+    }
+  },
+  "sector_aggregate_evidence": {
+    "stock_holder_assets_million_RON": {
+      "H": 87292.33,
+      "C": 50405.52,
+      "F": 22785.96015625,
+      "G": 376.54,
+      "BNR": 8.2
+    },
+    "flow_holder_assets_2025_million_RON": {
+      "H": 7386.14,
+      "C": 4488.19,
+      "F": 2294.399853515625,
+      "G": -25.33,
+      "BNR": 0.7
+    },
+    "stock_issuer_liabilities_million_RON": {
+      "F": 0.005624999990686774,
+      "G": 0,
+      "BNR": 154429.76,
+      "H": null,
+      "C": null
+    },
+    "flow_issuer_liabilities_2025_million_RON": {
+      "F": -0.00014892578110448085,
+      "G": 0,
+      "BNR": 13750.66,
+      "H": null,
+      "C": null
+    },
+    "interpretation": [
+      "The sum of published resident-holder W0 F21 asset aggregates reproduces the total-economy W0 asset control within numerical/published precision.",
+      "Published BNR F21 liabilities reproduce the total-economy W0 F21 liability control; general-government liabilities are zero and the non-central-bank financial-sector residual is immaterial at published precision.",
+      "Published W1 F21 liabilities are zero for stock and every 2025 quarter, while W1 F21 assets are positive; resident holdings therefore include non-resident-issued currency, but QSA does not publish its sector allocation.",
+      "Neither W2 holder-asset nor W2 issuer-liability bilateral F21 mirrors are published for the tested RMD sector pairs."
+    ]
+  },
+  "limitation": "The holder-by-issuer F21 matrix cannot be materialized from direct bilateral QSA publication. Aggregate currency-in-circulation or holder totals must not be allocated across sectors by shares or balancing.",
+  "next_gate": {
+    "name": "F21 external instrument bridge: W1 F2 minus W1 F2M",
+    "hypothesis": "If QSA publishes definitionally identical W1 total-F2 assets by resident holder, holder-specific external F21 can be derived exactly as F2 minus the already materialized F2M deposits component. Domestic F21 holdings then become the W0 F21 holder aggregate minus external F21, subject to the Romanian resident-issuer legal/accounting gate and aggregate reconciliation.",
+    "required_checks": [
+      "W1 F2 stock and quarterly transaction series are available for every resident holder on dimensions identical to F2M/F21",
+      "F2 = F21 + F2M instrument identity is applied without cross-source or valuation mismatch",
+      "sum of holder-derived external F21 equals published total-economy W1 F21 for stock and flow",
+      "sum of implied domestic F21 holdings equals published resident currency liabilities within tolerance",
+      "resident currency issuer classification is justified independently by Romanian legal/accounting evidence and QSA liability controls",
+      "no residual allocation or convenience share is introduced"
+    ],
+    "behavioural_closure_may_change": false
+  }
+}
