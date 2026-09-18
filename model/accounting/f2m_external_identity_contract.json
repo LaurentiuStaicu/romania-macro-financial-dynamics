@@ -1,24 +1,33 @@
 {
-  "contract_version": "0.1",
+  "contract_version": "0.2",
   "phase": "Accounting Empirical Recovery / F2 Phase A2 — F2M External Complement Identity Audit",
   "purpose": "Test whether the five resident-holder to rest-of-world F2M cells can be derived as unique accounting complements rather than allocated residuals.",
   "benchmark_stock_period": "2025-Q4",
   "benchmark_flow_period": "2025-Q1..2025-Q4",
   "no_benchmark_mutation": true,
-  "hypothesis": "For each resident holder, W0 F2M assets equal domestic W2 deposits plus W1 rest-of-world deposits. If the domestic issuer partition is complete and W0/W2/W1 area partition is independently verified, the single missing holder→X value is an exact complement, not a synthetic allocation.",
+  "hypothesis": "For each resident holder, W0 F2M assets equal the complete resident-issuer deposit submatrix plus the single remaining rest-of-world issuer X. The X value is eligible as an exact complement only if independent aggregate controls close.",
+  "official_counterpart_area_semantics": {
+    "W0": "World / all counterpart areas including the reference area",
+    "W2": "Domestic / home or reference area",
+    "W1": "Rest of the world",
+    "source": "ECB QSA dataset dimensions"
+  },
   "required_gates": [
     "H and C issuer columns are structurally NOT_APPLICABLE under ESA 2010",
     "all resident deposit-issuer columns F/G/BNR are observed or exact-derived",
     "holder W0 F2M totals are available on definitionally identical dimensions",
-    "total-economy QSA area identity W0 = W2 + W1 passes for stock and flow",
-    "sum of the five holder-level complement candidates equals the published total-economy W1 F2M asset control",
+    "published total-economy W0 and W1 F2M controls are available",
+    "independently constructed domestic bilateral submatrix equals the implied domestic aggregate W0 minus W1 within tolerance; a directly published W2 aggregate, when available, is an additional control but is not required when unpublished",
+    "sum of the five independently calculated holder-level X complements equals the published total-economy W1 F2M asset control within tolerance",
     "frequency, instrument, accounting entry, consolidation, unit, currency denominator, valuation, prices and transformation are identical"
   ],
-  "promotion_rule": "Only if every required gate passes may holder→X be classified as an exact DERIVED QSA complement in a later materialization PR.",
-  "failure_rule": "If any required gate fails or the W1 aggregate is unavailable, the external F2M column remains unresolved and BOP/IIP/BNR external statistics are investigated only as separately reconciled sources.",
+  "control_independence_rule": "The domestic-submatrix control is calculated without using any holder→X candidate. The W1 control is published independently by ECB QSA. Thus the check does not validate a residual with itself.",
+  "promotion_rule": "Only if the independent domestic partition control and the published W1 aggregate control both pass for stock and flow may holder→X be classified as exact DERIVED QSA complements in a later materialization PR.",
+  "failure_rule": "If either independent control fails or W0/W1 is unavailable, the external F2M column remains unresolved and BOP/IIP/BNR external statistics are investigated only as separately reconciled sources.",
   "prohibited": [
     "allocating a total external aggregate across holders by shares",
-    "using the row residual when more than one issuer cell is unresolved",
+    "using a row residual when more than one issuer cell is unresolved",
+    "treating an unavailable direct W2 aggregate as zero",
     "using BOP/IIP F2 currency-and-deposits as if it were QSA F2M deposits without an explicit instrument bridge",
     "populating total F2 from F2M"
   ]
