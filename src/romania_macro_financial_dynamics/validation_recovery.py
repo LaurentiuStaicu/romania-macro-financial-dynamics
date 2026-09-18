@@ -1,4 +1,4 @@
-"""Parsimonious validation-recovery estimators for Alpha 0.5.x.
+"""Parsimonious validation-recovery estimators for the scientific core.
 
 This module is deliberately small and dependency-free. It supports predeclared
 one- and two-parameter monetary pass-through candidates, simple baselines and

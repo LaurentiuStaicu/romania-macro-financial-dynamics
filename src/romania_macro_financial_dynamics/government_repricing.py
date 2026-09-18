@@ -1,4 +1,4 @@
-"""Boundary-safe utilities for the Alpha 0.5.2 government repricing ledger."""
+"""Boundary-safe utilities for the government repricing ledger."""
 
 from __future__ import annotations
 

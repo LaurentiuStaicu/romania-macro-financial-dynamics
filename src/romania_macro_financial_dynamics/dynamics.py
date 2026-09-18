@@ -1,4 +1,4 @@
-"""Accounting-constrained System Dynamics primitives for Alpha 0.3.0a0.
+"""Accounting-constrained System Dynamics primitives for the scientific core.
 
 The module provides structure, conservation and time-step mechanics only.
 Behavioural closure remains outside this stage: no consumption, investment,
