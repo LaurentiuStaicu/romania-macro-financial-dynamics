@@ -1,0 +1,207 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F4 Phase B — Exact Complement and Rank Audit",
+  "audit_head_sha": "10eecdafc04016b4c47e2dea331c85cb7804610e",
+  "workflow_run_id": 35372609851,
+  "workflow_artifact_id": 10558980689,
+  "workflow_artifact_sha256": "a01922ed3662725dd5c73c95cd248bb97c8fc8a06404c9507e7cac4fc8e260aa",
+  "verdict": "UNCONDITIONAL_PARTIAL_IDENTIFICATION_CONDITIONAL_STOCK_EXPANSION_REMAINS_UNMATERIALIZED",
+  "source_reproduction": {
+    "phase_A_series_requested": 420,
+    "phase_A_series_status_counts": {
+      "AVAILABLE": 178,
+      "HTTP_ERROR": 242
+    },
+    "phase_A_maturity_conflict_count": 0,
+    "W1_control_series_requested": 12,
+    "W1_control_series_status_counts": {
+      "AVAILABLE": 12
+    },
+    "network_errors_present": false
+  },
+  "W1_controls_million_RON": {
+    "stock": {
+      "assets": {
+        "T": 93514.06,
+        "S": 6214.62,
+        "L": 87299.44,
+        "residual_T_minus_S_minus_L": 0
+      },
+      "liabilities": {
+        "T": 393296.07,
+        "S": 76370.85,
+        "L": 316925.22,
+        "residual_T_minus_S_minus_L": 0
+      }
+    },
+    "flow_2025": {
+      "assets": {
+        "T": 10252.79,
+        "S": 1564.87,
+        "L": 8687.92,
+        "residual_T_minus_S_minus_L": 1.8189894e-12
+      },
+      "liabilities": {
+        "T": 39461.1,
+        "S": 1263.09,
+        "L": 38198.01,
+        "residual_T_minus_S_minus_L": 0
+      }
+    }
+  },
+  "unconditional_identification": {
+    "stock": {
+      "variables": 35,
+      "rank": 26,
+      "nullity": 9,
+      "unique_cell_count": 15,
+      "unique_cells": [
+        "H→H",
+        "H→C",
+        "H→G",
+        "H→X",
+        "C→H",
+        "C→C",
+        "C→G",
+        "C→X",
+        "G→H",
+        "G→C",
+        "G→G",
+        "G→X",
+        "X→H",
+        "X→C",
+        "X→G"
+      ]
+    },
+    "flow": {
+      "variables": 35,
+      "rank": 26,
+      "nullity": 9,
+      "unique_cell_count": 15,
+      "unique_cells": [
+        "H→H",
+        "H→C",
+        "H→G",
+        "H→X",
+        "C→H",
+        "C→C",
+        "C→G",
+        "C→X",
+        "G→H",
+        "G→C",
+        "G→G",
+        "G→X",
+        "X→H",
+        "X→C",
+        "X→G"
+      ]
+    },
+    "newly_recovered_exact_complements_million_RON": {
+      "stock": {
+        "X→H": 5912.312812499993,
+        "X→C": 236002.65269354824,
+        "X→G": 114279.18211029054
+      },
+      "flow_2025": {
+        "X→H": 921.8602420043935,
+        "X→C": 12625.789940193223,
+        "X→G": 24542.49937762737
+      }
+    }
+  },
+  "stock_conditional_BNR_zero_liability_scenario": {
+    "source_condition_pass": true,
+    "interpretation": "The published non-consolidated BNR W0 F4 liability stock is zero. Phase B evaluates, but does not materialize, the conditional stock partition-zero scenario in which every holder→BNR loan-position cell is zero. This premise is never extended to transactions.",
+    "variables": 35,
+    "rank": 31,
+    "nullity": 4,
+    "unique_cell_count": 25,
+    "newly_unique_cells_beyond_unconditional": [
+      "H→F",
+      "H→BNR",
+      "C→F",
+      "C→BNR",
+      "F→BNR",
+      "G→F",
+      "G→BNR",
+      "X→F",
+      "X→BNR",
+      "BNR→BNR"
+    ],
+    "row_complement_controls": [
+      {
+        "cell": "H→F",
+        "complement_value_million_RON": 448.0701708984343,
+        "direct_S12_asset_control_million_RON": 448.0600128173828,
+        "residual_million_RON": 0.010158081051486079,
+        "status": "PASS"
+      },
+      {
+        "cell": "C→F",
+        "complement_value_million_RON": 1143.9597836303728,
+        "direct_S12_asset_control_million_RON": 1143.9599914550781,
+        "residual_million_RON": -0.00020782470528502017,
+        "status": "PASS"
+      },
+      {
+        "cell": "G→F",
+        "complement_value_million_RON": 1451.021992187496,
+        "direct_S12_asset_control_million_RON": 1451.020025253296,
+        "residual_million_RON": 0.0019669342000270262,
+        "status": "PASS"
+      }
+    ],
+    "conditional_external_complements_million_RON": {
+      "X→F": 37101.92238366121,
+      "H→BNR": 0,
+      "C→BNR": 0,
+      "F→BNR": 0,
+      "G→BNR": 0,
+      "X→BNR": 0,
+      "BNR→BNR": 0
+    },
+    "nonunique_cells": [
+      "F→H",
+      "F→C",
+      "F→F",
+      "F→G",
+      "F→X",
+      "BNR→H",
+      "BNR→C",
+      "BNR→F",
+      "BNR→G",
+      "BNR→X"
+    ],
+    "remaining_degrees_of_freedom": 4,
+    "remaining_boundary": "The five BNR-holder asset cells across H/C/F/G/X sum to the published 6.1 million RON BNR F4 asset stock. Without counterpart evidence, their four independent allocation degrees of freedom remain unresolved; paired F-holder cells move oppositely through the exact S12=F+BNR identity."
+  },
+  "aggregate_reconciliation": {
+    "stock_external_assets_from_H_C_G_plus_S12_million_RON": 93514.05954742432,
+    "stock_external_assets_QSA_W1_million_RON": 93514.06,
+    "stock_external_assets_residual_million_RON": -0.00045257568126544356,
+    "flow_external_assets_from_H_C_G_plus_S12_million_RON": 10252.78989636898,
+    "flow_external_assets_QSA_W1_million_RON": 10252.79,
+    "flow_external_assets_residual_million_RON": -0.00010363102046540007,
+    "conditional_stock_external_liabilities_residual_million_RON": -5.82076609e-11,
+    "status": "PASS_WITHIN_0.1_MILLION_RON_FOR_ALL_COMPUTABLE_CONTROLS"
+  },
+  "scientific_interpretation": [
+    "The exact-rank result confirms that Phase A's 12 directly resolved cells are not the full identifiable set: W0 controls plus the exact S12=F+BNR holder identity uniquely recover X→H, X→C and X→G for both stock and flow.",
+    "The stock-only BNR zero-liability scenario adds five independent equations because the existing BNR issuer aggregate equation is redundant with their sum; stock rank therefore rises from 26 to 31, not by six.",
+    "No corresponding bilateral zero-flow constraints are introduced. Flow remains rank 26 with nine degrees of freedom.",
+    "The remaining stock ambiguity is not diffuse across the matrix: it is localized exactly to the F-versus-BNR holder split across H/C/F/G/X.",
+    "Published W1 all-maturity controls reconcile exactly with S+L and independently validate the computable external asset totals."
+  ],
+  "disposition": {
+    "phase_B_materialization": false,
+    "unconditional_unique_cells_eligible_for_later_partial_materialization": true,
+    "conditional_BNR_zero_cells_eligible_for_materialization": false,
+    "total_F4_complete": false,
+    "behavioural_closure": "UNCHANGED_INACTIVE"
+  },
+  "next_gate": {
+    "name": "F4 Phase C — immutable-source partial materialization of unconditional unique core",
+    "scope": "Retain the exact successful Phase B artifact and deterministically materialize only the 15 unconditional unique stock cells and 15 unconditional unique flow cells into a separate partial-F4 artifact, leaving all other cells explicitly UNRESOLVED and leaving benchmark_2025.json unchanged.",
+    "parallel_reopen_condition": "Search for an official BNR/financial-accounts counterpart source for the 6.1 million RON BNR F4 asset stock. Only such evidence, or a formally justified structural-zero adjudication, may expand the stock matrix beyond the unconditional core."
+  }
+}

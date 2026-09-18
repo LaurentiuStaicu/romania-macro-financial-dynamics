@@ -1,0 +1,53 @@
+name: F4 Exact Complement and Rank Audit
+
+on:
+  pull_request:
+    paths:
+      - "model/accounting/f4_exact_complement_rank_contract.json"
+      - "model/accounting/f4_loans_coverage_contract.json"
+      - "scripts/audit_qsa_f4_loans_coverage.py"
+      - "scripts/audit_f4_exact_complement_rank.py"
+      - "tests/test_f4_exact_complement_rank_contract.py"
+      - ".github/workflows/f4-exact-complement-rank-audit.yml"
+      - "model/accounting/reconciliation_2025.json"
+      - "STATUS.md"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit-f4-rank:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify Phase B contract
+        run: python -m unittest tests.test_f4_exact_complement_rank_contract -v
+
+      - name: Reproduce F4 Phase A source coverage
+        env:
+          F4_AUDIT_OUT: f4_phase_a_artifacts
+        run: python scripts/audit_qsa_f4_loans_coverage.py
+
+      - name: Run exact complement and rank audit
+        env:
+          F4_PHASE_B_OUT: f4_phase_b_artifacts
+        run: |
+          python scripts/audit_f4_exact_complement_rank.py             --phase-a-report f4_phase_a_artifacts/f4_loans_coverage_audit.json             --out f4_phase_b_artifacts
+
+      - name: Upload Phase A and Phase B evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: f4-exact-complement-rank-${{ github.sha }}
+          path: |
+            f4_phase_a_artifacts/
+            f4_phase_b_artifacts/
+          if-no-files-found: error
+          retention-days: 30
