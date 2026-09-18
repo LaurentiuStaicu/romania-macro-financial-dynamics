@@ -1,0 +1,69 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F2 Phase C2 — F21 External Instrument Bridge",
+  "audit_head_sha": "28e75701649237241ac079b3517999e4a02e9d4e",
+  "workflow_run_id": 35366122398,
+  "workflow_artifact_id": 10555973972,
+  "workflow_artifact_sha256": "2c6f984bd4d378665b0fe3502e59dc60771e31c5f384cb0c091344276437e6f6",
+  "verdict": "QSA_W1_F2_TOTAL_AVAILABLE_HOLDER_BREAKDOWN_UNAVAILABLE",
+  "identity_tested": "W1 F21(holder) = W1 F2(holder) - materialized W1 F2M(holder)",
+  "result": {
+    "series_requested": 30,
+    "series_available": 20,
+    "series_http_error": 10,
+    "network_errors_present": false,
+    "all_holder_bridges_available": false,
+    "all_required_controls_pass": false,
+    "promotion_status": "F21_EXTERNAL_BRIDGE_REMAINS_BLOCKED"
+  },
+  "aggregate_QSA_controls": {
+    "stock": {
+      "published_W1_total_F2_million_RON": 172401.07,
+      "published_W1_total_F21_million_RON": 6438.8,
+      "published_W0_total_F21_assets_million_RON": 160868.55,
+      "published_W0_total_F21_liabilities_million_RON": 154429.76,
+      "published_BNR_W0_F21_liabilities_million_RON": 154429.76
+    },
+    "flow_2025": {
+      "published_W1_total_F2_million_RON": -5106.8200000000015,
+      "published_W1_total_F21_million_RON": 393.43,
+      "published_W0_total_F21_assets_million_RON": 14144.09,
+      "published_W0_total_F21_liabilities_million_RON": 13750.66,
+      "published_BNR_W0_F21_liabilities_million_RON": 13750.66
+    }
+  },
+  "holder_bridge_status": {
+    "H": "W1_F2_UNAVAILABLE",
+    "C": "W1_F2_UNAVAILABLE",
+    "F": "W1_F2_UNAVAILABLE",
+    "G": "W1_F2_UNAVAILABLE",
+    "BNR": "W1_F2_UNAVAILABLE"
+  },
+  "scientific_interpretation": [
+    "QSA publishes total-economy W1 F2 and W1 F21 controls for Romania, but it does not publish the holder-specific W1 F2 series required to apply F2-F2M separately for H/C/F/G/BNR.",
+    "The already materialized holder-specific W1 F2M deposits values cannot identify holder-specific W1 F21 without matching holder-specific total F2.",
+    "The aggregate identity is insufficient to allocate the published W1 F21 total across resident holders.",
+    "The corrected liability-control reader confirms that total W0 F21 liabilities and BNR W0 F21 liabilities are both published at 154429.76 million RON for 2025-Q4 and 13750.66 million RON for 2025 flow; this does not solve the holder allocation."
+  ],
+  "limitation": "The exact QSA instrument bridge fails because its required holder-specific total-F2 source series are absent. No share or residual allocation is permitted.",
+  "next_gate": {
+    "name": "BPS/BOP external-sector sector-structure audit",
+    "purpose": "Test whether ECB BPS / BOP-IIP provides external currency-and-deposits assets at sector granularity compatible with RMD H/C/F/G/BNR and whether BPM6/ESA definition differences can be reconciled explicitly.",
+    "required_sector_probe": [
+      "S121 central bank",
+      "S12T/S122 monetary financial institutions other than central bank",
+      "S13 general government",
+      "S1P other sectors",
+      "S12M/S12O other financial corporations where published",
+      "S11 non-financial corporations where published",
+      "S1M households and NPISH where published"
+    ],
+    "prohibited": [
+      "splitting S1P by shares",
+      "treating BPS F2 as definitionally identical to QSA F2 without a documented BPM6/ESA bridge",
+      "mixing EUR and RON observations without an explicit official conversion bridge",
+      "using reserve-assets F2 as a substitute for all central-bank other-investment F2",
+      "promoting total F2 or behavioural closure"
+    ]
+  }
+}
