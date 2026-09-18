@@ -1,5 +1,5 @@
 {
-  "ledger_version": "1.4",
+  "ledger_version": "1.5",
   "benchmark": "2025",
   "principle": "Record residuals and unresolved coverage explicitly; never force accounting closure with invented allocations.",
   "instrument_gates": [
@@ -314,11 +314,38 @@
     {
       "instrument": "F5",
       "priority": 5,
-      "stock_matrix_status": "TBD",
-      "flow_matrix_status": "TBD",
+      "stock_matrix_status": "AGGREGATE_DECOMPOSITION_VALID_BILATERAL_TOTAL_F5_UNAVAILABLE",
+      "flow_matrix_status": "AGGREGATE_DECOMPOSITION_VALID_BILATERAL_TOTAL_F5_UNAVAILABLE",
       "asset_liability_residual": null,
-      "residual_status": "TBD_UNTIL_COMPARABLE_TOTALS_EXIST",
-      "known_issues": []
+      "residual_status": "TOTAL_F5_DECOMPOSITION_PASS_8_OF_8_BILATERAL_ZERO_OF_35",
+      "known_issues": [
+        "The initial F5 audit run used an invalid QSA maturity dimension T and is discarded; canonical F5 series use maturity _Z and expenditure _Z.",
+        "No tested bilateral total-F5 cell is published for stock or 2025 flow after the key correction.",
+        "All eight total-economy F5=F51+F52 controls pass and all ten resident holder-side asset decomposition controls pass.",
+        "F52 is material and F51 must not be used as a proxy for total F5.",
+        "Liability-side F52 controls are absent at the coarse RMD sector mapping; their structural applicability must be adjudicated before any missing-to-zero interpretation.",
+        "The next gate probes bilateral F51/F52 and formally constrains F52 issuer applicability before exact-rank analysis."
+      ],
+      "coverage_assessment": {
+        "status": "AGGREGATES_AVAILABLE_BILATERAL_TOTAL_F5_NOT_PUBLISHED",
+        "assessment": "model/accounting/f5_equity_fund_coverage_assessment.json",
+        "canonical_audit_run": 35375630494,
+        "invalid_run_discarded": 35375328011,
+        "stock_cells": {
+          "resolved": 0,
+          "unresolved": 35,
+          "not_applicable": 1
+        },
+        "flow_cells": {
+          "resolved": 0,
+          "unresolved": 35,
+          "not_applicable": 1
+        },
+        "total_decomposition_controls": "PASS_8_OF_8",
+        "holder_asset_decomposition_controls": "PASS_10_OF_10",
+        "next_gate": "F5 bilateral F51/F52 component and issuer-applicability audit",
+        "materialization_allowed": false
+      }
     },
     {
       "instrument": "F6",
@@ -461,6 +488,14 @@
     {
       "id": "f8_freeze_aggregate_only",
       "status": "ENFORCED_NO_SYNTHETIC_BILATERAL_ALLOCATION"
+    },
+    {
+      "id": "f5_qsa_dimension_correction",
+      "status": "ENFORCED_CANONICAL_F5_MATURITY__Z_EXPENDITURE__Z"
+    },
+    {
+      "id": "f5_total_instrument_coverage",
+      "status": "NEGATIVE_BILATERAL_TOTAL_DECOMPOSITION_PASS_8_OF_8"
     }
   ]
 }

@@ -1,0 +1,69 @@
+{
+  "contract_version": "0.2",
+  "phase": "Accounting Empirical Recovery / F5 Phase A — Equity and Investment Fund Shares Coverage Audit",
+  "instrument": "F5",
+  "meaning": "Equity and investment fund shares or units under ESA 2010",
+  "benchmark_stock_period": "2025-Q4",
+  "benchmark_flow_period": "2025-Q1..2025-Q4",
+  "purpose": "Determine exact ECB QSA who-to-whom coverage for total F5 and validate its top-level decomposition before any materialization.",
+  "instrument_structure": {
+    "F5": "equity and investment fund shares or units",
+    "F51": "equity",
+    "F52": "investment fund shares or units",
+    "identity": "F5 = F51 + F52"
+  },
+  "sector_mapping": {
+    "H": "S1M",
+    "C": "S11",
+    "G": "S13",
+    "BNR": "S121",
+    "F": "S12 - S121",
+    "X": "rest-of-world counterpart"
+  },
+  "source_orientations": {
+    "domestic_holder_asset": "W2; reference sector=holder; counterpart sector=issuer; entry=A",
+    "domestic_issuer_liability": "W2; reference sector=issuer; counterpart sector=holder; entry=L",
+    "resident_holder_to_X": "W1; reference sector=holder; counterpart sector=S1; entry=A",
+    "X_holder_to_resident_issuer": "W1; reference sector=issuer; counterpart sector=S1; entry=L"
+  },
+  "source_dimensions": {
+    "consolidation": "N",
+    "maturity": "not_applicable__Z",
+    "currency_denomination": "_Z",
+    "unit": "XDC",
+    "valuation": "V",
+    "custom_breakdown": "_T",
+    "expenditure": "_Z"
+  },
+  "hard_rules": {
+    "no_benchmark_mutation": true,
+    "no_materialization_in_coverage_phase": true,
+    "no_missing_to_zero": true,
+    "no_synthetic_allocation": true,
+    "F51_must_not_substitute_for_F5": true,
+    "F52_must_not_substitute_for_F5": true,
+    "F5_decomposition_must_be_tested_where_components_are_published": true,
+    "F_composite_only_by_exact_S12_minus_S121": true,
+    "annual_flow_only_by_exact_Q1_Q2_Q3_Q4_sum": true,
+    "dual_W2_orientations_must_be_probed": true,
+    "orientation_conflict_blocks_cell": true,
+    "valuation_dimension_must_remain_explicit": true,
+    "W0_holder_and_issuer_controls_required_where_published": true,
+    "W1_total_asset_and_liability_controls_required": true,
+    "X_to_X_is_outside_Romanian_national_accounts_boundary": true,
+    "network_errors_block_positive_coverage_claims": true,
+    "behavioural_closure_may_change": false,
+    "F5_maturity_dimension_must_be_not_applicable__Z": true,
+    "F5_expenditure_dimension_must_be_not_applicable__Z": true
+  },
+  "reconciliation_tolerance_million_RON": 0.1,
+  "promotion_rule": "This phase records coverage only. A later gate may materialize only cells directly observed or exactly derived through documented sector identities, after aggregate reconciliation and immutable source retention.",
+  "system_dynamics_conformity": "Accounting-only recovery; no feedback, delay, behavioural equation or closure status changes.",
+  "source_key_correction": {
+    "status": "CORRECTED_BEFORE_SCIENTIFIC_ASSESSMENT",
+    "invalid_initial_pattern": "...F5.T._Z.XDC...",
+    "canonical_pattern": "...F5._Z._Z.XDC...",
+    "evidence": "ECB QSA data portal publishes F5 with maturity Not applicable [_Z] and expenditure Not applicable [_Z].",
+    "interpretation": "The initial 204/204 HTTP-error run is discarded as a key-construction failure and must not be interpreted as negative F5 source coverage."
+  }
+}
