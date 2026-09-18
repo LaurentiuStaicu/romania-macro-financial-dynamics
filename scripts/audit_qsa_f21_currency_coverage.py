@@ -9,6 +9,7 @@ import os
 import urllib.error
 import urllib.parse
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -236,9 +237,18 @@ def main() -> None:
                 required.update(term.key for term in terms)
 
     series_by_key = {}
-    for index, series_key in enumerate(sorted(required), start=1):
-        print(f"[{index}/{len(required)}] {series_key}", flush=True)
-        series_by_key[series_key] = fetch(series_key)
+    ordered_keys = sorted(required)
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        future_to_key = {
+            executor.submit(fetch, series_key): series_key
+            for series_key in ordered_keys
+        }
+        completed = 0
+        for future in as_completed(future_to_key):
+            series_key = future_to_key[future]
+            series_by_key[series_key] = future.result()
+            completed += 1
+            print(f"[{completed}/{len(ordered_keys)}] {series_key}", flush=True)
 
     cells = []
     for measure, holder, issuer, terms in plans:
