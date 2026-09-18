@@ -26,6 +26,14 @@ class F5CoverageContractTests(unittest.TestCase):
         self.assertEqual(self.contract["source_dimensions"]["valuation"], "V")
         self.assertTrue(self.contract["hard_rules"]["valuation_dimension_must_remain_explicit"])
 
+    def test_f5_uses_not_applicable_maturity_and_expenditure(self) -> None:
+        dims = self.contract["source_dimensions"]
+        self.assertEqual(dims["maturity"], "not_applicable__Z")
+        self.assertEqual(dims["expenditure"], "_Z")
+        rules = self.contract["hard_rules"]
+        self.assertTrue(rules["F5_maturity_dimension_must_be_not_applicable__Z"])
+        self.assertTrue(rules["F5_expenditure_dimension_must_be_not_applicable__Z"])
+
     def test_no_synthetic_allocation_or_materialization(self) -> None:
         rules = self.contract["hard_rules"]
         self.assertTrue(rules["no_benchmark_mutation"])
