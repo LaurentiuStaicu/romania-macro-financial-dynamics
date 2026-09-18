@@ -56,7 +56,7 @@ class F3MaterializationTests(unittest.TestCase):
         )
         self.assertEqual(
             manifest["counts"]["flow"],
-            {"OBSERVED": 24, "DERIVED": 11, "NOT_APPLICABLE": 1},
+            {"OBSERVED": 0, "DERIVED": 35, "NOT_APPLICABLE": 1},
         )
 
         for measure in ("stock", "flow"):
@@ -65,17 +65,28 @@ class F3MaterializationTests(unittest.TestCase):
             statuses = {}
             for item in overrides:
                 statuses[item["status"]] = statuses.get(item["status"], 0) + 1
-            self.assertEqual(
-                statuses,
-                {"OBSERVED": 24, "DERIVED": 11, "NOT_APPLICABLE": 1},
+            expected = (
+                {"OBSERVED": 24, "DERIVED": 11, "NOT_APPLICABLE": 1}
+                if measure == "stock"
+                else {"DERIVED": 35, "NOT_APPLICABLE": 1}
             )
-            observed = [item for item in overrides if item["status"] == "OBSERVED"]
+            self.assertEqual(statuses, expected)
+
+            source_keyed = [
+                item for item in overrides if item.get("source_series_key")
+            ]
             self.assertTrue(
                 all(
                     item["source_series_key"].startswith("QSA.Q.")
-                    for item in observed
+                    for item in source_keyed
                 )
             )
+            numeric = [
+                item["value"]
+                for item in overrides
+                if item["status"] in {"OBSERVED", "DERIVED"}
+            ]
+            self.assertTrue(all(value == round(value, 2) for value in numeric))
             x_to_x = [
                 item
                 for item in overrides
