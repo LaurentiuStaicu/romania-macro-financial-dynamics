@@ -24,6 +24,8 @@ class F8OtherAccountsCoverageContractTests(unittest.TestCase):
         rules = self.contract["hard_rules"]
         self.assertTrue(rules["F81_must_not_substitute_for_F8"])
         self.assertTrue(rules["F8_F81_F89_identity_must_be_tested_where_components_are_available"])
+        self.assertTrue(rules["cell_level_F81_plus_F89_fallback_must_be_probed"])
+        self.assertTrue(rules["direct_F8_and_component_sum_must_agree_where_both_exist"])
 
     def test_total_custom_breakdown_only(self) -> None:
         rules = self.contract["hard_rules"]
