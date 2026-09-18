@@ -1,6 +1,6 @@
 {
   "contract_version": "1.0",
-  "canonical_repository": "LaurentiuStaicu/world3-empirical-flatpak",
+  "canonical_repository": "LaurentiuStaicu/empirical-world3-dynamics",
   "canonical_pr": 10,
   "canonical_branch": "product/world3-usefulness-recovery",
   "canonical_head": "51e236b61a0ec169bc8f28d4f8192e450ab6bd6d",
