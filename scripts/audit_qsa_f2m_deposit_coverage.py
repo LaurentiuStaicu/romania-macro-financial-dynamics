@@ -21,6 +21,7 @@ USER_AGENT = "romanian-monetary-dynamics/0.1.0 (+GitHub F2M deposit audit)"
 SECTORS = ("H", "C", "F", "G", "X", "BNR")
 DIRECT = {"H": "S1M", "C": "S11", "G": "S13", "BNR": "S121"}
 COMPOSITE = {"F": (("S12", 1.0), ("S121", -1.0))}
+STRUCTURAL_NON_ISSUERS = {"H", "C"}
 TOL = 0.1
 
 
@@ -49,6 +50,8 @@ def key(area: str, ref: str, cp: str, entry: str, measure: str) -> str:
 
 def formula(holder: str, issuer: str, measure: str) -> tuple[Term, ...]:
     if holder == "X" and issuer == "X":
+        return ()
+    if issuer in STRUCTURAL_NON_ISSUERS:
         return ()
 
     if holder == "X":
@@ -234,6 +237,8 @@ def main() -> None:
         value, detail = evaluate(terms, series_by_key, measure)
         if holder == "X" and issuer == "X":
             status = "OUTSIDE_BOUNDARY_CANDIDATE_NOT_APPLICABLE"
+        elif issuer in STRUCTURAL_NON_ISSUERS:
+            status = "STRUCTURAL_NOT_APPLICABLE_ESA"
         elif value is None:
             status = "UNRESOLVED_SOURCE_COVERAGE"
         else:
@@ -270,13 +275,36 @@ def main() -> None:
                 and cell["value_million_RON"] is not None
             )
         residual = None if official is None else bilateral - official
-        status = (
-            "CONTROL_UNAVAILABLE"
-            if official is None
-            else "PASS"
-            if abs(residual) <= TOL
-            else "FAIL"
+        external_cell = next(
+            (
+                cell
+                for cell in cells
+                if cell["measure"] == label
+                and cell["holder"] == sector
+                and cell["issuer"] == "X"
+            ),
+            None,
         )
+
+        if kind == "issuer_total" and sector in STRUCTURAL_NON_ISSUERS:
+            if official is None:
+                status = "STRUCTURAL_NOT_APPLICABLE_ESA"
+            elif abs(float(official)) <= TOL:
+                status = "STRUCTURAL_NOT_APPLICABLE_CONFIRMED_ZERO"
+            else:
+                status = "STRUCTURAL_DEFINITION_CONFLICT_REQUIRES_AUDIT"
+        elif official is None:
+            status = "CONTROL_UNAVAILABLE"
+        elif abs(residual) <= TOL:
+            status = "PASS"
+        elif (
+            kind == "holder_total"
+            and external_cell is not None
+            and external_cell["status"] == "UNRESOLVED_SOURCE_COVERAGE"
+        ):
+            status = "INCOMPLETE_EXTERNAL_ISSUER_COLUMN"
+        else:
+            status = "FAIL"
         reconciliation.append(
             {
                 "measure": label,
@@ -296,6 +324,7 @@ def main() -> None:
         "benchmark_changed": False,
         "total_F2_materialization_allowed": False,
         "currency_F21_status": "SEPARATE_UNRESOLVED_IDENTIFICATION_PROBLEM",
+        "external_F2M_asset_status": "UNRESOLVED_OFFICIAL_SOURCE_IDENTIFICATION",
         "series_requested": len(required),
         "series_status_counts": {},
         "cell_status_counts": {},
