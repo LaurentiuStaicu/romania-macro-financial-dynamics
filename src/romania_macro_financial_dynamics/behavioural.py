@@ -1,4 +1,4 @@
-"""Empirical-dynamics behavioural forms for Alpha 0.4.0a0.
+"""Empirical-dynamics behavioural forms for the scientific core.
 
 These are transparent candidate/admitted functional forms. They never invent
 parameter values: every coefficient required for numerical use must be supplied
@@ -138,7 +138,7 @@ def aggregate_credit_growth(
     """Candidate aggregate bank-credit growth equation.
 
     Bank-level evidence does not by itself identify this aggregate relation; it
-    remains a candidate until the Alpha 0.5 data/identifiability gates pass.
+    remains a candidate until the declared data and identifiability gates pass.
     """
 
     _finite(

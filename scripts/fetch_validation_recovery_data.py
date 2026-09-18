@@ -150,7 +150,7 @@ def main() -> None:
 
     manifest = {
         "fetched_at_utc": datetime.now(timezone.utc).isoformat(),
-        "purpose": "Alpha 0.5.x validation recovery: official-source vintage capture before model re-estimation",
+        "purpose": "Validation-recovery official-source vintage capture before model re-estimation",
         "attempts": attempts,
         "normalized_series": normalized,
         "holdout_rule": "Coverage may be inspected before the split is frozen, but model estimation/selection must not begin until a prospective split manifest is committed. Previously inspected Nov-2024–Jan-2025 observations are permanently ineligible for independent evaluation.",

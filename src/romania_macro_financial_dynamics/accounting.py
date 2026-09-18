@@ -1,4 +1,4 @@
-"""Accounting/SFC spine primitives for Alpha 0.2.0a0.
+"""Accounting/SFC spine primitives for the scientific core.
 
 This module deliberately separates observed values, derived values, identified
 source series and unresolved cells. Missing bilateral data are never coerced to
@@ -137,7 +137,7 @@ def b9f(net_acquisition_assets: float | None, net_incurrence_liabilities: float 
 
 
 def validate_benchmark_spec(spec: Mapping[str, Any]) -> None:
-    """Validate the Alpha 0.2 benchmark contract without pretending data completeness."""
+    """Validate the benchmark contract without pretending data completeness."""
 
     benchmark = spec.get("benchmark", {})
     if benchmark.get("stock_date") != "2025-12-31":

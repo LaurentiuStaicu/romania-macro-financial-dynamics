@@ -1,4 +1,4 @@
-"""Calibration/validation utilities for Alpha 0.5.0a0.
+"""Calibration and validation utilities for the scientific core.
 
 The module is intentionally dependency-light and deterministic. It supports the
 small public diagnostic sample without hiding practical non-identifiability
@@ -149,7 +149,7 @@ def fit_partial_adjustment(
     policy_rates: Sequence[float],
     target_indices: Sequence[int] | None = None,
 ) -> PartialAdjustmentFit:
-    """OLS fit of the Alpha 0.4 partial-adjustment form.
+    """OLS fit of the declared partial-adjustment form.
 
     The regression is estimated in the linear reparameterization
     Δr_t = c + b*policy_t + d*r_(t-1), where lambda=-d,
