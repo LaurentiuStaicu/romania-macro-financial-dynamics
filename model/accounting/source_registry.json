@@ -1,5 +1,5 @@
 {
-  "registry_version": "0.2",
+  "registry_version": "0.3",
   "retrieved_at": "2026-09-18",
   "sources": [
     {
@@ -129,6 +129,31 @@
       "derived_flow_rule": "Q1+Q2+Q3+Q4, plus F = S12 - S121 where required",
       "controls": "20/20 aggregate asset/liability controls PASS within 0.1 million RON; 2/2 X→G maturity controls PASS",
       "limitation": "W2 liability-side counterpart mirrors are not published for the tested F3 cells; canonical W2 asset-side detail is reconciled instead to published W0 total assets and liabilities."
+    },
+    {
+      "instrument": "F2M",
+      "component_of": "F2",
+      "source_id": "ecb_qsa",
+      "source_vintage": "data/source_vintages/accounting-f2m-2025-vintage-2026-09-18",
+      "component_artifact": "model/accounting/f2m_component_2025.json",
+      "materialization_manifest": "model/accounting/f2m_materialization_manifest.json",
+      "stock_period": "2025-Q4",
+      "flow_period": "2025-Q1..2025-Q4",
+      "stock_status_counts": {
+        "OBSERVED": 10,
+        "DERIVED": 13,
+        "NOT_APPLICABLE": 13
+      },
+      "flow_status_counts": {
+        "DERIVED": 23,
+        "NOT_APPLICABLE": 13
+      },
+      "direct_stock_rule": "One exact usable QSA 2025-Q4 F2M series where no sector aggregation is required.",
+      "derived_stock_rule": "Exact S12 minus S121 sector identity where required, plus the five resident-holder to X unique W0 complements after the resident-issuer submatrix is complete and independent aggregate controls pass.",
+      "derived_flow_rule": "Exact Q1+Q2+Q3+Q4 transaction sum, with exact S12 minus S121 sector identity and the independently controlled holder-to-X complement where required.",
+      "controls": "All available holder/issuer QSA controls pass within 0.1 million RON after published-precision materialization; Phase A2 domestic-partition, holder-W0 and W1 external-complement controls pass for stock and flow.",
+      "provenance": "Decoded retained GitHub Actions artifact SHA-256 efc2704388911d79c182d1ad0cffce32bc7728b1c9f7669714ec3a518ef2f227; 66 distinct A1 raw series keys retained; all 6 A2 raw payload digests verified.",
+      "limitation": "F2M is deposits only. F21 currency remains unresolved, so total F2 remains incomplete and the canonical total-F2 benchmark is unchanged."
     }
   ]
 }
