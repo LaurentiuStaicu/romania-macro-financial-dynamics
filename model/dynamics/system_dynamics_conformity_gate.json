@@ -1,0 +1,119 @@
+{
+  "gate_version": "0.1",
+  "name": "System Dynamics / Systems Thinking Conformity Gate",
+  "applies_to": [
+    "Reset Integrity",
+    "Scientific Baseline Screening",
+    "Accounting Empirical Recovery",
+    "Behavioural mechanism promotion",
+    "Reference-model activation",
+    "Policy-simulation development"
+  ],
+  "problem_definition": {
+    "status": "PASS_WITH_SCOPE_LIMIT",
+    "problem": "Represent Romania's monetary and macro-financial dynamics with an accounting-constrained stock-flow-consistent architecture while testing, rather than assuming, the behavioural feedback mechanisms that could generate observed dynamics.",
+    "dynamic_focus": "How financial stocks, transactions, revaluations, financing costs, credit, policy rates and sector balance sheets evolve through time under accounting conservation and empirically admissible feedback structure.",
+    "current_limit": "The full endogenous behavioural explanation is not yet implemented or validated."
+  },
+  "purpose": {
+    "status": "PASS",
+    "statement": "Build an empirically traceable scientific model core for structural explanation and later dynamic simulation. Forecasting and policy simulation are downstream uses and are not implied by structural implementation alone."
+  },
+  "system_boundary": {
+    "status": "PASS_FOR_ACCOUNTING_CORE_WARNING_FOR_BEHAVIOURAL_BOUNDARY",
+    "sectors": ["H", "C", "F", "G", "X", "BNR"],
+    "instruments": ["F2", "F3", "F4", "F5", "F6", "F7", "F8"],
+    "accounting_boundary": "Closed for double-entry conservation across represented holder/issuer positions.",
+    "behavioural_boundary_status": "PARTIAL",
+    "rule": "Every behavioural mechanism must explicitly classify each driver as endogenous, exogenous, observed forcing, policy input, or unresolved before activation."
+  },
+  "classification_rules": {
+    "accounting_identity": "Definition or conservation relation that must hold by construction and is not estimated behaviour.",
+    "structural_dynamic_equation": "Equation defining stock accumulation, delay, transformation or numerical state evolution without asserting an empirically validated behavioural response.",
+    "behavioural_equation": "Response relation whose functional form, sign, magnitude or timing requires empirical or theory-based support.",
+    "observed_exogenous_input": "Observed series imposed on the model during a declared validation or partial-model test rather than generated endogenously.",
+    "diagnostic_or_proxy": "Variable used for checking or approximation that must not silently acquire causal or behavioural status."
+  },
+  "reference_mode_gate": {
+    "registry": "model/dynamics/reference_modes.json",
+    "required_before_behavioural_closure": true,
+    "required_variables": [
+      "policy_rate",
+      "household_lending_rate",
+      "nfc_lending_rate",
+      "credit_stock",
+      "credit_flow",
+      "government_debt_stock",
+      "government_interest_burden",
+      "government_refinancing_need",
+      "government_effective_interest_rate",
+      "sectoral_financial_positions"
+    ],
+    "rule": "Reference modes are empirical or explicitly hypothesised behaviour-over-time targets. Missing reference modes block integrated behavioural-closure validation but do not invalidate the accounting core."
+  },
+  "feedback_activation_gate": {
+    "all_must_pass": true,
+    "requires_equation": true,
+    "requires_units": true,
+    "requires_evidence_status": true,
+    "requires_parameter_source_or_estimation_plan": true,
+    "requires_identifiability_assessment": true,
+    "requires_endogenous_exogenous_classification": true,
+    "requires_polarity_and_loop_path": true,
+    "requires_delay_specification_when_delay_claimed": true,
+    "requires_nonlinearity_documentation_when_present": true,
+    "requires_extreme_condition_test": true,
+    "requires_sensitivity_plan": true,
+    "requires_validation_gate": true,
+    "requires_reference_mode_link": true,
+    "requires_accounting_conservation_preservation": true,
+    "rule": "Failure of any item keeps the feedback quantitatively inactive. Missing data or non-identifiability are valid scientific outcomes and must not be repaired with convenience coefficients."
+  },
+  "candidate_feedbacks": [
+    "government_refinancing_interest_loop",
+    "government_issuance_yield_loop",
+    "bank_credit_balance_sheet_loop",
+    "monetary_credit_transmission_loop",
+    "external_fx_refinancing_loop"
+  ],
+  "behavioural_closure": {
+    "current_status": "INACTIVE",
+    "must_not_be_activated_for_methodological_completeness": true,
+    "activation_condition": "Only after the required feedback mechanisms for the declared reference model have individually passed the feedback activation gate and the integrated model passes structural and behavioural validation.",
+    "terminology_rule": "RMD must not be described as a complete endogenous System Dynamics model while behavioural closure is inactive."
+  },
+  "testing_gate": {
+    "structural": [
+      "stock-flow identity",
+      "double-entry conservation",
+      "dimensional consistency",
+      "boundary consistency",
+      "integration time-step convergence",
+      "extreme conditions",
+      "missing-data rejection"
+    ],
+    "behavioural": [
+      "partial-model behaviour reproduction",
+      "baseline comparison",
+      "time-respecting calibration and structural selection",
+      "holdout evaluation",
+      "sensitivity analysis",
+      "prospective confirmation where preregistered"
+    ],
+    "integrated": [
+      "reference-mode reproduction",
+      "loop activation/deactivation tests",
+      "dominant-loop interpretation where claimed",
+      "system-level sensitivity",
+      "extreme-condition behaviour",
+      "numerical robustness"
+    ]
+  },
+  "maturity_dimensions": {
+    "Accounting / Stock-Flow Core": "PARTIAL_PASS",
+    "Feedback Architecture": "QUALITATIVE_CANDIDATE_ARCHITECTURE",
+    "Behavioural Closure": "INACTIVE",
+    "Empirical Parameterization": "PARTIAL_AND_MECHANISM_SPECIFIC",
+    "Validation": "PARTIAL_RETROSPECTIVE_WITH_NO_VALIDATED_REFERENCE_BEHAVIOURAL_MECHANISM"
+  }
+}
