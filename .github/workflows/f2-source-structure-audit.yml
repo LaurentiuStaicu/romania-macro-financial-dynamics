@@ -1,0 +1,41 @@
+name: F2 Source Structure Audit
+
+on:
+  pull_request:
+    paths:
+      - "model/accounting/f2_source_structure_contract.json"
+      - "scripts/probe_qsa_f2_structure.py"
+      - ".github/workflows/f2-source-structure-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe-f2-qsa-structure:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Compile probe
+        run: python -m py_compile scripts/probe_qsa_f2_structure.py
+
+      - name: Probe official ECB QSA F2 publication structure
+        env:
+          F2_PROBE_OUT: f2_probe_artifacts
+        run: python scripts/probe_qsa_f2_structure.py
+
+      - name: Upload raw source responses and structure report
+        uses: actions/upload-artifact@v4
+        with:
+          name: f2-source-structure-${{ github.sha }}
+          path: f2_probe_artifacts/
+          if-no-files-found: error
+          retention-days: 30
