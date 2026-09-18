@@ -57,6 +57,42 @@ def check(condition: bool, message: str) -> None:
         raise RuntimeError(message)
 
 
+def normalized_link_sign(raw: str) -> int:
+    if raw.startswith("+"):
+        return 1
+    if raw.startswith("-"):
+        return -1
+    raise RuntimeError(f"Unsupported causal-link sign: {raw!r}")
+
+
+def path_is_contiguous(path: list[dict[str, str]]) -> bool:
+    return bool(path) and all(
+        path[index - 1]["to"] == path[index]["from"]
+        for index in range(1, len(path))
+    )
+
+
+def path_is_closed(path: list[dict[str, str]]) -> bool:
+    return bool(path) and path[-1]["to"] == path[0]["from"]
+
+
+def implied_loop_polarity(path: list[dict[str, str]]) -> str:
+    if not path_is_closed(path):
+        raise RuntimeError("Loop polarity is undefined for an open causal path")
+    product = 1
+    for link in path:
+        product *= normalized_link_sign(str(link["sign"]))
+    return "reinforcing" if product > 0 else "balancing"
+
+
+def declared_polarity_base(value: str) -> str | None:
+    if value.startswith("reinforcing"):
+        return "reinforcing"
+    if value.startswith("balancing"):
+        return "balancing"
+    return None
+
+
 def main() -> None:
     model = load("model/registries/model_contract.json")
     core = load("model/dynamics/core_contract.json")
@@ -85,22 +121,99 @@ def main() -> None:
         "Core behavioural closure unexpectedly active",
     )
 
-    loops = feedback["loops"]
-    check(loops, "Feedback registry must contain the candidate feedback architecture")
-    for loop in loops:
+    structures = feedback["loops"]
+    check(structures, "Feedback registry must contain the candidate feedback architecture")
+
+    delay_registry = {item["id"]: item for item in feedback["delay_candidates"]}
+    closed_loop_ids: list[str] = []
+    open_chain_ids: list[str] = []
+
+    for structure in structures:
+        structure_id = structure["id"]
+        status = structure["scientific_status"]
         check(
-            loop["scientific_status"] == "BEHAVIOURAL_CANDIDATE",
-            f"{loop['id']} is not explicitly a behavioural candidate",
+            status in {"BEHAVIOURAL_CANDIDATE", "BEHAVIOURAL_CANDIDATE_OPEN_CHAIN"},
+            f"{structure_id} has unsupported scientific status {status}",
         )
         check(
-            loop["quantitatively_active"] is False,
-            f"{loop['id']} is quantitatively active before conformity gates pass",
+            structure["quantitatively_active"] is False,
+            f"{structure_id} is quantitatively active before conformity gates pass",
         )
-        check(bool(loop.get("path")), f"{loop['id']} lacks an explicit loop path")
+
+        path = structure.get("path")
+        check(bool(path), f"{structure_id} lacks an explicit causal path")
         check(
-            bool(loop.get("polarity_hypothesis")),
-            f"{loop['id']} lacks a polarity hypothesis",
+            path_is_contiguous(path),
+            f"{structure_id} causal path is not contiguous",
         )
+
+        for link in path:
+            normalized_link_sign(str(link["sign"]))
+
+        for delay_id in structure.get("delay_candidates", []):
+            check(
+                delay_id in delay_registry,
+                f"{structure_id} references unknown delay candidate {delay_id}",
+            )
+            delay = delay_registry[delay_id]
+            check(
+                delay["active"] is False,
+                f"{structure_id} has an active delay before feedback activation",
+            )
+
+        if status == "BEHAVIOURAL_CANDIDATE":
+            check(
+                structure.get("topology_status") == "CLOSED_CANDIDATE_LOOP",
+                f"{structure_id} must declare CLOSED_CANDIDATE_LOOP topology",
+            )
+            check(
+                path_is_closed(path),
+                f"{structure_id} is labelled as a loop but its path is open",
+            )
+            declared = declared_polarity_base(
+                str(structure.get("polarity_hypothesis", ""))
+            )
+            check(
+                declared is not None,
+                f"{structure_id} lacks a reinforcing/balancing polarity hypothesis",
+            )
+            implied = implied_loop_polarity(path)
+            check(
+                declared == implied,
+                (
+                    f"{structure_id} declared polarity {declared!r} conflicts with "
+                    f"signed-path polarity {implied!r}"
+                ),
+            )
+            closed_loop_ids.append(structure_id)
+        else:
+            check(
+                structure.get("topology_status") == "OPEN_CHAIN",
+                f"{structure_id} open candidate must declare OPEN_CHAIN topology",
+            )
+            check(
+                not path_is_closed(path),
+                f"{structure_id} is classified as open but its path is closed",
+            )
+            check(
+                structure.get("polarity_hypothesis") == "not_applicable_until_closed",
+                f"{structure_id} must not assign loop polarity before closure",
+            )
+            check(
+                bool(structure.get("activation_blocker")),
+                f"{structure_id} open chain lacks an explicit activation blocker",
+            )
+            open_chain_ids.append(structure_id)
+
+    topology_gate = gate["feedback_topology_gate"]
+    check(
+        set(topology_gate["closed_loop_candidates"]) == set(closed_loop_ids),
+        "Conformity gate closed-loop list does not match feedback registry",
+    )
+    check(
+        set(topology_gate["open_feedback_chains"]) == set(open_chain_ids),
+        "Conformity gate open-chain list does not match feedback registry",
+    )
 
     activation = feedback["activation_gate"]
     missing_activation = REQUIRED_FEEDBACK_GATE_FIELDS - set(activation)
@@ -175,14 +288,15 @@ def main() -> None:
 
     report = {
         "Accounting / Stock-Flow Core": "PASS_WITH_EMPIRICAL_COMPLETENESS_LIMIT",
-        "Feedback Architecture": "PASS_AS_QUALITATIVE_CANDIDATE_ARCHITECTURE",
+        "Feedback Architecture": "PASS_WITH_OPEN_CHAIN_EXPLICITLY_BLOCKED",
         "Behavioural Closure": "PASS_INACTIVE",
         "Empirical Parameterization": "PARTIAL",
         "Validation": "PARTIAL",
         "complete_endogenous_system_dynamics_model": False,
         "validated_reference_behavioural_mechanisms":
             disposition["validated_reference_behavioural_mechanisms"],
-        "candidate_feedback_loops": [loop["id"] for loop in loops],
+        "closed_candidate_feedback_loops": closed_loop_ids,
+        "open_candidate_feedback_chains": open_chain_ids,
         "reference_modes_registered": sorted(mode_ids),
     }
     print(json.dumps(report, indent=2))
