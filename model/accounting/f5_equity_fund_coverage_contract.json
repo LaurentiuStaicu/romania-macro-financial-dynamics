@@ -1,5 +1,5 @@
 {
-  "contract_version": "0.1",
+  "contract_version": "0.2",
   "phase": "Accounting Empirical Recovery / F5 Phase A — Equity and Investment Fund Shares Coverage Audit",
   "instrument": "F5",
   "meaning": "Equity and investment fund shares or units under ESA 2010",
@@ -28,11 +28,12 @@
   },
   "source_dimensions": {
     "consolidation": "N",
-    "maturity": "T",
+    "maturity": "not_applicable__Z",
     "currency_denomination": "_Z",
     "unit": "XDC",
     "valuation": "V",
-    "custom_breakdown": "_T"
+    "custom_breakdown": "_T",
+    "expenditure": "_Z"
   },
   "hard_rules": {
     "no_benchmark_mutation": true,
@@ -51,9 +52,18 @@
     "W1_total_asset_and_liability_controls_required": true,
     "X_to_X_is_outside_Romanian_national_accounts_boundary": true,
     "network_errors_block_positive_coverage_claims": true,
-    "behavioural_closure_may_change": false
+    "behavioural_closure_may_change": false,
+    "F5_maturity_dimension_must_be_not_applicable__Z": true,
+    "F5_expenditure_dimension_must_be_not_applicable__Z": true
   },
   "reconciliation_tolerance_million_RON": 0.1,
   "promotion_rule": "This phase records coverage only. A later gate may materialize only cells directly observed or exactly derived through documented sector identities, after aggregate reconciliation and immutable source retention.",
-  "system_dynamics_conformity": "Accounting-only recovery; no feedback, delay, behavioural equation or closure status changes."
+  "system_dynamics_conformity": "Accounting-only recovery; no feedback, delay, behavioural equation or closure status changes.",
+  "source_key_correction": {
+    "status": "CORRECTED_BEFORE_SCIENTIFIC_ASSESSMENT",
+    "invalid_initial_pattern": "...F5.T._Z.XDC...",
+    "canonical_pattern": "...F5._Z._Z.XDC...",
+    "evidence": "ECB QSA data portal publishes F5 with maturity Not applicable [_Z] and expenditure Not applicable [_Z].",
+    "interpretation": "The initial 204/204 HTTP-error run is discarded as a key-construction failure and must not be interpreted as negative F5 source coverage."
+  }
 }
