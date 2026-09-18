@@ -3,6 +3,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+from audit_dimensional_consistency import audit_registry
+
 ROOT = Path(__file__).resolve().parents[1]
 
 REQUIRED_REFERENCE_MODES = {
@@ -243,10 +245,11 @@ def main() -> None:
         "First-order delay equation must not be classified as an accounting identity",
     )
 
-    unit_checks = units["equation_checks"]
+    dimensional_errors = audit_registry(units)
     check(
-        unit_checks and all(item["status"] == "CONSISTENT" for item in unit_checks),
-        "Dimensional-consistency registry contains a failing equation",
+        not dimensional_errors,
+        "Recomputed dimensional-consistency audit failed: "
+        + "; ".join(dimensional_errors),
     )
 
     required_tests = set(core["required_tests"])
