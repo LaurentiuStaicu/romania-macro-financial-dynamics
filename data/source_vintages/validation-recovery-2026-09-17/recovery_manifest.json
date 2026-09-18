@@ -1,0 +1,38 @@
+{
+  "recovery_manifest_version": "0.1",
+  "legacy_snapshot_id": "validation-recovery-2026-09-17",
+  "legacy_manifest": "data/raw/validation_recovery/fetch_manifest.json",
+  "materialized_at_utc": "2026-09-18T12:52:48.654782+00:00",
+  "audit_commit_sha": "af9921472024f39b2ece4ccde763f438f0cef76e",
+  "complete_raw_vintage_recovered": false,
+  "sources": [
+    {
+      "name": "bis_policy_rate_xml",
+      "legacy_sha256": "dfe161487ec80bd097da498fc2825a1df662afa8bbf5b4229cd8d8857ba215ab",
+      "live_sha256": "127bc274d2f722b09bba51c95c4bf645fe6a2bfb4326f1ff0485cdca32583728",
+      "status": "NOT_RECOVERED_RAW_HASH_MISMATCH"
+    },
+    {
+      "name": "ecb_household_housing_new_business_ron",
+      "legacy_sha256": "bb77cb030cb5128c0ca0233a2710c9e10db595472cd177e2436f6d02d44819b8",
+      "live_sha256": "bb77cb030cb5128c0ca0233a2710c9e10db595472cd177e2436f6d02d44819b8",
+      "status": "BYTE_IDENTICAL_RECOVERED",
+      "path": "raw/ecb_household_housing_new_business_ron.csv"
+    },
+    {
+      "name": "ecb_nfc_new_business_total_ron",
+      "legacy_sha256": "c477b14e6770564000d015d00ce7f06314013108949f30cfce474315c4597796",
+      "live_sha256": "c477b14e6770564000d015d00ce7f06314013108949f30cfce474315c4597796",
+      "status": "BYTE_IDENTICAL_RECOVERED",
+      "path": "raw/ecb_nfc_new_business_total_ron.csv"
+    },
+    {
+      "name": "ecb_nfc_new_business_upto1y_ron",
+      "legacy_sha256": "eb80c64535727f194348a0ba7c04356cea761884273b332af55eac79addcf1c0",
+      "live_sha256": "eb80c64535727f194348a0ba7c04356cea761884273b332af55eac79addcf1c0",
+      "status": "BYTE_IDENTICAL_RECOVERED",
+      "path": "raw/ecb_nfc_new_business_upto1y_ron.csv"
+    }
+  ],
+  "rule": "Only payloads with exact SHA-256 equality to the v0.1.0 legacy manifest are materialized as historical raw bytes."
+}
