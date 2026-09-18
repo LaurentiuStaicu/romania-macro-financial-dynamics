@@ -48,4 +48,4 @@ jobs:
             f8_phase_a_artifacts/
             f8_rank_artifacts/
           if-no-files-found: error
-          retention-days: 30
+          retention-days: 90
