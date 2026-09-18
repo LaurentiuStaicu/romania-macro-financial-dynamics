@@ -44,7 +44,7 @@ def key(area: str, ref: str, cp: str, entry: str, measure: str, instrument: str)
     return ".".join(
         (
             "Q", "N", "RO", area, ref, cp, "N", entry, measure,
-            instrument, "T", "_Z", "XDC", "_T", "S", "V", "N", "_T",
+            instrument, "_Z", "_Z", "XDC", "_T", "S", "V", "N", "_T",
         )
     )
 
@@ -191,7 +191,7 @@ def values(series: dict[str, object], measure: str, instrument: str) -> list[flo
         row.get("unit") != "XDC"
         or str(row.get("unit_mult")) != "6"
         or row.get("instrument") != instrument
-        or row.get("maturity") != "T"
+        or row.get("maturity") not in {"_Z", None}
         for row in rows
     ):
         return None
