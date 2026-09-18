@@ -1,0 +1,87 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F2 Phase C4 — Eurostat bop_iip6_q Detailed-Sector Audit",
+  "audit_head_sha": "bdc5aa8a1f04251510d89e7f69d88d9e35b935c4",
+  "workflow_run_id": 35368280869,
+  "workflow_artifact_id": 10557107780,
+  "workflow_artifact_sha256": "fb7deb003930d762bef35d4fb1b3759c1e0f44acd6195ffed0b7be4f949a0325",
+  "eurostat_dataset_updated": "2026-09-11T23:00:00+0200",
+  "verdict": "DETAILED_S11_S1M_DIRECT_OBSERVATIONS_AVAILABLE_AT_SOURCE_PRECISION",
+  "result": {
+    "period": "2025-Q4",
+    "series_requested": 18,
+    "series_available": 18,
+    "network_errors_present": false,
+    "direct_S11_S1M_observations_available": true,
+    "source_precision_reconciliation_pass": true,
+    "promotion_status": "DETAILED_S11_S1M_AVAILABLE_FOR_LATER_CONCEPT_BRIDGE"
+  },
+  "stock_MIO_NAC": {
+    "total_S1": 79126,
+    "BNR_S121": 804,
+    "MFI_S12T": 58273,
+    "government_S13": 117,
+    "other_sectors_S1P": 19932,
+    "other_financial_S12M": 334,
+    "NFC_plus_households_S1V": 19598,
+    "nonfinancial_corporations_S11": 8898,
+    "households_NPISH_S1M": 10701,
+    "S11_plus_S1M": 19599,
+    "S11_plus_S1M_minus_S1V": 1,
+    "source_precision_tolerance": 1.5,
+    "reconciliation_status": "PASS_SOURCE_PRECISION"
+  },
+  "stock_MIO_EUR": {
+    "total_S1": 15524.6,
+    "BNR_S121": 157.7,
+    "MFI_S12T": 11433.3,
+    "government_S13": 23,
+    "other_sectors_S1P": 3910.7,
+    "other_financial_S12M": 65.5,
+    "NFC_plus_households_S1V": 3845.2,
+    "nonfinancial_corporations_S11": 1745.8,
+    "households_NPISH_S1M": 2099.6,
+    "S11_plus_S1M": 3845.4,
+    "S11_plus_S1M_minus_S1V": 0.2,
+    "use": "secondary dissemination consistency diagnostic; primary precision gate uses national-currency transmission"
+  },
+  "cross_source_ECB_BPS_control": {
+    "status": "PASS_ALL_COMMON_SECTORS",
+    "tolerance_million": 0.1,
+    "sectors": [
+      "S1",
+      "S121",
+      "S12T",
+      "S13",
+      "S1P",
+      "S12M",
+      "S1V"
+    ],
+    "interpretation": "Eurostat bop_iip6_q and the retained ECB BPS assessment agree for every common tested sector within 0.1 million in each disseminated unit."
+  },
+  "recovered_RMD_sector_structure": {
+    "BNR": "S121",
+    "G": "S13",
+    "F": "S12T + S12M",
+    "C": "S11",
+    "H": "S1M",
+    "status": "STRUCTURALLY_COMPLETE_FOR_EXTERNAL_BPM6_OTHER_INVESTMENT_F2_POSITION"
+  },
+  "limitations": [
+    "The recovered detail is BPM6 Other-Investment F2, not yet an ESA/QSA total-F2 accounting-spine observation.",
+    "Direct S11 and S1M observations solve the BPS S1V sector-detail blocker, but do not solve functional-category differences, reserve-assets treatment, or other BPM6-versus-ESA instrument-boundary differences.",
+    "The 1 million RON S11+S1M versus S1V residual is compatible with the declared integer-million national-currency publication precision and is retained explicitly rather than forced to zero."
+  ],
+  "next_gate": {
+    "name": "BPM6-to-ESA F2 concept bridge",
+    "purpose": "Test sector by sector whether Eurostat/ECB external F2 can be reconciled to QSA F2/F2M definitions, including reserve-assets F2 for BNR and any remaining functional-category or instrument-boundary differences.",
+    "mandatory_checks": [
+      "compare external BPM6 F2 position by RMD sector against materialized QSA W1 F2M deposits; a definitionally comparable total F2 cannot be below its deposits component",
+      "identify and add reserve-assets currency-and-deposits for BNR before comparing central-bank external F2 with QSA",
+      "document any BPM6/ESA deposit-versus-loan classification differences rather than balancing them away",
+      "reconcile the sum of sector-level bridge values to total QSA W1 F2 and W1 F21 controls",
+      "no negative implied F21 value may be accepted as a currency position; such a result indicates concept mismatch or source inconsistency",
+      "no benchmark or behavioural-closure promotion until the concept bridge passes"
+    ]
+  }
+}
