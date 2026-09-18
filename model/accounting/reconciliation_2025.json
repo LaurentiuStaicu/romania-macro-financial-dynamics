@@ -1,5 +1,5 @@
 {
-  "ledger_version": "1.3",
+  "ledger_version": "1.4",
   "benchmark": "2025",
   "principle": "Record residuals and unresolved coverage explicitly; never force accounting closure with invented allocations.",
   "instrument_gates": [
@@ -249,16 +249,16 @@
     {
       "instrument": "F8",
       "priority": 4,
-      "stock_matrix_status": "AGGREGATE_ONLY_BILATERAL_F8_F81_F89_UNAVAILABLE",
-      "flow_matrix_status": "AGGREGATE_ONLY_BILATERAL_F8_F81_F89_UNAVAILABLE",
+      "stock_matrix_status": "FROZEN_AGGREGATE_ONLY_NO_UNCONDITIONAL_BILATERAL_IDENTIFICATION",
+      "flow_matrix_status": "FROZEN_AGGREGATE_ONLY_NO_UNCONDITIONAL_BILATERAL_IDENTIFICATION",
       "asset_liability_residual": null,
-      "residual_status": "COMPONENT_BRIDGE_RECOVERS_ZERO_BILATERAL_CELLS",
+      "residual_status": "ACCOUNTING_RHS_PASS_RANK_11_NULLITY_24_ZERO_UNIQUE_CELLS",
       "known_issues": [
-        "No tested bilateral total-F8 cell is published in QSA.",
-        "No tested bilateral F81 or F89 cell is published either, so the exact F8=F81+F89 component bridge recovers zero cells.",
-        "All total-economy decomposition controls remain valid and F89 remains material; F81 must not substitute for F8.",
-        "The remaining empirical information is aggregate: five resident holder totals, five resident issuer totals, and W1 total asset/liability controls per measure.",
-        "An exact rank/nullspace gate is required to quantify the underdetermination before F8 can be frozen or any partial core considered."
+        "Direct total-F8 bilateral coverage is absent, and the F81+F89 bilateral component bridge also recovers zero cells.",
+        "Published W0/W1 aggregate equations are internally consistent within 0.1 million RON but have rank 11 over 35 in-boundary variables, leaving 24 degrees of freedom and zero unconditional unique cells for both stock and flow.",
+        "A stock-only BNR zero-liability scenario makes the six holder→BNR stock cells unique zeros, but those conditional cells are not promoted.",
+        "F8 is frozen at the aggregate-only public-data boundary until new official counterpart information becomes available.",
+        "F81 trade credits must not be used as a proxy for F8; F89 is material and the aggregate decomposition remains part of the control layer."
       ],
       "coverage_assessment": {
         "status": "TOTAL_F8_AGGREGATES_AVAILABLE_BILATERAL_NOT_PUBLISHED",
@@ -285,6 +285,29 @@
         "F89_resolved_cells": 0,
         "derived_F8_resolved_cells": 0,
         "next_gate": "F8 exact aggregate-control rank audit",
+        "materialization_allowed": false
+      },
+      "rank_assessment": {
+        "status": "FREEZE_AGGREGATE_ONLY",
+        "assessment": "model/accounting/f8_aggregate_rank_assessment.json",
+        "stock_unconditional": {
+          "rank": 11,
+          "nullity": 24,
+          "unique_cells": 0
+        },
+        "flow_unconditional": {
+          "rank": 11,
+          "nullity": 24,
+          "unique_cells": 0
+        },
+        "stock_conditional_BNR_zero": {
+          "rank": 16,
+          "nullity": 19,
+          "unique_cells": 6,
+          "promoted": false
+        },
+        "RHS_controls": "PASS_STOCK_AND_FLOW_WITHIN_0.1_MILLION_RON",
+        "next_priority": "F5 coverage screening",
         "materialization_allowed": false
       }
     },
@@ -430,6 +453,14 @@
     {
       "id": "f8_bilateral_component_bridge",
       "status": "NEGATIVE_ZERO_F81_ZERO_F89_BILATERAL_CELLS"
+    },
+    {
+      "id": "f8_exact_rank_identification",
+      "status": "PASS_RANK_11_NULLITY_24_ZERO_UNCONDITIONAL_UNIQUE_CELLS"
+    },
+    {
+      "id": "f8_freeze_aggregate_only",
+      "status": "ENFORCED_NO_SYNTHETIC_BILATERAL_ALLOCATION"
     }
   ]
 }

@@ -1,0 +1,51 @@
+name: F8 Aggregate Rank Audit
+
+on:
+  pull_request:
+    paths:
+      - "model/accounting/f8_aggregate_rank_contract.json"
+      - "model/accounting/f8_other_accounts_coverage_contract.json"
+      - "scripts/audit_qsa_f8_other_accounts_coverage.py"
+      - "scripts/audit_f8_aggregate_rank.py"
+      - "tests/test_f8_aggregate_rank_contract.py"
+      - ".github/workflows/f8-aggregate-rank-audit.yml"
+      - "model/accounting/reconciliation_2025.json"
+      - "STATUS.md"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit-f8-rank:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify F8 rank contract
+        run: python -m unittest tests.test_f8_aggregate_rank_contract -v
+
+      - name: Reproduce F8 Phase A aggregate evidence
+        env:
+          F8_AUDIT_OUT: f8_phase_a_artifacts
+        run: python scripts/audit_qsa_f8_other_accounts_coverage.py
+
+      - name: Run exact aggregate-control rank audit
+        run: |
+          python scripts/audit_f8_aggregate_rank.py             --phase-a-report f8_phase_a_artifacts/f8_other_accounts_coverage_audit.json             --out f8_rank_artifacts
+
+      - name: Upload F8 rank evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: f8-aggregate-rank-${{ github.sha }}
+          path: |
+            f8_phase_a_artifacts/
+            f8_rank_artifacts/
+          if-no-files-found: error
+          retention-days: 30
