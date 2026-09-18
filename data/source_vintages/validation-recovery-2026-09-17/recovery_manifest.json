@@ -2,14 +2,14 @@
   "recovery_manifest_version": "0.1",
   "legacy_snapshot_id": "validation-recovery-2026-09-17",
   "legacy_manifest": "data/raw/validation_recovery/fetch_manifest.json",
-  "materialized_at_utc": "2026-09-18T12:53:56.036547+00:00",
-  "audit_commit_sha": "f98438558793b5c0c98dc40fe0f5d2269ea2562e",
+  "materialized_at_utc": "2026-09-18T12:54:47.898384+00:00",
+  "audit_commit_sha": "5920531f536c3261c35cd789785fee6133547974",
   "complete_raw_vintage_recovered": false,
   "sources": [
     {
       "name": "bis_policy_rate_xml",
       "legacy_sha256": "dfe161487ec80bd097da498fc2825a1df662afa8bbf5b4229cd8d8857ba215ab",
-      "live_sha256": "a520fbf1d738a5bf18257ef7f381b7f375e0fafb5264d047446aea2310d7c7ab",
+      "live_sha256": "d64e64725cc922ab4bd3f2b18e727c81d8eb775fd82926c79d683a79e46984ee",
       "status": "NOT_RECOVERED_RAW_HASH_MISMATCH"
     },
     {
