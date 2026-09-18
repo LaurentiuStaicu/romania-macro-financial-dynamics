@@ -1,5 +1,5 @@
 {
-  "registry_version": "0.4",
+  "registry_version": "0.5",
   "retrieved_at": "2026-09-18",
   "sources": [
     {
@@ -34,6 +34,15 @@
       "api_base": "https://data-api.ecb.europa.eu/service/data/BPS/",
       "accounting_basis": "BPM6 balance of payments and international investment position",
       "notes": "Do not promote BPS values directly into the ESA/QSA Accounting Spine. Sector structure, functional category, maturity, unit and BPM6-versus-ESA instrument boundaries require an explicit bridge."
+    },
+    {
+      "id": "eurostat_bop_iip6_q",
+      "institution": "Eurostat",
+      "dataset": "bop_iip6_q — International investment position, quarterly and annual data (BPM6)",
+      "role": "independent detailed-sector external-position dissemination and cross-source control layer",
+      "api_base": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/bop_iip6_q",
+      "accounting_basis": "BPM6 international investment position with ESA 2010 sector coding",
+      "notes": "For Romania FA__O__F2 at 2025-Q4, Eurostat publishes S11 and S1M detail not exposed by the tested ECB BPS endpoint. Values remain outside the ESA/QSA Accounting Spine until the BPM6-to-ESA concept bridge passes."
     }
   ],
   "verified_series": [
