@@ -1,0 +1,42 @@
+{
+  "contract_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F2 Phase C5 — BPM6-to-ESA F2 Concept Bridge",
+  "purpose": "Test whether the recovered Eurostat/ECB BPM6 external F2 sector structure can be reconciled to the ESA/QSA F2/F2M accounting boundary strongly enough to support later F21 materialization.",
+  "inputs": {
+    "eurostat_other_investment_sector_detail": "model/accounting/eurostat_f2_sector_detail_assessment.json",
+    "materialized_QSA_F2M_component": "model/accounting/f2m_component_2025.json",
+    "QSA_external_F2_F21_controls": "model/accounting/f21_f2_external_bridge_assessment.json"
+  },
+  "official_BPM6_components": {
+    "other_investment_currency_and_deposits": "FA__O__F2",
+    "reserve_assets_currency_and_deposits": "FA__R__F2"
+  },
+  "candidate_external_F2_mapping": {
+    "H": "Eurostat FA__O__F2 S1M",
+    "C": "Eurostat FA__O__F2 S11",
+    "G": "Eurostat FA__O__F2 S13",
+    "F": "Eurostat FA__O__F2 S12T + S12M",
+    "BNR": "Eurostat FA__O__F2 S121 + FA__R__F2 attributed to the central-bank/reserve-assets sector only if directly published or definitionally controlled"
+  },
+  "hard_rules": {
+    "no_benchmark_mutation": true,
+    "no_F21_materialization": true,
+    "no_total_F2_promotion": true,
+    "reserve_assets_F2_must_not_be_replaced_by_total_reserve_assets": true,
+    "FA_R_F2_must_be_used_for_reserve_currency_and_deposits": true,
+    "QSA_F2M_is_a_component_lower_bound_for_definitionally_comparable_total_F2": true,
+    "negative_implied_F21_beyond_source_precision_blocks_bridge": true,
+    "aggregate_reconciliation_cannot_override_sector_level_failures": true,
+    "BPM6_ESA_classification_differences_must_be_reported_not_balanced": true,
+    "source_vintage_or_revision_mismatch_must_remain_explicit": true,
+    "no_residual_reallocation_across_H_C_F_G_BNR": true,
+    "behavioural_closure_may_change": false
+  },
+  "precision": {
+    "Eurostat_non_euro_area_primary_unit": "MIO_NAC",
+    "sector_level_negative_F21_tolerance_million_RON": 1.5,
+    "aggregate_rounding_tolerance_million_RON": 3.5
+  },
+  "promotion_rule": "The concept bridge passes only if reserve-assets F2 is identified, every sector-level candidate total F2 is at least its materialized QSA F2M deposits component within source precision, and sector sums reconcile to QSA W1 F2 and W1 F21 controls within the aggregate rounding envelope. Aggregate agreement alone cannot rescue a negative sector-level implied F21.",
+  "failure_rule": "A negative implied F21 beyond source precision is evidence that the BPM6 candidate is not definitionally/vintage-comparable to the QSA component for that sector. Do not set it to zero and do not transfer the discrepancy to another sector."
+}
