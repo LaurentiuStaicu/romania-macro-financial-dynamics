@@ -404,8 +404,8 @@ def main() -> None:
             "flow_period": "2025-Q1..2025-Q4",
         },
         "rules": {
-            "benchmark_changed": false,
-            "synthetic_allocation": false,
+            "benchmark_changed": False,
+            "synthetic_allocation": False,
             "mirror_absolute_tolerance_million_RON": MIRROR_ABS_TOLERANCE_MILLION_RON,
             "required_unit": "XDC",
             "required_unit_multiplier": "6",
