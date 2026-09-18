@@ -77,6 +77,17 @@ class DynamicCoreTests(unittest.TestCase):
         )
         self.assertLess(abs(fine - exact), abs(coarse - exact))
 
+    def test_complete_f3_empirical_initialization_succeeds(self) -> None:
+        benchmark = json.loads(
+            (ROOT / "model" / "accounting" / "benchmark_2025.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        cells = expand_matrix("F3", "stock", benchmark["matrices"]["F3"]["stock"])
+        state = empirical_cells_to_state(cells)
+        self.assertEqual(len(state), 36)
+        self.assertEqual(state[PositionKey("X", "X", "F3")], 0.0)
+
     def test_incomplete_empirical_initialization_rejected(self) -> None:
         benchmark = json.loads(
             (ROOT / "model" / "accounting" / "benchmark_2025.json").read_text(
