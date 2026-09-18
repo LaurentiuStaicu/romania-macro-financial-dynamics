@@ -60,7 +60,7 @@
           1
         ]
       },
-      "interpretation": "Parsimonious mean-spread anchor plus one adjustment-speed parameter; simpler than Alpha 0.5's free alpha/beta/lambda form."
+      "interpretation": "Parsimonious mean-spread anchor plus one adjustment-speed parameter; simpler than the previous free alpha/beta/lambda form."
     },
     {
       "id": "static_affine_policy_level",

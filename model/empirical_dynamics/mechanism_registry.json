@@ -7,10 +7,10 @@
     "DEFERRED"
   ],
   "status_semantics": {
-    "ACTIVATED": "Functional form is admitted to the empirical model and Alpha 0.5 calibration set. No default parameter is implied; numerical use requires an explicit calibrated/externally sourced parameter bundle.",
+    "ACTIVATED": "Functional form is admitted to the empirical model and calibration set. No default parameter is implied; numerical use requires an explicit calibrated/externally sourced parameter bundle.",
     "CANDIDATE": "Mechanism is plausible and evidence-linked but not yet admitted to the central calibration model because identification, aggregation or regime stability is insufficient.",
     "REJECTED": "Specified shortcut/form is excluded from the scientific model unless new evidence justifies reopening it.",
-    "DEFERRED": "Mechanism may matter but current observability/identification/scope is insufficient for Alpha 0.4; it is not numerically active."
+    "DEFERRED": "Mechanism may matter but current observability/identification/scope is insufficient for the empirical-dynamics cycle; it is not numerically active."
   },
   "mechanisms": [
     {
@@ -320,7 +320,7 @@
       "functional_form": "Delta primary_balance = f(debt_gap, output_gap, institutional/fiscal-package regime)",
       "implementation": null,
       "parameters": [],
-      "estimation_plan": "Do not impose a Taylor-style fiscal rule during Alpha 0.4. First encode discrete fiscal packages/institutional regimes and assess whether a stable reaction function exists.",
+      "estimation_plan": "Do not impose a Taylor-style fiscal rule during the empirical-dynamics cycle. First encode discrete fiscal packages/institutional regimes and assess whether a stable reaction function exists.",
       "observables": [
         "primary_balance",
         "debt_to_gdp",

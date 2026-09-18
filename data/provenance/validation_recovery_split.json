@@ -2,7 +2,7 @@
   "split_version": "0.1",
   "frozen_at": "2026-09-17T15:42:00Z",
   "frozen_before_estimation": true,
-  "purpose": "Prospective role assignment for monetary-transmission validation recovery after official-source coverage inspection and before any Alpha 0.5.x model estimation or selection.",
+  "purpose": "Prospective role assignment for monetary-transmission validation recovery after official-source coverage inspection and before any the validation-recovery cycle model estimation or selection.",
   "series": {
     "policy_rate": {
       "source": "BIS central bank policy rates, M.RO",
@@ -43,7 +43,7 @@
       "end": "2025-11",
       "months": 10,
       "inspection_status_at_freeze": "UNINSPECTED_FOR_VALUES",
-      "scientific_reason": "Fresh independent evaluation window relative to prior Alpha 0.5 work. It is reserved before estimation/selection and will be opened once only after model form and structural-selection verdict are frozen.",
+      "scientific_reason": "Fresh independent evaluation window relative to the previously inspected evaluation window. It is reserved before estimation/selection and will be opened once only after model form and structural-selection verdict are frozen.",
       "limitation": "The policy rate is expected to be much less variable than in earlier cycles, so passing this holdout alone cannot validate pass-through dynamics."
     },
     "coverage_inspected_not_independent": {
@@ -58,16 +58,16 @@
         "2026-07"
       ],
       "role": "POST_EVALUATION_DIAGNOSTIC_ONLY",
-      "reason": "Tail values were inspected during source-coverage verification before this split was frozen; they are permanently ineligible as independent evaluation for Alpha 0.5.x."
+      "reason": "Tail values were inspected during source-coverage verification before this split was frozen; they are permanently ineligible as independent evaluation for the validation-recovery cycle."
     },
     "future_confirmation_holdout": {
       "start": "2026-08",
       "end": null,
       "status": "PROSPECTIVE_NOT_YET_AVAILABLE_FOR_ALL_TARGETS",
-      "rule": "Future MIR observations from 2026-08 onward are reserved for later confirmation and may not be used to revise the Alpha 0.5.x selected structure before their first formal evaluation."
+      "rule": "Future MIR observations from 2026-08 onward are reserved for later confirmation and may not be used to revise the the validation-recovery cycle selected structure before their first formal evaluation."
     }
   },
   "model_selection_rule": "Only calibration and structural-selection windows may influence model form, lag choice among predeclared parsimonious candidates, or parameter estimation procedure. Final evaluation cannot rescue a structure that fails structural selection.",
-  "old_holdout_rule": "Nov-2024..Jan-2025 from Alpha 0.5 has already been inspected and is explicitly reclassified as structural-selection information, never independent validation.",
+  "old_holdout_rule": "Nov-2024..Jan-2025 from the previous validation cycle has already been inspected and is explicitly reclassified as structural-selection information, never independent validation.",
   "missing_data_rule": "No interpolation, carry-forward, synthetic allocation or zero-fill is permitted for missing lending-rate observations."
 }

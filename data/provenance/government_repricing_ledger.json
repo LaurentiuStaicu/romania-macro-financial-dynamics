@@ -16,7 +16,7 @@
         "maturity": "2028-02-19",
         "secondary_market_ytm_pct": 7.07
       },
-      "semantic_limit": "Issue value is not asserted to equal outstanding principal at the Alpha 0.5.2 reconciliation date. Secondary-market YTM is not a matched refinancing/reset rate."
+      "semantic_limit": "Issue value is not asserted to equal outstanding principal at the the retained reconciliation reconciliation date. Secondary-market YTM is not a matched refinancing/reset rate."
     },
     {
       "id": "bvb_r3109a",
