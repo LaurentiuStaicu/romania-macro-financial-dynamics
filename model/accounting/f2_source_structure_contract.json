@@ -1,0 +1,34 @@
+{
+  "contract_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F2 Phase A0 — source-structure probe",
+  "purpose": "Determine the exact ECB QSA publication structure needed to represent RMD F2 currency-and-deposit bilateral cells before any F2 benchmark population.",
+  "instrument": {
+    "canonical": "F2",
+    "esa_definition": "Currency and deposits",
+    "subcategories_to_test": [
+      "F21",
+      "F22",
+      "F29"
+    ],
+    "qsa_deposit_aggregate_to_test": "F2M"
+  },
+  "hard_rules": {
+    "benchmark_may_change": false,
+    "no_synthetic_bilateral_allocation": true,
+    "no_missing_value_to_zero": true,
+    "no_assumption_that_F2_has_same_publication_pattern_as_F3": true,
+    "direct_F2_and_subinstrument_routes_must_be_distinguished": true,
+    "F2M_may_not_be_relabelled_as_F2_without_currency_reconciliation": true,
+    "all_source_failures_are_retained_as_diagnostic_evidence": true,
+    "issuer_liability_orientation_must_be_tested_for_F2M": true
+  },
+  "questions": [
+    "Is bilateral total F2 published directly for the canonical sector combinations?",
+    "Where direct F2 is absent, are F21 plus F2M or F21 plus F22 plus F29 available as an exact identity?",
+    "Does QSA use S12, S121 or the more specific MFI counterpart codes for deposit liabilities?",
+    "Are W0 total assets/liabilities available for independent reconciliation?",
+    "Are W1 rest-of-world asset/liability series available on a definitionally compatible basis?",
+    "Are bilateral deposits published more completely from the issuer-liability orientation using S12K/S12T/S121 rather than the holder-asset orientation?"
+  ],
+  "promotion_rule": "This phase only identifies the valid source construction. No F2 benchmark cell may be promoted until a later full-coverage audit and reconciliation gate passes."
+}
