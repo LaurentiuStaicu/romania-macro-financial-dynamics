@@ -64,7 +64,7 @@ def side_by_side(left_path:Path,right_path:Path,output:Path,label:str)->None:
 def main()->None:
     args=parse_args();root=Path(args.output);macro_dir=root/'macro';world_dir=root/'world3';side_dir=root/'side-by-side';audit_dir=root/'audit'
     for d in (macro_dir,world_dir,side_dir,audit_dir):d.mkdir(parents=True,exist_ok=True)
-    report={"gate":"Strict World3 Visual Alignment Gate","canonical_product":"World3 Product Recovery PR #10 @ 51e236b61a0ec169bc8f28d4f8192e450ab6bd6d","candidate_product":"Romania Macro-Financial Dynamics","accessibility_target_floor":"24x24 CSS px (WCAG 2.2 AA; native checkbox/radio user-agent controls excluded)","viewports":{},"css_parity":"PENDING","functional_layout":"PENDING","human_visual_comparison":"REQUIRES_SCREENSHOT_INSPECTION"}
+    report={"gate":"Strict World3 Visual Alignment Gate","canonical_product":"World3 Product Recovery PR #10 @ 51e236b61a0ec169bc8f28d4f8192e450ab6bd6d","candidate_product":"Romanian Monetary Dynamics","accessibility_target_floor":"24x24 CSS px (WCAG 2.2 AA; native checkbox/radio user-agent controls excluded)","viewports":{},"css_parity":"PENDING","functional_layout":"PENDING","human_visual_comparison":"REQUIRES_SCREENSHOT_INSPECTION"}
     with sync_playwright() as p:
         browser=p.chromium.launch(executable_path=args.browser,headless=True,args=['--no-sandbox','--disable-gpu'])
         try:
