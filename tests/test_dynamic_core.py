@@ -83,7 +83,7 @@ class DynamicCoreTests(unittest.TestCase):
                 encoding="utf-8"
             )
         )
-        cells = expand_matrix("F3", "stock", benchmark["matrices"]["F3"]["stock"])
+        cells = expand_matrix("F2", "stock", benchmark["matrices"]["F2"]["stock"])
         with self.assertRaises(IncompleteEmpiricalState):
             empirical_cells_to_state(cells)
 
