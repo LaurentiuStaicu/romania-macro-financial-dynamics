@@ -1,5 +1,5 @@
 {
-  "ledger_version": "1.0",
+  "ledger_version": "1.1",
   "benchmark": "2025",
   "principle": "Record residuals and unresolved coverage explicitly; never force accounting closure with invented allocations.",
   "instrument_gates": [
@@ -171,17 +171,17 @@
     {
       "instrument": "F4",
       "priority": 3,
-      "stock_matrix_status": "PARTIAL_UNCONDITIONAL_15_OF_35_IDENTIFIED_CONDITIONAL_25_OF_35_SCENARIO",
-      "flow_matrix_status": "PARTIAL_UNCONDITIONAL_15_OF_35_IDENTIFIED",
+      "stock_matrix_status": "PARTIAL_F4_UNCONDITIONAL_CORE_MATERIALIZED_15_OF_35_IN_BOUNDARY",
+      "flow_matrix_status": "PARTIAL_F4_UNCONDITIONAL_CORE_MATERIALIZED_15_OF_35_IN_BOUNDARY",
       "asset_liability_residual": null,
-      "residual_status": "STOCK_9_DOF_UNCONDITIONAL_4_DOF_WITH_BNR_ZERO_SCENARIO_FLOW_9_DOF",
+      "residual_status": "PARTIAL_ARTIFACT_RETAINED_FULL_F4_REMAINS_UNDERDETERMINED",
       "known_issues": [
-        "Unconditional accounting rank is 26/35 for both stock and flow, leaving nine degrees of freedom and 15 unique cells per measure.",
-        "W0 controls plus exact S12=F+BNR holder identities uniquely recover X→H, X→C and X→G in addition to the 12 Phase A cells.",
-        "A stock-only conditional BNR zero-liability scenario raises stock rank to 31/35 and 25 unique cells, but those additional cells are not promoted in Phase B.",
-        "The remaining stock ambiguity is exactly the F-versus-BNR holder split across H/C/F/G/X; BNR's five counterpart asset cells sum to 6.1 million RON and retain four allocation degrees of freedom.",
-        "Zero aggregate BNR F4 transactions do not create bilateral flow zeros; flow remains at nine degrees of freedom.",
-        "All 12 total-economy W1 F4 T/S/L control series are available and maturity-consistent."
+        "The separate partial F4 artifact now retains the 15 unconditional rank-unique in-boundary cells for stock and 15 for 2025 flow; 20 in-boundary cells per measure remain explicitly UNRESOLVED.",
+        "The newly materialized exact complements are X→H, X→C and X→G for stock and flow.",
+        "The stock-only BNR zero-liability scenario would make 10 additional stock cells unique, but none of those conditional cells is promoted.",
+        "The remaining stock source boundary includes the 6.1 million RON BNR F4 asset row whose counterpart allocation is unavailable; no synthetic allocation is performed.",
+        "Flow retains nine degrees of freedom because aggregate zero BNR transactions do not imply bilateral zeros.",
+        "Partial F4 must not be relabelled as a complete F4 matrix and benchmark_2025.json remains unchanged."
       ],
       "coverage_assessment": {
         "status": "PARTIAL_QSA_WHO_TO_WHOM_COVERAGE",
@@ -223,6 +223,27 @@
         "W1_controls": "12_OF_12_AVAILABLE_MATURITY_PASS",
         "next_gate": "F4 immutable-source partial materialization of unconditional unique core",
         "materialization_allowed_by_phase_B": false
+      },
+      "partial_materialization": {
+        "status": "PARTIAL_UNCONDITIONAL_CORE_MATERIALIZED",
+        "component_artifact": "model/accounting/f4_partial_2025.json",
+        "source_vintage": "data/source_vintages/accounting-f4-partial-2025-vintage-2026-09-18",
+        "materialization_manifest": "model/accounting/f4_partial_materialization_manifest.json",
+        "stock_counts": {
+          "OBSERVED": 12,
+          "DERIVED": 3,
+          "UNRESOLVED": 20,
+          "NOT_APPLICABLE": 1
+        },
+        "flow_counts": {
+          "DERIVED": 15,
+          "UNRESOLVED": 20,
+          "NOT_APPLICABLE": 1
+        },
+        "conditional_BNR_zero_stock_cells_promoted": false,
+        "BNR_asset_counterpart_allocation_performed": false,
+        "complete_F4_matrix": false,
+        "canonical_benchmark_changed": false
       }
     },
     {
@@ -358,6 +379,18 @@
     {
       "id": "f4_exact_rank_identification",
       "status": "PASS_UNCONDITIONAL_RANK_26_NULLITY_9_CONDITIONAL_STOCK_RANK_31_NULLITY_4"
+    },
+    {
+      "id": "f4_partial_immutable_source_vintage",
+      "status": "ENFORCED"
+    },
+    {
+      "id": "f4_partial_unconditional_materialization",
+      "status": "PASS_15_STOCK_15_FLOW_UNCONDITIONAL_UNIQUE"
+    },
+    {
+      "id": "f4_conditional_stock_not_promoted",
+      "status": "ENFORCED"
     }
   ]
 }

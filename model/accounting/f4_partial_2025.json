@@ -1,0 +1,1017 @@
+{
+  "artifact_version": "0.1",
+  "instrument": "F4",
+  "scope": "partial_unconditional_rank_unique_core",
+  "complete_F4_matrix": false,
+  "canonical_benchmark_changed": false,
+  "benchmark_stock_period": "2025-Q4",
+  "benchmark_flow_period": "2025-Q1..2025-Q4",
+  "source_vintage": "data/source_vintages/accounting-f4-partial-2025-vintage-2026-09-18",
+  "source_vintage_sha256": "a01922ed3662725dd5c73c95cd248bb97c8fc8a06404c9507e7cac4fc8e260aa",
+  "matrices": {
+    "stock": [
+      {
+        "holder": "H",
+        "issuer": "H",
+        "status": "OBSERVED",
+        "value": 0.0,
+        "unit": "million_RON",
+        "derivation": "direct_QSA_2025Q4_all_maturity_position",
+        "provenance": {
+          "phase_A_selected_orientation": "holder_asset_W2",
+          "phase_A_maturity_derivation": "DIRECT_T",
+          "source_terms": [
+            {
+              "maturity": "T",
+              "coefficient": 1.0,
+              "qsa_key": "Q.N.RO.W2.S1M.S1M.N.A.LE.F4.T._Z.XDC._T.S.V.N._T",
+              "values": [
+                0.0
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "holder": "H",
+        "issuer": "C",
+        "status": "OBSERVED",
+        "value": 0.0,
+        "unit": "million_RON",
+        "derivation": "direct_QSA_2025Q4_all_maturity_position",
+        "provenance": {
+          "phase_A_selected_orientation": "holder_asset_W2",
+          "phase_A_maturity_derivation": "DIRECT_T",
+          "source_terms": [
+            {
+              "maturity": "T",
+              "coefficient": 1.0,
+              "qsa_key": "Q.N.RO.W2.S1M.S11.N.A.LE.F4.T._Z.XDC._T.S.V.N._T",
+              "values": [
+                0.0
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "holder": "H",
+        "issuer": "F",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "H",
+        "issuer": "G",
+        "status": "OBSERVED",
+        "value": 39142.09,
+        "unit": "million_RON",
+        "derivation": "direct_QSA_2025Q4_all_maturity_position",
+        "provenance": {
+          "phase_A_selected_orientation": "holder_asset_W2",
+          "phase_A_maturity_derivation": "DIRECT_T",
+          "source_terms": [
+            {
+              "maturity": "T",
+              "coefficient": 1.0,
+              "qsa_key": "Q.N.RO.W2.S1M.S13.N.A.LE.F4.T._Z.XDC._T.S.V.N._T",
+              "values": [
+                39142.08984375
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "holder": "H",
+        "issuer": "X",
+        "status": "OBSERVED",
+        "value": 1317.11,
+        "unit": "million_RON",
+        "derivation": "direct_QSA_2025Q4_all_maturity_position",
+        "provenance": {
+          "phase_A_selected_orientation": "holder_asset_W1",
+          "phase_A_maturity_derivation": "DIRECT_T",
+          "source_terms": [
+            {
+              "maturity": "T",
+              "coefficient": 1.0,
+              "qsa_key": "Q.N.RO.W1.S1M.S1.N.A.LE.F4.T._Z.XDC._T.S.V.N._T",
+              "values": [
+                1317.1099853515625
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "holder": "H",
+        "issuer": "BNR",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "C",
+        "issuer": "H",
+        "status": "OBSERVED",
+        "value": 0.0,
+        "unit": "million_RON",
+        "derivation": "direct_QSA_2025Q4_all_maturity_position",
+        "provenance": {
+          "phase_A_selected_orientation": "holder_asset_W2",
+          "phase_A_maturity_derivation": "DIRECT_T",
+          "source_terms": [
+            {
+              "maturity": "T",
+              "coefficient": 1.0,
+              "qsa_key": "Q.N.RO.W2.S11.S1M.N.A.LE.F4.T._Z.XDC._T.S.V.N._T",
+              "values": [
+                0.0
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "holder": "C",
+        "issuer": "C",
+        "status": "OBSERVED",
+        "value": 22387.58,
+        "unit": "million_RON",
+        "derivation": "direct_QSA_2025Q4_all_maturity_position",
+        "provenance": {
+          "phase_A_selected_orientation": "holder_asset_W2",
+          "phase_A_maturity_derivation": "DIRECT_T",
+          "source_terms": [
+            {
+              "maturity": "T",
+              "coefficient": 1.0,
+              "qsa_key": "Q.N.RO.W2.S11.S11.N.A.LE.F4.T._Z.XDC._T.S.V.N._T",
+              "values": [
+                22387.57958984375
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "holder": "C",
+        "issuer": "F",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "C",
+        "issuer": "G",
+        "status": "OBSERVED",
+        "value": 0.0,
+        "unit": "million_RON",
+        "derivation": "direct_QSA_2025Q4_all_maturity_position",
+        "provenance": {
+          "phase_A_selected_orientation": "holder_asset_W2",
+          "phase_A_maturity_derivation": "DIRECT_T",
+          "source_terms": [
+            {
+              "maturity": "T",
+              "coefficient": 1.0,
+              "qsa_key": "Q.N.RO.W2.S11.S13.N.A.LE.F4.T._Z.XDC._T.S.V.N._T",
+              "values": [
+                0.0
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "holder": "C",
+        "issuer": "X",
+        "status": "OBSERVED",
+        "value": 37776.29,
+        "unit": "million_RON",
+        "derivation": "direct_QSA_2025Q4_all_maturity_position",
+        "provenance": {
+          "phase_A_selected_orientation": "holder_asset_W1",
+          "phase_A_maturity_derivation": "DIRECT_T",
+          "source_terms": [
+            {
+              "maturity": "T",
+              "coefficient": 1.0,
+              "qsa_key": "Q.N.RO.W1.S11.S1.N.A.LE.F4.T._Z.XDC._T.S.V.N._T",
+              "values": [
+                37776.29062652588
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "holder": "C",
+        "issuer": "BNR",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "F",
+        "issuer": "H",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "F",
+        "issuer": "C",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "F",
+        "issuer": "F",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "F",
+        "issuer": "G",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "F",
+        "issuer": "X",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "F",
+        "issuer": "BNR",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "G",
+        "issuer": "H",
+        "status": "OBSERVED",
+        "value": 0.0,
+        "unit": "million_RON",
+        "derivation": "direct_QSA_2025Q4_all_maturity_position",
+        "provenance": {
+          "phase_A_selected_orientation": "holder_asset_W2",
+          "phase_A_maturity_derivation": "DIRECT_T",
+          "source_terms": [
+            {
+              "maturity": "T",
+              "coefficient": 1.0,
+              "qsa_key": "Q.N.RO.W2.S13.S1M.N.A.LE.F4.T._Z.XDC._T.S.V.N._T",
+              "values": [
+                0.0
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "holder": "G",
+        "issuer": "C",
+        "status": "OBSERVED",
+        "value": 6230.62,
+        "unit": "million_RON",
+        "derivation": "direct_QSA_2025Q4_all_maturity_position",
+        "provenance": {
+          "phase_A_selected_orientation": "holder_asset_W2",
+          "phase_A_maturity_derivation": "DIRECT_T",
+          "source_terms": [
+            {
+              "maturity": "T",
+              "coefficient": 1.0,
+              "qsa_key": "Q.N.RO.W2.S13.S11.N.A.LE.F4.T._Z.XDC._T.S.V.N._T",
+              "values": [
+                6230.6201171875
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "holder": "G",
+        "issuer": "F",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "G",
+        "issuer": "G",
+        "status": "OBSERVED",
+        "value": 22160.62,
+        "unit": "million_RON",
+        "derivation": "direct_QSA_2025Q4_all_maturity_position",
+        "provenance": {
+          "phase_A_selected_orientation": "holder_asset_W2",
+          "phase_A_maturity_derivation": "DIRECT_T",
+          "source_terms": [
+            {
+              "maturity": "T",
+              "coefficient": 1.0,
+              "qsa_key": "Q.N.RO.W2.S13.S13.N.A.LE.F4.T._Z.XDC._T.S.V.N._T",
+              "values": [
+                22160.619140625
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "holder": "G",
+        "issuer": "X",
+        "status": "OBSERVED",
+        "value": 39517.72,
+        "unit": "million_RON",
+        "derivation": "direct_QSA_2025Q4_all_maturity_position",
+        "provenance": {
+          "phase_A_selected_orientation": "holder_asset_W1",
+          "phase_A_maturity_derivation": "DIRECT_T",
+          "source_terms": [
+            {
+              "maturity": "T",
+              "coefficient": 1.0,
+              "qsa_key": "Q.N.RO.W1.S13.S1.N.A.LE.F4.T._Z.XDC._T.S.V.N._T",
+              "values": [
+                39517.71875
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "holder": "G",
+        "issuer": "BNR",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "X",
+        "issuer": "H",
+        "status": "DERIVED",
+        "value": 5912.31,
+        "unit": "million_RON",
+        "derivation": "W0 issuer-column complement using exact S12=(F+BNR) holder aggregate",
+        "phase_B_rank_uniqueness_confirmed": true
+      },
+      {
+        "holder": "X",
+        "issuer": "C",
+        "status": "DERIVED",
+        "value": 236002.65,
+        "unit": "million_RON",
+        "derivation": "W0 issuer-column complement using exact S12=(F+BNR) holder aggregate",
+        "phase_B_rank_uniqueness_confirmed": true
+      },
+      {
+        "holder": "X",
+        "issuer": "F",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "X",
+        "issuer": "G",
+        "status": "DERIVED",
+        "value": 114279.18,
+        "unit": "million_RON",
+        "derivation": "W0 issuer-column complement using exact S12=(F+BNR) holder aggregate",
+        "phase_B_rank_uniqueness_confirmed": true
+      },
+      {
+        "holder": "X",
+        "issuer": "X",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "outside_Romanian_national_accounts_boundary"
+      },
+      {
+        "holder": "X",
+        "issuer": "BNR",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "BNR",
+        "issuer": "H",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "BNR",
+        "issuer": "C",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "BNR",
+        "issuer": "F",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "BNR",
+        "issuer": "G",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "BNR",
+        "issuer": "X",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "BNR",
+        "issuer": "BNR",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      }
+    ],
+    "flow": [
+      {
+        "holder": "H",
+        "issuer": "H",
+        "status": "DERIVED",
+        "value": 0.0,
+        "unit": "million_RON",
+        "derivation": "exact_Phase_A_temporal_or_maturity_derivation",
+        "provenance": {
+          "phase_A_selected_orientation": "holder_asset_W2",
+          "phase_A_maturity_derivation": "DIRECT_T",
+          "source_terms": [
+            {
+              "maturity": "T",
+              "coefficient": 1.0,
+              "qsa_key": "Q.N.RO.W2.S1M.S1M.N.A.F.F4.T._Z.XDC._T.S.V.N._T",
+              "values": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "holder": "H",
+        "issuer": "C",
+        "status": "DERIVED",
+        "value": 0.0,
+        "unit": "million_RON",
+        "derivation": "exact_Phase_A_temporal_or_maturity_derivation",
+        "provenance": {
+          "phase_A_selected_orientation": "holder_asset_W2",
+          "phase_A_maturity_derivation": "DIRECT_T",
+          "source_terms": [
+            {
+              "maturity": "T",
+              "coefficient": 1.0,
+              "qsa_key": "Q.N.RO.W2.S1M.S11.N.A.F.F4.T._Z.XDC._T.S.V.N._T",
+              "values": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "holder": "H",
+        "issuer": "F",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "H",
+        "issuer": "G",
+        "status": "DERIVED",
+        "value": 14670.4,
+        "unit": "million_RON",
+        "derivation": "exact_Phase_A_temporal_or_maturity_derivation",
+        "provenance": {
+          "phase_A_selected_orientation": "holder_asset_W2",
+          "phase_A_maturity_derivation": "DIRECT_T",
+          "source_terms": [
+            {
+              "maturity": "T",
+              "coefficient": 1.0,
+              "qsa_key": "Q.N.RO.W2.S1M.S13.N.A.F.F4.T._Z.XDC._T.S.V.N._T",
+              "values": [
+                7243.85986328125,
+                2304.0000610351562,
+                2926.1500244140625,
+                2196.3900146484375
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "holder": "H",
+        "issuer": "X",
+        "status": "DERIVED",
+        "value": 0.0,
+        "unit": "million_RON",
+        "derivation": "exact_Phase_A_temporal_or_maturity_derivation",
+        "provenance": {
+          "phase_A_selected_orientation": "holder_asset_W1",
+          "phase_A_maturity_derivation": "DIRECT_T",
+          "source_terms": [
+            {
+              "maturity": "T",
+              "coefficient": 1.0,
+              "qsa_key": "Q.N.RO.W1.S1M.S1.N.A.F.F4.T._Z.XDC._T.S.V.N._T",
+              "values": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "holder": "H",
+        "issuer": "BNR",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "C",
+        "issuer": "H",
+        "status": "DERIVED",
+        "value": 0.0,
+        "unit": "million_RON",
+        "derivation": "exact_Phase_A_temporal_or_maturity_derivation",
+        "provenance": {
+          "phase_A_selected_orientation": "holder_asset_W2",
+          "phase_A_maturity_derivation": "DIRECT_T",
+          "source_terms": [
+            {
+              "maturity": "T",
+              "coefficient": 1.0,
+              "qsa_key": "Q.N.RO.W2.S11.S1M.N.A.F.F4.T._Z.XDC._T.S.V.N._T",
+              "values": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "holder": "C",
+        "issuer": "C",
+        "status": "DERIVED",
+        "value": 0.0,
+        "unit": "million_RON",
+        "derivation": "exact_Phase_A_temporal_or_maturity_derivation",
+        "provenance": {
+          "phase_A_selected_orientation": "holder_asset_W2",
+          "phase_A_maturity_derivation": "DIRECT_T",
+          "source_terms": [
+            {
+              "maturity": "T",
+              "coefficient": 1.0,
+              "qsa_key": "Q.N.RO.W2.S11.S11.N.A.F.F4.T._Z.XDC._T.S.V.N._T",
+              "values": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "holder": "C",
+        "issuer": "F",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "C",
+        "issuer": "G",
+        "status": "DERIVED",
+        "value": 0.0,
+        "unit": "million_RON",
+        "derivation": "exact_Phase_A_temporal_or_maturity_derivation",
+        "provenance": {
+          "phase_A_selected_orientation": "holder_asset_W2",
+          "phase_A_maturity_derivation": "DIRECT_T",
+          "source_terms": [
+            {
+              "maturity": "T",
+              "coefficient": 1.0,
+              "qsa_key": "Q.N.RO.W2.S11.S13.N.A.F.F4.T._Z.XDC._T.S.V.N._T",
+              "values": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "holder": "C",
+        "issuer": "X",
+        "status": "DERIVED",
+        "value": -808.68,
+        "unit": "million_RON",
+        "derivation": "exact_Phase_A_temporal_or_maturity_derivation",
+        "provenance": {
+          "phase_A_selected_orientation": "holder_asset_W1",
+          "phase_A_maturity_derivation": "DIRECT_T",
+          "source_terms": [
+            {
+              "maturity": "T",
+              "coefficient": 1.0,
+              "qsa_key": "Q.N.RO.W1.S11.S1.N.A.F.F4.T._Z.XDC._T.S.V.N._T",
+              "values": [
+                1930.9099950790405,
+                -2879.420107424259,
+                -915.3299950957298,
+                1055.1600074768066
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "holder": "C",
+        "issuer": "BNR",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "F",
+        "issuer": "H",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "F",
+        "issuer": "C",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "F",
+        "issuer": "F",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "F",
+        "issuer": "G",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "F",
+        "issuer": "X",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "F",
+        "issuer": "BNR",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "G",
+        "issuer": "H",
+        "status": "DERIVED",
+        "value": 0.0,
+        "unit": "million_RON",
+        "derivation": "exact_Phase_A_temporal_or_maturity_derivation",
+        "provenance": {
+          "phase_A_selected_orientation": "holder_asset_W2",
+          "phase_A_maturity_derivation": "DIRECT_T",
+          "source_terms": [
+            {
+              "maturity": "T",
+              "coefficient": 1.0,
+              "qsa_key": "Q.N.RO.W2.S13.S1M.N.A.F.F4.T._Z.XDC._T.S.V.N._T",
+              "values": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "holder": "G",
+        "issuer": "C",
+        "status": "DERIVED",
+        "value": 267.41,
+        "unit": "million_RON",
+        "derivation": "exact_Phase_A_temporal_or_maturity_derivation",
+        "provenance": {
+          "phase_A_selected_orientation": "holder_asset_W2",
+          "phase_A_maturity_derivation": "DIRECT_T",
+          "source_terms": [
+            {
+              "maturity": "T",
+              "coefficient": 1.0,
+              "qsa_key": "Q.N.RO.W2.S13.S11.N.A.F.F4.T._Z.XDC._T.S.V.N._T",
+              "values": [
+                11.40999984741211,
+                -71.66000366210938,
+                -16.040000915527344,
+                343.70001220703125
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "holder": "G",
+        "issuer": "F",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "G",
+        "issuer": "G",
+        "status": "DERIVED",
+        "value": 983.11,
+        "unit": "million_RON",
+        "derivation": "exact_Phase_A_temporal_or_maturity_derivation",
+        "provenance": {
+          "phase_A_selected_orientation": "holder_asset_W2",
+          "phase_A_maturity_derivation": "DIRECT_T",
+          "source_terms": [
+            {
+              "maturity": "T",
+              "coefficient": 1.0,
+              "qsa_key": "Q.N.RO.W2.S13.S13.N.A.F.F4.T._Z.XDC._T.S.V.N._T",
+              "values": [
+                7560.66015625,
+                -2050.56005859375,
+                3833.330078125,
+                -8360.3203125
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "holder": "G",
+        "issuer": "X",
+        "status": "DERIVED",
+        "value": 7117.65,
+        "unit": "million_RON",
+        "derivation": "exact_Phase_A_temporal_or_maturity_derivation",
+        "provenance": {
+          "phase_A_selected_orientation": "holder_asset_W1",
+          "phase_A_maturity_derivation": "DIRECT_T",
+          "source_terms": [
+            {
+              "maturity": "T",
+              "coefficient": 1.0,
+              "qsa_key": "Q.N.RO.W1.S13.S1.N.A.F.F4.T._Z.XDC._T.S.V.N._T",
+              "values": [
+                2195.81005859375,
+                1429.8699951171875,
+                2464.22998046875,
+                1027.739990234375
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "holder": "G",
+        "issuer": "BNR",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "X",
+        "issuer": "H",
+        "status": "DERIVED",
+        "value": 921.86,
+        "unit": "million_RON",
+        "derivation": "W0 issuer-column complement using exact S12=(F+BNR) holder aggregate",
+        "phase_B_rank_uniqueness_confirmed": true
+      },
+      {
+        "holder": "X",
+        "issuer": "C",
+        "status": "DERIVED",
+        "value": 12625.79,
+        "unit": "million_RON",
+        "derivation": "W0 issuer-column complement using exact S12=(F+BNR) holder aggregate",
+        "phase_B_rank_uniqueness_confirmed": true
+      },
+      {
+        "holder": "X",
+        "issuer": "F",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "X",
+        "issuer": "G",
+        "status": "DERIVED",
+        "value": 24542.5,
+        "unit": "million_RON",
+        "derivation": "W0 issuer-column complement using exact S12=(F+BNR) holder aggregate",
+        "phase_B_rank_uniqueness_confirmed": true
+      },
+      {
+        "holder": "X",
+        "issuer": "X",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "outside_Romanian_national_accounts_boundary"
+      },
+      {
+        "holder": "X",
+        "issuer": "BNR",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "BNR",
+        "issuer": "H",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "BNR",
+        "issuer": "C",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "BNR",
+        "issuer": "F",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "BNR",
+        "issuer": "G",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "BNR",
+        "issuer": "X",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      },
+      {
+        "holder": "BNR",
+        "issuer": "BNR",
+        "status": "UNRESOLVED",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "not_unconditional_rank_unique_in_F4_Phase_B"
+      }
+    ]
+  },
+  "conditional_stock_cells_not_promoted": [
+    "BNR→BNR",
+    "C→BNR",
+    "C→F",
+    "F→BNR",
+    "G→BNR",
+    "G→F",
+    "H→BNR",
+    "H→F",
+    "X→BNR",
+    "X→F"
+  ],
+  "remaining_stock_rank_nonunique_cells": [
+    "F→H",
+    "F→C",
+    "F→F",
+    "F→G",
+    "F→X",
+    "BNR→H",
+    "BNR→C",
+    "BNR→F",
+    "BNR→G",
+    "BNR→X"
+  ],
+  "remaining_flow_rank_nonunique_cells": [
+    "H→F",
+    "H→BNR",
+    "C→F",
+    "C→BNR",
+    "F→H",
+    "F→C",
+    "F→F",
+    "F→G",
+    "F→X",
+    "F→BNR",
+    "G→F",
+    "G→BNR",
+    "X→F",
+    "X→BNR",
+    "BNR→H",
+    "BNR→C",
+    "BNR→F",
+    "BNR→G",
+    "BNR→X",
+    "BNR→BNR"
+  ]
+}
