@@ -1,0 +1,42 @@
+name: Accounting Coverage Audit
+
+on:
+  pull_request:
+    paths:
+      - "model/accounting/empirical_recovery_contract.json"
+      - "scripts/audit_qsa_accounting_coverage.py"
+      - "tests/test_accounting_recovery_contract.py"
+      - ".github/workflows/accounting-coverage-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qsa-f3-source-coverage:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Run offline contract tests
+        run: python -m unittest tests.test_accounting_recovery_contract -v
+
+      - name: Audit ECB QSA F3 source coverage without changing benchmark
+        env:
+          ACCOUNTING_AUDIT_OUT: accounting_audit_artifacts
+        run: python scripts/audit_qsa_accounting_coverage.py
+
+      - name: Upload raw responses and audit reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: accounting-qsa-f3-coverage-${{ github.sha }}
+          path: accounting_audit_artifacts/
+          if-no-files-found: error
+          retention-days: 30
