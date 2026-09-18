@@ -211,6 +211,29 @@ def main() -> None:
                 }
             )
 
+        holder_w0_values = [
+            float(item["official_aggregate_million_RON"])
+            for item in holder_controls
+            if item["official_aggregate_million_RON"] is not None
+        ]
+        holder_w0_sum = (
+            sum(holder_w0_values)
+            if len(holder_w0_values) == len(RESIDENT_HOLDERS)
+            else None
+        )
+        holder_w0_vs_total_residual = (
+            None
+            if holder_w0_sum is None or values["W0"] is None
+            else holder_w0_sum - float(values["W0"])
+        )
+        holder_w0_vs_total_status = (
+            "CONTROL_UNAVAILABLE"
+            if holder_w0_vs_total_residual is None
+            else "PASS"
+            if abs(holder_w0_vs_total_residual) <= TOL
+            else "FAIL"
+        )
+
         candidates = [
             x["candidate_value_million_RON"]
             for x in complement_candidates
@@ -242,6 +265,10 @@ def main() -> None:
                 "implied_domestic_W0_minus_W1_million_RON": implied_domestic_control,
                 "independent_domestic_partition_residual_million_RON": implied_domestic_residual,
                 "independent_domestic_partition_status": implied_domestic_status,
+                "sum_resident_holder_W0_million_RON": holder_w0_sum,
+                "published_total_economy_W0_million_RON": values["W0"],
+                "resident_holder_W0_vs_total_W0_residual_million_RON": holder_w0_vs_total_residual,
+                "resident_holder_W0_vs_total_W0_status": holder_w0_vs_total_status,
                 "sum_holder_complement_candidates_million_RON": candidate_sum,
                 "published_W1_total_economy_million_RON": external_control,
                 "holder_complements_vs_W1_residual_million_RON": external_residual,
@@ -251,6 +278,7 @@ def main() -> None:
 
     all_gates_pass = all(
         item["independent_domestic_partition_status"] == "PASS"
+        and item["resident_holder_W0_vs_total_W0_status"] == "PASS"
         and item["holder_complements_vs_W1_status"] == "PASS"
         and (
             item["direct_area_partition_status"] in {"PASS", "CONTROL_UNAVAILABLE"}
@@ -259,7 +287,7 @@ def main() -> None:
     )
 
     report = {
-        "audit_version": "0.2",
+        "audit_version": "0.3",
         "purpose": "Test whether F2M resident-holder→X values are uniquely derivable from QSA accounting partitions rather than synthetically allocated.",
         "benchmark_changed": False,
         "tolerance_million_RON": TOL,
