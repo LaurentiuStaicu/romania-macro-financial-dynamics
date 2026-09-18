@@ -1,5 +1,5 @@
 {
-  "ledger_version": "1.9",
+  "ledger_version": "2.0",
   "benchmark": "2025",
   "principle": "Record residuals and unresolved coverage explicitly; never force accounting closure with invented allocations.",
   "instrument_gates": [
@@ -422,17 +422,16 @@
     {
       "instrument": "F6",
       "priority": 6,
-      "stock_matrix_status": "AGGREGATE_TOTAL_F6_AVAILABLE_BILATERAL_UNAVAILABLE",
-      "flow_matrix_status": "AGGREGATE_TOTAL_F6_AVAILABLE_BILATERAL_UNAVAILABLE",
+      "stock_matrix_status": "AGGREGATE_ONLY_NO_TOTAL_OR_COMPONENT_BILATERAL_COVERAGE",
+      "flow_matrix_status": "AGGREGATE_ONLY_NO_TOTAL_OR_COMPONENT_BILATERAL_COVERAGE",
       "asset_liability_residual": null,
-      "residual_status": "ONLY_F62_F63_COMPONENT_CONTROLS_AVAILABLE_FULL_DECOMPOSITION_INCOMPLETE",
+      "residual_status": "W0_W1_TOTAL_F6_CONTROLS_ONLY_EXACT_RANK_REQUIRED",
       "known_issues": [
         "No tested bilateral total-F6 cell is published for stock or 2025 flow.",
-        "The canonical QSA _Z._Z dimensions are valid; 64 of 344 exact requested series are available.",
-        "At the aggregate layer F62 and F63 are published, while the tested F61/F64/F65/F66 and F63_F64_F65 controls are unavailable.",
-        "The six-component and transmission-block F6 decompositions therefore remain incomplete rather than failed.",
-        "The aggregate remainder F6-F62-F63 must not be allocated to missing subcomponents.",
-        "The next gate probes all F6 subcomponents bilaterally before any issuer-applicability or rank decision."
+        "No tested bilateral F61/F62/F63/F64/F65/F66 or F63_F64_F65 cell is published in the W2/W1 layer.",
+        "F62 and F63 remain useful aggregate controls only; their aggregate publication does not identify counterpart structure.",
+        "Neither exact component representation reconstructs any bilateral F6 cell.",
+        "The next gate computes exact rank/nullspace from the published W0/W1 total-F6 controls before freeze or any further recovery decision."
       ],
       "coverage_assessment": {
         "status": "TOTAL_F6_AGGREGATES_AVAILABLE_BILATERAL_NOT_PUBLISHED",
@@ -453,6 +452,25 @@
           "F63_F64_F65"
         ],
         "next_gate": "F6 bilateral subcomponent coverage audit",
+        "materialization_allowed": false
+      },
+      "component_coverage_assessment": {
+        "status": "NEGATIVE_ZERO_BILATERAL_COMPONENT_CELLS",
+        "assessment": "model/accounting/f6_bilateral_component_coverage_assessment.json",
+        "component_resolved_cells_per_measure": {
+          "F61": 0,
+          "F62": 0,
+          "F63": 0,
+          "F64": 0,
+          "F65": 0,
+          "F66": 0,
+          "F63_F64_F65": 0
+        },
+        "total_F6_resolved_cells": {
+          "stock": 0,
+          "flow": 0
+        },
+        "next_gate": "F6 exact aggregate-control rank/nullspace audit",
         "materialization_allowed": false
       }
     },
@@ -620,6 +638,10 @@
     {
       "id": "f6_total_instrument_coverage",
       "status": "NEGATIVE_BILATERAL_RESULT_AGGREGATES_AVAILABLE_F62_F63_ONLY"
+    },
+    {
+      "id": "f6_bilateral_component_coverage",
+      "status": "NEGATIVE_ZERO_BILATERAL_F6_COMPONENT_CELLS"
     }
   ]
 }
