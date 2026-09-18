@@ -1,0 +1,28 @@
+{
+  "registry_version": "0.1",
+  "scope": "validation-recovery official-source data",
+  "baseline_release": "v0.1.0",
+  "vintages": [
+    {
+      "id": "validation-recovery-2026-09-17",
+      "manifest": "data/raw/validation_recovery/fetch_manifest.json",
+      "fetched_at_utc": "2026-09-17T15:42:48.557026+00:00",
+      "status": "HASH_ONLY_LEGACY",
+      "raw_payloads_materialized_in_repository": false,
+      "exact_vintage_reproducible_from_release": false,
+      "known_raw_sha256_count": 4,
+      "reason": "The retained manifest records exact source URLs, response sizes and SHA-256 digests, but the recovery_artifacts raw payloads named by that manifest were not committed to v0.1.0.",
+      "recovery_rule": "Do not reconstruct or relabel later source responses as the 2026-09-17 vintage unless every raw payload independently matches the recorded SHA-256 digest. If any source differs or cannot be retrieved, preserve this gap and create a new immutable vintage."
+    }
+  ],
+  "future_capture_policy": {
+    "status_required_for_release": "ARCHIVED_RAW_VERIFIED",
+    "retain_raw_payloads": true,
+    "retain_normalized_payloads": true,
+    "record_raw_sha256": true,
+    "record_normalized_sha256": true,
+    "record_fetcher_script_sha256": true,
+    "network_refetch_required_for_reproduction": false,
+    "allow_revision_overwrite": false
+  }
+}
