@@ -1,0 +1,51 @@
+name: F5 Component-Aware Rank Audit
+
+on:
+  pull_request:
+    paths:
+      - "model/accounting/f5_component_aware_rank_contract.json"
+      - "model/accounting/f5_equity_subcomponent_bridge_contract.json"
+      - "scripts/audit_qsa_f5_equity_subcomponents.py"
+      - "scripts/audit_f5_component_aware_rank.py"
+      - "tests/test_f5_component_aware_rank_contract.py"
+      - ".github/workflows/f5-component-aware-rank-audit.yml"
+      - "model/accounting/reconciliation_2025.json"
+      - "STATUS.md"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit-f5-component-rank:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify F5 component-rank contract
+        run: python -m unittest tests.test_f5_component_aware_rank_contract -v
+
+      - name: Reproduce F5 Phase C source evidence
+        env:
+          F5_EQUITY_OUT: f5_phase_c_artifacts
+        run: python scripts/audit_qsa_f5_equity_subcomponents.py
+
+      - name: Run exact component-aware rank audit
+        run: |
+          python scripts/audit_f5_component_aware_rank.py             --phase-c-report f5_phase_c_artifacts/f5_equity_subcomponent_bridge_audit.json             --out f5_rank_artifacts
+
+      - name: Upload F5 rank evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: f5-component-aware-rank-${{ github.sha }}
+          path: |
+            f5_phase_c_artifacts/
+            f5_rank_artifacts/
+          if-no-files-found: error
+          retention-days: 30

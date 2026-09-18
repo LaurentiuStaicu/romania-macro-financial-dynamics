@@ -1,0 +1,90 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F5 Phase D — Component-Aware Exact Rank Audit",
+  "audit_head_sha": "835f05f6fd2fca0fd7bb3ea136fd1598f706339a",
+  "workflow_run_id": 35378703118,
+  "workflow_artifact_id": 10561526069,
+  "workflow_artifact_sha256": "575d3a4c6b9cabdaf95c6eb7fa4cec94059aff6e2694e86bbe8f3fe7137b2a9a",
+  "verdict": "FREEZE_F5_PUBLIC_DATA_BOUNDARY_ZERO_UNCONDITIONAL_TOTAL_CELLS",
+  "source_reproduction": {
+    "phase_C_series_requested": 532,
+    "phase_C_series_status_counts": {
+      "AVAILABLE": 180,
+      "HTTP_ERROR": 352
+    },
+    "network_errors_present": false,
+    "component_source_topology": {
+      "F511_resolved_cells": {
+        "stock": 11,
+        "flow": 11
+      },
+      "F512_resolved_cells": {
+        "stock": 0,
+        "flow": 0
+      },
+      "F519_resolved_cells": {
+        "stock": 0,
+        "flow": 0
+      },
+      "F52_resolved_or_structural_cells": {
+        "stock": 31,
+        "flow": 31
+      }
+    }
+  },
+  "exact_rank": {
+    "stock": {
+      "component_variables": 140,
+      "equations": 98,
+      "rank": 73,
+      "nullity": 67,
+      "unique_component_variables": 42,
+      "unique_F52_cells": 31,
+      "unique_F51_total_cells": 0,
+      "unique_F5_total_cells": 0
+    },
+    "flow_2025": {
+      "component_variables": 140,
+      "equations": 98,
+      "rank": 73,
+      "nullity": 67,
+      "unique_component_variables": 42,
+      "unique_F52_cells": 31,
+      "unique_F51_total_cells": 0,
+      "unique_F5_total_cells": 0
+    }
+  },
+  "unique_component_structure": {
+    "interpretation": [
+      "The 42 unique component variables are exactly the 11 directly recovered F511 cells plus 31 F52 cells fixed either by source evidence or the established investment-fund issuer scope.",
+      "Four applicable F52 cells remain non-unique per measure: F→F, F→X, BNR→F and BNR→X.",
+      "No combination F511+F512+F519 is invariant for any bilateral cell, so no F51 total cell is identified.",
+      "No combination F511+F512+F519+F52 is invariant for any bilateral cell, so no total-F5 cell is identified."
+    ],
+    "nonunique_F52_cells_per_measure": [
+      "F→F",
+      "F→X",
+      "BNR→F",
+      "BNR→X"
+    ]
+  },
+  "scientific_interpretation": [
+    "The F5 limitation is identification, not a failure of the aggregate accounting identities: F5=F51+F52 and F51=F511+F512+F519 remain validated at the available aggregate levels.",
+    "The component-aware system deliberately preserves lower-level information rather than discarding the 11 F511 and 31 F52 unique variables, but none of that information is sufficient to identify an entire F51 or F5 bilateral cell.",
+    "Because F512 and F519 are large and bilaterally unpublished, promoting F511 or F51 proxies would materially distort the instrument structure.",
+    "Exact rational nullspace analysis provides no unconditional partial total-F5 core to materialize."
+  ],
+  "disposition": {
+    "F5_status": "FROZEN_AT_PUBLIC_DATA_BOUNDARY",
+    "partial_total_F5_materialization_allowed": false,
+    "component_evidence_retained": true,
+    "benchmark_changed": false,
+    "behavioural_closure": "UNCHANGED_INACTIVE",
+    "next_priority": "F6 coverage screening"
+  },
+  "reopen_conditions": [
+    "official bilateral or counterpart-sector publication for F512 and/or F519",
+    "additional official component controls that reduce the exact component nullspace enough to make a total-F51 or total-F5 cell invariant",
+    "a separately justified instrument-specific structural applicability rule supported by ESA/source evidence, never an empirical convenience assumption"
+  ]
+}

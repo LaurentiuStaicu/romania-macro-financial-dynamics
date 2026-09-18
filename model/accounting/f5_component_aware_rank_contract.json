@@ -1,0 +1,26 @@
+{
+  "contract_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F5 Phase D — Component-Aware Exact Rank Audit",
+  "purpose": "Compute exact coefficient rank/nullspace for the bilateral F5 component system and test whether any total-F5 holder-by-issuer linear combination is uniquely identified by direct F511 observations, direct/structural F52 evidence, and published aggregate controls.",
+  "component_variables": ["F511", "F512", "F519", "F52"],
+  "total_cell_linear_form": "F5(holder,issuer) = F511 + F512 + F519 + F52",
+  "source_report": "F5 Phase C bilateral equity subcomponent bridge, regenerated in the same workflow",
+  "hard_rules": {
+    "no_benchmark_mutation": true,
+    "no_materialization_in_phase_D": true,
+    "no_synthetic_allocation": true,
+    "exact_rational_coefficient_rank": true,
+    "total_F5_unique_only_if_linear_form_annihilates_every_nullspace_basis_vector": true,
+    "F51_unique_only_if_F511_F512_F519_linear_form_annihilates_every_nullspace_basis_vector": true,
+    "direct_F511_equations_only_from_phase_C_resolved_cells": true,
+    "F52_equations_only_from_phase_C_resolved_or_structural_cells": true,
+    "F52_structural_scope_must_not_expand": true,
+    "aggregate_equations_only_when_source_value_is_published_or_exactly represented_in_phase_C": true,
+    "zero_aggregate_flow_must_not_create_bilateral_zero_equations": true,
+    "component_rounding_residuals_must_not_be_forced_to_zero": true,
+    "behavioural_closure_may_change": false
+  },
+  "expected_variable_count_per_measure": 140,
+  "promotion_rule": "Phase D may classify topology as unique or non-unique only. Any materialization would require a later immutable-source gate. If zero total-F5 cells are unconditionally unique, F5 is frozen at the public-data boundary and Accounting Empirical Recovery advances to F6.",
+  "system_dynamics_conformity": "Accounting-only gate; behavioural closure remains inactive."
+}
