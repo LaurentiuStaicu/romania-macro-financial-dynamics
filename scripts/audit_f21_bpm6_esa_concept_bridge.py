@@ -129,9 +129,23 @@ def fetch_item(
 
     ids = payload.get("id") or []
     sizes = payload.get("size") or []
-    if len(ids) != len(sizes) or any(
-        int(size) != 1 for dim, size in zip(ids, sizes) if dim != "time"
-    ):
+    if len(ids) != len(sizes):
+        result["status"] = "UNEXPECTED_DIMENSIONS"
+        result["ids"] = ids
+        result["sizes"] = sizes
+        return result
+
+    zero_dimensions = [
+        dim for dim, size in zip(ids, sizes) if int(size) == 0
+    ]
+    if zero_dimensions:
+        result["status"] = "FILTER_VALUE_NOT_IN_DATASET_CONSTRAINT"
+        result["ids"] = ids
+        result["sizes"] = sizes
+        result["zero_dimensions"] = zero_dimensions
+        return result
+
+    if any(int(size) != 1 for dim, size in zip(ids, sizes) if dim != "time"):
         result["status"] = "UNEXPECTED_DIMENSIONS"
         result["ids"] = ids
         result["sizes"] = sizes
