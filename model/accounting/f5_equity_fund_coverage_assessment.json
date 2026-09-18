@@ -1,0 +1,182 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F5 Phase A — Equity and Investment Fund Shares Coverage Audit",
+  "canonical_audit_head_sha": "e1bee3b153c78afb5d14d0078d06c6b5e90ca97b",
+  "workflow_run_id": 35375630494,
+  "workflow_artifact_id": 10560760253,
+  "workflow_artifact_sha256": "eafc1770e9ade2139ae4bd1517c305306e16e3bcd1edeeb432212286f5b1ae97",
+  "superseded_invalid_run": {
+    "workflow_run_id": 35375328011,
+    "workflow_artifact_id": 10559539914,
+    "workflow_artifact_sha256": "247ced10163d18b94c48674cca6e84a1d1d713170b77951c597c4ea8a2d988b9",
+    "defect": "F5 QSA keys incorrectly used maturity T instead of not-applicable _Z, producing 204/204 HTTP errors.",
+    "disposition": "DISCARDED_AS_KEY_CONSTRUCTION_FAILURE_NOT_INTERPRETED_AS_SOURCE_COVERAGE"
+  },
+  "verdict": "AGGREGATE_F5_AND_F51_F52_DECOMPOSITION_AVAILABLE_BILATERAL_TOTAL_F5_NOT_PUBLISHED",
+  "result": {
+    "series_requested": 204,
+    "series_status_counts": {
+      "AVAILABLE": 76,
+      "HTTP_ERROR": 128
+    },
+    "network_errors_present": false,
+    "orientation_conflict_count": 0,
+    "stock_cells": {
+      "resolved": 0,
+      "unresolved": 35,
+      "not_applicable": 1
+    },
+    "flow_cells": {
+      "resolved": 0,
+      "unresolved": 35,
+      "not_applicable": 1
+    },
+    "aggregate_reconciliation": {
+      "bilateral_coverage_incomplete": 20
+    },
+    "sector_decomposition_controls": {
+      "PASS": 10,
+      "CONTROL_INCOMPLETE": 10
+    },
+    "total_decomposition_controls": {
+      "PASS": 8
+    },
+    "materialization_allowed": false
+  },
+  "aggregate_controls_million_RON": {
+    "stock": {
+      "W0_assets": {
+        "F5": 935068.59,
+        "F51": 863724.73,
+        "F52": 71343.86
+      },
+      "W0_liabilities": {
+        "F5": 1385415.1,
+        "F51": 1329174.33,
+        "F52": 56240.77
+      },
+      "W1_assets": {
+        "F5": 82028.85,
+        "F51": 64278.06,
+        "F52": 17750.79
+      },
+      "W1_liabilities": {
+        "F5": 532375.36,
+        "F51": 529727.67,
+        "F52": 2647.7
+      }
+    },
+    "flow_2025": {
+      "W0_assets": {
+        "F5": 39727.53,
+        "F51": 28195.18,
+        "F52": 11532.35
+      },
+      "W0_liabilities": {
+        "F5": 60405.3,
+        "F51": 53463.98,
+        "F52": 6941.31
+      },
+      "W1_assets": {
+        "F5": 9104.64,
+        "F51": 4604.41,
+        "F52": 4500.24
+      },
+      "W1_liabilities": {
+        "F5": 29782.41,
+        "F51": 29873.22,
+        "F52": -90.8
+      }
+    }
+  },
+  "resident_sector_controls": {
+    "stock_assets": {
+      "H": {
+        "F5": 397269.59,
+        "F51": 357516.3,
+        "F52": 39753.29,
+        "status": "PASS"
+      },
+      "C": {
+        "F5": 135673.3,
+        "F51": 129960.37,
+        "F52": 5712.92,
+        "residual": 0.01,
+        "status": "PASS"
+      },
+      "F": {
+        "F5": 140716.15,
+        "F51": 115386.86875,
+        "F52": 25329.26953125,
+        "residual": 0.01171875,
+        "status": "PASS"
+      },
+      "G": {
+        "F5": 261153.7,
+        "F51": 260605.33,
+        "F52": 548.37,
+        "status": "PASS"
+      },
+      "BNR": {
+        "F5": 255.85,
+        "F51": 255.85,
+        "F52": 0,
+        "status": "PASS"
+      }
+    },
+    "flow_assets_2025": {
+      "H": {
+        "F5": 18484.61,
+        "F51": 11916.88,
+        "F52": 6567.73,
+        "status": "PASS"
+      },
+      "C": {
+        "F5": 14347.9,
+        "F51": 12730.82,
+        "F52": 1617.08,
+        "status": "PASS"
+      },
+      "F": {
+        "F5": 5087.9801025390625,
+        "F51": 1740.4799194335938,
+        "F52": 3347.529998779297,
+        "residual": -0.029815673828125,
+        "status": "PASS"
+      },
+      "G": {
+        "F5": 1807.02,
+        "F51": 1807.02,
+        "F52": 0,
+        "status": "PASS"
+      },
+      "BNR": {
+        "F5": 0,
+        "F51": 0,
+        "F52": 0,
+        "status": "PASS"
+      }
+    },
+    "liability_component_note": "F5 and F51 liabilities are published for the RMD sectors, while F52 liability controls are absent in the coarse RMD H/C/F/G/BNR mapping. This is not interpreted as zero in Phase A; issuer-sector structural applicability is deferred to the next gate."
+  },
+  "scientific_interpretation": [
+    "The corrected canonical QSA key for F5 uses maturity Not applicable [_Z] and expenditure Not applicable [_Z]. The initial all-error run is invalidated and excluded from scientific inference.",
+    "No tested bilateral total-F5 cell is directly published in QSA for Romania despite extensive aggregate coverage.",
+    "All eight total-economy F5=F51+F52 controls pass within 0.1 million RON.",
+    "All ten resident holder-side asset decompositions (five sectors × stock/flow) pass; the ten liability-side decompositions are formally incomplete because the F52 liability component is not returned at the coarse RMD sector controls.",
+    "F52 is quantitatively material on the asset side and externally; neither F51 nor listed shares may substitute for total F5.",
+    "The structural issuer scope of F52 must be adjudicated explicitly before using its absence on non-fund sectors as a zero/not-applicable constraint."
+  ],
+  "next_gate": {
+    "name": "F5 Phase B — bilateral F51/F52 component and issuer-applicability audit",
+    "required_checks": [
+      "probe bilateral F51 and F52 separately in both W2 orientations and W1 external orientations",
+      "formally document that resident F52 issuance belongs to investment-fund subsectors within the RMD F sector before using structural not-applicable/zero constraints for H/C/G/BNR issuers",
+      "derive total F5 only when component evidence plus structural applicability make the sum exact",
+      "test F51 substructure only as a diagnostic if needed; do not substitute listed shares for equity or total F5",
+      "reconcile any recovered bilateral totals to W0/W1 F5 controls",
+      "compute exact rank/nullity before materialization"
+    ],
+    "behavioural_closure_may_change": false
+  }
+}
