@@ -69,6 +69,13 @@ class F3MaterializationTests(unittest.TestCase):
                 statuses,
                 {"OBSERVED": 24, "DERIVED": 11, "NOT_APPLICABLE": 1},
             )
+            observed = [item for item in overrides if item["status"] == "OBSERVED"]
+            self.assertTrue(
+                all(
+                    item["source_series_key"].startswith("QSA.Q.")
+                    for item in observed
+                )
+            )
             x_to_x = [
                 item
                 for item in overrides
