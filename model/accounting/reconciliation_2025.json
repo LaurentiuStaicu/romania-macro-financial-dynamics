@@ -1,5 +1,5 @@
 {
-  "ledger_version": "1.6",
+  "ledger_version": "1.7",
   "benchmark": "2025",
   "principle": "Record residuals and unresolved coverage explicitly; never force accounting closure with invented allocations.",
   "instrument_gates": [
@@ -314,17 +314,16 @@
     {
       "instrument": "F5",
       "priority": 5,
-      "stock_matrix_status": "F51_BILATERAL_UNAVAILABLE_F52_PARTIAL_AND_STRUCTURALLY_SCOPED",
-      "flow_matrix_status": "F51_BILATERAL_UNAVAILABLE_F52_PARTIAL_AND_STRUCTURALLY_SCOPED",
+      "stock_matrix_status": "F511_PARTIAL_F512_F519_BILATERAL_UNAVAILABLE_F5_UNRESOLVED",
+      "flow_matrix_status": "F511_PARTIAL_F512_F519_BILATERAL_UNAVAILABLE_F5_UNRESOLVED",
       "asset_liability_residual": null,
-      "residual_status": "TOTAL_F5_BLOCKED_BY_F51_ZERO_OF_35_BILATERAL_CELLS",
+      "residual_status": "EQUITY_DECOMPOSITION_PASS_TOTAL_F51_BILATERAL_ZERO_OF_35",
       "known_issues": [
-        "The corrected canonical QSA F5 keys use maturity _Z and expenditure _Z.",
-        "No tested bilateral total-F5 cell is published for stock or 2025 flow.",
-        "F52 issuer applicability is structurally constrained: resident H/C/G/BNR are non-issuers, while investment-fund issuance lies in resident F or foreign X.",
-        "Phase B recovers seven applicable bilateral F52 cells per measure and classifies 24 resident-nonfund issuer cells per measure as structural non-applicable, not source zeros.",
-        "F51 equity remains unavailable in every tested bilateral cell, so total F5 cannot yet be reconstructed even where F52 is structurally non-applicable.",
-        "The next gate tests the exact equity decomposition F51 = F511 + F512 + F519 bilaterally before any aggregate-rank fallback."
+        "F52 issuer applicability and seven applicable bilateral F52 cells per measure are retained from Phase B.",
+        "F511 listed shares resolve 11 bilateral cells per measure, but F512 unlisted shares and F519 other equity resolve zero bilateral cells.",
+        "All eight total-economy F51=F511+F512+F519 controls pass within 0.1 million RON; F512 and F519 are material and F511 must not substitute for F51.",
+        "No bilateral F51 or total-F5 cell is reconstructed because every cell lacks at least F512 and F519 coverage.",
+        "The next gate is component-aware exact rank/nullspace analysis using direct F511, direct/structural F52 and aggregate component controls before any freeze/materialization decision."
       ],
       "coverage_assessment": {
         "status": "AGGREGATES_AVAILABLE_BILATERAL_TOTAL_F5_NOT_PUBLISHED",
@@ -370,6 +369,29 @@
           "flow": 0
         },
         "next_gate": "F5 bilateral F511+F512+F519 equity subcomponent bridge",
+        "materialization_allowed": false
+      },
+      "equity_subcomponent_assessment": {
+        "status": "F511_PARTIAL_F512_F519_UNAVAILABLE",
+        "assessment": "model/accounting/f5_equity_subcomponent_bridge_assessment.json",
+        "F511_resolved_cells": {
+          "stock": 11,
+          "flow": 11
+        },
+        "F512_resolved_cells": {
+          "stock": 0,
+          "flow": 0
+        },
+        "F519_resolved_cells": {
+          "stock": 0,
+          "flow": 0
+        },
+        "F51_resolved_cells": {
+          "stock": 0,
+          "flow": 0
+        },
+        "total_F51_decomposition_controls": "PASS_8_OF_8_TOTAL_ECONOMY",
+        "next_gate": "F5 component-aware exact rank/nullspace audit",
         "materialization_allowed": false
       }
     },
@@ -530,6 +552,10 @@
     {
       "id": "f5_bilateral_component_bridge",
       "status": "PARTIAL_F52_7_PER_MEASURE_F51_ZERO_BILATERAL"
+    },
+    {
+      "id": "f5_equity_subcomponent_bridge",
+      "status": "PARTIAL_F511_11_PER_MEASURE_F512_F519_ZERO_BILATERAL_F51_ZERO"
     }
   ]
 }

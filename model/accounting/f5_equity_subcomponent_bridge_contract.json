@@ -1,0 +1,50 @@
+{
+  "contract_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F5 Phase C — Bilateral Equity Subcomponent Bridge",
+  "instrument": "F5",
+  "equity_identity": "F51 = F511 + F512 + F519",
+  "total_identity": "F5 = F51 + F52",
+  "purpose": "Test whether bilateral F51 equity can be reconstructed exactly from listed shares, unlisted shares and other equity, then combine any resolved F51 with the already established F52 issuer-applicability rule to form total-F5 candidates.",
+  "benchmark_stock_period": "2025-Q4",
+  "benchmark_flow_period": "2025-Q1..2025-Q4",
+  "canonical_qsa_dimensions": {
+    "maturity": "_Z",
+    "expenditure": "_Z",
+    "unit": "XDC",
+    "currency_denominator": "_T",
+    "valuation": "S",
+    "prices": "V",
+    "transformation": "N",
+    "custom_breakdown": "_T"
+  },
+  "equity_components": ["F511", "F512", "F519"],
+  "retained_F52_rule": {
+    "resident_nonfund_issuers": ["H", "C", "G", "BNR"],
+    "resident_fund_issuer": "F",
+    "foreign_fund_issuer": "X"
+  },
+  "hard_rules": {
+    "no_benchmark_mutation": true,
+    "no_materialization_in_phase_C": true,
+    "no_missing_to_zero": true,
+    "no_synthetic_allocation": true,
+    "F51_requires_F511_F512_F519": true,
+    "no_F511_or_F512_proxy_for_F51": true,
+    "no_new_structural_issuer_zero_for_F511_F512_F519": true,
+    "F_composite_only_by_exact_S12_minus_S121": true,
+    "annual_flow_only_by_exact_Q1_Q2_Q3_Q4_sum": true,
+    "dual_W2_orientations_must_be_probed": true,
+    "orientation_conflict_blocks_component": true,
+    "component_conflict_blocks_F51": true,
+    "F52_structural_scope_must_match_phase_B": true,
+    "aggregate_F51_decomposition_controls_required": true,
+    "aggregate_F5_controls_required_for_any_complete_partition": true,
+    "rank_must_be_computed_in_a_later_gate_before_materialization": true,
+    "network_errors_block_positive_coverage_claims": true,
+    "behavioural_closure_may_change": false
+  },
+  "reconciliation_tolerance_million_RON": 0.1,
+  "promotion_rule": "This phase may classify bilateral F51/F5 candidates only. F51 requires all three F511/F512/F519 subcomponents to be separately resolved without orientation conflict. Total F5 additionally requires F52 to be resolved or structurally not applicable under the already established Phase B rule. Materialization is prohibited until a later exact-rank and immutable-source gate.",
+  "negative_result_rule": "If one or more F51 subcomponents are unavailable, F51 and total F5 remain unresolved for that bilateral cell. Aggregate residuals are never allocated.",
+  "system_dynamics_conformity": "Accounting-only recovery; behavioural closure remains inactive."
+}
