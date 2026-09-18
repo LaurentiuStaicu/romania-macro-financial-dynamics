@@ -1,0 +1,48 @@
+{
+  "contract_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F8 Phase B — Bilateral Component Bridge",
+  "instrument": "F8",
+  "components": ["F81", "F89"],
+  "purpose": "Test whether missing bilateral total-F8 cells can be recovered exactly from separately published bilateral F81 trade credits/advances and F89 other accounts excluding trade credits/advances.",
+  "identity": "F8 = F81 + F89",
+  "benchmark_stock_period": "2025-Q4",
+  "benchmark_flow_period": "2025-Q1..2025-Q4",
+  "sector_mapping": {
+    "H": "S1M",
+    "C": "S11",
+    "G": "S13",
+    "BNR": "S121",
+    "F": "S12 - S121",
+    "X": "rest-of-world counterpart"
+  },
+  "source_orientations": {
+    "domestic_holder_asset": "W2; reference sector=holder; counterpart sector=issuer; entry=A",
+    "domestic_issuer_liability": "W2; reference sector=issuer; counterpart sector=holder; entry=L",
+    "resident_holder_to_X": "W1; reference sector=holder; counterpart sector=S1; entry=A",
+    "X_holder_to_resident_issuer": "W1; reference sector=issuer; counterpart sector=S1; entry=L"
+  },
+  "hard_rules": {
+    "no_benchmark_mutation": true,
+    "no_materialization_in_phase_B": true,
+    "no_missing_to_zero": true,
+    "no_synthetic_allocation": true,
+    "F81_must_not_substitute_for_F8": true,
+    "F89_must_not_substitute_for_F8": true,
+    "bilateral_F8_requires_both_F81_and_F89": true,
+    "F_composite_only_by_exact_S12_minus_S121": true,
+    "annual_flow_only_by_exact_Q1_Q2_Q3_Q4_sum": true,
+    "dual_W2_orientations_must_be_probed_for_each_component": true,
+    "component_orientation_conflict_blocks_component": true,
+    "component_conflict_blocks_total_F8_cell": true,
+    "published_F8_W0_controls_required_for_complete_rows_and_columns": true,
+    "published_F8_W1_controls_required_for_complete_external_partitions": true,
+    "component_missingness_must_remain_explicit": true,
+    "rank_must_be_computed_in_a_later_gate_before_materialization": true,
+    "network_errors_block_positive_coverage_claims": true,
+    "behavioural_closure_may_change": false
+  },
+  "reconciliation_tolerance_million_RON": 0.1,
+  "promotion_rule": "This phase may classify a bilateral F8 cell as an exact component derivation only when both F81 and F89 are available for the same holder/issuer/measure and each component has no orientation conflict. Materialization is prohibited until a later exact-rank and immutable-source gate.",
+  "negative_result_rule": "If either F81 or F89 is unavailable, total F8 remains unresolved for that bilateral cell even if aggregate F8 is known.",
+  "system_dynamics_conformity": "Accounting-only recovery; no feedback, delay, behavioural equation or closure status changes."
+}
