@@ -1,0 +1,1379 @@
+{
+  "component_version": "0.1",
+  "instrument": "F2M",
+  "meaning": "Deposits only; component of F2 currency and deposits",
+  "benchmark_stock_period": "2025-Q4",
+  "benchmark_flow_period": "2025-Q1..2025-Q4",
+  "source_vintage": "data/source_vintages/accounting-f2m-2025-vintage-2026-09-18",
+  "component_only": true,
+  "canonical_total_F2_population_allowed": false,
+  "F21_currency_status": "UNRESOLVED_BILATERAL_CURRENCY_ALLOCATION",
+  "matrices": {
+    "stock": [
+      {
+        "holder": "H",
+        "issuer": "H",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "ESA2010_DEPOSIT_NON_ISSUER"
+      },
+      {
+        "holder": "H",
+        "issuer": "C",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "ESA2010_DEPOSIT_NON_ISSUER"
+      },
+      {
+        "holder": "H",
+        "issuer": "F",
+        "status": "DERIVED",
+        "value": 413451.69,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S12.S1M.N.L.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              413451.6875
+            ]
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S121.S1M.N.L.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              0.0
+            ]
+          }
+        ],
+        "sector_derivation": "exact_S12_minus_S121_identity_with_inclusion_exclusion_where_required"
+      },
+      {
+        "holder": "H",
+        "issuer": "G",
+        "status": "OBSERVED",
+        "value": 66.0,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S13.S1M.N.L.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              66.0
+            ]
+          }
+        ]
+      },
+      {
+        "holder": "H",
+        "issuer": "X",
+        "status": "DERIVED",
+        "value": 11369.21,
+        "unit": "million_RON",
+        "derivation": {
+          "identity": "holder_W0_F2M_assets - complete_resident_issuer_F2M_submatrix",
+          "published_holder_W0_million_RON": 424886.9,
+          "resident_issuer_submatrix_million_RON": 413517.6875,
+          "independent_control": "A2 domestic partition + resident-holder W0 aggregation + published W1 aggregate all PASS"
+        },
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S1M.S1.N.A.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              424886.9
+            ]
+          }
+        ]
+      },
+      {
+        "holder": "H",
+        "issuer": "BNR",
+        "status": "OBSERVED",
+        "value": 0.0,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S1M.N.L.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              0.0
+            ]
+          }
+        ]
+      },
+      {
+        "holder": "C",
+        "issuer": "H",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "ESA2010_DEPOSIT_NON_ISSUER"
+      },
+      {
+        "holder": "C",
+        "issuer": "C",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "ESA2010_DEPOSIT_NON_ISSUER"
+      },
+      {
+        "holder": "C",
+        "issuer": "F",
+        "status": "DERIVED",
+        "value": 235955.34,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S12.S11.N.L.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              235955.34375
+            ]
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S121.S11.N.L.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              0.0
+            ]
+          }
+        ],
+        "sector_derivation": "exact_S12_minus_S121_identity_with_inclusion_exclusion_where_required"
+      },
+      {
+        "holder": "C",
+        "issuer": "G",
+        "status": "OBSERVED",
+        "value": 23334.72,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S13.S11.N.L.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              23334.72
+            ]
+          }
+        ]
+      },
+      {
+        "holder": "C",
+        "issuer": "X",
+        "status": "DERIVED",
+        "value": 8897.82,
+        "unit": "million_RON",
+        "derivation": {
+          "identity": "holder_W0_F2M_assets - complete_resident_issuer_F2M_submatrix",
+          "published_holder_W0_million_RON": 268187.88,
+          "resident_issuer_submatrix_million_RON": 259290.06375,
+          "independent_control": "A2 domestic partition + resident-holder W0 aggregation + published W1 aggregate all PASS"
+        },
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S11.S1.N.A.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              268187.88
+            ]
+          }
+        ]
+      },
+      {
+        "holder": "C",
+        "issuer": "BNR",
+        "status": "OBSERVED",
+        "value": 0.0,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S11.N.L.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              0.0
+            ]
+          }
+        ]
+      },
+      {
+        "holder": "F",
+        "issuer": "H",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "ESA2010_DEPOSIT_NON_ISSUER"
+      },
+      {
+        "holder": "F",
+        "issuer": "C",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "ESA2010_DEPOSIT_NON_ISSUER"
+      },
+      {
+        "holder": "F",
+        "issuer": "F",
+        "status": "DERIVED",
+        "value": 42658.65,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S12.S12.N.L.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              138394.25170898438
+            ]
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S12.S121.N.L.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              0.5
+            ]
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S121.S12.N.L.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              95735.1015625
+            ]
+          },
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S121.N.L.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              0.0
+            ]
+          }
+        ],
+        "sector_derivation": "exact_S12_minus_S121_identity_with_inclusion_exclusion_where_required"
+      },
+      {
+        "holder": "F",
+        "issuer": "G",
+        "status": "DERIVED",
+        "value": 0.19,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S13.S12.N.L.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              0.1899999976158142
+            ]
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S13.S121.N.L.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              0.0
+            ]
+          }
+        ],
+        "sector_derivation": "exact_S12_minus_S121_identity_with_inclusion_exclusion_where_required"
+      },
+      {
+        "holder": "F",
+        "issuer": "X",
+        "status": "DERIVED",
+        "value": 54406.34,
+        "unit": "million_RON",
+        "derivation": {
+          "identity": "holder_W0_F2M_assets - complete_resident_issuer_F2M_submatrix",
+          "published_holder_W0_million_RON": 192800.2825,
+          "resident_issuer_submatrix_million_RON": 138393.941708982,
+          "independent_control": "A2 domestic partition + resident-holder W0 aggregation + published W1 aggregate all PASS"
+        },
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S12.S1.N.A.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              283882.3125
+            ]
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W0.S121.S1.N.A.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              91082.03
+            ]
+          }
+        ]
+      },
+      {
+        "holder": "F",
+        "issuer": "BNR",
+        "status": "DERIVED",
+        "value": 95735.1,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S12.N.L.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              95735.1015625
+            ]
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S121.S121.N.L.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              0.0
+            ]
+          }
+        ],
+        "sector_derivation": "exact_S12_minus_S121_identity_with_inclusion_exclusion_where_required"
+      },
+      {
+        "holder": "G",
+        "issuer": "H",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "ESA2010_DEPOSIT_NON_ISSUER"
+      },
+      {
+        "holder": "G",
+        "issuer": "C",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "ESA2010_DEPOSIT_NON_ISSUER"
+      },
+      {
+        "holder": "G",
+        "issuer": "F",
+        "status": "DERIVED",
+        "value": 63564.01,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S12.S13.N.L.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              131999.421875
+            ]
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S121.S13.N.L.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              68435.41
+            ]
+          }
+        ],
+        "sector_derivation": "exact_S12_minus_S121_identity_with_inclusion_exclusion_where_required"
+      },
+      {
+        "holder": "G",
+        "issuer": "G",
+        "status": "OBSERVED",
+        "value": 41115.03,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S13.S13.N.L.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              41115.03
+            ]
+          }
+        ]
+      },
+      {
+        "holder": "G",
+        "issuer": "X",
+        "status": "DERIVED",
+        "value": 207.38,
+        "unit": "million_RON",
+        "derivation": {
+          "identity": "holder_W0_F2M_assets - complete_resident_issuer_F2M_submatrix",
+          "published_holder_W0_million_RON": 173321.83,
+          "resident_issuer_submatrix_million_RON": 173114.451875,
+          "independent_control": "A2 domestic partition + resident-holder W0 aggregation + published W1 aggregate all PASS"
+        },
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S13.S1.N.A.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              173321.83
+            ]
+          }
+        ]
+      },
+      {
+        "holder": "G",
+        "issuer": "BNR",
+        "status": "OBSERVED",
+        "value": 68435.41,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S13.N.L.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              68435.41
+            ]
+          }
+        ]
+      },
+      {
+        "holder": "X",
+        "issuer": "H",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "ESA2010_DEPOSIT_NON_ISSUER"
+      },
+      {
+        "holder": "X",
+        "issuer": "C",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "ESA2010_DEPOSIT_NON_ISSUER"
+      },
+      {
+        "holder": "X",
+        "issuer": "F",
+        "status": "DERIVED",
+        "value": 42992.3,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S12.S1.N.L.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              43027.80078125
+            ]
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W1.S121.S1.N.L.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              35.5
+            ]
+          }
+        ],
+        "sector_derivation": "exact_S12_minus_S121_identity_with_inclusion_exclusion_where_required"
+      },
+      {
+        "holder": "X",
+        "issuer": "G",
+        "status": "OBSERVED",
+        "value": 2692.9,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S13.S1.N.L.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              2692.9
+            ]
+          }
+        ]
+      },
+      {
+        "holder": "X",
+        "issuer": "X",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "OUTSIDE_ROMANIAN_NATIONAL_ACCOUNTS_BOUNDARY"
+      },
+      {
+        "holder": "X",
+        "issuer": "BNR",
+        "status": "OBSERVED",
+        "value": 35.5,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S121.S1.N.L.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              35.5
+            ]
+          }
+        ]
+      },
+      {
+        "holder": "BNR",
+        "issuer": "H",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "ESA2010_DEPOSIT_NON_ISSUER"
+      },
+      {
+        "holder": "BNR",
+        "issuer": "C",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "ESA2010_DEPOSIT_NON_ISSUER"
+      },
+      {
+        "holder": "BNR",
+        "issuer": "F",
+        "status": "DERIVED",
+        "value": 0.5,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S12.S121.N.L.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              0.5
+            ]
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S121.S121.N.L.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              0.0
+            ]
+          }
+        ],
+        "sector_derivation": "exact_S12_minus_S121_identity_with_inclusion_exclusion_where_required"
+      },
+      {
+        "holder": "BNR",
+        "issuer": "G",
+        "status": "OBSERVED",
+        "value": 0.0,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S13.S121.N.L.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              0.0
+            ]
+          }
+        ]
+      },
+      {
+        "holder": "BNR",
+        "issuer": "X",
+        "status": "DERIVED",
+        "value": 91081.53,
+        "unit": "million_RON",
+        "derivation": {
+          "identity": "holder_W0_F2M_assets - complete_resident_issuer_F2M_submatrix",
+          "published_holder_W0_million_RON": 91082.03,
+          "resident_issuer_submatrix_million_RON": 0.5,
+          "independent_control": "A2 domestic partition + resident-holder W0 aggregation + published W1 aggregate all PASS"
+        },
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S121.S1.N.A.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              91082.03
+            ]
+          }
+        ]
+      },
+      {
+        "holder": "BNR",
+        "issuer": "BNR",
+        "status": "OBSERVED",
+        "value": 0.0,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S121.N.L.LE.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              0.0
+            ]
+          }
+        ]
+      }
+    ],
+    "flow": [
+      {
+        "holder": "H",
+        "issuer": "H",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "ESA2010_DEPOSIT_NON_ISSUER"
+      },
+      {
+        "holder": "H",
+        "issuer": "C",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "ESA2010_DEPOSIT_NON_ISSUER"
+      },
+      {
+        "holder": "H",
+        "issuer": "F",
+        "status": "DERIVED",
+        "value": 28969.7,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S12.S1M.N.L.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              2958.199951171875,
+              5358.2001953125,
+              1403.699951171875,
+              19249.599609375
+            ]
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S121.S1M.N.L.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "temporal_derivation": "exact_sum_2025_Q1_Q2_Q3_Q4_transactions",
+        "sector_derivation": "exact_S12_minus_S121_identity_with_inclusion_exclusion_where_required"
+      },
+      {
+        "holder": "H",
+        "issuer": "G",
+        "status": "DERIVED",
+        "value": -14.18,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S13.S1M.N.L.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              -5.01,
+              -3.12,
+              -3.42,
+              -2.63
+            ]
+          }
+        ],
+        "temporal_derivation": "exact_sum_2025_Q1_Q2_Q3_Q4_transactions"
+      },
+      {
+        "holder": "H",
+        "issuer": "X",
+        "status": "DERIVED",
+        "value": -1803.11,
+        "unit": "million_RON",
+        "derivation": {
+          "identity": "holder_W0_F2M_assets - complete_resident_issuer_F2M_submatrix",
+          "published_holder_W0_million_RON": 27152.41,
+          "resident_issuer_submatrix_million_RON": 28955.51970703125,
+          "independent_control": "A2 domestic partition + resident-holder W0 aggregation + published W1 aggregate all PASS"
+        },
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S1M.S1.N.A.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              -494.43,
+              5994.1,
+              1647.65,
+              20005.09
+            ]
+          }
+        ]
+      },
+      {
+        "holder": "H",
+        "issuer": "BNR",
+        "status": "DERIVED",
+        "value": 0.0,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S1M.N.L.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "temporal_derivation": "exact_sum_2025_Q1_Q2_Q3_Q4_transactions"
+      },
+      {
+        "holder": "C",
+        "issuer": "H",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "ESA2010_DEPOSIT_NON_ISSUER"
+      },
+      {
+        "holder": "C",
+        "issuer": "C",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "ESA2010_DEPOSIT_NON_ISSUER"
+      },
+      {
+        "holder": "C",
+        "issuer": "F",
+        "status": "DERIVED",
+        "value": 8136.83,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S12.S11.N.L.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              -5177.2001953125,
+              -9498.5,
+              3844.89990234375,
+              18967.630859375
+            ]
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S121.S11.N.L.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "temporal_derivation": "exact_sum_2025_Q1_Q2_Q3_Q4_transactions",
+        "sector_derivation": "exact_S12_minus_S121_identity_with_inclusion_exclusion_where_required"
+      },
+      {
+        "holder": "C",
+        "issuer": "G",
+        "status": "DERIVED",
+        "value": 4552.41,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S13.S11.N.L.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              -1756.89,
+              1985.02,
+              1269.95,
+              3054.33
+            ]
+          }
+        ],
+        "temporal_derivation": "exact_sum_2025_Q1_Q2_Q3_Q4_transactions"
+      },
+      {
+        "holder": "C",
+        "issuer": "X",
+        "status": "DERIVED",
+        "value": 1523.02,
+        "unit": "million_RON",
+        "derivation": {
+          "identity": "holder_W0_F2M_assets - complete_resident_issuer_F2M_submatrix",
+          "published_holder_W0_million_RON": 14212.26,
+          "resident_issuer_submatrix_million_RON": 12689.24056640625,
+          "independent_control": "A2 domestic partition + resident-holder W0 aggregation + published W1 aggregate all PASS"
+        },
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S11.S1.N.A.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              -6034.0,
+              -7862.4,
+              6517.82,
+              21590.84
+            ]
+          }
+        ]
+      },
+      {
+        "holder": "C",
+        "issuer": "BNR",
+        "status": "DERIVED",
+        "value": 0.0,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S11.N.L.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "temporal_derivation": "exact_sum_2025_Q1_Q2_Q3_Q4_transactions"
+      },
+      {
+        "holder": "F",
+        "issuer": "H",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "ESA2010_DEPOSIT_NON_ISSUER"
+      },
+      {
+        "holder": "F",
+        "issuer": "C",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "ESA2010_DEPOSIT_NON_ISSUER"
+      },
+      {
+        "holder": "F",
+        "issuer": "F",
+        "status": "DERIVED",
+        "value": 2878.07,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S12.S12.N.L.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              3276.0000228881836,
+              -21635.100784301758,
+              14070.800399780273,
+              19958.869201660156
+            ]
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S12.S121.N.L.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              0.0,
+              1500.0,
+              -1500.0,
+              0.5
+            ]
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S121.S12.N.L.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              5457.2998046875,
+              -28534.5,
+              13253.099609375,
+              22616.099609375
+            ]
+          },
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S121.N.L.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "temporal_derivation": "exact_sum_2025_Q1_Q2_Q3_Q4_transactions",
+        "sector_derivation": "exact_S12_minus_S121_identity_with_inclusion_exclusion_where_required"
+      },
+      {
+        "holder": "F",
+        "issuer": "G",
+        "status": "DERIVED",
+        "value": 0.12,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S13.S12.N.L.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              0.3499999940395355,
+              0.019999999552965164,
+              -0.11999999731779099,
+              -0.12999999523162842
+            ]
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S13.S121.N.L.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "temporal_derivation": "exact_sum_2025_Q1_Q2_Q3_Q4_transactions",
+        "sector_derivation": "exact_S12_minus_S121_identity_with_inclusion_exclusion_where_required"
+      },
+      {
+        "holder": "F",
+        "issuer": "X",
+        "status": "DERIVED",
+        "value": -422.16,
+        "unit": "million_RON",
+        "derivation": {
+          "identity": "holder_W0_F2M_assets - complete_resident_issuer_F2M_submatrix",
+          "published_holder_W0_million_RON": 15248.0288671875,
+          "resident_issuer_submatrix_million_RON": 15670.188840027899,
+          "independent_control": "A2 domestic partition + resident-holder W0 aggregation + published W1 aggregate all PASS"
+        },
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S12.S1.N.A.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              10281.8896484375,
+              4833.4296875,
+              -22851.66015625,
+              18209.6796875
+            ]
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W0.S121.S1.N.A.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              6647.45,
+              11046.78,
+              -22436.36,
+              -32.56
+            ]
+          }
+        ]
+      },
+      {
+        "holder": "F",
+        "issuer": "BNR",
+        "status": "DERIVED",
+        "value": 12792.0,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S12.N.L.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              5457.2998046875,
+              -28534.5,
+              13253.099609375,
+              22616.099609375
+            ]
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S121.S121.N.L.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "temporal_derivation": "exact_sum_2025_Q1_Q2_Q3_Q4_transactions",
+        "sector_derivation": "exact_S12_minus_S121_identity_with_inclusion_exclusion_where_required"
+      },
+      {
+        "holder": "G",
+        "issuer": "H",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "ESA2010_DEPOSIT_NON_ISSUER"
+      },
+      {
+        "holder": "G",
+        "issuer": "C",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "ESA2010_DEPOSIT_NON_ISSUER"
+      },
+      {
+        "holder": "G",
+        "issuer": "F",
+        "status": "DERIVED",
+        "value": 4740.83,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S12.S13.N.L.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              -555.8099975585938,
+              12326.26953125,
+              19125.41015625,
+              -23334.25
+            ]
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S121.S13.N.L.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              -163.68,
+              13814.68,
+              16752.31,
+              -27582.52
+            ]
+          }
+        ],
+        "temporal_derivation": "exact_sum_2025_Q1_Q2_Q3_Q4_transactions",
+        "sector_derivation": "exact_S12_minus_S121_identity_with_inclusion_exclusion_where_required"
+      },
+      {
+        "holder": "G",
+        "issuer": "G",
+        "status": "DERIVED",
+        "value": 713.79,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S13.S13.N.L.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              5285.34,
+              661.18,
+              -4506.9,
+              -725.83
+            ]
+          }
+        ],
+        "temporal_derivation": "exact_sum_2025_Q1_Q2_Q3_Q4_transactions"
+      },
+      {
+        "holder": "G",
+        "issuer": "X",
+        "status": "DERIVED",
+        "value": -22.82,
+        "unit": "million_RON",
+        "derivation": {
+          "identity": "holder_W0_F2M_assets - complete_resident_issuer_F2M_submatrix",
+          "published_holder_W0_million_RON": 8252.590000000002,
+          "resident_issuer_submatrix_million_RON": 8275.409689941407,
+          "independent_control": "A2 domestic partition + resident-holder W0 aggregation + published W1 aggregate all PASS"
+        },
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S13.S1.N.A.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              4740.34,
+              12960.7,
+              14600.76,
+              -24049.21
+            ]
+          }
+        ]
+      },
+      {
+        "holder": "G",
+        "issuer": "BNR",
+        "status": "DERIVED",
+        "value": 2820.79,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S13.N.L.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              -163.68,
+              13814.68,
+              16752.31,
+              -27582.52
+            ]
+          }
+        ],
+        "temporal_derivation": "exact_sum_2025_Q1_Q2_Q3_Q4_transactions"
+      },
+      {
+        "holder": "X",
+        "issuer": "H",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "ESA2010_DEPOSIT_NON_ISSUER"
+      },
+      {
+        "holder": "X",
+        "issuer": "C",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "ESA2010_DEPOSIT_NON_ISSUER"
+      },
+      {
+        "holder": "X",
+        "issuer": "F",
+        "status": "DERIVED",
+        "value": 6326.69,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S12.S1.N.L.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              -3302.719970703125,
+              759.0399780273438,
+              -1413.5799560546875,
+              4711.35986328125
+            ]
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W1.S121.S1.N.L.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              -5472.6,
+              -106.42,
+              -1.99,
+              8.42
+            ]
+          }
+        ],
+        "temporal_derivation": "exact_sum_2025_Q1_Q2_Q3_Q4_transactions",
+        "sector_derivation": "exact_S12_minus_S121_identity_with_inclusion_exclusion_where_required"
+      },
+      {
+        "holder": "X",
+        "issuer": "G",
+        "status": "DERIVED",
+        "value": 1780.75,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S13.S1.N.L.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              190.7,
+              600.78,
+              842.94,
+              146.33
+            ]
+          }
+        ],
+        "temporal_derivation": "exact_sum_2025_Q1_Q2_Q3_Q4_transactions"
+      },
+      {
+        "holder": "X",
+        "issuer": "X",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "OUTSIDE_ROMANIAN_NATIONAL_ACCOUNTS_BOUNDARY"
+      },
+      {
+        "holder": "X",
+        "issuer": "BNR",
+        "status": "DERIVED",
+        "value": -5572.59,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W1.S121.S1.N.L.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              -5472.6,
+              -106.42,
+              -1.99,
+              8.42
+            ]
+          }
+        ],
+        "temporal_derivation": "exact_sum_2025_Q1_Q2_Q3_Q4_transactions"
+      },
+      {
+        "holder": "BNR",
+        "issuer": "H",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "ESA2010_DEPOSIT_NON_ISSUER"
+      },
+      {
+        "holder": "BNR",
+        "issuer": "C",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "unit": "million_RON",
+        "reason": "ESA2010_DEPOSIT_NON_ISSUER"
+      },
+      {
+        "holder": "BNR",
+        "issuer": "F",
+        "status": "DERIVED",
+        "value": 0.5,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S12.S121.N.L.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              0.0,
+              1500.0,
+              -1500.0,
+              0.5
+            ]
+          },
+          {
+            "coefficient": -1.0,
+            "key": "Q.N.RO.W2.S121.S121.N.L.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "temporal_derivation": "exact_sum_2025_Q1_Q2_Q3_Q4_transactions",
+        "sector_derivation": "exact_S12_minus_S121_identity_with_inclusion_exclusion_where_required"
+      },
+      {
+        "holder": "BNR",
+        "issuer": "G",
+        "status": "DERIVED",
+        "value": 0.0,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S13.S121.N.L.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "temporal_derivation": "exact_sum_2025_Q1_Q2_Q3_Q4_transactions"
+      },
+      {
+        "holder": "BNR",
+        "issuer": "X",
+        "status": "DERIVED",
+        "value": -4775.19,
+        "unit": "million_RON",
+        "derivation": {
+          "identity": "holder_W0_F2M_assets - complete_resident_issuer_F2M_submatrix",
+          "published_holder_W0_million_RON": -4774.6900000000005,
+          "resident_issuer_submatrix_million_RON": 0.5,
+          "independent_control": "A2 domestic partition + resident-holder W0 aggregation + published W1 aggregate all PASS"
+        },
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W0.S121.S1.N.A.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              6647.45,
+              11046.78,
+              -22436.36,
+              -32.56
+            ]
+          }
+        ]
+      },
+      {
+        "holder": "BNR",
+        "issuer": "BNR",
+        "status": "DERIVED",
+        "value": 0.0,
+        "unit": "million_RON",
+        "source_terms": [
+          {
+            "coefficient": 1.0,
+            "key": "Q.N.RO.W2.S121.S121.N.L.F.F2M.T._Z.XDC._T.S.V.N._T",
+            "usable": true,
+            "values": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "temporal_derivation": "exact_sum_2025_Q1_Q2_Q3_Q4_transactions"
+      }
+    ]
+  }
+}

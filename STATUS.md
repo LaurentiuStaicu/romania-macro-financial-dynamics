@@ -32,7 +32,9 @@ F3 stock at 2025-Q4 contains 24 direct `OBSERVED` cells, 11 exact `DERIVED` cell
 
 The F3 source vintage is retained immutably. Twenty out of twenty published QSA aggregate asset/liability controls and both preregistered X→G maturity controls reconcile within the 0.1 million RON tolerance. The unavailable W2 liability-side counterpart mirrors are recorded as unavailable publication coverage and are not treated as zeros.
 
-This is **not** completion of the Accounting Spine. F2, F4, F8, F5, F6 and F7 remain unresolved or only partially controlled, so the full multi-instrument empirical state is still not ready for canonical system simulation.
+The deposits-only **F2M component** has now also completed a separate materialization gate for the 2025 benchmark. The retained source vintage is the exact Phase A2 GitHub Actions artifact, stored losslessly for offline regeneration and checked against SHA-256 `efc2704388911d79c182d1ad0cffce32bc7728b1c9f7669714ec3a518ef2f227`. The materialized F2M stock matrix contains 10 direct `OBSERVED` cells, 13 exact `DERIVED` cells and 13 `NOT_APPLICABLE` cells; the 2025 flow matrix contains 23 exact `DERIVED` cells and 13 `NOT_APPLICABLE` cells. All available holder/issuer controls pass within the preregistered 0.1 million RON tolerance, and the independently controlled resident-holder→rest-of-world complements pass the Phase A2 W0/W1 identity gates.
+
+This does **not** complete total F2. F21 currency remains an unresolved bilateral allocation problem, F2M must not be relabelled as F2, and the canonical total-F2 matrix in `benchmark_2025.json` remains unchanged. F4, F8, F5, F6 and F7 also remain unresolved or only partially controlled, so the full multi-instrument empirical state is still not ready for canonical system simulation.
 
 ## Model architecture boundary
 

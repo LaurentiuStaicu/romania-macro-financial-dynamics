@@ -1,0 +1,23 @@
+{
+  "vintage_version": "0.1",
+  "instrument": "F2M",
+  "meaning": "Deposits only; not total F2 currency and deposits",
+  "benchmark_stock_period": "2025-Q4",
+  "benchmark_flow_period": "2025-Q1..2025-Q4",
+  "retrieved_on": "2026-09-18",
+  "source": "ECB QSA via retained GitHub Actions audit artifact",
+  "workflow_run_id": 35357989430,
+  "workflow_artifact_id": 10553225559,
+  "workflow_head_sha": "4f7df9cabe22a29739fa8bbc85201dd70c94745e",
+  "archive": "workflow_artifact_10553225559.zip.b64",
+  "archive_contains": {
+    "phase_a1_report": "f2m_audit_artifacts/f2m_deposit_coverage_audit.json",
+    "phase_a1_raw_directory": "f2m_audit_artifacts/raw/",
+    "phase_a2_report": "f2m_external_audit_artifacts/f2m_external_identity_audit.json",
+    "phase_a2_raw_directory": "f2m_external_audit_artifacts/raw/"
+  },
+  "immutability_rule": "The retained workflow artifact is stored losslessly as Base64 text. Offline regeneration must decode it, verify the decoded ZIP SHA-256 against the recorded GitHub Actions artifact digest, and fail on any byte change in the decoded archive or referenced raw payloads.",
+  "scope_rule": "This vintage may materialize only the F2M deposits component. It must not populate or relabel the canonical total-F2 matrix; F21 currency remains unresolved.",
+  "archive_encoding": "base64_lossless",
+  "decoded_archive_sha256": "efc2704388911d79c182d1ad0cffce32bc7728b1c9f7669714ec3a518ef2f227"
+}

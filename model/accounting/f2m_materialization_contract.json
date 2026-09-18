@@ -1,0 +1,59 @@
+{
+  "contract_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F2 Phase B — F2M component materialization",
+  "purpose": "Materialize the empirically supported deposits-only F2M holder-by-issuer component as a separate accounting artifact while preserving total F2 as unresolved until F21 currency is independently identified.",
+  "source_vintage_path": "data/source_vintages/accounting-f2m-2025-vintage-2026-09-18",
+  "scope": {
+    "instrument": "F2M",
+    "stock_period": "2025-Q4",
+    "flow_period": "2025-Q1..2025-Q4",
+    "canonical_total_F2_benchmark_may_change": false,
+    "F21_currency_may_change": false,
+    "behavioural_model_may_change": false,
+    "behavioural_closure_may_change": false
+  },
+  "hard_rules": {
+    "network_not_allowed_during_component_generation": true,
+    "exact_workflow_artifact_must_be_retained": true,
+    "workflow_artifact_sha256_must_match_recorded_A2_assessment": true,
+    "all_referenced_raw_payloads_must_exist_inside_retained_artifact": true,
+    "phase_A2_identity_controls_must_pass_before_materialization": true,
+    "resident_holder_to_X_cells_may_be_derived_only_as_unique_row_complements": true,
+    "row_complements_require_independent_W0_and_W1_controls": true,
+    "F_composite_cells_are_derived_only_by_exact_S12_minus_S121_identity": true,
+    "annual_flow_cells_are_derived_by_exact_Q1_Q2_Q3_Q4_sum": true,
+    "published_zero_is_distinct_from_missing": true,
+    "structural_non_issuers_H_and_C_are_NOT_APPLICABLE_not_zero_observations": true,
+    "X_to_X_is_NOT_APPLICABLE_outside_national_accounts_boundary": true,
+    "no_F2M_relabelled_as_F2": true,
+    "no_F21_synthetic_allocation": true,
+    "no_missing_to_zero": true,
+    "component_generation_must_be_deterministic": true,
+    "system_dynamics_behavioural_closure_remains_inactive": true
+  },
+  "classification": {
+    "OBSERVED": "A 2025-Q4 stock cell produced by one exact usable QSA series with no sector aggregation or complement calculation.",
+    "DERIVED": "An exact transformation only: F=S12-S121; annual flow=sum of Q1-Q4 transactions; and/or a resident-holder→X unique complement to a published W0 holder total after every resident issuer cell is resolved, with independent aggregate controls passed.",
+    "NOT_APPLICABLE": "A structural non-issuer H/C column for deposits or the X→X cell outside the Romanian national financial-accounts boundary. This is not an observed numeric zero."
+  },
+  "rounding": {
+    "component_value": "round to two decimals, matching the declared ECB published precision used by the accounting materialization layer",
+    "audit_calculation": "retain full parsed precision inside the source audit artifact",
+    "reconciliation_tolerance_million_RON": 0.1
+  },
+  "required_offline_checks": [
+    "retained workflow artifact SHA-256 matches the A2 assessment digest",
+    "A1 report contains exactly 72 stock/flow matrix cells",
+    "all A1 series keys referenced by cells and aggregate controls map to retained raw payloads",
+    "all A2 aggregate-series raw payload SHA-256 values match the retained bytes",
+    "A2 promotion status is EXACT_COMPLEMENT_DERIVATION_ELIGIBLE_FOR_LATER_MATERIALIZATION",
+    "all required A2 identity controls pass for stock and flow",
+    "all five resident-holder→X stock and flow values reproduce their unique row complements",
+    "the materialized stock matrix contains 10 OBSERVED, 13 DERIVED and 13 NOT_APPLICABLE cells",
+    "the materialized 2025 flow matrix contains 23 DERIVED and 13 NOT_APPLICABLE cells",
+    "materialized holder and issuer controls remain within 0.1 million RON after published-precision rounding",
+    "total F2 is not modified or claimed complete",
+    "behavioural closure remains inactive"
+  ],
+  "promotion_rule": "A passing materialization creates only model/accounting/f2m_component_2025.json and its manifest/registry metadata. The canonical model/accounting/benchmark_2025.json F2 matrix remains unchanged and incomplete until F21 currency and any remaining total-F2 definition bridge pass separate gates."
+}
