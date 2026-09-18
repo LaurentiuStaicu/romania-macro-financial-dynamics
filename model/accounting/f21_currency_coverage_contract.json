@@ -1,5 +1,5 @@
 {
-  "contract_version": "0.1",
+  "contract_version": "0.2",
   "phase": "Accounting Empirical Recovery / F2 Phase C1 — F21 Currency Coverage Audit",
   "instrument": "F21",
   "meaning": "Currency (notes and coins) only; component of F2 currency and deposits",
@@ -12,7 +12,7 @@
     "implication_for_rmd": "Issuer concentration is an empirical/structural hypothesis to audit, not a licence to assign all F21 liabilities to BNR or to allocate holder sectors synthetically."
   },
   "canonical_orientation": {
-    "domestic_holder_to_domestic_issuer": "QSA W2 issuer-liability series: reference sector = issuer, counterpart sector = holder, accounting entry = L",
+    "domestic_holder_to_domestic_issuer": "Probe both QSA W2 mirrors independently: holder-asset (reference sector = holder, counterpart sector = issuer, entry A) and issuer-liability (reference sector = issuer, counterpart sector = holder, entry L). Prefer neither by assumption; if both are published they must reconcile within tolerance.",
     "rest_of_world_holder_to_resident_issuer": "QSA W1 issuer-liability series with counterpart sector S1",
     "resident_holder_to_rest_of_world_issuer": "QSA W1 holder-asset series with counterpart sector S1",
     "X_to_X": "outside Romanian national financial-accounts boundary"
@@ -38,10 +38,12 @@
     "annual_flow_only_by_exact_Q1_Q2_Q3_Q4_sum": true,
     "row_and_column_aggregate_controls_required": true,
     "negative_source_coverage_is_a_valid_result": true,
-    "behavioural_closure_may_change": false
+    "behavioural_closure_may_change": false,
+    "domestic_asset_and_liability_orientations_must_both_be_probed": true,
+    "orientation_conflict_blocks_promotion": true
   },
   "reconciliation_tolerance_million_RON": 0.1,
-  "promotion_rule": "This phase may only classify F21 source coverage and reconciliation. Materialization requires a later gate with immutable source vintage, deterministic offline regeneration, and exact observed/derived values for every promoted cell.",
+  "promotion_rule": "This phase may only classify F21 source coverage, source orientation and reconciliation. A domestic cell may be considered covered when an exact W2 asset-side or liability-side representation is available; if both are available they must agree within tolerance. Materialization requires a later gate with immutable source vintage, deterministic offline regeneration, and exact observed/derived values for every promoted cell.",
   "failure_rule": "If QSA does not identify the bilateral holder distribution or exact complements are not uniquely determined and independently controlled, F21 remains unresolved. Currency-in-circulation aggregates may be controls but must not be allocated across sectors by shares or convenience residuals.",
   "system_dynamics_conformity": "Accounting-only audit. No behavioural mechanism, feedback loop, delay, reference mode or behavioural-closure status may change."
 }
