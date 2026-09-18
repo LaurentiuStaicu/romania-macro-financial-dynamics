@@ -37,21 +37,32 @@ def direct_or_derived(cell: dict[str, object]) -> tuple[str, str | None, str]:
                 f"Direct F3 cell {holder}->{issuer} does not have one exact source"
             )
         key = "QSA." + str(terms[0]["key"])
+        if cell["measure"] == "stock":
+            return (
+                "OBSERVED",
+                key,
+                f"Direct ECB QSA 2025-Q4 closing-position observation from immutable snapshot {SNAPSHOT_ID}.",
+            )
         return (
-            "OBSERVED",
+            "DERIVED",
             key,
-            f"Direct ECB QSA canonical observation from immutable snapshot {SNAPSHOT_ID}.",
+            "Exact temporal aggregation of observed ECB QSA quarterly transactions: "
+            f"2025 annual flow = Q1 + Q2 + Q3 + Q4; snapshot={SNAPSHOT_ID}.",
         )
 
     expression = " + ".join(
         f"{float(term['coefficient']):+g}*QSA.{term['key']}"
         for term in terms
     )
+    transformation = (
+        "Exact additive sector derivation required by RMD F = S12 - S121"
+        if cell["measure"] == "stock"
+        else "Exact temporal aggregation Q1+Q2+Q3+Q4 plus additive sector derivation required by RMD F = S12 - S121"
+    )
     return (
         "DERIVED",
         None,
-        "Exact additive sector derivation required by RMD F = S12 - S121; "
-        f"snapshot={SNAPSHOT_ID}; formula={expression}",
+        f"{transformation}; snapshot={SNAPSHOT_ID}; formula={expression}",
     )
 
 
@@ -89,7 +100,7 @@ def build_materialization(audit: dict[str, object]) -> dict[str, object]:
         value = (
             None
             if status == "NOT_APPLICABLE"
-            else float(cell["canonical_value_million_RON"])
+            else round(float(cell["canonical_value_million_RON"]), 2)
         )
         counts[measure][status] += 1
         cell_records.append(
@@ -113,8 +124,12 @@ def build_materialization(audit: dict[str, object]) -> dict[str, object]:
             }
         )
 
-    expected = {"OBSERVED": 24, "DERIVED": 11, "NOT_APPLICABLE": 1}
+    expected_by_measure = {
+        "stock": {"OBSERVED": 24, "DERIVED": 11, "NOT_APPLICABLE": 1},
+        "flow": {"OBSERVED": 0, "DERIVED": 35, "NOT_APPLICABLE": 1},
+    }
     for measure in ("stock", "flow"):
+        expected = expected_by_measure[measure]
         if counts[measure] != expected:
             raise RuntimeError(
                 f"Unexpected F3 materialization counts for {measure}: "
