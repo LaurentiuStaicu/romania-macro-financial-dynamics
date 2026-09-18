@@ -1,5 +1,5 @@
 {
-  "ledger_version": "1.8",
+  "ledger_version": "1.9",
   "benchmark": "2025",
   "principle": "Record residuals and unresolved coverage explicitly; never force accounting closure with invented allocations.",
   "instrument_gates": [
@@ -422,11 +422,39 @@
     {
       "instrument": "F6",
       "priority": 6,
-      "stock_matrix_status": "TBD",
-      "flow_matrix_status": "TBD",
+      "stock_matrix_status": "AGGREGATE_TOTAL_F6_AVAILABLE_BILATERAL_UNAVAILABLE",
+      "flow_matrix_status": "AGGREGATE_TOTAL_F6_AVAILABLE_BILATERAL_UNAVAILABLE",
       "asset_liability_residual": null,
-      "residual_status": "TBD_UNTIL_COMPARABLE_TOTALS_EXIST",
-      "known_issues": []
+      "residual_status": "ONLY_F62_F63_COMPONENT_CONTROLS_AVAILABLE_FULL_DECOMPOSITION_INCOMPLETE",
+      "known_issues": [
+        "No tested bilateral total-F6 cell is published for stock or 2025 flow.",
+        "The canonical QSA _Z._Z dimensions are valid; 64 of 344 exact requested series are available.",
+        "At the aggregate layer F62 and F63 are published, while the tested F61/F64/F65/F66 and F63_F64_F65 controls are unavailable.",
+        "The six-component and transmission-block F6 decompositions therefore remain incomplete rather than failed.",
+        "The aggregate remainder F6-F62-F63 must not be allocated to missing subcomponents.",
+        "The next gate probes all F6 subcomponents bilaterally before any issuer-applicability or rank decision."
+      ],
+      "coverage_assessment": {
+        "status": "TOTAL_F6_AGGREGATES_AVAILABLE_BILATERAL_NOT_PUBLISHED",
+        "assessment": "model/accounting/f6_insurance_pensions_coverage_assessment.json",
+        "total_F6_resolved_cells": {
+          "stock": 0,
+          "flow": 0
+        },
+        "published_components_at_aggregate_layer": [
+          "F62",
+          "F63"
+        ],
+        "unavailable_tested_components_at_aggregate_layer": [
+          "F61",
+          "F64",
+          "F65",
+          "F66",
+          "F63_F64_F65"
+        ],
+        "next_gate": "F6 bilateral subcomponent coverage audit",
+        "materialization_allowed": false
+      }
     },
     {
       "instrument": "F7",
@@ -588,6 +616,10 @@
     {
       "id": "f5_freeze_public_data_boundary",
       "status": "ENFORCED_NO_SYNTHETIC_TOTAL_F5_ALLOCATION"
+    },
+    {
+      "id": "f6_total_instrument_coverage",
+      "status": "NEGATIVE_BILATERAL_RESULT_AGGREGATES_AVAILABLE_F62_F63_ONLY"
     }
   ]
 }
