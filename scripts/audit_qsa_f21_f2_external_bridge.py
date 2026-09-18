@@ -146,7 +146,11 @@ def fetch(series_key: str) -> dict[str, object]:
 
 
 def period_values(
-    series: dict[str, object], measure: str, instrument: str
+    series: dict[str, object],
+    measure: str,
+    instrument: str,
+    *,
+    entry: str = "A",
 ) -> list[float] | None:
     if series.get("status") != "AVAILABLE":
         return None
@@ -155,7 +159,7 @@ def period_values(
         row.get("unit") != "XDC"
         or str(row.get("unit_mult")) != "6"
         or row.get("instrument") != instrument
-        or row.get("entry") != "A"
+        or row.get("entry") != entry
         for row in rows
     ):
         return None
@@ -288,7 +292,9 @@ def main() -> None:
 
         def direct(area: str, entry: str, instrument: str, ref: str = "S1"):
             k = key(area, ref, "S1", entry, measure, instrument)
-            vals = period_values(series_by_key[k], measure, instrument)
+            vals = period_values(
+                series_by_key[k], measure, instrument, entry=entry
+            )
             if vals is None:
                 return None
             return vals[0] if measure == "LE" else sum(vals)
