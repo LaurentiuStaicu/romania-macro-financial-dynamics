@@ -172,6 +172,34 @@
       "controls": "All available holder/issuer QSA controls pass within 0.1 million RON after published-precision materialization; Phase A2 domestic-partition, holder-W0 and W1 external-complement controls pass for stock and flow.",
       "provenance": "Decoded retained GitHub Actions artifact SHA-256 efc2704388911d79c182d1ad0cffce32bc7728b1c9f7669714ec3a518ef2f227; 66 distinct A1 raw series keys retained; all 6 A2 raw payload digests verified.",
       "limitation": "F2M is deposits only. F21 currency remains unresolved, so total F2 remains incomplete and the canonical total-F2 benchmark is unchanged."
+    },
+    {
+      "instrument": "F4",
+      "scope": "PARTIAL_UNCONDITIONAL_RANK_UNIQUE_CORE",
+      "source_id": "ecb_qsa",
+      "source_vintage": "data/source_vintages/accounting-f4-partial-2025-vintage-2026-09-18",
+      "component_artifact": "model/accounting/f4_partial_2025.json",
+      "materialization_manifest": "model/accounting/f4_partial_materialization_manifest.json",
+      "stock_period": "2025-Q4",
+      "flow_period": "2025-Q1..2025-Q4",
+      "stock_status_counts": {
+        "OBSERVED": 12,
+        "DERIVED": 3,
+        "UNRESOLVED": 20,
+        "NOT_APPLICABLE": 1
+      },
+      "flow_status_counts": {
+        "DERIVED": 15,
+        "UNRESOLVED": 20,
+        "NOT_APPLICABLE": 1
+      },
+      "rank_boundary": {
+        "stock_unconditional": "rank 26 / nullity 9 / 15 unique cells",
+        "flow_unconditional": "rank 26 / nullity 9 / 15 unique cells",
+        "stock_conditional_BNR_zero": "rank 31 / nullity 4 / 25 unique cells; NOT PROMOTED"
+      },
+      "provenance": "Exact Phase B workflow artifact 10558980689 retained losslessly; decoded SHA-256 a01922ed3662725dd5c73c95cd248bb97c8fc8a06404c9507e7cac4fc8e260aa; contains 420 Phase A raw QSA responses and 12 Phase B W1 raw responses.",
+      "limitation": "This is a partial F4 artifact, not a complete F4 matrix. The conditional BNR-zero stock cells and all rank-nonunique cells remain unresolved; the canonical benchmark is unchanged."
     }
   ]
 }
