@@ -251,10 +251,14 @@ def main() -> None:
     for measure in ("LE", "F"):
         for holder in SECTORS:
             for issuer in SECTORS:
-                formulas = candidate_terms(holder, issuer, measure, "F8")
-                plans.append((measure, holder, issuer, formulas))
-                for terms in formulas.values():
-                    required.update(t.key for t in terms)
+                formulas_by_instrument = {
+                    instrument: candidate_terms(holder, issuer, measure, instrument)
+                    for instrument in ("F8", "F81", "F89")
+                }
+                plans.append((measure, holder, issuer, formulas_by_instrument))
+                for formulas in formulas_by_instrument.values():
+                    for terms in formulas.values():
+                        required.update(t.key for t in terms)
 
     controls = []
     for measure in ("LE", "F"):
@@ -291,7 +295,7 @@ def main() -> None:
             print(f"[{index}/{len(futures)}] {k}", flush=True)
 
     cells = []
-    for measure, holder, issuer, formulas in plans:
+    for measure, holder, issuer, formulas_by_instrument in plans:
         label = "stock" if measure == "LE" else "flow"
         if holder == "X" and issuer == "X":
             cells.append({
@@ -301,31 +305,104 @@ def main() -> None:
                 "status": "OUTSIDE_BOUNDARY_NOT_APPLICABLE",
                 "value_million_RON": None,
                 "selected_orientation": None,
+                "derivation": None,
                 "orientation_results": {},
             })
             continue
 
+        orientation_names = sorted(
+            set().union(
+                *(set(x.keys()) for x in formulas_by_instrument.values())
+            )
+        )
         orientation_results = {}
-        for orientation, terms in formulas.items():
-            value, detail = evaluate(terms, series_by_key, measure, "F8")
+        usable = {}
+        subinstrument_conflict = False
+
+        for orientation in orientation_names:
+            by_instrument = {}
+            for instrument in ("F8", "F81", "F89"):
+                terms = formulas_by_instrument[instrument].get(orientation)
+                if terms is None:
+                    by_instrument[instrument] = {
+                        "value_million_RON": None,
+                        "terms": [],
+                    }
+                    continue
+                value, detail = evaluate(
+                    terms, series_by_key, measure, instrument
+                )
+                by_instrument[instrument] = {
+                    "value_million_RON": value,
+                    "terms": detail,
+                }
+
+            direct = by_instrument["F8"]["value_million_RON"]
+            f81 = by_instrument["F81"]["value_million_RON"]
+            f89 = by_instrument["F89"]["value_million_RON"]
+            component_sum = (
+                None if f81 is None or f89 is None
+                else float(f81) + float(f89)
+            )
+            decomposition_residual = (
+                None if direct is None or component_sum is None
+                else float(direct) - component_sum
+            )
+            decomposition_status = (
+                "CONTROL_INCOMPLETE"
+                if decomposition_residual is None
+                else "PASS"
+                if abs(decomposition_residual) <= TOL
+                else "FAIL"
+            )
+            if decomposition_status == "FAIL":
+                subinstrument_conflict = True
+
+            if direct is not None and decomposition_status != "FAIL":
+                selected_value = float(direct)
+                derivation = "DIRECT_F8"
+            elif direct is None and component_sum is not None:
+                selected_value = component_sum
+                derivation = "EXACT_F81_PLUS_F89"
+            else:
+                selected_value = None
+                derivation = "UNAVAILABLE"
+
             orientation_results[orientation] = {
-                "value_million_RON": value,
-                "terms": detail,
+                "selected_value_million_RON": selected_value,
+                "derivation": derivation,
+                "F8_direct_million_RON": direct,
+                "F81_million_RON": f81,
+                "F89_million_RON": f89,
+                "F81_plus_F89_million_RON": component_sum,
+                "F8_minus_F81_minus_F89_residual_million_RON":
+                    decomposition_residual,
+                "subinstrument_control_status": decomposition_status,
+                "instrument_results": by_instrument,
             }
-        usable = {
-            k: v for k, v in orientation_results.items()
-            if v["value_million_RON"] is not None
-        }
-        if not usable:
+            if selected_value is not None:
+                usable[orientation] = orientation_results[orientation]
+
+        if subinstrument_conflict:
+            status = "SUBINSTRUMENT_CONFLICT"
+            value = None
+            selected = None
+            derivation = None
+        elif not usable:
             status = "UNRESOLVED_SOURCE_COVERAGE"
             value = None
             selected = None
+            derivation = None
         else:
-            vals = [float(v["value_million_RON"]) for v in usable.values()]
+            vals = [
+                float(v["selected_value_million_RON"])
+                for v in usable.values()
+            ]
             if len(vals) > 1 and max(vals) - min(vals) > TOL:
                 status = "ORIENTATION_CONFLICT"
                 value = None
                 selected = None
+                derivation = None
             else:
                 status = "OBSERVABLE_OR_EXACT_DERIVATION"
                 selected = (
@@ -333,7 +410,8 @@ def main() -> None:
                     if "holder_asset_W2" in usable
                     else next(iter(usable))
                 )
-                value = usable[selected]["value_million_RON"]
+                value = usable[selected]["selected_value_million_RON"]
+                derivation = usable[selected]["derivation"]
 
         cells.append({
             "measure": label,
@@ -342,6 +420,7 @@ def main() -> None:
             "status": status,
             "value_million_RON": value,
             "selected_orientation": selected,
+            "derivation": derivation,
             "orientation_results": orientation_results,
         })
 
@@ -464,6 +543,11 @@ def main() -> None:
         "series_requested": len(required),
         "series_status_counts": dict(Counter(str(x.get("status")) for x in series_by_key.values())),
         "cell_status_counts": dict(Counter(x["status"] for x in cells)),
+        "cell_derivation_counts": dict(Counter(
+            str(x.get("derivation"))
+            for x in cells
+            if x["status"] == "OBSERVABLE_OR_EXACT_DERIVATION"
+        )),
         "reconciliation_status_counts": dict(Counter(x["status"] for x in reconciliation)),
         "decomposition_status_counts": dict(Counter(x["status"] for x in decomposition)),
         "total_decomposition_status_counts": dict(Counter(x["status"] for x in total_decomposition)),
@@ -491,6 +575,7 @@ def main() -> None:
         "series_requested": report["series_requested"],
         "series_status_counts": report["series_status_counts"],
         "cell_status_counts": report["cell_status_counts"],
+        "cell_derivation_counts": report["cell_derivation_counts"],
         "reconciliation_status_counts": report["reconciliation_status_counts"],
         "decomposition_status_counts": report["decomposition_status_counts"],
         "total_decomposition_status_counts": report["total_decomposition_status_counts"],
