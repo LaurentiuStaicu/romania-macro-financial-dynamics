@@ -1,0 +1,43 @@
+{
+  "contract_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F5 Phase B — Bilateral Component and Issuer-Applicability Audit",
+  "instrument": "F5",
+  "components": ["F51", "F52"],
+  "purpose": "Test whether bilateral total F5 can be recovered from F51 equity plus F52 investment fund shares/units while distinguishing genuine missingness from the structural issuer scope of F52.",
+  "identity": "F5 = F51 + F52",
+  "official_structural_basis": {
+    "F52_definition": "Investment fund shares or units are shares/units issued by investment funds, which are collective investment undertakings.",
+    "RMD_implication": "Resident F52 issuance belongs inside the RMD financial sector F. Resident issuers H, C, G and BNR are structural non-issuers of F52; foreign investment-fund issuance remains inside X.",
+    "issuer_F_source_rule": "For F52 liabilities issued by resident F, S12 may be used directly because S121 is structurally a non-issuer of F52; this is an instrument-specific issuer identity and does not generalize to F51 or other instruments."
+  },
+  "benchmark_stock_period": "2025-Q4",
+  "benchmark_flow_period": "2025-Q1..2025-Q4",
+  "source_dimensions": {
+    "maturity": "_Z",
+    "expenditure": "_Z",
+    "unit": "XDC",
+    "valuation": "S",
+    "prices": "V"
+  },
+  "hard_rules": {
+    "no_benchmark_mutation": true,
+    "no_materialization_in_phase_B": true,
+    "no_missing_to_zero": true,
+    "no_synthetic_allocation": true,
+    "F51_must_not_substitute_for_F5_when_F52_is_applicable": true,
+    "F52_structural_zero_only_for_resident_nonfund_issuers_H_C_G_BNR": true,
+    "F52_issuer_F_may_use_S12_directly_only_under_the_instrument_specific_nonissuer_rule_for_S121": true,
+    "F52_for_issuer_X_must_be_observed_or_exactly_derived_not_structurally_zero": true,
+    "F51_F_composite_only_by_exact_S12_minus_S121": true,
+    "F52_holder_F_composite_only_by_exact_S12_minus_S121": true,
+    "annual_flow_only_by_exact_Q1_Q2_Q3_Q4_sum": true,
+    "dual_W2_orientations_must_be_probed_for_applicable_components": true,
+    "component_orientation_conflict_blocks_total_cell": true,
+    "published_F5_W0_and_W1_controls_required": true,
+    "rank_must_be_computed_before_materialization": true,
+    "behavioural_closure_may_change": false
+  },
+  "reconciliation_tolerance_million_RON": 0.1,
+  "promotion_rule": "A bilateral F5 candidate exists only when F51 is resolved and F52 is either resolved or formally structural-zero because the resident issuer is H/C/G/BNR. This phase does not materialize; exact rank/nullity and immutable provenance are later gates.",
+  "system_dynamics_conformity": "Accounting-only recovery; no feedback, delay, behavioural equation or closure status changes."
+}

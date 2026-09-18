@@ -1,5 +1,5 @@
 {
-  "ledger_version": "1.5",
+  "ledger_version": "1.6",
   "benchmark": "2025",
   "principle": "Record residuals and unresolved coverage explicitly; never force accounting closure with invented allocations.",
   "instrument_gates": [
@@ -314,17 +314,17 @@
     {
       "instrument": "F5",
       "priority": 5,
-      "stock_matrix_status": "AGGREGATE_DECOMPOSITION_VALID_BILATERAL_TOTAL_F5_UNAVAILABLE",
-      "flow_matrix_status": "AGGREGATE_DECOMPOSITION_VALID_BILATERAL_TOTAL_F5_UNAVAILABLE",
+      "stock_matrix_status": "F51_BILATERAL_UNAVAILABLE_F52_PARTIAL_AND_STRUCTURALLY_SCOPED",
+      "flow_matrix_status": "F51_BILATERAL_UNAVAILABLE_F52_PARTIAL_AND_STRUCTURALLY_SCOPED",
       "asset_liability_residual": null,
-      "residual_status": "TOTAL_F5_DECOMPOSITION_PASS_8_OF_8_BILATERAL_ZERO_OF_35",
+      "residual_status": "TOTAL_F5_BLOCKED_BY_F51_ZERO_OF_35_BILATERAL_CELLS",
       "known_issues": [
-        "The initial F5 audit run used an invalid QSA maturity dimension T and is discarded; canonical F5 series use maturity _Z and expenditure _Z.",
-        "No tested bilateral total-F5 cell is published for stock or 2025 flow after the key correction.",
-        "All eight total-economy F5=F51+F52 controls pass and all ten resident holder-side asset decomposition controls pass.",
-        "F52 is material and F51 must not be used as a proxy for total F5.",
-        "Liability-side F52 controls are absent at the coarse RMD sector mapping; their structural applicability must be adjudicated before any missing-to-zero interpretation.",
-        "The next gate probes bilateral F51/F52 and formally constrains F52 issuer applicability before exact-rank analysis."
+        "The corrected canonical QSA F5 keys use maturity _Z and expenditure _Z.",
+        "No tested bilateral total-F5 cell is published for stock or 2025 flow.",
+        "F52 issuer applicability is structurally constrained: resident H/C/G/BNR are non-issuers, while investment-fund issuance lies in resident F or foreign X.",
+        "Phase B recovers seven applicable bilateral F52 cells per measure and classifies 24 resident-nonfund issuer cells per measure as structural non-applicable, not source zeros.",
+        "F51 equity remains unavailable in every tested bilateral cell, so total F5 cannot yet be reconstructed even where F52 is structurally non-applicable.",
+        "The next gate tests the exact equity decomposition F51 = F511 + F512 + F519 bilaterally before any aggregate-rank fallback."
       ],
       "coverage_assessment": {
         "status": "AGGREGATES_AVAILABLE_BILATERAL_TOTAL_F5_NOT_PUBLISHED",
@@ -344,6 +344,32 @@
         "total_decomposition_controls": "PASS_8_OF_8",
         "holder_asset_decomposition_controls": "PASS_10_OF_10",
         "next_gate": "F5 bilateral F51/F52 component and issuer-applicability audit",
+        "materialization_allowed": false
+      },
+      "component_issuer_assessment": {
+        "status": "F52_PARTIAL_F51_BILATERAL_UNAVAILABLE",
+        "assessment": "model/accounting/f5_bilateral_component_issuer_assessment.json",
+        "F51_resolved_cells": {
+          "stock": 0,
+          "flow": 0
+        },
+        "F52_resolved_cells": {
+          "stock": 7,
+          "flow": 7
+        },
+        "F52_structural_nonissuer_cells": {
+          "stock": 24,
+          "flow": 24
+        },
+        "F52_unresolved_applicable_cells": {
+          "stock": 4,
+          "flow": 4
+        },
+        "total_F5_resolved_cells": {
+          "stock": 0,
+          "flow": 0
+        },
+        "next_gate": "F5 bilateral F511+F512+F519 equity subcomponent bridge",
         "materialization_allowed": false
       }
     },
@@ -496,6 +522,14 @@
     {
       "id": "f5_total_instrument_coverage",
       "status": "NEGATIVE_BILATERAL_TOTAL_DECOMPOSITION_PASS_8_OF_8"
+    },
+    {
+      "id": "f5_f52_issuer_applicability",
+      "status": "ENFORCED_RESIDENT_NONFUND_ISSUERS_H_C_G_BNR_STRUCTURAL_NOT_APPLICABLE"
+    },
+    {
+      "id": "f5_bilateral_component_bridge",
+      "status": "PARTIAL_F52_7_PER_MEASURE_F51_ZERO_BILATERAL"
     }
   ]
 }

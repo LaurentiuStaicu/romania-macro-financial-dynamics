@@ -1,0 +1,109 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F5 Phase B — Bilateral Component and Issuer-Applicability Audit",
+  "audit_head_sha": "02e3087d1b069e066e2f605557b13752c78d773c",
+  "workflow_run_id": 35376151945,
+  "workflow_artifact_id": 10560696130,
+  "workflow_artifact_sha256": "6c14c98aada17bf63e076912c1b5177c1f7d56f679158fb905ef7d7dae251436",
+  "verdict": "F52_PARTIALLY_BILATERAL_AND_STRUCTURALLY_SCOPED_F51_BILATERAL_UNAVAILABLE",
+  "result": {
+    "series_requested": 180,
+    "series_status_counts": {
+      "AVAILABLE": 46,
+      "HTTP_ERROR": 134
+    },
+    "network_errors_present": false,
+    "F51_cells": {
+      "resolved": 0,
+      "unresolved": 70
+    },
+    "F52_cells": {
+      "structural_not_applicable_resident_nonfund_issuer": 48,
+      "resolved": 14,
+      "unresolved": 8
+    },
+    "total_F5_cells": {
+      "resolved": 0,
+      "unresolved_due_F51": 70,
+      "not_applicable": 2
+    },
+    "aggregate_reconciliation": {
+      "bilateral_coverage_incomplete": 20
+    },
+    "external_controls": {
+      "bilateral_coverage_incomplete": 4
+    },
+    "materialization_allowed": false
+  },
+  "F52_resolved_topology": {
+    "stock": [
+      "H→F",
+      "H→X",
+      "C→F",
+      "C→X",
+      "G→F",
+      "G→X",
+      "X→F"
+    ],
+    "flow": [
+      "H→F",
+      "H→X",
+      "C→F",
+      "C→X",
+      "G→F",
+      "G→X",
+      "X→F"
+    ],
+    "stock_million_RON": {
+      "H→F": 35925.640625,
+      "H→X": 3827.65,
+      "C→F": 4951.47998046875,
+      "C→X": 761.44,
+      "G→F": 451.5199890136719,
+      "G→X": 96.85,
+      "X→F": 2647.699951171875
+    },
+    "flow_2025_million_RON": {
+      "H→F": 5435.639892578125,
+      "H→X": 1132.09,
+      "C→F": 1157.5799942016602,
+      "C→X": 459.5,
+      "G→F": 0,
+      "G→X": 0,
+      "X→F": -90.80000305175781
+    }
+  },
+  "structural_F52_scope": {
+    "resident_nonfund_issuers": [
+      "H",
+      "C",
+      "G",
+      "BNR"
+    ],
+    "classification": "STRUCTURAL_NOT_APPLICABLE_RESIDENT_NONFUND_ISSUER",
+    "cells_per_measure": 24,
+    "resident_fund_issuer": "F",
+    "foreign_fund_issuer": "X",
+    "interpretation": "F52 issuer applicability removes false missingness for H/C/G/BNR columns but does not solve total F5 because F51 remains missing bilaterally."
+  },
+  "scientific_interpretation": [
+    "The F52 issuer-scope rule is empirically useful and methodologically distinct from missing-to-zero: 24 in-boundary cells per measure are structural non-issuer cases.",
+    "Seven applicable F52 bilateral cells per measure are directly/exactly recovered, covering H/C/G holdings of resident/foreign funds and rest-of-world holdings of resident fund shares.",
+    "F51 equity remains unavailable in every tested bilateral cell. Therefore total F5 cannot be reconstructed for any in-boundary cell, including those where F52 is structurally zero.",
+    "The next exact decomposition is F51 = F511 listed shares + F512 unlisted shares + F519 other equity. It must be tested bilaterally before aggregate-rank-only fallback.",
+    "No structural issuer simplification is applied to F511/F512/F519 in this phase; their issuer applicability is more heterogeneous than F52."
+  ],
+  "next_gate": {
+    "name": "F5 Phase C — bilateral F51 subcomponent bridge",
+    "identity": "F51 = F511 + F512 + F519",
+    "required_checks": [
+      "probe F511/F512/F519 separately in both W2 orientations and W1 external orientations using canonical _Z._Z dimensions",
+      "derive bilateral F51 only when all three subcomponents are resolved or a separately justified structural applicability rule is established",
+      "combine derived F51 with the Phase B F52 evidence/issuer scope to derive total F5 candidates",
+      "reconcile any recovered F51/F5 rows, columns and external partitions to published W0/W1 controls",
+      "if material bilateral coverage emerges, compute exact rank/nullity before materialization",
+      "if F51 subcomponents are also unavailable bilaterally, proceed to aggregate rank and freeze rather than allocate"
+    ],
+    "behavioural_closure_may_change": false
+  }
+}
