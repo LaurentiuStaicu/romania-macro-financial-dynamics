@@ -1,0 +1,51 @@
+{
+  "contract_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F4 Phase C — Immutable-Source Partial Materialization",
+  "purpose": "Retain the exact successful F4 Phase B evidence and materialize only the unconditional rank-unique 2025 F4 cells into a separate partial artifact without modifying the canonical benchmark.",
+  "source_vintage": "data/source_vintages/accounting-f4-partial-2025-vintage-2026-09-18",
+  "scope": {
+    "instrument": "F4",
+    "stock_period": "2025-Q4",
+    "flow_period": "2025-Q1..2025-Q4",
+    "expected_unconditional_unique_stock_cells": 15,
+    "expected_unconditional_unique_flow_cells": 15,
+    "canonical_benchmark_may_change": false,
+    "conditional_BNR_zero_stock_cells_may_be_promoted": false,
+    "behavioural_closure_may_change": false
+  },
+  "classification": {
+    "OBSERVED": "Stock cell directly represented by the selected exact QSA all-maturity position series in Phase A.",
+    "DERIVED": "Exact transformation only: annual Q1-Q4 transaction sum, exact S+L maturity reconstruction, exact S12-S121 sector identity where already resolved by Phase A, or Phase B algebraic W0/S12 complement whose coordinate is unconditional rank-unique.",
+    "UNRESOLVED": "In-boundary F4 cell with non-zero loading on at least one unconditional Phase B nullspace vector, or a cell made unique only by the conditional BNR zero-liability stock scenario.",
+    "NOT_APPLICABLE": "X→X, outside the Romanian national financial-accounts boundary."
+  },
+  "hard_rules": {
+    "exact_phase_B_artifact_must_be_retained": true,
+    "decoded_artifact_sha256_must_match": true,
+    "all_420_phase_A_raw_responses_must_be_retained": true,
+    "all_12_phase_B_W1_raw_responses_must_be_retained": true,
+    "offline_generation_only_after_source_retention": true,
+    "unconditional_rank_unique_topology_must_match_phase_B": true,
+    "rank_nonunique_cells_must_remain_UNRESOLVED": true,
+    "conditional_BNR_zero_stock_cells_must_remain_UNRESOLVED": true,
+    "no_BNR_6_1_million_RON_counterpart_allocation": true,
+    "no_missing_to_zero": true,
+    "no_synthetic_allocation": true,
+    "canonical_benchmark_2025_must_remain_unchanged": true,
+    "partial_F4_must_not_be_relabelled_as_complete_F4": true,
+    "behavioural_closure_may_change": false
+  },
+  "expected_counts": {
+    "stock": {
+      "OBSERVED_or_DERIVED": 15,
+      "UNRESOLVED": 20,
+      "NOT_APPLICABLE": 1
+    },
+    "flow": {
+      "DERIVED": 15,
+      "UNRESOLVED": 20,
+      "NOT_APPLICABLE": 1
+    }
+  },
+  "promotion_rule": "The separate partial-F4 artifact may be retained as empirical recovery evidence. The canonical total F4 matrix remains incomplete and benchmark_2025.json remains unchanged until a later gate resolves or formally accepts the remaining degrees of freedom."
+}
