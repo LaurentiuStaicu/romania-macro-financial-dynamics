@@ -48,30 +48,47 @@ def key(area: str, ref: str, cp: str, entry: str, measure: str) -> str:
     )
 
 
-def formula(holder: str, issuer: str, measure: str) -> tuple[Term, ...]:
+def candidate_formulas(
+    holder: str, issuer: str, measure: str
+) -> dict[str, tuple[Term, ...]]:
     if holder == "X" and issuer == "X":
-        return ()
+        return {}
     if holder == "X":
-        return tuple(
-            Term(coeff, key("W1", issuer_code, "S1", "L", measure))
-            for issuer_code, coeff in sector_terms(issuer)
-        )
+        return {
+            "issuer_liability_W1": tuple(
+                Term(coeff, key("W1", issuer_code, "S1", "L", measure))
+                for issuer_code, coeff in sector_terms(issuer)
+            )
+        }
     if issuer == "X":
-        return tuple(
-            Term(coeff, key("W1", holder_code, "S1", "A", measure))
-            for holder_code, coeff in sector_terms(holder)
-        )
+        return {
+            "holder_asset_W1": tuple(
+                Term(coeff, key("W1", holder_code, "S1", "A", measure))
+                for holder_code, coeff in sector_terms(holder)
+            )
+        }
 
-    terms: list[Term] = []
+    liability_terms: list[Term] = []
+    asset_terms: list[Term] = []
     for issuer_code, issuer_coeff in sector_terms(issuer):
         for holder_code, holder_coeff in sector_terms(holder):
-            terms.append(
+            coefficient = issuer_coeff * holder_coeff
+            liability_terms.append(
                 Term(
-                    issuer_coeff * holder_coeff,
+                    coefficient,
                     key("W2", issuer_code, holder_code, "L", measure),
                 )
             )
-    return tuple(terms)
+            asset_terms.append(
+                Term(
+                    coefficient,
+                    key("W2", holder_code, issuer_code, "A", measure),
+                )
+            )
+    return {
+        "holder_asset_W2": tuple(asset_terms),
+        "issuer_liability_W2": tuple(liability_terms),
+    }
 
 
 def aggregate_terms(sector: str, entry: str, measure: str) -> tuple[Term, ...]:
@@ -216,9 +233,10 @@ def main() -> None:
     for measure in ("LE", "F"):
         for holder in SECTORS:
             for issuer in SECTORS:
-                terms = formula(holder, issuer, measure)
-                plans.append((measure, holder, issuer, terms))
-                required.update(term.key for term in terms)
+                candidates = candidate_formulas(holder, issuer, measure)
+                plans.append((measure, holder, issuer, candidates))
+                for terms in candidates.values():
+                    required.update(term.key for term in terms)
 
     controls = []
     for measure in ("LE", "F"):
@@ -251,14 +269,47 @@ def main() -> None:
             print(f"[{completed}/{len(ordered_keys)}] {series_key}", flush=True)
 
     cells = []
-    for measure, holder, issuer, terms in plans:
-        value, detail = evaluate(terms, series_by_key, measure)
+    for measure, holder, issuer, candidates in plans:
+        orientation_results = {}
+        for orientation, terms in candidates.items():
+            value, detail = evaluate(terms, series_by_key, measure)
+            orientation_results[orientation] = {
+                "value_million_RON": value,
+                "terms": detail,
+            }
+
+        usable = {
+            orientation: result
+            for orientation, result in orientation_results.items()
+            if result["value_million_RON"] is not None
+        }
+        selected_orientation = None
+        value = None
+        detail = []
         if holder == "X" and issuer == "X":
             status = "OUTSIDE_BOUNDARY_NOT_APPLICABLE"
-        elif value is None:
+        elif not usable:
             status = "UNRESOLVED_SOURCE_COVERAGE"
         else:
-            status = "OBSERVABLE_OR_EXACT_DERIVATION"
+            if len(usable) > 1:
+                vals = [float(x["value_million_RON"]) for x in usable.values()]
+                if max(vals) - min(vals) > TOL:
+                    status = "ORIENTATION_CONFLICT"
+                else:
+                    status = "OBSERVABLE_OR_EXACT_DERIVATION"
+            else:
+                status = "OBSERVABLE_OR_EXACT_DERIVATION"
+
+            if status == "OBSERVABLE_OR_EXACT_DERIVATION":
+                selected_orientation = (
+                    "holder_asset_W2"
+                    if "holder_asset_W2" in usable
+                    else next(iter(usable))
+                )
+                chosen = usable[selected_orientation]
+                value = chosen["value_million_RON"]
+                detail = chosen["terms"]
+
         cells.append(
             {
                 "measure": "stock" if measure == "LE" else "flow",
@@ -266,7 +317,9 @@ def main() -> None:
                 "issuer": issuer,
                 "status": status,
                 "value_million_RON": value,
+                "selected_orientation": selected_orientation,
                 "terms": detail,
+                "orientation_results": orientation_results,
             }
         )
 
@@ -286,7 +339,7 @@ def main() -> None:
             and not (c["holder"] == "X" and c["issuer"] == "X")
         ]
         complete = all(
-            c["status"] != "UNRESOLVED_SOURCE_COVERAGE" for c in related
+            c["status"] == "OBSERVABLE_OR_EXACT_DERIVATION" for c in related
         )
         bilateral = (
             sum(float(c["value_million_RON"]) for c in related)
@@ -349,8 +402,10 @@ def main() -> None:
         "aggregate_reconciliation": reconciliation,
         "total_economy_controls": total_controls,
         "rule": (
-            "Coverage only. No missing bilateral F21 cell is converted to zero, "
-            "and no aggregate currency control is allocated across holder or issuer sectors."
+            "Coverage and source-orientation audit only. Domestic W2 asset-side and "
+            "liability-side mirrors are probed independently; no missing bilateral F21 cell "
+            "is converted to zero, and no aggregate currency control is allocated across "
+            "holder or issuer sectors."
         ),
     }
     for series in series_by_key.values():
