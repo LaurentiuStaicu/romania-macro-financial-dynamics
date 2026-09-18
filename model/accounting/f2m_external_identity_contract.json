@@ -1,0 +1,25 @@
+{
+  "contract_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F2 Phase A2 — F2M External Complement Identity Audit",
+  "purpose": "Test whether the five resident-holder to rest-of-world F2M cells can be derived as unique accounting complements rather than allocated residuals.",
+  "benchmark_stock_period": "2025-Q4",
+  "benchmark_flow_period": "2025-Q1..2025-Q4",
+  "no_benchmark_mutation": true,
+  "hypothesis": "For each resident holder, W0 F2M assets equal domestic W2 deposits plus W1 rest-of-world deposits. If the domestic issuer partition is complete and W0/W2/W1 area partition is independently verified, the single missing holder→X value is an exact complement, not a synthetic allocation.",
+  "required_gates": [
+    "H and C issuer columns are structurally NOT_APPLICABLE under ESA 2010",
+    "all resident deposit-issuer columns F/G/BNR are observed or exact-derived",
+    "holder W0 F2M totals are available on definitionally identical dimensions",
+    "total-economy QSA area identity W0 = W2 + W1 passes for stock and flow",
+    "sum of the five holder-level complement candidates equals the published total-economy W1 F2M asset control",
+    "frequency, instrument, accounting entry, consolidation, unit, currency denominator, valuation, prices and transformation are identical"
+  ],
+  "promotion_rule": "Only if every required gate passes may holder→X be classified as an exact DERIVED QSA complement in a later materialization PR.",
+  "failure_rule": "If any required gate fails or the W1 aggregate is unavailable, the external F2M column remains unresolved and BOP/IIP/BNR external statistics are investigated only as separately reconciled sources.",
+  "prohibited": [
+    "allocating a total external aggregate across holders by shares",
+    "using the row residual when more than one issuer cell is unresolved",
+    "using BOP/IIP F2 currency-and-deposits as if it were QSA F2M deposits without an explicit instrument bridge",
+    "populating total F2 from F2M"
+  ]
+}
