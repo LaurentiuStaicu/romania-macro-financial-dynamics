@@ -1,0 +1,78 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F2 Phase A2 — F2M External Complement Identity Audit",
+  "audit_head_sha": "4f7df9cabe22a29739fa8bbc85201dd70c94745e",
+  "workflow_run_id": 35357989430,
+  "workflow_artifact_id": 10553225559,
+  "workflow_artifact_sha256": "efc2704388911d79c182d1ad0cffce32bc7728b1c9f7669714ec3a518ef2f227",
+  "verdict": "EXACT_COMPLEMENT_DERIVATION_ELIGIBLE_FOR_LATER_MATERIALIZATION",
+  "direct_W2_total_economy_publication": {
+    "stock": false,
+    "flow": false,
+    "interpretation": "The direct total-economy W2 F2M series was unavailable and was not treated as zero."
+  },
+  "controls": {
+    "stock": {
+      "published_W0_million_RON": 1150278.93,
+      "published_W1_million_RON": 165962.27,
+      "independent_domestic_bilateral_sum_million_RON": 984316.644833982,
+      "implied_domestic_W0_minus_W1_million_RON": 984316.6599999999,
+      "domestic_partition_residual_million_RON": -0.01516601792536676,
+      "domestic_partition_status": "PASS",
+      "sum_resident_holder_W0_million_RON": 1150278.9225,
+      "holder_W0_vs_total_W0_residual_million_RON": -0.007499999832361937,
+      "holder_W0_vs_total_W0_status": "PASS",
+      "sum_holder_X_complements_million_RON": 165962.27766601802,
+      "complements_vs_published_W1_residual_million_RON": 0.007666018034797162,
+      "complements_vs_W1_status": "PASS"
+    },
+    "flow": {
+      "published_W0_million_RON": 60090.6,
+      "published_W1_million_RON": -5500.26,
+      "independent_domestic_bilateral_sum_million_RON": 65590.85880340681,
+      "implied_domestic_W0_minus_W1_million_RON": 65590.86,
+      "domestic_partition_residual_million_RON": -0.0011965931917075068,
+      "domestic_partition_status": "PASS",
+      "sum_resident_holder_W0_million_RON": 60090.5988671875,
+      "holder_W0_vs_total_W0_residual_million_RON": -0.0011328124965075403,
+      "holder_W0_vs_total_W0_status": "PASS",
+      "sum_holder_X_complements_million_RON": -5500.259936219303,
+      "complements_vs_published_W1_residual_million_RON": 0.00006378069701895583,
+      "complements_vs_W1_status": "PASS"
+    }
+  },
+  "holder_to_X_derivation_candidates_million_RON": {
+    "stock": {
+      "H": 11369.212500000023,
+      "C": 8897.816250000003,
+      "F": 54406.34079101801,
+      "G": 207.37812499998836,
+      "BNR": 91081.53
+    },
+    "flow": {
+      "H": -1803.1097070312499,
+      "C": 1523.0194335937504,
+      "F": -422.15997284039804,
+      "G": -22.81968994140516,
+      "BNR": -4775.1900000000005
+    }
+  },
+  "scientific_interpretation": [
+    "Each resident-holder row has exactly one unresolved issuer after structural non-issuers H/C and resident issuer columns F/G/BNR are resolved: X.",
+    "Each holder→X candidate is therefore a unique row complement to an observed W0 holder total, not an allocation of an external aggregate by shares.",
+    "The independently observed/derived domestic bilateral submatrix reconciles to published total-economy W0 minus published W1 for both stock and flow.",
+    "The sum of resident-holder W0 controls reconciles to published total-economy W0.",
+    "The sum of the five independently derived holder→X complements reconciles to the published total-economy W1 control.",
+    "Published statistical precision explains the small residuals; every residual is within the preregistered 0.1 million RON tolerance."
+  ],
+  "limitations": [
+    "Direct total-economy W2 F2M publication was unavailable.",
+    "This audit establishes eligibility for exact complement derivation; it does not itself write values to an accounting benchmark.",
+    "F2M remains deposits only. Total F2 remains blocked by F21 currency identification."
+  ],
+  "next_gate": {
+    "name": "F2M component materialization",
+    "rule": "Materialize F2M only as a separate component accounting artifact with immutable raw provenance and deterministic offline regeneration. Do not write F2M values into the canonical total-F2 matrix.",
+    "behavioural_closure_may_change": false
+  }
+}
