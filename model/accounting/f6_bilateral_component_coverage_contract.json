@@ -1,0 +1,33 @@
+{
+  "contract_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F6 Phase B — Bilateral Component Coverage Audit",
+  "purpose": "Probe bilateral F6 subcomponents and derive a total-F6 candidate only from a complete exact ESA component representation.",
+  "exact_identities": {
+    "six_component": "F6 = F61 + F62 + F63 + F64 + F65 + F66",
+    "transmission_block": "F6 = F61 + F62 + F63_F64_F65 + F66",
+    "pension_block": "F63_F64_F65 = F63 + F64 + F65"
+  },
+  "components": ["F61","F62","F63","F64","F65","F66","F63_F64_F65"],
+  "hard_rules": {
+    "no_benchmark_mutation": true,
+    "no_materialization_in_phase_B": true,
+    "no_missing_to_zero": true,
+    "no_synthetic_allocation": true,
+    "no_issuer_applicability_assumption": true,
+    "dual_W2_orientations_must_be_probed": true,
+    "orientation_conflict_blocks_component": true,
+    "six_component_F6_requires_all_six_components": true,
+    "block_F6_requires_F61_F62_F63_F64_F65_block_F66": true,
+    "two_available_F6_derivations_must_agree_within_tolerance": true,
+    "F_composite_only_by_exact_S12_minus_S121": true,
+    "annual_flow_only_by_exact_Q1_Q2_Q3_Q4_sum": true,
+    "complete_derived_partitions_must_reconcile_to_published_F6_W0_W1_controls": true,
+    "rank_is_a_later_gate": true,
+    "network_errors_block_positive_coverage_claims": true,
+    "behavioural_closure_may_change": false
+  },
+  "reconciliation_tolerance_million_RON": 0.1,
+  "promotion_rule": "A bilateral total-F6 candidate may be classified only if one exact component representation is complete and conflict-free. If both representations are complete they must agree within tolerance. Phase B never materializes.",
+  "negative_result_rule": "Missing component coverage remains explicit and is never filled from aggregate remainders.",
+  "system_dynamics_conformity": "Accounting-only recovery; behavioural closure remains inactive."
+}
