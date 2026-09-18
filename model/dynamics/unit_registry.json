@@ -1,53 +1,181 @@
 {
-  "registry_version": "0.3.0a0",
+  "registry_version": "0.1",
   "base_dimensions": {
     "currency": "million_RON",
     "time": "year",
     "dimensionless": "1"
   },
   "variables": [
-    {"id":"bilateral_financial_position","unit":"million_RON","signature":{"currency":1,"time":0}},
-    {"id":"financial_transaction_period_amount","unit":"million_RON","signature":{"currency":1,"time":0}},
-    {"id":"revaluation_period_amount","unit":"million_RON","signature":{"currency":1,"time":0}},
-    {"id":"other_change_period_amount","unit":"million_RON","signature":{"currency":1,"time":0}},
-    {"id":"financial_transaction_rate","unit":"million_RON_per_year","signature":{"currency":1,"time":-1}},
-    {"id":"revaluation_rate","unit":"million_RON_per_year","signature":{"currency":1,"time":-1}},
-    {"id":"other_change_rate","unit":"million_RON_per_year","signature":{"currency":1,"time":-1}},
-    {"id":"dt","unit":"year","signature":{"currency":0,"time":1}},
-    {"id":"delay_tau","unit":"year","signature":{"currency":0,"time":1}},
-    {"id":"sector_financial_assets","unit":"million_RON","signature":{"currency":1,"time":0}},
-    {"id":"sector_financial_liabilities","unit":"million_RON","signature":{"currency":1,"time":0}},
-    {"id":"sector_net_financial_worth","unit":"million_RON","signature":{"currency":1,"time":0}},
-    {"id":"system_net_financial_worth","unit":"million_RON","signature":{"currency":1,"time":0}},
-    {"id":"safe_ratio","unit":"1","signature":{"currency":0,"time":0}}
+    {
+      "id": "bilateral_financial_position",
+      "unit": "million_RON",
+      "signature": {
+        "currency": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "financial_transaction_period_amount",
+      "unit": "million_RON",
+      "signature": {
+        "currency": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "revaluation_period_amount",
+      "unit": "million_RON",
+      "signature": {
+        "currency": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "other_change_period_amount",
+      "unit": "million_RON",
+      "signature": {
+        "currency": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "financial_transaction_rate",
+      "unit": "million_RON_per_year",
+      "signature": {
+        "currency": 1,
+        "time": -1
+      }
+    },
+    {
+      "id": "revaluation_rate",
+      "unit": "million_RON_per_year",
+      "signature": {
+        "currency": 1,
+        "time": -1
+      }
+    },
+    {
+      "id": "other_change_rate",
+      "unit": "million_RON_per_year",
+      "signature": {
+        "currency": 1,
+        "time": -1
+      }
+    },
+    {
+      "id": "dt",
+      "unit": "year",
+      "signature": {
+        "currency": 0,
+        "time": 1
+      }
+    },
+    {
+      "id": "delay_tau",
+      "unit": "year",
+      "signature": {
+        "currency": 0,
+        "time": 1
+      }
+    },
+    {
+      "id": "sector_financial_assets",
+      "unit": "million_RON",
+      "signature": {
+        "currency": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "sector_financial_liabilities",
+      "unit": "million_RON",
+      "signature": {
+        "currency": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "sector_net_financial_worth",
+      "unit": "million_RON",
+      "signature": {
+        "currency": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "system_net_financial_worth",
+      "unit": "million_RON",
+      "signature": {
+        "currency": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "safe_ratio",
+      "unit": "1",
+      "signature": {
+        "currency": 0,
+        "time": 0
+      }
+    }
   ],
   "equation_checks": [
     {
-      "id":"period_stock_identity",
-      "lhs":{"currency":1,"time":0},
-      "rhs_terms":[
-        {"currency":1,"time":0},
-        {"currency":1,"time":0},
-        {"currency":1,"time":0},
-        {"currency":1,"time":0}
+      "id": "period_stock_identity",
+      "lhs": {
+        "currency": 1,
+        "time": 0
+      },
+      "rhs_terms": [
+        {
+          "currency": 1,
+          "time": 0
+        },
+        {
+          "currency": 1,
+          "time": 0
+        },
+        {
+          "currency": 1,
+          "time": 0
+        },
+        {
+          "currency": 1,
+          "time": 0
+        }
       ],
-      "status":"CONSISTENT"
+      "status": "CONSISTENT"
     },
     {
-      "id":"rate_stock_identity",
-      "lhs":{"currency":1,"time":0},
-      "rhs_rate_signature":{"currency":1,"time":-1},
-      "dt_signature":{"currency":0,"time":1},
-      "product_signature":{"currency":1,"time":0},
-      "status":"CONSISTENT"
+      "id": "rate_stock_identity",
+      "lhs": {
+        "currency": 1,
+        "time": 0
+      },
+      "rhs_rate_signature": {
+        "currency": 1,
+        "time": -1
+      },
+      "dt_signature": {
+        "currency": 0,
+        "time": 1
+      },
+      "product_signature": {
+        "currency": 1,
+        "time": 0
+      },
+      "status": "CONSISTENT"
     },
     {
-      "id":"first_order_delay_derivative",
-      "state_signature":"same_as_input",
-      "tau_signature":{"currency":0,"time":1},
-      "derivative_signature":"input_per_year",
-      "status":"CONSISTENT"
+      "id": "first_order_delay_derivative",
+      "state_signature": "same_as_input",
+      "tau_signature": {
+        "currency": 0,
+        "time": 1
+      },
+      "derivative_signature": "input_per_year",
+      "status": "CONSISTENT"
     }
   ],
-  "rule":"A behavioural equation may not be activated unless every additive term has the same dimensional signature and every parameter has an explicit unit or dimensionless status."
+  "rule": "A behavioural equation may not be activated unless every additive term has the same dimensional signature and every parameter has an explicit unit or dimensionless status."
 }

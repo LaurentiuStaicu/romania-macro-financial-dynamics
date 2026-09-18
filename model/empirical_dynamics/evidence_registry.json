@@ -1,5 +1,5 @@
 {
-  "registry_version": "0.4.0a0",
+  "registry_version": "0.1",
   "as_of": "2026-09-17",
   "rule": "Evidence supports admission or prioritisation of mechanisms; it does not substitute for parameter estimation, time-respecting validation or causal identification.",
   "sources": [

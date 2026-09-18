@@ -1,13 +1,9 @@
 {
-  "contract_version": "0.5.2a0",
+  "contract_version": "0.1",
   "stage": "Government Repricing Ledger",
   "frozen_before_ledger_assessment": true,
   "frozen_date": "2026-09-17",
   "mechanism_id": "government_refinancing_effective_rate",
-  "historical_results_immutable": [
-    "Alpha 0.5.0a0 Calibration & Validation",
-    "Alpha 0.5.1a0 Validation Recovery / Empirical Basis Expansion"
-  ],
   "scientific_boundary": {
     "primary_target": "Ministry of Finance government public debt portfolio under the same national-legislation boundary used by the published portfolio cost and debt-risk indicators, excluding temporary financing where the source definition excludes it",
     "external_diagnostic_only": "Eurostat Maastricht general-government gross debt and apparent cost; this boundary must not be substituted for the MoF direct government-debt portfolio boundary",
@@ -46,8 +42,8 @@
   },
   "prospective_acceptance_gates": {
     "gate_1_ledger_completeness": {
-      "minimum_opening_principal_coverage_pct": 95.0,
-      "minimum_repricing_event_principal_coverage_pct": 90.0,
+      "minimum_opening_principal_coverage_pct": 95,
+      "minimum_repricing_event_principal_coverage_pct": 90,
       "rule": "Coverage is computed only on the exact MoF portfolio boundary and exact testing period. Issuance size, redemption schedules and strategy targets do not count as observed opening/repriced principal."
     },
     "gate_2_balance_reconciliation": {
@@ -56,7 +52,7 @@
     },
     "gate_3_portfolio_cost_reconstruction": {
       "minimum_consecutive_published_snapshots": 3,
-      "maximum_absolute_error_pp_each_snapshot": 0.10,
+      "maximum_absolute_error_pp_each_snapshot": 0.1,
       "maximum_mean_absolute_error_pp": 0.05,
       "maximum_currency_subportfolio_absolute_error_pp": 0.15,
       "rule": "Only source-compatible interest-cost definitions and same-boundary principals may be weighted."
@@ -77,6 +73,5 @@
     "status": "FROZEN_FOR_PROSPECTIVE_MONETARY_CONFIRMATION",
     "future_observations_reserved_from": "2026-08",
     "may_respecify_before_first_new_policy_rate_event_test": false
-  },
-  "alpha_0_6_rule": "Remain NO-GO while validated behavioural reference mechanisms equal zero."
+  }
 }

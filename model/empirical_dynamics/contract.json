@@ -1,16 +1,15 @@
 {
-  "contract_version": "0.4.0a0",
+  "contract_version": "0.1",
   "purpose": "Evidence-traceable behavioural closure candidates layered on the immutable Accounting Spine and structural Dynamic Core.",
   "hard_invariants": {
     "accounting_spine_unchanged": true,
     "dynamic_core_stock_flow_semantics_unchanged": true,
-    "infoclar_v1_1_unchanged": true,
     "missing_empirical_values_may_not_be_zero_filled": true,
     "behavioural_equations_may_not_break_double_entry": true
   },
   "activation_semantics": {
-    "ACTIVATED": "admitted to Alpha 0.5 calibration/validation set; requires explicit parameters before numerical evaluation",
-    "CANDIDATE": "implemented/documented for testing but excluded from the central calibrated model until its evidence/identifiability gate passes",
+    "ACTIVATED": "admitted to the calibration/validation set; requires explicit parameters before numerical evaluation",
+    "CANDIDATE": "implemented/documented for testing but excluded from the central calibrated model until its evidence and identifiability gates pass",
     "DEFERRED": "not numerically active because observability, identification or scope is insufficient",
     "REJECTED": "form excluded because it is structurally/causally under-specified or contradicted by the modelling contract"
   },
@@ -18,8 +17,8 @@
     "monetary_policy_lending_rate_pass_through",
     "government_refinancing_effective_rate"
   ],
-  "central_calibration_rule": "Alpha 0.5 begins with the smallest activated model. Candidate mechanisms may be promoted only using structural-selection data, never by inspecting the final holdout.",
-  "parameter_rule": "No coefficient has a convenience default. Parameters are either observed/data-derived with provenance, externally sourced with explicit transferability limits, or estimated in Alpha 0.5.",
+  "central_calibration_rule": "Calibration begins with the smallest activated model. Candidate mechanisms may be promoted only using structural-selection data, never by inspecting the final holdout.",
+  "parameter_rule": "No coefficient has a convenience default. Parameters are either observed/data-derived with provenance, externally sourced with explicit transferability limits, or estimated under the declared calibration protocol.",
   "observability_rule": "Every admitted mechanism must list target and driver observables or be downgraded/deferred.",
   "causality_rule": "Predictive/associational fit is not sufficient to label a coefficient causal. Policy/endogeneity-sensitive mechanisms remain explicitly qualified.",
   "data_frequency_policy": {
@@ -28,9 +27,13 @@
     "mixed_frequency": "aggregation/alignment must be predeclared within each evaluation origin to avoid future-information leakage"
   },
   "next_stage": {
-    "id": "0.5.x",
+    "id": "calibration_validation",
     "name": "Calibration & Validation",
-    "required_separation": ["calibration_data", "structural_selection_data", "evaluation_holdout_data"],
+    "required_separation": [
+      "calibration_data",
+      "structural_selection_data",
+      "evaluation_holdout_data"
+    ],
     "holdout_rule": "An inspected evaluation holdout cannot subsequently be reported as independent validation."
   }
 }
