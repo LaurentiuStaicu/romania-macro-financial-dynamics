@@ -1,5 +1,5 @@
 {
-  "ledger_version": "0.3",
+  "ledger_version": "0.4",
   "benchmark": "2025",
   "principle": "Record residuals and unresolved coverage explicitly; never force accounting closure with invented allocations.",
   "instrument_gates": [
@@ -58,7 +58,8 @@
       "known_issues": [
         "Money aggregates are not substitutes for sectoral ESA F2 positions.",
         "The F2M deposits component is materialized separately and must not be relabelled as total F2.",
-        "F21 currency remains an unresolved bilateral allocation problem; total F2 cannot be populated until F21 and the combined-definition bridge pass separate gates."
+        "The F21 QSA coverage audit found aggregate holder/issuer controls but no published bilateral F21 cells in either tested W2 asset-side or liability-side orientation.",
+        "F21 therefore remains unresolved at the holder-by-issuer level. The next exact-identity gate is holder-specific W1 F2 minus the materialized W1 F2M component; aggregate currency totals must not be synthetically allocated."
       ],
       "component_materialization": {
         "instrument": "F2M",
@@ -78,6 +79,21 @@
           }
         },
         "controls": "All available holder/issuer controls pass within 0.1 million RON; Phase A2 independent external-complement controls pass for stock and flow.",
+        "total_F2_promotion_allowed": false
+      },
+      "currency_F21_coverage": {
+        "status": "QSA_AGGREGATES_AVAILABLE_BILATERAL_NOT_PUBLISHED",
+        "assessment": "model/accounting/f21_currency_coverage_assessment.json",
+        "stock_total_assets_million_RON": 160868.55,
+        "stock_total_liabilities_million_RON": 154429.76,
+        "stock_external_assets_W1_million_RON": 6438.8,
+        "stock_external_liabilities_W1_million_RON": 0,
+        "flow_2025_total_assets_million_RON": 14144.09,
+        "flow_2025_total_liabilities_million_RON": 13750.66,
+        "flow_2025_external_assets_W1_million_RON": 393.43,
+        "flow_2025_external_liabilities_W1_million_RON": 0,
+        "bilateral_cells_observable": 0,
+        "next_gate": "F21 external instrument bridge: W1 F2 minus W1 F2M",
         "total_F2_promotion_allowed": false
       }
     },
@@ -197,6 +213,10 @@
     {
       "id": "f2m_total_f2_separation",
       "status": "ENFORCED_F21_UNRESOLVED"
+    },
+    {
+      "id": "f21_direct_bilateral_qsa_coverage",
+      "status": "NEGATIVE_RESULT_AGGREGATES_ONLY"
     }
   ]
 }
