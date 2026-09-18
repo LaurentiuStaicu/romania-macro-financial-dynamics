@@ -1,5 +1,5 @@
 {
-  "ledger_version": "1.2",
+  "ledger_version": "1.3",
   "benchmark": "2025",
   "principle": "Record residuals and unresolved coverage explicitly; never force accounting closure with invented allocations.",
   "instrument_gates": [
@@ -249,16 +249,16 @@
     {
       "instrument": "F8",
       "priority": 4,
-      "stock_matrix_status": "AGGREGATES_VALID_BILATERAL_TOTAL_F8_UNAVAILABLE",
-      "flow_matrix_status": "AGGREGATES_VALID_BILATERAL_TOTAL_F8_UNAVAILABLE",
+      "stock_matrix_status": "AGGREGATE_ONLY_BILATERAL_F8_F81_F89_UNAVAILABLE",
+      "flow_matrix_status": "AGGREGATE_ONLY_BILATERAL_F8_F81_F89_UNAVAILABLE",
       "asset_liability_residual": null,
-      "residual_status": "TOTAL_DECOMPOSITION_PASS_BILATERAL_COVERAGE_ZERO_OF_35",
+      "residual_status": "COMPONENT_BRIDGE_RECOVERS_ZERO_BILATERAL_CELLS",
       "known_issues": [
-        "No tested in-boundary bilateral total-F8 cell is directly published in QSA for stock or 2025 flow.",
-        "All eight total-economy F8=F81+F89 controls pass within 0.1 million RON, so the total-instrument definition is empirically supported.",
-        "Twelve of twenty resident-sector decomposition controls pass; the eight incomplete controls are F and BNR asset/liability controls where S121 component series are not published.",
-        "F81 trade credits and advances must not be used as a proxy for F8 because F89 is quantitatively material.",
-        "The next source gate probes bilateral F81 and F89 and permits F8 derivation only from the exact component sum."
+        "No tested bilateral total-F8 cell is published in QSA.",
+        "No tested bilateral F81 or F89 cell is published either, so the exact F8=F81+F89 component bridge recovers zero cells.",
+        "All total-economy decomposition controls remain valid and F89 remains material; F81 must not substitute for F8.",
+        "The remaining empirical information is aggregate: five resident holder totals, five resident issuer totals, and W1 total asset/liability controls per measure.",
+        "An exact rank/nullspace gate is required to quantify the underdetermination before F8 can be frozen or any partial core considered."
       ],
       "coverage_assessment": {
         "status": "TOTAL_F8_AGGREGATES_AVAILABLE_BILATERAL_NOT_PUBLISHED",
@@ -276,6 +276,15 @@
         "total_decomposition_controls": "PASS_8_OF_8",
         "sector_decomposition_controls": "PASS_12_INCOMPLETE_8",
         "next_gate": "F8 bilateral F81+F89 component bridge",
+        "materialization_allowed": false
+      },
+      "component_bridge_assessment": {
+        "status": "NEGATIVE_ZERO_BILATERAL_COMPONENT_CELLS",
+        "assessment": "model/accounting/f8_bilateral_component_bridge_assessment.json",
+        "F81_resolved_cells": 0,
+        "F89_resolved_cells": 0,
+        "derived_F8_resolved_cells": 0,
+        "next_gate": "F8 exact aggregate-control rank audit",
         "materialization_allowed": false
       }
     },
@@ -417,6 +426,10 @@
     {
       "id": "f8_total_instrument_coverage",
       "status": "NEGATIVE_BILATERAL_RESULT_TOTAL_DECOMPOSITION_PASS_8_OF_8"
+    },
+    {
+      "id": "f8_bilateral_component_bridge",
+      "status": "NEGATIVE_ZERO_F81_ZERO_F89_BILATERAL_CELLS"
     }
   ]
 }
