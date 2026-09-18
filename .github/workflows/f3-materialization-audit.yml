@@ -8,16 +8,19 @@ on:
       - "scripts/verify_f3_source_vintage.py"
       - "scripts/generate_f3_benchmark_from_snapshot.py"
       - "tests/test_f3_materialization.py"
+      - "tests/test_dynamic_core.py"
       - ".github/workflows/f3-materialization-audit.yml"
       - "model/accounting/benchmark_2025.json"
       - "model/accounting/f3_materialization_manifest.json"
+      - "model/accounting/source_registry.json"
+      - "model/accounting/reconciliation_2025.json"
   workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
-  verify-and-generate-f3:
+  verify-and-regenerate-f3:
     runs-on: ubuntu-latest
 
     steps:
@@ -35,7 +38,7 @@ jobs:
       - name: Run F3 materialization tests
         run: python -m unittest tests.test_f3_materialization -v
 
-      - name: Generate proposed F3 benchmark entirely offline
+      - name: Regenerate F3 benchmark entirely offline
         run: |
           mkdir -p generated
           python scripts/generate_f3_benchmark_from_snapshot.py \
@@ -43,10 +46,19 @@ jobs:
             --benchmark-output generated/benchmark_2025.json \
             --materialization-output generated/f3_materialization_manifest.json
 
-      - name: Upload generated proposal for audit
+      - name: Require deterministic semantic reproduction
+        run: |
+          python scripts/check_json_semantic_equivalence.py \
+            model/accounting/benchmark_2025.json \
+            generated/benchmark_2025.json
+          python scripts/check_json_semantic_equivalence.py \
+            model/accounting/f3_materialization_manifest.json \
+            generated/f3_materialization_manifest.json
+
+      - name: Upload regenerated evidence
         uses: actions/upload-artifact@v4
         with:
-          name: f3-materialization-proposal-${{ github.sha }}
+          name: f3-materialization-regeneration-${{ github.sha }}
           path: generated/
           if-no-files-found: error
           retention-days: 30
