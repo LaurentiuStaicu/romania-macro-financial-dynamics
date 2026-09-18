@@ -5,6 +5,7 @@ on:
     paths:
       - "scripts/fetch_validation_recovery_data.py"
       - "scripts/compare_live_to_legacy_vintage.py"
+      - "scripts/compare_live_normalized_to_retained.py"
       - "data/provenance/**"
       - ".github/workflows/provenance-audit.yml"
   workflow_dispatch:
@@ -38,7 +39,14 @@ jobs:
             data/raw/validation_recovery/fetch_manifest.json \
             provenance_live/comparison_to_v0.1.0.json
 
-      - name: Upload exact fetched bytes and comparison as audit evidence
+      - name: Compare normalized statistical inputs with retained model data
+        run: |
+          python scripts/compare_live_normalized_to_retained.py \
+            provenance_live \
+            data/raw/validation_recovery \
+            provenance_live/normalized_comparison_to_retained.json
+
+      - name: Upload exact fetched bytes and comparisons as audit evidence
         uses: actions/upload-artifact@v4
         with:
           name: validation-recovery-live-provenance-${{ github.sha }}
