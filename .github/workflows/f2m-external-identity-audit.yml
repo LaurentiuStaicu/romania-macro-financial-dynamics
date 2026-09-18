@@ -43,4 +43,4 @@ jobs:
             f2m_audit_artifacts/
             f2m_external_audit_artifacts/
           if-no-files-found: error
-          retention-days: 30
+          retention-days: 90
