@@ -38,4 +38,4 @@ jobs:
           name: f2m-deposit-coverage-${{ github.sha }}
           path: f2m_audit_artifacts/
           if-no-files-found: error
-          retention-days: 30
+          retention-days: 90
