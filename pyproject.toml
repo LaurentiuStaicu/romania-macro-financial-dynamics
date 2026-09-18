@@ -3,9 +3,9 @@ requires = ["hatchling>=1.27"]
 build-backend = "hatchling.build"
 
 [project]
-name = "romania-macro-financial-dynamics"
+name = "romanian-monetary-dynamics"
 version = "0.1"
-description = "Empirical stock-flow-consistent system-dynamics model of Romania's macro-financial system"
+description = "Empirical stock-flow-consistent system-dynamics model of Romania's monetary and macro-financial system"
 readme = "README.md"
 requires-python = ">=3.12"
 license = {file = "LICENSE"}
