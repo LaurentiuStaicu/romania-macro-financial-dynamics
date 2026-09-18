@@ -114,22 +114,33 @@ def fetch(series_key: str) -> dict[str, object]:
     request = urllib.request.Request(
         url, headers={"User-Agent": USER_AGENT, "Accept": "text/csv"}
     )
-    try:
-        with urllib.request.urlopen(request, timeout=90) as response:
-            body = response.read()
-            status = int(response.status)
-            headers = dict(response.headers.items())
-    except urllib.error.HTTPError as exc:
-        body = exc.read()
-        status = int(exc.code)
-        headers = dict(exc.headers.items())
-    except urllib.error.URLError as exc:
-        return {
-            "key": series_key,
-            "status": "NETWORK_ERROR",
-            "error": str(exc),
-            "rows": [],
-        }
+
+    last_error: Exception | None = None
+    for attempt in range(1, 4):
+        try:
+            with urllib.request.urlopen(request, timeout=30) as response:
+                body = response.read()
+                status = int(response.status)
+                headers = dict(response.headers.items())
+            break
+        except urllib.error.HTTPError as exc:
+            body = exc.read()
+            status = int(exc.code)
+            headers = dict(exc.headers.items())
+            break
+        except (urllib.error.URLError, TimeoutError) as exc:
+            last_error = exc
+            if attempt == 3:
+                return {
+                    "key": series_key,
+                    "url": url,
+                    "status": "NETWORK_ERROR",
+                    "error": str(last_error),
+                    "attempts": attempt,
+                    "rows": [],
+                }
+    else:
+        raise AssertionError("unreachable fetch retry state")
 
     raw_path = OUT / "raw" / f"{sha256(series_key.encode())[:16]}.raw"
     raw_path.parent.mkdir(parents=True, exist_ok=True)
