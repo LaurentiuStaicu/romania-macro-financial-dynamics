@@ -1,0 +1,52 @@
+{
+  "contract_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F2 Phase C4 — Eurostat Detailed-Sector Dissemination Audit",
+  "purpose": "Test whether Eurostat's own BPM6 quarterly BOP/IIP dissemination publishes Romania F2 currency-and-deposits assets separately for S11 and S1M where ECB BPS publishes only the combined S1V sector.",
+  "datasets": {
+    "stock": "bop_iip6_q",
+    "transactions": "bop_c6_q"
+  },
+  "selection": {
+    "frequency": "Q",
+    "currency_units": ["MIO_EUR", "MIO_NAC"],
+    "bop_item": "FA__O__F2",
+    "reporting_sector_codes": ["S1", "S121", "S12T", "S13", "S12M", "S1V", "S11", "S1M"],
+    "counterpart_sector": "S1",
+    "partner": "WRL_REST",
+    "reporting_geo": "RO",
+    "stock_stk_flow": "A_LE",
+    "periods": ["2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4"]
+  },
+  "candidate_rmd_mapping": {
+    "BNR": "S121",
+    "G": "S13",
+    "F": "S12T + S12M",
+    "C": "S11",
+    "H": "S1M"
+  },
+  "required_checks": [
+    "S11 stock observation exists for 2025-Q4 in at least one official Eurostat unit",
+    "S1M stock observation exists for 2025-Q4 in the same unit",
+    "S1V = S11 + S1M reconciles within published precision",
+    "S1P/S12M/S1V and total-sector controls are cross-checked against the prior ECB BPS structure",
+    "quarterly transaction dissemination is inspected independently in bop_c6_q and its available stk_flow categories are recorded rather than assumed",
+    "all raw Eurostat JSON-stat responses used in the audit are retained with SHA-256"
+  ],
+  "hard_rules": {
+    "no_benchmark_mutation": true,
+    "no_F21_materialization": true,
+    "no_total_F2_promotion": true,
+    "no_split_of_S1V_by_shares": true,
+    "no_missing_to_zero": true,
+    "dataset_dimension_codes_must_be_verified_from_response": true,
+    "MIO_EUR_and_MIO_NAC_must_not_be_mixed": true,
+    "Eurostat_and_ECB_BPS_vintages_must_not_be_assumed_identical": true,
+    "BPM6_and_ESA_F2_must_not_be_assumed_identical": true,
+    "transaction_stk_flow_code_must_be_discovered_from_Eurostat_metadata_or_response_not_guessed": true,
+    "network_errors_block_positive_coverage_claims": true,
+    "behavioural_closure_may_change": false
+  },
+  "promotion_rule": "A positive source-coverage result only authorizes a later concept-and-vintage reconciliation gate. It does not authorize insertion into the ESA/QSA Accounting Spine.",
+  "negative_result_rule": "If S11 and S1M observations are not both published for Romania F2, the H/C split remains unresolved and S1V must not be allocated synthetically.",
+  "system_dynamics_conformity": "Accounting/source audit only; no feedback, delay, nonlinearity or behavioural-closure status changes."
+}
