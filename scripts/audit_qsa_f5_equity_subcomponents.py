@@ -326,6 +326,8 @@ def main() -> None:
                     terms = aggregate_terms(sector, entry, measure, instrument)
                     by_instrument[instrument] = terms
                     required.update(t.key for t in terms)
+                f5_terms = aggregate_terms(sector, entry, measure, "F5")
+                required.update(t.key for t in f5_terms)
                 sector_controls.append((measure, sector, entry, by_instrument))
         for area in ("W0", "W1"):
             for entry in ("A", "L"):
