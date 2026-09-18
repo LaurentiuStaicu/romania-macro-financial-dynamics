@@ -1,0 +1,66 @@
+{
+  "contract_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F2 Phase C3 — BPS/BOP External Sector Structure Audit",
+  "purpose": "Determine whether ECB BPS/BOP-IIP currency-and-deposits data provide an external-sector breakdown that can be mapped exactly to RMD H/C/F/G/BNR before any F21 recovery from BOP data.",
+  "source": {
+    "dataset": "ECB BPS — Balance of Payments and International Investment Position",
+    "reference_area": "RO",
+    "counterpart_area": "W1",
+    "international_accounts_item": "FA",
+    "functional_category": "O",
+    "instrument": "F2",
+    "accounting_entry": "A",
+    "frequencies": ["Q"],
+    "stock_or_flow": ["LE", "T"],
+    "units_to_probe": ["EUR", "RON"],
+    "maturities_to_probe": ["T", "S", "L"]
+  },
+  "sector_codes_to_probe": [
+    "S1",
+    "S121",
+    "S12T",
+    "S122",
+    "S123",
+    "S13",
+    "S1P",
+    "S12M",
+    "S124",
+    "S12Q",
+    "S12O",
+    "S1V",
+    "S11",
+    "S1M"
+  ],
+  "official_sector_identities_to_test": [
+    "S1 = S121 + S12T + S13 + S1P",
+    "S1 = S121 + S12T + S13 + S124 + S12Q + S12O + S11 + S1M",
+    "S12T = S122 + S123",
+    "S1P = S12M + S1V",
+    "S12M = S124 + S12Q + S12O",
+    "S1V = S11 + S1M"
+  ],
+  "candidate_rmd_mapping": {
+    "BNR": "S121",
+    "G": "S13",
+    "C": "S11",
+    "H": "S1M",
+    "F": "S12T + S12M"
+  },
+  "hard_rules": {
+    "source_structure_only_no_benchmark_mutation": true,
+    "no_total_F2_promotion": true,
+    "no_F21_materialization": true,
+    "no_split_of_S1P_by_shares": true,
+    "no_split_of_S1V_by_shares": true,
+    "no_inference_that_unpublished_detailed_sector_is_zero": true,
+    "no_assumption_BPS_F2_equals_QSA_F2_without_definition_bridge": true,
+    "BPM6_ESA_deposit_loan_classification_difference_must_remain_explicit": true,
+    "EUR_RON_must_not_be_combined_without_conversion_bridge": true,
+    "reserve_assets_F2_must_not_substitute_for_other_investment_F2": true,
+    "maturity_T_may_be_reconstructed_only_as_exact_S_plus_L_when_both_are_available": true,
+    "network_errors_block_positive_coverage_claims": true,
+    "behavioural_closure_may_change": false
+  },
+  "promotion_rule": "This phase may only classify BPS source structure. A later bridge may use BPS only if sector granularity, functional category, instrument definition, maturity, unit/currency, valuation and BPM6-versus-ESA reconciliation are explicitly satisfied.",
+  "negative_result_rule": "If Romania publishes only coarse S1P/S12T sector groups for F2, the inability to separate H/C/non-MFI-F is a valid blocker and no synthetic split is permitted."
+}

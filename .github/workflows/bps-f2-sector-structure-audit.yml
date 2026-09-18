@@ -1,0 +1,41 @@
+name: BPS F2 Sector Structure Audit
+
+on:
+  pull_request:
+    paths:
+      - "model/accounting/bps_f2_sector_structure_contract.json"
+      - "scripts/audit_bps_f2_sector_structure.py"
+      - "tests/test_bps_f2_sector_structure_contract.py"
+      - ".github/workflows/bps-f2-sector-structure-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit-bps-f2-sector-structure:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify BPS sector-structure contract
+        run: python -m unittest tests.test_bps_f2_sector_structure_contract -v
+
+      - name: Probe BPS F2 sector structure
+        env:
+          BPS_F2_AUDIT_OUT: bps_f2_audit_artifacts
+        run: python scripts/audit_bps_f2_sector_structure.py
+
+      - name: Upload BPS source-structure evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: bps-f2-sector-structure-${{ github.sha }}
+          path: bps_f2_audit_artifacts/
+          if-no-files-found: error
+          retention-days: 30
