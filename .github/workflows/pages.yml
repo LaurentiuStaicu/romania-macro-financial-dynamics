@@ -76,7 +76,7 @@ jobs:
         run: |
           set -euo pipefail
           rm -rf /tmp/world3-canonical
-          git clone --filter=blob:none --no-checkout https://github.com/LaurentiuStaicu/world3-empirical-flatpak.git /tmp/world3-canonical
+          git clone --filter=blob:none --no-checkout https://github.com/LaurentiuStaicu/empirical-world3-dynamics.git /tmp/world3-canonical
           git -C /tmp/world3-canonical fetch origin "$WORLD3_CANONICAL_SHA" --depth=1
           git -C /tmp/world3-canonical checkout --detach "$WORLD3_CANONICAL_SHA"
           test "$(git -C /tmp/world3-canonical rev-parse HEAD)" = "$WORLD3_CANONICAL_SHA"
@@ -85,7 +85,7 @@ jobs:
           npm run check
           npm run build
           test -f dist/index.html
-          grep -q 'World3 Empirical' dist/index.html
+          grep -q 'Empirical World3 Dynamics' dist/index.html
 
       - name: Install visual comparison helpers
         run: python -m pip install --disable-pip-version-check pillow playwright
