@@ -14,7 +14,7 @@ from pathlib import Path
 OUT = Path(os.environ.get("RECOVERY_OUT", "recovery_artifacts"))
 OUT.mkdir(parents=True, exist_ok=True)
 
-USER_AGENT = "romania-macro-financial-dynamics/0.5.1a0 (+GitHub Actions reproducible research fetch)"
+USER_AGENT = "romanian-monetary-dynamics/0.1 (+GitHub Actions reproducible research fetch)"
 
 
 def fetch(url: str, *, accept: str | None = None) -> tuple[int, bytes, dict[str, str]]:
