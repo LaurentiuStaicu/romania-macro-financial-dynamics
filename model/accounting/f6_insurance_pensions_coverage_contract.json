@@ -1,0 +1,61 @@
+{
+  "contract_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F6 Phase A — Insurance, Pensions and Standardised Guarantees Coverage Audit",
+  "instrument": "F6",
+  "purpose": "Audit direct total-F6 QSA who-to-whom coverage and validate published F6 subcomponent decompositions before any bilateral component recovery or materialization.",
+  "benchmark_stock_period": "2025-Q4",
+  "benchmark_flow_period": "2025-Q1..2025-Q4",
+  "esa_decomposition": {
+    "full": "F6 = F61 + F62 + F63 + F64 + F65 + F66",
+    "transmission_block": "F6 = F61 + F62 + F63_F64_F65 + F66",
+    "pension_block": "F63_F64_F65 = F63 + F64 + F65"
+  },
+  "subcomponents": {
+    "F61": "Non-life insurance technical reserves",
+    "F62": "Life insurance and annuity entitlements",
+    "F63": "Pension entitlements",
+    "F64": "Claims of pension funds on pension managers",
+    "F65": "Entitlements to non-pension benefits",
+    "F66": "Provisions for calls under standardised guarantees",
+    "F63_F64_F65": "Combined pension/manager/non-pension-benefit block used in the ESA transmission programme"
+  },
+  "canonical_qsa_dimensions": {
+    "maturity": "_Z",
+    "expenditure": "_Z",
+    "unit": "XDC",
+    "currency_denominator": "_T",
+    "consolidation": "N",
+    "valuation": "S",
+    "prices": "V",
+    "transformation": "N",
+    "custom_breakdown": "_T"
+  },
+  "sector_mapping": {
+    "H": "S1M",
+    "C": "S11",
+    "G": "S13",
+    "BNR": "S121",
+    "F": "S12 - S121",
+    "X": "rest-of-world counterpart"
+  },
+  "hard_rules": {
+    "no_benchmark_mutation": true,
+    "no_materialization_in_phase_A": true,
+    "no_missing_to_zero": true,
+    "no_synthetic_allocation": true,
+    "no_issuer_applicability_assumption_in_phase_A": true,
+    "F_composite_only_by_exact_S12_minus_S121": true,
+    "annual_flow_only_by_exact_Q1_Q2_Q3_Q4_sum": true,
+    "dual_W2_orientations_must_be_probed_for_total_F6": true,
+    "orientation_conflict_blocks_total_F6_cell": true,
+    "full_six_component_identity_used_only_when_all_six_are_available": true,
+    "combined_pension_block_identity_used_only_when_required_series_are_available": true,
+    "component_missingness_must_remain_explicit": true,
+    "network_errors_block_positive_coverage_claims": true,
+    "behavioural_closure_may_change": false
+  },
+  "reconciliation_tolerance_million_RON": 0.1,
+  "promotion_rule": "Phase A classifies direct total-F6 source coverage and aggregate decomposition consistency only. Any component-level bilateral recovery, issuer-applicability rule, rank analysis or materialization requires a later gate.",
+  "negative_result_rule": "If direct bilateral F6 is absent, aggregate totals may constrain a later component/rank gate but must never be distributed across counterparties.",
+  "system_dynamics_conformity": "Accounting-only recovery; behavioural closure remains inactive."
+}
