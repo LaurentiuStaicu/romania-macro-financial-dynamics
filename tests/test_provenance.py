@@ -25,7 +25,7 @@ class ProvenanceTests(unittest.TestCase):
             ]
         )
 
-    def test_v010_gap_is_explicit_not_silently_passed(self) -> None:
+    def test_v010_gap_is_partially_recovered_not_silently_closed(self) -> None:
         registry = json.loads(
             (
                 ROOT
@@ -34,10 +34,20 @@ class ProvenanceTests(unittest.TestCase):
                 / "validation_recovery_vintage_status.json"
             ).read_text(encoding="utf-8")
         )
-        legacy = registry["vintages"][0]
-        self.assertEqual(legacy["status"], "HASH_ONLY_LEGACY")
-        self.assertFalse(legacy["raw_payloads_materialized_in_repository"])
-        self.assertFalse(legacy["exact_vintage_reproducible_from_release"])
+        vintage = registry["vintages"][0]
+        self.assertEqual(vintage["status"], "PARTIAL_RAW_RECOVERY")
+        self.assertEqual(vintage["raw_payloads_materialized_in_repository"], 3)
+        self.assertEqual(vintage["raw_payloads_not_recovered"], 1)
+        self.assertFalse(vintage["exact_vintage_reproducible_from_repository"])
+        self.assertEqual(
+            vintage["unrecovered_raw_sources"],
+            ["bis_policy_rate_xml"],
+        )
+        self.assertTrue(
+            vintage["live_audit_2026_09_18"][
+                "all_normalized_statistical_inputs_match_retained_model_inputs"
+            ]
+        )
 
     def test_offline_provenance_verifier(self) -> None:
         subprocess.run(
