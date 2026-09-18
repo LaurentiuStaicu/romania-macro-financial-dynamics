@@ -203,6 +203,39 @@ def main() -> None:
             entry="A",
         )
 
+    # Deposit who-to-whom data are often published from the issuer liability side.
+    # Probe broad financial corporations, MFI aggregates, MFIs excluding the
+    # central bank, the central bank itself, and government as potential issuers.
+    liability_issuer_pairs = (
+        ("S12K_from_H", "S12K", "S1M"),
+        ("S12K_from_C", "S12K", "S11"),
+        ("S12K_from_G", "S12K", "S13"),
+        ("S12T_from_H", "S12T", "S1M"),
+        ("S12T_from_C", "S12T", "S11"),
+        ("S12T_from_G", "S12T", "S13"),
+        ("S12T_from_BNR", "S12T", "S121"),
+        ("S12_from_H", "S12", "S1M"),
+        ("S12_from_C", "S12", "S11"),
+        ("S12_from_G", "S12", "S13"),
+        ("S12_from_BNR", "S12", "S121"),
+        ("BNR_from_H", "S121", "S1M"),
+        ("BNR_from_C", "S121", "S11"),
+        ("BNR_from_G", "S121", "S13"),
+        ("BNR_from_S12", "S121", "S12"),
+        ("G_from_H", "S13", "S1M"),
+        ("G_from_C", "S13", "S11"),
+        ("G_from_S12", "S13", "S12"),
+    )
+    for name, issuer_sector, holder_sector in liability_issuer_pairs:
+        add_family(
+            specs,
+            name,
+            counterpart_area="W2",
+            reference_sector=issuer_sector,
+            counterpart_sector=holder_sector,
+            entry="L",
+        )
+
     # Rest-of-world boundary examples on both asset and liability sides.
     external = (
         ("H_assets_X", "S1M", "A"),
@@ -267,8 +300,9 @@ def main() -> None:
 
     exact_identity_tests = []
     grouped = {
-        (item["family"], item["measure"]): {
-            item["instrument"]: item for item in results
+        (family, measure): {
+            item["instrument"]: item
+            for item in results
             if item["family"] == family and item["measure"] == measure
         }
         for family in specs
