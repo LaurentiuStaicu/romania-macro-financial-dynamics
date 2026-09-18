@@ -35,6 +35,13 @@ class F21BPM6ESAConceptBridgeContractTests(unittest.TestCase):
         self.assertTrue(rules["aggregate_reconciliation_cannot_override_sector_level_failures"])
         self.assertTrue(rules["no_residual_reallocation_across_H_C_F_G_BNR"])
 
+    def test_functional_category_coverage_is_complete_before_f21_inference(self) -> None:
+        rules = self.contract["hard_rules"]
+        self.assertTrue(rules["other_investment_plus_reserve_assets_is_not_assumed_full_F2"])
+        self.assertTrue(rules["direct_investment_F2_detail_must_be_probed"])
+        self.assertTrue(rules["direct_investment_debt_total_FA_D_FL_must_not_substitute_for_F2"])
+        self.assertTrue(rules["functional_category_F2_coverage_must_be_complete_before_implied_F21"])
+
     def test_behavioural_closure_cannot_change(self) -> None:
         self.assertFalse(self.contract["hard_rules"]["behavioural_closure_may_change"])
 
