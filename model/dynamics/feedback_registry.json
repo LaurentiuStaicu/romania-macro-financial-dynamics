@@ -1,89 +1,240 @@
 {
-  "registry_version": "0.3.0a0",
-  "purpose": "Qualitative feedback skeleton for the Dynamic Core. Every loop is a behavioural candidate until evidence, equation and parameter gates are passed in Alpha 0.4+.",
+  "registry_version": "0.1",
+  "purpose": "Qualitative feedback skeleton for the Dynamic Core. Every loop remains a behavioural candidate until its evidence, equation and parameter gates are passed.",
   "status_rule": "Presence in this registry does not establish causality, parameter sign stability, empirical materiality or predictive validity.",
   "loops": [
     {
       "id": "government_refinancing_interest_loop",
-      "label": {"en":"Government refinancing–interest loop","ro":"Bucla refinanțare–dobânzi a administrației publice"},
+      "label": {
+        "en": "Government refinancing–interest loop",
+        "ro": "Bucla refinanțare–dobânzi a administrației publice"
+      },
       "polarity_hypothesis": "reinforcing",
       "scientific_status": "BEHAVIOURAL_CANDIDATE",
       "quantitatively_active": false,
       "path": [
-        {"from":"government_financing_need","to":"government_debt_issuance","sign":"+"},
-        {"from":"government_debt_issuance","to":"government_debt_stock","sign":"+"},
-        {"from":"government_debt_stock","to":"government_interest_cost","sign":"+"},
-        {"from":"government_interest_cost","to":"government_financing_need","sign":"+"}
+        {
+          "from": "government_financing_need",
+          "to": "government_debt_issuance",
+          "sign": "+"
+        },
+        {
+          "from": "government_debt_issuance",
+          "to": "government_debt_stock",
+          "sign": "+"
+        },
+        {
+          "from": "government_debt_stock",
+          "to": "government_interest_cost",
+          "sign": "+"
+        },
+        {
+          "from": "government_interest_cost",
+          "to": "government_financing_need",
+          "sign": "+"
+        }
       ],
-      "delay_candidates": ["debt_service_maturity_delay"]
+      "delay_candidates": [
+        "debt_service_maturity_delay"
+      ]
     },
     {
       "id": "government_issuance_yield_loop",
-      "label": {"en":"Government issuance–yield loop","ro":"Bucla emisiuni publice–randament"},
+      "label": {
+        "en": "Government issuance–yield loop",
+        "ro": "Bucla emisiuni publice–randament"
+      },
       "polarity_hypothesis": "reinforcing_candidate",
       "scientific_status": "BEHAVIOURAL_CANDIDATE",
       "quantitatively_active": false,
       "path": [
-        {"from":"government_debt_issuance","to":"government_securities_supply_pressure","sign":"+"},
-        {"from":"government_securities_supply_pressure","to":"sovereign_yield","sign":"+_candidate"},
-        {"from":"sovereign_yield","to":"government_interest_cost","sign":"+"},
-        {"from":"government_interest_cost","to":"government_financing_need","sign":"+"},
-        {"from":"government_financing_need","to":"government_debt_issuance","sign":"+"}
+        {
+          "from": "government_debt_issuance",
+          "to": "government_securities_supply_pressure",
+          "sign": "+"
+        },
+        {
+          "from": "government_securities_supply_pressure",
+          "to": "sovereign_yield",
+          "sign": "+_candidate"
+        },
+        {
+          "from": "sovereign_yield",
+          "to": "government_interest_cost",
+          "sign": "+"
+        },
+        {
+          "from": "government_interest_cost",
+          "to": "government_financing_need",
+          "sign": "+"
+        },
+        {
+          "from": "government_financing_need",
+          "to": "government_debt_issuance",
+          "sign": "+"
+        }
       ],
-      "delay_candidates": ["portfolio_reallocation_delay", "debt_service_maturity_delay"]
+      "delay_candidates": [
+        "portfolio_reallocation_delay",
+        "debt_service_maturity_delay"
+      ]
     },
     {
       "id": "bank_credit_balance_sheet_loop",
-      "label": {"en":"Bank credit–balance-sheet loop","ro":"Bucla credit–bilanț bancar"},
+      "label": {
+        "en": "Bank credit–balance-sheet loop",
+        "ro": "Bucla credit–bilanț bancar"
+      },
       "polarity_hypothesis": "mixed_candidate",
       "scientific_status": "BEHAVIOURAL_CANDIDATE",
       "quantitatively_active": false,
       "path": [
-        {"from":"credit_flow","to":"loan_stock","sign":"+"},
-        {"from":"loan_stock","to":"debt_service_and_credit_risk","sign":"+_candidate"},
-        {"from":"debt_service_and_credit_risk","to":"credit_supply_capacity","sign":"-_candidate"},
-        {"from":"credit_supply_capacity","to":"credit_flow","sign":"+_candidate"}
+        {
+          "from": "credit_flow",
+          "to": "loan_stock",
+          "sign": "+"
+        },
+        {
+          "from": "loan_stock",
+          "to": "debt_service_and_credit_risk",
+          "sign": "+_candidate"
+        },
+        {
+          "from": "debt_service_and_credit_risk",
+          "to": "credit_supply_capacity",
+          "sign": "-_candidate"
+        },
+        {
+          "from": "credit_supply_capacity",
+          "to": "credit_flow",
+          "sign": "+_candidate"
+        }
       ],
-      "delay_candidates": ["credit_risk_recognition_delay", "credit_supply_adjustment_delay"]
+      "delay_candidates": [
+        "credit_risk_recognition_delay",
+        "credit_supply_adjustment_delay"
+      ]
     },
     {
       "id": "monetary_credit_transmission_loop",
-      "label": {"en":"Monetary–credit transmission loop","ro":"Bucla transmisie monetară–credit"},
+      "label": {
+        "en": "Monetary–credit transmission loop",
+        "ro": "Bucla transmisie monetară–credit"
+      },
       "polarity_hypothesis": "balancing_candidate",
       "scientific_status": "BEHAVIOURAL_CANDIDATE",
       "quantitatively_active": false,
       "path": [
-        {"from":"policy_rate","to":"market_and_lending_rates","sign":"+_candidate"},
-        {"from":"market_and_lending_rates","to":"credit_flow","sign":"-_candidate"},
-        {"from":"credit_flow","to":"private_demand_and_investment","sign":"+_candidate"},
-        {"from":"private_demand_and_investment","to":"inflationary_pressure","sign":"+_candidate"},
-        {"from":"inflationary_pressure","to":"policy_rate","sign":"+_candidate"}
+        {
+          "from": "policy_rate",
+          "to": "market_and_lending_rates",
+          "sign": "+_candidate"
+        },
+        {
+          "from": "market_and_lending_rates",
+          "to": "credit_flow",
+          "sign": "-_candidate"
+        },
+        {
+          "from": "credit_flow",
+          "to": "private_demand_and_investment",
+          "sign": "+_candidate"
+        },
+        {
+          "from": "private_demand_and_investment",
+          "to": "inflationary_pressure",
+          "sign": "+_candidate"
+        },
+        {
+          "from": "inflationary_pressure",
+          "to": "policy_rate",
+          "sign": "+_candidate"
+        }
       ],
-      "delay_candidates": ["monetary_transmission_delay"]
+      "delay_candidates": [
+        "monetary_transmission_delay"
+      ]
     },
     {
       "id": "external_fx_refinancing_loop",
-      "label": {"en":"External FX–refinancing loop","ro":"Bucla curs valutar–refinanțare externă"},
+      "label": {
+        "en": "External FX–refinancing loop",
+        "ro": "Bucla curs valutar–refinanțare externă"
+      },
       "polarity_hypothesis": "reinforcing_candidate",
       "scientific_status": "BEHAVIOURAL_CANDIDATE",
       "quantitatively_active": false,
       "path": [
-        {"from":"exchange_rate_depreciation","to":"fx_debt_service_burden","sign":"+_candidate"},
-        {"from":"fx_debt_service_burden","to":"refinancing_need","sign":"+_candidate"},
-        {"from":"refinancing_need","to":"risk_premium","sign":"+_candidate"},
-        {"from":"risk_premium","to":"exchange_rate_pressure","sign":"+_candidate"}
+        {
+          "from": "exchange_rate_depreciation",
+          "to": "fx_debt_service_burden",
+          "sign": "+_candidate"
+        },
+        {
+          "from": "fx_debt_service_burden",
+          "to": "refinancing_need",
+          "sign": "+_candidate"
+        },
+        {
+          "from": "refinancing_need",
+          "to": "risk_premium",
+          "sign": "+_candidate"
+        },
+        {
+          "from": "risk_premium",
+          "to": "exchange_rate_pressure",
+          "sign": "+_candidate"
+        }
       ],
-      "delay_candidates": ["refinancing_maturity_delay", "fx_pass_through_delay"]
+      "delay_candidates": [
+        "refinancing_maturity_delay",
+        "fx_pass_through_delay"
+      ]
     }
   ],
   "delay_candidates": [
-    {"id":"debt_service_maturity_delay","unit":"year","tau":"TBD","active":false},
-    {"id":"portfolio_reallocation_delay","unit":"year","tau":"TBD","active":false},
-    {"id":"credit_risk_recognition_delay","unit":"year","tau":"TBD","active":false},
-    {"id":"credit_supply_adjustment_delay","unit":"year","tau":"TBD","active":false},
-    {"id":"monetary_transmission_delay","unit":"year","tau":"TBD","active":false},
-    {"id":"refinancing_maturity_delay","unit":"year","tau":"TBD","active":false},
-    {"id":"fx_pass_through_delay","unit":"year","tau":"TBD","active":false}
+    {
+      "id": "debt_service_maturity_delay",
+      "unit": "year",
+      "tau": "TBD",
+      "active": false
+    },
+    {
+      "id": "portfolio_reallocation_delay",
+      "unit": "year",
+      "tau": "TBD",
+      "active": false
+    },
+    {
+      "id": "credit_risk_recognition_delay",
+      "unit": "year",
+      "tau": "TBD",
+      "active": false
+    },
+    {
+      "id": "credit_supply_adjustment_delay",
+      "unit": "year",
+      "tau": "TBD",
+      "active": false
+    },
+    {
+      "id": "monetary_transmission_delay",
+      "unit": "year",
+      "tau": "TBD",
+      "active": false
+    },
+    {
+      "id": "refinancing_maturity_delay",
+      "unit": "year",
+      "tau": "TBD",
+      "active": false
+    },
+    {
+      "id": "fx_pass_through_delay",
+      "unit": "year",
+      "tau": "TBD",
+      "active": false
+    }
   ],
   "activation_gate": {
     "requires_equation": true,

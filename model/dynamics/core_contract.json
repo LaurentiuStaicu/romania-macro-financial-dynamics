@@ -1,6 +1,6 @@
 {
-  "contract_version": "0.3.0a0",
-  "purpose": "Executable structural dynamic core constrained by the Alpha 0.2 Accounting Spine; behavioural closure is deferred to Alpha 0.4.",
+  "contract_version": "0.1",
+  "purpose": "Executable structural dynamic core constrained by the accounting spine; behavioural closure remains inactive until mechanisms pass explicit empirical and identifiability gates.",
   "time": {
     "canonical_unit": "year",
     "default_dt_years": 0.25,
@@ -8,21 +8,42 @@
     "rationale": "Quarterly is the preferred empirical frequency where definitions remain compatible; smaller dt values are used for integration-error tests."
   },
   "boundary": {
-    "sectors": ["H", "C", "F", "G", "X", "BNR"],
-    "financial_instruments": ["F3", "F2", "F4", "F8", "F5", "F6", "F7"],
+    "sectors": [
+      "H",
+      "C",
+      "F",
+      "G",
+      "X",
+      "BNR"
+    ],
+    "financial_instruments": [
+      "F3",
+      "F2",
+      "F4",
+      "F8",
+      "F5",
+      "F6",
+      "F7"
+    ],
     "closed_for_double_entry_conservation": true
   },
   "stocks": [
     {
       "id": "bilateral_financial_position",
-      "index": ["holder", "issuer", "instrument"],
+      "index": [
+        "holder",
+        "issuer",
+        "instrument"
+      ],
       "unit": "million_RON",
       "meaning": "Financial asset of holder and equal financial liability of issuer represented once.",
       "scientific_status": "ACCOUNTING_IDENTITY"
     },
     {
       "id": "generic_first_order_delay_state",
-      "index": ["mechanism_instance"],
+      "index": [
+        "mechanism_instance"
+      ],
       "unit": "same_as_delay_input",
       "meaning": "Reusable first-order delay state; concrete mechanism assignment requires explicit later documentation.",
       "scientific_status": "ACCOUNTING_IDENTITY"
@@ -50,11 +71,31 @@
     }
   ],
   "auxiliaries": [
-    {"id":"sector_financial_assets","unit":"million_RON","definition":"sum of bilateral positions where sector is holder"},
-    {"id":"sector_financial_liabilities","unit":"million_RON","definition":"sum of bilateral positions where sector is issuer"},
-    {"id":"sector_net_financial_worth","unit":"million_RON","definition":"financial assets minus financial liabilities"},
-    {"id":"system_net_financial_worth","unit":"million_RON","definition":"sum of sector net financial worth over H/C/F/G/X/BNR; must equal zero up to numerical tolerance for a complete represented financial boundary"},
-    {"id":"safe_ratio","unit":"dimensionless","definition":"numerator / denominator, undefined rather than forced when denominator is zero"}
+    {
+      "id": "sector_financial_assets",
+      "unit": "million_RON",
+      "definition": "sum of bilateral positions where sector is holder"
+    },
+    {
+      "id": "sector_financial_liabilities",
+      "unit": "million_RON",
+      "definition": "sum of bilateral positions where sector is issuer"
+    },
+    {
+      "id": "sector_net_financial_worth",
+      "unit": "million_RON",
+      "definition": "financial assets minus financial liabilities"
+    },
+    {
+      "id": "system_net_financial_worth",
+      "unit": "million_RON",
+      "definition": "sum of sector net financial worth over H/C/F/G/X/BNR; must equal zero up to numerical tolerance for a complete represented financial boundary"
+    },
+    {
+      "id": "safe_ratio",
+      "unit": "dimensionless",
+      "definition": "numerator / denominator, undefined rather than forced when denominator is zero"
+    }
   ],
   "equations": [
     {
@@ -86,12 +127,12 @@
     "source_series_identified_without_value_allowed": false,
     "not_applicable_cells_map_to_numeric_zero": true,
     "observed_or_derived_finite_values_required": true,
-    "rule": "Raw Alpha 0.2 matrices with TBD cells cannot initialize a numeric dynamic state. Missing data must never become simulation zero implicitly."
+    "rule": "Incomplete benchmark matrices with TBD cells cannot initialize a numeric dynamic state. Missing data must never become simulation zero implicitly."
   },
   "behavioural_closure": {
-    "included_in_alpha_0_3": false,
-    "deferred_to": "0.4.x Empirical Dynamics",
-    "forbidden_in_0_3_without_explicit_status": [
+    "active": false,
+    "rule": "Behavioural mechanisms may enter the reference simulation only with explicit scientific status, observed or defensibly estimated parameters, and passed empirical/identifiability gates.",
+    "candidate_mechanisms": [
       "consumption_response",
       "investment_response",
       "credit_demand_or_supply_response",

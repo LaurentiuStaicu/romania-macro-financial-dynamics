@@ -1,24 +1,61 @@
 {
-  "schema_version": "0.2.0a0",
+  "schema_version": "0.1",
   "benchmark": {
     "stock_date": "2025-12-31",
     "stock_period": "2025-Q4",
     "flow_period": "2025-01-01/2025-12-31",
-    "flow_quarters": ["2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4"],
+    "flow_quarters": [
+      "2025-Q1",
+      "2025-Q2",
+      "2025-Q3",
+      "2025-Q4"
+    ],
     "unit": "million_RON",
     "primary_accounting_basis": "ESA 2010 quarterly financial accounts",
     "primary_consolidation": "non-consolidated"
   },
   "matrix_axes": {
-    "holders": ["H", "C", "F", "G", "X", "BNR"],
-    "issuers": ["H", "C", "F", "G", "X", "BNR"]
+    "holders": [
+      "H",
+      "C",
+      "F",
+      "G",
+      "X",
+      "BNR"
+    ],
+    "issuers": [
+      "H",
+      "C",
+      "F",
+      "G",
+      "X",
+      "BNR"
+    ]
   },
-  "instrument_priority": ["F3", "F2", "F4", "F8", "F5", "F6", "F7"],
-  "status_vocabulary": ["TBD", "SOURCE_SERIES_IDENTIFIED", "OBSERVED", "DERIVED", "NOT_APPLICABLE"],
+  "instrument_priority": [
+    "F3",
+    "F2",
+    "F4",
+    "F8",
+    "F5",
+    "F6",
+    "F7"
+  ],
+  "status_vocabulary": [
+    "TBD",
+    "SOURCE_SERIES_IDENTIFIED",
+    "OBSERVED",
+    "DERIVED",
+    "NOT_APPLICABLE"
+  ],
   "matrices": {
     "F3": {
       "stock": {
-        "default": {"status": "TBD", "value": null, "unit": "million_RON"},
+        "default": {
+          "status": "TBD",
+          "value": null,
+          "unit": "million_RON"
+        },
         "overrides": [
           {
             "holder": "X",
@@ -31,33 +68,121 @@
         ]
       },
       "flow": {
-        "default": {"status": "TBD", "value": null, "unit": "million_RON"},
+        "default": {
+          "status": "TBD",
+          "value": null,
+          "unit": "million_RON"
+        },
         "overrides": []
       }
     },
     "F2": {
-      "stock": {"default": {"status": "TBD", "value": null, "unit": "million_RON"}, "overrides": []},
-      "flow": {"default": {"status": "TBD", "value": null, "unit": "million_RON"}, "overrides": []}
+      "stock": {
+        "default": {
+          "status": "TBD",
+          "value": null,
+          "unit": "million_RON"
+        },
+        "overrides": []
+      },
+      "flow": {
+        "default": {
+          "status": "TBD",
+          "value": null,
+          "unit": "million_RON"
+        },
+        "overrides": []
+      }
     },
     "F4": {
-      "stock": {"default": {"status": "TBD", "value": null, "unit": "million_RON"}, "overrides": []},
-      "flow": {"default": {"status": "TBD", "value": null, "unit": "million_RON"}, "overrides": []}
+      "stock": {
+        "default": {
+          "status": "TBD",
+          "value": null,
+          "unit": "million_RON"
+        },
+        "overrides": []
+      },
+      "flow": {
+        "default": {
+          "status": "TBD",
+          "value": null,
+          "unit": "million_RON"
+        },
+        "overrides": []
+      }
     },
     "F8": {
-      "stock": {"default": {"status": "TBD", "value": null, "unit": "million_RON"}, "overrides": []},
-      "flow": {"default": {"status": "TBD", "value": null, "unit": "million_RON"}, "overrides": []}
+      "stock": {
+        "default": {
+          "status": "TBD",
+          "value": null,
+          "unit": "million_RON"
+        },
+        "overrides": []
+      },
+      "flow": {
+        "default": {
+          "status": "TBD",
+          "value": null,
+          "unit": "million_RON"
+        },
+        "overrides": []
+      }
     },
     "F5": {
-      "stock": {"default": {"status": "TBD", "value": null, "unit": "million_RON"}, "overrides": []},
-      "flow": {"default": {"status": "TBD", "value": null, "unit": "million_RON"}, "overrides": []}
+      "stock": {
+        "default": {
+          "status": "TBD",
+          "value": null,
+          "unit": "million_RON"
+        },
+        "overrides": []
+      },
+      "flow": {
+        "default": {
+          "status": "TBD",
+          "value": null,
+          "unit": "million_RON"
+        },
+        "overrides": []
+      }
     },
     "F6": {
-      "stock": {"default": {"status": "TBD", "value": null, "unit": "million_RON"}, "overrides": []},
-      "flow": {"default": {"status": "TBD", "value": null, "unit": "million_RON"}, "overrides": []}
+      "stock": {
+        "default": {
+          "status": "TBD",
+          "value": null,
+          "unit": "million_RON"
+        },
+        "overrides": []
+      },
+      "flow": {
+        "default": {
+          "status": "TBD",
+          "value": null,
+          "unit": "million_RON"
+        },
+        "overrides": []
+      }
     },
     "F7": {
-      "stock": {"default": {"status": "TBD", "value": null, "unit": "million_RON"}, "overrides": []},
-      "flow": {"default": {"status": "TBD", "value": null, "unit": "million_RON"}, "overrides": []}
+      "stock": {
+        "default": {
+          "status": "TBD",
+          "value": null,
+          "unit": "million_RON"
+        },
+        "overrides": []
+      },
+      "flow": {
+        "default": {
+          "status": "TBD",
+          "value": null,
+          "unit": "million_RON"
+        },
+        "overrides": []
+      }
     }
   },
   "observed_anchors": [

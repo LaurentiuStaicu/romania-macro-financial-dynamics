@@ -1,5 +1,5 @@
 {
-  "ledger_version": "0.2.0a0",
+  "ledger_version": "0.1",
   "benchmark": "2025",
   "principle": "Record residuals and unresolved coverage explicitly; never force accounting closure with invented allocations.",
   "instrument_gates": [
@@ -23,7 +23,9 @@
       "flow_matrix_status": "TBD",
       "asset_liability_residual": null,
       "residual_status": "TBD_UNTIL_COMPARABLE_TOTALS_EXIST",
-      "known_issues": ["Money aggregates are not substitutes for sectoral ESA F2 positions."]
+      "known_issues": [
+        "Money aggregates are not substitutes for sectoral ESA F2 positions."
+      ]
     },
     {
       "instrument": "F4",
@@ -32,7 +34,9 @@
       "flow_matrix_status": "TBD",
       "asset_liability_residual": null,
       "residual_status": "TBD_UNTIL_COMPARABLE_TOTALS_EXIST",
-      "known_issues": ["Government F4 asset aggregate is not itself a bilateral holder-by-issuer allocation."]
+      "known_issues": [
+        "Government F4 asset aggregate is not itself a bilateral holder-by-issuer allocation."
+      ]
     },
     {
       "instrument": "F8",
@@ -41,7 +45,9 @@
       "flow_matrix_status": "TBD",
       "asset_liability_residual": null,
       "residual_status": "TBD_UNTIL_COMPARABLE_TOTALS_EXIST",
-      "known_issues": ["F8 must not be reduced to pure trade credit."]
+      "known_issues": [
+        "F8 must not be reduced to pure trade credit."
+      ]
     },
     {
       "instrument": "F5",
@@ -68,7 +74,9 @@
       "flow_matrix_status": "TBD_MATERIALITY_CHECK",
       "asset_liability_residual": null,
       "residual_status": "TBD_UNTIL_MATERIALITY_AND_COMPARABLE_TOTALS_EXIST",
-      "known_issues": ["Include explicitly where material; do not assume immateriality without checking."]
+      "known_issues": [
+        "Include explicitly where material; do not assume immateriality without checking."
+      ]
     }
   ],
   "b9f_reconciliation": {
@@ -80,12 +88,33 @@
     "rule": "B9 and B9F are separate balancing items; any residual must be reported and methodologically explained."
   },
   "closure_checks": [
-    {"id": "stock_flow_distinction", "status": "ENFORCED"},
-    {"id": "counterpart_sector_explicit", "status": "ENFORCED"},
-    {"id": "consolidation_explicit", "status": "ENFORCED"},
-    {"id": "valuation_explicit", "status": "ENFORCED"},
-    {"id": "missing_is_not_zero", "status": "ENFORCED"},
-    {"id": "partial_coverage_labelled", "status": "ENFORCED"},
-    {"id": "forced_closure_prohibited", "status": "ENFORCED"}
+    {
+      "id": "stock_flow_distinction",
+      "status": "ENFORCED"
+    },
+    {
+      "id": "counterpart_sector_explicit",
+      "status": "ENFORCED"
+    },
+    {
+      "id": "consolidation_explicit",
+      "status": "ENFORCED"
+    },
+    {
+      "id": "valuation_explicit",
+      "status": "ENFORCED"
+    },
+    {
+      "id": "missing_is_not_zero",
+      "status": "ENFORCED"
+    },
+    {
+      "id": "partial_coverage_labelled",
+      "status": "ENFORCED"
+    },
+    {
+      "id": "forced_closure_prohibited",
+      "status": "ENFORCED"
+    }
   ]
 }
