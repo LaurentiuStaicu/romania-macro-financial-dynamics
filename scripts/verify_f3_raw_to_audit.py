@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import csv
 import hashlib
-import importlib
+import importlib.util
 import io
 import json
 import tempfile
@@ -184,9 +184,14 @@ def main() -> None:
             f"Expected 144 unique retained QSA series, found {len(rebuilt_by_key)}"
         )
 
-    audit_module = importlib.import_module(
-        "scripts.audit_qsa_accounting_coverage"
+    spec = importlib.util.spec_from_file_location(
+        "rmd_f3_capture_audit",
+        AUDIT_SCRIPT,
     )
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f"Could not load audit script: {AUDIT_SCRIPT}")
+    audit_module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(audit_module)
 
     original_fetch = audit_module.fetch_series
     original_out = audit_module.OUT
