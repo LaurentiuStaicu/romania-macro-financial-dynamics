@@ -1,6 +1,6 @@
 {
   "fetched_at_utc": "2026-09-17T15:42:48.557026+00:00",
-  "purpose": "Alpha 0.5.x validation recovery: official-source vintage capture before model re-estimation",
+  "purpose": "Validation-recovery official-source vintage capture before model re-estimation",
   "attempts": [
     {
       "name": "ecb_nfc_new_business_total_ron",

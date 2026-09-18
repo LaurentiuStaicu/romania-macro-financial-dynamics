@@ -1,5 +1,5 @@
 {
-  "split_version": "0.5.1a0",
+  "split_version": "0.1",
   "frozen_at": "2026-09-17T15:42:00Z",
   "frozen_before_estimation": true,
   "purpose": "Prospective role assignment for monetary-transmission validation recovery after official-source coverage inspection and before any Alpha 0.5.x model estimation or selection.",
@@ -47,7 +47,16 @@
       "limitation": "The policy rate is expected to be much less variable than in earlier cycles, so passing this holdout alone cannot validate pass-through dynamics."
     },
     "coverage_inspected_not_independent": {
-      "periods": ["2025-12", "2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07"],
+      "periods": [
+        "2025-12",
+        "2026-01",
+        "2026-02",
+        "2026-03",
+        "2026-04",
+        "2026-05",
+        "2026-06",
+        "2026-07"
+      ],
       "role": "POST_EVALUATION_DIAGNOSTIC_ONLY",
       "reason": "Tail values were inspected during source-coverage verification before this split was frozen; they are permanently ineligible as independent evaluation for Alpha 0.5.x."
     },
