@@ -40,4 +40,4 @@ jobs:
           name: f6-aggregate-rank-${{ github.sha }}
           path: f6_rank_artifacts/
           if-no-files-found: error
-          retention-days: 30
+          retention-days: 90
