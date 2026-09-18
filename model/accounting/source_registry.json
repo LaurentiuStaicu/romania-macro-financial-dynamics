@@ -1,6 +1,6 @@
 {
-  "registry_version": "0.1",
-  "retrieved_at": "2026-09-17",
+  "registry_version": "0.2",
+  "retrieved_at": "2026-09-18",
   "sources": [
     {
       "id": "ecb_qsa",
@@ -29,6 +29,26 @@
   ],
   "verified_series": [
     {
+      "id": "f3_gov_liability_rest_world_all_maturity_stock",
+      "source_id": "ecb_qsa",
+      "series_key": "QSA.Q.N.RO.W1.S13.S1.N.L.LE.F3.T._Z.XDC._T.S.V.N._T",
+      "period": "2025-Q4",
+      "value": 448235.66,
+      "unit": "million_RON",
+      "status": "OBSERVED",
+      "use": "canonical X→G F3 stock cell; independently reconciled to short-term plus long-term maturity components"
+    },
+    {
+      "id": "f3_gov_liability_rest_world_short_term_stock",
+      "source_id": "ecb_qsa",
+      "series_key": "QSA.Q.N.RO.W1.S13.S1.N.L.LE.F3.S._Z.XDC._T.S.V.N._T",
+      "period": "2025-Q4",
+      "value": 1520.41,
+      "unit": "million_RON",
+      "status": "OBSERVED_EMPIRICAL_MATURITY_CONTROL",
+      "use": "short-term component used only to reconcile the all-maturity X→G F3 stock"
+    },
+    {
       "id": "f3_gov_liability_rest_world_long_term_stock",
       "source_id": "ecb_qsa",
       "series_key": "QSA.Q.N.RO.W1.S13.S1.N.L.LE.F3.L._Z.XDC._T.S.V.N._T",
@@ -39,8 +59,10 @@
       "issuer": "G",
       "maturity": "long_term",
       "unit": "million_RON",
-      "status": "SOURCE_SERIES_IDENTIFIED",
-      "use": "partial F3 source coverage; retrieve all-maturity or reconcile maturity components before promotion to OBSERVED"
+      "status": "OBSERVED_EMPIRICAL_MATURITY_CONTROL",
+      "use": "long-term component used only to reconcile the all-maturity X→G F3 stock; not a substitute for total-maturity coverage",
+      "period": "2025-Q4",
+      "value": 446715.26
     },
     {
       "id": "f3_nonresident_total_economy_stock_2025q4",
@@ -80,6 +102,33 @@
     "require_explicit_consolidation": true,
     "require_explicit_valuation": true,
     "quarterly_2025_flows_must_be_summed_only_after_definition_check": true,
-    "aggregate_controls_must_not_be_disaggregated_without_evidence": true
-  }
+    "aggregate_controls_must_not_be_disaggregated_without_evidence": true,
+    "require_immutable_source_vintage_before_benchmark_promotion": true,
+    "direct_observation_must_be_distinguished_from_exact_temporal_or_sector_derivation": true
+  },
+  "materialized_accounting": [
+    {
+      "instrument": "F3",
+      "source_id": "ecb_qsa",
+      "source_vintage": "data/source_vintages/accounting-f3-2025-vintage-2026-09-18",
+      "materialization_manifest": "model/accounting/f3_materialization_manifest.json",
+      "stock_period": "2025-Q4",
+      "flow_period": "2025-Q1..2025-Q4",
+      "stock_status_counts": {
+        "OBSERVED": 24,
+        "DERIVED": 11,
+        "NOT_APPLICABLE": 1
+      },
+      "flow_status_counts": {
+        "OBSERVED": 0,
+        "DERIVED": 35,
+        "NOT_APPLICABLE": 1
+      },
+      "direct_stock_rule": "one exact QSA canonical series at 2025-Q4",
+      "derived_stock_rule": "only exact sector identity F = S12 - S121",
+      "derived_flow_rule": "Q1+Q2+Q3+Q4, plus F = S12 - S121 where required",
+      "controls": "20/20 aggregate asset/liability controls PASS within 0.1 million RON; 2/2 X→G maturity controls PASS",
+      "limitation": "W2 liability-side counterpart mirrors are not published for the tested F3 cells; canonical W2 asset-side detail is reconciled instead to published W0 total assets and liabilities."
+    }
+  ]
 }
