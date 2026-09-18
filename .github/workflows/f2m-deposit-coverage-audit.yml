@@ -1,0 +1,41 @@
+name: F2M Deposit Coverage Audit
+
+on:
+  pull_request:
+    paths:
+      - "model/accounting/f2m_deposit_coverage_contract.json"
+      - "scripts/audit_qsa_f2m_deposit_coverage.py"
+      - ".github/workflows/f2m-deposit-coverage-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit-f2m-deposit-submatrix:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Compile audit
+        run: python -m py_compile scripts/audit_qsa_f2m_deposit_coverage.py
+
+      - name: Audit ECB QSA F2M deposit submatrix without benchmark mutation
+        env:
+          F2M_AUDIT_OUT: f2m_audit_artifacts
+        run: python scripts/audit_qsa_f2m_deposit_coverage.py
+
+      - name: Upload raw responses and audit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: f2m-deposit-coverage-${{ github.sha }}
+          path: f2m_audit_artifacts/
+          if-no-files-found: error
+          retention-days: 30
