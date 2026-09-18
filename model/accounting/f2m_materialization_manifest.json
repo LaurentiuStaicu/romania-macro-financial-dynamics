@@ -1,0 +1,257 @@
+{
+  "materialization_version": "0.1",
+  "instrument": "F2M",
+  "component_path": "model/accounting/f2m_component_2025.json",
+  "source_vintage": "accounting-f2m-2025-vintage-2026-09-18",
+  "source_workflow_artifact_id": 10553225559,
+  "source_workflow_artifact_sha256": "efc2704388911d79c182d1ad0cffce32bc7728b1c9f7669714ec3a518ef2f227",
+  "counts": {
+    "stock": {
+      "DERIVED": 13,
+      "NOT_APPLICABLE": 13,
+      "OBSERVED": 10
+    },
+    "flow": {
+      "DERIVED": 23,
+      "NOT_APPLICABLE": 13
+    }
+  },
+  "reconciliation_tolerance_million_RON": 0.1,
+  "aggregate_reconciliation": [
+    {
+      "measure": "stock",
+      "kind": "holder_total",
+      "sector": "H",
+      "materialized_total_million_RON": 424886.9,
+      "published_control_million_RON": 424886.9,
+      "residual_million_RON": 0.0,
+      "status": "PASS"
+    },
+    {
+      "measure": "stock",
+      "kind": "issuer_total",
+      "sector": "H",
+      "materialized_total_million_RON": 0,
+      "published_control_million_RON": null,
+      "residual_million_RON": null,
+      "status": "STRUCTURAL_CONTROL_UNAVAILABLE"
+    },
+    {
+      "measure": "stock",
+      "kind": "holder_total",
+      "sector": "C",
+      "materialized_total_million_RON": 268187.88,
+      "published_control_million_RON": 268187.88,
+      "residual_million_RON": 0.0,
+      "status": "PASS"
+    },
+    {
+      "measure": "stock",
+      "kind": "issuer_total",
+      "sector": "C",
+      "materialized_total_million_RON": 0,
+      "published_control_million_RON": 0.0,
+      "residual_million_RON": 0.0,
+      "status": "PASS"
+    },
+    {
+      "measure": "stock",
+      "kind": "holder_total",
+      "sector": "F",
+      "materialized_total_million_RON": 192800.28,
+      "published_control_million_RON": 192800.2825,
+      "residual_million_RON": -0.0025000000023283064,
+      "status": "PASS"
+    },
+    {
+      "measure": "stock",
+      "kind": "issuer_total",
+      "sector": "F",
+      "materialized_total_million_RON": 798622.49,
+      "published_control_million_RON": 798622.49,
+      "residual_million_RON": 0.0,
+      "status": "PASS"
+    },
+    {
+      "measure": "stock",
+      "kind": "holder_total",
+      "sector": "G",
+      "materialized_total_million_RON": 173321.83000000002,
+      "published_control_million_RON": 173321.83,
+      "residual_million_RON": 2.9103830456733704e-11,
+      "status": "PASS"
+    },
+    {
+      "measure": "stock",
+      "kind": "issuer_total",
+      "sector": "G",
+      "materialized_total_million_RON": 67208.84,
+      "published_control_million_RON": 67208.83,
+      "residual_million_RON": 0.00999999999476131,
+      "status": "PASS"
+    },
+    {
+      "measure": "stock",
+      "kind": "holder_total",
+      "sector": "BNR",
+      "materialized_total_million_RON": 91082.03,
+      "published_control_million_RON": 91082.03,
+      "residual_million_RON": 0.0,
+      "status": "PASS"
+    },
+    {
+      "measure": "stock",
+      "kind": "issuer_total",
+      "sector": "BNR",
+      "materialized_total_million_RON": 164206.01,
+      "published_control_million_RON": 164206.01,
+      "residual_million_RON": 0.0,
+      "status": "PASS"
+    },
+    {
+      "measure": "flow",
+      "kind": "holder_total",
+      "sector": "H",
+      "materialized_total_million_RON": 27152.41,
+      "published_control_million_RON": 27152.41,
+      "residual_million_RON": 0.0,
+      "status": "PASS"
+    },
+    {
+      "measure": "flow",
+      "kind": "issuer_total",
+      "sector": "H",
+      "materialized_total_million_RON": 0,
+      "published_control_million_RON": null,
+      "residual_million_RON": null,
+      "status": "STRUCTURAL_CONTROL_UNAVAILABLE"
+    },
+    {
+      "measure": "flow",
+      "kind": "holder_total",
+      "sector": "C",
+      "materialized_total_million_RON": 14212.26,
+      "published_control_million_RON": 14212.26,
+      "residual_million_RON": 0.0,
+      "status": "PASS"
+    },
+    {
+      "measure": "flow",
+      "kind": "issuer_total",
+      "sector": "C",
+      "materialized_total_million_RON": 0,
+      "published_control_million_RON": 0.0,
+      "residual_million_RON": 0.0,
+      "status": "PASS"
+    },
+    {
+      "measure": "flow",
+      "kind": "holder_total",
+      "sector": "F",
+      "materialized_total_million_RON": 15248.03,
+      "published_control_million_RON": 15248.0288671875,
+      "residual_million_RON": 0.0011328125001455192,
+      "status": "PASS"
+    },
+    {
+      "measure": "flow",
+      "kind": "issuer_total",
+      "sector": "F",
+      "materialized_total_million_RON": 51052.62,
+      "published_control_million_RON": 51052.62153320313,
+      "residual_million_RON": -0.0015332031252910383,
+      "status": "PASS"
+    },
+    {
+      "measure": "flow",
+      "kind": "holder_total",
+      "sector": "G",
+      "materialized_total_million_RON": 8252.59,
+      "published_control_million_RON": 8252.590000000002,
+      "residual_million_RON": -1.8189894035458565e-12,
+      "status": "PASS"
+    },
+    {
+      "measure": "flow",
+      "kind": "issuer_total",
+      "sector": "G",
+      "materialized_total_million_RON": 7032.889999999999,
+      "published_control_million_RON": 7032.87,
+      "residual_million_RON": 0.019999999999527063,
+      "status": "PASS"
+    },
+    {
+      "measure": "flow",
+      "kind": "holder_total",
+      "sector": "BNR",
+      "materialized_total_million_RON": -4774.69,
+      "published_control_million_RON": -4774.6900000000005,
+      "residual_million_RON": 9.094947017729282e-13,
+      "status": "PASS"
+    },
+    {
+      "measure": "flow",
+      "kind": "issuer_total",
+      "sector": "BNR",
+      "materialized_total_million_RON": 10040.2,
+      "published_control_million_RON": 10040.199999999999,
+      "residual_million_RON": 1.8189894035458565e-12,
+      "status": "PASS"
+    }
+  ],
+  "external_complement_controls": [
+    {
+      "measure": "stock",
+      "qsa_total_economy": {
+        "W0": 1150278.93,
+        "W2": null,
+        "W1": 165962.27
+      },
+      "direct_W2_published": false,
+      "direct_area_partition_residual_million_RON": null,
+      "direct_area_partition_status": "CONTROL_UNAVAILABLE",
+      "independent_domestic_bilateral_sum_million_RON": 984316.644833982,
+      "implied_domestic_W0_minus_W1_million_RON": 984316.6599999999,
+      "independent_domestic_partition_residual_million_RON": -0.01516601792536676,
+      "independent_domestic_partition_status": "PASS",
+      "sum_resident_holder_W0_million_RON": 1150278.9225,
+      "published_total_economy_W0_million_RON": 1150278.93,
+      "resident_holder_W0_vs_total_W0_residual_million_RON": -0.007499999832361937,
+      "resident_holder_W0_vs_total_W0_status": "PASS",
+      "sum_holder_complement_candidates_million_RON": 165962.27766601802,
+      "published_W1_total_economy_million_RON": 165962.27,
+      "holder_complements_vs_W1_residual_million_RON": 0.007666018034797162,
+      "holder_complements_vs_W1_status": "PASS"
+    },
+    {
+      "measure": "flow",
+      "qsa_total_economy": {
+        "W0": 60090.6,
+        "W2": null,
+        "W1": -5500.26
+      },
+      "direct_W2_published": false,
+      "direct_area_partition_residual_million_RON": null,
+      "direct_area_partition_status": "CONTROL_UNAVAILABLE",
+      "independent_domestic_bilateral_sum_million_RON": 65590.85880340681,
+      "implied_domestic_W0_minus_W1_million_RON": 65590.86,
+      "independent_domestic_partition_residual_million_RON": -0.0011965931917075068,
+      "independent_domestic_partition_status": "PASS",
+      "sum_resident_holder_W0_million_RON": 60090.5988671875,
+      "published_total_economy_W0_million_RON": 60090.6,
+      "resident_holder_W0_vs_total_W0_residual_million_RON": -0.0011328124965075403,
+      "resident_holder_W0_vs_total_W0_status": "PASS",
+      "sum_holder_complement_candidates_million_RON": -5500.259936219303,
+      "published_W1_total_economy_million_RON": -5500.26,
+      "holder_complements_vs_W1_residual_million_RON": 6.378069701895583e-05,
+      "holder_complements_vs_W1_status": "PASS"
+    }
+  ],
+  "total_F2_status": "INCOMPLETE_BLOCKED_BY_F21_CURRENCY",
+  "canonical_total_F2_benchmark_changed": false,
+  "behavioural_closure_changed": false,
+  "raw_provenance_verification": {
+    "phase_a1_distinct_series_keys_with_retained_raw": 66,
+    "phase_a2_raw_payloads_sha256_verified": 6
+  }
+}
