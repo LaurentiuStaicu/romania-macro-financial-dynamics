@@ -6,6 +6,14 @@ Romanian Monetary Dynamics (RMD) v0.1.0 is the initial public scientific-core ba
 
 The current scientific stage is **Validation Recovery / Empirical Basis Expansion**.
 
+## Canonical modeling paradigm
+
+**Romanian Monetary Dynamics (RMD) is an accounting-constrained, stock-flow-consistent dynamic model with a developing System Dynamics feedback architecture; behavioural closure remains inactive pending empirical identification and validation.**
+
+The accounting/stock-flow core and its conservation rules are canonical constraints. Candidate feedback loops, delays, nonlinear behavioural equations, and reaction functions may become part of the endogenous System Dynamics structure only after their explicit evidence, units, parameterization, identifiability, extreme-condition, sensitivity, and validation gates are satisfied.
+
+This paradigm statement is canonical for the project. RMD must not activate behavioural closure merely to appear to be a complete System Dynamics model, and it must not replace unresolved empirical structure with convenient synthetic coefficients or allocations. Any proposed paradigm-level change must be explicit, scientifically justified, documented in this file before integration, and must preserve accounting consistency unless a formally justified boundary change is approved.
+
 ## Current validation boundary
 
 The canonical validation disposition records **0 validated reference behavioural mechanisms**.
