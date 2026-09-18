@@ -1,0 +1,61 @@
+{
+  "contract_version": "0.2",
+  "phase": "Accounting Empirical Recovery / F8 Phase A — Other Accounts Coverage Audit",
+  "instrument": "F8",
+  "meaning": "Other accounts receivable/payable under ESA 2010",
+  "benchmark_stock_period": "2025-Q4",
+  "benchmark_flow_period": "2025-Q1..2025-Q4",
+  "purpose": "Determine exact ECB QSA who-to-whom coverage for total F8, including exact cell-level recovery as F81+F89 where total F8 is not directly disseminated, and independently test the same decomposition at aggregate-control level.",
+  "instrument_boundary": {
+    "F8": "Other accounts receivable/payable total",
+    "F81": "Trade credits and advances",
+    "F89": "Other accounts receivable/payable excluding trade credits and advances",
+    "identity": "F8 = F81 + F89",
+    "rule": "F81 must never be used as a substitute for F8."
+  },
+  "sector_mapping": {
+    "H": "S1M",
+    "C": "S11",
+    "G": "S13",
+    "BNR": "S121",
+    "F": "S12 - S121",
+    "X": "rest-of-world counterpart"
+  },
+  "source_orientations": {
+    "domestic_holder_asset": "W2; reference sector=holder; counterpart sector=issuer; entry=A",
+    "domestic_issuer_liability": "W2; reference sector=issuer; counterpart sector=holder; entry=L",
+    "resident_holder_to_X": "W1; reference sector=holder; counterpart sector=S1; entry=A",
+    "X_holder_to_resident_issuer": "W1; reference sector=issuer; counterpart sector=S1; entry=L"
+  },
+  "source_dimensions": {
+    "maturity": "T only",
+    "custom_breakdown": "_T total only; direct-investment FND must not replace total",
+    "unit": "XDC million domestic currency",
+    "valuation": "S standard SNA/ESA valuation",
+    "consolidation": "N non-consolidated"
+  },
+  "hard_rules": {
+    "no_benchmark_mutation": true,
+    "no_materialization_in_coverage_phase": true,
+    "no_missing_to_zero": true,
+    "no_synthetic_allocation": true,
+    "F_composite_only_by_exact_S12_minus_S121": true,
+    "annual_flow_only_by_exact_Q1_Q2_Q3_Q4_sum": true,
+    "dual_W2_orientations_must_be_probed": true,
+    "orientation_conflict_blocks_cell": true,
+    "F81_must_not_substitute_for_F8": true,
+    "F8_F81_F89_identity_must_be_tested_where_components_are_available": true,
+    "custom_breakdown_total_must_be_used": true,
+    "direct_investment_breakdown_must_not_substitute_for_total": true,
+    "W0_holder_and_issuer_controls_required_where_published": true,
+    "W1_total_economy_controls_required_where_published": true,
+    "X_to_X_is_outside_Romanian_national_accounts_boundary": true,
+    "network_errors_block_positive_coverage_claims": true,
+    "behavioural_closure_may_change": false,
+    "cell_level_F81_plus_F89_fallback_must_be_probed": true,
+    "direct_F8_and_component_sum_must_agree_where_both_exist": true
+  },
+  "reconciliation_tolerance_million_RON": 0.1,
+  "promotion_rule": "A later F8 rank/materialization gate may use a cell only if total F8 is directly observed or exactly derived as F81+F89 with all required source terms available, no orientation/subinstrument conflict, and accounting controls satisfied. This phase only records source coverage.",
+  "system_dynamics_conformity": "Accounting-only recovery. No behavioural feedback, delay, nonlinearity or closure status may change."
+}

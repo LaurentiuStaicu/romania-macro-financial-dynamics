@@ -1,5 +1,5 @@
 {
-  "ledger_version": "1.1",
+  "ledger_version": "1.2",
   "benchmark": "2025",
   "principle": "Record residuals and unresolved coverage explicitly; never force accounting closure with invented allocations.",
   "instrument_gates": [
@@ -249,13 +249,35 @@
     {
       "instrument": "F8",
       "priority": 4,
-      "stock_matrix_status": "TBD",
-      "flow_matrix_status": "TBD",
+      "stock_matrix_status": "AGGREGATES_VALID_BILATERAL_TOTAL_F8_UNAVAILABLE",
+      "flow_matrix_status": "AGGREGATES_VALID_BILATERAL_TOTAL_F8_UNAVAILABLE",
       "asset_liability_residual": null,
-      "residual_status": "TBD_UNTIL_COMPARABLE_TOTALS_EXIST",
+      "residual_status": "TOTAL_DECOMPOSITION_PASS_BILATERAL_COVERAGE_ZERO_OF_35",
       "known_issues": [
-        "F8 must not be reduced to pure trade credit."
-      ]
+        "No tested in-boundary bilateral total-F8 cell is directly published in QSA for stock or 2025 flow.",
+        "All eight total-economy F8=F81+F89 controls pass within 0.1 million RON, so the total-instrument definition is empirically supported.",
+        "Twelve of twenty resident-sector decomposition controls pass; the eight incomplete controls are F and BNR asset/liability controls where S121 component series are not published.",
+        "F81 trade credits and advances must not be used as a proxy for F8 because F89 is quantitatively material.",
+        "The next source gate probes bilateral F81 and F89 and permits F8 derivation only from the exact component sum."
+      ],
+      "coverage_assessment": {
+        "status": "TOTAL_F8_AGGREGATES_AVAILABLE_BILATERAL_NOT_PUBLISHED",
+        "assessment": "model/accounting/f8_other_accounts_coverage_assessment.json",
+        "stock_cells": {
+          "resolved": 0,
+          "unresolved": 35,
+          "not_applicable": 1
+        },
+        "flow_cells": {
+          "resolved": 0,
+          "unresolved": 35,
+          "not_applicable": 1
+        },
+        "total_decomposition_controls": "PASS_8_OF_8",
+        "sector_decomposition_controls": "PASS_12_INCOMPLETE_8",
+        "next_gate": "F8 bilateral F81+F89 component bridge",
+        "materialization_allowed": false
+      }
     },
     {
       "instrument": "F5",
@@ -391,6 +413,10 @@
     {
       "id": "f4_conditional_stock_not_promoted",
       "status": "ENFORCED"
+    },
+    {
+      "id": "f8_total_instrument_coverage",
+      "status": "NEGATIVE_BILATERAL_RESULT_TOTAL_DECOMPOSITION_PASS_8_OF_8"
     }
   ]
 }

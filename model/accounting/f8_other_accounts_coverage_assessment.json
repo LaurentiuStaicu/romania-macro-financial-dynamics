@@ -1,0 +1,167 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F8 Phase A — Total Other Accounts Coverage Audit",
+  "audit_head_sha": "3eaa05a84532e4be130455ab66b847dca0c46896",
+  "workflow_run_id": 35373637941,
+  "workflow_artifact_id": 10559905765,
+  "workflow_artifact_sha256": "70ffb902745015fd529cb056752359fd3eccd3846867c11613bdca32ca110438",
+  "verdict": "TOTAL_F8_AGGREGATES_AND_DECOMPOSITION_VALID_BILATERAL_F8_NOT_PUBLISHED",
+  "result": {
+    "series_requested": 204,
+    "series_status_counts": {
+      "AVAILABLE": 76,
+      "HTTP_ERROR": 128
+    },
+    "network_errors_present": false,
+    "stock_cells": {
+      "observable_or_exact_derivation": 0,
+      "unresolved_source_coverage": 35,
+      "not_applicable": 1
+    },
+    "flow_cells": {
+      "observable_or_exact_derivation": 0,
+      "unresolved_source_coverage": 35,
+      "not_applicable": 1
+    },
+    "aggregate_reconciliation": {
+      "bilateral_coverage_incomplete": 20
+    },
+    "sector_decomposition_controls": {
+      "PASS": 12,
+      "CONTROL_INCOMPLETE": 8
+    },
+    "total_economy_decomposition_controls": {
+      "PASS": 8
+    }
+  },
+  "total_economy_F8_million_RON": {
+    "stock": {
+      "W0_assets": 1151251.2,
+      "W0_liabilities": 1204988.07,
+      "W1_assets": 167132.57,
+      "W1_liabilities": 220869.44
+    },
+    "flow_2025": {
+      "W0_assets": 32678.36,
+      "W0_liabilities": 23702.87,
+      "W1_assets": 19961.87,
+      "W1_liabilities": 10986.38
+    }
+  },
+  "decomposition_evidence": {
+    "stock_W0_assets": {
+      "F8": 1151251.2,
+      "F81": 601224.52,
+      "F89": 550026.68,
+      "residual": -1.1641532182693481e-10,
+      "status": "PASS"
+    },
+    "stock_W0_liabilities": {
+      "F8": 1204988.07,
+      "F81": 634477.69,
+      "F89": 570510.38,
+      "residual": 1.1641532182693481e-10,
+      "status": "PASS"
+    },
+    "stock_W1_assets": {
+      "F8": 167132.57,
+      "F81": 101017.2,
+      "F89": 66115.37,
+      "residual": 1.4551915228366852e-11,
+      "status": "PASS"
+    },
+    "stock_W1_liabilities": {
+      "F8": 220869.44,
+      "F81": 134270.37,
+      "F89": 86599.07,
+      "residual": 0,
+      "status": "PASS"
+    },
+    "flow_W0_assets": {
+      "F8": 32678.36,
+      "F81": 6258.26,
+      "F89": 26420.09,
+      "residual": 0.01,
+      "status": "PASS"
+    },
+    "flow_W0_liabilities": {
+      "F8": 23702.87,
+      "F81": 8677.18,
+      "F89": 15025.7,
+      "residual": -0.01,
+      "status": "PASS"
+    },
+    "flow_W1_assets": {
+      "F8": 19961.87,
+      "F81": 5650.82,
+      "F89": 14311.07,
+      "residual": -0.02,
+      "status": "PASS"
+    },
+    "flow_W1_liabilities": {
+      "F8": 10986.38,
+      "F81": 8069.71,
+      "F89": 2916.67,
+      "residual": 0,
+      "status": "PASS"
+    }
+  },
+  "sector_decomposition_summary": {
+    "PASS": [
+      "stock H assets",
+      "stock H liabilities",
+      "stock C assets",
+      "stock C liabilities",
+      "stock G assets",
+      "stock G liabilities",
+      "flow H assets",
+      "flow H liabilities",
+      "flow C assets",
+      "flow C liabilities",
+      "flow G assets",
+      "flow G liabilities"
+    ],
+    "CONTROL_INCOMPLETE": [
+      "stock F assets",
+      "stock F liabilities",
+      "stock BNR assets",
+      "stock BNR liabilities",
+      "flow F assets",
+      "flow F liabilities",
+      "flow BNR assets",
+      "flow BNR liabilities"
+    ],
+    "interpretation": "The incomplete controls arise because the S121 F81/F89 component series needed to form RMD F=S12-S121 and the BNR component rows are not published in the tested aggregate layer. This is missing component coverage, not an F8=F81+F89 contradiction."
+  },
+  "BNR_boundary_evidence": {
+    "stock_F8_assets_W0_million_RON": 3289.49,
+    "stock_F8_liabilities_W0_million_RON": 0,
+    "flow_2025_F8_assets_W0_million_RON": 2339.5,
+    "flow_2025_F8_liabilities_W0_million_RON": 0,
+    "interpretation": [
+      "BNR has a non-zero aggregate F8 asset position/flow and zero aggregate F8 liabilities in the tested 2025 controls.",
+      "No bilateral zero is inferred in Phase A.",
+      "Because F8 positions are claims/liabilities, a stock-only zero-liability partition scenario could be tested later, but only after component-bilateral recovery and exact-rank analysis; zero aggregate flows are never converted to bilateral zeros."
+    ]
+  },
+  "scientific_interpretation": [
+    "The direct QSA source does not publish any tested bilateral total-F8 holder-by-issuer cell for Romania in W2/W1 orientations.",
+    "The total instrument is nevertheless strongly validated at aggregate level: every total-economy control satisfies F8=F81+F89 within the 0.1 million RON tolerance.",
+    "F89 is quantitatively material. For example, at 2025-Q4 W0 assets F89 is 550026.68 million RON versus F81 601224.52 million RON; treating trade credit F81 as total F8 would omit nearly half the instrument.",
+    "The next recovery step should test whether bilateral F81 and F89 are published even though bilateral total F8 is not. If both subcomponents are available for a cell, total F8 can be derived exactly as their sum."
+  ],
+  "next_gate": {
+    "name": "F8 Phase B — bilateral component bridge F81 + F89",
+    "required_checks": [
+      "probe W2 holder-asset and issuer-liability series separately for F81 and F89",
+      "probe W1 external asset/liability series separately for F81 and F89",
+      "derive bilateral F8 only when both F81 and F89 are available on identical dimensions",
+      "use F=S12-S121 only as an exact sector identity",
+      "reconcile any derived F8 rows/columns to published W0 total-F8 controls",
+      "reconcile external derived F8 to W1 total-F8 controls",
+      "record all component-missing cells explicitly and never substitute F81 for F8",
+      "after component recovery, compute exact rank/nullity before any materialization"
+    ],
+    "behavioural_closure_may_change": false
+  }
+}
