@@ -1,5 +1,5 @@
 {
-  "contract_version": "0.2",
+  "contract_version": "0.3",
   "phase": "Accounting Empirical Recovery / F2 Phase A2 — F2M External Complement Identity Audit",
   "purpose": "Test whether the five resident-holder to rest-of-world F2M cells can be derived as unique accounting complements rather than allocated residuals.",
   "benchmark_stock_period": "2025-Q4",
@@ -18,10 +18,11 @@
     "holder W0 F2M totals are available on definitionally identical dimensions",
     "published total-economy W0 and W1 F2M controls are available",
     "independently constructed domestic bilateral submatrix equals the implied domestic aggregate W0 minus W1 within tolerance; a directly published W2 aggregate, when available, is an additional control but is not required when unpublished",
+    "sum of resident-sector holder W0 F2M aggregates equals the published total-economy W0 F2M aggregate within tolerance",
     "sum of the five independently calculated holder-level X complements equals the published total-economy W1 F2M asset control within tolerance",
     "frequency, instrument, accounting entry, consolidation, unit, currency denominator, valuation, prices and transformation are identical"
   ],
-  "control_independence_rule": "The domestic-submatrix control is calculated without using any holder→X candidate. The W1 control is published independently by ECB QSA. Thus the check does not validate a residual with itself.",
+  "control_independence_rule": "Three aggregate checks are required: the independently observed/derived domestic bilateral submatrix versus published W0−W1; the sum of resident holder W0 aggregates versus published total-economy W0; and the sum of holder→X complements versus published W1. None uses an allocated share or an unobserved W2 value.",
   "promotion_rule": "Only if the independent domestic partition control and the published W1 aggregate control both pass for stock and flow may holder→X be classified as exact DERIVED QSA complements in a later materialization PR.",
   "failure_rule": "If either independent control fails or W0/W1 is unavailable, the external F2M column remains unresolved and BOP/IIP/BNR external statistics are investigated only as separately reconciled sources.",
   "prohibited": [
