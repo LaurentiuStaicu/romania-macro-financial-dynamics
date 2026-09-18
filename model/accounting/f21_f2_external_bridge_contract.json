@@ -1,0 +1,34 @@
+{
+  "contract_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F2 Phase C2 — F21 External Instrument Bridge",
+  "purpose": "Test whether holder-specific external F21 currency can be identified exactly from QSA total F2 minus the already materialized F2M deposits component.",
+  "identity": "F2 = F21 + F2M, therefore W1 F21(holder) = W1 F2(holder) - W1 F2M(holder) when definitions and dimensions are identical.",
+  "benchmark_stock_period": "2025-Q4",
+  "benchmark_flow_period": "2025-Q1..2025-Q4",
+  "inputs": {
+    "materialized_F2M_component": "model/accounting/f2m_component_2025.json",
+    "F2M_external_cells_status": "DERIVED by previously passed exact QSA complement gate",
+    "candidate_F2_source": "ECB QSA W1 assets by resident holder",
+    "F21_holder_control": "ECB QSA W0 F21 assets by resident holder"
+  },
+  "hard_rules": {
+    "no_benchmark_mutation": true,
+    "no_total_F2_promotion": true,
+    "no_holder_share_allocation": true,
+    "no_residual_allocation_across_holders": true,
+    "no_missing_to_zero": true,
+    "F_composite_only_by_exact_S12_minus_S121": true,
+    "annual_flow_only_by_exact_Q1_Q2_Q3_Q4_sum": true,
+    "F2_F21_F2M_dimensions_must_match": true,
+    "external_F21_must_be_exact_F2_minus_F2M": true,
+    "external_F21_sum_must_reconcile_to_published_W1_F21": true,
+    "holder_W1_F2_sum_must_reconcile_to_published_total_W1_F2": true,
+    "implied_domestic_F21_sum_must_reconcile_to_resident_F21_liability_control": true,
+    "network_errors_block_promotion": true,
+    "behavioural_closure_may_change": false
+  },
+  "reconciliation_tolerance_million_RON": 0.1,
+  "promotion_rule": "Only if every resident-holder W1 F2 series is available and all exact bridge controls pass for stock and flow may holder-specific external F21 be eligible for later materialization. This gate does not itself assign the resident issuer column or populate total F2.",
+  "failure_rule": "If any holder W1 F2 series is unavailable, definitionally mismatched, or the aggregate identities fail, F21 remains unresolved. No aggregate W1 F21 amount may be distributed by shares.",
+  "system_dynamics_conformity": "Accounting-only gate; feedback and behavioural closure remain unchanged."
+}
