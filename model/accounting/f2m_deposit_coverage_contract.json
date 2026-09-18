@@ -1,0 +1,62 @@
+{
+  "contract_version": "0.2",
+  "phase": "Accounting Empirical Recovery / F2 Phase A1 — Deposit Submatrix Coverage Audit",
+  "instrument": "F2M",
+  "meaning": "Deposits only; not total F2 currency and deposits",
+  "benchmark_stock_period": "2025-Q4",
+  "benchmark_flow_period": "2025-Q1..2025-Q4",
+  "official_definition": {
+    "framework": "ESA 2010",
+    "rule": "Deposits F22/F29 are standardised non-negotiable contracts offered by deposit-taking corporations and, in some cases, central government as debtors; non-resident institutional units may also be deposit debtors.",
+    "source": "https://ec.europa.eu/eurostat/documents/3859598/5925693/KS-02-13-269-EN.PDF",
+    "implication_for_rmd": "H and C are not deposit-issuing sectors in the canonical F2M holder-by-issuer matrix and are structural NOT_APPLICABLE issuer columns, not missing observations."
+  },
+  "canonical_orientation": {
+    "domestic_holder_to_domestic_issuer": "issuer-liability QSA W2 series: reference sector = issuer, counterpart sector = holder, accounting entry = L",
+    "rest_of_world_holder_to_resident_issuer": "issuer-liability QSA W1 series with counterpart sector S1",
+    "resident_holder_to_rest_of_world_issuer": "holder-asset external-sector source; QSA W1 F2M is unavailable in the current audit and must not be inferred from row residuals",
+    "X_to_X": "outside Romanian national financial-accounts boundary"
+  },
+  "sector_mapping": {
+    "H": "S1M",
+    "C": "S11",
+    "G": "S13",
+    "BNR": "S121",
+    "F": "S12 - S121",
+    "X": "non-resident counterpart"
+  },
+  "structural_non_issuer_sectors_for_F2M": ["H", "C"],
+  "hard_rules": {
+    "no_F2M_relabelled_as_F2": true,
+    "no_synthetic_currency_allocation": true,
+    "no_external_deposit_allocation_from_row_residuals": true,
+    "no_missing_to_zero": true,
+    "no_benchmark_promotion_in_this_audit": true,
+    "F_composite_only_by_exact_S12_minus_S121": true,
+    "annual_flow_only_by_exact_Q1_Q2_Q3_Q4_sum": true,
+    "row_and_column_aggregate_controls_required_before_later_materialization": true,
+    "negative_source_coverage_is_a_valid_result": true
+  },
+  "reconciliation_tolerance_million_RON": 0.1,
+  "parallel_blockers": [
+    {
+      "instrument": "F21",
+      "status": "UNRESOLVED_BILATERAL_CURRENCY_ALLOCATION",
+      "effect": "Total F2 Accounting Spine remains incomplete even if F2M deposits are recovered."
+    },
+    {
+      "instrument": "F2M",
+      "boundary": "resident holder to rest-of-world issuer",
+      "status": "UNRESOLVED_EXTERNAL_DEPOSIT_ASSETS",
+      "effect": "A complete F2M matrix cannot be claimed until an official external-statistics source is reconciled to the missing X issuer column."
+    }
+  ],
+  "next_source_gate": {
+    "preferred_sources": [
+      "ECB BPS / Balance of Payments and International Investment Position",
+      "Eurostat BOP/IIP",
+      "BNR external-sector statistics"
+    ],
+    "reason": "External statistics explicitly cover resident claims on non-residents, including Other Investment / Currency and Deposits, but sector mapping and accounting-concept reconciliation must be verified before use."
+  }
+}
