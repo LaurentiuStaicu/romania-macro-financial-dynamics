@@ -1,0 +1,90 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F6 Phase B — Bilateral Component Coverage Audit",
+  "audit_head_sha": "ba2130931d2efc67388fa2643f708e55da0dd882",
+  "workflow_run_id": 35379740677,
+  "workflow_artifact_id": 10561013391,
+  "workflow_artifact_sha256": "4213f1968593b3f9e29d01f59bdf1de26cd95a1d146ea124883e150f6be21e69",
+  "verdict": "NO_BILATERAL_F6_SUBCOMPONENT_COVERAGE_AGGREGATE_RANK_REQUIRED",
+  "result": {
+    "series_requested": 868,
+    "series_status_counts": {
+      "AVAILABLE": 28,
+      "HTTP_ERROR": 840
+    },
+    "network_errors_present": false,
+    "component_cells": {
+      "F61": {
+        "resolved": 0,
+        "unresolved": 70
+      },
+      "F62": {
+        "resolved": 0,
+        "unresolved": 70
+      },
+      "F63": {
+        "resolved": 0,
+        "unresolved": 70
+      },
+      "F64": {
+        "resolved": 0,
+        "unresolved": 70
+      },
+      "F65": {
+        "resolved": 0,
+        "unresolved": 70
+      },
+      "F66": {
+        "resolved": 0,
+        "unresolved": 70
+      },
+      "F63_F64_F65": {
+        "resolved": 0,
+        "unresolved": 70
+      }
+    },
+    "total_F6_candidates": {
+      "resolved": 0,
+      "unresolved": 70,
+      "not_applicable": 2
+    },
+    "aggregate_reconciliation": {
+      "bilateral_coverage_incomplete": 20
+    },
+    "external_controls": {
+      "bilateral_coverage_incomplete": 4
+    },
+    "materialization_allowed": false
+  },
+  "scientific_interpretation": [
+    "None of the tested F6 subcomponents is published bilaterally in the W2/W1 layer for the RMD sector mapping, including F62 and F63 even though those instruments are published at aggregate level.",
+    "The Phase A aggregate F62/F63 observations therefore do not translate into holder-by-issuer component equations.",
+    "Neither the full six-component identity nor the transmission-block identity reconstructs any bilateral F6 cell.",
+    "With no direct total-F6 cells and no bilateral component cells, the remaining public evidence consists of resident W0 holder/issuer total-F6 controls and total-economy W1 total-F6 controls.",
+    "No issuer-applicability zero has been introduced; any such future structural rule would require a separate instrument-specific gate."
+  ],
+  "rank_preview": {
+    "variables_per_measure": 35,
+    "equation_families": [
+      "5 resident holder W0 F6 totals",
+      "5 resident issuer W0 F6 totals",
+      "1 total-economy W1 F6 asset equation",
+      "1 total-economy W1 F6 liability equation"
+    ],
+    "known_dependency": "sum(resident holder W0 totals)-W1 assets = sum(resident issuer W0 totals)-W1 liabilities",
+    "expected_max_rank": 11,
+    "expected_min_nullity": 24,
+    "note": "This is a preview only; the next gate computes exact rational rank/nullspace and source RHS consistency."
+  },
+  "next_gate": {
+    "name": "F6 Phase C — exact aggregate-control rank/nullspace audit",
+    "required_checks": [
+      "compute exact rational rank/nullity over 35 in-boundary F6 variables using all published W0/W1 total-F6 equations",
+      "verify the domestic asset/liability accounting RHS identity within published precision",
+      "identify any unconditional rank-unique bilateral F6 coordinates",
+      "introduce no issuer-applicability or non-negativity structural zero in the unconditional system",
+      "if zero useful unique cells result, freeze F6 at the aggregate-only public-data boundary and advance to F7"
+    ],
+    "behavioural_closure_may_change": false
+  }
+}
