@@ -1,0 +1,200 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F6 Phase A — Insurance, Pensions and Standardised Guarantees Coverage Audit",
+  "audit_head_sha": "8a90fcab4511161c411996512cfd2c83a34eb207",
+  "workflow_run_id": 35379249532,
+  "workflow_artifact_id": 10560957885,
+  "workflow_artifact_sha256": "5fb1324b87df4b3151527ab587479aff7cdb38299d0eef2cb5ea28dcda9f106a",
+  "verdict": "TOTAL_F6_AGGREGATES_AVAILABLE_BILATERAL_UNAVAILABLE_ONLY_F62_F63_COMPONENT_CONTROLS_PUBLISHED",
+  "result": {
+    "series_requested": 344,
+    "series_status_counts": {
+      "AVAILABLE": 64,
+      "HTTP_ERROR": 280
+    },
+    "network_errors_present": false,
+    "total_F6_cells": {
+      "resolved": 0,
+      "unresolved": 70,
+      "not_applicable": 2
+    },
+    "aggregate_reconciliation": {
+      "bilateral_coverage_incomplete": 20
+    },
+    "sector_decomposition": {
+      "full_six_component": {
+        "CONTROL_INCOMPLETE": 20
+      },
+      "transmission_block": {
+        "CONTROL_INCOMPLETE": 20
+      },
+      "pension_block": {
+        "CONTROL_INCOMPLETE": 20
+      }
+    },
+    "total_economy_decomposition": {
+      "full_six_component": {
+        "CONTROL_INCOMPLETE": 8
+      },
+      "transmission_block": {
+        "CONTROL_INCOMPLETE": 8
+      },
+      "pension_block": {
+        "CONTROL_INCOMPLETE": 8
+      }
+    }
+  },
+  "published_total_economy_controls_million_RON": {
+    "stock": {
+      "W0_assets": {
+        "F6": 253103.49,
+        "F62": 15825.1,
+        "F63": 207461.87,
+        "unresolved_remainder_after_F62_F63": 29816.52
+      },
+      "W0_liabilities": {
+        "F6": 249733.75,
+        "F62": 15825.1,
+        "F63": 208966.38,
+        "unresolved_remainder_after_F62_F63": 24942.27
+      },
+      "W1_assets": {
+        "F6": 5044.41,
+        "F62": 0,
+        "F63": 0,
+        "unresolved_remainder_after_F62_F63": 5044.41
+      },
+      "W1_liabilities": {
+        "F6": 1674.68,
+        "F62": 0,
+        "F63": 1504.51,
+        "unresolved_remainder_after_F62_F63": 170.17
+      }
+    },
+    "flow_2025": {
+      "W0_assets": {
+        "F6": 36519.23,
+        "F62": 2118.39,
+        "F63": 30198.59,
+        "unresolved_remainder_after_F62_F63": 4202.25
+      },
+      "W0_liabilities": {
+        "F6": 36017.26,
+        "F62": 2118.39,
+        "F63": 30409.43,
+        "unresolved_remainder_after_F62_F63": 3489.44
+      },
+      "W1_assets": {
+        "F6": 706.69,
+        "F62": 0,
+        "F63": 0,
+        "unresolved_remainder_after_F62_F63": 706.69
+      },
+      "W1_liabilities": {
+        "F6": 204.74,
+        "F62": 0,
+        "F63": 210.82,
+        "unresolved_remainder_after_F62_F63": -6.08
+      }
+    }
+  },
+  "resident_aggregate_structure": {
+    "stock": {
+      "H_assets": {
+        "F6": 234561.69,
+        "F62": 15825.1,
+        "F63": 207461.87
+      },
+      "H_liabilities": {
+        "F6": 0,
+        "F63": 0
+      },
+      "C_assets": {
+        "F6": 9025.68,
+        "F62": 0
+      },
+      "C_liabilities": {
+        "F6": 0,
+        "F63": 0
+      },
+      "F_assets": {
+        "F6": 9310.80953125
+      },
+      "F_liabilities": {
+        "F6": 249640.578125
+      },
+      "G_assets": {
+        "F6": 205.09,
+        "F62": 0
+      },
+      "G_liabilities": {
+        "F6": 93.17,
+        "F63": 0
+      },
+      "BNR_assets": {
+        "F6": 0.21
+      },
+      "BNR_liabilities": {
+        "F6": 0
+      }
+    },
+    "flow_2025": {
+      "H_assets": {
+        "F6": 33994.05,
+        "F62": 2118.39,
+        "F63": 30198.59
+      },
+      "H_liabilities": {
+        "F6": 0,
+        "F63": 0
+      },
+      "C_assets": {
+        "F6": 1342.79,
+        "F62": 0
+      },
+      "C_liabilities": {
+        "F6": 0,
+        "F63": 0
+      },
+      "F_assets": {
+        "F6": 1169.719966583252
+      },
+      "F_liabilities": {
+        "F6": 36152.95068359375
+      },
+      "G_assets": {
+        "F6": 12.6,
+        "F62": 0
+      },
+      "G_liabilities": {
+        "F6": -135.67,
+        "F63": 0
+      },
+      "BNR_assets": {
+        "F6": 0.07
+      },
+      "BNR_liabilities": {
+        "F6": 0
+      }
+    }
+  },
+  "scientific_interpretation": [
+    "The canonical _Z._Z QSA dimensions are valid for Romania F6: 64 requested series return observations, so this is not an all-error dimension failure.",
+    "No tested bilateral total-F6 W2/W1 cell is published.",
+    "At the tested aggregate layer, F62 life-insurance/annuity entitlements and F63 pension entitlements are published, while F61, F64, F65, F66 and F63_F64_F65 are not available in the requested controls.",
+    "Because the other component controls are absent, neither the six-way ESA identity nor the transmission-block identity can be evaluated; all such controls remain CONTROL_INCOMPLETE rather than FAIL.",
+    "The numerical remainder F6-F62-F63 is not assigned to F61/F64/F65/F66 and is retained only as an unresolved aggregate remainder."
+  ],
+  "next_gate": {
+    "name": "F6 Phase B — bilateral subcomponent coverage audit",
+    "required_checks": [
+      "probe F61/F62/F63/F64/F65/F66 and F63_F64_F65 bilaterally in both W2 orientations and W1 external orientations",
+      "retain exact F=S12-S121 only",
+      "do not introduce issuer-applicability zeros in the same gate",
+      "derive no total F6 cell unless the complete relevant component identity is source-covered",
+      "record whether F62/F63 bilateral detail exists despite missing other aggregate components",
+      "if useful component detail emerges, follow with component-aware rank; otherwise compute aggregate rank/freeze"
+    ],
+    "behavioural_closure_may_change": false
+  }
+}
