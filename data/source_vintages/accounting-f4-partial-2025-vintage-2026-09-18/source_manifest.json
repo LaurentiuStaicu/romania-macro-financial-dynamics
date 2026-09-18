@@ -21,5 +21,7 @@
     "phase_B_raw_response_count": 12
   },
   "immutability_rule": "The exact successful Phase B workflow artifact is retained losslessly. Offline generation must decode it, verify SHA-256, verify both embedded reports and raw-response counts, and fail on any byte/provenance mismatch.",
-  "scope_rule": "This vintage may materialize only the unconditional rank-unique F4 core. Conditional BNR-zero stock cells and all rank-nonunique cells remain unresolved."
+  "scope_rule": "This vintage may materialize only the unconditional rank-unique F4 core. Conditional BNR-zero stock cells and all rank-nonunique cells remain unresolved.",
+  "retained_in_repository": true,
+  "retention_commit_sha": "ea9cd5ddba924f968e47521be2f90c342f525c1b"
 }
