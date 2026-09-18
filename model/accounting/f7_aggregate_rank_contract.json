@@ -1,0 +1,34 @@
+{
+  "contract_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F7 Phase B — Exact Aggregate-Control Rank Audit",
+  "purpose": "Quantify exactly how much bilateral F7 structure is identified by the retained published aggregate controls after Phase A found zero direct bilateral coverage.",
+  "inputs": {
+    "phase_A_assessment": "model/accounting/f7_financial_derivatives_coverage_assessment.json"
+  },
+  "canonical_variables": "35 in-boundary holder→issuer F7 cells over H/C/F/G/X/BNR; X→X is outside the Romanian national-accounts boundary",
+  "equation_families": [
+    "available resident W0 holder asset totals",
+    "available resident W0 issuer liability totals",
+    "W0 total-economy asset and liability equations",
+    "W1 total asset equation for resident holders→X",
+    "W1 total liability equation for X→resident issuers"
+  ],
+  "hard_rules": {
+    "no_benchmark_mutation": true,
+    "no_materialization_in_phase_B": true,
+    "rank_and_nullity_must_use_exact_rational_coefficient_arithmetic": true,
+    "unique_cell_status_requires_zero_loading_on_every_nullspace_basis_vector": true,
+    "aggregate_RHS_identity_residual_must_be_reported": true,
+    "published_rounding_residuals_must_not_be_forced_to_zero": true,
+    "no_unconditional_bilateral_value_from_aggregate_equations_unless_rank_unique": true,
+    "zero_aggregate_must_not_create_bilateral_zero_equations": true,
+    "no_nonnegativity_constraint": true,
+    "no_issuer_applicability_assumption": true,
+    "no_materiality_assumption": true,
+    "no_synthetic_allocation": true,
+    "behavioural_closure_may_change": false
+  },
+  "reconciliation_tolerance_million_RON": 0.1,
+  "disposition_rule": "If the aggregate RHS identity is consistent within tolerance and no bilateral coordinate is invariant over the exact unconditional nullspace, freeze F7 at the aggregate-only public-data boundary rather than allocate counterparties.",
+  "system_dynamics_conformity": "Accounting-only recovery; no feedback, delay, behavioural equation or closure status changes."
+}
