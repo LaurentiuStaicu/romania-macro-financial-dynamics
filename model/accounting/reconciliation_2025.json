@@ -1,5 +1,5 @@
 {
-  "ledger_version": "0.2",
+  "ledger_version": "0.3",
   "benchmark": "2025",
   "principle": "Record residuals and unresolved coverage explicitly; never force accounting closure with invented allocations.",
   "instrument_gates": [
@@ -51,13 +51,35 @@
     {
       "instrument": "F2",
       "priority": 2,
-      "stock_matrix_status": "TBD",
-      "flow_matrix_status": "TBD",
+      "stock_matrix_status": "TOTAL_F2_INCOMPLETE_F2M_COMPONENT_MATERIALIZED_F21_UNRESOLVED",
+      "flow_matrix_status": "TOTAL_F2_INCOMPLETE_F2M_COMPONENT_MATERIALIZED_F21_UNRESOLVED",
       "asset_liability_residual": null,
-      "residual_status": "TBD_UNTIL_COMPARABLE_TOTALS_EXIST",
+      "residual_status": "F2M_COMPONENT_RECONCILED_TOTAL_F2_BLOCKED_BY_F21",
       "known_issues": [
-        "Money aggregates are not substitutes for sectoral ESA F2 positions."
-      ]
+        "Money aggregates are not substitutes for sectoral ESA F2 positions.",
+        "The F2M deposits component is materialized separately and must not be relabelled as total F2.",
+        "F21 currency remains an unresolved bilateral allocation problem; total F2 cannot be populated until F21 and the combined-definition bridge pass separate gates."
+      ],
+      "component_materialization": {
+        "instrument": "F2M",
+        "status": "COMPLETE_COMPONENT_MATERIALIZED_RECONCILED",
+        "component_artifact": "model/accounting/f2m_component_2025.json",
+        "source_vintage": "data/source_vintages/accounting-f2m-2025-vintage-2026-09-18",
+        "materialization_manifest": "model/accounting/f2m_materialization_manifest.json",
+        "materialization_counts": {
+          "stock": {
+            "OBSERVED": 10,
+            "DERIVED": 13,
+            "NOT_APPLICABLE": 13
+          },
+          "flow": {
+            "DERIVED": 23,
+            "NOT_APPLICABLE": 13
+          }
+        },
+        "controls": "All available holder/issuer controls pass within 0.1 million RON; Phase A2 independent external-complement controls pass for stock and flow.",
+        "total_F2_promotion_allowed": false
+      }
     },
     {
       "instrument": "F4",
@@ -163,6 +185,18 @@
     {
       "id": "f3_deterministic_offline_regeneration",
       "status": "ENFORCED"
+    },
+    {
+      "id": "f2m_immutable_source_vintage",
+      "status": "ENFORCED"
+    },
+    {
+      "id": "f2m_component_reconciliation",
+      "status": "PASS_ALL_AVAILABLE_CONTROLS_WITHIN_0.1_MILLION_RON"
+    },
+    {
+      "id": "f2m_total_f2_separation",
+      "status": "ENFORCED_F21_UNRESOLVED"
     }
   ]
 }
