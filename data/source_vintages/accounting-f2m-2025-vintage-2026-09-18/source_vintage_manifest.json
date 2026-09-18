@@ -1,0 +1,21 @@
+{
+  "vintage_version": "0.1",
+  "instrument": "F2M",
+  "meaning": "Deposits component only; not total F2 currency and deposits",
+  "retrieved_at": "2026-09-18",
+  "source": "GitHub Actions artifact from F2M External Identity Audit",
+  "workflow_run_id": 35357989430,
+  "workflow_artifact_id": 10553225559,
+  "workflow_artifact_name": "f2m-external-identity-60790242e88c6aa72f9188f6a197a170b8d46c96",
+  "workflow_head_sha": "4f7df9cabe22a29739fa8bbc85201dd70c94745e",
+  "archive": "f2m-phase-a2.zip",
+  "archive_sha256": "efc2704388911d79c182d1ad0cffce32bc7728b1c9f7669714ec3a518ef2f227",
+  "archive_bytes": 70621,
+  "contents": {
+    "phase_a1_audit": "f2m_audit_artifacts/f2m_deposit_coverage_audit.json",
+    "phase_a1_raw_responses": 66,
+    "phase_a2_audit": "f2m_external_audit_artifacts/f2m_external_identity_audit.json",
+    "phase_a2_raw_responses": 6
+  },
+  "immutability_rule": "The retained ZIP is the source vintage. Materialization must read it offline and verify its SHA-256 before producing the F2M component artifact."
+}
