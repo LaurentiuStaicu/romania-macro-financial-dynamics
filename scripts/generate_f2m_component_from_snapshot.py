@@ -268,3 +268,34 @@ def build_component(source_manifest: dict, a1: dict, a2: dict) -> tuple[dict, di
     return component, manifest
 
 
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--vintage", type=Path, default=DEFAULT_VINTAGE)
+    parser.add_argument("--component-output", type=Path, default=ROOT / "model" / "accounting" / "f2m_component_2025.json")
+    parser.add_argument("--manifest-output", type=Path, default=ROOT / "model" / "accounting" / "f2m_materialization_manifest.json")
+    args = parser.parse_args()
+
+    source_manifest, zf, a1, a2 = load_vintage(args.vintage)
+    try:
+        raw_summary = verify_raw_coverage(source_manifest, zf, a1, a2)
+        verify_audits(a1, a2)
+        component, manifest = build_component(source_manifest, a1, a2)
+        manifest["raw_provenance_verification"] = raw_summary
+    finally:
+        zf.close()
+
+    args.component_output.parent.mkdir(parents=True, exist_ok=True)
+    args.manifest_output.parent.mkdir(parents=True, exist_ok=True)
+    args.component_output.write_text(json.dumps(component, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    args.manifest_output.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    print(json.dumps({
+        "component": str(args.component_output),
+        "manifest": str(args.manifest_output),
+        "counts": manifest["counts"],
+        "total_F2_status": manifest["total_F2_status"],
+        "raw_provenance_verification": raw_summary,
+    }, indent=2))
+
+
+if __name__ == "__main__":
+    main()
