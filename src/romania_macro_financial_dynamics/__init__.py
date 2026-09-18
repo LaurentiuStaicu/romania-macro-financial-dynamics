@@ -1,3 +1,3 @@
-"""Romania Macro-Financial Dynamics scientific core."""
+"""Romanian Monetary Dynamics (RMD) scientific core."""
 
 __version__ = "0.1"
