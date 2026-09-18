@@ -81,6 +81,18 @@ def main() -> None:
         if sha256_file(path) != item["raw_sha256"]:
             raise RuntimeError(f"Raw series hash mismatch: {item['key']}")
         if item["status"] == "AVAILABLE":
+            if item.get("unit_values") != ["XDC"]:
+                raise RuntimeError(f"Unexpected unit for {item['key']}: {item.get('unit_values')}")
+            if item.get("unit_mult_values") != ["6"]:
+                raise RuntimeError(
+                    f"Unexpected unit multiplier for {item['key']}: "
+                    f"{item.get('unit_mult_values')}"
+                )
+            if item.get("decimal_values") != ["2"]:
+                raise RuntimeError(
+                    f"Unexpected published precision for {item['key']}: "
+                    f"{item.get('decimal_values')}"
+                )
             available += 1
         elif item["status"] == "HTTP_ERROR":
             unavailable += 1
