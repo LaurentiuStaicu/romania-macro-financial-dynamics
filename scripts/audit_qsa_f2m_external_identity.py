@@ -144,16 +144,45 @@ def main() -> None:
             area: period_value(aggregates[(measure, area)], measure)
             for area in ("W0", "W2", "W1")
         }
-        area_residual = (
+        direct_area_residual = (
             None
             if any(values[area] is None for area in ("W0", "W2", "W1"))
             else values["W0"] - values["W2"] - values["W1"]
         )
-        area_status = (
+        direct_area_status = (
             "CONTROL_UNAVAILABLE"
-            if area_residual is None
+            if direct_area_residual is None
             else "PASS"
-            if abs(area_residual) <= TOL
+            if abs(direct_area_residual) <= TOL
+            else "FAIL"
+        )
+
+        domestic_cells = [
+            cell
+            for cell in phase_a1["cells"]
+            if cell["measure"] == label
+            and cell["holder"] in RESIDENT_HOLDERS
+            and cell["issuer"] in RESIDENT_HOLDERS
+            and cell["value_million_RON"] is not None
+        ]
+        domestic_bilateral_sum = sum(
+            float(cell["value_million_RON"]) for cell in domestic_cells
+        )
+        implied_domestic_control = (
+            None
+            if values["W0"] is None or values["W1"] is None
+            else float(values["W0"]) - float(values["W1"])
+        )
+        implied_domestic_residual = (
+            None
+            if implied_domestic_control is None
+            else domestic_bilateral_sum - implied_domestic_control
+        )
+        implied_domestic_status = (
+            "CONTROL_UNAVAILABLE"
+            if implied_domestic_residual is None
+            else "PASS"
+            if abs(implied_domestic_residual) <= TOL
             else "FAIL"
         )
 
@@ -206,8 +235,13 @@ def main() -> None:
             {
                 "measure": label,
                 "qsa_total_economy": values,
-                "area_partition_residual_million_RON": area_residual,
-                "area_partition_status": area_status,
+                "direct_W2_published": values["W2"] is not None,
+                "direct_area_partition_residual_million_RON": direct_area_residual,
+                "direct_area_partition_status": direct_area_status,
+                "independent_domestic_bilateral_sum_million_RON": domestic_bilateral_sum,
+                "implied_domestic_W0_minus_W1_million_RON": implied_domestic_control,
+                "independent_domestic_partition_residual_million_RON": implied_domestic_residual,
+                "independent_domestic_partition_status": implied_domestic_status,
                 "sum_holder_complement_candidates_million_RON": candidate_sum,
                 "published_W1_total_economy_million_RON": external_control,
                 "holder_complements_vs_W1_residual_million_RON": external_residual,
@@ -216,13 +250,16 @@ def main() -> None:
         )
 
     all_gates_pass = all(
-        item["area_partition_status"] == "PASS"
+        item["independent_domestic_partition_status"] == "PASS"
         and item["holder_complements_vs_W1_status"] == "PASS"
+        and (
+            item["direct_area_partition_status"] in {"PASS", "CONTROL_UNAVAILABLE"}
+        )
         for item in measure_results
     )
 
     report = {
-        "audit_version": "0.1",
+        "audit_version": "0.2",
         "purpose": "Test whether F2M resident-holder→X values are uniquely derivable from QSA accounting partitions rather than synthetically allocated.",
         "benchmark_changed": False,
         "tolerance_million_RON": TOL,
@@ -240,7 +277,7 @@ def main() -> None:
             if all_gates_pass
             else "EXTERNAL_F2M_REMAINS_UNRESOLVED"
         ),
-        "rule": "No candidate value is written to the benchmark by this audit."
+        "rule": "No candidate value is written to the benchmark by this audit. When direct W2 total-economy publication is unavailable, the independent domestic control is the observed/derived domestic bilateral sum versus published W0 minus published W1; holder→X candidates are excluded from that control."
     }
 
     (OUT / "f2m_external_identity_audit.json").write_text(
