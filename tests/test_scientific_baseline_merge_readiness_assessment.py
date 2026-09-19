@@ -77,17 +77,26 @@ class ScientificBaselineMergeReadinessAssessmentTests(unittest.TestCase):
             self.a["prohibited_next_actions"],
         )
 
-    def test_model_contract_keeps_pr_draft_and_forbids_automatic_merge(self):
+    def test_model_contract_retains_old_assessment_but_advances_current_governance(self):
         g = self.m["repository_governance"]
         self.assertEqual(
             g["merge_readiness_assessment"],
             "model/registries/scientific_baseline_merge_readiness_assessment.json",
         )
         self.assertEqual(
+            g["consolidation_terminal_assessment"],
+            "model/registries/scientific_baseline_consolidation_terminal_assessment.json",
+        )
+        self.assertNotEqual(
             g["current_merge_readiness_status"],
             self.a["status"],
         )
+        self.assertEqual(
+            g["current_merge_readiness_status"],
+            "CONSOLIDATION_COMPLETE_HUMAN_REVIEW_DECISION_PENDING",
+        )
         self.assertTrue(g["pull_request_must_remain_draft"])
+        self.assertTrue(g["human_review_decision_required"])
         self.assertFalse(g["automatic_merge_authorized"])
         self.assertFalse(g["release_or_version_change_authorized"])
 
