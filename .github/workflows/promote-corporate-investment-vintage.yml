@@ -1,0 +1,83 @@
+name: Promote Reviewed Corporate Investment Source Vintage
+
+# One-shot promotion of the exact already-reviewed artifact.
+# No provider refetch, target selection, transformation or estimation.
+on:
+  pull_request:
+    types: [labeled]
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  promote-reviewed-vintage:
+    if: ${{ github.event.label.name == 'promote-corporate-investment-vintage' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out PR head branch
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 1
+
+      - name: Download exact reviewed artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          curl -L --fail-with-body \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10581133050/zip" \
+            -o /tmp/corporate-investment-reviewed.zip
+          echo "0902a9a575cc1f322341a93e72422dd4cf06ce966b719103d9442f8d6c2f93e6  /tmp/corporate-investment-reviewed.zip" | sha256sum -c -
+
+      - name: Verify every reviewed file
+        run: |
+          rm -rf /tmp/corporate-investment-reviewed
+          mkdir -p /tmp/corporate-investment-reviewed
+          unzip -q /tmp/corporate-investment-reviewed.zip -d /tmp/corporate-investment-reviewed
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          root = Path("/tmp/corporate-investment-reviewed")
+          review = json.loads(
+              Path(
+                  "model/calibration_validation/"
+                  "corporate_investment_source_vintage_promotion_review.json"
+              ).read_text(encoding="utf-8")
+          )
+          actual = {
+              str(path.relative_to(root))
+              for path in root.rglob("*")
+              if path.is_file()
+          }
+          expected = {item["path"] for item in review["expected_files"]}
+          if actual != expected:
+              raise SystemExit(
+                  f"artifact file set mismatch: missing={expected-actual}, "
+                  f"extra={actual-expected}"
+              )
+          for item in review["expected_files"]:
+              path = root / item["path"]
+              data = path.read_bytes()
+              digest = hashlib.sha256(data).hexdigest()
+              if len(data) != item["bytes"] or digest != item["sha256"]:
+                  raise SystemExit(f"review mismatch for {item['path']}")
+          print("Exact reviewed corporate-investment artifact verified.")
+          PY
+
+      - name: Commit immutable source vintage to PR branch
+        run: |
+          dest="data/source_vintages/corporate-investment-source-family-vintage-2026-09-19"
+          test ! -e "$dest"
+          mkdir -p "$dest"
+          cp -a /tmp/corporate-investment-reviewed/. "$dest/"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$dest"
+          git commit -m "data: retain exact corporate-investment source vintage"
+          git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
