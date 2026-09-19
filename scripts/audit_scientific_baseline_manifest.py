@@ -58,6 +58,9 @@ def main() -> None:
     reopen = load("model/accounting/reopen_conditions_registry.json")
     sd = load("model/dynamics/system_dynamics_conformity_gate.json")
     refs = load("model/dynamics/reference_modes.json")
+    sectoral_external_screening = load(
+        "model/dynamics/sectoral_financial_positions_external_source_screening.json"
+    )
     empirical = load("model/empirical_dynamics/contract.json")
     mechanisms = load("model/empirical_dynamics/mechanism_registry.json")
     readiness = load(
@@ -141,6 +144,40 @@ def main() -> None:
     check(ref_state["closure_ready"] is (not blockers), "Baseline reference closure flag is stale")
     check(model["dynamic_core"]["reference_mode_ready_count"] == len(ready), "Model reference ready count disagrees with baseline")
     check(model["dynamic_core"]["reference_mode_required_count"] == len(REQUIRED_REFERENCE_MODES), "Model reference required count disagrees with baseline")
+
+    sectoral_mode = by_id["sectoral_financial_positions"]
+    external_decision = sectoral_external_screening["decision"]
+    check(
+        ref_state["external_counterpart_screening_state"]
+        == external_decision["external_counterpart_recovery_state"],
+        "Baseline external counterpart screening state is stale",
+    )
+    check(
+        ref_state[
+            "sectoral_financial_positions_external_counterpart_recovery_state"
+        ]
+        == sectoral_mode["external_counterpart_recovery_state"],
+        "Baseline sectoral-position external reopen policy is stale",
+    )
+    check(
+        external_decision["discovery_priority"] == [],
+        "Exhausted external counterpart screening still has an active discovery priority",
+    )
+    check(
+        external_decision["eurostat_exact_historical_extraction_authorized"]
+        is False,
+        "Eurostat historical extraction must remain unauthorized",
+    )
+    check(
+        external_decision["oecd_exact_historical_extraction_authorized"]
+        is False,
+        "OECD historical extraction must remain unauthorized",
+    )
+    check(
+        ref_state["external_counterpart_exact_historical_extraction_authorized"]
+        is False,
+        "Baseline may not authorize exact historical extraction from failed semantic gates",
+    )
 
     # SD topology and closure state.
     sd_state = state["system_dynamics"]
@@ -332,6 +369,9 @@ def main() -> None:
         "reference_modes_ready": ref_state["ready_count"],
         "reference_modes_required": ref_state["required_count"],
         "reference_mode_blockers": ref_state["blockers"],
+        "external_counterpart_screening_state": ref_state[
+            "external_counterpart_screening_state"
+        ],
         "behavioural_closure_active": sd_state["behavioural_closure_active"],
         "validated_reference_behavioural_mechanisms": validation[
             "validated_reference_behavioural_mechanisms"

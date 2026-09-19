@@ -1,5 +1,5 @@
 {
-  "manifest_version": "0.2",
+  "manifest_version": "0.3",
   "baseline_id": "scientific-integrity-2026-09-19",
   "purpose": "Single canonical cross-registry snapshot of RMD scientific maturity. Values in this manifest must agree with the authoritative accounting, dynamics, reference-mode, empirical-mechanism and validation registries; the manifest is not an independent source of scientific truth.",
   "authority": {
@@ -14,7 +14,8 @@
     "validation_disposition": "model/calibration_validation/validation_recovery_disposition.json",
     "prospective_confirmation_contract": "model/calibration_validation/prospective_monetary_confirmation_contract.json",
     "prospective_confirmation_status": "model/calibration_validation/prospective_monetary_confirmation_status.json",
-    "mechanism_source_readiness": "model/calibration_validation/mechanism_source_readiness.json"
+    "mechanism_source_readiness": "model/calibration_validation/mechanism_source_readiness.json",
+    "sectoral_financial_positions_external_source_screening": "model/dynamics/sectoral_financial_positions_external_source_screening.json"
   },
   "canonical_state": {
     "accounting": {
@@ -49,7 +50,10 @@
       ],
       "blockers": [
         "sectoral_financial_positions"
-      ]
+      ],
+      "external_counterpart_screening_state": "EXHAUSTED_NO_SEMANTICALLY_ADMISSIBLE_CURRENT_PUBLIC_SOURCE",
+      "sectoral_financial_positions_external_counterpart_recovery_state": "FROZEN_UNTIL_NEW_SOURCE_OR_CHANGED_DATASET_TRIGGER",
+      "external_counterpart_exact_historical_extraction_authorized": false
     },
     "system_dynamics": {
       "complete_endogenous_system_dynamics_model": false,
@@ -111,6 +115,7 @@
     "Prospective monetary response values remain inaccessible until the frozen event and release gates authorize inspection.",
     "Every non-rejected behavioural mechanism has exactly one readiness entry and no duplicate readiness ownership.",
     "A closed calibration cycle with zero activated mechanisms may not contain any mechanism authorized for estimation or refit.",
-    "After exhaustive source screening, a new empirical cycle requires a declared evidence/reopen trigger; queue exhaustion is not permission to respecify a failed form."
+    "After exhaustive source screening, a new empirical cycle requires a declared evidence/reopen trigger; queue exhaustion is not permission to respecify a failed form.",
+    "The exhausted sectoral-financial-position external counterpart path may reopen only on a declared new-source or changed-dataset trigger; repeating the same Eurostat/OECD source boundary is not scientific progress."
   ]
 }
