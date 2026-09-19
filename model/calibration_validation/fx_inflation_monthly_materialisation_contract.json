@@ -1,0 +1,88 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "mechanism_id": "exchange_rate_pass_through_to_inflation",
+  "phase": "FX Inflation Pass-Through — Exact Monthly Raw Source Materialisation",
+  "purpose": "Retain one exact common monthly level-only source vintage for the preregistered RON/EUR driver, current HICP all-items index and total-import/world unit-value external-price proxy. This contract does not choose growth transformations, lag lengths or estimate pass-through.",
+  "estimation_authorized": false,
+  "sources": {
+    "exchange_rate": {
+      "institution": "European Central Bank",
+      "flow": "EXR",
+      "series_key": "EXR.M.RON.EUR.SP00.A",
+      "key_without_flow": "M.RON.EUR.SP00.A",
+      "concept": "Monthly average RON per EUR ECB reference exchange rate",
+      "start_period": "1999-01",
+      "output_column": "ron_per_eur_monthly_average"
+    },
+    "hicp": {
+      "institution": "Eurostat",
+      "dataset": "prc_hicp_minr",
+      "exact_dimensions": {
+        "lang": "en",
+        "freq": "M",
+        "unit": "I25",
+        "coicop18": "TOTAL",
+        "geo": "RO"
+      },
+      "concept": "Romania all-items HICP, ECOICOP v2, index 2025=100",
+      "output_column": "hicp_total_2025_100"
+    },
+    "external_price": {
+      "institution": "Eurostat",
+      "dataset": "ext_st_27_2020msbec",
+      "exact_dimensions": {
+        "lang": "en",
+        "freq": "M",
+        "stk_flow": "IMP",
+        "indic_et": "IVU",
+        "partner": "WORLD",
+        "bclas_bec": "TOTAL",
+        "geo": "RO"
+      },
+      "concept": "Romania total imports from world, unit value index 2021=100",
+      "output_column": "import_uvi_total_world_2021_100",
+      "role": "external-price proxy, not a direct transaction-price import-price index"
+    }
+  },
+  "completeness_gate": {
+    "expected_first_common_period": "2002-01",
+    "minimum_common_months": 280,
+    "finite_common_months_only": true,
+    "no_interpolation": true,
+    "no_backfill": true,
+    "no_forward_fill": true,
+    "no_missing_to_zero": true
+  },
+  "output_schema": [
+    "period",
+    "ron_per_eur_monthly_average",
+    "hicp_total_2025_100",
+    "import_uvi_total_world_2021_100",
+    "source_completeness"
+  ],
+  "provenance_rules": {
+    "source_vintage_contract": "data/provenance/source_vintage_contract.json",
+    "fetch_all_three_sources_in_same_live_run": true,
+    "retain_exact_raw_bytes": true,
+    "retain_raw_sha256": true,
+    "retain_materializer_script_sha256": true,
+    "retain_normalized_csv_sha256": true,
+    "retain_provider_updated_metadata_where_available": true
+  },
+  "hard_rules": {
+    "level_only_materialisation": true,
+    "no_log_difference": true,
+    "no_monthly_or_annual_inflation_transform": true,
+    "no_lag_selection": true,
+    "no_regime_selection": true,
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_causal_claim": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true,
+    "live_provider_work_manual_only": true
+  },
+  "pass_effect": "SOURCE_VINTAGE_READY_FOR_EXPLICIT_REPOSITORY_REVIEW_ONLY",
+  "next_gate": "After exact source-vintage review and retention, preregister transformations, lag horizon, regime boundary, structural-selection and untouched evaluation windows before any estimation."
+}
