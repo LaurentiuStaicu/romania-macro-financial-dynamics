@@ -60,7 +60,7 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         )
         self.assertEqual(
             step["action"],
-            "RUN_PRUDENTIAL_COVERAGE_DIAGNOSTIC_NO_ESTIMATION",
+            "RETAIN_AND_INSPECT_BNR_BLS_MAY_2025_XLSX_NO_ESTIMATION",
         )
         self.assertFalse(step["calibration_cycle_open"])
 
