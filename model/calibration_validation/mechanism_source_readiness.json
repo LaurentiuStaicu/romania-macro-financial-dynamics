@@ -306,7 +306,7 @@
       "id": "monetary_policy_reaction_function",
       "classification": "DEFERRED",
       "source_readiness": "QUANTITATIVE_EXPECTATIONS_AND_QUARTERLY_GAP_CONCEPTS_OBSERVED_FORMATION_TIME_AND_REAL_TIME_VINTAGES_NOT_RETAINED",
-      "next_admissible_action": "Keep the policy rate observed/exogenous. Reopen only after retaining a machine-readable BNR financial-analyst expectations history indexed by survey formation date and a quarterly BNR GDP-gap vintage history mapped to the information set available at each policy decision. Then preregister managed-float/intervention treatment, policy-regime boundaries and simultaneity identification before any reaction-function fit. Do not digitise charts, use target-horizon-shifted expectation coordinates as formation dates, or backfill later revised gaps into earlier decisions.",
+      "next_admissible_action": "Keep the policy rate observed/exogenous. The formation-time expectations / real-time GDP-gap source-discovery stage is frozen under the current public surface. Reopen only on new official BNR evidence that supplies a machine-readable analyst-expectations history indexed by survey formation date, a machine-readable quarterly GDP-gap vintage history with information cutoffs/revisions, or equivalent stable official series/API/data-annex mappings. Only after both measurement prerequisites are retained may regime/intervention and simultaneity identification be preregistered; no reaction-function fit is currently authorized.",
       "blockers": [
         "BNR flat inflation target 2.5% ±1 pp and policy-rate history are observed.",
         "DG ECFIN CONS_006 remains a qualitative response balance and is not percentage inflation expectations.",
@@ -322,7 +322,9 @@
       "quantitative_analyst_expectations_concept_observed": true,
       "quantitative_expectations_machine_readable_formation_time_history_retained": false,
       "quarterly_bnr_gap_observed_in_reports": true,
-      "real_time_gap_vintages_retained": false
+      "real_time_gap_vintages_retained": false,
+      "monetary_policy_reaction_source_discovery_terminal_assessment": "model/calibration_validation/monetary_policy_reaction_source_discovery_terminal_assessment.json",
+      "monetary_policy_reaction_source_discovery_stage_status": "STAGE_CLOSED_FROZEN_UNDER_CURRENT_PUBLIC_DISCOVERY_SURFACE_NO_MODEL_EFFECT"
     },
     {
       "id": "external_fx_refinancing_feedback",
