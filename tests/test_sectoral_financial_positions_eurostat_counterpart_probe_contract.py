@@ -62,7 +62,7 @@ class SectoralFinancialPositionsEurostatCounterpartProbeContractTests(unittest.T
         self.assertTrue(policy["no_trigger_broadening_to_bypass_precondition"])
         self.assertEqual(
             policy["current_execution_state"],
-            "READY_FOR_MANUAL_DISPATCH_VIA_EXISTING_DEFAULT_BRANCH_WORKFLOW",
+            "READY_FOR_MANUAL_RERUN_OR_WORKFLOW_DISPATCH",
         )
         self.assertEqual(
             policy["scientific_effect_while_pending"],
