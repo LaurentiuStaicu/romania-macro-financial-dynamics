@@ -107,7 +107,7 @@ class MechanismSourceReadinessTests(unittest.TestCase):
             mechanisms["external_fx_refinancing_feedback"][
                 "priority_group"
             ],
-            "DEFER_UNTIL_CURRENCY_MATURITY_EXPOSURE_SOURCE",
+            "DEFER_UNTIL_CURRENCY_RESIDUAL_MATURITY_HEDGING_SOURCE",
         )
 
 
