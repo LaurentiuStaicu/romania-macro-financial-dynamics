@@ -94,20 +94,40 @@ class AggregateBankCreditSourceBoundaryTests(unittest.TestCase):
         catalog = review["bls_machine_readable_source_catalog"]
         self.assertEqual(
             catalog["status"],
-            "DIRECT_OFFICIAL_SPREADSHEETS_IDENTIFIED_"
-            "PROVIDER_ACCESS_BLOCKED_IN_CURRENT_ENVIRONMENT",
+            "PARTIAL_RAW_ARCHIVE_RETAINED_LEGACY_XLS_EXTRACTION_PENDING_XLSX_BRIDGE_AVAILABLE",
         )
         self.assertFalse(catalog["historical_coverage_claimed"])
         self.assertGreaterEqual(len(catalog["files"]), 6)
+        retained_legacy = 0
+        xlsx_candidates = 0
         for item in catalog["files"]:
-            self.assertTrue(item["content_not_materialised"])
             self.assertTrue(
                 item["url"].endswith(".xls")
                 or item["url"].endswith(".xlsx")
             )
+            if item["format"] == "xls":
+                self.assertFalse(item["content_not_materialised"])
+                self.assertEqual(
+                    item["value_extraction_status"],
+                    "NOT_CANONICAL_LEGACY_XLS",
+                )
+                retained_legacy += 1
+            else:
+                self.assertTrue(item["content_not_materialised"])
+                self.assertEqual(
+                    item["value_extraction_status"],
+                    "NEXT_XLSX_BRIDGE_CANDIDATE",
+                )
+                xlsx_candidates += 1
+        self.assertGreaterEqual(retained_legacy, 5)
+        self.assertGreaterEqual(xlsx_candidates, 1)
         self.assertIn(
-            "not evidence of missing files",
+            "access-path limitation",
             catalog["provider_access_observation"],
+        )
+        self.assertIn(
+            "only one survey round",
+            catalog["may_2025_xlsx_bridge"]["interpretation"],
         )
 
     def test_prudential_machine_readable_candidates_do_not_change_variables_post_hoc(self) -> None:
@@ -139,12 +159,20 @@ class AggregateBankCreditSourceBoundaryTests(unittest.TestCase):
             "EXACT_ROMANIA_QUARTERLY_SERIES_CONFIRMED",
         )
         self.assertEqual(
-            sources["solvency_ratio_candidate"]["item_code"],
-            "I4001",
+            sources["solvency_ratio_candidate"]["series_key"],
+            "CBD2.Q.RO.W0.11._Z._Z.A.A.I4001._Z._Z._Z._Z._Z._Z.PC",
         )
         self.assertEqual(
             sources["solvency_ratio_candidate"]["status"],
-            "ITEM_SEMANTICS_CONFIRMED_ROMANIA_EXACT_QUARTERLY_TUPLE_NOT_YET_CONFIRMED",
+            "EXACT_ROMANIA_QUARTERLY_SERIES_CONFIRMED_AND_RETAINED",
+        )
+        self.assertEqual(
+            sources["solvency_ratio_candidate"]["retained_vintage"],
+            "data/source_vintages/bank-credit-prudential-coverage-vintage-2026-09-19",
+        )
+        self.assertIn(
+            "not numerically identical",
+            sources["solvency_ratio_candidate"]["semantic_limit"],
         )
         self.assertIn(
             "Annual frequency",
