@@ -233,19 +233,27 @@
     {
       "id": "credit_risk_npl_response",
       "classification": "DEFERRED",
-      "source_readiness": "NPL_EXACT_DEBT_SERVICE_AND_TARGET_BOUNDARY_UNRESOLVED",
-      "next_admissible_action": "Search for an exact Romania borrower debt-service burden on a portfolio boundary compatible with the NPL target; separately preregister aggregate versus sector-specific NPL and the activity variable before any estimation.",
+      "source_readiness": "AGGREGATE_NPL_EXACT_MORTGAGE_PORTFOLIO_FAMILY_OBSERVED_JOINT_BOUNDARY_AND_ACTIVITY_UNRESOLVED",
+      "next_admissible_action": "Keep credit-risk estimation closed. Reopen only through one of two explicit source paths: retain an aggregate Romania debt-service burden aligned to the exact aggregate NPL target, or retain exact machine-readable mortgage NPL plus housing-loan burden histories and preregister a new mortgage-specific target/form after reconciling reporting population, coverage and weighting. DTI-O may not substitute for debt service, BNR charts may not be digitised, and aggregate versus mortgage target may not be chosen after fit.",
       "blockers": [
-        "Exact quarterly Romania CBD2 NPL ratio is available from 2014-Q4.",
-        "Romania is not among the 17 economies in the current BIS documentation with household/NFC sectoral DSR breakdowns.",
-        "BNR household DSTI is borrower/loan-portfolio specific and is not aligned to an aggregate or NFC-inclusive NPL target.",
-        "Output-growth observable and aggregate versus sector-specific NPL target remain unfrozen.",
-        "Lag structure and treatment of regulatory/portfolio-management breaks remain unresolved."
+        "The exact quarterly aggregate Romania NPL ratio remains retained from ECB CBD2.",
+        "BNR official publications separately observe mortgage NPL, including 1.7 percent in September 2023 and March 2024, but no exact machine-readable mortgage NPL history is retained.",
+        "BNR housing-loan DSTI levels are observed in publication text for 2023-Q1..2025-Q2; outstanding-loan DSTI is conceptually closer to a mortgage NPL stock, but exact source-population/coverage/weighting compatibility is not demonstrated.",
+        "BNR DTI-O is debt-to-income at origination, not debt-service burden, and the June-2024 report states that the indicator covered about 25 percent of mortgage exposure value.",
+        "The aggregate NPL target has no matched aggregate debt-service burden.",
+        "A mortgage-specific target has not been preregistered and may not silently replace the aggregate target.",
+        "The output/activity observable remains unfrozen for either boundary.",
+        "Lag structure and treatment of NPL recognition, cures, write-offs, sales and regulatory/portfolio breaks remain unresolved."
       ],
       "source_boundary_review": "model/calibration_validation/credit_risk_npl_source_boundary_review.json",
       "estimation_or_refit_allowed": false,
-      "priority_group": "DEFER_UNTIL_DEBT_SERVICE_SOURCE",
-      "debt_service_source_screening": "model/calibration_validation/debt_service_source_screening.json"
+      "priority_group": "DEFER_UNTIL_MATCHED_AGGREGATE_OR_MORTGAGE_PORTFOLIO_SOURCE",
+      "debt_service_source_screening": "model/calibration_validation/debt_service_source_screening.json",
+      "mortgage_portfolio_source_screening": "model/calibration_validation/credit_risk_mortgage_portfolio_source_screening.json",
+      "mortgage_npl_publication_observed": true,
+      "mortgage_npl_exact_machine_readable_history_retained": false,
+      "mortgage_target_selected": false,
+      "dti_o_debt_service_substitution_allowed": false
     },
     {
       "id": "fiscal_primary_balance_reaction",
