@@ -134,11 +134,11 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         household = mechanisms["household_consumption_response"]
         self.assertEqual(
             household["source_readiness"],
-            "COMPLETE_2023Q1_2025Q2_HOUSING_DSTI_PUBLICATION_TEXT_WINDOW_MACHINE_READABLE_HISTORY_AND_REGISTERED_MACRO_DSR_UNRESOLVED",
+            "COMPLETE_DSTI_TEXT_WINDOW_BUT_AGGREGATE_CONSUMPTION_POPULATION_ALIGNMENT_BLOCKED",
         )
         self.assertEqual(
             household["priority_group"],
-            "DEFER_UNTIL_PREREGISTERED_DSTI_CANDIDATE_MEASUREMENT_AND_RATE_TRANSFORM_BOUNDARIES",
+            "DEFER_UNTIL_BORROWER_BURDEN_POPULATION_ALIGNMENT",
         )
         self.assertEqual(
             household["debt_service_source_screening"],
@@ -164,6 +164,14 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         )
         self.assertFalse(household["registered_macro_dsr_identified"])
         self.assertTrue(household["alternative_housing_loan_burden_observed"])
+        self.assertEqual(household["population_alignment_status"], "BLOCKED")
+        self.assertFalse(
+            household["housing_dsti_directly_admissible_in_registered_aggregate_consumption_form"]
+        )
+        self.assertEqual(
+            household["borrower_burden_population_alignment_review"],
+            "model/calibration_validation/household_consumption_borrower_burden_alignment_review.json",
+        )
         self.assertFalse(household["estimation_or_refit_allowed"])
         fiscal = mechanisms["fiscal_primary_balance_reaction"]
         self.assertEqual(
