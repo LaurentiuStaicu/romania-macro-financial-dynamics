@@ -62,15 +62,20 @@
     {
       "id": "sovereign_yield_spread_response",
       "classification": "CANDIDATE",
-      "source_readiness": "QUARTERLY_MATERIALISATION_CONTRACT_FROZEN_PRIMARY_SERIES_IDENTIFIED",
-      "next_admissible_action": "Materialize the frozen quarterly source table: Romania 10y RON yield, Germany 10y EUR benchmark, New CISS, retained debt-to-GDP, and seasonally adjusted B9-to-GDP.",
+      "source_readiness": "MATERIALISER_IMPLEMENTED_MANUAL_LIVE_RUN_PENDING",
+      "next_admissible_action": "Run the manual-only sovereign-yield quarterly materialisation workflow, retain its raw provider responses/hashes and generated quarterly CSV, then review and explicitly commit a source snapshot before any structural-selection contract is opened.",
       "blockers": [
-        "Exact B9 provider tuple/raw vintage still must be retained; no regression is authorised by the materialisation contract."
+        "The source materialiser and exact provider tuple/transform rules are implemented, but no retained successful live materialisation artifact has yet been promoted into the repository.",
+        "A live run is new-vintage evidence and must remain workflow_dispatch/manual-only; Scientific CI must not call providers.",
+        "No regression is authorised by the materialisation contract."
       ],
       "source_boundary_review": "model/calibration_validation/sovereign_yield_source_boundary_review.json",
       "materialisation_contract": "model/calibration_validation/sovereign_yield_quarterly_materialisation_contract.json",
       "estimation_or_refit_allowed": false,
-      "priority_group": "NEXT_REPRODUCIBLE_MATERIALISATION"
+      "priority_group": "MANUAL_LIVE_MATERIALISATION_PENDING",
+      "materialiser_script": "scripts/audit_sovereign_yield_quarterly_materialisation.py",
+      "materialiser_workflow": ".github/workflows/sovereign-yield-quarterly-materialisation.yml",
+      "live_execution_policy": "MANUAL_ONLY_LIVE_SOURCE_EVIDENCE"
     },
     {
       "id": "household_consumption_response",
@@ -105,8 +110,8 @@
   "priority_rule": "Priority is determined by the shortest scientifically admissible path to new independent evidence, not by a desire to activate a feedback loop. Waiting mechanisms remain frozen; source-incomplete mechanisms are not fit with proxies.",
   "current_next_step": {
     "mechanism_id": "sovereign_yield_spread_response",
-    "action": "EXACT_QUARTERLY_SOURCE_MATERIALISATION_ONLY",
-    "reason": "The primary yield, benchmark and stress series are identified; debt-to-GDP is already retained; the quarterly B9 source is official and conceptually fixed. This path has the fewest unresolved source-semantics dependencies among mechanisms not waiting on future events.",
+    "action": "RUN_MANUAL_QUARTERLY_SOURCE_MATERIALISER_AND_RETAIN_EVIDENCE",
+    "reason": "The exact source tuple, deterministic transformations, offline parser tests, materialiser script and manual-only GitHub workflow are implemented. The remaining admissible step is a retained successful live source run and repository review; calibration remains closed.",
     "calibration_cycle_open": false
   }
 }

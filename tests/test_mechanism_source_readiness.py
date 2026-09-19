@@ -39,9 +39,26 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         )
         self.assertEqual(
             step["action"],
-            "EXACT_QUARTERLY_SOURCE_MATERIALISATION_ONLY",
+            "RUN_MANUAL_QUARTERLY_SOURCE_MATERIALISER_AND_RETAIN_EVIDENCE",
         )
         self.assertFalse(step["calibration_cycle_open"])
+
+        mechanisms = {
+            item["id"]: item for item in self.readiness["mechanisms"]
+        }
+        sovereign = mechanisms["sovereign_yield_spread_response"]
+        self.assertEqual(
+            sovereign["source_readiness"],
+            "MATERIALISER_IMPLEMENTED_MANUAL_LIVE_RUN_PENDING",
+        )
+        self.assertEqual(
+            sovereign["live_execution_policy"],
+            "MANUAL_ONLY_LIVE_SOURCE_EVIDENCE",
+        )
+        self.assertEqual(
+            sovereign["materialiser_workflow"],
+            ".github/workflows/sovereign-yield-quarterly-materialisation.yml",
+        )
 
     def test_waiting_and_deferred_mechanisms_remain_frozen(self) -> None:
         mechanisms = {
