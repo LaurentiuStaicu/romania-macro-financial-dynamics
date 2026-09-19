@@ -60,7 +60,7 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         )
         self.assertEqual(
             step["action"],
-            "PREREGISTER_FISCAL_GAP_AND_REGIME_MEASUREMENT_BOUNDARY_NO_ESTIMATION",
+            "PREREGISTER_ANNUAL_FISCAL_REACTION_STRUCTURAL_SELECTION_NO_ESTIMATION",
         )
         self.assertFalse(step["calibration_cycle_open"])
 
@@ -70,11 +70,11 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         fiscal = mechanisms["fiscal_primary_balance_reaction"]
         self.assertEqual(
             fiscal["source_readiness"],
-            "MATCHED_PRIMARY_BALANCE_VINTAGE_RETAINED_OUTPUT_GAP_DEBT_GAP_REGIMES_UNRESOLVED",
+            "ANNUAL_AMECO_ACTUAL_SOURCE_VINTAGE_RETAINED_STRUCTURAL_SELECTION_PREREGISTRATION_PENDING",
         )
         self.assertEqual(
             fiscal["priority_group"],
-            "MEASUREMENT_AND_REGIME_PREREGISTRATION_PENDING",
+            "STRUCTURAL_SELECTION_PREREGISTRATION_PENDING",
         )
 
         sovereign = mechanisms["sovereign_yield_spread_response"]
