@@ -1,0 +1,69 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Reference Mode Recovery — Government Refinancing Need",
+  "verdict": "REMAINS_PARTIAL_SERIES_AVAILABLE",
+  "reference_mode": "government_refinancing_need",
+  "observed_evidence": {
+    "ministry_risk_snapshots": "data/processed/government_debt_risk_snapshots_mof_2023_2024.csv",
+    "repricing_assessment": "model/calibration_validation/government_repricing_ledger_assessment.json",
+    "official_gross_financing_need_definition": {
+      "source": "European Commission Debt Sustainability Monitor 2024/2025",
+      "concept": "Gross financing needs are a flow/liquidity concept combining the government deficit, debt redemptions and stock-flow adjustments; they are not the realized principal actually refinanced or contractually refixed."
+    },
+    "ministry_financing_need_example": {
+      "source": "Romania Ministry of Finance Government Debt Management Strategy 2024-2026, Table 8",
+      "periods": {
+        "2023_operative_execution": {
+          "budget_deficit_bn_RON": 90.6,
+          "government_debt_refinancing_bn_RON": 95.8,
+          "gross_financing_need_bn_RON": 186.4
+        },
+        "2024_forecast": {
+          "budget_deficit_bn_RON": 85.9,
+          "government_debt_refinancing_bn_RON": 94.6,
+          "gross_financing_need_bn_RON": 180.5
+        },
+        "2025_forecast": {
+          "budget_deficit_bn_RON": 89.9,
+          "government_debt_refinancing_bn_RON": 71.3,
+          "gross_financing_need_bn_RON": 161.2
+        },
+        "2026_forecast": {
+          "budget_deficit_bn_RON": 85.6,
+          "government_debt_refinancing_bn_RON": 71.9,
+          "gross_financing_need_bn_RON": 157.5
+        }
+      },
+      "definition_limit": "The Ministry table mixes operative execution with forecasts. Its refinancing component is defined from principal repayments and government-security refinancing on the stated national-law debt boundary; it does not identify matched realized repricing events or the model transition share m[t]."
+    }
+  },
+  "blocker": {
+    "reason": "The current reference-mode role is refinancing pressure distinct from maturity alone. Public data provide useful aggregate financing-need, maturity and refixing indicators, but the retained evidence does not provide a definitionally stable, sufficiently long realized refinancing/repricing series on one frozen vintage/boundary, nor matched realized principal needed to distinguish refinancing from contractual refixing. Promoting the mixed forecast/execution gross-financing-need history would silently change the empirical target.",
+    "current_data_are_not_zero": true,
+    "current_data_are_not_absent": true,
+    "blocker_is_definition_and_vintage_consistency": true
+  },
+  "prohibited_shortcuts": [
+    "treat gross financing need as realized principal refinanced",
+    "treat debt maturing within one year as debt actually repriced",
+    "treat debt refixing within one year as realized refinancing",
+    "mix operative-execution and forecast vintages as one observed historical series without a preregistered revision rule",
+    "use issuance size as the principal replacing a specific maturity",
+    "infer the government repricing parameter m[t] from aggregate financing needs"
+  ],
+  "reopen_condition": {
+    "primary": "Preregister one exact reference concept and revision-vintage rule, then retain a reproducible multi-period official series on a stable boundary.",
+    "acceptable_paths": [
+      "A dedicated gross-financing-need reference mode explicitly defined as a liquidity-pressure flow, with historical-versus-forecast status and revisions frozen by contract.",
+      "A realized refinancing/repricing series with matched principal and event semantics on the Ministry portfolio boundary."
+    ],
+    "behavioural_activation_still_requires": "The separate government repricing-ledger completeness, reconciliation, parameter-identification and prospective-validation gates."
+  },
+  "disposition": {
+    "status": "PARTIAL_SERIES_AVAILABLE",
+    "readiness_count_change": 0,
+    "government_refinancing_effective_rate_mechanism": "UNCHANGED_DEFERRED",
+    "behavioural_closure": "UNCHANGED_INACTIVE",
+    "validated_reference_behavioural_mechanisms": 0
+  }
+}
