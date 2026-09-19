@@ -1,0 +1,188 @@
+{
+  "enumeration_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "mechanism_id": "aggregate_bank_credit_response",
+  "phase": "BNR Prudential Table Exact Source Enumeration",
+  "governed_by": "model/calibration_validation/bnr_prudential_table_materialisation_contract.json",
+  "contract_common_window": {
+    "start_period": "2015-Q4",
+    "end_period": "2025-Q4",
+    "expected_quarter_count": 41,
+    "data_years": [
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ]
+  },
+  "status": "INCOMPLETE_SOURCE_ENUMERATION_NO_MODEL_EFFECT",
+  "purpose": "Freeze only independently identified exact official BNR Monthly Bulletin source URLs for the matched prudential source family before any numeric extraction. Unresolved primary URLs remain unresolved; search-index non-discovery is not evidence that an official bulletin does not exist.",
+  "discovery_methodology": {
+    "official_archive": "https://www.bnr.ro/12058-buletine-lunare",
+    "archive_observation": "The official archive page is public but its historical edition list is dynamically loaded and is not fully emitted in the current crawl/search surface.",
+    "independent_search_rule": "An exact primary URL may be registered only when an official BNR/bnro result exposes both the publication identity and exact PDF URL. URL patterns are not generated or brute-forced.",
+    "search_index_failure_means_absence": false,
+    "fallback_selection_opened": false,
+    "values_inspected": false,
+    "numeric_extraction_performed": false,
+    "pdf_bytes_retained_in_this_phase": false
+  },
+  "year_sources": [
+    {
+      "data_year": 2015,
+      "primary_publication": "January 2016",
+      "primary_exact_url": null,
+      "primary_discovery_status": "UNRESOLVED_NOT_NEGATIVE_EVIDENCE",
+      "selected": false,
+      "values_inspected": false,
+      "numeric_extraction_performed": false,
+      "source_bytes_retained": false
+    },
+    {
+      "data_year": 2016,
+      "primary_publication": "January 2017",
+      "primary_exact_url": null,
+      "primary_discovery_status": "UNRESOLVED_NOT_NEGATIVE_EVIDENCE",
+      "selected": false,
+      "values_inspected": false,
+      "numeric_extraction_performed": false,
+      "source_bytes_retained": false,
+      "discovered_nonselected_fallback_evidence": [
+        {
+          "publication": "February 2017",
+          "url": "https://bnr.ro/files/d/Pubs_ro/Lunare/2017bl/2017bl02.pdf",
+          "selection_status": "NOT_SELECTED_PRIMARY_STATUS_UNRESOLVED",
+          "scientific_role": "Methodology/layout evidence only."
+        }
+      ]
+    },
+    {
+      "data_year": 2017,
+      "primary_publication": "January 2018",
+      "primary_exact_url": null,
+      "primary_discovery_status": "UNRESOLVED_NOT_NEGATIVE_EVIDENCE",
+      "selected": false,
+      "values_inspected": false,
+      "numeric_extraction_performed": false,
+      "source_bytes_retained": false
+    },
+    {
+      "data_year": 2018,
+      "primary_publication": "January 2019",
+      "primary_exact_url": null,
+      "primary_discovery_status": "UNRESOLVED_NOT_NEGATIVE_EVIDENCE",
+      "selected": false,
+      "values_inspected": false,
+      "numeric_extraction_performed": false,
+      "source_bytes_retained": false
+    },
+    {
+      "data_year": 2019,
+      "primary_publication": "January 2020",
+      "primary_exact_url": "https://www.bnro.ro/files/d/Pubs_ro/Lunare/2020/2020bl01.pdf",
+      "primary_discovery_status": "EXACT_OFFICIAL_URL_INDEPENDENTLY_IDENTIFIED",
+      "selected": true,
+      "values_inspected": false,
+      "numeric_extraction_performed": false,
+      "source_bytes_retained": false
+    },
+    {
+      "data_year": 2020,
+      "primary_publication": "January 2021",
+      "primary_exact_url": null,
+      "primary_discovery_status": "UNRESOLVED_NOT_NEGATIVE_EVIDENCE",
+      "selected": false,
+      "values_inspected": false,
+      "numeric_extraction_performed": false,
+      "source_bytes_retained": false
+    },
+    {
+      "data_year": 2021,
+      "primary_publication": "January 2022",
+      "primary_exact_url": null,
+      "primary_discovery_status": "UNRESOLVED_NOT_NEGATIVE_EVIDENCE",
+      "selected": false,
+      "values_inspected": false,
+      "numeric_extraction_performed": false,
+      "source_bytes_retained": false
+    },
+    {
+      "data_year": 2022,
+      "primary_publication": "January 2023",
+      "primary_exact_url": "https://www.bnro.ro/files/d/Pubs_ro/Lunare/2023/2023bl01.pdf",
+      "primary_discovery_status": "EXACT_OFFICIAL_URL_INDEPENDENTLY_IDENTIFIED",
+      "selected": true,
+      "values_inspected": false,
+      "numeric_extraction_performed": false,
+      "source_bytes_retained": false
+    },
+    {
+      "data_year": 2023,
+      "primary_publication": "January 2024",
+      "primary_exact_url": null,
+      "primary_discovery_status": "UNRESOLVED_NOT_NEGATIVE_EVIDENCE",
+      "selected": false,
+      "values_inspected": false,
+      "numeric_extraction_performed": false,
+      "source_bytes_retained": false
+    },
+    {
+      "data_year": 2024,
+      "primary_publication": "January 2025",
+      "primary_exact_url": "https://www.bnr.ro/uploads/2025-03-07buletinlunarnr.012025_documentpdf_545_1741348451.pdf",
+      "primary_discovery_status": "EXACT_OFFICIAL_URL_INDEPENDENTLY_IDENTIFIED",
+      "selected": true,
+      "values_inspected": false,
+      "numeric_extraction_performed": false,
+      "source_bytes_retained": false
+    },
+    {
+      "data_year": 2025,
+      "primary_publication": "January 2026",
+      "primary_exact_url": null,
+      "primary_discovery_status": "UNRESOLVED_NOT_NEGATIVE_EVIDENCE",
+      "selected": false,
+      "values_inspected": false,
+      "numeric_extraction_performed": false,
+      "source_bytes_retained": false
+    }
+  ],
+  "counts": {
+    "required_data_years": 11,
+    "exact_primary_identified": 3,
+    "unresolved_primary": 8,
+    "selected_primary": 3,
+    "fallbacks_selected": 0
+  },
+  "completion_gate": {
+    "enumeration_complete": false,
+    "required_exact_year_source_count": 11,
+    "source_byte_acquisition_authorized": false,
+    "numeric_extraction_authorized": false,
+    "canonical_series_mutation_authorized": false,
+    "structural_selection_authorized": false,
+    "estimation_or_refit_authorized": false
+  },
+  "next_admissible_action": "Continue independent discovery of exact official primary URLs. Do not infer filenames or timestamps. If the current indexed/archive surface cannot expose them, freeze this path until exact links can be obtained through an official archive/browser surface; do not activate fallbacks merely because a search engine omitted the primary.",
+  "hard_rules": {
+    "no_url_pattern_generation": true,
+    "no_timestamp_bruteforce": true,
+    "no_search_index_failure_as_negative_evidence": true,
+    "no_fallback_without_documented_primary_source_or_layout_failure": true,
+    "no_value_inspection": true,
+    "no_numeric_extraction": true,
+    "no_pdf_byte_promotion_in_enumeration": true,
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_holdout_opening": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  }
+}
