@@ -150,7 +150,7 @@
     ],
     "provider_access_observation": "GitHub Actions successfully retrieved seven exact official BNR BLS workbooks from 2023-2025 as valid OLE2 XLS files; the prior web-layer Request Rejected behavior was an access-path limitation, not missing files.",
     "historical_coverage_claimed": true,
-    "next_required_step": "Recover only the exact official 2025-Q2 workbook endpoint/bytes under the frozen recovery chain if an independent official clue appears. Do not infer archive URLs or substitute publication-rounded values. Separately materialise a population-matched BNR prudential history before any credit-response structural-selection contract.",
+    "next_required_step": "No active 2025-Q2 BLS source-discovery task remains under the current public surface. Reopen only if new official BNR evidence exposes the exact workbook endpoint or an exact official machine-readable time-series/catalog target with matching realised-round semantics; then use the frozen workbook-recovery/promotion chain. Do not infer archive URLs or substitute publication-rounded values. Separately, the matched prudential path remains frozen until its own new-official-evidence trigger.",
     "retained_raw_vintage": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19",
     "may_2025_xlsx_bridge": {
       "status": "EXACT_TWO_XLSX_WORKBOOKS_RETAINED_AND_LAYOUT_REVIEWED",
@@ -176,7 +176,9 @@
     "canonical_missing_rounds": [
       "2025-Q2"
     ],
-    "canonical_promotion_review": "model/calibration_validation/bnr_bls_canonical_panel_promotion_review.json"
+    "canonical_promotion_review": "model/calibration_validation/bnr_bls_canonical_panel_promotion_review.json",
+    "2025q2_source_discovery_terminal_assessment": "model/calibration_validation/bnr_bls_2025q2_source_discovery_terminal_assessment.json",
+    "2025q2_source_discovery_stage_status": "STAGE_CLOSED_FROZEN_SINGLE_GAP_2025_Q2_UNDER_CURRENT_PUBLIC_DISCOVERY_SURFACE_NO_MODEL_EFFECT"
   },
   "external_prudential_source_screening": {
     "status": "QUARTERLY_CBD2_SERIES_RETAINED_DIRECT_BNR_POPULATION_SUBSTITUTION_REJECTED",
@@ -271,5 +273,7 @@
   "bnr_prudential_table_materialisation_contract": "model/calibration_validation/bnr_prudential_table_materialisation_contract.json",
   "bnr_prudential_table_source_enumeration": "model/calibration_validation/bnr_prudential_table_source_enumeration.json",
   "bnr_prudential_interactive_database_discovery_review": "model/calibration_validation/bnr_prudential_interactive_database_discovery_review.json",
-  "bnr_prudential_source_discovery_terminal_assessment": "model/calibration_validation/bnr_prudential_source_discovery_terminal_assessment.json"
+  "bnr_prudential_source_discovery_terminal_assessment": "model/calibration_validation/bnr_prudential_source_discovery_terminal_assessment.json",
+  "bnr_bls_2025q2_source_discovery_terminal_assessment": "model/calibration_validation/bnr_bls_2025q2_source_discovery_terminal_assessment.json",
+  "bnr_bls_2025q2_source_discovery_stage_status": "STAGE_CLOSED_FROZEN_SINGLE_GAP_2025_Q2_UNDER_CURRENT_PUBLIC_DISCOVERY_SURFACE_NO_MODEL_EFFECT"
 }
