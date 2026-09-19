@@ -93,24 +93,25 @@ class FxInflationSelectionRunnerTests(unittest.TestCase):
             result.stdout.lower(),
         )
 
-    def test_selection_cannot_run_without_explicit_gate(self) -> None:
-        if GATE.exists():
-            self.fail(
-                "FX-inflation execution gate unexpectedly exists "
-                "during runner-implementation phase"
-            )
-        result = subprocess.run(
-            [
-                sys.executable,
-                str(RUNNER),
-                "--execute-selection",
-            ],
-            cwd=ROOT,
-            capture_output=True,
-            text=True,
+    def test_execution_gate_is_selection_only_and_never_opens_holdout(self) -> None:
+        import json
+
+        self.assertTrue(GATE.exists())
+        gate = json.loads(GATE.read_text(encoding="utf-8"))
+        self.assertEqual(
+            gate["authorized_scope"],
+            "STRUCTURAL_SELECTION_2015_01_TO_2020_12_ONLY",
         )
-        self.assertNotEqual(result.returncode, 0)
-        self.assertIn("not authorized", result.stderr.lower())
+        self.assertFalse(gate["final_evaluation_authorized"])
+        self.assertTrue(gate["hard_rules"]["single_write_result"])
+        self.assertTrue(gate["hard_rules"]["no_final_evaluation"])
+        self.assertTrue(gate["hard_rules"]["no_respecification"])
+        self.assertTrue(gate["hard_rules"]["no_system_dynamics_activation"])
+        self.assertTrue(gate["hard_rules"]["no_behavioural_closure_change"])
+        self.assertFalse(
+            gate["selection_execution_authorized"]
+            and gate["selection_execution_consumed"]
+        )
 
 
 if __name__ == "__main__":
