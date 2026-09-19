@@ -27,6 +27,10 @@ class CorporateInvestmentMeasurementPanelContractTests(unittest.TestCase):
             vintages["supplemental"],
             "data/source_vintages/corporate-investment-supplemental-source-vintage-2026-09-19",
         )
+        self.assertEqual(
+            vintages["financing_rate_screening"],
+            "data/source_vintages/corporate-investment-financing-rate-screening-vintage-2026-09-19",
+        )
 
     def test_only_preregistered_measurements_are_derived(self) -> None:
         t = self.c["transformations"]
@@ -34,7 +38,13 @@ class CorporateInvestmentMeasurementPanelContractTests(unittest.TestCase):
         self.assertIn("SUM(grants", t["investment_grants_support_intensity"])
         self.assertIn(
             "EXACTLY_THREE",
-            t["nfc_new_business_lending_rate_quarterly_mean"],
+            t[
+                "nfc_new_business_lending_rate_up_to_one_year_quarterly_mean"
+            ],
+        )
+        self.assertEqual(
+            self.c["inputs"]["lending_rate_series_key"],
+            "MIR.M.RO.B.A2A.F.R.A.2240.RON.N",
         )
         self.assertEqual(
             t["target_investment_rate"],
