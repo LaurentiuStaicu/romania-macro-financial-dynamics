@@ -241,14 +241,15 @@
       "numeric_similarity_can_bridge": false,
       "future_preferred_source": "Exact BNR-population statistical-table history or another officially documented matched population."
     },
-    "next_admissible_source_task": "Complete the frozen year-level exact BNR source map without inferring URLs. Numeric extraction remains closed until all 11 primary/fallback selections are resolved under the preregistered precedence rules.",
-    "source_enumeration_status": "INCOMPLETE_SOURCE_ENUMERATION_NO_MODEL_EFFECT",
+    "next_admissible_source_task": "No active matched-prudential discovery task remains under the current public surface. Reopen only on new official BNR link/catalog/export/population-bridge evidence; do not repeat the same discovery probes or infer endpoints.",
+    "source_enumeration_status": "FROZEN_INCOMPLETE_3_OF_11_CURRENT_PUBLIC_DISCOVERY_EXHAUSTED_NO_MODEL_EFFECT",
     "exact_primary_years_identified": [
       2019,
       2022,
       2024
     ],
-    "interactive_database_discovery_status": "OFFICIAL_DATABASE_SURFACE_CONFIRMED_TARGET_SERIES_NOT_IDENTIFIED_IN_PUBLIC_INDEX"
+    "interactive_database_discovery_status": "OFFICIAL_DATABASE_CONFIRMED_TARGET_SERIES_NOT_IDENTIFIED_STAGE_FROZEN",
+    "discovery_stage_status": "STAGE_CLOSED_FROZEN_INCOMPLETE_UNDER_CURRENT_PUBLIC_DISCOVERY_SURFACE_NO_MODEL_EFFECT"
   },
   "prudential_coverage_diagnostic": {
     "status": "EXECUTED_SUCCESS_CBD2_VINTAGE_RETAINED_DIRECT_BNR_SUBSTITUTION_REJECTED",
@@ -269,5 +270,6 @@
   "prudential_population_boundary_review": "model/calibration_validation/bank_credit_prudential_population_boundary_review.json",
   "bnr_prudential_table_materialisation_contract": "model/calibration_validation/bnr_prudential_table_materialisation_contract.json",
   "bnr_prudential_table_source_enumeration": "model/calibration_validation/bnr_prudential_table_source_enumeration.json",
-  "bnr_prudential_interactive_database_discovery_review": "model/calibration_validation/bnr_prudential_interactive_database_discovery_review.json"
+  "bnr_prudential_interactive_database_discovery_review": "model/calibration_validation/bnr_prudential_interactive_database_discovery_review.json",
+  "bnr_prudential_source_discovery_terminal_assessment": "model/calibration_validation/bnr_prudential_source_discovery_terminal_assessment.json"
 }
