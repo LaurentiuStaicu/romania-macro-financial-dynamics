@@ -1,18 +1,16 @@
 name: AMECO Fiscal Reaction Annual Source Materialisation
 
-# Live provider materialisation is manual-only. The PR label is a one-shot
-# bootstrap trigger before this workflow reaches the default branch.
+# Live provider refresh/materialisation is manual-only. The reviewed
+# 2026-09-19 actual-only source vintage is retained immutably in-repository;
+# any future manual run is evidence for a new vintage and cannot overwrite it.
 on:
   workflow_dispatch:
-  pull_request:
-    types: [labeled]
 
 permissions:
   contents: read
 
 jobs:
   materialise-ameco-fiscal-reaction-source:
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.label.name == 'run-ameco-fiscal-materialisation' }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
