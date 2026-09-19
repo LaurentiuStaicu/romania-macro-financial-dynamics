@@ -54,7 +54,10 @@
     "activated_means_admitted_for_calibration_not_precalibrated": true,
     "unparameterized_behaviour_may_not_drive_reference_simulation": true,
     "activated_label_is_not_feedback_activation": true,
-    "feedback_activation_requires_system_dynamics_conformity_gate": true
+    "feedback_activation_requires_system_dynamics_conformity_gate": true,
+    "active_calibration_cycle_open": false,
+    "activated_mechanisms_count": 0,
+    "validation_disposition_governs_current_status": true
   },
   "calibration_validation": {
     "validation_recovery_contract": "model/calibration_validation/validation_recovery_contract.json",
