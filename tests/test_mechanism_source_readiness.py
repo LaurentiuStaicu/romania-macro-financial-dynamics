@@ -134,16 +134,26 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         household = mechanisms["household_consumption_response"]
         self.assertEqual(
             household["source_readiness"],
-            "LEGACY_XLS_EXTRACTION_RETAINED_BLS_DSTI_TERM_CHANGE_NOT_DSTI_LEVEL",
+            "OFFICIAL_HOUSING_LOAN_DSTI_LEVEL_OBSERVATIONS_CONFIRMED_MACHINE_READABLE_LONGITUDINAL_HISTORY_NOT_RETAINED",
         )
         self.assertEqual(
             household["priority_group"],
-            "DEFER_UNTIL_MACHINE_READABLE_DSTI_LEVEL_HISTORY",
+            "DEFER_UNTIL_MACHINE_READABLE_DSTI_LEVEL_HISTORY_OR_PREREGISTERED_TEXT_ONLY_CANDIDATE",
         )
         self.assertEqual(
             household["debt_service_source_screening"],
             "model/calibration_validation/debt_service_source_screening.json",
         )
+        self.assertEqual(
+            household["dsti_level_publication_boundary_review"],
+            "model/calibration_validation/bnr_household_dsti_level_publication_boundary_review.json",
+        )
+        self.assertEqual(
+            household["confirmed_publication_text_quarters"],
+            ["2024-Q1", "2024-Q2", "2024-Q3", "2025-Q2"],
+        )
+        self.assertFalse(household["registered_macro_dsr_identified"])
+        self.assertTrue(household["alternative_housing_loan_burden_observed"])
         self.assertFalse(household["estimation_or_refit_allowed"])
         fiscal = mechanisms["fiscal_primary_balance_reaction"]
         self.assertEqual(
