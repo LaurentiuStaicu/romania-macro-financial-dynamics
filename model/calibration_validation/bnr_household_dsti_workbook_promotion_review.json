@@ -1,0 +1,81 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "household_consumption_response",
+  "snapshot_id": "bnr-household-dsti-workbook-probe-vintage-2026-09-19",
+  "verdict": "PASS_EXACT_BNR_WORKBOOK_BYTES_ELIGIBLE_FOR_PROMOTION",
+  "estimation_authorized": false,
+  "reviewed_workflow": {
+    "run_id": 35437155388,
+    "artifact_id": 10582576588,
+    "artifact_name": "bnr-household-dsti-workbook-probe-155a5b7711021d7ac6a5f96d476c5a6c10db0e21",
+    "artifact_zip_sha256": "f5efeb0952af48e82c41106bff63908877dcd45176b49a0f085d7ef11d2e109b",
+    "source_branch_head_sha": "6f3c3bc72dd12a005204df8283422e4ec6f54237"
+  },
+  "expected_files": [
+    {
+      "path": "bls_2023_feb.xls",
+      "bytes": 98304,
+      "sha256": "a79f26ef2a30aa54826979f08b3b9d5186b135ec291070d3cbe18e31df897e35"
+    },
+    {
+      "path": "bls_2023_may.xls",
+      "bytes": 81920,
+      "sha256": "a0b5b0727b8208af1f576ff4128dae7268555f4122ff777a612f0817f92cdd41"
+    },
+    {
+      "path": "bls_2024_feb.xls",
+      "bytes": 81408,
+      "sha256": "c62be9d1e9b17ea0c01ed1de9d7c86bae36f061e08fdf5bd14b71fc6a3b6de75"
+    },
+    {
+      "path": "bls_2024_may.xls",
+      "bytes": 81920,
+      "sha256": "c85887dcb7bce9745f3b4baf90e78eceed5ca8e5392150d246e679e428406a98"
+    },
+    {
+      "path": "bls_2024_nov.xls",
+      "bytes": 81408,
+      "sha256": "d396414440ba3bcea7fa9b319880a2e701fe7ce4dfbd6a145abc8dfb7f3b6dac"
+    },
+    {
+      "path": "bls_2025_feb.xls",
+      "bytes": 98304,
+      "sha256": "2202f9d703f47d807549c35e2aba0ce9850fa862cd0fda8b95063637f67cd451"
+    },
+    {
+      "path": "bls_2025_nov.xls",
+      "bytes": 135680,
+      "sha256": "eaae97b82bc416d51124917a0dcf3c60991045cb14c0441b2c87457004d07e7a"
+    },
+    {
+      "path": "bnr_household_dsti_workbook_probe.json",
+      "bytes": 4774,
+      "sha256": null
+    }
+  ],
+  "access_summary": {
+    "candidate_workbooks": 7,
+    "accessible_workbooks": 7,
+    "http_200_workbooks": 7,
+    "valid_ole2_signatures": 7,
+    "value_extraction_performed": false,
+    "chart_digitisation_performed": false
+  },
+  "semantic_boundary": "Promotion retains raw official BNR BLS workbook evidence only. It does not establish that a particular sheet/range is the canonical household DSTI series and does not make borrower-level DSTI equivalent to the registered macro household DSR.",
+  "parser_boundary": {
+    "legacy_format": ".xls / OLE2 BIFF",
+    "canonical_value_extraction_ready": false,
+    "rule": "Do not introduce an ad-hoc parser, manual copy or format conversion merely to advance the model. Value extraction requires a separately reviewed deterministic extraction path with sheet/range semantics frozen before use."
+  },
+  "hard_boundaries": {
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_household_consumption_outcome_access": true,
+    "no_dsti_semantic_substitution": true,
+    "no_chart_digitisation": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "promotion_rule": "Only artifact 10582576588 with the exact ZIP digest and reviewed per-file bytes/SHA-256 values may be committed as this raw BNR workbook vintage."
+}
