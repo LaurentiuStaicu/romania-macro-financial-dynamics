@@ -75,7 +75,7 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         aggregate_credit = mechanisms["aggregate_bank_credit_response"]
         self.assertEqual(
             aggregate_credit["source_readiness"],
-            "BLS_CANONICAL_8_OF_12_PLUS_OFFICIAL_PUBLICATION_TEXT_BRIDGE_EXACT_WORKBOOK_GAPS_REMAIN",
+            "BLS_CANONICAL_8_OF_12_PUBLICATION_BRIDGE_COMPLETE_ENOUGH_FOR_CORROBORATION_MISSING_WORKBOOK_RECOVERY_CONTRACT_FROZEN",
         )
         self.assertEqual(aggregate_credit["observed_round_count"], 8)
         self.assertEqual(
@@ -105,6 +105,26 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         self.assertEqual(
             aggregate_credit["canonical_missing_rounds"],
             ["2023-Q2", "2023-Q3", "2024-Q2", "2025-Q2"],
+        )
+        self.assertEqual(
+            aggregate_credit["missing_round_recovery_contract"],
+            "model/calibration_validation/bnr_bls_missing_round_workbook_recovery_contract.json",
+        )
+        self.assertEqual(
+            aggregate_credit["missing_round_recovery_workflow"],
+            ".github/workflows/bnr-bls-missing-round-workbook-recovery.yml",
+        )
+        self.assertEqual(
+            aggregate_credit["missing_round_recovery_execution_policy"],
+            "MANUAL_ONLY_LIVE_SOURCE_ACQUISITION",
+        )
+        self.assertEqual(
+            aggregate_credit["recovery_endpoint_status"]["2023-Q2"],
+            "EXACT_ENDPOINT_CONFIRMED_BY_WEB_AS_APPLICATION_VND_MS_EXCEL_BINARY_NOT_RETAINED",
+        )
+        self.assertEqual(
+            aggregate_credit["recovery_endpoint_status"]["2025-Q2"],
+            "OFFICIAL_ANNEX_EXISTENCE_KNOWN_EXACT_URL_UNIDENTIFIED",
         )
         self.assertFalse(aggregate_credit["estimation_or_refit_allowed"])
 
