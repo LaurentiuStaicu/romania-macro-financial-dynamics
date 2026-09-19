@@ -1,0 +1,54 @@
+{
+  "screening_version": "0.1",
+  "screened_on": "2026-09-19",
+  "mechanism_id": "exchange_rate_pass_through_to_inflation",
+  "purpose": "Choose an external-price control family before pass-through estimation so the control is not selected after inspecting model fit.",
+  "preferred_direct_control": {
+    "dataset": "Eurostat sts_inpi_m — Import prices in industry, monthly data",
+    "target": "Romania industrial import transaction-price index",
+    "status": "ROMANIA_COVERAGE_NOT_CONFIRMED",
+    "evidence": [
+      "Eurostat defines the indicator as monthly transaction-price development of imported industrial goods.",
+      "Under the European business-statistics framework euro-area countries are required to transmit import prices; only some non-euro EU/EFTA countries transmit them.",
+      "Current provider and dataset-mirror searches did not identify the standard Romania total-industry series. This is treated as non-confirmation, not proof that every possible Romanian subseries is absent."
+    ],
+    "decision": "DO_NOT_USE_UNLESS_EXACT_ROMANIA_SERIES_IS_MATERIALISED"
+  },
+  "preregistered_fallback": {
+    "source_family": "Eurostat International Trade in Goods Statistics — Indices by SITC/BEC/CPA",
+    "target": "Romania monthly import unit-value index for total imports/world, expressed in euro",
+    "status": "SOURCE_FAMILY_CONFIRMED_EXACT_SERIES_CODE_PENDING_MATERIALISATION",
+    "rationale": [
+      "Eurostat documents monthly and annual unit-value indices for imports and exports of each EU country, with coverage starting from January 2002 in the current user manual.",
+      "The indices are available in euro, national currency and US dollars.",
+      "For a RON/EUR pass-through equation, the euro-denominated import UVI is preferred over a RON-denominated UVI because a RON-denominated index would mechanically embed part of the exchange-rate conversion being studied.",
+      "Unit-value indices are constructed from trade values and quantities and can move with product composition; they are therefore an external-price proxy, not a pure transaction-price index."
+    ],
+    "required_dimensions_before_use": [
+      "reporting country = Romania",
+      "flow = imports",
+      "partner = world or the broadest stable world aggregate available",
+      "product = total goods or the broadest stable aggregate available",
+      "unit = unit-value index denominated in euro",
+      "frequency = monthly"
+    ],
+    "materialisation_rule": "Do not estimate until the exact Eurostat dataset identifier, complete dimension tuple, coverage, revisions/vintage, raw-source hash and missingness are retained. If the exact requested UVI cannot be reproduced, return to SOURCE_CONTROL_UNRESOLVED rather than selecting a fit-improving substitute."
+  },
+  "methodological_limits": {
+    "UVI_is_not_direct_import_price_index": true,
+    "composition_effects_possible": true,
+    "euro_denomination_selected_before_fit": true,
+    "no_RON_denomination_switch_after_fit": true,
+    "no_EU_or_euro_area_aggregate_substitution_for_Romania": true,
+    "no_global_commodity_index_substitution_without_new_contract": true,
+    "no_post_fit_control_selection": true
+  },
+  "disposition": {
+    "external_price_control_status": "FALLBACK_SOURCE_FAMILY_PREREGISTERED_EXACT_SERIES_PENDING",
+    "calibration_cycle_open": false,
+    "mechanism_classification": "CANDIDATE",
+    "central_feedback": false,
+    "validated_reference_behavioural_mechanisms_change": 0,
+    "behavioural_closure": "UNCHANGED_INACTIVE"
+  }
+}

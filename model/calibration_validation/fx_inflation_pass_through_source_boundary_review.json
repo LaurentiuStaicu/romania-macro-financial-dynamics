@@ -28,12 +28,9 @@
     }
   },
   "external_price_control_screen": {
-    "preferred_dataset": "Eurostat sts_inpi_m — Import prices in industry, monthly data",
-    "concept": "Monthly transaction-price development of imported industrial goods purchased by domestic residents.",
-    "source_url": "https://ec.europa.eu/eurostat/databrowser/view/sts_inpi_m/default/table",
-    "current_status": "ROMANIA_SPECIFIC_COVERAGE_NOT_YET_CONFIRMED",
-    "reason": "Eurostat states that euro-area countries are required to transmit industrial import prices, while only some non-euro EU/EFTA countries provide them. Dataset existence therefore does not prove a Romanian series.",
-    "rule": "Do not choose a substitute external-price control after observing model fit. If Romanian import-price coverage is unavailable, freeze an alternative external-price control in a new contract before opening outcomes."
+    "screening": "model/calibration_validation/fx_inflation_external_price_control_screening.json",
+    "current_decision": "PREFERRED_STS_INPI_RO_NOT_CONFIRMED_FALLBACK_ITGS_EUR_UVI_PREREGISTERED",
+    "calibration_may_open": false
   },
   "transformation_boundary": {
     "fx_quote": "RON_per_EUR",
