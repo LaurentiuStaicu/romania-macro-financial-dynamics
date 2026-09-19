@@ -37,13 +37,15 @@
   },
   "primary_balance_measurement_boundary": {
     "accounting_identity": "primary_balance = net_lending_borrowing + interest_expenditure, when both components share a compatible accounting/unit/seasonal boundary and interest expenditure is expressed as a positive use.",
-    "current_status": "MATCHED_NSA_PC_GDP_MATERIALISATION_CONTRACT_FROZEN_MANUAL_LIVE_RUN_PENDING",
-    "blocker": "The matched identity is now frozen on gov_10q_ggnfa / S13 / NSA / PC_GDP, but no successful retained live materialisation artifact has yet been promoted to the repository.",
-    "admissible_next_step": "Run the manual-only matched B9/D41PAY materialiser, retain raw hashes and the derived quarterly primary-balance CSV, then explicitly review/commit a snapshot before any debt-gap/output-gap/regime contract.",
+    "current_status": "EXACT_MATCHED_NSA_PC_GDP_SOURCE_VINTAGE_RETAINED",
+    "blocker": "Resolved for source observability: the exact matched Eurostat B9 and D41PAY NSA/PC_GDP vintage is retained for 2000-Q1..2026-Q1. Fiscal-reaction estimation remains blocked by debt-gap, output-gap and ex-ante regime measurement.",
+    "admissible_next_step": "Separately preregister the debt-gap reference, output-gap measurement source/model and dated fiscal/institutional regime coding before any structural-selection estimation. Do not infer gaps or break dates from model fit.",
     "no_cash_budget_substitution": true,
     "materialisation_contract": "model/calibration_validation/fiscal_primary_balance_materialisation_contract.json",
     "materialiser_script": "scripts/audit_fiscal_primary_balance_materialisation.py",
-    "materialiser_workflow": ".github/workflows/fiscal-primary-balance-materialisation.yml"
+    "materialiser_workflow": ".github/workflows/fiscal-primary-balance-materialisation.yml",
+    "retained_source_vintage": "data/source_vintages/fiscal-primary-balance-quarterly-vintage-2026-09-19",
+    "promotion_review": "model/calibration_validation/fiscal_primary_balance_source_vintage_promotion_review.json"
   },
   "output_gap_boundary": {
     "registered_concept": "output_gap",
@@ -64,8 +66,8 @@
   "source_admissibility": {
     "registered_full_form_admissible": false,
     "reasons": [
-      "A matched quarterly primary-balance series has not yet been materialised on one seasonal/unit boundary.",
-      "The output gap is not directly observed and no measurement model is frozen.",
+      "The matched quarterly primary-balance series is now retained exactly on gov_10q_ggnfa / S13 / NSA / PC_GDP.",
+      "The output gap is not directly observed and no measurement source/model is frozen.",
       "Institutional/fiscal-package regimes are not encoded ex ante.",
       "The registered debt_gap concept is not frozen; observed debt-to-GDP is not automatically a debt gap."
     ],
@@ -82,7 +84,7 @@
   ],
   "disposition": {
     "mechanism_classification": "DEFERRED",
-    "source_readiness": "PRIMARY_BALANCE_MATERIALISER_FROZEN_MANUAL_LIVE_RUN_PENDING_OUTPUT_GAP_AND_REGIMES_UNRESOLVED",
+    "source_readiness": "MATCHED_PRIMARY_BALANCE_VINTAGE_RETAINED_OUTPUT_GAP_DEBT_GAP_REGIMES_UNRESOLVED",
     "active_calibration_cycle_open": false,
     "estimation_or_refit_allowed": false,
     "central_feedback": false,
