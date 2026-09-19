@@ -55,7 +55,25 @@
         "na_item": "B9",
         "geo": "RO"
       },
-      "revision_note": "Eurostat metadata state that Romanian quarterly government non-financial accounts are revised when annual data become available; every live materialisation must therefore retain dataset vintage/update metadata and the raw response hash."
+      "revision_note": "Eurostat metadata state that Romanian quarterly government non-financial accounts are revised when annual data become available; every live materialisation must therefore retain dataset vintage/update metadata and the raw response hash.",
+      "published_semantic_crosscheck": {
+        "source": "Eurostat Euro indicators, 21 July 2026",
+        "source_url": "https://ec.europa.eu/eurostat/en/web/products-euro-indicators/w/2-21072026-bp",
+        "release_table": "Seasonally adjusted general government surplus (+) / deficit (-), percent of GDP",
+        "romania_values": {
+          "2024-Q1": -9.8,
+          "2024-Q2": -7.8,
+          "2024-Q3": -9.6,
+          "2024-Q4": -9.6,
+          "2025-Q1": -9,
+          "2025-Q2": -8.2,
+          "2025-Q3": -6.9,
+          "2025-Q4": -7.5,
+          "2026-Q1": -3.6
+        },
+        "use": "DIAGNOSTIC_ONLY_NOT_HARD_EQUALITY_GATE",
+        "reason": "The official release confirms sign, unit and seasonal-adjustment semantics, but Romanian quarterly government accounts are revision-sensitive. A later API vintage may legitimately differ."
+      }
     }
   },
   "optional_domestic_rate_baseline": {

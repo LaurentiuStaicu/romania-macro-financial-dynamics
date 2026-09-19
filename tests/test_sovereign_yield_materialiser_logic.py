@@ -6,6 +6,7 @@ import unittest
 from scripts.audit_sovereign_yield_quarterly_materialisation import (
     complete_quarterly_monthly_mean,
     equal_weight_daily_to_quarter,
+    normalize_quarter,
     parse_ecb_csv,
     parse_eurostat_json,
     quarter_from_month,
@@ -13,6 +14,12 @@ from scripts.audit_sovereign_yield_quarterly_materialisation import (
 
 
 class SovereignYieldMaterialiserLogicTests(unittest.TestCase):
+    def test_quarter_normalization_accepts_both_provider_spellings(self) -> None:
+        self.assertEqual(normalize_quarter("2025Q1"), "2025-Q1")
+        self.assertEqual(normalize_quarter("2025-Q1"), "2025-Q1")
+        with self.assertRaises(ValueError):
+            normalize_quarter("2025--Q1")
+
     def test_month_to_quarter_mapping(self) -> None:
         self.assertEqual(quarter_from_month("2025-01"), "2025-Q1")
         self.assertEqual(quarter_from_month("2025-06"), "2025-Q2")

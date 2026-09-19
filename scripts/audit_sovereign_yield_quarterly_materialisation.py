@@ -36,6 +36,15 @@ def sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def normalize_quarter(period: str) -> str:
+    value = period.strip()
+    if len(value) == 7 and value[4:6] == "-Q" and value[6] in "1234":
+        return value
+    if len(value) == 6 and value[4] == "Q" and value[5] in "1234":
+        return f"{value[:4]}-Q{value[5]}"
+    raise ValueError(f"invalid quarterly period: {period!r}")
+
+
 def quarter_from_month(period: str) -> str:
     year_text, month_text = period.split("-", 1)
     month = int(month_text[:2])
@@ -128,7 +137,7 @@ def parse_eurostat_json(body: bytes) -> tuple[list[tuple[str, float]], dict]:
         raw = value_at(values, position)
         if raw is None:
             continue
-        rows.append((period.replace("Q", "-Q"), finite_float(raw)))
+        rows.append((normalize_quarter(period), finite_float(raw)))
     if not rows:
         raise ValueError("Eurostat response contained no finite observations")
     meta = {
