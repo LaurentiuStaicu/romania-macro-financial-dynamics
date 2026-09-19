@@ -1,0 +1,88 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "purpose": "Screen official debt-service sources relevant to the household-consumption and credit-risk mechanisms without constructing a synthetic debt-service variable or estimating any behavioural equation.",
+  "mechanisms": [
+    "household_consumption_response",
+    "credit_risk_npl_response"
+  ],
+  "verdict": "BIS_SECTORAL_DSR_NOT_AVAILABLE_FOR_ROMANIA_BNR_DSTI_OBSERVED_BUT_NON_EQUIVALENT",
+  "bis_sectoral_dsr": {
+    "institution": "Bank for International Settlements",
+    "dataset": "Debt service ratios",
+    "current_dataset_scope": "The current BIS DSR overview states that total private-non-financial-sector DSRs cover 32 economies, while household and NFC breakdowns are estimated for 17 economies.",
+    "source_overview_url": "https://data.bis.org/topics/DSR",
+    "documentation_url": "https://www.bis.org/statistics/dsr/dsr_doc.pdf",
+    "documented_17_country_sectoral_breakdown": [
+      "Belgium",
+      "Finland",
+      "France",
+      "Germany",
+      "Italy",
+      "Netherlands",
+      "Portugal",
+      "Spain",
+      "Denmark",
+      "Norway",
+      "Sweden",
+      "United Kingdom",
+      "Australia",
+      "Canada",
+      "Japan",
+      "Korea",
+      "United States"
+    ],
+    "romania_in_sectoral_breakdown": false,
+    "consequence": "No BIS household or NFC sector DSR may be treated as an exact Romania source. A total-PNFS DSR, if available for Romania, would still not be definitionally interchangeable with a household or NFC sector burden."
+  },
+  "bnr_household_dsti": {
+    "institution": "National Bank of Romania",
+    "concept": "Debt service-to-income (DSTI) for household borrowers / loan portfolios",
+    "evidence": [
+      {
+        "source": "Bank Lending Survey, May 2024",
+        "url": "https://muzeu.bnr.ro/uploads/2024-5-banklendingsurvey-may2024_documentpdf_545_1733753844.pdf",
+        "finding": "The report publishes quarterly household DSTI charts and states that in 2024 Q1 the average DSTI was 34 percent for new household loans and 41 percent for outstanding loans."
+      },
+      {
+        "source": "Financial Stability Report, June 2020",
+        "url": "https://www.bnr.ro/files/d/Pubs_en/RSF/FSR%20June%202020.pdf",
+        "finding": "The report publishes a historical DSTI chart for new consumer and housing loans and discusses changes after the 2019 borrower-based limit."
+      }
+    ],
+    "semantic_boundary": [
+      "Borrower/loan-portfolio DSTI is not the BIS macro flow-to-flow DSR for the full household sector.",
+      "New-loan DSTI is an origination-state measure and cannot stand in for debt service on the outstanding household debt stock.",
+      "Outstanding-loan DSTI is closer to the desired burden concept but remains a bank-loan borrower measure, not total household debt service divided by aggregate household income.",
+      "BNR DSTI may become an observed alternative state variable only under a separately frozen candidate-family measurement contract."
+    ],
+    "exact_machine_readable_history_retained": false,
+    "provider_note": "BNR XLS/XLSX links are publicly indexed but current direct provider access is rejected in this environment; no chart digitisation is permitted."
+  },
+  "shared_prohibitions": [
+    "Do not construct a Romania household or NFC DSR from debt stock, a new-business rate and an assumed maturity.",
+    "Do not use household debt-to-income as debt service.",
+    "Do not use a regulatory DSTI cap as an observed time series.",
+    "Do not substitute BNR new-loan DSTI for an aggregate household debt-service burden.",
+    "Do not digitise report charts to manufacture a canonical time series.",
+    "Do not drop the debt-service term merely because the exact registered concept is unavailable."
+  ],
+  "dispositions": {
+    "household_consumption_response": {
+      "status": "SOURCE_BOUNDARY_STILL_INCOMPLETE",
+      "estimation_authorized": false,
+      "next_gate": "Enumerate and retain an exact BNR household DSTI history from official XLS/XLSX or another machine-readable official source, separately for new and outstanding loans where available; then preregister whether outstanding-loan DSTI defines a new borrower-burden candidate family."
+    },
+    "credit_risk_npl_response": {
+      "status": "DEFERRED_DEBT_SERVICE_BOUNDARY_UNRESOLVED",
+      "estimation_authorized": false,
+      "next_gate": "Do not use household DSTI as the debt-service variable for aggregate NPL risk. Reopen only with a debt-service measure aligned to the chosen borrower/portfolio boundary."
+    }
+  },
+  "global_effect": {
+    "active_calibration_cycle_open": false,
+    "validated_reference_behavioural_mechanisms_change": 0,
+    "behavioural_closure_change": false,
+    "accounting_spine_change": false
+  }
+}
