@@ -92,6 +92,16 @@ def main() -> None:
         == "model/registries/scientific_baseline_manifest.json",
         "Reset integrity contract does not register the scientific baseline manifest",
     )
+    check(
+        model["calibration_validation"]["mechanism_source_readiness"]
+        == "model/calibration_validation/mechanism_source_readiness.json",
+        "Model contract does not register mechanism source readiness",
+    )
+    check(
+        model["calibration_validation"]["mechanism_reopen_conditions_registry"]
+        == "model/calibration_validation/mechanism_reopen_conditions_registry.json",
+        "Model contract does not register mechanism reopen governance",
+    )
 
     # Accounting state is derived from the canonical accounting gate.
     expected = accounting["current_expected_state"]
