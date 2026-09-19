@@ -46,7 +46,16 @@
       "unit": "percent of GDP",
       "aggregation": "None; use the directly published quarterly observation.",
       "sign_rule": "Positive values are surplus/net lending; negative values are deficit/net borrowing. Do not silently flip the sign in the source table.",
-      "source_resolution_rule": "Materialisation must retain the exact provider dimension tuple and raw hash. If the requested direct percent-of-GDP series cannot be resolved unambiguously, stop rather than reconstructing a different fiscal concept."
+      "source_resolution_rule": "Materialisation must retain the exact provider dimension tuple and raw hash. If the requested direct percent-of-GDP series cannot be resolved unambiguously, stop rather than reconstructing a different fiscal concept.",
+      "exact_provider_tuple": {
+        "freq": "Q",
+        "unit": "PC_GDP",
+        "s_adj": "SCA",
+        "sector": "S13",
+        "na_item": "B9",
+        "geo": "RO"
+      },
+      "revision_note": "Eurostat metadata state that Romanian quarterly government non-financial accounts are revised when annual data become available; every live materialisation must therefore retain dataset vintage/update metadata and the raw response hash."
     }
   },
   "optional_domestic_rate_baseline": {
@@ -87,5 +96,15 @@
     "no_system_dynamics_activation": true,
     "no_behavioural_closure_change": true
   },
-  "next_gate": "After exact source materialisation and provenance retention, write a separate structural-selection contract before any coefficient estimation. The later contract must freeze baseline forms, lag structure, estimation/selection window and untouched evaluation window."
+  "next_gate": "After exact source materialisation and provenance retention, write a separate structural-selection contract before any coefficient estimation. The later contract must freeze baseline forms, lag structure, estimation/selection window and untouched evaluation window.",
+  "source_endpoints": {
+    "ecb_api_base": "https://data-api.ecb.europa.eu/service/data",
+    "eurostat_api": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/gov_10q_ggnfa"
+  },
+  "source_materialiser": {
+    "script": "scripts/audit_sovereign_yield_quarterly_materialisation.py",
+    "workflow": ".github/workflows/sovereign-yield-quarterly-materialisation.yml",
+    "execution_policy": "MANUAL_ONLY_LIVE_SOURCE_EVIDENCE",
+    "canonical_repository_promotion": "A successful live run creates evidence only. The generated quarterly CSV and provenance must be reviewed and committed explicitly in a later repository step before any structural-selection contract may be opened."
+  }
 }
