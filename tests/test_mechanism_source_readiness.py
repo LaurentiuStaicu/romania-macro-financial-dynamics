@@ -60,7 +60,7 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         )
         self.assertEqual(
             step["action"],
-            "PREREGISTER_ANNUAL_FISCAL_REACTION_STRUCTURAL_SELECTION_NO_ESTIMATION",
+            "IMPLEMENT_ANNUAL_FISCAL_REACTION_OFFLINE_RUNNER_NO_ESTIMATION",
         )
         self.assertFalse(step["calibration_cycle_open"])
 
@@ -70,11 +70,11 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         fiscal = mechanisms["fiscal_primary_balance_reaction"]
         self.assertEqual(
             fiscal["source_readiness"],
-            "ANNUAL_AMECO_ACTUAL_SOURCE_VINTAGE_RETAINED_STRUCTURAL_SELECTION_PREREGISTRATION_PENDING",
+            "ANNUAL_AMECO_SOURCE_AND_FORM_FROZEN_RUNNER_IMPLEMENTATION_PENDING",
         )
         self.assertEqual(
             fiscal["priority_group"],
-            "STRUCTURAL_SELECTION_PREREGISTRATION_PENDING",
+            "OFFLINE_RUNNER_IMPLEMENTATION_PENDING",
         )
 
         sovereign = mechanisms["sovereign_yield_spread_response"]
