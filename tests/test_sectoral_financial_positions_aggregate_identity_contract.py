@@ -121,7 +121,7 @@ class SectoralFinancialPositionsAggregateIdentityContractTests(unittest.TestCase
     def test_post_run_esa_review_cannot_rewrite_a_d_history(self) -> None:
         self.assertEqual(
             self.review["status"],
-            "FUTURE_METHODOLOGY_CORRECTION_NOT_RETROACTIVE",
+            "POST_RUN_F1_ZERO_REFINEMENT_REJECTED_NONRETROACTIVE",
         )
         nonretro = self.review["nonretroactivity"]
         self.assertFalse(nonretro["phase_A_reinterpreted"])
@@ -132,7 +132,7 @@ class SectoralFinancialPositionsAggregateIdentityContractTests(unittest.TestCase
         self.assertFalse(nonretro["reference_mode_promoted"])
         self.assertEqual(
             self.review["next_action"]["status"],
-            "EXPLORATORY_REAUDIT_RETAINED_NO_FURTHER_RERUN",
+            "NO_FURTHER_INTERNAL_F1_ADAPTATION",
         )
         self.assertIn(
             "new independently preregistered phase",
@@ -145,6 +145,15 @@ class SectoralFinancialPositionsAggregateIdentityContractTests(unittest.TestCase
             exploratory["result"],
             "RECONCILIATION_FAIL_NO_PROMOTION",
         )
+        self.assertEqual(
+            self.review["proposal_status"],
+            "REJECTED_BY_PUBLISHED_QSA_SDR_LIABILITY_DIAGNOSTIC",
+        )
+        semantics = self.review["semantics_diagnostic"]
+        self.assertFalse(semantics["formal_gate"])
+        self.assertEqual(semantics["readiness_effect"], 0)
+        self.assertIn("non-zero F12/SDR liabilities", semantics["conclusion"])
+
 
 
 if __name__ == "__main__":
