@@ -1,12 +1,10 @@
 name: Sectoral Financial Positions Aggregate Identity Audit
 
+
+# Phase B live QSA refresh is manual after the retained immutable run. The
+# historical scientific result is reproduced offline from the committed
+# assessment and invariant tests.
 on:
-  pull_request:
-    paths:
-      - "model/dynamics/sectoral_financial_positions_aggregate_identity_contract.json"
-      - "scripts/audit_ecb_sectoral_financial_positions_aggregate_identity.py"
-      - "tests/test_sectoral_financial_positions_aggregate_identity_contract.py"
-      - ".github/workflows/sectoral-financial-positions-aggregate-identity-audit.yml"
   workflow_dispatch:
 
 permissions:
