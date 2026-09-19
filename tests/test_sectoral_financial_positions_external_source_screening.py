@@ -17,6 +17,32 @@ class SectoralFinancialPositionsExternalSourceScreeningTests(unittest.TestCase):
     def setUp(self) -> None:
         self.review = json.loads(P.read_text(encoding="utf-8"))
 
+    def test_eurostat_counterpart_dataset_is_priority_probe_candidate(self) -> None:
+        by_id = {item["id"]: item for item in self.review["screened_sources"]}
+        eurostat = by_id["EUROSTAT_QUARTERLY_COUNTERPART_FINANCIAL_ACCOUNTS"]
+        self.assertEqual(eurostat["dataset_code"], "nasq_10_f_cp")
+        self.assertFalse(eurostat["romania_exact_observation_coverage_retained"])
+        self.assertEqual(
+            eurostat["status"],
+            "PRIORITY_CANDIDATE_FOR_PREREGISTERED_ROMANIA_SCHEMA_COVERAGE_PROBE_NOT_REOPEN_EVIDENCE",
+        )
+        self.assertTrue(
+            self.review["decision"]["eurostat_counterpart_probe_justified"]
+        )
+        self.assertEqual(
+            self.review["decision"]["discovery_priority"][0],
+            "EUROSTAT_NASQ_10_F_CP",
+        )
+
+    def test_eurostat_lineage_is_republication_not_independent_measurement(self) -> None:
+        by_id = {item["id"]: item for item in self.review["screened_sources"]}
+        eurostat = by_id["EUROSTAT_QUARTERLY_COUNTERPART_FINANCIAL_ACCOUNTS"]
+        lineage = " ".join(eurostat["lineage_boundary"]).lower()
+        self.assertIn("validated", lineage)
+        self.assertIn("ecb", lineage)
+        self.assertIn("not assumed", lineage)
+        self.assertIn("independent", lineage)
+
     def test_oecd_counterpart_dataflows_are_only_probe_candidates(self) -> None:
         by_id = {item["id"]: item for item in self.review["screened_sources"]}
         oecd = by_id["OECD_QUARTERLY_COUNTERPART_FINANCIAL_ACCOUNTS"]
