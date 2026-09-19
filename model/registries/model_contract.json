@@ -85,5 +85,12 @@
     "next_operational_state": "EVIDENCE_TRIGGERED_BASELINE_HOLD",
     "model_complete": false,
     "release_ready": false
+  },
+  "repository_governance": {
+    "merge_readiness_assessment": "model/registries/scientific_baseline_merge_readiness_assessment.json",
+    "current_merge_readiness_status": "NOT_READY_REVIEWABILITY_BLOCKER_SCIENTIFIC_BASELINE_GREEN",
+    "pull_request_must_remain_draft": true,
+    "automatic_merge_authorized": false,
+    "release_or_version_change_authorized": false
   }
 }
