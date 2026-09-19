@@ -1,0 +1,68 @@
+{
+  "review_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "mechanism_id": "aggregate_bank_credit_response",
+  "phase": "BNR BLS Missing-Round Cell Extraction Source-Vintage Promotion Review",
+  "source_extraction_contract": "model/calibration_validation/bnr_bls_missing_round_cell_extraction_contract.json",
+  "source_workflow": ".github/workflows/bnr-bls-missing-round-cell-extraction.yml",
+  "source_workflow_run_id": 35452197462,
+  "source_job_id": 105921188520,
+  "source_head_branch": "audit/scientific-integrity-2026-09-18",
+  "source_branch_head_before_execution": "bfaad715b176180b5b93ea2c97c6f342f2993cb5",
+  "source_artifact_id": 10587291974,
+  "source_artifact_name": "bnr-bls-missing-round-cell-extraction-944c9636dc5f78a056e9ada74ada2bd843a6f946",
+  "source_artifact_zip_sha256": "9b75298c240ac63628df8b28342fc267a77d0869dee28e30c5b2d7f53ac4efcf",
+  "destination": "data/source_vintages/bnr-bls-missing-round-cell-extraction-vintage-2026-09-19",
+  "expected_files": [
+    {
+      "path": "bls_2023_aug_cells.json",
+      "bytes": 419034,
+      "sha256": "b373e615bb0ed5ae8f07135db43dc2889a57963399d5ba48803eddc84a5af0d0"
+    },
+    {
+      "path": "bls_2023_nov_cells.json",
+      "bytes": 418846,
+      "sha256": "f6fd5c51472bce2881e7130aa9eeee2bdec10a1caa384336bd0830953129690c"
+    },
+    {
+      "path": "bls_2024_aug_cells.json",
+      "bytes": 418770,
+      "sha256": "e7028029d574ce608f8b6427e8939961f4f63761550f98ac9e99e4c382fb708b"
+    },
+    {
+      "path": "bnr_bls_missing_round_cell_extraction_audit.json",
+      "bytes": 3705,
+      "sha256": "901411e06b347f6b595f53e35ee5b1756a759bc331a91659fde6ea7ba4e2e95f"
+    }
+  ],
+  "review_result": "APPROVED_FOR_IMMUTABLE_CELL_EXTRACTION_VINTAGE_RETENTION_ONLY",
+  "promotion_effect": {
+    "retain_exact_extraction_json": true,
+    "semantic_admission_authorized": false,
+    "canonical_panel_append_authorized": false,
+    "parameter_estimation_authorized": false,
+    "model_selection_authorized": false,
+    "holdout_opening_authorized": false,
+    "system_dynamics_activation": false,
+    "behavioural_closure_change": false
+  },
+  "required_next_gate_after_retention": [
+    "Compare exact question IDs, metric labels and coordinates against the frozen cross-round mapping.",
+    "Resolve round-identity anomalies explicitly rather than silently normalising workbook header dates.",
+    "Require all six preregistered observables to pass for each admitted quarter.",
+    "Only then regenerate the canonical realised-round panel without interpolation."
+  ],
+  "hard_rules": {
+    "no_live_source_refetch": true,
+    "artifact_id_and_zip_hash_are_frozen": true,
+    "exact_file_set_and_hashes_required": true,
+    "destination_must_not_preexist": true,
+    "no_semantic_substitution": true,
+    "no_canonical_panel_mutation": true,
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_holdout_opening": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  }
+}
