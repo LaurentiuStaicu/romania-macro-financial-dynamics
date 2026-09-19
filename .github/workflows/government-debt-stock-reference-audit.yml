@@ -1,0 +1,41 @@
+name: Government Debt Stock Reference Audit
+
+on:
+  pull_request:
+    paths:
+      - "model/dynamics/government_debt_stock_reference_contract.json"
+      - "scripts/audit_eurostat_government_debt_stock_reference.py"
+      - "tests/test_government_debt_stock_reference_contract.py"
+      - ".github/workflows/government-debt-stock-reference-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit-government-debt-reference:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify government-debt reference contract
+        run: python -m unittest tests.test_government_debt_stock_reference_contract -v
+
+      - name: Probe Eurostat GD reference series
+        env:
+          GOV_DEBT_REFERENCE_AUDIT_OUT: government_debt_reference_audit_artifacts
+        run: python scripts/audit_eurostat_government_debt_stock_reference.py
+
+      - name: Upload government-debt reference evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: government-debt-stock-reference-${{ github.sha }}
+          path: government_debt_reference_audit_artifacts/
+          if-no-files-found: error
+          retention-days: 90
