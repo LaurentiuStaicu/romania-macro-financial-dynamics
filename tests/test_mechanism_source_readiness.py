@@ -60,7 +60,7 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         )
         self.assertEqual(
             step["action"],
-            "RESOLVE_EXTERNAL_PRICE_PRODUCT_BOUNDARY_NO_ESTIMATION",
+            "MATERIALISE_FX_HICP_TOTAL_IMPORT_UVI_NO_ESTIMATION",
         )
         self.assertFalse(step["calibration_cycle_open"])
 
@@ -77,6 +77,17 @@ class MechanismSourceReadinessTests(unittest.TestCase):
             "FREEZE_TESTED_FORM_UNTIL_NEW_EVIDENCE",
         )
         self.assertFalse(fiscal["estimation_or_refit_allowed"])
+
+        fx = mechanisms["exchange_rate_pass_through_to_inflation"]
+        self.assertEqual(
+            fx["source_readiness"],
+            "EXACT_FX_HICP_TOTAL_IMPORT_UVI_BOUNDARIES_FROZEN_MATERIALISATION_PENDING",
+        )
+        self.assertEqual(
+            fx["priority_group"],
+            "SOURCE_MATERIALISATION_PENDING",
+        )
+        self.assertFalse(fx["estimation_or_refit_allowed"])
 
         sovereign = mechanisms["sovereign_yield_spread_response"]
         self.assertEqual(
