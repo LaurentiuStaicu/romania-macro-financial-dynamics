@@ -36,7 +36,7 @@
       "id": "aggregate_bank_credit_response",
       "classification": "CANDIDATE",
       "source_readiness": "BLS_CANONICAL_11_OF_12_EXACT_WORKBOOK_RECOVERY_RETAINED_SINGLE_GAP_2025_Q2",
-      "next_admissible_action": "Keep calibration closed. For BLS, reopen only if the exact official 2025-Q2 workbook endpoint is independently identified. For prudential controls, complete the exact year-level BNR Monthly Bulletin source enumeration; only 3 of 11 primary year sources are independently identified. Search-index non-discovery is not source absence, fallbacks remain unopened, and no numeric extraction or model estimation is authorized.",
+      "next_admissible_action": "Keep calibration closed. The BNR interactive database is now a registered reopen surface, but no exact target machine-readable prudential series has been identified. Reopen that path only on an official stable series/export/API identifier with matched population metadata. Otherwise continue PDF source enumeration only when exact official links are independently exposed; do not infer endpoints, URLs or values.",
       "blockers": [
         "The canonical realised BNR BLS panel now contains 11 exact observed rounds from 2022-Q4 through 2025-Q3; only 2025-Q2 remains missing.",
         "Exact 2023-Q2, 2023-Q3 and 2024-Q2 workbooks are retained with hashes, all six preregistered observables are semantically mapped, and those three rounds are canonically promoted without interpolation.",
@@ -111,7 +111,9 @@
         2024
       ],
       "bnr_prudential_exact_primary_identified_count": 3,
-      "bnr_prudential_required_year_count": 11
+      "bnr_prudential_required_year_count": 11,
+      "bnr_prudential_interactive_database_discovery_review": "model/calibration_validation/bnr_prudential_interactive_database_discovery_review.json",
+      "bnr_prudential_interactive_database_discovery_status": "OFFICIAL_DATABASE_SURFACE_CONFIRMED_TARGET_SERIES_NOT_IDENTIFIED_IN_PUBLIC_INDEX"
     },
     {
       "id": "exchange_rate_pass_through_to_inflation",
