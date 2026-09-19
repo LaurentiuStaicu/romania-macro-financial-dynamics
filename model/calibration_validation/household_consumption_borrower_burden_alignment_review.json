@@ -36,7 +36,14 @@
     "debt_instrument_coverage_match": false,
     "target_population_bridge_observed": false,
     "subgroup_consumption_target_observed": false,
-    "conclusion": "The observed BNR housing-loan DSTI levels are scientifically valid borrower-burden observables but are not directly admissible as the debt_service_ratio driver in the registered aggregate S1M consumption equation."
+    "conclusion": "The observed BNR housing-loan DSTI levels are scientifically valid borrower-burden observables but are not directly admissible as the debt_service_ratio driver in the registered aggregate S1M consumption equation. A targeted official-source screening found no observed public bridge, aligned borrower-consumption target or Romania common microdata frame that closes this population boundary.",
+    "official_public_source_screening_completed": true,
+    "screening_result": "BLOCKED_NO_OBSERVED_PUBLIC_BRIDGE_IDENTIFIED",
+    "screened_source_summary": {
+      "ECB_HFCS": "Conceptually suitable household finance/consumption microdata, but Romania is not identified as a participant in relevant waves.",
+      "INS_ABF_TEMPO": "Quarterly household budget/consumption source exists, but no public mortgage-borrower-status breakdown or DSTI-consumption linkage was identified.",
+      "ECB_CES": "High-frequency spending/income survey, but no Romania country series was identified and it would not itself map mortgage-borrower DSTI to S1M consumption."
+    }
   },
   "borrowing_rate_alignment": {
     "household_consumption_loan_rate": "Would align to consumer-credit pricing but not to the housing-loan DSTI instrument boundary.",
@@ -48,17 +55,20 @@
     {
       "id": "AGGREGATE_BURDEN_SOURCE",
       "requirement": "Identify an observed Romania burden measure whose population and debt boundary are defensibly aligned with aggregate S1M household consumption.",
-      "effect": "May permit a new aggregate-consumption candidate-family measurement contract; does not itself authorize estimation."
+      "effect": "May permit a new aggregate-consumption candidate-family measurement contract; does not itself authorize estimation.",
+      "current_screening_status": "NOT_IDENTIFIED"
     },
     {
       "id": "BORROWER_SUBPOPULATION_TARGET",
       "requirement": "Identify an observed consumption/income target for a housing-borrower population aligned to the BNR DSTI boundary.",
-      "effect": "Would define a different empirical target/mechanism and requires separate preregistration; it may not silently replace the registered aggregate mechanism."
+      "effect": "Would define a different empirical target/mechanism and requires separate preregistration; it may not silently replace the registered aggregate mechanism.",
+      "current_screening_status": "NOT_IDENTIFIED"
     },
     {
       "id": "REPRESENTATIVENESS_BRIDGE",
       "requirement": "Retain independently observed evidence capable of mapping housing-loan borrower burden to the aggregate consumption population without synthetic residual allocation.",
-      "effect": "Only after the bridge is frozen may the housing-loan DSTI candidate be reconsidered for aggregate consumption."
+      "effect": "Only after the bridge is frozen may the housing-loan DSTI candidate be reconsidered for aggregate consumption.",
+      "current_screening_status": "NOT_IDENTIFIED"
     }
   ],
   "insufficient_reopen_evidence": [
@@ -80,12 +90,13 @@
     "no_behavioural_closure_change": true
   },
   "disposition": {
-    "population_alignment_status": "BLOCKED",
+    "population_alignment_status": "BLOCKED_NO_OBSERVED_PUBLIC_BRIDGE_IDENTIFIED",
     "housing_dsti_observed": true,
     "housing_dsti_directly_admissible_in_registered_aggregate_consumption_form": false,
     "registered_full_form_source_admissible": false,
     "estimation_or_refit_allowed": false,
     "validated_reference_behavioural_mechanisms_change": 0,
     "behavioural_closure": "UNCHANGED_INACTIVE"
-  }
+  },
+  "population_bridge_source_screening": "model/calibration_validation/household_consumption_population_bridge_source_screening.json"
 }
