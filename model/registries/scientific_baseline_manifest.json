@@ -1,5 +1,5 @@
 {
-  "manifest_version": "0.6",
+  "manifest_version": "0.7",
   "baseline_id": "scientific-integrity-2026-09-19",
   "purpose": "Single canonical cross-registry snapshot of RMD scientific maturity. Values in this manifest must agree with the authoritative accounting, dynamics, reference-mode, empirical-mechanism and validation registries; the manifest is not an independent source of scientific truth.",
   "authority": {
@@ -19,7 +19,8 @@
     "mechanism_reopen_conditions": "model/calibration_validation/mechanism_reopen_conditions_registry.json",
     "reference_mode_recovery_terminal_assessment": "model/dynamics/reference_mode_recovery_terminal_assessment.json",
     "sectoral_financial_positions_bnr_cnf_source_screening": "model/dynamics/sectoral_financial_positions_bnr_cnf_source_screening.json",
-    "validation_recovery_stage_terminal_assessment": "model/registries/validation_recovery_stage_terminal_assessment.json"
+    "validation_recovery_stage_terminal_assessment": "model/registries/validation_recovery_stage_terminal_assessment.json",
+    "sectoral_financial_positions_bnr_quarterly_s13_source_screening": "model/dynamics/sectoral_financial_positions_bnr_quarterly_s13_source_screening.json"
   },
   "canonical_state": {
     "accounting": {
@@ -61,7 +62,7 @@
       "recovery_stage_status": "STAGE_COMPLETE_FROZEN_9_OF_10_UNDER_CURRENT_PUBLIC_EVIDENCE_BOUNDARY",
       "recovery_substage_complete": true,
       "next_operational_state": "EVIDENCE_TRIGGERED_BASELINE_HOLD",
-      "final_blocker_public_source_completion_status": "EUROSTAT_INSTRUMENT_SCOPE_FAIL_OECD_S121_SCOPE_FAIL_BNR_ANNUAL_FREQUENCY_TRANSACTION_HISTORY_FAIL"
+      "final_blocker_public_source_completion_status": "EUROSTAT_INSTRUMENT_SCOPE_FAIL_OECD_S121_SCOPE_FAIL_BNR_ANNUAL_FREQUENCY_TRANSACTION_HISTORY_FAIL_BNR_QUARTERLY_S13_SECTOR_COUNTERPART_CONSOLIDATION_FAIL"
     },
     "system_dynamics": {
       "complete_endogenous_system_dynamics_model": false,
@@ -141,6 +142,7 @@
     "Reference-mode recovery may complete at a documented public-evidence boundary below 10/10 only when every missing mode has an explicit blocker, exhausted admissible current-public-source paths and declared reopen triggers.",
     "The annual BNR counterpart stock matrix may be used as semantic evidence only; it may not be interpolated to quarters or used to substitute for the required quarterly stock-and-financial-transaction history.",
     "Completion of the current recovery stage does not imply model completion, calibration, causal identification, integrated reference-mode closure, behavioural closure or release readiness.",
-    "When the stage is in EVIDENCE_TRIGGERED_BASELINE_HOLD, no new empirical calibration/refit or boundary relaxation may start without satisfying a declared reopen trigger."
+    "When the stage is in EVIDENCE_TRIGGERED_BASELINE_HOLD, no new empirical calibration/refit or boundary relaxation may start without satisfying a declared reopen trigger.",
+    "BNR quarterly S13 financial accounts are a valid national quarterly control but do not satisfy the full non-consolidated RMD sector-by-counterpart boundary and may not be promoted as the complete sectoral-financial-position reference mode."
   ]
 }
