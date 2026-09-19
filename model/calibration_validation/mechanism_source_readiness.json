@@ -35,14 +35,15 @@
     {
       "id": "aggregate_bank_credit_response",
       "classification": "CANDIDATE",
-      "source_readiness": "PRUDENTIAL_CONTROLS_RETAINED_BLS_SCHEMA_FROZEN_MULTI_ROUND_HISTORY_BLOCKED",
-      "next_admissible_action": "Reopen only if official multi-round machine-readable BNR BLS history is found or a deterministic reviewed extraction path for the retained legacy XLS archive becomes available. Do not infer missing rounds, digitize charts or fit a single-round credit equation.",
+      "source_readiness": "LEGACY_XLS_EXTRACTION_RETAINED_SEMANTIC_MAPPING_AND_MISSING_ROUNDS_PENDING",
+      "next_admissible_action": "Use the retained deterministic full-cell extraction to preregister a cross-round mapping for C01/C05/P01/P06/P13 based on the independently reviewed May-2025 XLSX schema; separately enumerate/recover missing BNR survey rounds. Do not interpolate missing quarters, combine NFC/household signals synthetically, or fit a credit equation.",
       "blockers": [
         "Exact quarterly ECB CBD2 NPL, solvency-ratio and CET1 histories are retained for 2014-Q4..2026-Q1.",
         "The CBD2-to-BNR population/consolidation bridge remains unresolved; numerical similarity is not a bridge.",
         "The May-2025 BNR XLSX round fixes exact realised standards/demand semantics for NFC and household credit paths.",
-        "The May-2025 XLSX workbook contains one survey round only; no longitudinal BLS history is present.",
-        "Seven retained historical BNR workbooks are legacy OLE2 XLS and lack a canonical artifact_tool extraction path.",
+        "A deterministic reviewed xlrd 2.0.2 extraction path now exists for all seven retained legacy OLE2 XLS workbooks, and full-cell extractions are retained immutably.",
+        "Question-ID anchors C01/C05/P01/P06/P13 are coordinate-stable across all seven legacy rounds, but a separate semantic mapping contract is still required before values become model-facing series.",
+        "The retained archive is not yet a complete quarterly history; missing BNR rounds may not be interpolated or inferred.",
         "No synthetic aggregation of NFC and household BLS signals is authorized."
       ],
       "source_boundary_review": "model/calibration_validation/aggregate_bank_credit_source_boundary_review.json",
@@ -53,7 +54,10 @@
       "prudential_promotion_review": "model/calibration_validation/bank_credit_prudential_coverage_promotion_review.json",
       "retained_bnr_bls_raw_vintage": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19",
       "retained_bnr_bls_xlsx_vintage": "data/source_vintages/bnr-bls-may2025-xlsx-vintage-2026-09-19",
-      "bnr_bls_xlsx_layout_review": "model/calibration_validation/bnr_bls_may2025_xlsx_layout_review.json"
+      "bnr_bls_xlsx_layout_review": "model/calibration_validation/bnr_bls_may2025_xlsx_layout_review.json",
+      "legacy_xls_extraction_contract": "model/calibration_validation/bnr_legacy_xls_cell_extraction_contract.json",
+      "legacy_xls_extraction_assessment": "model/calibration_validation/bnr_legacy_xls_cell_extraction_assessment.json",
+      "retained_legacy_xls_extraction_vintage": "data/source_vintages/bnr-legacy-xls-cell-extraction-vintage-2026-09-19"
     },
     {
       "id": "exchange_rate_pass_through_to_inflation",
@@ -109,20 +113,24 @@
     {
       "id": "household_consumption_response",
       "classification": "CANDIDATE",
-      "source_readiness": "BNR_DSTI_WORKBOOK_VINTAGE_RETAINED_LEGACY_XLS_EXTRACTION_NOT_CANONICAL",
-      "next_admissible_action": "Do not manually copy or chart-digitize DSTI values. Reopen household-consumption measurement only when a deterministic reviewed extraction path can identify the relevant BNR workbook sheet/range and preserve new-loan versus outstanding-loan semantics.",
+      "source_readiness": "LEGACY_XLS_EXTRACTION_RETAINED_BLS_DSTI_TERM_CHANGE_NOT_DSTI_LEVEL",
+      "next_admissible_action": "Do not use BLS P0303/P1103 net percentages as household DSTI levels. Reopen the household debt-burden measurement only if an exact machine-readable BNR history of borrower/loan DSTI levels is retained with new-loan versus outstanding-loan semantics, or under a separately preregistered alternative borrower-burden candidate family.",
       "blockers": [
-        "Seven exact official BNR BLS workbook files from 2023-2025 are retained with immutable hashes.",
-        "The workbooks are legacy OLE2 .xls files; no canonical deterministic value-extraction path has yet been admitted.",
+        "Seven exact official BNR BLS legacy workbooks are retained and now have a deterministic reviewed full-cell extraction path.",
+        "Across the extracted rounds, P0303/P1103 are stable BLS questions about changes in the maximum debt-service-to-income lending term, reported as response distributions/net percentages; they are not borrower DSTI levels.",
         "Borrower-level new-loan versus outstanding-loan DSTI must remain separate and neither is automatically equivalent to the registered macro household DSR.",
+        "No exact machine-readable longitudinal BNR DSTI level history has yet been retained.",
         "Household borrowing-rate family and consumption/income real/seasonal transformations remain unfrozen."
       ],
       "estimation_or_refit_allowed": false,
-      "priority_group": "DEFER_UNTIL_DETERMINISTIC_LEGACY_XLS_EXTRACTION_PATH",
+      "priority_group": "DEFER_UNTIL_MACHINE_READABLE_DSTI_LEVEL_HISTORY",
       "source_boundary_review": "model/calibration_validation/household_consumption_source_boundary_review.json",
       "debt_service_source_screening": "model/calibration_validation/debt_service_source_screening.json",
       "retained_bnr_dsti_workbook_vintage": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19",
-      "bnr_dsti_promotion_review": "model/calibration_validation/bnr_household_dsti_workbook_promotion_review.json"
+      "bnr_dsti_promotion_review": "model/calibration_validation/bnr_household_dsti_workbook_promotion_review.json",
+      "legacy_xls_extraction_contract": "model/calibration_validation/bnr_legacy_xls_cell_extraction_contract.json",
+      "legacy_xls_extraction_assessment": "model/calibration_validation/bnr_legacy_xls_cell_extraction_assessment.json",
+      "retained_legacy_xls_extraction_vintage": "data/source_vintages/bnr-legacy-xls-cell-extraction-vintage-2026-09-19"
     },
     {
       "id": "corporate_investment_response",
