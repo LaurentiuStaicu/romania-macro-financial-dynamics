@@ -52,7 +52,7 @@ class MechanismSourceReadinessTests(unittest.TestCase):
             self.readiness["coverage_rule"]["missing_entries_allowed"]
         )
 
-    def test_next_step_consolidates_post_screening_baseline(self) -> None:
+    def test_next_step_holds_closed_baseline_after_consolidation(self) -> None:
         step = self.readiness["current_next_step"]
         self.assertEqual(
             step["mechanism_id"],
@@ -60,11 +60,11 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         )
         self.assertEqual(
             step["action"],
-            "CONSOLIDATE_POST_SCREENING_MECHANISM_READINESS_AND_INVARIANTS",
+            "HOLD_CLOSED_BASELINE_UNTIL_DECLARED_REOPEN_TRIGGER",
         )
         self.assertFalse(step["calibration_cycle_open"])
         self.assertIn(
-            "Every registered behavioural mechanism",
+            "Cross-registry mechanism readiness",
             step["reason"],
         )
 
