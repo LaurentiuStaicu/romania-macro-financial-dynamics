@@ -181,11 +181,12 @@
     "discovery_pass_effect": "A discovery PASS does not authorize value extraction or promotion. It only opens the frozen Semantic + Lineage Review, which must pass before a separate exact historical extraction contract can be preregistered.",
     "eurostat_exact_historical_extraction_authorized": false,
     "oecd_exact_historical_extraction_authorized": false,
-    "external_counterpart_recovery_state": "EXHAUSTED_NO_SEMANTICALLY_AND_FREQUENCY_COMPLETE_CURRENT_PUBLIC_SOURCE",
+    "external_counterpart_recovery_state": "EXHAUSTED_NO_SEMANTICALLY_ADMISSIBLE_CURRENT_PUBLIC_SOURCE",
     "current_reference_mode_status": "PARTIAL_SERIES_AVAILABLE",
     "reference_mode_readiness_change": 0,
     "bnr_annual_cnf_screening_assessment": "model/dynamics/sectoral_financial_positions_bnr_cnf_source_screening.json",
-    "bnr_annual_cnf_screening_state": "ANNUAL_SEMANTIC_STOCK_PASS_QUARTERLY_TRANSACTION_HISTORY_FAIL_NO_REOPEN"
+    "bnr_annual_cnf_screening_state": "ANNUAL_SEMANTIC_STOCK_PASS_QUARTERLY_TRANSACTION_HISTORY_FAIL_NO_REOPEN",
+    "current_public_source_completion_status": "EUROSTAT_INSTRUMENT_SCOPE_FAIL_OECD_S121_SCOPE_FAIL_BNR_ANNUAL_FREQUENCY_TRANSACTION_HISTORY_FAIL"
   },
   "hard_rules": {
     "no_reinterpretation_of_historical_phase_A_D": true,
