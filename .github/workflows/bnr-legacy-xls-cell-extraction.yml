@@ -1,0 +1,50 @@
+name: BNR Legacy XLS Deterministic Cell Extraction
+
+# One-shot diagnostic bootstrap for already-retained source bytes. The extractor
+# serializes all non-empty cells before any semantic/model-facing field selection.
+on:
+  pull_request:
+    types: [labeled]
+
+permissions:
+  contents: read
+
+jobs:
+  extract-legacy-xls:
+    if: ${{ github.event.label.name == 'run-bnr-legacy-xls-extraction' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify frozen extraction contract
+        run: python -m unittest tests.test_bnr_legacy_xls_cell_extraction_contract -v
+
+      - name: Acquire exact xlrd extraction engine
+        shell: bash
+        run: |
+          python -m pip download --no-deps --only-binary=:all: xlrd==2.0.2 -d /tmp/xlrd-dist
+          wheel="$(find /tmp/xlrd-dist -maxdepth 1 -type f -name 'xlrd-2.0.2-*.whl' -print -quit)"
+          test -n "$wheel"
+          echo "XLRD_DISTRIBUTION_FILENAME=$(basename "$wheel")" >> "$GITHUB_ENV"
+          echo "XLRD_DISTRIBUTION_SHA256=$(sha256sum "$wheel" | awk '{print $1}')" >> "$GITHUB_ENV"
+          python -m pip install --no-deps "$wheel"
+
+      - name: Extract every non-empty cell deterministically
+        env:
+          BNR_LEGACY_XLS_EXTRACTION_OUT: bnr_legacy_xls_extraction_artifacts
+        run: python scripts/audit_bnr_legacy_xls_cell_extraction.py
+
+      - name: Upload extraction evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bnr-legacy-xls-cell-extraction-${{ github.sha }}
+          path: bnr_legacy_xls_extraction_artifacts/
+          if-no-files-found: error
+          retention-days: 90
