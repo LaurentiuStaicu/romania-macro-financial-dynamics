@@ -1,0 +1,139 @@
+{
+  "assessment_version": "0.2",
+  "assessed_on": "2026-09-19",
+  "stage": "Scientific Baseline Consolidation / Merge Readiness",
+  "status": "CONSOLIDATION_COMPLETE_HUMAN_REVIEW_DECISION_PENDING",
+  "purpose": "Formally close the non-destructive scientific-baseline consolidation stage after proving that the stacked review series preserves the validated terminal scientific tree, passes clean-checkout Scientific CI, and uses an explicit integrity-review exception for immutable machine-produced provenance that cannot be fully rendered within GitHub diff limits.",
+  "predecessor_assessment": "model/registries/scientific_baseline_merge_readiness_assessment.json",
+  "original_audit_pull_request": {
+    "number": 47,
+    "head_sha": "befc41a5e92787da27790e507f7b31548705c290",
+    "terminal_tree_sha": "f8ca0b757b4be46cc19b36564e9f0eed69ef95ce",
+    "disposition": "RETAIN_DRAFT_AS_COMPLETE_CHRONOLOGICAL_AUDIT_HISTORY"
+  },
+  "consolidated_scientific_review_stack": [
+    {
+      "pull_request": 48,
+      "role": "retained source vintages and provenance",
+      "head_sha": "31b2e849e0e174fb6156a45c42c132bc350b997c",
+      "commits": 1,
+      "changed_files": 102,
+      "additions": 193997,
+      "review_mode": "HYBRID_INTEGRITY_REVIEW_FOR_IMMUTABLE_MACHINE_PROVENANCE"
+    },
+    {
+      "pull_request": 49,
+      "role": "contracts, registries and model core",
+      "head_sha": "7c1934959a0e46ac91bb0e2b92c6663040043bd0",
+      "commits": 1,
+      "changed_files": 165,
+      "additions": 19263,
+      "review_mode": "ORDINARY_LAYER_DIFF_REVIEW"
+    },
+    {
+      "pull_request": 50,
+      "role": "audit scripts and workflows",
+      "head_sha": "47737844c5da17229b0bcf8c8981e37ff36b531e",
+      "commits": 1,
+      "changed_files": 107,
+      "additions": 16768,
+      "review_mode": "ORDINARY_LAYER_DIFF_REVIEW"
+    },
+    {
+      "pull_request": 51,
+      "role": "remaining scientific invariant and regression tests",
+      "head_sha": "1ff1af122adaf3633cba8fd30eb6807c617d05e0",
+      "commits": 1,
+      "changed_files": 113,
+      "additions": 10617,
+      "review_mode": "ORDINARY_LAYER_DIFF_REVIEW"
+    }
+  ],
+  "exact_tree_equivalence": {
+    "original_pr_47_terminal_tree": "f8ca0b757b4be46cc19b36564e9f0eed69ef95ce",
+    "stacked_pr_51_terminal_tree": "f8ca0b757b4be46cc19b36564e9f0eed69ef95ce",
+    "equal": true,
+    "interpretation": "The four-layer scientific review stack changes review history/partitioning only and does not change the validated scientific content."
+  },
+  "clean_checkout_reproducibility": {
+    "pr_51_head": "1ff1af122adaf3633cba8fd30eb6807c617d05e0",
+    "scientific_ci_run_id": 35459208972,
+    "verify_baseline_job_id": 105939898290,
+    "conclusion": "SUCCESS",
+    "verified_steps": [
+      "clean repository checkout",
+      "source and wheel build",
+      "clean wheel installation and import",
+      "scientific invariant tests",
+      "canonical Accounting Spine readiness audit",
+      "independent dimensional-consistency audit",
+      "System Dynamics conformity gate",
+      "cross-registry scientific baseline manifest audit",
+      "offline retained source-vintage provenance verification",
+      "validation-recovery selection reproduction",
+      "authorized household holdout reproduction",
+      "semantic identity check for retained validation artifacts"
+    ],
+    "live_source_refreshes": "INTENTIONALLY_SKIPPED_MANUAL_ONLY"
+  },
+  "github_review_constraints": {
+    "documentation_url": "https://docs.github.com/en/repositories/creating-and-managing-repositories/repository-limits",
+    "pull_request_total_loadable_diff_lines": 20000,
+    "single_file_loadable_diff_lines": 20000,
+    "single_file_raw_diff_bytes": 500000,
+    "max_files_per_diff": 300,
+    "compare_commit_listing_limit": 250,
+    "irreducible_example": {
+      "path": "data/source_vintages/bnr-legacy-xls-cell-extraction-vintage-2026-09-19/bls_2025_nov_cells.json",
+      "added_lines": 25293,
+      "bytes": 620446,
+      "implication": "This immutable reviewed artifact exceeds GitHub single-file visual diff limits by itself; further PR splitting cannot make its full visual diff renderable without changing the artifact."
+    }
+  },
+  "provenance_review_exception": {
+    "status": "JUSTIFIED_AND_TEST_ENFORCED",
+    "scope": "immutable machine-produced retained source vintages only",
+    "review_method": [
+      "frozen expected file set",
+      "exact byte size",
+      "SHA-256 identity",
+      "offline deterministic provenance/invariant tests",
+      "green clean-checkout Scientific CI"
+    ],
+    "prohibited_shortcuts": [
+      "delete retained evidence solely to reduce diff size",
+      "regenerate or reformat retained evidence solely to satisfy UI limits",
+      "replace exact retained bytes with summarized or synthetic values",
+      "treat an unrendered visual diff as unverified when byte/hash tests pass"
+    ]
+  },
+  "scientific_effects": {
+    "accounting_state_changed": false,
+    "reference_mode_state_changed": false,
+    "behavioural_mechanism_state_changed": false,
+    "calibration_or_refit_authorized": false,
+    "holdout_opening_authorized": false,
+    "system_dynamics_feedback_activation": false,
+    "behavioural_closure_activation": false,
+    "release_or_version_change_authorized": false
+  },
+  "stage_completion": {
+    "non_destructive_consolidation_prepared": true,
+    "exact_terminal_tree_preserved": true,
+    "clean_checkout_verified": true,
+    "review_strategy_explicit": true,
+    "irreducible_provenance_ui_limit_classified": true,
+    "autonomous_consolidation_tasks_remaining": false,
+    "stage_complete": true
+  },
+  "next_state": {
+    "id": "HUMAN_REVIEW_DECISION_PENDING",
+    "ready_for_human_review_decision": true,
+    "automatic_ready_for_review_transition_authorized": false,
+    "automatic_merge_authorized": false,
+    "merge_to_main_authorized_by_this_assessment": false,
+    "release_or_tag_authorized": false,
+    "version_change_authorized": false,
+    "note": "This terminal assessment closes the autonomous consolidation stage. Review/merge remains a separate human repository-governance decision."
+  }
+}
