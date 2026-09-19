@@ -301,16 +301,14 @@
       "classification": "CANDIDATE",
       "maps_to_dynamic_core_loop": null,
       "central_feedback": false,
-      "functional_form": "inflation = baseline_inflation + sum_k gamma_k*FX_depreciation[t-k]",
-      "implementation": "fx_pass_through_inflation",
-      "parameters": [
-        "gamma_1..gamma_K"
-      ],
-      "estimation_plan": "Calibration remains closed. First retain exact monthly ECB EXR.M.RON.EUR.SP00.A and Eurostat Romania HICP CP00 source vintages, then resolve the external-price-control coverage gate before freezing the inflation transform, regime start, lag horizon, structural-selection window and untouched evaluation window. Compare any distributed-lag candidate against an inflation autoregression plus an ex-ante external-price baseline. Do not interpret predictive improvement as causal pass-through and do not import pre-current-regime coefficients.",
+      "functional_form": "No admitted pass-through form yet. Candidate family will model monthly HICP inflation from preregistered RON/EUR depreciation lags conditional on retained total-import/world UVI changes and inflation persistence.",
+      "implementation": null,
+      "parameters": [],
+      "estimation_plan": "Calibration remains closed. The exact common monthly level source vintage is retained for 2002-01..2026-06 using ECB EXR.M.RON.EUR.SP00.A, Eurostat prc_hicp_minr I25/coicop18=TOTAL/RO, and Eurostat ext_st_27_2020msbec IMP/WORLD/TOTAL/IVU/RO. Next freeze the monthly transformations, August-2005 inflation-targeting/current-regime boundary, seasonal treatment, fixed lag-horizon candidate set, structural-selection window and untouched final-evaluation window. Compare any FX candidate against an inflation-persistence plus external-price baseline. Do not interpret predictive improvement as causal pass-through and do not import historical coefficients.",
       "observables": [
-        "HICP_or_CPI_inflation",
-        "RON_EUR_exchange_rate",
-        "possibly_import_price_controls"
+        "HICP ECOICOP-v2 TOTAL index (2025=100)",
+        "RON/EUR ECB monthly-average exchange rate",
+        "Romania total-import/world unit-value index (external-price proxy)"
       ],
       "evidence": [
         "imf_2003_fx_pass_through",
@@ -319,18 +317,23 @@
         "ecb_convergence_2026_ro"
       ],
       "limits": [
-        "documented regime dependence",
-        "energy/tax/import-price shocks confound pass-through",
-        "managed-float interventions are endogenous",
-        "Romania-specific import-price control coverage must be verified rather than inferred from Eurostat dataset existence",
-        "inflation transform and lag horizon must be frozen before untouched evaluation data are opened"
+        "documented pass-through regime dependence, including the August-2005 inflation-targeting break",
+        "energy, tax, administered-price and common external-price shocks can confound predictive FX coefficients",
+        "managed-float intervention makes the observed exchange rate endogenous to policy and macro conditions",
+        "the import UVI is a composition-sensitive external-price proxy rather than a pure transaction-price import-price index",
+        "inflation/FX/UVI transforms, seasonality and lag horizon must be frozen before untouched evaluation data are opened"
       ],
       "rejection_or_degradation_criteria": [
-        "distributed-lag weights unstable",
-        "no gain over inflation autoregression plus external-price baseline",
-        "historical coefficient confidence intervals include economically negligible pass-through on current regime"
+        "frozen FX candidate family fails to improve on inflation-persistence plus external-price baselines",
+        "lag-weight or cumulative-pass-through signs are unstable across preregistered selection origins",
+        "current-regime evaluation fails despite selection-window admissibility",
+        "identifiability or conditioning gates fail"
       ],
-      "source_boundary_review": "model/calibration_validation/fx_inflation_pass_through_source_boundary_review.json"
+      "source_boundary_review": "model/calibration_validation/fx_inflation_pass_through_source_boundary_review.json",
+      "external_price_control_contract": "model/calibration_validation/fx_inflation_external_price_control_contract.json",
+      "monthly_materialisation_contract": "model/calibration_validation/fx_inflation_monthly_materialisation_contract.json",
+      "retained_source_vintage": "data/source_vintages/fx-inflation-monthly-levels-vintage-2026-09-19",
+      "source_vintage_promotion_review": "model/calibration_validation/fx_inflation_source_vintage_promotion_review.json"
     },
     {
       "id": "credit_risk_npl_response",
