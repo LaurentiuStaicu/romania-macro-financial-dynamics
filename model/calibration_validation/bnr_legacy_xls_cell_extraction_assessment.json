@@ -1,0 +1,164 @@
+{
+  "assessment_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "phase": "BNR Legacy XLS — Deterministic Cell Extraction Diagnostic Review",
+  "verdict": "PASS_DETERMINISTIC_LEGACY_XLS_TABULAR_EXTRACTION_PATH_AVAILABLE",
+  "extraction_contract": "model/calibration_validation/bnr_legacy_xls_cell_extraction_contract.json",
+  "source_vintage": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19",
+  "reviewed_workflow": {
+    "run_id": 35438938968,
+    "artifact_id": 10582798806,
+    "artifact_name": "bnr-legacy-xls-cell-extraction-a9b2175e3f376a7175fe69b4fbd6a239c9e0d7ff",
+    "artifact_zip_sha256": "4ba78ffee9504ef919723f7b59db3a34eeec029b03065050035f24492a3de58d",
+    "source_branch_head_sha": "5b4563d8ce5b25299358d49de6d46656a003a322"
+  },
+  "extraction_engine": {
+    "package": "xlrd",
+    "version": "2.0.2",
+    "distribution_filename": "xlrd-2.0.2-py2.py3-none-any.whl",
+    "distribution_sha256": "ea762c3d29f4cca48d82df517b6d89fbce4db3107f9d78713e48cd321d5c9aa9"
+  },
+  "expected_files": [
+    {
+      "path": "bls_2023_feb_cells.json",
+      "bytes": 427610,
+      "sha256": "752b82fa65e318df388730d0ca1bd632489c5e9d5e28b4daa641f04e8c38113a"
+    },
+    {
+      "path": "bls_2023_may_cells.json",
+      "bytes": 418997,
+      "sha256": "465c8a3785d4ad0d563cb38e5e55d2c95c95f2094219146cded4fd5d81c58e29"
+    },
+    {
+      "path": "bls_2024_feb_cells.json",
+      "bytes": 418730,
+      "sha256": "eb1dcd54d8eb9bea36cbd4b97a0ed98d097367a54bea46d978252876d40dbbc3"
+    },
+    {
+      "path": "bls_2024_may_cells.json",
+      "bytes": 418866,
+      "sha256": "63f1b51c2afaa2d5ac458786cd106fc34a445cc0f4d8b8d20b55c030449f963d"
+    },
+    {
+      "path": "bls_2024_nov_cells.json",
+      "bytes": 418844,
+      "sha256": "5a0a9d3bb080cfc62464f6e8808d67971a1c2b3eb7ce273ffd10e1f1085e070c"
+    },
+    {
+      "path": "bls_2025_feb_cells.json",
+      "bytes": 427420,
+      "sha256": "fb400b4b1afbe85dcbb405c2791d99706848015d79cf7535a8a5d3e75f0fb492"
+    },
+    {
+      "path": "bls_2025_nov_cells.json",
+      "bytes": 620446,
+      "sha256": "d3d2f259dccc9a80ab0b58c2e42e3ff50285a5c1f40bfaff82c59aaa3472334c"
+    },
+    {
+      "path": "bnr_legacy_xls_cell_extraction_audit.json",
+      "bytes": 6575,
+      "sha256": "e895dcc7492efc18b6384d7947d8e889c64b50949c7d34d0a4a903f59efcfd40"
+    }
+  ],
+  "workbooks": {
+    "bls_2023_feb": {
+      "reference_date": "31/12/2022",
+      "sheet_names": [
+        "companii",
+        "populatie"
+      ],
+      "non_empty_cells": 2477
+    },
+    "bls_2023_may": {
+      "reference_date": "31/03/2023",
+      "sheet_names": [
+        "Companies",
+        "Households"
+      ],
+      "non_empty_cells": 2461
+    },
+    "bls_2024_feb": {
+      "reference_date": "31/12/2023",
+      "sheet_names": [
+        "Companies",
+        "Households"
+      ],
+      "non_empty_cells": 2461
+    },
+    "bls_2024_may": {
+      "reference_date": "31/03/2024",
+      "sheet_names": [
+        "Companies",
+        "Households"
+      ],
+      "non_empty_cells": 2461
+    },
+    "bls_2024_nov": {
+      "reference_date": "30/09/2024",
+      "sheet_names": [
+        "Companies",
+        "Households"
+      ],
+      "non_empty_cells": 2461
+    },
+    "bls_2025_feb": {
+      "reference_date": "31/12/2024",
+      "sheet_names": [
+        "companii",
+        "populatie"
+      ],
+      "non_empty_cells": 2477
+    },
+    "bls_2025_nov": {
+      "reference_date": "30/09/2025",
+      "sheet_names": [
+        "companii",
+        "populatie"
+      ],
+      "non_empty_cells": 3602
+    }
+  },
+  "schema_stability": {
+    "all_seven_workbooks_parsed": true,
+    "all_have_two_sheets": true,
+    "anchor_coordinates_stable": true,
+    "anchors": {
+      "C01": [
+        "A2"
+      ],
+      "C05": [
+        "A225"
+      ],
+      "P01": [
+        "A2"
+      ],
+      "P06": [
+        "A90"
+      ],
+      "P13": [
+        "A293"
+      ],
+      "P0303": [
+        "A59",
+        "E64"
+      ],
+      "P1103": [
+        "A212"
+      ]
+    },
+    "interpretation": "Question-ID anchors occupy the same coordinates in every retained legacy workbook, despite English/Romanian sheet-name and label-language differences. This supports a separately preregistered semantic mapping review; it does not by itself authorize a longitudinal model series."
+  },
+  "hard_effects": {
+    "legacy_xls_extraction_path_available": true,
+    "behavioural_variable_selection": false,
+    "longitudinal_series_ready": false,
+    "dsti_level_observed": false,
+    "parameter_estimation_authorized": false,
+    "model_selection_authorized": false,
+    "system_dynamics_activation": false,
+    "behavioural_closure_change": false
+  },
+  "retained_extraction_vintage": "data/source_vintages/bnr-legacy-xls-cell-extraction-vintage-2026-09-19",
+  "next_gate": "Freeze a cross-round semantic mapping contract using only independently pre-existing BLS question IDs/labels and the May-2025 XLSX layout review. Do not infer missing survey rounds or treat P0303/P1103 term-change net percentages as borrower DSTI levels.",
+  "promotion_rule": "Only artifact 10582798806 with the exact ZIP digest and per-file bytes/SHA-256 values above may be retained as the canonical extraction artifact."
+}
