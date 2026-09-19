@@ -68,10 +68,30 @@
       "BNR housing-loan DSTI may become an observed alternative borrower-burden state only under a separately frozen candidate-family measurement contract."
     ],
     "exact_machine_readable_history_retained": false,
-    "provider_note": "Official BNR report text directly confirms multiple quarterly DSTI level observations and the charts show a longer quarterly history, but no exact machine-readable longitudinal level series has yet been retained. Chart digitisation remains prohibited.",
+    "provider_note": "Official BNR report text now directly covers every quarter from 2023-Q1 through 2025-Q2 for new and outstanding housing-loan DSTI levels, at the precision/qualifiers stated in each publication. This is not an exact machine-readable source history; chart digitisation remains prohibited.",
     "publication_level_boundary_review": "model/calibration_validation/bnr_household_dsti_level_publication_boundary_review.json",
     "official_quarterly_level_observations_confirmed": true,
     "confirmed_publication_text_observations": [
+      {
+        "quarter": "2023-Q1",
+        "new_housing_loans_dsti_percent": 35,
+        "outstanding_housing_loans_dsti_percent": 41
+      },
+      {
+        "quarter": "2023-Q2",
+        "new_housing_loans_dsti_percent": 35,
+        "outstanding_housing_loans_dsti_percent": 42
+      },
+      {
+        "quarter": "2023-Q3",
+        "new_housing_loans_dsti_percent": 34,
+        "outstanding_housing_loans_dsti_percent": 42
+      },
+      {
+        "quarter": "2023-Q4",
+        "new_housing_loans_dsti_percent": 35,
+        "outstanding_housing_loans_dsti_percent": 41
+      },
       {
         "quarter": "2024-Q1",
         "new_housing_loans_dsti_percent": 34,
@@ -88,11 +108,31 @@
         "outstanding_housing_loans_dsti_percent": 40.9
       },
       {
+        "quarter": "2024-Q4",
+        "new_housing_loans_dsti_percent": 35,
+        "outstanding_housing_loans_dsti_percent": 41
+      },
+      {
+        "quarter": "2025-Q1",
+        "new_housing_loans_dsti_percent": 35,
+        "outstanding_housing_loans_dsti_percent": 41,
+        "publication_precision_qualifier": "approximately/roughly"
+      },
+      {
         "quarter": "2025-Q2",
         "new_housing_loans_dsti_percent": 37,
         "outstanding_housing_loans_dsti_percent": 42
       }
-    ]
+    ],
+    "publication_text_coverage": {
+      "window_start": "2023-Q1",
+      "window_end": "2025-Q2",
+      "expected_quarters": 10,
+      "directly_observed_quarters": 10,
+      "missing_quarters": [],
+      "coverage_fraction": 1,
+      "exact_machine_readable_history_retained": false
+    }
   },
   "shared_prohibitions": [
     "Do not construct a Romania household or NFC DSR from debt stock, a new-business rate and an assumed maturity.",
@@ -104,9 +144,9 @@
   ],
   "dispositions": {
     "household_consumption_response": {
-      "status": "OFFICIAL_HOUSING_LOAN_DSTI_LEVELS_OBSERVED_REGISTERED_MACRO_DSR_STILL_UNIDENTIFIED",
+      "status": "COMPLETE_2023Q1_2025Q2_PUBLICATION_TEXT_HOUSING_DSTI_WINDOW_REGISTERED_MACRO_DSR_STILL_UNIDENTIFIED",
       "estimation_authorized": false,
-      "next_gate": "Retain an exact machine-readable BNR housing-loan DSTI level history, separately for new and outstanding loans, or preregister a publication-text-only alternative borrower-burden candidate family with an explicit observation window. Neither path identifies the registered macro household DSR automatically."
+      "next_gate": "Either retain an exact machine-readable BNR housing-loan DSTI level history or preregister a publication-text-only alternative borrower-burden candidate family over the complete 2023-Q1..2025-Q2 window, preserving publication precision and keeping new versus outstanding loans separate. Neither path identifies the registered macro household DSR automatically."
     },
     "credit_risk_npl_response": {
       "status": "DEFERRED_DEBT_SERVICE_BOUNDARY_UNRESOLVED",
