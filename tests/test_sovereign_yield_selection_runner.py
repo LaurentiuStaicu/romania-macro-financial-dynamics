@@ -135,7 +135,8 @@ class SovereignYieldSelectionRunnerTests(unittest.TestCase):
         import json
 
         gate = json.loads(GATE.read_text(encoding="utf-8"))
-        self.assertTrue(gate["selection_execution_authorized"])
+        self.assertFalse(gate["selection_execution_authorized"])
+        self.assertTrue(gate["selection_execution_consumed"])
         self.assertFalse(gate["final_evaluation_authorized"])
         self.assertEqual(
             gate["authorized_scope"],
