@@ -44,9 +44,10 @@ class HouseholdConsumptionBorrowerBurdenAlignmentTests(unittest.TestCase):
         self.assertFalse(comparison["target_population_bridge_observed"])
         self.assertFalse(comparison["subgroup_consumption_target_observed"])
         self.assertTrue(comparison["official_public_source_screening_completed"])
+        self.assertTrue(comparison["official_source_screening_completed"])
         self.assertEqual(
             comparison["screening_result"],
-            "BLOCKED_NO_OBSERVED_PUBLIC_BRIDGE_IDENTIFIED",
+            "BLOCKED_NO_OBSERVED_OFFICIAL_BRIDGE_IDENTIFIED",
         )
         self.assertEqual(
             self.review["population_bridge_source_screening"],
@@ -69,7 +70,7 @@ class HouseholdConsumptionBorrowerBurdenAlignmentTests(unittest.TestCase):
         disposition = self.review["disposition"]
         self.assertEqual(
             disposition["population_alignment_status"],
-            "BLOCKED_NO_OBSERVED_PUBLIC_BRIDGE_IDENTIFIED",
+            "BLOCKED_NO_OBSERVED_OFFICIAL_BRIDGE_IDENTIFIED",
         )
         self.assertTrue(disposition["housing_dsti_observed"])
         self.assertFalse(
