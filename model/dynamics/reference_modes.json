@@ -143,15 +143,17 @@
       "oecd_counterpart_discovery_probe_effect": "NONE_UNTIL_RETAINED_RESULT_AND_SEPARATE_SEMANTIC_LINEAGE_REVIEW",
       "external_reopen_screening_summary": "Eurostat nasq_10_f_cp is the priority discovery candidate because it explicitly disseminates quarterly financial-account counterpart information, but Eurostat metadata states the data are validated by ECB and republished, so discovery can establish public counterpart coverage—not statistical independence. OECD counterpart dataflows remain a secondary discovery path with the same lineage caution.",
       "eurostat_counterpart_discovery_probe_contract": "model/dynamics/sectoral_financial_positions_eurostat_counterpart_probe_contract.json",
-      "eurostat_counterpart_discovery_probe_status": "PREREGISTERED_MANUAL_NOT_EXECUTED",
-      "eurostat_counterpart_discovery_probe_effect": "NONE_UNTIL_RETAINED_RESULT_AND_SEPARATE_MAPPING_LINEAGE_REVIEW",
-      "eurostat_counterpart_discovery_probe_execution_state": "READY_FOR_MANUAL_DISPATCH_VIA_EXISTING_DEFAULT_BRANCH_WORKFLOW",
+      "eurostat_counterpart_discovery_probe_status": "EXECUTED_PASS_SEMANTIC_REVIEW_FAIL_INSTRUMENT_SCOPE",
+      "eurostat_counterpart_discovery_probe_effect": "NO_REOPEN; discovery confirmed Romania counterpart data, but frozen semantic review failed because the public instrument set does not cover complete RMD F2-F8.",
+      "eurostat_counterpart_discovery_probe_execution_state": "EXECUTED_MANUAL_RERUN_ATTEMPT_2",
       "eurostat_counterpart_discovery_probe_execution_effect": "NONE UNTIL RETAINED RESULT REVIEW; Scientific CI provides a manual-only branch-ref bridge without enabling automatic PR/push acquisition.",
       "oecd_counterpart_discovery_probe_execution_state": "READY_FOR_MANUAL_DISPATCH_VIA_EXISTING_DEFAULT_BRANCH_WORKFLOW",
       "oecd_counterpart_discovery_probe_execution_effect": "NONE UNTIL RETAINED RESULT REVIEW; Scientific CI provides a manual-only branch-ref bridge, and provider throttling/access failures remain indeterminate.",
       "external_semantic_lineage_review_contract": "model/dynamics/sectoral_financial_positions_external_semantic_lineage_review_contract.json",
-      "external_semantic_lineage_review_status": "PREREGISTERED_NOT_OPEN_UNTIL_DISCOVERY_PASS",
-      "external_semantic_lineage_review_effect": "NONE; semantic admissibility is a pre-extraction gate and cannot itself promote the reference mode."
+      "external_semantic_lineage_review_status": "EUROSTAT_FAIL_INSTRUMENT_SCOPE_OECD_PENDING",
+      "external_semantic_lineage_review_effect": "No readiness change. OECD remains pending as the secondary external counterpart path.",
+      "eurostat_counterpart_discovery_probe_vintage": "data/source_vintages/sectoral-financial-positions-eurostat-counterpart-discovery-vintage-2026-09-19",
+      "eurostat_counterpart_semantic_review_assessment": "model/dynamics/sectoral_financial_positions_eurostat_counterpart_discovery_assessment.json"
     }
   ],
   "closure_rule": "Integrated behavioural closure may not be declared validated until the reference modes required by each active loop have explicit observed targets or a documented reason why only qualitative/reference-pattern validation is possible.",

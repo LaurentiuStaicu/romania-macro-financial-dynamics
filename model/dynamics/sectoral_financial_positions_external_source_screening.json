@@ -69,11 +69,27 @@
         "Its scientific value here is potential access to an explicit counterpart dissemination table that was not yet retained in the RMD source-recovery chain."
       ],
       "scope_limit": [
-        "Metadata does not establish complete mandatory counterpart coverage for every RMD instrument F2-F8.",
-        "No conclusion about Romania row-level availability, sector mapping, units, counterpart orientation or instrument completeness is allowed before a retained probe."
+        "Discovery confirms Romania counterpart rows and schema, but the retained na_item code set is not the complete RMD F2-F8 instrument boundary.",
+        "F2 lacks F21 currency; F5 is partial; F6/F7/F8 are absent.",
+        "No historical extraction or reference-mode promotion is authorized from Eurostat nasq_10_f_cp under the frozen RMD boundary."
       ],
-      "romania_exact_observation_coverage_retained": false,
-      "status": "PRIORITY_CANDIDATE_FOR_PREREGISTERED_ROMANIA_SCHEMA_COVERAGE_PROBE_NOT_REOPEN_EVIDENCE"
+      "romania_exact_observation_coverage_retained": true,
+      "status": "DISCOVERY_PASS_SEMANTIC_REVIEW_FAIL_INSTRUMENT_SCOPE_NO_REOPEN",
+      "discovery_vintage": "data/source_vintages/sectoral-financial-positions-eurostat-counterpart-discovery-vintage-2026-09-19",
+      "discovery_result": {
+        "state": "PASS",
+        "non_null_observation_count": 64995,
+        "time_codes": [
+          "2025-Q1",
+          "2025-Q2",
+          "2025-Q3",
+          "2025-Q4",
+          "2026-Q1"
+        ],
+        "raw_response_sha256": "547c9e65c60900aa259ba547efb60faedbaa22e8d8a66e1caed6cbd2cbd189ae"
+      },
+      "semantic_lineage_review_assessment": "model/dynamics/sectoral_financial_positions_eurostat_counterpart_discovery_assessment.json",
+      "semantic_lineage_review_verdict": "FAIL_REQUIRED_INSTRUMENT_SCOPE_INCOMPLETE"
     },
     {
       "id": "BNR_NATIONAL_FINANCIAL_ACCOUNTS_PUBLICATIONS",
@@ -88,14 +104,13 @@
     "immediate_reference_mode_reopen_authorized": false,
     "reference_mode_promotion_authorized": false,
     "accounting_readiness_change": false,
-    "next_admissible_action": "Manually dispatch the existing Scientific CI workflow against audit/scientific-integrity-2026-09-18. The branch-locked jobs run the frozen Eurostat and OECD discovery probes and upload separate source-access artifacts. Any discovery PASS proceeds only to the already-preregistered external Semantic + Lineage Review; mapping is frozen from metadata before historical values or reconciliation residuals may be evaluated.",
+    "next_admissible_action": "Run the already-preregistered OECD counterpart discovery probe using the manual rerun/workflow-dispatch bridge. Eurostat nasq_10_f_cp passed source/schema discovery for Romania but failed the frozen semantic instrument-scope gate, so it cannot open an exact historical extraction or change readiness.",
     "oecd_probe_justified": true,
     "eurostat_counterpart_probe_justified": true,
     "discovery_priority": [
-      "EUROSTAT_NASQ_10_F_CP",
       "OECD_COUNTERPART_DATAFLOWS"
     ],
-    "eurostat_probe_execution_state": "READY_FOR_MANUAL_DISPATCH_VIA_EXISTING_DEFAULT_BRANCH_WORKFLOW",
+    "eurostat_probe_execution_state": "EXECUTED_PASS_SEMANTIC_REVIEW_FAIL_NO_REOPEN",
     "trigger_broadening_to_bypass_execution_precondition_authorized": false,
     "oecd_probe_execution_state": "READY_FOR_MANUAL_DISPATCH_VIA_EXISTING_DEFAULT_BRANCH_WORKFLOW",
     "oecd_provider_access_failures_have_no_scientific_effect": true,
@@ -110,7 +125,8 @@
       "pull_request_or_push_live_execution": false
     },
     "post_discovery_semantic_lineage_review_contract": "model/dynamics/sectoral_financial_positions_external_semantic_lineage_review_contract.json",
-    "discovery_pass_effect": "A discovery PASS does not authorize value extraction or promotion. It only opens the frozen Semantic + Lineage Review, which must pass before a separate exact historical extraction contract can be preregistered."
+    "discovery_pass_effect": "A discovery PASS does not authorize value extraction or promotion. It only opens the frozen Semantic + Lineage Review, which must pass before a separate exact historical extraction contract can be preregistered.",
+    "eurostat_exact_historical_extraction_authorized": false
   },
   "hard_rules": {
     "no_reinterpretation_of_historical_phase_A_D": true,

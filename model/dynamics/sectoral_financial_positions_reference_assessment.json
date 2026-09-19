@@ -57,7 +57,7 @@
     "exploratory_f1_semantics_diagnostic": "REJECTS_RESIDENT_F1_LIABILITY_ZERO_NO_PROMOTION",
     "exploratory_f1_zero_refinement": "REJECTED_BY_PUBLISHED_QSA_SDR_LIABILITIES",
     "s1n_boundary_diagnostic": "EXECUTED_NEGATIVE_NO_REOPEN_EVIDENCE",
-    "external_source_screening": "EUROSTAT_PRIORITY_AND_OECD_SECONDARY_DISCOVERY_PREREGISTERED_NO_REOPEN_YET"
+    "external_source_screening": "EUROSTAT_DISCOVERY_PASS_SEMANTIC_FAIL_OECD_PENDING_NO_REOPEN"
   },
   "boundary_review": "model/dynamics/sectoral_financial_positions_boundary_review.json",
   "strict_source_gate_contract": "model/dynamics/sectoral_financial_positions_reference_contract.json",
@@ -111,18 +111,22 @@
     "manual_dispatch_bridge": ".github/workflows/scientific-ci.yml#manual-oecd-counterpart-probe"
   },
   "eurostat_counterpart_discovery_probe": {
-    "status": "PREREGISTERED_MANUAL_NOT_EXECUTED",
+    "status": "EXECUTED_PASS_SEMANTIC_REVIEW_FAIL_INSTRUMENT_SCOPE",
     "contract": "model/dynamics/sectoral_financial_positions_eurostat_counterpart_probe_contract.json",
     "workflow": ".github/workflows/sectoral-financial-positions-eurostat-counterpart-probe.yml",
     "formal_reference_mode_gate": false,
-    "current_effect": "NONE_UNTIL_RETAINED_RESULT_AND_SEPARATE_MAPPING_LINEAGE_REVIEW",
+    "current_effect": "NO_REOPEN; DISCOVERY PASS ONLY, SEMANTIC INSTRUMENT-SCOPE FAIL",
     "rationale": "Eurostat nasq_10_f_cp explicitly disseminates quarterly counterpart information and is therefore the priority source-access discovery path. However, Eurostat metadata states that quarterly financial-account data are validated by ECB and transmitted to Eurostat, so a successful probe establishes public granularity/coverage rather than independent measurement.",
-    "execution_state": "READY_FOR_MANUAL_DISPATCH_VIA_EXISTING_DEFAULT_BRANCH_WORKFLOW",
+    "execution_state": "EXECUTED_MANUAL_RERUN_ATTEMPT_2",
     "execution_precondition": "Dispatch the existing default-branch Scientific CI workflow against audit/scientific-integrity-2026-09-18; the branch-only live job is guarded to workflow_dispatch on that exact ref.",
     "no_trigger_bypass": true,
-    "manual_dispatch_bridge": ".github/workflows/scientific-ci.yml#manual-eurostat-counterpart-probe"
+    "manual_dispatch_bridge": ".github/workflows/scientific-ci.yml#manual-eurostat-counterpart-probe",
+    "retained_vintage": "data/source_vintages/sectoral-financial-positions-eurostat-counterpart-discovery-vintage-2026-09-19",
+    "discovery_assessment": "model/dynamics/sectoral_financial_positions_eurostat_counterpart_discovery_assessment.json",
+    "discovery_artifact_id": 10586785016,
+    "raw_response_sha256": "547c9e65c60900aa259ba547efb60faedbaa22e8d8a66e1caed6cbd2cbd189ae"
   },
   "external_semantic_lineage_review_contract": "model/dynamics/sectoral_financial_positions_external_semantic_lineage_review_contract.json",
-  "external_semantic_lineage_review_status": "PREREGISTERED_NOT_OPEN_UNTIL_DISCOVERY_PASS",
-  "external_semantic_lineage_review_effect": "NONE; a PASS authorizes only a separately preregistered exact historical extraction contract."
+  "external_semantic_lineage_review_status": "EUROSTAT_FAIL_INSTRUMENT_SCOPE_OECD_PENDING",
+  "external_semantic_lineage_review_effect": "Eurostat cannot authorize exact historical extraction; OECD remains the only active external counterpart discovery candidate. Readiness remains unchanged."
 }
