@@ -22,6 +22,14 @@ A subsequent human continuation decision authorized the reviewed stack #48–#52
 
 The current repository-governance state is **INTEGRATION_COMPLETE** while the scientific operational state remains **EVIDENCE_TRIGGERED_BASELINE_HOLD**. Integration did not complete missing accounting instruments, promote the 10th reference mode, validate a behavioural mechanism, open calibration/refit, activate System Dynamics feedback or behavioural closure, create a release/tag, or change the version.
 
+### Reopen-trigger monitoring — 2026-09-19
+
+A post-integration monitoring pass tested the currently declared external/event and new-source reopen conditions. The result is **NO_DECLARED_REOPEN_TRIGGER_SATISFIED_BASELINE_HOLD_CONTINUES**, recorded in `model/registries/reopen_trigger_monitoring_2026_09_19.json`.
+
+The 10 August 2026 BNR meeting left the policy rate unchanged, so the prospective monetary event gate remains closed. Targeted public-source screening did not confirm the missing exact BNR 2025-Q2 BLS workbook, a current exact Romania industrial import transaction-price series, a matched Romania household debt-service burden, a same-boundary government repricing ledger, or a new accounting/reference-mode counterpart source satisfying the frozen boundaries. Non-confirmation is not treated as proof of permanent absence, and no filenames, bilateral allocations, population bridges or missing values are inferred.
+
+No accounting instrument, reference mode or behavioural mechanism is reopened. Calibration/refit, reserved-response or holdout inspection, System Dynamics feedback activation and behavioural closure remain unauthorized. The scientific operational state therefore remains **EVIDENCE_TRIGGERED_BASELINE_HOLD**.
+
 ## Canonical modeling paradigm
 
 **Romanian Monetary Dynamics (RMD) is an accounting-constrained, stock-flow-consistent dynamic model with a developing System Dynamics feedback architecture; behavioural closure remains inactive pending empirical identification and validation.**

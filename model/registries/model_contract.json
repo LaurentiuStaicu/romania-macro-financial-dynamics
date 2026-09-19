@@ -84,7 +84,10 @@
     "status": "STAGE_COMPLETE_EVIDENCE_TRIGGERED_BASELINE_HOLD",
     "next_operational_state": "EVIDENCE_TRIGGERED_BASELINE_HOLD",
     "model_complete": false,
-    "release_ready": false
+    "release_ready": false,
+    "latest_reopen_trigger_monitoring": "model/registries/reopen_trigger_monitoring_2026_09_19.json",
+    "latest_reopen_trigger_monitoring_status": "NO_DECLARED_REOPEN_TRIGGER_SATISFIED_BASELINE_HOLD_CONTINUES",
+    "active_autonomous_empirical_task": null
   },
   "repository_governance": {
     "merge_readiness_assessment": "model/registries/scientific_baseline_merge_readiness_assessment.json",
