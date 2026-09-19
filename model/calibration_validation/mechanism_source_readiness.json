@@ -122,6 +122,21 @@
       "source_boundary_review": "model/calibration_validation/credit_risk_npl_source_boundary_review.json",
       "estimation_or_refit_allowed": false,
       "priority_group": "DEFER_UNTIL_DEBT_SERVICE_SOURCE"
+    },
+    {
+      "id": "fiscal_primary_balance_reaction",
+      "classification": "DEFERRED",
+      "source_readiness": "FISCAL_COMPONENTS_OBSERVED_PRIMARY_BALANCE_MATCHING_OUTPUT_GAP_AND_REGIMES_UNRESOLVED",
+      "next_admissible_action": "Preregister and materialise a matched quarterly primary-balance series from B9 and D41PAY on one seasonal/unit boundary; separately freeze debt-gap, output-gap measurement and dated fiscal regimes before any reaction-function fit.",
+      "blockers": [
+        "Debt-to-GDP and interest expenditure are already retained; B9 is directly available.",
+        "Matched primary balance is not yet materialised because adjustment/unit boundaries must be aligned.",
+        "Output gap and debt gap are not directly observed definitions.",
+        "Discrete fiscal/EDP regime indicators are not encoded ex ante."
+      ],
+      "source_boundary_review": "model/calibration_validation/fiscal_primary_balance_source_boundary_review.json",
+      "estimation_or_refit_allowed": false,
+      "priority_group": "DEFER_UNTIL_MATCHED_PRIMARY_BALANCE_AND_REGIME_CONTRACT"
     }
   ],
   "priority_rule": "Priority is determined by the shortest scientifically admissible path to new independent evidence, not by a desire to activate a feedback loop. Waiting mechanisms remain frozen; source-incomplete mechanisms are not fit with proxies.",

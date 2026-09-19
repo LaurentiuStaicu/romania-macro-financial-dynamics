@@ -360,7 +360,7 @@
       "functional_form": "Delta primary_balance = f(debt_gap, output_gap, institutional/fiscal-package regime)",
       "implementation": null,
       "parameters": [],
-      "estimation_plan": "Do not impose a Taylor-style fiscal rule during the empirical-dynamics cycle. First encode discrete fiscal packages/institutional regimes and assess whether a stable reaction function exists.",
+      "estimation_plan": "Keep the fiscal reaction DEFERRED. Debt-to-GDP and interest expenditure are already retained and B9 is directly available, but first materialise a matched primary-balance series on one adjustment/unit boundary. Then freeze a debt-gap definition, an output-gap measurement model and dated institutional/discretionary fiscal regimes before any reaction-function estimation. Do not impose a stable Taylor-style fiscal rule merely because fiscal accounting inputs are observed.",
       "observables": [
         "primary_balance",
         "debt_to_gdp",
@@ -374,12 +374,14 @@
       ],
       "limits": [
         "large discretionary packages and EDP constraints create regime shifts",
-        "short sample for a stable reaction function"
+        "short sample for a stable reaction function",
+        "observed B9, interest expenditure and debt do not identify a stable fiscal reaction without a matched primary-balance boundary and output-gap measurement model"
       ],
       "rejection_or_degradation_criteria": [
         "reaction coefficients regime-unstable",
         "rule obscures discrete policy measures or performs worse than explicit exogenous fiscal-package representation"
-      ]
+      ],
+      "source_boundary_review": "model/calibration_validation/fiscal_primary_balance_source_boundary_review.json"
     },
     {
       "id": "monetary_policy_reaction_function",

@@ -1,0 +1,89 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "fiscal_primary_balance_reaction",
+  "purpose": "Separate observability of Romania's fiscal accounting components from identification of a stable primary-balance reaction function.",
+  "verdict": "FISCAL_ACCOUNTING_INPUTS_LARGELY_OBSERVED_REACTION_FUNCTION_DEFERRED_BY_OUTPUT_GAP_REGIME_AND_TIMING",
+  "current_registry_form": "Delta primary_balance = f(debt_gap, output_gap, institutional/fiscal-package regime)",
+  "observed_fiscal_inputs": {
+    "government_debt_to_gdp": {
+      "source": "model/dynamics/government_debt_stock_reference_snapshot.json",
+      "dataset": "Eurostat gov_10q_ggdebt",
+      "series": "PC_GDP",
+      "status": "RETAINED_QUARTERLY_OBSERVED_SERIES",
+      "coverage": "2000-Q1 through 2026-Q1 in the retained snapshot"
+    },
+    "interest_expenditure": {
+      "source": "model/dynamics/government_interest_burden_reference_snapshot.json",
+      "dataset": "Eurostat gov_10q_ggnfa",
+      "na_item": "D41PAY",
+      "retained_units": [
+        "MIO_NAC",
+        "PC_GDP"
+      ],
+      "adjustment": "NSA",
+      "status": "RETAINED_QUARTERLY_OBSERVED_SERIES",
+      "coverage": "2000-Q1 through 2026-Q1 in the retained snapshot"
+    },
+    "net_lending_borrowing": {
+      "institution": "Eurostat / ECB Data Portal",
+      "dataset": "QSA / gov_10q_ggnfa",
+      "example_exact_key": "QSA.Q.Y.RO.W0.S13.S1._Z.B.B9._Z._Z._Z.XDC._T.S.V.N._T",
+      "concept": "General-government net lending (+) / net borrowing (-), Romania, quarterly",
+      "adjustment": "calendar and seasonally adjusted for the exact example key",
+      "status": "EXACT_SOURCE_AVAILABLE_NOT_YET_RETAINED_AS_PRIMARY_BALANCE_INPUT",
+      "semantic_note": "B9 equals revenue minus expenditure and therefore includes interest expenditure."
+    }
+  },
+  "primary_balance_measurement_boundary": {
+    "accounting_identity": "primary_balance = net_lending_borrowing + interest_expenditure, when both components share a compatible accounting/unit/seasonal boundary and interest expenditure is expressed as a positive use.",
+    "current_status": "COMPONENTS_IDENTIFIED_BUT_MATCHED_PRIMARY_BALANCE_SERIES_NOT_YET_MATERIALISED",
+    "blocker": "The retained D41PAY snapshot is non-seasonally adjusted while the exact B9 key currently used elsewhere is seasonally adjusted; do not add mismatched variants.",
+    "admissible_next_step": "Preregister one adjustment/unit boundary and materialise matched B9 and D41PAY on that same boundary before computing primary balance.",
+    "no_cash_budget_substitution": true
+  },
+  "output_gap_boundary": {
+    "registered_concept": "output_gap",
+    "status": "MODEL_BASED_LATENT_OR_ESTIMATED_VARIABLE_NOT_DIRECTLY_OBSERVED",
+    "rule": "Do not treat real GDP growth, unemployment, or deviation from a deterministic trend as an output gap without a separately preregistered measurement method.",
+    "implication": "A fiscal reaction coefficient on an estimated output gap inherits measurement-model uncertainty and does not become structurally identified merely because fiscal accounts are observed."
+  },
+  "regime_boundary": {
+    "status": "DISCRETE_POLICY_AND_INSTITUTIONAL_REGIMES_REQUIRED",
+    "required_examples": [
+      "Excessive Deficit Procedure / fiscal-governance regime status",
+      "major discretionary tax or expenditure packages",
+      "pandemic/emergency fiscal regimes where relevant",
+      "one-off capital transfers or exceptional measures where material"
+    ],
+    "rule": "Regime indicators must be coded from dated institutional/policy evidence before coefficient estimation. Do not infer breaks from residuals and then treat them as exogenous."
+  },
+  "source_admissibility": {
+    "registered_full_form_admissible": false,
+    "reasons": [
+      "A matched quarterly primary-balance series has not yet been materialised on one seasonal/unit boundary.",
+      "The output gap is not directly observed and no measurement model is frozen.",
+      "Institutional/fiscal-package regimes are not encoded ex ante.",
+      "The registered debt_gap concept is not frozen; observed debt-to-GDP is not automatically a debt gap."
+    ],
+    "simple_taylor_style_rule_automatically_authorized": false,
+    "rule": "Observed debt and fiscal balances do not authorize a stable Taylor-style fiscal rule. Estimation requires a new preregistered regime-aware candidate family and independent validation."
+  },
+  "prohibited_shortcuts": [
+    "Add seasonally adjusted B9 to non-seasonally adjusted D41PAY.",
+    "Treat observed debt-to-GDP as a debt gap without a target/reference definition.",
+    "Use GDP growth as output gap by relabelling.",
+    "Estimate break dates from the same residuals used to fit the fiscal reaction and call the breaks exogenous regimes.",
+    "Ignore discretionary fiscal packages or EDP/institutional changes to obtain a stable coefficient.",
+    "Activate the government refinancing-interest loop from a fiscal regression."
+  ],
+  "disposition": {
+    "mechanism_classification": "DEFERRED",
+    "source_readiness": "FISCAL_COMPONENTS_OBSERVED_PRIMARY_BALANCE_MATCHING_OUTPUT_GAP_AND_REGIMES_UNRESOLVED",
+    "active_calibration_cycle_open": false,
+    "estimation_or_refit_allowed": false,
+    "central_feedback": false,
+    "validated_reference_behavioural_mechanisms_change": 0,
+    "behavioural_closure": "UNCHANGED_INACTIVE"
+  }
+}
