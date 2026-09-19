@@ -52,15 +52,15 @@ class MechanismSourceReadinessTests(unittest.TestCase):
             self.readiness["coverage_rule"]["missing_entries_allowed"]
         )
 
-    def test_next_step_advances_after_exact_corporate_source_retention(self) -> None:
+    def test_next_step_advances_after_failed_corporate_form(self) -> None:
         step = self.readiness["current_next_step"]
         self.assertEqual(
             step["mechanism_id"],
-            "corporate_investment_response",
+            "household_consumption_response",
         )
         self.assertEqual(
             step["action"],
-            "MATERIALISE_SUPPLEMENTAL_S11_GVA_AND_REAL_GDP_SOURCES_NO_ESTIMATION",
+            "SCREEN_OFFICIAL_HOUSEHOLD_DEBT_SERVICE_SOURCES_NO_ESTIMATION",
         )
         self.assertFalse(step["calibration_cycle_open"])
 
@@ -71,19 +71,23 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         investment = mechanisms["corporate_investment_response"]
         self.assertEqual(
             investment["source_readiness"],
-            "SOURCE_VINTAGE_RETAINED_MEASUREMENT_DESIGN_PREREGISTERED_SUPPLEMENTAL_SOURCES_PENDING",
+            "FROZEN_TESTED_FORM_FAILED_BEFORE_HOLDOUT",
         )
         self.assertEqual(
             investment["retained_source_vintage"],
             "data/source_vintages/corporate-investment-source-family-vintage-2026-09-19",
         )
         self.assertEqual(
-            investment["measurement_design_contract"],
-            "model/calibration_validation/corporate_investment_measurement_design_contract.json",
+            investment["structural_selection_contract"],
+            "model/calibration_validation/corporate_investment_structural_selection_contract.json",
+        )
+        self.assertEqual(
+            investment["selection_result"],
+            "model/calibration_validation/corporate_investment_structural_selection_result.json",
         )
         self.assertEqual(
             investment["priority_group"],
-            "MATERIALISE_SUPPLEMENTAL_MEASUREMENT_SOURCES_NO_ESTIMATION",
+            "FREEZE_TESTED_FORM_UNTIL_NEW_EVIDENCE",
         )
         self.assertFalse(investment["estimation_or_refit_allowed"])
         fiscal = mechanisms["fiscal_primary_balance_reaction"]
