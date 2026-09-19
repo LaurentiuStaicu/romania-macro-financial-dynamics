@@ -1,5 +1,5 @@
 {
-  "manifest_version": "0.4",
+  "manifest_version": "0.5",
   "baseline_id": "scientific-integrity-2026-09-19",
   "purpose": "Single canonical cross-registry snapshot of RMD scientific maturity. Values in this manifest must agree with the authoritative accounting, dynamics, reference-mode, empirical-mechanism and validation registries; the manifest is not an independent source of scientific truth.",
   "authority": {
@@ -16,7 +16,9 @@
     "prospective_confirmation_status": "model/calibration_validation/prospective_monetary_confirmation_status.json",
     "mechanism_source_readiness": "model/calibration_validation/mechanism_source_readiness.json",
     "sectoral_financial_positions_external_source_screening": "model/dynamics/sectoral_financial_positions_external_source_screening.json",
-    "mechanism_reopen_conditions": "model/calibration_validation/mechanism_reopen_conditions_registry.json"
+    "mechanism_reopen_conditions": "model/calibration_validation/mechanism_reopen_conditions_registry.json",
+    "reference_mode_recovery_terminal_assessment": "model/dynamics/reference_mode_recovery_terminal_assessment.json",
+    "sectoral_financial_positions_bnr_cnf_source_screening": "model/dynamics/sectoral_financial_positions_bnr_cnf_source_screening.json"
   },
   "canonical_state": {
     "accounting": {
@@ -54,7 +56,11 @@
       ],
       "external_counterpart_screening_state": "EXHAUSTED_NO_SEMANTICALLY_ADMISSIBLE_CURRENT_PUBLIC_SOURCE",
       "sectoral_financial_positions_external_counterpart_recovery_state": "FROZEN_UNTIL_NEW_SOURCE_OR_CHANGED_DATASET_TRIGGER",
-      "external_counterpart_exact_historical_extraction_authorized": false
+      "external_counterpart_exact_historical_extraction_authorized": false,
+      "recovery_stage_status": "STAGE_COMPLETE_FROZEN_9_OF_10_UNDER_CURRENT_PUBLIC_EVIDENCE_BOUNDARY",
+      "recovery_substage_complete": true,
+      "next_operational_state": "EVIDENCE_TRIGGERED_BASELINE_HOLD",
+      "final_blocker_public_source_completion_status": "EUROSTAT_INSTRUMENT_SCOPE_FAIL_OECD_S121_SCOPE_FAIL_BNR_ANNUAL_FREQUENCY_TRANSACTION_HISTORY_FAIL"
     },
     "system_dynamics": {
       "complete_endogenous_system_dynamics_model": false,
@@ -122,6 +128,8 @@
     "After exhaustive source screening, a new empirical cycle requires a declared evidence/reopen trigger; queue exhaustion is not permission to respecify a failed form.",
     "The exhausted sectoral-financial-position external counterpart path may reopen only on a declared new-source or changed-dataset trigger; repeating the same Eurostat/OECD source boundary is not scientific progress.",
     "Every non-rejected behavioural mechanism has exactly one canonical reopen-condition entry with governing evidence and explicit non-reopen conditions.",
-    "Reopening a behavioural mechanism authorizes only its declared next evidence/identification gate and never automatically authorizes estimation/refit, holdout inspection, causal claims, System Dynamics activation or behavioural closure."
+    "Reopening a behavioural mechanism authorizes only its declared next evidence/identification gate and never automatically authorizes estimation/refit, holdout inspection, causal claims, System Dynamics activation or behavioural closure.",
+    "Reference-mode recovery may complete at a documented public-evidence boundary below 10/10 only when every missing mode has an explicit blocker, exhausted admissible current-public-source paths and declared reopen triggers.",
+    "The annual BNR counterpart stock matrix may be used as semantic evidence only; it may not be interpolated to quarters or used to substitute for the required quarterly stock-and-financial-transaction history."
   ]
 }
