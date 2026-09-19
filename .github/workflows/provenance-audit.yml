@@ -1,13 +1,10 @@
 name: Provenance Audit
 
+
+# Live-source provenance comparison is intentionally manual. Canonical provenance
+# reproducibility is verified offline in Scientific CI from retained manifests,
+# hashes and source-vintage files.
 on:
-  pull_request:
-    paths:
-      - "scripts/fetch_validation_recovery_data.py"
-      - "scripts/compare_live_to_legacy_vintage.py"
-      - "scripts/compare_live_normalized_to_retained.py"
-      - "data/provenance/**"
-      - ".github/workflows/provenance-audit.yml"
   workflow_dispatch:
 
 permissions:
