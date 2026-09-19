@@ -212,7 +212,7 @@
         "beta_npl",
         "beta_cap"
       ],
-      "estimation_plan": "Start from sector-specific aggregate credit with parsimonious subsets; use bank-level Romanian evidence only as sign/mechanism support, not as aggregate coefficients.",
+      "estimation_plan": "Calibration remains closed. First materialize exact sector-specific NFC and household/NPISH credit targets together with realised BNR Bank Lending Survey credit-standards and loan-demand series, plus harmonised NPL and total-capital-ratio state controls under frozen provenance. The current aggregate reduced form is not eligible for estimation as a bank-supply equation because demand and supply are jointly determined. After source materialisation, preregister a sector-specific predictive/identification cycle and untouched holdout; no causal or feedback activation follows from predictive gain alone.",
       "observables": [
         "credit_stock_or_transactions",
         "activity_growth",
@@ -227,13 +227,16 @@
       "limits": [
         "aggregation can reverse bank-level relations",
         "credit demand and supply are jointly determined",
-        "prudential-regime changes matter"
+        "prudential-regime changes matter",
+        "BNR Bank Lending Survey supply standards and loan demand must remain separate rather than being collapsed into one aggregate credit signal",
+        "NPL and total capital ratios are endogenous prudential state variables, not clean exogenous bank-supply shocks"
       ],
       "rejection_or_degradation_criteria": [
         "demand/supply components cannot be separately or robustly identified",
         "high parameter trade-off",
         "no out-of-sample gain versus autoregressive credit baseline"
-      ]
+      ],
+      "source_boundary_review": "model/calibration_validation/aggregate_bank_credit_source_boundary_review.json"
     },
     {
       "id": "sovereign_yield_spread_response",
