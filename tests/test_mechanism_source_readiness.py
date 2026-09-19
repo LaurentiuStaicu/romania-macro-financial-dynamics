@@ -60,7 +60,7 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         )
         self.assertEqual(
             step["action"],
-            "MATERIALISE_FX_HICP_TOTAL_IMPORT_UVI_NO_ESTIMATION",
+            "PREREGISTER_FX_INFLATION_TRANSFORMS_LAGS_AND_WINDOWS_NO_ESTIMATION",
         )
         self.assertFalse(step["calibration_cycle_open"])
 
@@ -81,11 +81,11 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         fx = mechanisms["exchange_rate_pass_through_to_inflation"]
         self.assertEqual(
             fx["source_readiness"],
-            "EXACT_FX_HICP_TOTAL_IMPORT_UVI_BOUNDARIES_FROZEN_MATERIALISATION_PENDING",
+            "EXACT_MONTHLY_LEVEL_SOURCE_VINTAGE_RETAINED_TRANSFORM_AND_LAG_PREREGISTRATION_PENDING",
         )
         self.assertEqual(
             fx["priority_group"],
-            "SOURCE_MATERIALISATION_PENDING",
+            "TRANSFORM_LAG_AND_WINDOWS_PREREGISTRATION_PENDING",
         )
         self.assertFalse(fx["estimation_or_refit_allowed"])
 
