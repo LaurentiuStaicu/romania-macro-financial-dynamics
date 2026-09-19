@@ -36,10 +36,11 @@
       "series_key": "QSA.Q.N.RO.W0.S11.S1.N.D.P51G._Z._Z._Z.XDC._T.S.V.N._T",
       "concept": "Gross fixed capital formation of non-financial corporations (S11), Romania, quarterly, non-seasonally adjusted, current prices, domestic currency",
       "status": "EXACT_SERIES_CONFIRMED",
-      "coverage": "1999-Q1 to 2025-Q4 in the indexed ECB Data Portal evidence reviewed on 2026-09-19",
+      "coverage": "1999-Q1 to 2025-Q4",
       "latest_indexed_example": "2025-Q4 = 45775.50 million domestic currency",
       "provider_last_updated_seen": "2026-04-28T19:41:00+02:00",
-      "semantic_limit": "This is an exact sector-specific nominal investment target, but the registered gI growth transformation, seasonal treatment and deflator are not yet frozen."
+      "semantic_limit": "This is an exact sector-specific nominal investment target, but the registered gI growth transformation, seasonal treatment and deflator are not yet frozen.",
+      "coverage_evidence_reviewed_on": "2026-09-19"
     }
   },
   "sector_specific_investment_boundary": {
