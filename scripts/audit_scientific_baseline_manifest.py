@@ -66,6 +66,9 @@ def main() -> None:
     readiness = load(
         "model/calibration_validation/mechanism_source_readiness.json"
     )
+    mechanism_reopen = load(
+        "model/calibration_validation/mechanism_reopen_conditions_registry.json"
+    )
     disposition = load(
         "model/calibration_validation/validation_recovery_disposition.json"
     )
@@ -279,6 +282,60 @@ def main() -> None:
         set(readiness_ids) == non_rejected_ids,
         "Mechanism readiness coverage is not exactly the non-rejected registry",
     )
+
+    reopen_entries = mechanism_reopen["mechanisms"]
+    check(
+        set(reopen_entries) == non_rejected_ids,
+        "Mechanism reopen registry coverage is not exactly the non-rejected registry",
+    )
+    check(
+        readiness["mechanism_reopen_conditions_registry"]
+        == "model/calibration_validation/mechanism_reopen_conditions_registry.json",
+        "Mechanism readiness does not register the canonical reopen-condition registry",
+    )
+    check(
+        readiness["current_next_step"]["reopen_conditions_registry"]
+        == "model/calibration_validation/mechanism_reopen_conditions_registry.json",
+        "Closed scientific-baseline next step is not bound to the reopen-condition registry",
+    )
+    source_by_id = {item["id"]: item for item in readiness_entries}
+    for mechanism_id, reopen_entry in reopen_entries.items():
+        source_entry = source_by_id[mechanism_id]
+        check(
+            reopen_entry["classification"] == source_entry["classification"],
+            f"Mechanism reopen classification is stale: {mechanism_id}",
+        )
+        check(
+            reopen_entry["source_readiness"] == source_entry["source_readiness"],
+            f"Mechanism reopen source-readiness state is stale: {mechanism_id}",
+        )
+        evidence = reopen_entry["governing_evidence"]
+        check(
+            isinstance(evidence, list) and bool(evidence),
+            f"Mechanism reopen entry lacks governing evidence: {mechanism_id}",
+        )
+        for relative in evidence:
+            check(
+                (ROOT / relative).is_file(),
+                f"Mechanism reopen evidence path is missing for {mechanism_id}: {relative}",
+            )
+        reopen_when = reopen_entry["reopen_when"]
+        check(
+            (isinstance(reopen_when, str) and bool(reopen_when.strip()))
+            or (
+                isinstance(reopen_when, list)
+                and bool(reopen_when)
+                and all(isinstance(x, str) and x.strip() for x in reopen_when)
+            ),
+            f"Mechanism reopen trigger is empty: {mechanism_id}",
+        )
+        non_reopen = reopen_entry["evidence_that_does_not_reopen"]
+        check(
+            isinstance(non_reopen, list)
+            and bool(non_reopen)
+            and all(isinstance(x, str) and x.strip() for x in non_reopen),
+            f"Mechanism non-reopen boundary is empty: {mechanism_id}",
+        )
     check(
         readiness_state["non_rejected_mechanism_count"] == len(non_rejected),
         "Baseline non-rejected mechanism count is stale",
@@ -286,6 +343,19 @@ def main() -> None:
     check(
         readiness_state["readiness_entry_count"] == len(readiness_entries),
         "Baseline readiness-entry count is stale",
+    )
+    check(
+        readiness_state["reopen_registry_entry_count"] == len(reopen_entries),
+        "Baseline reopen-registry entry count is stale",
+    )
+    check(
+        readiness_state["all_reopen_conditions_registered"] is True,
+        "Baseline must require reopen conditions for every mechanism",
+    )
+    check(
+        readiness_state["reopen_governance_state"]
+        == "DECLARED_TRIGGER_REQUIRED_NO_AUTOMATIC_ESTIMATION",
+        "Baseline reopen-governance state is stale",
     )
 
     classification_counts: dict[str, int] = {
@@ -351,6 +421,36 @@ def main() -> None:
         all(item["priority_group"] for item in readiness_entries),
         "A mechanism readiness entry lacks an explicit priority/reopen group",
     )
+    reopen_governance = mechanism_reopen["governance"]
+    check(
+        mechanism_reopen["current_baseline_action"]
+        == readiness["current_next_step"]["action"],
+        "Reopen registry baseline action disagrees with source readiness",
+    )
+    check(
+        mechanism_reopen["current_active_calibration_cycle_open"] is False,
+        "Reopen registry may not open calibration at the closed baseline",
+    )
+    check(
+        mechanism_reopen["current_validated_reference_behavioural_mechanisms"] == 0,
+        "Reopen registry may not alter validated-mechanism count",
+    )
+    check(
+        reopen_governance["reopen_authorizes_only_the_declared_next_gate"] is True,
+        "Reopen registry must constrain reopening to the declared next gate",
+    )
+    check(
+        reopen_governance["reopen_does_not_authorize_automatic_estimation_or_refit"] is True,
+        "Reopen registry may not authorize automatic estimation/refit",
+    )
+    check(
+        reopen_governance["reopen_does_not_activate_system_dynamics_feedback"] is True,
+        "Reopen registry may not activate System Dynamics feedback",
+    )
+    check(
+        reopen_governance["reopen_does_not_activate_behavioural_closure"] is True,
+        "Reopen registry may not activate behavioural closure",
+    )
 
     # Live-source refreshes are not canonical reproduction prerequisites.
     source_state = state["source_reproduction"]
@@ -384,6 +484,12 @@ def main() -> None:
         ],
         "mechanisms_estimation_or_refit_allowed": readiness_state[
             "estimation_or_refit_allowed_count"
+        ],
+        "mechanism_reopen_registry_entries": readiness_state[
+            "reopen_registry_entry_count"
+        ],
+        "mechanism_reopen_governance_state": readiness_state[
+            "reopen_governance_state"
         ],
         "mechanism_priority_groups": readiness_state[
             "priority_group_counts"
