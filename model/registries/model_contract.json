@@ -89,7 +89,7 @@
   "repository_governance": {
     "merge_readiness_assessment": "model/registries/scientific_baseline_merge_readiness_assessment.json",
     "consolidation_terminal_assessment": "model/registries/scientific_baseline_consolidation_terminal_assessment.json",
-    "current_merge_readiness_status": "MERGE_AUTHORIZED_INTEGRATION_PENDING",
+    "current_merge_readiness_status": "INTEGRATION_COMPLETE",
     "scientific_review_series_complete": true,
     "scientific_review_series_terminal_pr": 51,
     "scientific_review_series_terminal_tree": "f8ca0b757b4be46cc19b36564e9f0eed69ef95ce",
@@ -101,6 +101,8 @@
     "review_ready_assessment": "model/registries/scientific_baseline_review_ready_assessment.json",
     "merge_decision_required": false,
     "merge_authorization_assessment": "model/registries/scientific_baseline_merge_authorization.json",
-    "human_merge_authorized": true
+    "human_merge_authorized": true,
+    "integration_terminal_assessment": "model/registries/scientific_baseline_integration_terminal_assessment.json",
+    "integration_complete": true
   }
 }
