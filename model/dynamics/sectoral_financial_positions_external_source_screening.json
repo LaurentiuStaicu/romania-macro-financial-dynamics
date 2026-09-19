@@ -1,0 +1,83 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "reference_mode": "sectoral_financial_positions",
+  "phase": "External Source Screening — Sectoral Financial Positions",
+  "purpose": "Screen official sources outside the already exhausted retained ECB-QSA query path for a possible future source-reopen trigger. Screening does not change the reference-mode target, accounting state or readiness and does not treat a new dissemination layer as independent evidence without source-lineage review.",
+  "frozen_current_state": {
+    "status": "PARTIAL_SERIES_AVAILABLE",
+    "readiness_count_change": 0,
+    "internal_source_recovery": "FROZEN_UNTIL_REOPEN_TRIGGER",
+    "canonical_accounting_instruments_complete": [
+      "F3"
+    ],
+    "behavioural_closure": "UNCHANGED_INACTIVE"
+  },
+  "screened_sources": [
+    {
+      "id": "OECD_QUARTERLY_COUNTERPART_FINANCIAL_ACCOUNTS",
+      "institution": "OECD",
+      "official_dataset_family_url": "https://www.oecd.org/en/data/datasets/financial-accounts-and-balance-sheets.html",
+      "candidate_dataflows": {
+        "stocks": {
+          "id": "OECD.SDD.NAD,DSD_NASEC20@DF_T725R_Q",
+          "title": "Quarterly Financial Balance Sheets (stocks) - counterpart information",
+          "structure_url": "https://sdmx.oecd.org/public/rest/dataflow/OECD.SDD.NAD/DSD_NASEC20@DF_T725R_Q/?references=all"
+        },
+        "flows": {
+          "id": "OECD.SDD.NAD,DSD_NASEC20@DF_T625R_Q",
+          "title": "Quarterly Financial Accounts (flows) - counterpart information",
+          "structure_url": "https://sdmx.oecd.org/public/rest/dataflow/OECD.SDD.NAD/DSD_NASEC20@DF_T625R_Q/?references=all"
+        }
+      },
+      "semantic_fit": "POTENTIALLY_HIGH",
+      "positive_evidence": [
+        "OECD explicitly describes both quarterly counterpart-position and counterpart-flow tables by institutional sector and financial instrument.",
+        "The OECD Data Explorer exposes SDMX API endpoints for both dataflows.",
+        "The counterpart tables can in principle represent relationships between non-financial corporations, financial corporations, government, households/NPISH and rest of world by instrument."
+      ],
+      "lineage_boundary": [
+        "OECD states that Quarterly Sector Accounts (financial part) are an OECD-ECB collection.",
+        "Therefore an OECD observation is not assumed to be statistically independent from the ECB/European financial-accounts source chain.",
+        "A future retained Romania result must record its source metadata/lineage before it can count as a source-reopen trigger."
+      ],
+      "romania_exact_observation_coverage_retained": false,
+      "status": "CANDIDATE_FOR_PREREGISTERED_COUNTRY_COVERAGE_PROBE_NOT_REOPEN_EVIDENCE"
+    },
+    {
+      "id": "EUROSTAT_INSTITUTIONAL_SECTOR_ACCOUNTS",
+      "institution": "Eurostat",
+      "official_url": "https://ec.europa.eu/eurostat/en/web/sector-accounts",
+      "semantic_fit": "HIGH_FOR_SECTOR_AND_INSTRUMENT_AGGREGATES",
+      "source_lineage": "EUROPEAN_SECTOR_ACCOUNTS_CHAIN_OVERLAPS_EXISTING_ECB_QSA_EVIDENCE",
+      "exact_new_counterpart_boundary_identified": false,
+      "status": "NO_SEPARATE_REOPEN_TRIGGER_IDENTIFIED_IN_CURRENT_SCREENING"
+    },
+    {
+      "id": "BNR_NATIONAL_FINANCIAL_ACCOUNTS_PUBLICATIONS",
+      "institution": "National Bank of Romania",
+      "official_publication_example": "https://www.bnr.ro/files/d/Pubs_ro/cnf/CNF_2018-2022.pdf",
+      "semantic_fit": "NATIONAL_FINANCIAL_ACCOUNTS_CONTEXT",
+      "exact_quarterly_F2_F8_counterpart_machine_readable_history_identified": false,
+      "status": "NO_EXACT_NEW_QUARTERLY_COUNTERPART_SOURCE_IDENTIFIED_IN_CURRENT_SCREENING"
+    }
+  ],
+  "decision": {
+    "immediate_reference_mode_reopen_authorized": false,
+    "reference_mode_promotion_authorized": false,
+    "accounting_readiness_change": false,
+    "next_admissible_action": "Run a separately preregistered manual OECD country-coverage discovery probe for Romania on DF_T725R_Q and DF_T625R_Q. Retain raw responses and metadata only. If non-empty Romania data are obtained, perform a separate source-lineage and semantic-coverage review before any formal reference-mode gate.",
+    "oecd_probe_justified": true
+  },
+  "hard_rules": {
+    "no_reinterpretation_of_historical_phase_A_D": true,
+    "no_missing_to_zero": true,
+    "no_residual_allocation": true,
+    "no_sector_dropping_after_result": true,
+    "no_tolerance_change": true,
+    "no_reference_mode_promotion_from_discovery_probe": true,
+    "no_accounting_readiness_promotion": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  }
+}
