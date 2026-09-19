@@ -60,10 +60,37 @@ class SectoralFinancialPositionsOECDCounterpartProbeContractTests(unittest.TestC
             rule["effect_if_pass"],
             "ROMANIA_COUNTRY_DATA_RETAINED_FOR_EXPLICIT_SEMANTIC_AND_LINEAGE_REVIEW_ONLY",
         )
+        self.assertTrue(rule["each_required_structure_parse"])
+        self.assertTrue(rule["each_required_counterpart_dimension"])
         self.assertEqual(
-            rule["effect_if_fail"],
+            rule["effect_if_definitive_negative"],
             "NO_REOPEN_EVIDENCE_FROM_OECD_COUNTRY_COVERAGE_PROBE",
         )
+        self.assertEqual(
+            rule["effect_if_indeterminate"],
+            "INDETERMINATE_OECD_SOURCE_ACCESS_RETRY_REQUIRED_NO_SCIENTIFIC_EFFECT",
+        )
+
+    def test_provider_access_failure_has_no_scientific_effect(self) -> None:
+        context = self.contract["provider"]["api_operational_context"]
+        semantics = self.contract["source_response_semantics"]
+        self.assertEqual(context["rate_limit_data_downloads_per_hour"], 60)
+        self.assertIn("rate-limit", semantics["INDETERMINATE"])
+        self.assertIn("zero baseline effect", semantics["INDETERMINATE"])
+
+    def test_manual_execution_precondition_cannot_be_bypassed(self) -> None:
+        policy = self.contract["execution_policy"]
+        self.assertEqual(policy["trigger"], "workflow_dispatch")
+        self.assertTrue(policy["live_source_refresh_manual_only"])
+        self.assertTrue(
+            policy["workflow_dispatch_requires_workflow_on_default_branch"]
+        )
+        self.assertEqual(policy["default_branch_at_preregistration"], "main")
+        self.assertFalse(
+            policy["workflow_present_on_default_branch_at_preregistration"]
+        )
+        self.assertTrue(policy["no_trigger_broadening_to_bypass_precondition"])
+        self.assertEqual(policy["scientific_effect_while_pending"], "NONE")
 
 
 if __name__ == "__main__":

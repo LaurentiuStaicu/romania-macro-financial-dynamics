@@ -103,7 +103,11 @@
     "workflow": ".github/workflows/sectoral-financial-positions-oecd-counterpart-probe.yml",
     "formal_reference_mode_gate": false,
     "current_effect": "NONE_UNTIL_RETAINED_RESULT_AND_SEPARATE_SEMANTIC_LINEAGE_REVIEW",
-    "rationale": "OECD counterpart stocks/flows could expose a useful Romania sector-counterpart boundary, but OECD documents the quarterly financial sector-accounts collection as OECD-ECB. Discovery therefore tests coverage only; it cannot establish independent reopen evidence or promotion by itself."
+    "rationale": "OECD counterpart stocks/flows could expose a useful Romania sector-counterpart boundary, but OECD documents the quarterly financial sector-accounts collection as OECD-ECB. Discovery therefore tests coverage only; it cannot establish independent reopen evidence or promotion by itself.",
+    "execution_state": "PENDING_DEFAULT_BRANCH_PRESENCE_OR_EQUIVALENT_AUTHORIZED_MANUAL_EXECUTION",
+    "execution_precondition": "workflow_dispatch definition must exist on the default branch; the OECD workflow is not present on main while PR #47 remains a draft.",
+    "no_trigger_bypass": true,
+    "provider_access_failure_effect": "INDETERMINATE_NO_SCIENTIFIC_EFFECT"
   },
   "eurostat_counterpart_discovery_probe": {
     "status": "PREREGISTERED_MANUAL_NOT_EXECUTED",

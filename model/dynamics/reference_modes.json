@@ -146,7 +146,9 @@
       "eurostat_counterpart_discovery_probe_status": "PREREGISTERED_MANUAL_NOT_EXECUTED",
       "eurostat_counterpart_discovery_probe_effect": "NONE_UNTIL_RETAINED_RESULT_AND_SEPARATE_MAPPING_LINEAGE_REVIEW",
       "eurostat_counterpart_discovery_probe_execution_state": "PENDING_DEFAULT_BRANCH_PRESENCE_OR_EQUIVALENT_AUTHORIZED_MANUAL_EXECUTION",
-      "eurostat_counterpart_discovery_probe_execution_effect": "NONE; the probe remains preregistered and manual-only. Default-branch workflow presence is an execution prerequisite, not scientific reopen evidence."
+      "eurostat_counterpart_discovery_probe_execution_effect": "NONE; the probe remains preregistered and manual-only. Default-branch workflow presence is an execution prerequisite, not scientific reopen evidence.",
+      "oecd_counterpart_discovery_probe_execution_state": "PENDING_DEFAULT_BRANCH_PRESENCE_OR_EQUIVALENT_AUTHORIZED_MANUAL_EXECUTION",
+      "oecd_counterpart_discovery_probe_execution_effect": "NONE; the probe remains preregistered and manual-only. Default-branch workflow presence is an execution prerequisite, and OECD throttling/provider failures are indeterminate rather than negative evidence."
     }
   ],
   "closure_rule": "Integrated behavioural closure may not be declared validated until the reference modes required by each active loop have explicit observed targets or a documented reason why only qualitative/reference-pattern validation is possible.",

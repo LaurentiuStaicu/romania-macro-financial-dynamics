@@ -1,5 +1,5 @@
 {
-  "contract_version": "0.1",
+  "contract_version": "0.2",
   "frozen_on": "2026-09-19",
   "reference_mode": "sectoral_financial_positions",
   "phase": "OECD Quarterly Counterpart Financial Accounts — Romania Country-Coverage Discovery Probe",
@@ -21,7 +21,13 @@
         "flow_ref": "OECD.SDD.NAD,DSD_NASEC20@DF_T625R_Q",
         "structure_url": "https://sdmx.oecd.org/public/rest/dataflow/OECD.SDD.NAD/DSD_NASEC20@DF_T625R_Q/?references=all"
       }
-    ]
+    ],
+    "api_operational_context": {
+      "checked_on": "2026-09-19",
+      "rate_limit_data_downloads_per_hour": 60,
+      "excessive_requests": "TEMPORARILY_BLOCKED",
+      "scientific_interpretation": "A provider throttle or access block is INDETERMINATE and cannot be interpreted as absent Romania counterpart data."
+    }
   },
   "query_scope": {
     "reference_area": "ROU",
@@ -42,7 +48,12 @@
     "each_required_nonempty_csv": true,
     "each_required_romania_identity_present": true,
     "effect_if_pass": "ROMANIA_COUNTRY_DATA_RETAINED_FOR_EXPLICIT_SEMANTIC_AND_LINEAGE_REVIEW_ONLY",
-    "effect_if_fail": "NO_REOPEN_EVIDENCE_FROM_OECD_COUNTRY_COVERAGE_PROBE"
+    "each_required_structure_http_status": 200,
+    "each_required_structure_parse": true,
+    "each_required_counterpart_dimension": true,
+    "effect_if_definitive_negative": "NO_REOPEN_EVIDENCE_FROM_OECD_COUNTRY_COVERAGE_PROBE",
+    "effect_if_indeterminate": "INDETERMINATE_OECD_SOURCE_ACCESS_RETRY_REQUIRED_NO_SCIENTIFIC_EFFECT",
+    "rationale": "A PASS requires both official counterpart dataflows, successfully parsed SDMX structures containing an explicit counterpart dimension, and non-empty Romania-scoped CSV observations. Provider/access failures cannot count as negative scientific evidence."
   },
   "retained_outputs": {
     "raw_structure_xml": true,
@@ -53,7 +64,9 @@
     "csv_data_row_count": true,
     "constructed_dimension_order": true,
     "constructed_query_key": true,
-    "request_url": true
+    "request_url": true,
+    "source_result_state": true,
+    "counterpart_dimension_present": true
   },
   "hard_rules": {
     "no_sector_mapping_in_probe": true,
@@ -68,5 +81,22 @@
     "no_system_dynamics_activation": true,
     "no_behavioural_closure_change": true
   },
-  "next_gate_if_pass": "Retain the exact probe artifact, then preregister a separate lineage/semantic-coverage review before any formal reference-mode gate. That review must establish Romania source lineage, sector definitions, counterpart orientation, instrument scope F2-F8, stock/flow semantics, units and coverage without using fit or reconciliation outcomes to redefine the mapping."
+  "next_gate_if_pass": "Retain the exact probe artifact, then preregister a separate lineage/semantic-coverage review before any formal reference-mode gate. That review must establish Romania source lineage, sector definitions, counterpart orientation, instrument scope F2-F8, stock/flow semantics, units and coverage without using fit or reconciliation outcomes to redefine the mapping.",
+  "source_response_semantics": {
+    "PASS": "Both required OECD dataflows have HTTP 200 structure responses, parse successfully, expose an explicit counterpart dimension, and return HTTP 200 non-empty Romania-scoped CSV data.",
+    "DEFINITIVE_NEGATIVE": "A required dataflow has a successful counterpart-structure parse and a successful HTTP 200 CSV response with a valid header but zero data rows for the frozen Romania/time query. Negative source-discovery evidence never changes reference-mode readiness by itself.",
+    "INDETERMINATE": "Structure/network failures, parse failures, HTTP throttling/rate-limit responses, server errors, request-size errors, empty or malformed CSV responses, or non-empty responses that do not preserve the frozen Romania identity are source-access/query failures rather than negative scientific evidence and require retry with zero baseline effect."
+  },
+  "execution_policy": {
+    "workflow": ".github/workflows/sectoral-financial-positions-oecd-counterpart-probe.yml",
+    "trigger": "workflow_dispatch",
+    "live_source_refresh_manual_only": true,
+    "workflow_dispatch_requires_workflow_on_default_branch": true,
+    "default_branch_at_preregistration": "main",
+    "workflow_present_on_default_branch_at_preregistration": false,
+    "current_execution_state": "PENDING_DEFAULT_BRANCH_PRESENCE_OR_EQUIVALENT_AUTHORIZED_MANUAL_EXECUTION",
+    "no_trigger_broadening_to_bypass_precondition": true,
+    "scientific_effect_while_pending": "NONE",
+    "rationale": "The manual OECD workflow is introduced on the scientific-integrity draft branch and is absent from main. GitHub workflow_dispatch therefore cannot be used for that workflow until it exists on the default branch, or an equivalent explicitly authorized manual path is used. The trigger must not be broadened to pull_request/push merely to obtain live source data."
+  }
 }

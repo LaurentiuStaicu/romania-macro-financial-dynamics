@@ -171,6 +171,69 @@ def inspect_csv(data: bytes) -> dict:
     }
 
 
+def has_counterpart_dimension(dimension_order: list[str]) -> bool:
+    return any(
+        "COUNTERPART" in dimension_id.upper()
+        for dimension_id in dimension_order
+    )
+
+
+def classify_flow_result(result: dict, rule: dict) -> str:
+    structure_ok = (
+        result["structure_http_status"]
+        == rule["each_required_structure_http_status"]
+        and result["structure_error"] is None
+        and result["structure_parse_error"] is None
+        and result["counterpart_dimension_present"]
+    )
+    if not structure_ok:
+        return "INDETERMINATE"
+
+    data_ok = (
+        result["data_http_status"]
+        == rule["each_required_http_status"]
+        and result["data_error"] is None
+    )
+    if not data_ok:
+        return "INDETERMINATE"
+
+    if not result["csv_header"]:
+        return "INDETERMINATE"
+    if result["csv_data_row_count"] == 0:
+        return "DEFINITIVE_NEGATIVE"
+    if not result["romania_identity_present"]:
+        return "INDETERMINATE"
+    return "PASS"
+
+
+def classify_probe_result(
+    results: list[dict],
+    rule: dict,
+) -> tuple[str, str]:
+    by_id = {item["id"]: item for item in results}
+    states: list[str] = []
+    for item_id in rule["required_dataflows"]:
+        item = by_id.get(item_id)
+        if item is None:
+            return "INDETERMINATE", rule["effect_if_indeterminate"]
+        states.append(item["source_result_state"])
+
+    if all(state == "PASS" for state in states):
+        return "PASS", rule["effect_if_pass"]
+    if (
+        any(state == "DEFINITIVE_NEGATIVE" for state in states)
+        and all(
+            state in {"PASS", "DEFINITIVE_NEGATIVE"}
+            for state in states
+        )
+    ):
+        return (
+            "DEFINITIVE_NEGATIVE",
+            rule["effect_if_definitive_negative"],
+        )
+    return "INDETERMINATE", rule["effect_if_indeterminate"]
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     contract = json.loads(CONTRACT.read_text(encoding="utf-8"))
@@ -234,49 +297,62 @@ def main() -> None:
             if data_status == 200 and data_body:
                 csv_summary = inspect_csv(data_body)
 
+        counterpart_present = has_counterpart_dimension(
+            dimension_order
+        )
         available = (
-            data_status
+            structure_status
+            == contract["discovery_pass_rule"][
+                "each_required_structure_http_status"
+            ]
+            and structure_parse_error is None
+            and counterpart_present
+            and data_status
             == contract["discovery_pass_rule"]["each_required_http_status"]
             and csv_summary["data_row_count"] > 0
             and csv_summary["romania_identity_present"]
         )
 
-        results.append(
-            {
-                "id": item["id"],
-                "flow_ref": item["flow_ref"],
-                "structure_url": item["structure_url"],
-                "structure_http_status": structure_status,
-                "structure_error": structure_error,
-                "structure_content_type": structure_headers.get("Content-Type"),
-                "structure_bytes": len(structure_body),
-                "structure_sha256": sha256(structure_body)
-                if structure_body
-                else None,
-                "structure_parse_error": structure_parse_error,
-                "dimension_order": dimension_order,
-                "query_key": query_key,
-                "data_url": data_url,
-                "data_http_status": data_status,
-                "data_error": data_error,
-                "data_content_type": data_headers.get("Content-Type"),
-                "data_bytes": len(data_body),
-                "data_sha256": sha256(data_body) if data_body else None,
-                "csv_header": csv_summary["header"],
-                "csv_data_row_count": csv_summary["data_row_count"],
-                "romania_identity_present": csv_summary[
-                    "romania_identity_present"
-                ],
-                "country_data_available": available,
-            }
+        result = {
+            "id": item["id"],
+            "flow_ref": item["flow_ref"],
+            "structure_url": item["structure_url"],
+            "structure_http_status": structure_status,
+            "structure_error": structure_error,
+            "structure_content_type": structure_headers.get("Content-Type"),
+            "structure_bytes": len(structure_body),
+            "structure_sha256": sha256(structure_body)
+            if structure_body
+            else None,
+            "structure_parse_error": structure_parse_error,
+            "dimension_order": dimension_order,
+            "counterpart_dimension_present": counterpart_present,
+            "query_key": query_key,
+            "data_url": data_url,
+            "data_http_status": data_status,
+            "data_error": data_error,
+            "data_content_type": data_headers.get("Content-Type"),
+            "data_bytes": len(data_body),
+            "data_sha256": sha256(data_body) if data_body else None,
+            "csv_header": csv_summary["header"],
+            "csv_data_row_count": csv_summary["data_row_count"],
+            "romania_identity_present": csv_summary[
+                "romania_identity_present"
+            ],
+            "country_data_available": available,
+        }
+        result["source_result_state"] = classify_flow_result(
+            result,
+            contract["discovery_pass_rule"],
         )
+        results.append(result)
 
-    by_id = {item["id"]: item for item in results}
-    required = contract["discovery_pass_rule"]["required_dataflows"]
-    pass_gate = all(
-        by_id.get(item_id, {}).get("country_data_available", False)
-        for item_id in required
+    rule = contract["discovery_pass_rule"]
+    scientific_result_state, disposition = classify_probe_result(
+        results,
+        rule,
     )
+    pass_gate = scientific_result_state == "PASS"
 
     audit = {
         "audit_version": "0.1",
@@ -290,11 +366,8 @@ def main() -> None:
         "query_scope": scope,
         "results": results,
         "discovery_gate_pass": pass_gate,
-        "disposition": (
-            contract["discovery_pass_rule"]["effect_if_pass"]
-            if pass_gate
-            else contract["discovery_pass_rule"]["effect_if_fail"]
-        ),
+        "scientific_result_state": scientific_result_state,
+        "disposition": disposition,
         "semantic_mapping_performed": False,
         "reconciliation_test_performed": False,
         "historical_phase_A_D_reinterpreted": False,

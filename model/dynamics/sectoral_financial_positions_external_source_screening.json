@@ -42,7 +42,13 @@
         "A future retained Romania result must record its source metadata/lineage before it can count as a source-reopen trigger."
       ],
       "romania_exact_observation_coverage_retained": false,
-      "status": "CANDIDATE_FOR_PREREGISTERED_COUNTRY_COVERAGE_PROBE_NOT_REOPEN_EVIDENCE"
+      "status": "CANDIDATE_FOR_PREREGISTERED_COUNTRY_COVERAGE_PROBE_NOT_REOPEN_EVIDENCE",
+      "access_operational_context": {
+        "checked_on": "2026-09-19",
+        "api_data_download_limit_per_hour": 60,
+        "excess_requests": "TEMPORARILY_BLOCKED",
+        "interpretation": "Provider throttling/access failures are INDETERMINATE and cannot be treated as absent Romania data."
+      }
     },
     {
       "id": "EUROSTAT_QUARTERLY_COUNTERPART_FINANCIAL_ACCOUNTS",
@@ -82,7 +88,7 @@
     "immediate_reference_mode_reopen_authorized": false,
     "reference_mode_promotion_authorized": false,
     "accounting_readiness_change": false,
-    "next_admissible_action": "Preserve the strengthened preregistered Eurostat nasq_10_f_cp Romania schema/coverage probe as manual-only. Execute it only after its workflow definition is present on the default branch or through an equivalent explicitly authorized manual path; do not broaden the trigger to pull_request/push merely to obtain source data. Retain the raw JSON-stat response and dimension metadata without mapping or reconciliation. If non-empty Romania counterpart observations pass the frozen schema gate, perform a separate lineage/semantic/instrument-coverage review. Keep the OECD counterpart probe as a secondary discovery path; neither source may promote the reference mode from discovery alone.",
+    "next_admissible_action": "Preserve both strengthened external discovery probes as manual-only. Eurostat nasq_10_f_cp remains first priority; OECD counterpart stocks/flows remain secondary. Execute either only after its workflow definition is present on the default branch or through an equivalent explicitly authorized manual path; do not broaden triggers to pull_request/push merely to obtain live source data. Provider/network/throttling failures are indeterminate and have no scientific effect. A retained PASS authorizes only a separately preregistered lineage/semantic/instrument-coverage review, never direct reference-mode promotion.",
     "oecd_probe_justified": true,
     "eurostat_counterpart_probe_justified": true,
     "discovery_priority": [
@@ -90,7 +96,9 @@
       "OECD_COUNTERPART_DATAFLOWS"
     ],
     "eurostat_probe_execution_state": "PENDING_DEFAULT_BRANCH_PRESENCE_OR_EQUIVALENT_AUTHORIZED_MANUAL_EXECUTION",
-    "trigger_broadening_to_bypass_execution_precondition_authorized": false
+    "trigger_broadening_to_bypass_execution_precondition_authorized": false,
+    "oecd_probe_execution_state": "PENDING_DEFAULT_BRANCH_PRESENCE_OR_EQUIVALENT_AUTHORIZED_MANUAL_EXECUTION",
+    "oecd_provider_access_failures_have_no_scientific_effect": true
   },
   "hard_rules": {
     "no_reinterpretation_of_historical_phase_A_D": true,
