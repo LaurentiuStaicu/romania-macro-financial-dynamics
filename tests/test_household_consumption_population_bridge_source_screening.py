@@ -76,7 +76,7 @@ class HouseholdConsumptionPopulationBridgeSourceScreeningTests(unittest.TestCase
         hard = self.review["hard_rules"]
         self.assertEqual(
             disposition["population_bridge_status"],
-            "BLOCKED_NO_OBSERVED_PUBLIC_BRIDGE_IDENTIFIED",
+            "BLOCKED_NO_OBSERVED_OFFICIAL_BRIDGE_IDENTIFIED",
         )
         self.assertFalse(disposition["household_consumption_estimation_authorized"])
         self.assertFalse(disposition["registered_full_form_source_admissible"])
