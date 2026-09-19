@@ -90,7 +90,23 @@ class SectoralFinancialPositionsOECDCounterpartProbeContractTests(unittest.TestC
             policy["workflow_present_on_default_branch_at_preregistration"]
         )
         self.assertTrue(policy["no_trigger_broadening_to_bypass_precondition"])
-        self.assertEqual(policy["scientific_effect_while_pending"], "NONE")
+        self.assertEqual(
+            policy["current_execution_state"],
+            "READY_FOR_MANUAL_DISPATCH_VIA_EXISTING_DEFAULT_BRANCH_WORKFLOW",
+        )
+        self.assertEqual(
+            policy["scientific_effect_while_pending"],
+            "NONE_UNTIL_A_RETAINED_MANUAL_RUN_RESULT_IS_REVIEWED",
+        )
+        bridge = policy["manual_dispatch_bridge"]
+        self.assertEqual(
+            bridge["workflow"],
+            ".github/workflows/scientific-ci.yml",
+        )
+        self.assertTrue(bridge["workflow_exists_on_default_branch"])
+        self.assertFalse(
+            bridge["automatic_pull_request_or_push_execution"]
+        )
 
 
 if __name__ == "__main__":
