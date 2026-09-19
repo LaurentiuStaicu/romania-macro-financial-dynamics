@@ -31,9 +31,22 @@ class FiscalPrimaryBalanceSourceBoundaryTests(unittest.TestCase):
         boundary = self.review["primary_balance_measurement_boundary"]
         self.assertEqual(
             boundary["current_status"],
-            "COMPONENTS_IDENTIFIED_BUT_MATCHED_PRIMARY_BALANCE_SERIES_NOT_YET_MATERIALISED",
+            "MATCHED_NSA_PC_GDP_MATERIALISATION_CONTRACT_FROZEN_"
+            "MANUAL_LIVE_RUN_PENDING",
         )
-        self.assertIn("do not add mismatched variants", boundary["blocker"])
+        self.assertEqual(
+            boundary["materialisation_contract"],
+            "model/calibration_validation/"
+            "fiscal_primary_balance_materialisation_contract.json",
+        )
+        contract = load(boundary["materialisation_contract"])
+        self.assertFalse(contract["estimation_authorized"])
+        self.assertTrue(
+            contract["hard_rules"]["live_provider_work_manual_only"]
+        )
+        self.assertFalse(
+            contract["result_effect"]["calibration_cycle_open"]
+        )
 
     def test_output_gap_cannot_be_relabelled_from_growth(self) -> None:
         output = self.review["output_gap_boundary"]
