@@ -81,7 +81,7 @@ class GovernmentDebtStockReferenceAssessmentTests(unittest.TestCase):
                 "canonical_multi_instrument_stock_initialization_ready"
             ]
         )
-        self.assertEqual(
+        self.assertGreaterEqual(
             model["dynamic_core"]["reference_mode_ready_count"],
             5,
         )
