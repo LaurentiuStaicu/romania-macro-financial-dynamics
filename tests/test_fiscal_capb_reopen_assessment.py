@@ -15,6 +15,8 @@ def load(path: str) -> dict:
 class FiscalCapbReopenAssessmentTests(unittest.TestCase):
     def setUp(self) -> None:
         self.a = load("model/registries/fiscal_capb_reopen_assessment_2026_09_19.json")
+        self.m = load("model/registries/model_contract.json")
+        self.s = load("model/calibration_validation/mechanism_source_readiness.json")
 
     def test_trigger_is_satisfied_but_scope_is_narrow(self) -> None:
         self.assertEqual(
@@ -41,6 +43,28 @@ class FiscalCapbReopenAssessmentTests(unittest.TestCase):
         self.assertFalse(decision["causal_claim_authorized"])
         self.assertFalse(decision["system_dynamics_feedback_activation_authorized"])
         self.assertFalse(decision["behavioural_closure_activation_authorized"])
+
+    def test_current_state_has_one_source_only_selective_task(self) -> None:
+        stage = self.m["scientific_stage"]
+        self.assertTrue(stage["selective_reopen_active"])
+        self.assertEqual(
+            stage["selective_reopen_mechanism"],
+            "fiscal_primary_balance_reaction",
+        )
+        self.assertEqual(
+            stage["active_autonomous_empirical_task"],
+            "FISCAL_PRIMARY_BALANCE_CAPB_REALTIME_VINTAGE_MATERIALISATION",
+        )
+        self.assertEqual(
+            stage["status"],
+            "STAGE_COMPLETE_EVIDENCE_TRIGGERED_BASELINE_HOLD",
+        )
+        self.assertFalse(self.s["global_state"]["active_calibration_cycle_open"])
+        fiscal = {
+            item["id"]: item for item in self.s["mechanisms"]
+        }["fiscal_primary_balance_reaction"]
+        self.assertEqual(fiscal["classification"], "DEFERRED")
+        self.assertFalse(fiscal["estimation_or_refit_allowed"])
 
     def test_exact_measurement_evidence_is_named(self) -> None:
         series = self.a["trigger_evidence"]["exact_series"]
