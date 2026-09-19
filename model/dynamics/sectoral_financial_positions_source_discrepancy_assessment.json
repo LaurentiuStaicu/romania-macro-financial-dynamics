@@ -1,0 +1,94 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Reference Mode Recovery — Sectoral Financial Positions / Phase D source-discrepancy localization",
+  "verdict": "DIAGNOSTIC_LOCALIZED_RESIDENT_SECTOR_ADDITIVITY_NO_PROMOTION",
+  "reference_mode": "sectoral_financial_positions",
+  "contract": "model/dynamics/sectoral_financial_positions_source_discrepancy_contract.json",
+  "prerequisite": "model/dynamics/sectoral_financial_positions_rounding_consistency_assessment.json",
+  "source_basis": {
+    "audit_script": "scripts/audit_ecb_sectoral_financial_positions_source_discrepancy.py",
+    "workflow_run_id": 35413897372,
+    "workflow_artifact_id": 10575515550,
+    "workflow_head_sha": "33598774889d6c1947c4a2c8f826499abd01050d",
+    "workflow_artifact_sha256": "5d7847d3428cd8fe9118e11acc9e5c6c00a74e10b536d9267ecaa17be6779e15",
+    "artifact_retention_until": "2026-12-18T01:50:43Z"
+  },
+  "source_result": {
+    "series_requested": 48,
+    "series_available": 40,
+    "series_http_error": 8,
+    "mandatory_missing_series_count": 0,
+    "decomposition_exact": true,
+    "common_observation_count": 49,
+    "first_common_period": "2014-Q1",
+    "last_common_period": "2026-Q1",
+    "all_required_2025_quarters_present": true
+  },
+  "localization": {
+    "stock": {
+      "max_absolute_resident_additivity_residual_million_RON": 0.15539062535390258,
+      "max_absolute_total_economy_external_residual_million_RON": 0.010000000591389835,
+      "phase_C_failing_periods": {
+        "2017-Q2": {
+          "resident_additivity": -0.08453124971129,
+          "total_economy_external": -2.9103830456733704e-10,
+          "dominant": "RESIDENT_SECTOR_ADDITIVITY"
+        },
+        "2021-Q3": {
+          "resident_additivity": -0.15539062535390258,
+          "total_economy_external": -0.00999999966006726,
+          "dominant": "RESIDENT_SECTOR_ADDITIVITY"
+        },
+        "2022-Q3": {
+          "resident_additivity": 0.11500000022351742,
+          "total_economy_external": 0,
+          "dominant": "RESIDENT_SECTOR_ADDITIVITY"
+        },
+        "2023-Q2": {
+          "resident_additivity": 0.08992187562398612,
+          "total_economy_external": -9.313225746154785e-10,
+          "dominant": "RESIDENT_SECTOR_ADDITIVITY"
+        },
+        "2024-Q1": {
+          "resident_additivity": -0.10851562465541065,
+          "total_economy_external": -0.01000000024214387,
+          "dominant": "RESIDENT_SECTOR_ADDITIVITY"
+        }
+      }
+    },
+    "flow": {
+      "max_absolute_resident_additivity_residual_million_RON": 0.03007817745219654,
+      "max_absolute_total_economy_external_residual_million_RON": 0.010000000020227162
+    }
+  },
+  "scientific_interpretation": [
+    "The Phase C stock discrepancy is not primarily an external-sector orientation problem. In every Phase C failing stock quarter, the dominant component is the difference between the sum of published resident-sector aggregates and the directly published total-economy S1 aggregate.",
+    "The direct total-economy versus rest-of-world relation is much tighter, with a maximum absolute stock discrepancy of approximately 0.01 million RON.",
+    "The decomposition is exact up to computational precision, so the localization is algebraic rather than interpretive.",
+    "Because the required reference mode is sectoral, direct S1 totals cannot replace the H/C/F/G/BNR histories without changing the scientific target after observing the result.",
+    "No residual may be allocated to a sector. The observed public-data inconsistency is retained as a source-boundary limitation."
+  ],
+  "closure_of_internal_recovery_path": {
+    "current_internal_paths_exhausted": [
+      "Phase A explicit F2-F8 component sum",
+      "Phase B exact total-F-minus-F1 aggregate identity",
+      "Phase C DECIMALS-derived publication-precision envelope",
+      "Phase D direct S1 source-discrepancy localization"
+    ],
+    "no_further_internal_reinterpretation_justified": true,
+    "reopen_only_when": [
+      "ECB/BNR publishes revised sector aggregates that satisfy the frozen consistency gates",
+      "a new official source provides a definitionally comparable sectoral F2-F8 history with internally consistent resident-sector aggregation",
+      "an independently justified future reference-mode contract changes the scientific target before inspecting candidate source outcomes"
+    ]
+  },
+  "disposition": {
+    "previous_status": "PARTIAL_SERIES_AVAILABLE",
+    "new_status": "PARTIAL_SERIES_AVAILABLE",
+    "readiness_count_change": 0,
+    "accounting_spine": "UNCHANGED",
+    "accounting_readiness": "UNCHANGED",
+    "behavioural_closure": "UNCHANGED_INACTIVE",
+    "further_internal_source_recovery": "FROZEN_UNTIL_REOPEN_TRIGGER"
+  }
+}
