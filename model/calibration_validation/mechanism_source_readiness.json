@@ -100,18 +100,20 @@
     {
       "id": "household_consumption_response",
       "classification": "CANDIDATE",
-      "source_readiness": "BIS_SECTORAL_DSR_UNAVAILABLE_BNR_DSTI_ALTERNATIVE_IDENTIFIED_HISTORY_NOT_RETAINED",
-      "next_admissible_action": "Enumerate and retain the exact official BNR household DSTI history, separating new-loan and outstanding-loan measures. Do not digitize charts and do not treat DSTI as the registered macro DSR without a separately preregistered candidate-family contract.",
+      "source_readiness": "BNR_DSTI_WORKBOOK_VINTAGE_RETAINED_LEGACY_XLS_EXTRACTION_NOT_CANONICAL",
+      "next_admissible_action": "Do not manually copy or chart-digitize DSTI values. Reopen household-consumption measurement only when a deterministic reviewed extraction path can identify the relevant BNR workbook sheet/range and preserve new-loan versus outstanding-loan semantics.",
       "blockers": [
-        "Romania is not among the 17 economies in the current BIS documentation with household/NFC sectoral DSR breakdowns.",
-        "BNR publishes household borrower/loan-portfolio DSTI, but the exact machine-readable historical series has not been retained.",
-        "BNR new-loan and outstanding-loan DSTI are definitionally distinct and neither may be selected after fit.",
+        "Seven exact official BNR BLS workbook files from 2023-2025 are retained with immutable hashes.",
+        "The workbooks are legacy OLE2 .xls files; no canonical deterministic value-extraction path has yet been admitted.",
+        "Borrower-level new-loan versus outstanding-loan DSTI must remain separate and neither is automatically equivalent to the registered macro household DSR.",
         "Household borrowing-rate family and consumption/income real/seasonal transformations remain unfrozen."
       ],
       "estimation_or_refit_allowed": false,
-      "priority_group": "RETAIN_BNR_DSTI_HISTORY_NO_ESTIMATION",
+      "priority_group": "DEFER_UNTIL_DETERMINISTIC_LEGACY_XLS_EXTRACTION_PATH",
       "source_boundary_review": "model/calibration_validation/household_consumption_source_boundary_review.json",
-      "debt_service_source_screening": "model/calibration_validation/debt_service_source_screening.json"
+      "debt_service_source_screening": "model/calibration_validation/debt_service_source_screening.json",
+      "retained_bnr_dsti_workbook_vintage": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19",
+      "bnr_dsti_promotion_review": "model/calibration_validation/bnr_household_dsti_workbook_promotion_review.json"
     },
     {
       "id": "corporate_investment_response",
@@ -213,9 +215,9 @@
   ],
   "priority_rule": "Priority is determined by the shortest scientifically admissible path to new independent evidence, not by a desire to activate a feedback loop. Waiting mechanisms remain frozen; source-incomplete mechanisms are not fit with proxies.",
   "current_next_step": {
-    "mechanism_id": "household_consumption_response",
-    "action": "ENUMERATE_AND_RETAIN_BNR_HOUSEHOLD_DSTI_HISTORY_NO_ESTIMATION",
-    "reason": "The BIS sectoral-DSR path is now closed for Romania, while BNR publishes a potentially useful observed household DSTI family. Retaining its exact history is the shortest admissible way to determine whether a new borrower-burden consumption candidate can be defined without synthetic debt-service construction.",
+    "mechanism_id": "aggregate_bank_credit_response",
+    "action": "RUN_PRUDENTIAL_COVERAGE_DIAGNOSTIC_NO_ESTIMATION",
+    "reason": "The household DSTI source bytes are now retained but canonical extraction is a tooling/measurement boundary. The bank-credit mechanism already has a preregistered ECB CBD2 prudential coverage diagnostic that can add independent source evidence without parsing BNR workbooks or fitting a credit equation.",
     "calibration_cycle_open": false
   },
   "coverage_rule": {
