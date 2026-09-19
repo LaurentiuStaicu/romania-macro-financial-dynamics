@@ -32,7 +32,7 @@
     "F8": "Aggregate-only rank boundary; zero unconditional unique bilateral cells."
   },
   "blocker": {
-    "reason": "The original holder-by-issuer boundary remains blocked by canonical Accounting Readiness. The preregistered aggregate recovery path A-D also remains negative: Phase A explicit F2-F8 aggregation failed on eight unavailable component series; historical Phase B exact F-minus-F1 aggregation resolved mandatory coverage and produced 45 common quarters but failed the frozen stock reconciliation gate; Phase C showed that five stock residuals also exceeded the ECB DECIMALS-derived rounding envelope; and Phase D localized those discrepancies primarily to resident-sector additivity versus direct S1 rather than to the S1-rest-of-world relation. A later post-run ESA F1 structural-zero refinement was tested exploratorily and failed by large reconciliation margins. A retained F1/F11/F12 diagnostic then showed why: published S12/S121 F1 liabilities are non-zero F12/SDR liabilities, so the exploratory resident-F1-liability zero rule is rejected. This does not reinterpret historical A-D; it instead restores confidence that the immutable Phase B source-required treatment must govern that evidence chain. The mode remains PARTIAL_SERIES_AVAILABLE and further internal source reinterpretation is frozen until a declared external reopen trigger.",
+    "reason": "The original holder-by-issuer boundary remains blocked by canonical Accounting Readiness. The preregistered aggregate recovery path A-D also remains negative: Phase A explicit F2-F8 aggregation failed on eight unavailable component series; historical Phase B exact F-minus-F1 aggregation resolved mandatory coverage and produced 45 common quarters but failed the frozen stock reconciliation gate; Phase C showed that five stock residuals also exceeded the ECB DECIMALS-derived rounding envelope; and Phase D localized those discrepancies primarily to resident-sector additivity versus direct S1 rather than to the S1-rest-of-world relation. A later post-run ESA F1 structural-zero refinement was tested exploratorily and failed by large reconciliation margins. A retained F1/F11/F12 diagnostic then showed why: published S12/S121 F1 liabilities are non-zero F12/SDR liabilities, so the exploratory resident-F1-liability zero rule is rejected. This does not reinterpret historical A-D; it instead restores confidence that the immutable Phase B source-required treatment must govern that evidence chain. The mode remains PARTIAL_SERIES_AVAILABLE and further internal source reinterpretation is frozen until a declared external reopen trigger. The separately preregistered post-run S1N diagnostic has now also been executed: all eight exact Romania QSA S1N F/F1 asset/liability stock/flow queries returned ECB HTTP 404 ('No Series was returned for the query'), with no network errors. The S1N coverage gate therefore failed and supplied NO_REOPEN_EVIDENCE_FROM_S1N. This result is retained as negative source evidence and changes neither historical A-D nor the 9/10 reference-mode readiness state.",
     "blocker_is_structural_identification_not_missing_value_imputation": true
   },
   "prohibited_shortcuts": [
@@ -55,7 +55,8 @@
     "phase_b": "SOURCE_COVERAGE_PASS_RECONCILIATION_FAIL_NO_PROMOTION",
     "exploratory_esa_f1_reaudit": "RECONCILIATION_FAIL_NO_PROMOTION",
     "exploratory_f1_semantics_diagnostic": "REJECTS_RESIDENT_F1_LIABILITY_ZERO_NO_PROMOTION",
-    "exploratory_f1_zero_refinement": "REJECTED_BY_PUBLISHED_QSA_SDR_LIABILITIES"
+    "exploratory_f1_zero_refinement": "REJECTED_BY_PUBLISHED_QSA_SDR_LIABILITIES",
+    "s1n_boundary_diagnostic": "EXECUTED_NEGATIVE_NO_REOPEN_EVIDENCE"
   },
   "boundary_review": "model/dynamics/sectoral_financial_positions_boundary_review.json",
   "strict_source_gate_contract": "model/dynamics/sectoral_financial_positions_reference_contract.json",
@@ -83,11 +84,15 @@
   "ecb_quality_context": "model/dynamics/sectoral_financial_positions_ecb_quality_context.json",
   "exploratory_esa_f1_semantics_diagnostic_assessment": "model/dynamics/sectoral_financial_positions_esa_f1_semantics_diagnostic_assessment.json",
   "post_run_s1n_boundary_diagnostic": {
-    "status": "PREREGISTERED_NOT_EXECUTED",
+    "status": "EXECUTED_NEGATIVE_NO_REOPEN_EVIDENCE",
     "contract": "model/dynamics/sectoral_financial_positions_s1n_boundary_diagnostic_contract.json",
+    "assessment": "model/dynamics/sectoral_financial_positions_s1n_boundary_diagnostic_assessment.json",
+    "retained_vintage": "data/source_vintages/sectoral-financial-positions-s1n-boundary-vintage-2026-09-19",
     "formal_reference_mode_gate": false,
+    "source_outcome": "8/8 exact requested S1N F/F1 stock/flow A/L series returned ECB HTTP 404; network_errors=0",
     "readiness_effect": 0,
     "historical_A_D_reinterpreted": false,
-    "rationale": "A post-run external framework review identified S1N (not sectorised) as an explicit sector-account presentation category, including in Eurostat financial-balance-sheet layouts. The diagnostic is frozen before inspecting Romania's candidate S1N F/F1 financial outcomes and can only determine whether a future formal boundary retest is justified."
+    "reopen_authorized": false,
+    "rationale": "The preregistered source-availability question has been answered negatively. S1N does not provide a published Romania QSA F/F1 boundary capable of explaining the frozen residuals, so no formal retest is opened."
   }
 }
