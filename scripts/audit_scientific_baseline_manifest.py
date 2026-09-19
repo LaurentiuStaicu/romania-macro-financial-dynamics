@@ -485,9 +485,14 @@ def main() -> None:
         readiness_state["all_reopen_conditions_registered"] is True,
         "Baseline must require reopen conditions for every mechanism",
     )
+    expected_reopen_governance_state = (
+        "DECLARED_TRIGGER_SATISFIED_SOURCE_GATE_ONLY_NO_ESTIMATION"
+        if state["scientific_stage"].get("selective_reopen_active", False)
+        else "DECLARED_TRIGGER_REQUIRED_NO_AUTOMATIC_ESTIMATION"
+    )
     check(
         readiness_state["reopen_governance_state"]
-        == "DECLARED_TRIGGER_REQUIRED_NO_AUTOMATIC_ESTIMATION",
+        == expected_reopen_governance_state,
         "Baseline reopen-governance state is stale",
     )
 
