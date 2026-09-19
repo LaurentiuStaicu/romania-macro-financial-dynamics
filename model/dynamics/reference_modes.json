@@ -116,11 +116,13 @@
     {
       "id": "sectoral_financial_positions",
       "status": "PARTIAL_SERIES_AVAILABLE",
-      "role": "Partial reference boundary for holder-by-issuer financial stocks and transactions by instrument; readiness is governed by the canonical Accounting Readiness Gate.",
+      "role": "Partial sectoral-financial-position reference boundary. The original holder-by-issuer multi-instrument state remains governed by Accounting Readiness; a narrower aggregate F2-F8 behaviour-over-time boundary is scientifically admissible in principle but failed its first strict exact-component source gate and remains unpromoted.",
       "source": "ECB QSA Accounting Spine and retained instrument-specific recovery artifacts; only F3 is canonically complete across stock and flow.",
       "time_resolution": "quarterly",
       "current_endogeneity": "ACCOUNTING_CORE",
-      "assessment": "model/dynamics/sectoral_financial_positions_reference_assessment.json"
+      "assessment": "model/dynamics/sectoral_financial_positions_reference_assessment.json",
+      "boundary_review": "model/dynamics/sectoral_financial_positions_boundary_review.json",
+      "strict_source_gate_assessment": "model/dynamics/sectoral_financial_positions_strict_gate_assessment.json"
     }
   ],
   "closure_rule": "Integrated behavioural closure may not be declared validated until the reference modes required by each active loop have explicit observed targets or a documented reason why only qualitative/reference-pattern validation is possible.",
