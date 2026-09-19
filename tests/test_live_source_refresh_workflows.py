@@ -17,6 +17,10 @@ class LiveSourceRefreshWorkflowTests(unittest.TestCase):
             ".github/workflows/f5-equity-subcomponent-bridge-audit.yml",
             ".github/workflows/f7-financial-derivatives-coverage-audit.yml",
             ".github/workflows/f8-other-accounts-coverage-audit.yml",
+            ".github/workflows/sectoral-financial-positions-reference-audit.yml",
+            ".github/workflows/sectoral-financial-positions-aggregate-identity-audit.yml",
+            ".github/workflows/sectoral-financial-positions-rounding-consistency-audit.yml",
+            ".github/workflows/sectoral-financial-positions-source-discrepancy-audit.yml",
         ]
         for relative in manual_only:
             text = (ROOT / relative).read_text(encoding="utf-8")
@@ -54,6 +58,10 @@ class LiveSourceRefreshWorkflowTests(unittest.TestCase):
             "audit_qsa_f5_equity_subcomponents.py",
             "audit_qsa_f7_financial_derivatives_coverage.py",
             "audit_qsa_f8_other_accounts_coverage.py",
+            "audit_ecb_sectoral_financial_positions_reference.py",
+            "audit_ecb_sectoral_financial_positions_aggregate_identity.py",
+            "audit_ecb_sectoral_financial_positions_rounding_consistency.py",
+            "audit_ecb_sectoral_financial_positions_source_discrepancy.py",
         ]
         for script in forbidden:
             self.assertNotIn(script, text)
