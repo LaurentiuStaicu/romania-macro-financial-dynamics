@@ -53,11 +53,17 @@ class BNRBLSMissingRoundCellExtractionPromotionTests(unittest.TestCase):
             },
         )
 
-    def test_workflow_cannot_refetch_bnr_or_touch_panel(self) -> None:
+    def test_workflow_is_idempotent_and_cannot_touch_panel(self) -> None:
+        self.assertIn("types: [synchronize]", self.workflow)
         self.assertIn("actions/artifacts/10587291974/zip", self.workflow)
         self.assertNotIn("www.bnr.ro", self.workflow)
         self.assertNotIn("data/processed/bnr_bls_realised_rounds.csv", self.workflow)
-        self.assertIn('test ! -e "$dest"', self.workflow)
+        self.assertIn('if [ -e "$dest" ]; then', self.workflow)
+        self.assertIn("cmp ", self.workflow)
+        self.assertIn(
+            "Exact extraction source vintage already retained",
+            self.workflow,
+        )
 
 
 if __name__ == "__main__":

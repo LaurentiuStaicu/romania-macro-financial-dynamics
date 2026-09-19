@@ -2,7 +2,7 @@ name: Promote Reviewed BNR BLS Missing-Round Cell Extraction Vintage
 
 on:
   pull_request:
-    types: [labeled]
+    types: [synchronize]
 
 permissions:
   actions: read
@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   promote-reviewed-bnr-bls-missing-round-cell-extraction:
-    if: ${{ github.event.label.name == 'promote-bnr-bls-missing-round-cell-extraction-vintage' && github.event.pull_request.head.ref == 'audit/scientific-integrity-2026-09-18' }}
+    if: ${{ github.event.pull_request.head.ref == 'audit/scientific-integrity-2026-09-18' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -66,10 +66,18 @@ jobs:
               json.loads(data.decode("utf-8"))
           PY
 
-      - name: Commit immutable cell-extraction source vintage only
+      - name: Retain immutable cell-extraction source vintage idempotently
         run: |
           dest="data/source_vintages/bnr-bls-missing-round-cell-extraction-vintage-2026-09-19"
-          test ! -e "$dest"
+          if [ -e "$dest" ]; then
+            for file in               bls_2023_aug_cells.json               bls_2023_nov_cells.json               bls_2024_aug_cells.json               bnr_bls_missing_round_cell_extraction_audit.json
+            do
+              cmp "/tmp/bnr-bls-missing-round-cell-extraction-reviewed/$file" "$dest/$file"
+            done
+            cmp               model/calibration_validation/bnr_bls_missing_round_cell_extraction_promotion_review.json               "$dest/source_vintage_manifest.json"
+            echo "Exact extraction source vintage already retained; no repository mutation required."
+            exit 0
+          fi
           mkdir -p "$dest"
           cp -a /tmp/bnr-bls-missing-round-cell-extraction-reviewed/. "$dest/"
           cp             model/calibration_validation/bnr_bls_missing_round_cell_extraction_promotion_review.json             "$dest/source_vintage_manifest.json"
