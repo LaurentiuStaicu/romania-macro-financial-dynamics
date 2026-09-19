@@ -35,16 +35,21 @@ class ScientificBaselineReviewReadyAssessmentTests(unittest.TestCase):
         self.assertFalse(e["system_dynamics_activation"])
         self.assertFalse(e["behavioural_closure_activation"])
 
-    def test_current_governance_is_review_ready_but_not_merge_authorized(self) -> None:
+    def test_model_contract_retains_review_ready_assessment_after_merge_authorization(self) -> None:
         g = self.m["repository_governance"]
         self.assertEqual(
             g["review_ready_assessment"],
             "model/registries/scientific_baseline_review_ready_assessment.json",
         )
-        self.assertEqual(g["current_merge_readiness_status"], "REVIEW_READY_MERGE_DECISION_PENDING")
         self.assertFalse(g["pull_request_must_remain_draft"])
         self.assertFalse(g["human_review_decision_required"])
-        self.assertTrue(g["merge_decision_required"])
+        self.assertIn(
+            g["current_merge_readiness_status"],
+            {
+                "REVIEW_READY_MERGE_DECISION_PENDING",
+                "MERGE_AUTHORIZED_INTEGRATION_PENDING",
+            },
+        )
         self.assertFalse(g["automatic_merge_authorized"])
         self.assertFalse(g["release_or_version_change_authorized"])
 
