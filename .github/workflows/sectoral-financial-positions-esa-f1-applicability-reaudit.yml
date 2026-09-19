@@ -1,6 +1,6 @@
 name: Sectoral Financial Positions ESA F1 Applicability Re-audit
 
-# Exploratory post-run evidence only. This workflow is manual-only and cannot
+# Exploratory post-run live refresh/re-audit only. This workflow is manual-only and cannot
 # change reference-mode readiness, historical A-D verdicts, Accounting Spine
 # readiness, or behavioural closure.
 on:
