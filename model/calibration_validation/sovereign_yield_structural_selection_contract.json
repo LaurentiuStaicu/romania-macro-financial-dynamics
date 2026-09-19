@@ -1,0 +1,169 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "mechanism_id": "sovereign_yield_spread_response",
+  "phase": "Sovereign Yield Response — Structural Selection Preregistration",
+  "purpose": "Preregister a parsimonious quarterly conditional-yield selection cycle before any coefficient estimation, using only the exact retained sovereign-yield source vintage. The cycle tests predictive incremental value of lagged fiscal state variables beyond persistence and common-market controls; it does not identify causal fiscal effects and does not activate a System Dynamics feedback loop.",
+  "prerequisite_source_vintage": {
+    "path": "data/source_vintages/sovereign-yield-quarterly-vintage-2026-09-19",
+    "promotion_review": "model/calibration_validation/sovereign_yield_source_vintage_promotion_review.json",
+    "rows": 84,
+    "first_period": "2005-Q2",
+    "last_period": "2026-Q1",
+    "normalized_csv_sha256": "670d604a5cfd1cc1d2c7e2d6cdc1425c0e076e4f641ce082e29d406ba95ccceb",
+    "exact_raw_reproducibility_required": true
+  },
+  "target": {
+    "column": "romania_10y_yield_pct",
+    "concept": "Romania 10-year long-term convergence yield in RON",
+    "unit": "percentage points",
+    "transformation": "level",
+    "spread_label": false,
+    "interpretation": "Yield level only. The Germany series is a common long-rate control; no RON-EUR differential is called a pure sovereign credit spread."
+  },
+  "information_timing": {
+    "common_market_controls": "Contemporaneous quarter t values are allowed for Germany 10Y and New CISS. Evaluation is therefore a conditional quarterly yield prediction/nowcast, not a real-time forecast made before quarter-t market information exists.",
+    "fiscal_controls": "Debt-to-GDP and B9-to-GDP enter only at t-1. Same-quarter fiscal observations are prohibited in the first cycle.",
+    "target_lag": "Romania yield t-1 is available to autoregressive baseline and candidate.",
+    "no_future_leakage": true
+  },
+  "domestic_policy_rate_decision": {
+    "included_in_first_cycle": false,
+    "reason": "The retained validation-recovery BIS policy-rate normalized series is reconciled, but its original historical raw transport payload is not exactly recoverable under the repository source-vintage contract. Adding it would break exact byte-level provenance for this new cycle.",
+    "reopen_rule": "A later independently preregistered cycle may add a domestic policy-rate control only after a definitionally matched exact raw source vintage is retained and a quarterly aggregation rule is frozen before fit."
+  },
+  "baseline_models": [
+    {
+      "id": "persistence",
+      "equation": "y_RO[t] = y_RO[t-1]",
+      "estimated_parameters": 0,
+      "role": "naive one-step benchmark"
+    },
+    {
+      "id": "common_market_ar",
+      "equation": "y_RO[t] = alpha + rho*y_RO[t-1] + beta_g*y_DE[t] + beta_s*CISS[t]",
+      "estimated_parameters": 4,
+      "role": "strong non-fiscal conditional benchmark using yield persistence, the common long-rate control and external financial stress"
+    }
+  ],
+  "candidate_models": [
+    {
+      "id": "fiscal_augmented_common_market_ar",
+      "equation": "y_RO[t] = alpha + rho*y_RO[t-1] + beta_g*y_DE[t] + beta_s*CISS[t] + beta_d*DebtGDP[t-1] + beta_b*B9GDP[t-1]",
+      "estimated_parameters": 6,
+      "fiscal_parameter_interpretation": {
+        "beta_d": "incremental association of prior-quarter Maastricht debt-to-GDP with the conditional Romania 10Y yield; expected non-negative",
+        "beta_b": "incremental association of prior-quarter B9 net lending (+)/net borrowing (-) with the conditional Romania 10Y yield; expected non-positive because more positive B9 is a stronger fiscal balance"
+      }
+    }
+  ],
+  "fitting_method": {
+    "estimator": "ordinary least squares",
+    "intercept": true,
+    "regularization": false,
+    "robust_or_hac_standard_errors": "diagnostic_only_not_selection_gate",
+    "p_values_used_for_model_selection": false,
+    "predictor_standardization_for_estimation": false,
+    "standardized_design_used_for_condition_number": true,
+    "missing_value_policy": "No imputation. A target quarter is evaluable only when every required current and lagged input is finite.",
+    "no_model_averaging": true,
+    "no_post_fit_variable_dropping": true
+  },
+  "windows": {
+    "first_lagged_usable_target": "2005-Q3",
+    "initial_calibration": "2005-Q3..2016-Q4",
+    "structural_selection": "2017-Q1..2022-Q4",
+    "final_evaluation": "2023-Q1..2026-Q1",
+    "structural_selection_method": "Expanding-origin one-step conditional predictions. At each target quarter, fit each estimable model using only earlier target quarters; quarter-t Germany yield and CISS may enter the prediction because this is a conditional nowcast.",
+    "final_evaluation_open_rule": "Open final-evaluation model performance only if the fiscal-augmented candidate passes every structural-selection and identifiability gate. If it fails, final-evaluation performance remains unopened and cannot rescue the form.",
+    "no_respecification_after_selection": true
+  },
+  "identifiability_gates": {
+    "minimum_training_observations_per_origin": 40,
+    "full_column_rank_required": true,
+    "all_non_intercept_predictors_must_have_positive_variance": true,
+    "standardized_design_condition_number_max": 30,
+    "finite_coefficients_required": true,
+    "fiscal_sign_consistency_fraction_min": 0.75,
+    "nuisance_parameter_domains": {
+      "rho": [
+        0,
+        1.2
+      ],
+      "beta_g": [
+        0,
+        2.5
+      ],
+      "beta_s": [
+        0,
+        null
+      ]
+    },
+    "fiscal_parameter_domains": {
+      "beta_d": [
+        0,
+        null
+      ],
+      "beta_b": [
+        null,
+        0
+      ]
+    },
+    "parameter_domain_consistency_fraction_min": 0.75,
+    "rule": "Failure of rank, condition-number or domain consistency is an identification failure. Do not rescue the candidate with ridge/lasso, variable deletion, lag search or sign flipping inside this cycle."
+  },
+  "structural_selection_gates": {
+    "minimum_evaluable_origins": 20,
+    "candidate_rmse_improvement_vs_persistence_fraction_min": 0.05,
+    "candidate_rmse_improvement_vs_common_market_ar_fraction_min": 0.03,
+    "candidate_mae_may_not_exceed_best_baseline_by_more_than_fraction": 0.02,
+    "candidate_absolute_bias_max_percentage_points": 0.5,
+    "both_fiscal_parameters_must_satisfy_sign_consistency_gate": true,
+    "rule": "The fiscal-augmented candidate passes only if every identifiability and predictive gate passes. Improvement over persistence alone is insufficient; incremental value over the non-fiscal common-market AR baseline is mandatory."
+  },
+  "final_evaluation_gates_if_opened": {
+    "minimum_observations": 12,
+    "candidate_rmse_improvement_vs_common_market_ar_fraction_min": 0.01,
+    "candidate_mae_may_not_exceed_common_market_ar_by_more_than_fraction": 0.02,
+    "candidate_absolute_bias_max_percentage_points": 0.5,
+    "parameter_refit_policy": "At each final-evaluation origin, refit the frozen model form only on data strictly earlier than that target quarter; no form, lag, variable or gate may change.",
+    "sensitivity": "For the final origin fit, perturb each free coefficient independently by ±10%; no perturbation may more than double final-evaluation RMSE relative to the unperturbed frozen-form path.",
+    "causal_claim_allowed": false
+  },
+  "robustness_diagnostics_not_selection_criteria": {
+    "report_residual_autocorrelation": true,
+    "report_hac_standard_errors": true,
+    "report_coefficient_path_across_origins": true,
+    "report_predictions_by_subperiod": [
+      "2017-Q1..2019-Q4",
+      "2020-Q1..2022-Q4",
+      "2023-Q1..2026-Q1 if opened"
+    ],
+    "report_influence_diagnostics": true,
+    "note": "Diagnostics may motivate a future separately preregistered cycle but may not respecify this one."
+  },
+  "hard_rules": {
+    "no_alternative_lag_search": true,
+    "no_same_quarter_fiscal_controls": true,
+    "no_extra_predictors_after_fit": true,
+    "no_policy_rate_added_inside_cycle": true,
+    "no_spread_relabeling": true,
+    "no_sign_flip_of_b9_source": true,
+    "no_missing_value_imputation": true,
+    "no_regularization_rescue": true,
+    "no_holdout_peeking_before_selection_pass": true,
+    "no_causal_fiscal_claim": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "verdict_rules": {
+    "PASS_TO_FINAL_EVALUATION": "All structural-selection and identifiability gates pass; the frozen fiscal-augmented form may be evaluated on the final window.",
+    "FAIL_BEFORE_HOLDOUT": "Any required structural-selection or identifiability gate fails; final holdout stays unopened.",
+    "CANDIDATE_AFTER_FINAL_EVALUATION": "The frozen form passes final predictive gates but remains a non-causal candidate; separate validation and SD activation gates are still required.",
+    "REJECT_TESTED_FORM": "The frozen fiscal-augmented form fails decisively on permitted evaluation. This rejects this form, not the possibility that sovereign yields respond to fiscal conditions under another separately preregistered specification."
+  },
+  "estimation_authorization": {
+    "authorized_by_this_contract": false,
+    "next_gate": "Implement an offline selection runner that exactly enforces this frozen contract, add tests, and only then explicitly open a bounded structural-selection execution. Contract creation itself must not estimate coefficients."
+  }
+}
