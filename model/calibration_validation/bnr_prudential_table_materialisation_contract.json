@@ -1,5 +1,5 @@
 {
-  "contract_version": "0.1",
+  "contract_version": "0.2",
   "frozen_on": "2026-09-19",
   "mechanism_id": "aggregate_bank_credit_response",
   "phase": "BNR Prudential Table Source Enumeration and Materialisation Preregistration",
@@ -74,13 +74,22 @@
   "source_enumeration_rules": {
     "enumerate_exact_official_pdf_urls_before_value_extraction": true,
     "one_selected_source_per_target_quarter": true,
-    "selection_precedence": "For each target quarter select the latest official BNR Monthly Bulletin, as of the frozen source-enumeration date, that explicitly reports that quarter and still exposes the target table. Selection is based only on publication/revision precedence and source semantics, never on numerical fit.",
+    "selection_precedence": "For each calendar year Y, first try the official BNR January Y+1 Monthly Bulletin as the single source for all four quarter-end observations of Y, provided it explicitly reports the full Jan-Dec Y monthly table and target semantics. If that source is unavailable or lacks the required table, use the fixed fallback order December Y, then February Y+1. A fallback may be used only for documented source/layout absence, never because of numerical values.",
     "retain_discarded_candidates_and_reason": true,
     "no_url_pattern_generation": true,
     "no_directory_bruteforce": true,
     "no_value_peeking_during_source_selection": true,
     "minimum_required_quarter_coverage": 45,
-    "incomplete_enumeration_effect": "BLOCK_MATERIALISATION_NO_MODEL_EFFECT"
+    "incomplete_enumeration_effect": "BLOCK_MATERIALISATION_NO_MODEL_EFFECT",
+    "year_level_source_selection": true,
+    "primary_publication_rule": "January Y+1 Monthly Bulletin for year Y",
+    "fixed_fallback_order": [
+      "December Y Monthly Bulletin",
+      "February Y+1 Monthly Bulletin"
+    ],
+    "no_quarter_specific_source_cherry_picking": true,
+    "fallback_requires_documented_non_value_reason": true,
+    "freeze_year_source_map_before_numeric_extraction": true
   },
   "byte_retention_rules": {
     "retain_exact_pdf_bytes": true,
