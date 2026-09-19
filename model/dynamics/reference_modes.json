@@ -58,11 +58,13 @@
     },
     {
       "id": "government_interest_burden",
-      "status": "SOURCE_IDENTIFIED_NOT_MATERIALIZED",
-      "role": "Reference mode for the interest-cost leg of government feedback.",
-      "source": "Eurostat/ECB government accounts and Ministry of Finance candidate sources; exact concept reconciliation pending",
-      "time_resolution": "quarterly_or_annual_TBD",
-      "current_endogeneity": "UNRESOLVED"
+      "status": "OBSERVED_SERIES_AVAILABLE",
+      "role": "Observed quarterly ESA general-government interest-expenditure reference mode for the interest-cost leg of government dynamics; it is not an effective interest rate, marginal yield, cash-interest measure, or refinancing-share estimate.",
+      "source": "Eurostat gov_10q_ggnfa, Romania S13 D41PAY, NSA; retained MIO_NAC and PC_GDP source snapshot with immutable audit provenance.",
+      "time_resolution": "quarterly",
+      "current_endogeneity": "OBSERVED_TARGET",
+      "assessment": "model/dynamics/government_interest_burden_reference_assessment.json",
+      "retained_snapshot": "model/dynamics/government_interest_burden_reference_snapshot.json"
     },
     {
       "id": "government_refinancing_need",
