@@ -102,4 +102,4 @@
     "reason": "The primary yield, benchmark and stress series are identified; debt-to-GDP is already retained; the quarterly B9 source is official and conceptually fixed. This path has the fewest unresolved source-semantics dependencies among mechanisms not waiting on future events.",
     "calibration_cycle_open": false
   }
-}\n
+}
