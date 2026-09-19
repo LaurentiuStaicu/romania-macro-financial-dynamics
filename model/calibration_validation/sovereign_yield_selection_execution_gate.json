@@ -9,7 +9,7 @@
   "runner": "scripts/run_sovereign_yield_structural_selection.py",
   "runner_ci_verified_commit": "6b3b67b52e53f2fc4515cbb08d4331a959fabb72",
   "authorized_scope": "STRUCTURAL_SELECTION_2017_Q1_TO_2022_Q4_ONLY",
-  "selection_execution_authorized": true,
+  "selection_execution_authorized": false,
   "final_evaluation_authorized": false,
   "refit_or_respecification_authorized": false,
   "added_predictors_authorized": false,
@@ -17,5 +17,9 @@
   "causal_claim_authorized": false,
   "system_dynamics_activation_authorized": false,
   "behavioural_closure_change_authorized": false,
-  "rule": "This gate authorizes one bounded execution of the already frozen structural-selection contract only. It does not authorize reading final-evaluation performance, changing model form, activating the feedback loop, or interpreting fiscal coefficients causally."
+  "rule": "This gate authorizes one bounded execution of the already frozen structural-selection contract only. It does not authorize reading final-evaluation performance, changing model form, activating the feedback loop, or interpreting fiscal coefficients causally.",
+  "selection_execution_consumed": true,
+  "execution_result": "model/calibration_validation/sovereign_yield_structural_selection_result.json",
+  "execution_result_commit": "a3e49aa",
+  "closure_rule": "The authorized structural-selection execution has been consumed. Re-execution, overwrite, final-evaluation access, refit and respecification remain unauthorized."
 }
