@@ -35,7 +35,7 @@ class ReferenceModeRecoveryTerminalAssessmentTests(unittest.TestCase):
         self.assertEqual(blocker["status"], "PARTIAL_SERIES_AVAILABLE")
         self.assertEqual(
             blocker["current_public_source_completion_status"],
-            "EUROSTAT_INSTRUMENT_SCOPE_FAIL_OECD_S121_SCOPE_FAIL_BNR_ANNUAL_FREQUENCY_TRANSACTION_HISTORY_FAIL",
+            "EUROSTAT_INSTRUMENT_SCOPE_FAIL_OECD_S121_SCOPE_FAIL_BNR_ANNUAL_FREQUENCY_TRANSACTION_HISTORY_FAIL_BNR_QUARTERLY_S13_SECTOR_COUNTERPART_CONSOLIDATION_FAIL",
         )
         mode = next(x for x in self.refs["modes"] if x["id"] == "sectoral_financial_positions")
         self.assertEqual(mode["reference_mode_recovery_stage_status"], self.t["status"])
@@ -57,6 +57,10 @@ class ReferenceModeRecoveryTerminalAssessmentTests(unittest.TestCase):
         self.assertEqual(
             results["BNR_NATIONAL_FINANCIAL_ACCOUNTS"],
             "ANNUAL_COUNTERPART_STOCK_SEMANTICS_PASS_QUARTERLY_STOCK_TRANSACTION_HISTORY_FAIL",
+        )
+        self.assertEqual(
+            results["BNR_QUARTERLY_S13_FINANCIAL_ACCOUNTS"],
+            "QUARTERLY_FREQUENCY_AND_SEQUENCE_PASS_SECTOR_COUNTERPART_CONSOLIDATION_FAIL",
         )
 
     def test_stage_completion_does_not_relax_scientific_boundary(self):
