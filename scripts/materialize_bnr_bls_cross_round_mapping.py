@@ -51,19 +51,36 @@ def legacy_row(contract: dict, source: dict) -> dict:
     _,companies=choose_sheet(loaded["sheets"],contract["sheet_name_aliases"]["companies"])
     _,households=choose_sheet(loaded["sheets"],contract["sheet_name_aliases"]["households"])
 
-    round_company=companies.get(contract["date_rule"]["legacy_round_date_cell"])
-    round_household=households.get(contract["date_rule"]["legacy_round_date_cell"])
-    if round_company != round_household:
-        raise ValueError(f"sheet round-date mismatch: {round_company!r} vs {round_household!r}")
-    quarter=quarter_from_date(str(round_company))
+    date_rule=contract["date_rule"]
+    round_company=companies.get(date_rule["legacy_round_date_cell"])
+    if not isinstance(round_company,str) or not round_company.strip():
+        raise ValueError(
+            f"{source['source_id']} missing authoritative companies-sheet "
+            f"round date at {date_rule['legacy_round_date_cell']}"
+        )
+    quarter=quarter_from_date(round_company.strip())
+
+    household_header_diagnostics={
+        coord:households.get(coord)
+        for coord in date_rule["household_header_diagnostic_cells"]
+    }
 
     row={
         "quarter":quarter,
-        "reference_date":str(round_company),
+        "reference_date":round_company.strip(),
         "source_id":source["source_id"],
         "source_kind":"legacy_xls_full_cell_extraction",
     }
-    validation={}
+    validation={
+        "round_date_authority":{
+            "sheet":date_rule["legacy_round_date_authoritative_sheet"],
+            "cell":date_rule["legacy_round_date_cell"],
+            "value":round_company.strip(),
+            "household_header_diagnostics":household_header_diagnostics,
+            "household_header_date_consistency_required":
+                date_rule["household_header_date_consistency_required"],
+        }
+    }
     for obs in contract["realised_observables"]:
         cellmap=companies if obs["question_id"].startswith("C") else households
         if cellmap.get(obs["question_cell"]) != obs["question_id"]:
