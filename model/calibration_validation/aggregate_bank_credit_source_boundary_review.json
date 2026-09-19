@@ -97,7 +97,7 @@
     "accounting_spine": "UNCHANGED"
   },
   "bls_machine_readable_source_catalog": {
-    "status": "PARTIAL_RAW_ARCHIVE_RETAINED_LEGACY_XLS_EXTRACTION_PENDING_XLSX_BRIDGE_AVAILABLE",
+    "status": "CANONICAL_11_OF_12_EXACT_REALIZED_ROUNDS_RETAINED_SINGLE_GAP_2025_Q2",
     "discovery_date": "2026-09-19",
     "files": [
       {
@@ -149,8 +149,8 @@
       }
     ],
     "provider_access_observation": "GitHub Actions successfully retrieved seven exact official BNR BLS workbooks from 2023-2025 as valid OLE2 XLS files; the prior web-layer Request Rejected behavior was an access-path limitation, not missing files.",
-    "historical_coverage_claimed": false,
-    "next_required_step": "Reopen BLS history only if official multi-round machine-readable XLSX data are found or a deterministic reviewed legacy-XLS extraction path becomes available. Do not guess archive URLs, manually transcribe XLS files or digitise charts.",
+    "historical_coverage_claimed": true,
+    "next_required_step": "Recover only the exact official 2025-Q2 workbook endpoint/bytes under the frozen recovery chain if an independent official clue appears. Do not infer archive URLs or substitute publication-rounded values. Separately materialise a population-matched BNR prudential history before any credit-response structural-selection contract.",
     "retained_raw_vintage": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19",
     "may_2025_xlsx_bridge": {
       "status": "EXACT_TWO_XLSX_WORKBOOKS_RETAINED_AND_LAYOUT_REVIEWED",
@@ -168,10 +168,18 @@
       },
       "interpretation": "The XLSX round demonstrates deterministic supply/demand semantics and sector separation but contains only one survey round. It is not a historical BLS time series.",
       "dsti_limit": "P0303/P1103 are lending-term change questions about maximum debt-service-to-income, not levels of borrower DSTI."
-    }
+    },
+    "historical_coverage_complete": false,
+    "canonical_panel": "data/processed/bnr_bls_realised_rounds.csv",
+    "canonical_observed_round_count": 11,
+    "canonical_expected_round_count": 12,
+    "canonical_missing_rounds": [
+      "2025-Q2"
+    ],
+    "canonical_promotion_review": "model/calibration_validation/bnr_bls_canonical_panel_promotion_review.json"
   },
   "external_prudential_source_screening": {
-    "status": "CANDIDATE_MACHINE_READABLE_CONTROLS_IDENTIFIED_SEMANTIC_ALIGNMENT_PENDING",
+    "status": "QUARTERLY_CBD2_SERIES_RETAINED_DIRECT_BNR_POPULATION_SUBSTITUTION_REJECTED",
     "sources": {
       "cet1_quarterly_domestic_banks": {
         "institution": "ECB / ESCB",
@@ -225,10 +233,17 @@
       "Any future switch from total capital ratio to CET1 requires a preregistered source/variable contract before model outcomes are inspected.",
       "Prefer a confirmed quarterly Romania solvency-ratio series over substituting CET1 only if its exact CBD2 tuple, coverage and population are retained before model fit."
     ],
-    "calibration_effect": "NONE"
+    "calibration_effect": "NONE_DIRECT_SUBSTITUTION_REJECTED",
+    "population_boundary_decision": {
+      "direct_cbd2_to_bnr_equivalence": false,
+      "basis": "BNR Romanian-legal-entity-bank population is not the same control/consolidation population as CBD2 sector 11 domestic banking groups and stand-alone banks.",
+      "review": "model/calibration_validation/bank_credit_prudential_population_boundary_review.json",
+      "numeric_similarity_can_bridge": false,
+      "future_preferred_source": "Exact BNR-population statistical-table history or another officially documented matched population."
+    }
   },
   "prudential_coverage_diagnostic": {
-    "status": "EXECUTED_SUCCESS_SOURCE_VINTAGE_RETAINED_BOUNDARY_BRIDGE_PENDING",
+    "status": "EXECUTED_SUCCESS_CBD2_VINTAGE_RETAINED_DIRECT_BNR_SUBSTITUTION_REJECTED",
     "contract": "model/calibration_validation/bank_credit_prudential_coverage_contract.json",
     "promotion_review": "model/calibration_validation/bank_credit_prudential_coverage_promotion_review.json",
     "retained_vintage": "data/source_vintages/bank-credit-prudential-coverage-vintage-2026-09-19",
@@ -240,6 +255,8 @@
       "cet1_ratio": true
     },
     "coverage": "All three exact Romania CBD2 series contain 46 quarterly observations from 2014-Q4 through 2026-Q1.",
-    "conclusion": "The solvency availability question is resolved positively. Population/consolidation alignment with BNR remains unresolved, and CET1 does not automatically substitute for solvency."
-  }
+    "conclusion": "Quarterly CBD2 NPL/solvency/CET1 availability is confirmed, but official population definitions reject direct substitution for the BNR Romanian-legal-entity-bank anchor. The next defensible source path is exact BNR-population table materialisation or a genuinely matched official source.",
+    "population_boundary_review": "model/calibration_validation/bank_credit_prudential_population_boundary_review.json"
+  },
+  "prudential_population_boundary_review": "model/calibration_validation/bank_credit_prudential_population_boundary_review.json"
 }
