@@ -36,6 +36,15 @@ class CorporateInvestmentSourceBoundaryTests(unittest.TestCase):
         )
 
         self.assertEqual(
+            sources["nfc_investment_grants"]["series_key"],
+            "QSA.Q.N.RO.W0.S11.S1.N.C.D92._Z._Z._Z.XDC._T.S.V.N._T",
+        )
+        self.assertIn(
+            "not an automatic replacement",
+            sources["nfc_investment_grants"]["role"],
+        )
+
+        self.assertEqual(
             sources["nfc_gfcf"]["series_key"],
             "QSA.Q.N.RO.W0.S11.S1.N.D.P51G._Z._Z._Z.XDC._T.S.V.N._T",
         )
@@ -69,8 +78,14 @@ class CorporateInvestmentSourceBoundaryTests(unittest.TestCase):
         self.assertTrue(eu["no_difference_of_cumulative_payments_as_investment"])
         self.assertEqual(
             eu["current_status"],
-            "EU_FUND_IMPULSE_NOT_DEFINITIONALLY_MATERIALISED",
+            "EU_SPECIFIC_IMPULSE_UNRESOLVED_BUT_EXACT_S11_D92_INVESTMENT_GRANTS_AVAILABLE",
         )
+        alternative = eu["observed_sector_consistent_alternative"]
+        self.assertEqual(
+            alternative["status"],
+            "EXACT_SOURCE_AVAILABLE_BUT_ORIGIN_NOT_EU_IDENTIFIED",
+        )
+        self.assertIn("does not identify the payer", alternative["limitation"])
         prohibited = " ".join(self.review["prohibited_shortcuts"]).lower()
         self.assertIn("cumulative eu programme payments", prohibited)
         self.assertIn("heterogeneous rrf", prohibited)

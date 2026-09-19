@@ -94,13 +94,13 @@
     {
       "id": "corporate_investment_response",
       "classification": "CANDIDATE",
-      "source_readiness": "NFC_GFCF_AND_NFC_RATE_CONFIRMED_EU_IMPULSE_DEMAND_AND_TRANSFORMATIONS_BLOCKED",
-      "next_admissible_action": "Retain/materialize the exact Romania S11 GFCF vintage, then resolve the EU-fund accounting bridge, demand observable and gI/real-rate transformations under preregistered contracts; do not estimate the current equation.",
+      "source_readiness": "NFC_GFCF_RATE_AND_D92_GRANTS_CONFIRMED_EU_SPECIFIC_IMPULSE_DEMAND_AND_TRANSFORMS_BLOCKED",
+      "next_admissible_action": "Retain/materialize S11 GFCF and S11 D92 investment-grant vintages, then preregister whether a renamed investment-grants-support candidate family is scientifically preferable to the unresolved EU-specific term; freeze demand and transformations before any fit.",
       "blockers": [
-        "Exact Romania S11 quarterly GFCF is confirmed in QSA and the NFC new-business lending rate is exact and available.",
-        "Cohesion/RRF payment data do not directly measure quarterly realised NFC fixed investment and no EU-fund accounting bridge is frozen.",
+        "Exact Romania S11 quarterly GFCF, S11 D92 investment grants and the NFC new-business lending rate are source-identified.",
+        "D92 does not isolate EU-origin grants and may not keep the EU_fund_impulse label without an origin bridge.",
         "Demand observable is not preregistered.",
-        "The exact S11 source is nominal/non-seasonally-adjusted while the registered gI transformation, seasonal treatment, monthly-to-quarterly rate aggregation and real-rate deflator are not frozen."
+        "The S11 target and D92 source are nominal/non-seasonally-adjusted while gI, seasonal treatment, rate aggregation and real-rate deflator remain unfrozen."
       ],
       "estimation_or_refit_allowed": false,
       "priority_group": "SOURCE_BOUNDARY_BLOCKED_NO_ESTIMATION",
