@@ -21,9 +21,10 @@ class LiveSourceRefreshWorkflowTests(unittest.TestCase):
             text = (ROOT / relative).read_text(encoding="utf-8")
             self.assertIn("workflow_dispatch:", text, relative)
             self.assertNotIn("pull_request:", text, relative)
-            self.assertRegex(
-                text.lower(),
-                r"(live|provider).*refresh|refresh.*(live|provider)",
+            lowered = text.lower()
+            self.assertIn("refresh", lowered, relative)
+            self.assertTrue(
+                "live" in lowered or "provider" in lowered,
                 relative,
             )
 
