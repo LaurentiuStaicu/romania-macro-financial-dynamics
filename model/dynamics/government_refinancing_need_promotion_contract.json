@@ -1,0 +1,82 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "phase": "Reference Mode Recovery — Government Refinancing Need / Historical Continuity Promotion Gate",
+  "purpose": "Determine whether the Ministry of Finance government-debt refinancing/principal-repayment reference target can be promoted from a short partial annual history to an observed behaviour-over-time series without mixing forecasts, gross financing need, maturity/refixing proxies or repricing parameters.",
+  "target": {
+    "id": "government_refinancing_need",
+    "concept": "Annual Ministry of Finance principal repayments/refinancing of government public debt on the national-law debt-management boundary.",
+    "unit": "billion_RON",
+    "frequency": "annual",
+    "excludes": [
+      "budget deficit",
+      "gross financing need as a combined measure",
+      "temporary/liquidity-management financing maturing in the year of issuance",
+      "debt maturing within one year as a proxy",
+      "refixing share as a proxy",
+      "matched repricing parameter m[t]"
+    ]
+  },
+  "promotion_criteria": {
+    "minimum_consecutive_completed_calendar_years": 10,
+    "rationale_for_minimum": "Match or exceed the already accepted annual government_effective_interest_rate reference history, which contains ten annual observations for 2014-2023. The requirement is about behaviour-over-time observability, not parameter identification.",
+    "no_forecast_or_planned_observations": true,
+    "every_observation_requires_official_MoF_source": true,
+    "every_observation_requires_explicit_status": true,
+    "continuous_years_no_gap": true,
+    "definition_bridge_must_pass": true,
+    "revision_precedence_must_be_applied": true,
+    "no_value_selected_to_improve_model_fit": true
+  },
+  "accepted_observation_statuses": [
+    "FINAL_ANNUAL_REPORT",
+    "RETROSPECTIVE_MONTHLY_REPORT_COMPLETED_YEAR",
+    "OPERATIVE_EXECUTION_COMPLETED_YEAR",
+    "YEAR_END_UPDATED_EXECUTION"
+  ],
+  "source_precedence": [
+    "FINAL_ANNUAL_REPORT",
+    "RETROSPECTIVE_MONTHLY_REPORT_COMPLETED_YEAR",
+    "YEAR_END_UPDATED_EXECUTION",
+    "OPERATIVE_EXECUTION_COMPLETED_YEAR"
+  ],
+  "revision_rule": "When multiple official Ministry values exist for the same completed year and concept, retain the highest-precedence later observed/reconciled status. Forecast, planned and estimate values never override an observed completed-year value. Record discarded candidates in provenance rather than silently replacing them.",
+  "definition_bridge": {
+    "canonical_interpretation": "Principal/capital repayments and refinancing of government securities on account of government public debt under national legislation, on the stated Ministry debt-management boundary.",
+    "accepted_wording_variants": [
+      "Refinancing of the government public debt",
+      "Refinancing of Government Public Debt",
+      "Principal repayments"
+    ],
+    "bridge_requirement": "The source table/footnote must make clear that the amount is the debt-refinancing/principal-repayment component of annual financing needs, distinct from the budget deficit and from any separately reported pre-financing.",
+    "prohibited_bridge": "Do not treat total financing needs/gross financing need, issuance, maturity shares or pre-financing as the refinancing observation."
+  },
+  "candidate_window": {
+    "first_year": 2013,
+    "last_year": 2024,
+    "expected_consecutive_years": 12,
+    "note": "Candidate documents were discovered before repository materialization. This contract freezes selection, precedence and promotion rules before any extended series is committed or the reference registry is promoted."
+  },
+  "validation_checks": [
+    "all years 2013-2024 present exactly once",
+    "all numeric values finite and positive",
+    "all statuses belong to accepted_observation_statuses",
+    "zero forecast/planned/estimate rows in canonical series",
+    "source URLs point to official Ministry of Finance documents",
+    "2015 observed retrospective value must override the earlier 50.0 estimate",
+    "2016 observed retrospective value must override the earlier 48.6 plan",
+    "2024 value must come from a completed-year/year-end updated report rather than the November in-year plan",
+    "mechanism status remains DEFERRED and repricing parameter m[t] remains unidentified"
+  ],
+  "promotion_effect": {
+    "if_all_criteria_pass": "Set government_refinancing_need to OBSERVED_SERIES_AVAILABLE as an annual behaviour-over-time reference target.",
+    "does_not_imply": [
+      "government refinancing/effective-rate mechanism validation",
+      "repricing-share identification",
+      "behavioural closure activation",
+      "causal identification",
+      "sectoral Accounting Spine completion"
+    ]
+  },
+  "failure_rule": "If continuity, source status, definition bridge or precedence fails, retain PARTIAL_SERIES_AVAILABLE and do not fill or infer the missing year."
+}

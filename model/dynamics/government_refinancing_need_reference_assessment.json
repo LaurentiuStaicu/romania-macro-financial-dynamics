@@ -1,0 +1,89 @@
+{
+  "assessment_version": "0.2",
+  "phase": "Reference Mode Recovery — Government Refinancing Need",
+  "verdict": "OBSERVED_SERIES_AVAILABLE_AFTER_HISTORICAL_CONTINUITY_GATE",
+  "reference_mode": "government_refinancing_need",
+  "promotion_contract": "model/dynamics/government_refinancing_need_promotion_contract.json",
+  "promotion_assessment": "model/dynamics/government_refinancing_need_promotion_assessment.json",
+  "retained_series": "data/processed/government_debt_refinancing_mof_2013_2024.csv",
+  "provenance": "data/provenance/government_debt_refinancing_mof_2013_2024.json",
+  "current_observed_series": {
+    "concept": "Annual Ministry of Finance government-debt principal repayments/refinancing component, billion RON",
+    "first_period": "2013",
+    "last_period": "2024",
+    "observation_count": 12,
+    "consecutive_completed_years": 12,
+    "forecast_or_planned_observations": 0
+  },
+  "resolved_blocker": {
+    "prior_reason": "The previous 2017-2023 history contained only seven annual observations with mixed FINAL/OPERATIVE status and lacked a frozen sufficiency/revision rule.",
+    "resolution": "A frozen historical-continuity promotion contract now governs selection and revisions. Official MoF sources provide twelve consecutive completed-year observations for 2013-2024, all with accepted observed/retrospective execution statuses, while estimates/plans are explicitly retained only as discarded provenance candidates.",
+    "definition_bridge": "PASS",
+    "revision_precedence": "PASS",
+    "behaviour_over_time_observability": "PASS"
+  },
+  "semantic_limits": [
+    "The series is the refinancing/principal-repayment component, not gross financing need.",
+    "Separately reported pre-financing is excluded.",
+    "The series does not identify matched old/new interest rates.",
+    "The series does not identify the repricing share m[t].",
+    "Observed refinancing need does not validate the government refinancing/effective-rate mechanism."
+  ],
+  "historical_evidence": {
+    "prior_partial_series": "data/processed/government_debt_refinancing_mof_2017_2023.csv",
+    "prior_partial_provenance": "data/provenance/government_debt_refinancing_mof_2017_2023.json",
+    "external_source_screening": "model/dynamics/government_refinancing_need_external_source_screening.json",
+    "prior_observed_evidence": {
+      "ministry_risk_snapshots": "data/processed/government_debt_risk_snapshots_mof_2023_2024.csv",
+      "repricing_assessment": "model/calibration_validation/government_repricing_ledger_assessment.json",
+      "official_gross_financing_need_definition": {
+        "source": "European Commission Debt Sustainability Monitor 2024/2025",
+        "concept": "Gross financing needs are a flow/liquidity concept combining the government deficit, debt redemptions and stock-flow adjustments; they are not the realized principal actually refinanced or contractually refixed."
+      },
+      "ministry_financing_need_example": {
+        "source": "Romania Ministry of Finance Government Debt Management Strategy 2024-2026, Table 8",
+        "periods": {
+          "2023_operative_execution": {
+            "budget_deficit_bn_RON": 90.6,
+            "government_debt_refinancing_bn_RON": 95.8,
+            "gross_financing_need_bn_RON": 186.4
+          },
+          "2024_forecast": {
+            "budget_deficit_bn_RON": 85.9,
+            "government_debt_refinancing_bn_RON": 94.6,
+            "gross_financing_need_bn_RON": 180.5
+          },
+          "2025_forecast": {
+            "budget_deficit_bn_RON": 89.9,
+            "government_debt_refinancing_bn_RON": 71.3,
+            "gross_financing_need_bn_RON": 161.2
+          },
+          "2026_forecast": {
+            "budget_deficit_bn_RON": 85.6,
+            "government_debt_refinancing_bn_RON": 71.9,
+            "gross_financing_need_bn_RON": 157.5
+          }
+        },
+        "definition_limit": "The Ministry table mixes operative execution with forecasts. Its refinancing component is defined from principal repayments and government-security refinancing on the stated national-law debt boundary; it does not identify matched realized repricing events or the model transition share m[t]."
+      }
+    },
+    "prohibited_shortcuts": [
+      "treat gross financing need as realized principal refinanced",
+      "treat debt maturing within one year as debt actually repriced",
+      "treat debt refixing within one year as realized refinancing",
+      "mix operative-execution and forecast vintages as one observed historical series without a preregistered revision rule",
+      "use issuance size as the principal replacing a specific maturity",
+      "infer the government repricing parameter m[t] from aggregate financing needs"
+    ]
+  },
+  "disposition": {
+    "previous_status": "PARTIAL_SERIES_AVAILABLE",
+    "status": "OBSERVED_SERIES_AVAILABLE",
+    "readiness_count_change": 1,
+    "government_refinancing_effective_rate_mechanism": "UNCHANGED_DEFERRED",
+    "government_repricing_share_identified": false,
+    "behavioural_closure": "UNCHANGED_INACTIVE",
+    "validated_reference_behavioural_mechanisms": 0,
+    "accounting_readiness": "UNCHANGED"
+  }
+}

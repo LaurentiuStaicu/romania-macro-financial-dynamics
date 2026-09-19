@@ -1,0 +1,89 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Reference Mode Recovery — Sectoral Financial Positions / Phase C source-precision reconciliation",
+  "verdict": "SOURCE_PRECISION_GATE_FAILED_NO_PROMOTION",
+  "reference_mode": "sectoral_financial_positions",
+  "contract": "model/dynamics/sectoral_financial_positions_rounding_consistency_contract.json",
+  "prerequisite": "model/dynamics/sectoral_financial_positions_aggregate_identity_assessment.json",
+  "source_basis": {
+    "audit_script": "scripts/audit_ecb_sectoral_financial_positions_rounding_consistency.py",
+    "workflow_run_id": 35413741918,
+    "workflow_artifact_id": 10575485319,
+    "workflow_head_sha": "78f4fbe26ba2127a50f7cab54cfee54303c51bda",
+    "workflow_artifact_sha256": "8403b0860d54d4ef6e60315a7aa3ab184095311ccb00882b84b433d7cf253c68",
+    "artifact_retention_until": "2026-12-18T01:47:44Z"
+  },
+  "source_result": {
+    "series_requested": 48,
+    "series_available": 40,
+    "series_http_error": 8,
+    "mandatory_missing_series_count": 0,
+    "invalid_precision_series_count": 0,
+    "structural_H_C_F1_checks_pass": true,
+    "precision_metadata_complete": true
+  },
+  "coverage": {
+    "stock_common_observation_count": 45,
+    "flow_common_observation_count": 45,
+    "first_common_period": "2015-Q1",
+    "last_common_period": "2026-Q1",
+    "all_required_2025_quarters_present": true
+  },
+  "precision_gate": {
+    "metadata_attribute": "DECIMALS",
+    "unique_source_series_in_system_identity": 16,
+    "rounding_envelope_million_RON": 0.08,
+    "stock": {
+      "pass": false,
+      "max_absolute_residual_million_RON": 0.16539062504307367,
+      "failing_periods": {
+        "2017-Q2": {
+          "residual": -0.08453125003143214,
+          "excess_beyond_envelope": 0.004531250031432135
+        },
+        "2021-Q3": {
+          "residual": -0.16539062504307367,
+          "excess_beyond_envelope": 0.08539062504307367
+        },
+        "2022-Q3": {
+          "residual": 0.1150000001071021,
+          "excess_beyond_envelope": 0.035000000107102094
+        },
+        "2023-Q2": {
+          "residual": 0.08992187469266355,
+          "excess_beyond_envelope": 0.009921874692663549
+        },
+        "2024-Q1": {
+          "residual": -0.1185156247811392,
+          "excess_beyond_envelope": 0.03851562478113919
+        }
+      }
+    },
+    "flow": {
+      "pass": true,
+      "max_absolute_residual_million_RON": 0.020312500442514647,
+      "failing_periods": {}
+    }
+  },
+  "scientific_interpretation": [
+    "Phase C did not relax the Phase B fixed tolerance. It independently derived an admissible rounding envelope from ECB DECIMALS metadata.",
+    "All precision metadata required by the preregistered gate were present and valid.",
+    "The 0.08 million RON metadata-derived envelope fully contains every financial-transaction residual but does not contain five stock residuals.",
+    "Therefore the remaining stock discrepancy cannot be attributed solely to the published decimal precision under the preregistered rounding model.",
+    "This is a valid negative source-consistency result. It does not justify residual allocation, a wider post-hoc tolerance, or reference-mode promotion."
+  ],
+  "next_justified_path": {
+    "type": "DIAGNOSTIC_ONLY",
+    "purpose": "Localize the stock discrepancy between resident-sector additivity and the direct total-economy/rest-of-world identity using published S1 aggregate series.",
+    "promotion_effect": "NONE",
+    "reason": "A direct total-economy diagnostic can identify which official aggregation relation carries the discrepancy, but may not replace or residual-balance the six required sector series."
+  },
+  "disposition": {
+    "previous_status": "PARTIAL_SERIES_AVAILABLE",
+    "new_status": "PARTIAL_SERIES_AVAILABLE",
+    "readiness_count_change": 0,
+    "accounting_spine": "UNCHANGED",
+    "accounting_readiness": "UNCHANGED",
+    "behavioural_closure": "UNCHANGED_INACTIVE"
+  }
+}

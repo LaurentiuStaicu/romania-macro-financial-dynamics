@@ -1,0 +1,139 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "phase": "Prospective Monetary Confirmation — Household Housing Lending Pass-Through",
+  "purpose": "Prospectively confirm or fail to confirm the already frozen household-housing delta-policy candidate using only future policy-rate events and subsequently published MIR observations, without refitting, respecifying, peeking at reserved response values, or treating elapsed time/non-event months as identifying evidence.",
+  "inherited_freeze": {
+    "selection_freeze": "model/calibration_validation/validation_recovery_selection_freeze.json",
+    "final_holdout": "model/calibration_validation/validation_recovery_holdout.json",
+    "target": "household_housing",
+    "candidate": "delta_policy_contemporaneous",
+    "equation": "lend[t] = lend[t-1] + beta * (policy[t]-policy[t-1])",
+    "frozen_beta": 0.49746478873239447,
+    "frozen_beta_source": "validation_recovery_holdout.json",
+    "candidate_form_may_change": false,
+    "beta_may_change": false,
+    "baseline": "persistence",
+    "causal_claim_allowed": false
+  },
+  "prospective_data_boundary": {
+    "reserved_response_series": "ECB MIR.M.RO.B.A2C.A.R.A.2250.RON.N",
+    "reserved_from": "2026-08",
+    "policy_driver": "BNR monetary-policy rate",
+    "policy_event_definition": "A non-zero change in the BNR policy rate decided by the NBR Board and effective within a calendar month.",
+    "identifying_month_definition": "A calendar month in the reserved window for which policy[t]-policy[t-1] is non-zero.",
+    "non_event_months": "May be retained for chronology and state continuity but provide zero model-vs-persistence discrimination for the frozen delta-policy form and therefore do not count toward the formal identifying-event minimum.",
+    "response_mapping": "For a policy change in month t, the contemporaneous candidate is evaluated against the MIR household-housing observation for the same calendar month t, using the prior month lending rate and the frozen beta.",
+    "no_response_peeking_before_event": true,
+    "no_response_peeking_before_official_release": true
+  },
+  "current_schedule_evidence": {
+    "last_observed_decision": {
+      "date": "2026-08-10",
+      "policy_rate_pct": 6.5,
+      "decision": "UNCHANGED",
+      "source_url": "https://agerpres.ro/economic/2026/08/10/update-banca-centrala-a-mentinut-dobanda-cheie-la-6-50-pe-an--1583696"
+    },
+    "next_policy_meeting": {
+      "date": "2026-10-08",
+      "source_url": "https://bsky.app/profile/bnr.ro/post/3msq2oyu2sv2b"
+    },
+    "ECB_MIR_release_calendar": {
+      "source_url": "https://www.ecb.europa.eu/press/calendars/statscal/mfm/html/stprmf.en.html",
+      "scheduled_releases": [
+        {
+          "reference_period": "2026-08",
+          "release_date": "2026-10-01"
+        },
+        {
+          "reference_period": "2026-09",
+          "release_date": "2026-11-02"
+        },
+        {
+          "reference_period": "2026-10",
+          "release_date": "2026-12-02"
+        },
+        {
+          "reference_period": "2026-11",
+          "release_date": "2027-01-06"
+        },
+        {
+          "reference_period": "2026-12",
+          "release_date": "2027-02-04"
+        }
+      ],
+      "rule": "The calendar controls when a response month may first be inspected; an early or delayed provider publication must be recorded explicitly rather than silently changing the gate."
+    }
+  },
+  "staged_evaluation": {
+    "stage_0_wait_for_event": {
+      "status": "LOCKED",
+      "condition": "No non-zero BNR policy-rate event has occurred in the reserved prospective window.",
+      "allowed_actions": [
+        "check policy decisions and publication calendars",
+        "record event/no-event status",
+        "verify that frozen model artifacts are unchanged"
+      ],
+      "prohibited_actions": [
+        "inspect reserved MIR response values",
+        "refit beta",
+        "change model form",
+        "open NFC holdout",
+        "claim confirmation from non-event months"
+      ]
+    },
+    "stage_1_first_event_diagnostic": {
+      "trigger": "First non-zero policy-rate event in the reserved prospective window and official publication of the same-month MIR response.",
+      "response_access": "Open only the event-month MIR response and the minimum prior-month value needed to compute the frozen one-step prediction if that prior-month value was not already legitimately observed.",
+      "outputs": [
+        "frozen-candidate prediction",
+        "persistence prediction",
+        "candidate absolute error",
+        "persistence absolute error",
+        "signed error",
+        "event size"
+      ],
+      "status_effect": "DIAGNOSTIC_ONLY_NO_VALIDATION",
+      "rule": "One event can falsify bookkeeping or reveal gross misspecification but cannot validate the mechanism."
+    },
+    "stage_2_accumulate_events": {
+      "rule": "Repeat the frozen first-event procedure for each later non-zero policy-rate event. Do not refit or change candidate/baseline definitions.",
+      "non_event_months_count_toward_identifying_minimum": false
+    },
+    "stage_3_formal_confirmation": {
+      "minimum_distinct_nonzero_policy_event_months": 4,
+      "minimum_cumulative_absolute_policy_change_pp": 1,
+      "event_conditioned_evaluation": true,
+      "metrics": [
+        "RMSE on identifying event months",
+        "MAE on identifying event months",
+        "bias actual-minus-predicted on identifying event months",
+        "RMSE improvement versus persistence on identifying event months",
+        "plus/minus 10 percent frozen-beta sensitivity on identifying event months"
+      ],
+      "gates": {
+        "minimum_event_count": true,
+        "minimum_cumulative_absolute_policy_change": true,
+        "candidate_rmse_improvement_vs_persistence_fraction": 0.05,
+        "candidate_mae_may_not_exceed_persistence_by_more_than_fraction": 0.02,
+        "candidate_absolute_bias_max_percentage_points": 0.5,
+        "sensitivity_rule": "±10% perturbation of frozen beta must not more than double event-conditioned RMSE relative to the unperturbed frozen candidate."
+      },
+      "pass_rule": "Every formal-confirmation gate must pass. Passing supports prospective predictive confirmation within the tested household-housing monthly boundary; it does not establish causal identification and does not by itself activate behavioural closure.",
+      "fail_rule": "Failure leaves the current form unvalidated. Any respecification or refit requires a new preregistered validation cycle and may not reuse the failed confirmation observations as an independent holdout."
+    }
+  },
+  "hard_rules": {
+    "response_values_reserved_from_2026_08_may_not_influence_contract": true,
+    "do_not_backfill_or_impute_missing_MIR": true,
+    "do_not_change_frozen_beta": true,
+    "do_not_change_selected_candidate": true,
+    "do_not_add_controls_or_lags": true,
+    "do_not_open_NFC_holdout": true,
+    "do_not_treat_market_expectations_as_policy_events": true,
+    "do_not_count_unchanged_rate_meetings_as_identifying_events": true,
+    "do_not_count_non_event_months_toward_event_minimum": true,
+    "do_not_claim_causality": true,
+    "do_not_activate_behavioural_closure_from_confirmation_alone": true
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Reference Mode Recovery — Government Refinancing Need / Historical Continuity Promotion Gate",
+  "reference_mode": "government_refinancing_need",
+  "contract": "model/dynamics/government_refinancing_need_promotion_contract.json",
+  "retained_series": "data/processed/government_debt_refinancing_mof_2013_2024.csv",
+  "provenance": "data/provenance/government_debt_refinancing_mof_2013_2024.json",
+  "checks": {
+    "consecutive_completed_years": {
+      "required_minimum": 10,
+      "observed": 12,
+      "first_year": 2013,
+      "last_year": 2024,
+      "pass": true
+    },
+    "continuous_no_gap": true,
+    "official_MoF_source_for_every_observation": true,
+    "forecast_or_planned_observations_in_canonical_series": 0,
+    "observation_status_explicit_for_every_year": true,
+    "definition_bridge": "PASS",
+    "revision_precedence": "PASS",
+    "discarded_candidate_history_retained": true,
+    "no_model_fit_selection": true
+  },
+  "precedence_examples": {
+    "2015": {
+      "discarded_estimate_bn_RON": 50,
+      "retained_observed_bn_RON": 53.0256,
+      "rule": "Retrospective completed-year observation overrides estimate."
+    },
+    "2016": {
+      "discarded_plan_bn_RON": 48.6,
+      "retained_observed_bn_RON": 50.8751,
+      "rule": "Retrospective completed-year observation overrides plan."
+    },
+    "2023": {
+      "discarded_lower_precedence_operative_bn_RON": 95.8,
+      "retained_retrospective_bn_RON": 95.8347,
+      "rule": "Retrospective completed-year report overrides lower-precedence operative execution."
+    },
+    "2024": {
+      "discarded_november_in_year_plan_bn_RON": 95.2221,
+      "retained_december_31_bn_RON": 95.6546,
+      "rule": "Year-end updated execution overrides in-year revised plan."
+    }
+  },
+  "semantic_boundary": {
+    "retained_concept": "Annual Ministry government-debt principal repayments/refinancing component.",
+    "not_gross_financing_need": true,
+    "not_prefinancing": true,
+    "not_maturity_share": true,
+    "not_refixing_share": true,
+    "not_repricing_parameter": true
+  },
+  "verdict": "PROMOTE_TO_OBSERVED_SERIES_AVAILABLE",
+  "scientific_interpretation": [
+    "The prior blocker was a seven-observation low-frequency history with mixed FINAL and OPERATIVE statuses and no preregistered revision/sufficiency rule.",
+    "The frozen promotion contract now supplies a source-precedence and revision rule before canonical materialization/promotion, and the materialized history contains twelve consecutive completed annual observations from 2013 through 2024.",
+    "All retained values are official Ministry observations or retrospective/year-end execution values; no forecast, plan or estimate is present in the canonical series.",
+    "The annual history is sufficient as a behaviour-over-time reference target. This does not identify the government repricing share m[t] and does not validate the refinancing/effective-rate behavioural mechanism."
+  ],
+  "disposition": {
+    "previous_status": "PARTIAL_SERIES_AVAILABLE",
+    "new_status": "OBSERVED_SERIES_AVAILABLE",
+    "readiness_count_change": 1,
+    "government_refinancing_effective_rate_mechanism": "UNCHANGED_DEFERRED",
+    "behavioural_closure": "UNCHANGED_INACTIVE",
+    "validated_reference_behavioural_mechanisms": 0,
+    "accounting_readiness": "UNCHANGED"
+  }
+}

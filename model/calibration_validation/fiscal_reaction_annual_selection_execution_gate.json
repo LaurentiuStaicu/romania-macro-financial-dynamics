@@ -1,0 +1,25 @@
+{
+  "gate_version": "0.1",
+  "authorized_on": "2026-09-19",
+  "mechanism_id": "fiscal_primary_balance_reaction",
+  "contract": "model/calibration_validation/fiscal_reaction_annual_structural_selection_contract.json",
+  "source_csv_sha256": "4d6ab4c737ffb50d48d4866539e6f069b03bc90945bc7a645ac4bd7f88ef2193",
+  "selection_execution_authorized": false,
+  "selection_execution_consumed": true,
+  "authorized_scope": "STRUCTURAL_SELECTION_2010_TO_2017_ONLY",
+  "final_evaluation_authorized": false,
+  "authorized_output": "model/calibration_validation/fiscal_reaction_annual_structural_selection_result.json",
+  "authorization_basis": "Exact actual-only AMECO source vintage retained; annual measurement boundary frozen; parsimonious lagged-state candidate preregistered; guarded offline runner passed Scientific CI without estimation.",
+  "hard_rules": {
+    "single_write_result": true,
+    "no_final_evaluation": true,
+    "no_respecification": true,
+    "no_target_or_lag_search": true,
+    "no_regime_coefficients": true,
+    "no_causal_claim": true,
+    "no_debt_sustainability_claim": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "consumed_by_result": "model/calibration_validation/fiscal_reaction_annual_structural_selection_result.json"
+}

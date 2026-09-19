@@ -1,0 +1,94 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "fiscal_primary_balance_reaction",
+  "purpose": "Separate observability of Romania's fiscal accounting components from identification of a stable primary-balance reaction function.",
+  "verdict": "FISCAL_ACCOUNTING_INPUTS_LARGELY_OBSERVED_REACTION_FUNCTION_DEFERRED_BY_OUTPUT_GAP_REGIME_AND_TIMING",
+  "current_registry_form": "Delta primary_balance = f(debt_gap, output_gap, institutional/fiscal-package regime)",
+  "observed_fiscal_inputs": {
+    "government_debt_to_gdp": {
+      "source": "model/dynamics/government_debt_stock_reference_snapshot.json",
+      "dataset": "Eurostat gov_10q_ggdebt",
+      "series": "PC_GDP",
+      "status": "RETAINED_QUARTERLY_OBSERVED_SERIES",
+      "coverage": "2000-Q1 through 2026-Q1 in the retained snapshot"
+    },
+    "interest_expenditure": {
+      "source": "model/dynamics/government_interest_burden_reference_snapshot.json",
+      "dataset": "Eurostat gov_10q_ggnfa",
+      "na_item": "D41PAY",
+      "retained_units": [
+        "MIO_NAC",
+        "PC_GDP"
+      ],
+      "adjustment": "NSA",
+      "status": "RETAINED_QUARTERLY_OBSERVED_SERIES",
+      "coverage": "2000-Q1 through 2026-Q1 in the retained snapshot"
+    },
+    "net_lending_borrowing": {
+      "institution": "Eurostat / ECB Data Portal",
+      "dataset": "QSA / gov_10q_ggnfa",
+      "example_exact_key": "QSA.Q.Y.RO.W0.S13.S1._Z.B.B9._Z._Z._Z.XDC._T.S.V.N._T",
+      "concept": "General-government net lending (+) / net borrowing (-), Romania, quarterly",
+      "adjustment": "calendar and seasonally adjusted for the exact example key",
+      "status": "EXACT_SOURCE_AVAILABLE_NOT_YET_RETAINED_AS_PRIMARY_BALANCE_INPUT",
+      "semantic_note": "B9 equals revenue minus expenditure and therefore includes interest expenditure."
+    }
+  },
+  "primary_balance_measurement_boundary": {
+    "accounting_identity": "primary_balance = net_lending_borrowing + interest_expenditure, when both components share a compatible accounting/unit/seasonal boundary and interest expenditure is expressed as a positive use.",
+    "current_status": "EXACT_MATCHED_NSA_PC_GDP_SOURCE_VINTAGE_RETAINED",
+    "blocker": "Resolved for source observability: the exact matched Eurostat B9 and D41PAY NSA/PC_GDP vintage is retained for 2000-Q1..2026-Q1. Fiscal-reaction estimation remains blocked by debt-gap, output-gap and ex-ante regime measurement.",
+    "admissible_next_step": "Separately preregister the debt-gap reference, output-gap measurement source/model and dated fiscal/institutional regime coding before any structural-selection estimation. Do not infer gaps or break dates from model fit.",
+    "no_cash_budget_substitution": true,
+    "materialisation_contract": "model/calibration_validation/fiscal_primary_balance_materialisation_contract.json",
+    "materialiser_script": "scripts/audit_fiscal_primary_balance_materialisation.py",
+    "materialiser_workflow": ".github/workflows/fiscal-primary-balance-materialisation.yml",
+    "retained_source_vintage": "data/source_vintages/fiscal-primary-balance-quarterly-vintage-2026-09-19",
+    "promotion_review": "model/calibration_validation/fiscal_primary_balance_source_vintage_promotion_review.json"
+  },
+  "output_gap_boundary": {
+    "registered_concept": "output_gap",
+    "status": "ANNUAL_AMECO_EUCAM_SOURCE_VINTAGE_RETAINED_MODEL_BASED_MEASURE",
+    "source_variable": "AVGDGP",
+    "retained_source_vintage": "data/source_vintages/fiscal-reaction-ameco-actual-vintage-2026-09-19",
+    "coverage": "1995-2024 actual-only",
+    "rule": "Use the retained annual AMECO/EUCAM output-gap estimate only on the annual reaction boundary. Do not interpolate it to quarters, relabel GDP growth, or treat the latent/model-based estimate as directly observed potential output.",
+    "implication": "The source measurement is now frozen, but coefficient identification still requires a separately preregistered annual candidate family and must acknowledge output-gap measurement uncertainty."
+  },
+  "regime_boundary": {
+    "status": "EX_ANTE_TIMELINE_FROZEN_COEFFICIENTS_NOT_AUTHORIZED",
+    "annual_measurement_boundary": "model/calibration_validation/fiscal_reaction_annual_measurement_boundary_review.json",
+    "rule": "The EDP, general-escape-clause and post-2024 governance dates are retained as ex-ante institutional evidence, but separate regime coefficients are not authorized in the first short annual cycle because of overlap and weak identification."
+  },
+  "source_admissibility": {
+    "registered_full_form_admissible": false,
+    "reasons": [
+      "The exact matched quarterly primary-balance vintage remains retained as accounting evidence, but quarterly reaction estimation is rejected because the official frozen output gap is annual.",
+      "A source-consistent AMECO annual actual-only vintage for UBLGI, AVGDGP and UDGG is now retained for 1995-2024.",
+      "The former fixed debt-gap concept is rejected; the annual boundary permits lagged debt-to-GDP level only in a separately preregistered candidate family.",
+      "Regime dates are frozen ex ante but separate regime coefficients are not currently authorized."
+    ],
+    "simple_taylor_style_rule_automatically_authorized": false,
+    "rule": "Source completion does not authorize a fiscal reaction equation. The target transformation, timing, baseline, windows and identifiability gates must be preregistered before any fit."
+  },
+  "prohibited_shortcuts": [
+    "Add seasonally adjusted B9 to non-seasonally adjusted D41PAY.",
+    "Treat observed debt-to-GDP as a debt gap without a target/reference definition.",
+    "Use GDP growth as output gap by relabelling.",
+    "Estimate break dates from the same residuals used to fit the fiscal reaction and call the breaks exogenous regimes.",
+    "Ignore discretionary fiscal packages or EDP/institutional changes to obtain a stable coefficient.",
+    "Activate the government refinancing-interest loop from a fiscal regression."
+  ],
+  "disposition": {
+    "mechanism_classification": "DEFERRED",
+    "source_readiness": "ANNUAL_AMECO_ACTUAL_SOURCE_VINTAGE_RETAINED_STRUCTURAL_SELECTION_PREREGISTRATION_PENDING",
+    "active_calibration_cycle_open": false,
+    "estimation_or_refit_allowed": false,
+    "central_feedback": false,
+    "validated_reference_behavioural_mechanisms_change": 0,
+    "behavioural_closure": "UNCHANGED_INACTIVE"
+  },
+  "annual_reaction_boundary": "model/calibration_validation/fiscal_reaction_annual_measurement_boundary_review.json",
+  "retained_annual_source_vintage": "data/source_vintages/fiscal-reaction-ameco-actual-vintage-2026-09-19"
+}

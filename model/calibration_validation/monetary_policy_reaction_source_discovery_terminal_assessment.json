@@ -1,0 +1,97 @@
+{
+  "assessment_version": "0.1",
+  "assessed_on": "2026-09-19",
+  "mechanism_id": "monetary_policy_reaction_function",
+  "stage": "Monetary Policy Reaction Function — Formation-Time Expectations and Real-Time Gap Source Discovery",
+  "status": "STAGE_CLOSED_FROZEN_UNDER_CURRENT_PUBLIC_DISCOVERY_SURFACE_NO_MODEL_EFFECT",
+  "scope": "Close the current public-source discovery stage for the two measurement prerequisites that remain necessary before a Romanian monetary-policy reaction-function cycle can be preregistered: quantitative financial-analyst inflation expectations indexed by survey formation date, and quarterly BNR GDP-gap vintages indexed by the information set available to policymakers. This closure does not claim that provider-side data do not exist.",
+  "source_screening": "model/calibration_validation/monetary_policy_reaction_source_screening.json",
+  "prerequisite_state": {
+    "observed_policy_rate": true,
+    "exact_inflation_target_midpoint": true,
+    "actual_inflation_series_available": true,
+    "quantitative_private_expectations_concept_confirmed": true,
+    "quarterly_bnr_gdp_gap_concept_confirmed": true,
+    "formation_time_expectations_history_retained": false,
+    "real_time_gap_vintages_retained": false,
+    "estimation_or_refit_allowed": false
+  },
+  "official_evidence": [
+    {
+      "url": "https://www.bnr.ro/files/d/Pubs_ro/Caiete/2015cs39.pdf",
+      "finding": "BNR research displays quantitative 1-year and 2-year financial-analyst inflation expectations and explicitly notes that the series is shifted on the chart to the horizon to which it refers. Chart coordinates therefore cannot be treated as survey formation dates."
+    },
+    {
+      "url": "https://www.bnr.ro/files/d/Pubs_ro/RapInflatie/2024/RaI%20mai%202024.pdf",
+      "finding": "BNR Inflation Reports publish and discuss the quarterly GDP gap as a model-based policy-information variable, confirming the concept but not supplying a reproducible machine-readable real-time vintage history in the audited public search surface."
+    },
+    {
+      "url": "https://www.bnr.ro/1074-baza-de-date-interactiva",
+      "finding": "BNR exposes an official interactive statistical database. In the audited crawl/search surface no stable series identifier or export was identified for the financial-analyst formation-time expectations history or the quarterly real-time GDP-gap vintages required by this mechanism."
+    }
+  ],
+  "discovery_channels": [
+    {
+      "id": "bnr_analyst_expectations_machine_readable_discovery",
+      "result": "CONCEPT_CONFIRMED_MACHINE_READABLE_FORMATION_DATE_HISTORY_NOT_IDENTIFIED",
+      "finding": "Targeted BNR searches for the bank/financial-analyst survey, 1-year and 2-year quantitative inflation expectations, and XLS/XLSX/CSV exports found publications and chart evidence but no reproducible machine-readable history carrying survey formation dates."
+    },
+    {
+      "id": "bnr_gdp_gap_vintage_machine_readable_discovery",
+      "result": "REPORT_VINTAGE_CONCEPT_CONFIRMED_MACHINE_READABLE_REAL_TIME_HISTORY_NOT_IDENTIFIED",
+      "finding": "Targeted BNR searches confirm repeated quarterly GDP-gap discussion in Inflation Reports but did not identify a stable XLS/XLSX/CSV/API history retaining per-vintage values with report information cutoffs."
+    },
+    {
+      "id": "bnr_interactive_database_discovery",
+      "result": "OFFICIAL_DATABASE_CONFIRMED_TARGET_SERIES_IDENTIFIERS_NOT_IDENTIFIED",
+      "finding": "The official interactive database is confirmed, but the current public crawl/search representation does not expose stable target series identifiers for either required measurement family."
+    }
+  ],
+  "exhaustion_assessment": {
+    "current_public_discovery_surface_exhausted_for_identifying_required_machine_readable_histories": true,
+    "provider_side_data_absence_claimed": false,
+    "same_query_repetition_authorized": false,
+    "chart_digitisation_authorized": false,
+    "target_horizon_coordinate_as_formation_date_authorized": false,
+    "later_revised_gap_backfill_authorized": false,
+    "internal_endpoint_guessing_authorized": false,
+    "undocumented_private_dataset_substitution_authorized": false,
+    "reason": "The audited public paths confirm both economic concepts but not the reproducible time-indexed histories required for a real-time policy-information design. Repeating the same indexed publication/file/database queries cannot establish formation-date mapping or vintage identity without new provider-side evidence."
+  },
+  "terminal_disposition": {
+    "active_source_discovery_task_remains": false,
+    "expectations_path_status": "FROZEN_UNTIL_MACHINE_READABLE_FORMATION_DATE_HISTORY_OR_EQUIVALENT_OFFICIAL_MAPPING",
+    "gdp_gap_path_status": "FROZEN_UNTIL_MACHINE_READABLE_REAL_TIME_VINTAGE_HISTORY_OR_EQUIVALENT_OFFICIAL_MAPPING",
+    "parameter_estimation_authorized": false,
+    "model_selection_authorized": false,
+    "lag_selection_authorized": false,
+    "holdout_opening_authorized": false,
+    "policy_rule_activation": false,
+    "observed_policy_rate_remains_exogenous": true,
+    "system_dynamics_activation": false,
+    "behavioural_closure_change": false
+  },
+  "reopen_triggers": [
+    "BNR publishes or exposes a machine-readable quantitative financial-analyst inflation-expectations history indexed by survey formation date, or an official reproducible mapping from stored observations to formation dates.",
+    "BNR publishes or exposes machine-readable quarterly GDP-gap vintages with report/decision information cutoffs and revision timing sufficient to reconstruct the information set available at each policy decision.",
+    "BNR exposes stable API/export/series identifiers in its statistical database for either required history together with the necessary time semantics.",
+    "An official BNR archive or publication data annex supplies the required values and time mapping reproducibly without chart digitisation."
+  ],
+  "non_reopen_conditions": [
+    "Repeating the same indexed web queries without a new official clue.",
+    "Digitising analyst-expectations or GDP-gap charts.",
+    "Treating a target-horizon-shifted chart coordinate as the survey formation date.",
+    "Backfilling a later revised GDP-gap path into earlier policy decisions.",
+    "Substituting qualitative consumer balances, BNR staff forecasts, annual AMECO gaps or undocumented third-party histories for the required measurements."
+  ],
+  "model_effect": {
+    "mechanism_classification_change": false,
+    "mechanism_classification": "DEFERRED",
+    "active_calibration_cycle_open": false,
+    "estimation_or_refit_allowed": false,
+    "policy_rule_activation": false,
+    "validated_reference_behavioural_mechanisms_change": 0,
+    "behavioural_closure": "UNCHANGED_INACTIVE",
+    "accounting_spine": "UNCHANGED"
+  }
+}

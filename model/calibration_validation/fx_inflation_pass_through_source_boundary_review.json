@@ -1,0 +1,114 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "exchange_rate_pass_through_to_inflation",
+  "purpose": "Freeze the raw source boundary and sign/coverage rules required before any distributed-lag exchange-rate pass-through estimation for Romania.",
+  "verdict": "EXACT_FX_HICP_AND_TOTAL_IMPORT_UVI_SOURCE_BOUNDARIES_FROZEN_MATERIALISATION_PENDING",
+  "current_classification": "CANDIDATE",
+  "primary_sources": {
+    "exchange_rate": {
+      "institution": "European Central Bank",
+      "dataset": "EXR — Exchange Rates",
+      "series_key": "EXR.M.RON.EUR.SP00.A",
+      "concept": "Monthly average Romanian leu per euro ECB reference exchange rate",
+      "source_url": "https://data.ecb.europa.eu/data/datasets/EXR/EXR.M.RON.EUR.SP00.A",
+      "source_coverage_evidence": "ECB Data Portal reports monthly coverage beginning in January 1999.",
+      "frequency": "monthly",
+      "collection_indicator": "average"
+    },
+    "inflation": {
+      "institution": "Eurostat",
+      "dataset": "prc_hicp_minr — HICP ECOICOP version 2, monthly indices and rates",
+      "geography": "RO",
+      "product_dimension": "coicop18",
+      "product_code": "TOTAL",
+      "unit": "I25",
+      "unit_label": "Index, 2025=100",
+      "concept": "Romania all-items HICP under ECOICOP version 2",
+      "source_url": "https://ec.europa.eu/eurostat/databrowser/view/prc_hicp_minr",
+      "frequency": "monthly",
+      "coverage_note": "Live structure probe on 2026-09-19 reports time coverage 1996-01 through 2026-08 for the Romania dataset query. Exact TOTAL/I25 observations must be retained in the common source vintage.",
+      "migration_note": "The former prc_hicp_midx / ECOICOP v1 dataset is archived and discontinued for current 2026 data; it may not be silently spliced into the current source boundary.",
+      "live_structure_probe": {
+        "workflow_run_id": 35433198466,
+        "artifact_id": 10581101400,
+        "artifact_zip_sha256": "021ec0e4165aab030b726600e391ffb2d278b8d7a1b119d34f966341dc5735b4",
+        "provider_updated": "2026-09-17T11:00:00+0200",
+        "raw_sha256": "439fc80914d3b67b845528bfd606fd0f0cdcde374cbe5a7a96c4b0af9fee4f26",
+        "raw_bytes": 7583353
+      }
+    }
+  },
+  "external_price_control_screen": {
+    "screening": "model/calibration_validation/fx_inflation_external_price_control_screening.json",
+    "current_decision": "TOTAL_IMPORT_WORLD_IVU_CONFIRMED_EXACTLY_IN_EXT_ST_27_2020MSBEC",
+    "calibration_may_open": false,
+    "exact_control": {
+      "institution": "Eurostat",
+      "dataset": "ext_st_27_2020msbec",
+      "dimensions": {
+        "freq": "M",
+        "stk_flow": "IMP",
+        "indic_et": "IVU",
+        "partner": "WORLD",
+        "bclas_bec": "TOTAL",
+        "geo": "RO"
+      },
+      "provider_label": "Unit value index (2021=100)",
+      "live_probe_coverage": "2002-01 through 2026-06; 294 non-null monthly observations in the 2026-09-19 live structure probe",
+      "role": "external-price proxy; not a pure transaction-price import-price index",
+      "currency_boundary": "No currency dimension is exposed by this short-term API extract; do not invent or search a currency variant after model fit."
+    },
+    "contract": "model/calibration_validation/fx_inflation_external_price_control_contract.json"
+  },
+  "transformation_boundary": {
+    "fx_quote": "RON_per_EUR",
+    "positive_fx_change_interpretation": "RON depreciation against the euro",
+    "fx_change_candidate": "log difference of the monthly-average RON-per-EUR series",
+    "inflation_raw_input": "HICP ECOICOP v2 TOTAL, unit I25 (2025=100), monthly index",
+    "inflation_transform": "NOT_YET_FROZEN_BEFORE_SOURCE_MATERIALISATION",
+    "rationale": "Monthly log change, year-on-year inflation and seasonally adjusted transforms answer different questions. The transform and lag horizon must be preregistered only after raw-source completeness and revision properties are frozen, not chosen from fit."
+  },
+  "scientific_boundaries": {
+    "causal_claim_from_distributed_lag_alone": false,
+    "policy_regime_dependence_must_be_tested": true,
+    "pre_2005_coefficients_may_not_be_imported": true,
+    "managed_float_intervention_is_endogenous": true,
+    "energy_tax_and_administered_price_shocks_are_potential_confounders": true,
+    "autoregressive_inflation_baseline_required": true,
+    "external_price_baseline_required": true,
+    "lag_horizon_must_be_preregistered_before_holdout": true,
+    "no_post_holdout_lag_selection": true
+  },
+  "source_materialisation_gate": {
+    "calibration_cycle_open": false,
+    "required_before_estimation": [
+      "Retain the exact ECB EXR.M.RON.EUR.SP00.A monthly-average RON/EUR series with raw bytes, provider metadata and SHA-256.",
+      "Retain the exact Eurostat prc_hicp_minr monthly Romania series with unit=I25, coicop18=TOTAL, geo=RO and raw bytes/SHA-256.",
+      "Retain the exact Eurostat ext_st_27_2020msbec monthly series with freq=M, stk_flow=IMP, indic_et=IVU, partner=WORLD, bclas_bec=TOTAL, geo=RO and raw bytes/SHA-256.",
+      "Retain one normalized level-only common-month CSV without interpolation, backfill, missing-to-zero conversion or inflation/FX transformations.",
+      "Only after exact source-vintage retention, freeze inflation transform, external-price transform, FX transform, lag horizon, regime/estimation start, structural-selection window and untouched evaluation window before any coefficient estimation."
+    ],
+    "prohibited_shortcuts": [
+      "Use end-of-period exchange rates when the frozen driver is monthly average without a new source-boundary contract.",
+      "Switch between CPI and HICP after seeing model performance.",
+      "Select monthly versus year-on-year inflation transform from holdout fit.",
+      "Choose lag length after opening untouched evaluation data.",
+      "Treat correlation between RON depreciation and inflation as causal pass-through.",
+      "Import pre-inflation-targeting or pre-current-regime coefficients as current Romanian parameters.",
+      "Substitute INT, CAP, CONS or CONS_TRA for TOTAL after seeing model performance.",
+      "Infer a RON- or EUR-denominated IVU variant that is not exposed by the exact short-term dataset query.",
+      "Silently substitute euro-area or EU aggregate import prices for the exact Romania total-import/world UVI control."
+    ],
+    "pass_effect": "Authorises a separately preregistered structural-selection cycle against autoregressive and external-price baselines; no causal or System Dynamics activation follows automatically.",
+    "fail_effect": "Retain the mechanism as CANDIDATE and do not estimate an under-controlled distributed-lag equation."
+  },
+  "disposition": {
+    "mechanism_classification": "CANDIDATE",
+    "central_feedback": false,
+    "active_calibration_cycle_open": false,
+    "validated_reference_behavioural_mechanisms_change": 0,
+    "behavioural_closure": "UNCHANGED_INACTIVE",
+    "accounting_spine": "UNCHANGED"
+  }
+}

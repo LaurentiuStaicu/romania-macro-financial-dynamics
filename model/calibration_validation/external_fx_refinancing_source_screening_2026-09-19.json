@@ -1,0 +1,67 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "external_fx_refinancing_feedback",
+  "phase": "External FX / Refinancing — Official Source Boundary Screening",
+  "purpose": "Test whether newly identified official BNR, ECB, IMF and Ministry of Finance evidence jointly identifies a sector-compatible currency-denomination and residual-maturity/refinancing schedule. The screening must not combine marginal source dimensions into a synthetic joint exposure matrix.",
+  "verdict": "NEW_AGGREGATE_AND_S13_RISK_MARGINS_FOUND_JOINT_EXPOSURE_STILL_UNIDENTIFIED",
+  "evidence": {
+    "ecb_bps": {
+      "finding": "Romania gross external debt is available quarterly by institutional sector and original maturity.",
+      "exact_examples": [
+        "BPS.Q.N.RO.W1.S13.S1.LE.L.FA.TXD.FGED.L.EUR._T._X.N.ALL",
+        "BPS.Q.N.RO.W1.S122.S1.LE.L.FA.TXD.FGED.S.EUR._T._X.N.ALL"
+      ],
+      "boundary": "Currency denominator remains All currencies (_T); original maturity is not residual maturity."
+    },
+    "bnr_bop": {
+      "finding": "BNR annual balance-of-payments/IIP reports publish aggregate external-debt currency composition and debt-service/maturity information. Historical reports contain explicit currency tables; the 2023 annual report continues to present external-debt structures.",
+      "boundary": "Published aggregate currency composition does not identify the joint sector × currency distribution and may not be allocated to S13, banks and other sectors."
+    },
+    "mof_s13_portfolio": {
+      "source": "Romania Investor Presentation, March 2025 / Government Debt Management Strategy",
+      "reference_date": "2024-12-30",
+      "observed_margins": {
+        "domestic_currency_share_pct": 48.5,
+        "eur_share_of_foreign_currency_debt_pct": 79.7,
+        "debt_maturing_within_one_year_pct": 10,
+        "local_currency_debt_maturing_within_one_year_pct": 17,
+        "average_time_to_maturity_total_years": 6.9
+      },
+      "boundary": "These are government debt portfolio risk margins. They do not identify the principal due by currency block, matched coupon/refixing schedule, old/new refinancing rates or private-sector exposures."
+    },
+    "imf_reserve_template": {
+      "finding": "The IMF reserve template for Romania reports foreign-currency flows with residual-maturity buckets for central-bank reserve/liquidity positions.",
+      "boundary": "This is a central-bank foreign-currency-liquidity template, not a residual-maturity schedule for the economy's S13/bank/corporate external debt."
+    }
+  },
+  "identification_matrix": {
+    "institutional_sector": true,
+    "original_maturity": true,
+    "aggregate_external_debt_currency_composition": true,
+    "s13_currency_risk_margin": true,
+    "s13_one_year_refinancing_margin": true,
+    "residual_maturity_by_sector": false,
+    "currency_by_sector": false,
+    "joint_currency_x_residual_maturity_by_sector": false,
+    "matched_old_new_interest_rates": false,
+    "hedging_by_sector": false
+  },
+  "prohibited_inference": [
+    "Do not multiply aggregate BNR currency shares by ECB sector stocks to manufacture sector currency exposures.",
+    "Do not multiply MoF one-year maturity shares by foreign-currency shares to manufacture a government FX refinancing schedule unless the joint distribution is observed.",
+    "Do not use the IMF reserve-template residual-maturity buckets as residual maturity for government, banks or NFCs.",
+    "Do not treat average time to maturity as the amount of principal due in the next quarter.",
+    "Do not assume unhedged exposure from gross foreign-currency debt."
+  ],
+  "disposition": {
+    "mechanism_classification": "DEFERRED",
+    "feedback_topology": "OPEN_CHAIN",
+    "estimation_or_refit_allowed": false,
+    "source_boundary_improved": true,
+    "quantitative_closure_authorized": false,
+    "validated_reference_behavioural_mechanisms_change": 0,
+    "behavioural_closure": "UNCHANGED_INACTIVE"
+  },
+  "reopen_trigger": "A new official/reproducible source must provide a joint sector-compatible currency × residual-maturity/refinancing schedule, plus hedging treatment or explicit independently justified bounds. S13-only progress may support a separate government submodel but cannot close the aggregate external FX feedback."
+}

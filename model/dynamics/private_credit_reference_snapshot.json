@@ -1,0 +1,188 @@
+{
+  "snapshot_version": "0.1",
+  "reference_modes": [
+    "credit_stock",
+    "credit_flow"
+  ],
+  "purpose": "Retained compact source snapshot for the observed ECB BSI private non-financial credit reference modes. It preserves exact source keys, source hashes, coverage, and the complete 2025 component and aggregate benchmark window accepted by the successful source gate. Full raw CSV responses remain in the immutable workflow artifact. It does not use stock differences as flows, include other financial sectors, or mutate the Accounting Spine.",
+  "source": {
+    "institution": "European Central Bank / ESCB",
+    "dataset": "BSI — Balance Sheet Items",
+    "reference_area": "RO",
+    "frequency": "M",
+    "adjustment": "N",
+    "reference_sector": "A",
+    "balance_sheet_item": "A20",
+    "maturity": "A",
+    "counterpart_area": "U6",
+    "currency": "Z01",
+    "suffix": "E",
+    "unit": "Millions of Euro"
+  },
+  "provenance": {
+    "audit_branch_head_sha": "258eac8a18746bc4cb410d8d6f2fb3c1d8cfbbc5",
+    "workflow_run_id": 35409985524,
+    "workflow_artifact_id": 10573686121,
+    "workflow_artifact_name": "private-credit-reference-dfa19434f7ab4cfcf6658503ac09d90568d91681",
+    "workflow_artifact_sha256": "9920fd53f9338c7bb2e2221e3b6c2057c5aea94246e6d6b6204b9b351a3d41ba",
+    "audit_report_sha256": "b50ecb53130f0a9bd5731487737d14d70a66ebf6688202cf856e5b995630ebdd",
+    "raw_source_sha256": {
+      "nfc_stock": "2c7b1a68d0616c2c2e219498c44703795e297505d07768b33b665a62b2d62778",
+      "households_npish_stock": "d34978531317efe4dd0ab4b7c9d92ab3626638e281b2de72eab9c488ead84be2",
+      "nfc_flow": "bbe2b151d96b9cc6e82253f5c132077b6ff0a426eb421fdf8731b41c17d1f59a",
+      "households_npish_flow": "2d9899d73be327dcf13d3b4326920e45254b741a9557fd771a1034b26c6d4857"
+    },
+    "series_keys": {
+      "nfc_stock": "BSI.M.RO.N.A.A20.A.1.U6.2240.Z01.E",
+      "households_npish_stock": "BSI.M.RO.N.A.A20.A.1.U6.2250.Z01.E",
+      "nfc_flow": "BSI.M.RO.N.A.A20.A.4.U6.2240.Z01.E",
+      "households_npish_flow": "BSI.M.RO.N.A.A20.A.4.U6.2250.Z01.E"
+    }
+  },
+  "coverage": {
+    "nfc_stock": {
+      "observations": 260,
+      "first": "2004-12",
+      "last": "2026-07"
+    },
+    "households_npish_stock": {
+      "observations": 260,
+      "first": "2004-12",
+      "last": "2026-07"
+    },
+    "nfc_flow": {
+      "observations": 259,
+      "first": "2005-01",
+      "last": "2026-07"
+    },
+    "households_npish_flow": {
+      "observations": 259,
+      "first": "2005-01",
+      "last": "2026-07"
+    },
+    "credit_stock": {
+      "observations": 260,
+      "first": "2004-12",
+      "last": "2026-07"
+    },
+    "credit_flow": {
+      "observations": 259,
+      "first": "2005-01",
+      "last": "2026-07"
+    }
+  },
+  "benchmark_2025": {
+    "nfc_stock": [
+      41393.63052208835,
+      41533.14457831325,
+      41691.086345381525,
+      41716.06626506023,
+      41703.6976284585,
+      42133.91141732284,
+      42165.79527559055,
+      42332.928994082846,
+      42476.811023622045,
+      42489.1394891945,
+      42523.51866404715,
+      42341.64901960784
+    ],
+    "households_npish_stock": [
+      38148.69277108434,
+      38342.423694779114,
+      38726.345381526095,
+      39046.628514056225,
+      38965.58695652174,
+      39188.84842519685,
+      39681.86614173229,
+      39873.35305719921,
+      40043.24409448818,
+      40169.91748526522,
+      40318.015717092334,
+      40297.96470588236
+    ],
+    "credit_stock": [
+      79542.3232931727,
+      79875.56827309236,
+      80417.43172690761,
+      80762.69477911646,
+      80669.28458498025,
+      81322.75984251968,
+      81847.66141732284,
+      82206.28205128206,
+      82520.05511811023,
+      82659.05697445973,
+      82841.53438113949,
+      82639.6137254902
+    ],
+    "nfc_flow": [
+      -437.9229651079081,
+      1393.598344474465,
+      313.7813005246766,
+      165.05271427537855,
+      449.45465521138317,
+      582.5382733407716,
+      149.22214357288158,
+      239.1601911793205,
+      288.69447537037445,
+      567.3380209201183,
+      151.5746146856884,
+      132.09339919108714
+    ],
+    "households_npish_flow": [
+      59.95431115278285,
+      1413.8936310081112,
+      461.552268185778,
+      372.95008719137866,
+      525.3555750199805,
+      411.34449143750066,
+      548.9336324458474,
+      194.5268591609216,
+      292.0856710362159,
+      676.0062731697733,
+      196.778358198124,
+      146.4879757490531
+    ],
+    "credit_flow": [
+      -377.96865395512526,
+      2807.491975482576,
+      775.3335687104546,
+      538.0028014667572,
+      974.8102302313637,
+      993.8827647782723,
+      698.155776018729,
+      433.6870503402421,
+      580.7801464065903,
+      1243.3442940898917,
+      348.3529728838124,
+      278.5813749401402
+    ],
+    "month_order": [
+      "2025-01",
+      "2025-02",
+      "2025-03",
+      "2025-04",
+      "2025-05",
+      "2025-06",
+      "2025-07",
+      "2025-08",
+      "2025-09",
+      "2025-10",
+      "2025-11",
+      "2025-12"
+    ],
+    "unit": "Millions of Euro"
+  },
+  "aggregation": {
+    "credit_stock": "same-month nfc_stock + households_npish_stock",
+    "credit_flow": "same-month nfc_flow + households_npish_flow; ECB financial transactions, not stock first differences"
+  },
+  "hard_boundary": {
+    "accounting_spine_changed": false,
+    "stock_difference_used_as_flow": false,
+    "gross_new_lending_substitution": false,
+    "other_financial_sectors_included": false,
+    "missing_to_zero": false,
+    "interpolation": false,
+    "behavioural_closure_changed": false
+  }
+}

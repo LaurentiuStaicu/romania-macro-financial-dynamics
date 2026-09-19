@@ -1,0 +1,51 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "mechanism_id": "corporate_investment_response",
+  "phase": "Corporate Investment — Financing-Rate Source Continuity Screening",
+  "purpose": "Compare source continuity only for two exact ECB MIR Romania NFC RON new-business lending-rate families before any investment-model fitting. The screening may determine whether the narrower up-to-one-year fixation family is measurement-eligible when the broad total-fixation family is too sparse for a quarterly time-series design. It does not compare predictive performance or estimate any investment equation.",
+  "candidates": [
+    {
+      "id": "total_fixation",
+      "flow": "MIR",
+      "series_key": "MIR.M.RO.B.A2A.A.R.A.2240.RON.N",
+      "semantic_scope": "total initial-rate fixation; total amount; S11; RON; new business",
+      "status": "CURRENT_MEASUREMENT_FAMILY"
+    },
+    {
+      "id": "up_to_one_year_fixation",
+      "flow": "MIR",
+      "series_key": "MIR.M.RO.B.A2A.F.R.A.2240.RON.N",
+      "semantic_scope": "variable/up-to-one-year initial-rate fixation; total amount; S11; RON; new business",
+      "status": "SOURCE_CONTINUITY_ALTERNATIVE_ONLY"
+    }
+  ],
+  "diagnostic_metrics": [
+    "finite_observations",
+    "first_period",
+    "last_period",
+    "expected_months_between_bounds",
+    "finite_month_coverage_fraction",
+    "complete_three_month_quarters",
+    "expected_quarters_between_first_complete_candidate_and_last_bound",
+    "complete_quarter_coverage_fraction",
+    "longest_consecutive_month_run"
+  ],
+  "eligibility_rule": {
+    "alternative_min_complete_quarter_coverage_fraction": 0.9,
+    "alternative_min_advantage_over_total_fixation": 0.2,
+    "use_model_outcomes": false,
+    "automatic_replacement": false,
+    "rule": "The up-to-one-year family is measurement-eligible for a separately amended contract only if its complete-quarter coverage is at least 0.90 and exceeds the broad total-fixation family's complete-quarter coverage by at least 0.20. Even then, the semantic narrowing must be recorded before panel reconstruction."
+  },
+  "hard_rules": {
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_investment_outcome_access": true,
+    "no_lag_selection": true,
+    "no_holdout_opening": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true,
+    "live_provider_work_manual_only": true
+  }
+}

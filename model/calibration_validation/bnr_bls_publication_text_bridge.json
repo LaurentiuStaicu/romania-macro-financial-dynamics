@@ -1,0 +1,246 @@
+{
+  "audit_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "phase": "BNR BLS Missing-Round Official-Publication Text Bridge",
+  "status": "PASS_OFFICIAL_PUBLICATION_TEXT_EVIDENCE_RETAINED_WITH_PRECISION_BOUNDARY",
+  "contract": "model/calibration_validation/bnr_bls_publication_text_bridge_contract.json",
+  "canonical_panel": "data/processed/bnr_bls_realised_rounds.csv",
+  "canonical_panel_modified": false,
+  "source_rounds": [
+    {
+      "quarter": "2023-Q2",
+      "publication_title": "Bank Lending Survey, August 2023",
+      "publication_url": "https://www.bnr.ro/uploads/2023-8-banklendingsurvey-august2023_documentpdf_545_1733754083.pdf",
+      "canonical_round_status": "MISSING_EXACT_WORKBOOK_VALUE_SET",
+      "evidence": {
+        "nfc_credit_standards": {
+          "value": 16,
+          "evidence_class": "DIRECT_REPORTED_NET_PERCENTAGE",
+          "publication_page": 5,
+          "reported_precision_dp": 0,
+          "note": "Aggregate NFC credit standards explicitly reported as net percentage 16 percent."
+        },
+        "nfc_loan_demand": {
+          "value": 16,
+          "evidence_class": "DIRECT_REPORTED_NET_PERCENTAGE",
+          "publication_page": 8,
+          "reported_precision_dp": 0,
+          "note": "Aggregate NFC loan demand explicitly reported as net percentage 16 percent."
+        },
+        "household_mortgage_credit_standards": {
+          "value": null,
+          "evidence_class": "INCOMPLETE_NARRATIVE_ONLY",
+          "publication_page": 11,
+          "note": "Publication states that more than 95 percent cited status quo, but does not textually report the exact net percentage."
+        },
+        "household_consumer_credit_standards": {
+          "value": null,
+          "evidence_class": "INCOMPLETE_NARRATIVE_ONLY",
+          "publication_page": 11,
+          "note": "Publication states that more than 95 percent cited status quo, but does not textually report the exact net percentage."
+        },
+        "household_mortgage_loan_demand": {
+          "value": null,
+          "evidence_class": "INCOMPLETE_NARRATIVE_ONLY",
+          "publication_page": 15,
+          "note": "Text reports 46.8 percent moderately lower, 31.7 percent somewhat higher and 13.2 percent flat; the unreported residual response category prevents a unique text-only balance."
+        },
+        "household_consumer_loan_demand": {
+          "value": null,
+          "evidence_class": "ROUNDED_SHARE_BALANCE_DIAGNOSTIC_ONLY",
+          "publication_page": 17,
+          "rounded_share_balance_candidate": 50.8,
+          "candidate_precision_dp": 1,
+          "canonical_candidate_allowed": false,
+          "note": "Text reports 58.2 percent moderately higher, 34.4 percent unchanged and 7.4 percent slightly lower. Their reported-share balance is +50.8 percentage points, but publication rounding cannot recreate the exact workbook-cell value."
+        }
+      },
+      "exact_text_value_count": 2,
+      "unresolved_text_value_count": 4
+    },
+    {
+      "quarter": "2023-Q3",
+      "publication_title": "Bank Lending Survey, November 2023",
+      "publication_url": "https://www.bnr.ro/uploads/2023-11-banklendingsurvey-november2023_documentpdf_545_1733754070.pdf",
+      "canonical_round_status": "PUBLICATION_TEXT_COMPLETE_EXACT_WORKBOOK_PRECISION_STILL_MISSING",
+      "evidence": {
+        "nfc_credit_standards": {
+          "value": 0,
+          "evidence_class": "DIRECT_STATUS_QUO_IMPLIES_ZERO",
+          "publication_page": 5,
+          "reported_precision_dp": 0,
+          "note": "All responding institutions reported status quo at aggregate level."
+        },
+        "nfc_loan_demand": {
+          "value": -30,
+          "evidence_class": "DIRECT_REPORTED_NET_PERCENTAGE",
+          "publication_page": 8,
+          "reported_precision_dp": 0
+        },
+        "household_mortgage_credit_standards": {
+          "value": -38.2,
+          "evidence_class": "DIRECT_REPORTED_NET_PERCENTAGE",
+          "publication_page": 11,
+          "reported_precision_dp": 1
+        },
+        "household_consumer_credit_standards": {
+          "value": 1.4,
+          "evidence_class": "DIRECT_REPORTED_NET_PERCENTAGE",
+          "publication_page": 11,
+          "reported_precision_dp": 1
+        },
+        "household_mortgage_loan_demand": {
+          "value": 35,
+          "evidence_class": "DIRECT_REPORTED_NET_PERCENTAGE",
+          "publication_page": 15,
+          "reported_precision_dp": 0
+        },
+        "household_consumer_loan_demand": {
+          "value": 27,
+          "evidence_class": "DIRECT_REPORTED_NET_PERCENTAGE",
+          "publication_page": 17,
+          "reported_precision_dp": 0
+        }
+      },
+      "exact_text_value_count": 6,
+      "unresolved_text_value_count": 0
+    },
+    {
+      "quarter": "2024-Q2",
+      "publication_title": "Bank Lending Survey, August 2024",
+      "publication_url": "https://www.bnr.ro/uploads/2024-8-banklendingsurvey-august2024_documentpdf_545_1733753826.pdf",
+      "canonical_round_status": "PUBLICATION_TEXT_COMPLETE_EXACT_WORKBOOK_PRECISION_STILL_MISSING",
+      "evidence": {
+        "nfc_credit_standards": {
+          "value": 0,
+          "evidence_class": "DIRECT_STATUS_QUO_IMPLIES_ZERO",
+          "publication_page": 5,
+          "reported_precision_dp": 0,
+          "note": "Aggregate NFC credit standards reported as status quo."
+        },
+        "nfc_loan_demand": {
+          "value": 20,
+          "evidence_class": "DIRECT_REPORTED_NET_PERCENTAGE",
+          "publication_page": 8,
+          "reported_precision_dp": 0
+        },
+        "household_mortgage_credit_standards": {
+          "value": 12.9,
+          "evidence_class": "DIRECT_REPORTED_NET_PERCENTAGE",
+          "publication_page": 10,
+          "reported_precision_dp": 1
+        },
+        "household_consumer_credit_standards": {
+          "value": -14.2,
+          "evidence_class": "DIRECT_REPORTED_NET_PERCENTAGE",
+          "publication_page": 10,
+          "reported_precision_dp": 1
+        },
+        "household_mortgage_loan_demand": {
+          "value": 13,
+          "evidence_class": "DIRECT_REPORTED_NET_PERCENTAGE",
+          "publication_page": 14,
+          "reported_precision_dp": 0
+        },
+        "household_consumer_loan_demand": {
+          "value": 70,
+          "evidence_class": "DIRECT_REPORTED_NET_PERCENTAGE",
+          "publication_page": 15,
+          "reported_precision_dp": 0
+        }
+      },
+      "exact_text_value_count": 6,
+      "unresolved_text_value_count": 0
+    },
+    {
+      "quarter": "2025-Q2",
+      "publication_title": "Bank Lending Survey, August 2025",
+      "publication_url": "https://www.bnr.ro/uploads/2025-11-06blst1august2025_documentpdf_545_1762420562.pdf",
+      "canonical_round_status": "PUBLICATION_TEXT_COMPLETE_EXACT_WORKBOOK_PRECISION_STILL_MISSING",
+      "evidence": {
+        "nfc_credit_standards": {
+          "value": 12,
+          "evidence_class": "DIRECT_REPORTED_NET_PERCENTAGE",
+          "publication_page": 5,
+          "reported_precision_dp": 0
+        },
+        "nfc_loan_demand": {
+          "value": 31,
+          "evidence_class": "DIRECT_REPORTED_NET_PERCENTAGE",
+          "publication_page": 8,
+          "reported_precision_dp": 0
+        },
+        "household_mortgage_credit_standards": {
+          "value": 13.5,
+          "evidence_class": "DIRECT_REPORTED_NET_PERCENTAGE",
+          "publication_page": 10,
+          "reported_precision_dp": 1
+        },
+        "household_consumer_credit_standards": {
+          "value": 15.2,
+          "evidence_class": "DIRECT_REPORTED_NET_PERCENTAGE",
+          "publication_page": 10,
+          "reported_precision_dp": 1
+        },
+        "household_mortgage_loan_demand": {
+          "value": -6,
+          "evidence_class": "DIRECT_REPORTED_NET_PERCENTAGE",
+          "publication_page": 15,
+          "reported_precision_dp": 0
+        },
+        "household_consumer_loan_demand": {
+          "value": 37,
+          "evidence_class": "DIRECT_REPORTED_NET_PERCENTAGE",
+          "publication_page": 16,
+          "reported_precision_dp": 0
+        }
+      },
+      "exact_text_value_count": 6,
+      "unresolved_text_value_count": 0,
+      "related_household_dsti_level_evidence": {
+        "status": "SEPARATE_SOURCE_DISCOVERY_NOT_USED_IN_THIS_BRIDGE",
+        "publication_page": 13,
+        "new_loans_percent": 37,
+        "outstanding_loans_percent": 42,
+        "note": "The report narrative explicitly states borrower DSTI levels. This is distinct from legacy BLS P0303/P1103 lending-term change questions and is not used to alter household-consumption readiness in this task."
+      }
+    }
+  ],
+  "totals": {
+    "target_rounds": 4,
+    "target_observations": 24,
+    "direct_or_exact_status_quo_observations": 20,
+    "unresolved_publication_text_observations": 4,
+    "fully_text_covered_rounds": 3,
+    "partially_text_covered_rounds": 1
+  },
+  "methodology_boundary": {
+    "bnr_net_percentage_definition": "For standards: tightening share minus easing share. For demand: increase share minus decline share. BNR states that net percentages account for responding banks' market shares.",
+    "chart_digitisation_performed": false,
+    "ocr_performed": false,
+    "interpolation_performed": false,
+    "inferred_unreported_response_category": false,
+    "canonical_panel_substitution_performed": false,
+    "parameter_estimation_performed": false,
+    "model_selection_performed": false,
+    "behavioural_closure_change": false
+  },
+  "workbook_recovery_notes": {
+    "2023-Q2": {
+      "candidate_url": "https://www.bnr.ro/uploads/2023-8-banklendingsurvey-august2023_xls_547_1733754083.xls",
+      "status": "CANDIDATE_ENDPOINT_REPORTED_AS_EXCEL_MIME_BY_WEB_FETCH_BYTES_NOT_VERIFIED_OR_RETAINED"
+    },
+    "2023-Q3": {
+      "candidate_url": "https://www.bnr.ro/uploads/2023-11-banklendingsurvey-november2023_xls_547_1733754070.xls",
+      "status": "CANDIDATE_ENDPOINT_REPORTED_AS_EXCEL_MIME_BY_WEB_FETCH_BYTES_NOT_VERIFIED_OR_RETAINED"
+    },
+    "2024-Q2": {
+      "candidate_url": "https://www.bnr.ro/uploads/2024-8-banklendingsurvey-august2024_xls_547_1733753826.xls",
+      "status": "CANDIDATE_PATH_INCONCLUSIVE_NOT_BYTE_VERIFIED"
+    },
+    "2025-Q2": {
+      "status": "OFFICIAL_BNR_SURVEY_INDEX_LISTS_AN_XLS_ANNEX_BUT_DIRECT_ANNEX_URL_NOT_YET_RETAINED"
+    }
+  },
+  "next_gate": "Recover exact official workbook bytes and cell values for the four missing canonical quarters, with priority on 2023-Q2 because its household publication text is incomplete. Do not promote publication-rounded values into the canonical panel."
+}

@@ -15,34 +15,21 @@
   "mechanisms": [
     {
       "id": "monetary_policy_lending_rate_pass_through",
-      "classification": "ACTIVATED",
+      "classification": "CANDIDATE",
       "maps_to_dynamic_core_loop": "monetary_credit_transmission_loop",
-      "central_feedback": true,
-      "functional_form": "r_lend[t] = r_lend[t-1] + lambda * (alpha + beta * policy_rate[t] - r_lend[t-1])",
-      "implementation": "partial_adjustment_rate",
+      "central_feedback": false,
+      "functional_form": "household_housing candidate: lend[t] = lend[t-1] + beta * (policy[t]-policy[t-1]); no NFC form is selected",
+      "implementation": null,
       "parameters": [
         {
-          "id": "alpha",
-          "status": "TO_ESTIMATE_0.5",
-          "unit": "percentage_point"
-        },
-        {
-          "id": "beta",
-          "status": "TO_ESTIMATE_0.5",
+          "id": "beta_household_housing",
+          "status": "FROZEN_CANDIDATE_NOT_VALIDATED",
+          "value": 0.49746478873239447,
           "unit": "dimensionless",
-          "interpretation": "long-run policy-to-lending-rate pass-through"
-        },
-        {
-          "id": "lambda",
-          "status": "TO_ESTIMATE_0.5",
-          "unit": "fraction_per_observation",
-          "bounds": [
-            0,
-            1
-          ]
+          "interpretation": "Frozen coefficient fitted through 2025-01 for the household housing delta-policy candidate; it remains a candidate parameter because the final holdout contained zero policy-rate changes."
         }
       ],
-      "estimation_plan": "Estimate separately for household and corporate RON new-business lending rates using time-ordered monthly data; assess lag/partial-adjustment alternatives and parameter stability.",
+      "estimation_plan": "Do not respecify the frozen household delta-policy form before its first prospective confirmation on genuinely new policy-rate variation. NFC requires a newly preregistered model/data cycle before any form can be selected.",
       "observables": [
         "BNR_policy_rate_or_definitionally_matched_policy_instrument",
         "MIR.M.RO.B.A2C.A.R.A.2250.RON.N",
@@ -60,23 +47,53 @@
         "new-business rates do not equal effective rates on outstanding stocks"
       ],
       "rejection_or_degradation_criteria": [
-        "beta sign unstable or economically implausible across time-respecting origins",
-        "lambda practically non-identifiable",
-        "fails to improve materially over persistence/naive lending-rate baseline out of sample",
-        "residual dynamics show systematic omitted lag structure"
-      ]
+        "the frozen household beta becomes unstable or leaves the preregistered admissible domain in a future independently preregistered cycle",
+        "a prospective confirmation window containing genuinely non-zero policy-rate variation fails the frozen predictive gate versus persistence without post-observation respecification",
+        "residual dynamics under identifying policy-rate variation reveal systematic omitted lag or regime structure requiring a newly preregistered candidate cycle",
+        "no NFC form may be promoted without a new preregistered structural-selection cycle because the previous NFC candidates failed before holdout"
+      ],
+      "validation_recovery_disposition": {
+        "status": "CANDIDATE",
+        "source": "model/calibration_validation/validation_recovery_disposition.json",
+        "interpretation": "The household delta-policy form passed structural selection but the fresh holdout contained no policy-rate movement and could not distinguish the candidate from persistence. NFC tested forms failed structural selection before holdout. The generic pass-through mechanism therefore remains a candidate and is not an active central feedback."
+      },
+      "validation_recovery_selected_form": {
+        "source": "model/calibration_validation/validation_recovery_holdout.json",
+        "target": "household_housing",
+        "candidate": "delta_policy_contemporaneous",
+        "equation": "lend[t] = lend[t-1] + beta * (policy[t]-policy[t-1])",
+        "frozen_beta": 0.49746478873239447,
+        "holdout_nonzero_policy_changes": 0,
+        "passes_all_final_holdout_gates": false,
+        "final_verdict": "CANDIDATE",
+        "causal_claim": false
+      },
+      "validation_recovery_nfc": {
+        "source": "model/calibration_validation/validation_recovery_selection_freeze.json",
+        "target": "nfc_upto1y",
+        "selected_candidate": null,
+        "final_holdout_opened": false,
+        "status": "CANDIDATE",
+        "reason": "No preregistered NFC candidate passed all structural-selection gates; the final NFC holdout remains unopened."
+      },
+      "prospective_confirmation": {
+        "contract": "model/calibration_validation/prospective_monetary_confirmation_contract.json",
+        "status": "model/calibration_validation/prospective_monetary_confirmation_status.json",
+        "current_gate_status": "WAIT_FOR_NEW_POLICY_RATE_EVENT",
+        "classification_may_change_from_this_pointer_alone": false
+      }
     },
     {
       "id": "government_refinancing_effective_rate",
-      "classification": "ACTIVATED",
+      "classification": "DEFERRED",
       "maps_to_dynamic_core_loop": "government_refinancing_interest_loop",
-      "central_feedback": true,
+      "central_feedback": false,
       "functional_form": "effective_rate[t] = (1-m[t])*effective_rate[t-1] + m[t]*marginal_market_yield[t]",
       "implementation": "refinancing_effective_rate",
       "parameters": [
         {
           "id": "m[t]",
-          "status": "DATA_DERIVED_OR_ESTIMATE_0.5",
+          "status": "UNIDENTIFIED_NO_DEFAULT",
           "unit": "fraction_per_period",
           "bounds": [
             0,
@@ -85,7 +102,7 @@
           "interpretation": "share of debt stock repriced/refinanced in period"
         }
       ],
-      "estimation_plan": "Prefer maturity/refinancing schedules; if unavailable, infer only with explicit uncertainty from debt-service/maturity observables. Never tune m merely to fit interest expenditure.",
+      "estimation_plan": "Do not estimate at the current public-data boundary. Reopen only if same-boundary instrument/block evidence supplies opening outstanding principal, realized repriced/refinanced or reset principal, and matched old/new effective rates sufficient to pass the frozen government repricing-ledger gates. Maturity shares, refixing targets, aggregate financing needs, issue sizes, or one auction yield may not substitute for the missing matched repricing structure.",
       "observables": [
         "government_debt_stock",
         "government_interest_expenditure",
@@ -105,7 +122,12 @@
       "rejection_or_degradation_criteria": [
         "maturity/refinancing share cannot be bounded from data",
         "implied effective-rate path violates observed interest expenditure beyond declared reconciliation tolerance"
-      ]
+      ],
+      "validation_recovery_disposition": {
+        "status": "DEFERRED",
+        "source": "model/calibration_validation/government_repricing_ledger_assessment.json",
+        "interpretation": "Ledger completeness failed before estimation and the repricing share is not point-identifiable at the current public-data boundary. No synthetic allocation is permitted; the mechanism is deferred."
+      }
     },
     {
       "id": "household_consumption_response",
@@ -120,7 +142,7 @@
         "beta_r",
         "beta_ds"
       ],
-      "estimation_plan": "Quarterly reduced-form candidate using ESA household consumption/disposable-income data and matched borrowing/debt-service measures; compare with income-only baseline before admission.",
+      "estimation_plan": "Calibration remains closed. Retain exact household final-consumption and disposable-income QSA sources, but do not estimate the registered equation until an exact Romania household debt-service burden is retained or a new preregistered candidate-family contract explicitly defines a nested form. The household borrowing-rate family, seasonal treatment, real/nominal transformation, deflator and lag structure must be frozen before any structural-selection/evaluation data are opened.",
       "observables": [
         "household_final_consumption",
         "household_disposable_income",
@@ -133,33 +155,31 @@
       ],
       "limits": [
         "fiscal transfers, inflation and confidence can dominate short samples",
-        "disposable-income quarterly comparability must be verified"
+        "disposable-income quarterly comparability must be verified",
+        "Romania household debt-service-ratio source is not yet retained; leverage ratios and prudential borrower caps are not substitutes",
+        "the household borrowing-rate family must be selected ex ante rather than choosing mortgage versus consumer rates from model fit"
       ],
       "rejection_or_degradation_criteria": [
         "rate/debt-service terms practically non-identifiable",
         "does not outperform income-only baseline on untouched evaluation data",
         "coefficient signs unstable across origins"
-      ]
+      ],
+      "source_boundary_review": "model/calibration_validation/household_consumption_source_boundary_review.json"
     },
     {
       "id": "corporate_investment_response",
       "classification": "CANDIDATE",
       "maps_to_dynamic_core_loop": null,
       "central_feedback": false,
-      "functional_form": "gI = alpha + beta_d*demand_growth - beta_r*real_corporate_lending_rate + beta_eu*EU_fund_impulse",
-      "implementation": "corporate_investment_growth",
-      "parameters": [
-        "alpha",
-        "beta_d",
-        "beta_r",
-        "beta_eu"
-      ],
-      "estimation_plan": "Quarterly GFCF candidate with financing-cost and EU-fund terms; structural-selection data must be separated from later holdout evaluation.",
+      "functional_form": "No admitted corporate-investment behavioural form. The preregistered quarterly lagged real-activity + up-to-one-year NFC new-business financing-rate candidate, and its D.92 support extension, were tested on 2022-Q1..2023-Q4 and failed before holdout.",
+      "implementation": null,
+      "parameters": [],
+      "estimation_plan": "Freeze the 2026-09-19 tested investment-intensity forms at FAIL_BEFORE_HOLDOUT. Do not inspect 2024-Q1..2026-Q1 final-evaluation performance, change the financing-rate sign convention, search alternative lags, drop predictors, add interactions/regimes, switch target, or reinterpret D.92 after observing this result. Reopen only in a separately preregistered cycle triggered by genuinely new measurement or identification evidence.",
       "observables": [
-        "gross_fixed_capital_formation",
-        "real_GDP_or_demand",
-        "corporate_lending_rate",
-        "EU_fund_disbursement_or_investment_proxy"
+        "NFC investment rate (P51G / NFC GVA)",
+        "real GDP year-on-year growth",
+        "NFC RON new-business lending rate with variable/up-to-one-year initial fixation",
+        "NFC D.92 investment-grant support intensity"
       ],
       "evidence": [
         "ec_2026_romania_forecast",
@@ -167,14 +187,36 @@
         "eurostat_namq_10_gdp"
       ],
       "limits": [
-        "public and private investment are mixed in aggregate GFCF",
-        "EU-funded investment creates large policy-driven variation"
+        "the tested 34-quarter panel is short",
+        "real GDP growth is an activity proxy rather than an identified demand shock",
+        "the selected NFC financing-rate series is a marginal new-business rate, not an effective stock rate",
+        "D.92 is sector-consistent investment support but not EU-specific",
+        "the tested core and support-augmented forms failed predictive and parameter-domain gates before final evaluation"
       ],
       "rejection_or_degradation_criteria": [
-        "financing-cost term not identifiable",
-        "candidate loses to demand-only baseline out of sample",
-        "parameter instability around EU-fund cycles"
-      ]
+        "tested lagged-driver forms failed before holdout on predictive and financing-rate parameter-domain gates",
+        "any future reopening requires genuinely new evidence and a separately preregistered cycle rather than post-result respecification"
+      ],
+      "source_boundary_review": "model/calibration_validation/corporate_investment_source_boundary_review.json",
+      "measurement_design_contract": "model/calibration_validation/corporate_investment_measurement_design_contract.json",
+      "retained_source_vintage": "data/source_vintages/corporate-investment-source-family-vintage-2026-09-19",
+      "measurement_design_status": "TESTED_FORM_FAILED_BEFORE_HOLDOUT_MEASUREMENT_VINTAGES_RETAINED",
+      "supplemental_source_vintage": "data/source_vintages/corporate-investment-supplemental-source-vintage-2026-09-19",
+      "financing_rate_screening_result": "model/calibration_validation/corporate_investment_financing_rate_source_screening_result.json",
+      "measurement_panel_vintage": "data/source_vintages/corporate-investment-measurement-panel-vintage-2026-09-19",
+      "structural_selection_contract": "model/calibration_validation/corporate_investment_structural_selection_contract.json",
+      "structural_selection_result": "model/calibration_validation/corporate_investment_structural_selection_result.json",
+      "structural_selection_disposition": {
+        "status": "TESTED_FORM_FAILED_BEFORE_HOLDOUT",
+        "selection_window": "2022-Q1..2023-Q4",
+        "final_evaluation_window": "2024-Q1..2026-Q1",
+        "final_evaluation_opened": false,
+        "selected_form_for_final_evaluation": null,
+        "core_rmse_improvement_vs_persistence": -0.4737624846594073,
+        "core_rmse_improvement_vs_investment_rate_ar": -0.581362014058729,
+        "financing_rate_domain_fraction": 0,
+        "interpretation": "The frozen lagged-driver candidate underperformed both preregistered baselines and its financing-rate coefficient failed the expected non-positive domain at every selection origin. This rejects the tested forms in this cycle, not the general possibility that activity, financing conditions or investment support affect corporate investment."
+      }
     },
     {
       "id": "aggregate_bank_credit_response",
@@ -190,7 +232,7 @@
         "beta_npl",
         "beta_cap"
       ],
-      "estimation_plan": "Start from sector-specific aggregate credit with parsimonious subsets; use bank-level Romanian evidence only as sign/mechanism support, not as aggregate coefficients.",
+      "estimation_plan": "Calibration remains closed. First materialize exact sector-specific NFC and household/NPISH credit targets together with realised BNR Bank Lending Survey credit-standards and loan-demand series, plus harmonised NPL and total-capital-ratio state controls under frozen provenance. The current aggregate reduced form is not eligible for estimation as a bank-supply equation because demand and supply are jointly determined. After source materialisation, preregister a sector-specific predictive/identification cycle and untouched holdout; no causal or feedback activation follows from predictive gain alone.",
       "observables": [
         "credit_stock_or_transactions",
         "activity_growth",
@@ -205,20 +247,23 @@
       "limits": [
         "aggregation can reverse bank-level relations",
         "credit demand and supply are jointly determined",
-        "prudential-regime changes matter"
+        "prudential-regime changes matter",
+        "BNR Bank Lending Survey supply standards and loan demand must remain separate rather than being collapsed into one aggregate credit signal",
+        "NPL and total capital ratios are endogenous prudential state variables, not clean exogenous bank-supply shocks"
       ],
       "rejection_or_degradation_criteria": [
         "demand/supply components cannot be separately or robustly identified",
         "high parameter trade-off",
         "no out-of-sample gain versus autoregressive credit baseline"
-      ]
+      ],
+      "source_boundary_review": "model/calibration_validation/aggregate_bank_credit_source_boundary_review.json"
     },
     {
       "id": "sovereign_yield_spread_response",
       "classification": "CANDIDATE",
       "maps_to_dynamic_core_loop": "government_issuance_yield_loop",
       "central_feedback": false,
-      "functional_form": "spread = alpha + beta_d*debt_to_gdp + beta_f*deficit_to_gdp + beta_x*external_risk_proxy",
+      "functional_form": "No admitted sovereign-yield behavioural form. The preregistered quarterly fiscal-augmented common-market AR candidate was tested and failed before holdout.",
       "implementation": "sovereign_spread",
       "parameters": [
         "alpha",
@@ -226,7 +271,7 @@
         "beta_f",
         "beta_x"
       ],
-      "estimation_plan": "Estimate only with an external/global-risk control and time-respecting validation; consider regime/break terms. Do not interpret coefficients causally without stronger identification.",
+      "estimation_plan": "Freeze the 2026-09-19 tested form at FAIL_BEFORE_HOLDOUT. Do not open final-evaluation performance, refit, search alternative lags, add policy-rate or issuance variables after observing this result, or activate the government issuance-yield loop. Reopen only in a separately preregistered cycle triggered by genuinely new measurement/identification evidence.",
       "observables": [
         "Romania_sovereign_yield_or_spread",
         "debt_to_gdp",
@@ -240,29 +285,44 @@
       "limits": [
         "fiscal variables are endogenous to growth and rates",
         "global risk and ratings/news can dominate",
-        "low-frequency fiscal data constrain identification"
+        "low-frequency fiscal data constrain identification",
+        "a RON-versus-EUR long-rate differential is not a pure sovereign credit spread",
+        "low-frequency fiscal controls require a preregistered mixed-frequency or lower-frequency treatment",
+        "the tested 2026-09-19 fiscal-augmented yield form failed before final evaluation and may not be rescued by post-result respecification"
       ],
       "rejection_or_degradation_criteria": [
         "fiscal coefficients are not practically identifiable",
         "simple global-risk/persistence baseline performs as well or better out of sample",
         "parameter signs flip across regimes"
-      ]
+      ],
+      "source_boundary_review": "model/calibration_validation/sovereign_yield_source_boundary_review.json",
+      "structural_selection_disposition": {
+        "status": "TESTED_FORM_FAILED_BEFORE_HOLDOUT",
+        "source": "model/calibration_validation/sovereign_yield_structural_selection_result.json",
+        "tested_form": "fiscal_augmented_common_market_ar",
+        "selection_window": "2017-Q1..2022-Q4",
+        "final_evaluation_window": "2023-Q1..2026-Q1",
+        "final_evaluation_opened": false,
+        "rmse_improvement_vs_persistence": -0.11689596621586085,
+        "rmse_improvement_vs_common_market_ar": -0.03776185934400522,
+        "fiscal_beta_d_domain_fraction": 0.08333333333333333,
+        "fiscal_beta_b_domain_fraction": 0.7083333333333334,
+        "interpretation": "The frozen candidate failed predictive and fiscal-sign consistency gates before holdout. This rejects the tested form within this cycle, not the general possibility that fiscal conditions affect Romanian sovereign yields."
+      }
     },
     {
       "id": "exchange_rate_pass_through_to_inflation",
       "classification": "CANDIDATE",
       "maps_to_dynamic_core_loop": null,
       "central_feedback": false,
-      "functional_form": "inflation = baseline_inflation + sum_k gamma_k*FX_depreciation[t-k]",
-      "implementation": "fx_pass_through_inflation",
-      "parameters": [
-        "gamma_1..gamma_K"
-      ],
-      "estimation_plan": "Re-estimate distributed-lag pass-through on the inflation-targeting/current-regime sample; test parameter stability and avoid importing pre-2005 magnitudes.",
+      "functional_form": "No admitted pass-through behavioural form. The preregistered monthly AR(2)+seasonal+UVI+FX-block candidate was tested on 2015-2020 and failed before holdout.",
+      "implementation": null,
+      "parameters": [],
+      "estimation_plan": "Freeze the 2026-09-19 tested monthly form at FAIL_BEFORE_HOLDOUT. Do not inspect 2021-01..2026-06 final-evaluation performance or search alternative transforms, AR orders, FX lag blocks, external-price lags, regime dummies or asymmetries on the same evidence cycle. Reopen only under a separately preregistered cycle triggered by genuinely new measurement or identification evidence.",
       "observables": [
-        "HICP_or_CPI_inflation",
-        "RON_EUR_exchange_rate",
-        "possibly_import_price_controls"
+        "HICP ECOICOP-v2 TOTAL index (2025=100)",
+        "RON/EUR ECB monthly-average exchange rate",
+        "Romania total-import/world unit-value index (external-price proxy)"
       ],
       "evidence": [
         "imf_2003_fx_pass_through",
@@ -271,15 +331,23 @@
         "ecb_convergence_2026_ro"
       ],
       "limits": [
-        "documented regime dependence",
-        "energy/tax/import-price shocks confound pass-through",
-        "managed-float interventions are endogenous"
+        "managed-float intervention and macro-policy responses make observed RON/EUR changes endogenous",
+        "UVI is a composition-sensitive external-price proxy rather than a direct transaction-price import-price index",
+        "the tested FX form showed stable positive cumulative coefficients but essentially no incremental predictive gain over the external-price baseline",
+        "final-evaluation months 2021-01..2026-06 remain unopened"
       ],
       "rejection_or_degradation_criteria": [
-        "distributed-lag weights unstable",
-        "no gain over inflation autoregression plus external-price baseline",
-        "historical coefficient confidence intervals include economically negligible pass-through on current regime"
-      ]
+        "tested monthly FX form failed incremental predictive gates before holdout",
+        "any future reopening requires new evidence and a separately preregistered cycle rather than post-result lag or transform search"
+      ],
+      "source_boundary_review": "model/calibration_validation/fx_inflation_pass_through_source_boundary_review.json",
+      "external_price_control_contract": "model/calibration_validation/fx_inflation_external_price_control_contract.json",
+      "monthly_materialisation_contract": "model/calibration_validation/fx_inflation_monthly_materialisation_contract.json",
+      "retained_source_vintage": "data/source_vintages/fx-inflation-monthly-levels-vintage-2026-09-19",
+      "source_vintage_promotion_review": "model/calibration_validation/fx_inflation_source_vintage_promotion_review.json",
+      "transform_lag_window_contract": "model/calibration_validation/fx_inflation_transform_lag_window_contract.json",
+      "structural_selection_contract": "model/calibration_validation/fx_inflation_structural_selection_contract.json",
+      "structural_selection_result": "model/calibration_validation/fx_inflation_structural_selection_result.json"
     },
     {
       "id": "credit_risk_npl_response",
@@ -294,7 +362,7 @@
         "beta_ds",
         "rho"
       ],
-      "estimation_plan": "Require a sufficiently long, definitionally stable NPL series plus debt-service/borrower-risk observables; preferably separate household and NFC risk.",
+      "estimation_plan": "Keep the mechanism DEFERRED. The quarterly Romania CBD2 NPL ratio is exact, but do not estimate the registered equation until a definitionally matched debt-service burden is retained and the target portfolio, activity observable, lag structure and treatment of regulatory breaks are frozen in a new preregistered cycle. Loan stocks, loan transactions, debt ratios, new-business rates or assumed maturities may not manufacture the missing debt-service variable.",
       "observables": [
         "NPL_ratio",
         "output_growth",
@@ -305,22 +373,25 @@
       ],
       "limits": [
         "regulatory definitions and portfolio clean-ups can break comparability",
-        "aggregate NPL is partly a stock-management outcome"
+        "aggregate NPL is partly a stock-management outcome",
+        "the exact quarterly NPL series does not by itself identify borrower debt-service burden or default incidence",
+        "loan stocks/transactions and new-business rates may not be combined with assumed maturity to synthesize debt service without a separate measurement contract"
       ],
       "rejection_or_degradation_criteria": [
         "no stable comparable NPL history",
         "risk parameters non-identifiable or driven by definitional breaks"
-      ]
+      ],
+      "source_boundary_review": "model/calibration_validation/credit_risk_npl_source_boundary_review.json"
     },
     {
       "id": "fiscal_primary_balance_reaction",
       "classification": "DEFERRED",
       "maps_to_dynamic_core_loop": "government_refinancing_interest_loop",
       "central_feedback": false,
-      "functional_form": "Delta primary_balance = f(debt_gap, output_gap, institutional/fiscal-package regime)",
+      "functional_form": "No admitted fiscal-reaction behavioural form. The preregistered annual lagged-state primary-balance candidate was tested on 2010-2017 and failed before holdout.",
       "implementation": null,
       "parameters": [],
-      "estimation_plan": "Do not impose a Taylor-style fiscal rule during the empirical-dynamics cycle. First encode discrete fiscal packages/institutional regimes and assess whether a stable reaction function exists.",
+      "estimation_plan": "Freeze the 2026-09-19 annual tested form at FAIL_BEFORE_HOLDOUT. Do not inspect 2018-2024 final-evaluation performance, search alternative lags or target transformations, add regime coefficients, or reinterpret the negative output-gap sign after observing the selection result. Reopen only in a separately preregistered cycle triggered by genuinely new measurement or identification evidence.",
       "observables": [
         "primary_balance",
         "debt_to_gdp",
@@ -334,12 +405,20 @@
       ],
       "limits": [
         "large discretionary packages and EDP constraints create regime shifts",
-        "short sample for a stable reaction function"
+        "the exact actual-only national annual sample is short",
+        "AMECO/EUCAM output gap is model-based and revision-sensitive rather than directly observed potential output",
+        "the tested lagged-state annual form underperformed naive primary-balance persistence and failed the preregistered output-gap sign-consistency gate"
       ],
       "rejection_or_degradation_criteria": [
-        "reaction coefficients regime-unstable",
-        "rule obscures discrete policy measures or performs worse than explicit exogenous fiscal-package representation"
-      ]
+        "tested annual form failed before holdout on predictive and parameter-domain gates",
+        "any future reopening requires genuinely new evidence and a separately preregistered cycle rather than post-result respecification"
+      ],
+      "source_boundary_review": "model/calibration_validation/fiscal_primary_balance_source_boundary_review.json",
+      "primary_balance_materialisation_contract": "model/calibration_validation/fiscal_primary_balance_materialisation_contract.json",
+      "annual_measurement_boundary": "model/calibration_validation/fiscal_reaction_annual_measurement_boundary_review.json",
+      "annual_source_vintage": "data/source_vintages/fiscal-reaction-ameco-actual-vintage-2026-09-19",
+      "annual_structural_selection_contract": "model/calibration_validation/fiscal_reaction_annual_structural_selection_contract.json",
+      "annual_structural_selection_result": "model/calibration_validation/fiscal_reaction_annual_structural_selection_result.json"
     },
     {
       "id": "monetary_policy_reaction_function",
@@ -349,7 +428,7 @@
       "functional_form": "policy_rate = f(inflation_gap, activity_gap, exchange_rate, expectations, regime)",
       "implementation": null,
       "parameters": [],
-      "estimation_plan": "Treat the policy rate as observed/exogenous for early empirical validation; estimate a reaction function only with explicit policy-regime and endogeneity treatment.",
+      "estimation_plan": "Keep the policy rate observed/exogenous. The 2026-09-19 source screening confirms the 2.5% ±1 pp target but finds no unit-compatible retained quantitative expectations series or quarterly real-time activity-gap vintage. Any future rule requires a separately preregistered expectations/gap/regime/endogeneity cycle.",
       "observables": [
         "policy_rate",
         "inflation_gap",
@@ -364,11 +443,15 @@
       "limits": [
         "simultaneous response to endogenous macro conditions",
         "managed-float and intervention channel",
-        "policy regime changes"
+        "policy regime changes",
+        "DG ECFIN consumer price expectations are qualitative balances rather than percent inflation expectations",
+        "AMECO output gaps are annual model-based values rather than quarterly real-time gaps",
+        "BNR staff forecasts are not private-sector expectations"
       ],
       "rejection_or_degradation_criteria": [
         "cannot identify policy shocks or stable regime-specific coefficients"
-      ]
+      ],
+      "source_boundary_review": "model/calibration_validation/monetary_policy_reaction_source_screening.json"
     },
     {
       "id": "external_fx_refinancing_feedback",
@@ -378,7 +461,7 @@
       "functional_form": "FX debt-service burden = f(currency-specific debt stock, FX move, maturity/refinancing schedule)",
       "implementation": null,
       "parameters": [],
-      "estimation_plan": "Require currency- and maturity-resolved external/public/private debt exposures before activation.",
+      "estimation_plan": "Keep the mechanism DEFERRED. ECB BPS confirms sector- and original-maturity-resolved Romanian external-debt stocks, but the confirmed series have currency denominator 'All currencies'; EUR/RON is only the reporting unit. Original maturity is not a residual-maturity refinancing schedule, and hedging is unobserved. Reopen only with compatible currency-denomination plus residual-maturity/refinancing evidence and an explicit hedging treatment; do not synthesize FX exposure from reporting units.",
       "observables": [
         "currency_specific_debt_stock",
         "exchange_rate",
@@ -391,11 +474,14 @@
       ],
       "limits": [
         "aggregate F4/F3 stocks are insufficient to infer currency exposure",
-        "hedging is unobserved in aggregate accounts"
+        "hedging is unobserved in aggregate accounts",
+        "ECB external-debt reporting unit does not identify debt currency denomination",
+        "original maturity does not identify residual maturity or principal due in the next model period"
       ],
       "rejection_or_degradation_criteria": [
         "currency/maturity exposure cannot be observed or bounded without synthetic allocation"
-      ]
+      ],
+      "source_boundary_review": "model/calibration_validation/external_fx_refinancing_source_boundary_review.json"
     },
     {
       "id": "direct_policy_rate_to_exchange_rate_shortcut",

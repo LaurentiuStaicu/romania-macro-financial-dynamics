@@ -14,7 +14,13 @@
       "role": "Observed forcing in early monetary-transmission validation; later endogenization requires a separately validated monetary-policy reaction function.",
       "source": "BIS / BNR policy-rate series retained by validation recovery",
       "time_resolution": "monthly",
-      "current_endogeneity": "EXOGENOUS_OBSERVED_INPUT"
+      "current_endogeneity": "EXOGENOUS_OBSERVED_INPUT",
+      "evidence": {
+        "normalized_series": "data/raw/validation_recovery/policy_rate_bis_monthly.csv",
+        "role_freeze": "data/provenance/validation_recovery_split.json",
+        "vintage_status": "data/provenance/validation_recovery_vintage_status.json",
+        "provenance_status": "NORMALIZED_SERIES_RECONCILED_RAW_BIS_TRANSPORT_ENVELOPE_NOT_EXACTLY_RECOVERED"
+      }
     },
     {
       "id": "household_lending_rate",
@@ -22,7 +28,13 @@
       "role": "Reference mode for household monetary pass-through.",
       "source": "ECB MIR household housing new-business RON rate",
       "time_resolution": "monthly",
-      "current_endogeneity": "OBSERVED_TARGET"
+      "current_endogeneity": "OBSERVED_TARGET",
+      "evidence": {
+        "normalized_series": "data/raw/validation_recovery/household_housing_mir_monthly.csv",
+        "role_freeze": "data/provenance/validation_recovery_split.json",
+        "vintage_status": "data/provenance/validation_recovery_vintage_status.json",
+        "provenance_status": "ECB_RAW_BYTE_IDENTICAL_RECOVERED_AND_NORMALIZED_SERIES_RECONCILED"
+      }
     },
     {
       "id": "nfc_lending_rate",
@@ -30,64 +42,141 @@
       "role": "Reference mode for NFC monetary pass-through.",
       "source": "ECB MIR NFC new-business RON rate, including short-fixation target used in validation recovery",
       "time_resolution": "monthly",
-      "current_endogeneity": "OBSERVED_TARGET"
+      "current_endogeneity": "OBSERVED_TARGET",
+      "evidence": {
+        "normalized_series": "data/raw/validation_recovery/nfc_upto1y_mir_monthly.csv",
+        "role_freeze": "data/provenance/validation_recovery_split.json",
+        "vintage_status": "data/provenance/validation_recovery_vintage_status.json",
+        "provenance_status": "ECB_RAW_BYTE_IDENTICAL_RECOVERED_AND_NORMALIZED_SERIES_RECONCILED"
+      }
     },
     {
       "id": "credit_stock",
-      "status": "SOURCE_IDENTIFIED_NOT_MATERIALIZED",
-      "role": "Required reference mode for bank-credit balance-sheet feedback.",
-      "source": "BNR/ECB monetary and financial statistics; exact canonical series pending boundary audit",
-      "time_resolution": "TBD",
-      "current_endogeneity": "UNRESOLVED"
+      "status": "OBSERVED_SERIES_AVAILABLE",
+      "role": "Observed monthly private non-financial credit stock reference mode: end-of-period ECB BSI loan stocks for domestic NFCs (S.11) plus households/NPISH (S.14/S.15), MFIs excluding the NCB, all currencies combined.",
+      "source": "ECB BSI exact S.11 and S.14/S.15 end-of-period loan-stock series for Romania; retained compact snapshot with immutable workflow provenance.",
+      "time_resolution": "monthly",
+      "current_endogeneity": "OBSERVED_TARGET",
+      "assessment": "model/dynamics/private_credit_reference_assessment.json",
+      "retained_snapshot": "model/dynamics/private_credit_reference_snapshot.json"
     },
     {
       "id": "credit_flow",
-      "status": "SOURCE_IDENTIFIED_NOT_MATERIALIZED",
-      "role": "Required reference mode for credit creation/contraction and monetary-credit transmission.",
-      "source": "ECB QSA/BNR candidate sources; exact transaction definition pending audit",
-      "time_resolution": "quarterly_or_monthly_TBD",
-      "current_endogeneity": "UNRESOLVED"
+      "status": "OBSERVED_SERIES_AVAILABLE",
+      "role": "Observed monthly private non-financial credit-flow reference mode: ECB BSI financial transactions for domestic NFCs (S.11) plus households/NPISH (S.14/S.15). It is not a first difference of the loan stock and not gross new-lending originations.",
+      "source": "ECB BSI exact S.11 and S.14/S.15 financial-transaction series for Romania; retained compact snapshot with immutable workflow provenance.",
+      "time_resolution": "monthly",
+      "current_endogeneity": "OBSERVED_TARGET",
+      "assessment": "model/dynamics/private_credit_reference_assessment.json",
+      "retained_snapshot": "model/dynamics/private_credit_reference_snapshot.json"
     },
     {
       "id": "government_debt_stock",
-      "status": "PARTIAL_SERIES_AVAILABLE",
-      "role": "Reference mode for government debt accumulation and refinancing dynamics.",
-      "source": "ECB QSA F3 plus GFS/Eurostat controls and Ministry of Finance debt data",
+      "status": "OBSERVED_SERIES_AVAILABLE",
+      "role": "Observed quarterly behaviour-over-time reference mode for consolidated general-government gross Maastricht debt at nominal/face value; distinct from market-valued financial-accounts liabilities and holder-by-issuer Accounting Spine stocks.",
+      "source": "Eurostat gov_10q_ggdebt, Romania S13 GD; retained MIO_NAC and PC_GDP source snapshot with immutable audit provenance.",
       "time_resolution": "quarterly",
-      "current_endogeneity": "ACCOUNTING_STOCK_PARTIALLY_MATERIALIZED"
+      "current_endogeneity": "OBSERVED_TARGET",
+      "assessment": "model/dynamics/government_debt_stock_reference_assessment.json",
+      "retained_snapshot": "model/dynamics/government_debt_stock_reference_snapshot.json"
     },
     {
       "id": "government_interest_burden",
-      "status": "SOURCE_IDENTIFIED_NOT_MATERIALIZED",
-      "role": "Reference mode for the interest-cost leg of government feedback.",
-      "source": "Eurostat/ECB government accounts and Ministry of Finance candidate sources; exact concept reconciliation pending",
-      "time_resolution": "quarterly_or_annual_TBD",
-      "current_endogeneity": "UNRESOLVED"
+      "status": "OBSERVED_SERIES_AVAILABLE",
+      "role": "Observed quarterly ESA general-government interest-expenditure reference mode for the interest-cost leg of government dynamics; it is not an effective interest rate, marginal yield, cash-interest measure, or refinancing-share estimate.",
+      "source": "Eurostat gov_10q_ggnfa, Romania S13 D41PAY, NSA; retained MIO_NAC and PC_GDP source snapshot with immutable audit provenance.",
+      "time_resolution": "quarterly",
+      "current_endogeneity": "OBSERVED_TARGET",
+      "assessment": "model/dynamics/government_interest_burden_reference_assessment.json",
+      "retained_snapshot": "model/dynamics/government_interest_burden_reference_snapshot.json"
     },
     {
       "id": "government_refinancing_need",
-      "status": "PARTIAL_SERIES_AVAILABLE",
-      "role": "Reference mode for refinancing pressure, distinct from maturity alone.",
-      "source": "Ministry of Finance maturity/refixing and issuance information; matched realized repricing remains incomplete",
-      "time_resolution": "instrument_or_period_specific",
-      "current_endogeneity": "UNRESOLVED_BEHAVIOURAL_DRIVER"
+      "status": "OBSERVED_SERIES_AVAILABLE",
+      "role": "Observed annual government-debt refinancing/liquidity-pressure reference mode using the Ministry of Finance principal-repayment/refinancing component. It is explicitly distinct from gross financing need, pre-financing, maturity/refixing shares and matched repricing events.",
+      "source": "Romania Ministry of Finance annual/monthly public-debt reports and completed-year execution sources; retained continuous 2013-2024 observed history under a frozen revision-precedence contract.",
+      "time_resolution": "annual",
+      "current_endogeneity": "OBSERVED_TARGET",
+      "assessment": "model/dynamics/government_refinancing_need_reference_assessment.json",
+      "retained_series": "data/processed/government_debt_refinancing_mof_2013_2024.csv",
+      "provenance": "data/provenance/government_debt_refinancing_mof_2013_2024.json",
+      "external_source_screening": "model/dynamics/government_refinancing_need_external_source_screening.json",
+      "promotion_contract": "model/dynamics/government_refinancing_need_promotion_contract.json",
+      "promotion_assessment": "model/dynamics/government_refinancing_need_promotion_assessment.json"
     },
     {
       "id": "government_effective_interest_rate",
-      "status": "SOURCE_IDENTIFIED_NOT_MATERIALIZED",
-      "role": "Reference mode for effective-rate dynamics; must not be substituted by marginal yield.",
-      "source": "Government interest expenditure and debt-stock data subject to accounting-concept reconciliation",
-      "time_resolution": "quarterly_or_annual_TBD",
-      "current_endogeneity": "UNRESOLVED"
+      "status": "OBSERVED_SERIES_AVAILABLE",
+      "role": "Observed annual year-end Ministry of Finance government-debt portfolio average interest-rate reference target. The source metric is a portfolio cost indicator and is not Eurostat apparent cost, a marginal sovereign yield, or an inferred repricing rate.",
+      "source": "Romania Ministry of Finance government debt-management strategies; retained 2014-2023 annual series and explicit source provenance.",
+      "time_resolution": "annual",
+      "current_endogeneity": "OBSERVED_TARGET",
+      "assessment": "model/dynamics/government_effective_interest_rate_reference_assessment.json",
+      "retained_series": "data/processed/government_debt_average_interest_rate_mof_2014_2023.csv",
+      "provenance": "data/provenance/government_debt_average_interest_rate_mof_2014_2023.json"
     },
     {
       "id": "sectoral_financial_positions",
       "status": "PARTIAL_SERIES_AVAILABLE",
-      "role": "Reference modes for holder-by-issuer financial stocks and transactions by instrument.",
-      "source": "ECB QSA Accounting Spine; F3 materialized, other instruments incomplete",
+      "role": "Partial sectoral-financial-position reference boundary. The original holder-by-issuer multi-instrument state remains governed by Accounting Readiness. A narrower aggregate behaviour-over-time boundary is scientifically admissible in principle; Phase A failed exact component coverage and Phase B recovered complete total-F/F1 source coverage but failed preregistered system reconciliation. No promotion is permitted.",
+      "source": "ECB QSA Accounting Spine and retained instrument-specific recovery artifacts; only F3 is canonically complete across stock and flow.",
       "time_resolution": "quarterly",
-      "current_endogeneity": "ACCOUNTING_CORE"
+      "current_endogeneity": "OBSERVED_PARTIAL_ACCOUNTING_REFERENCE",
+      "assessment": "model/dynamics/sectoral_financial_positions_reference_assessment.json",
+      "boundary_review": "model/dynamics/sectoral_financial_positions_boundary_review.json",
+      "strict_source_gate_assessment": "model/dynamics/sectoral_financial_positions_strict_gate_assessment.json",
+      "aggregate_identity_assessment": "model/dynamics/sectoral_financial_positions_aggregate_identity_assessment.json",
+      "rounding_consistency_assessment": "model/dynamics/sectoral_financial_positions_rounding_consistency_assessment.json",
+      "source_discrepancy_assessment": "model/dynamics/sectoral_financial_positions_source_discrepancy_assessment.json",
+      "exploratory_esa_f1_reaudit_assessment": "model/dynamics/sectoral_financial_positions_esa_f1_applicability_reaudit_assessment.json",
+      "historical_phase_b_assessment": "model/dynamics/sectoral_financial_positions_aggregate_identity_assessment.json",
+      "ecb_quality_context": "model/dynamics/sectoral_financial_positions_ecb_quality_context.json",
+      "exploratory_esa_f1_semantics_diagnostic_assessment": "model/dynamics/sectoral_financial_positions_esa_f1_semantics_diagnostic_assessment.json",
+      "post_run_s1n_boundary_diagnostic_contract": "model/dynamics/sectoral_financial_positions_s1n_boundary_diagnostic_contract.json",
+      "post_run_s1n_boundary_diagnostic_status": "EXECUTED_NEGATIVE_NO_REOPEN_EVIDENCE",
+      "post_run_s1n_boundary_diagnostic_effect": "NONE; all eight exact S1N F/F1 stock/flow asset/liability queries returned ECB HTTP 404 with no network errors, so the diagnostic does not justify a formal boundary retest or readiness promotion.",
+      "post_run_s1n_boundary_diagnostic_assessment": "model/dynamics/sectoral_financial_positions_s1n_boundary_diagnostic_assessment.json",
+      "post_run_s1n_boundary_diagnostic_vintage": "data/source_vintages/sectoral-financial-positions-s1n-boundary-vintage-2026-09-19",
+      "external_source_screening": "model/dynamics/sectoral_financial_positions_external_source_screening.json",
+      "oecd_counterpart_discovery_probe_contract": "model/dynamics/sectoral_financial_positions_oecd_counterpart_probe_contract.json",
+      "oecd_counterpart_discovery_probe_status": "EXECUTED_PASS_SEMANTIC_REVIEW_FAIL_SECTOR_SCOPE",
+      "oecd_counterpart_discovery_probe_effect": "NO_REOPEN; discovery and F2-F8 instrument scope passed, but frozen semantic review failed because Romania counterpart tables do not expose S121 central bank required for BNR and F=S12-S121.",
+      "external_reopen_screening_summary": "Eurostat nasq_10_f_cp passes counterpart discovery but fails complete F2-F8 instrument scope; OECD quarterly counterpart stocks/flows pass complete F2-F8 discovery but Romania lacks S121; the BNR annual CNF report supplies a non-consolidated 2024 counterpart stock matrix with S121 and AF2-AF8 but not the required quarterly stock+transaction history; and the BNR quarterly financial-accounts publication supplies a long stock/transaction sequence only for consolidated S13, not the full non-consolidated RMD sector-by-counterpart boundary. No current public source satisfies the full frozen boundary.",
+      "eurostat_counterpart_discovery_probe_contract": "model/dynamics/sectoral_financial_positions_eurostat_counterpart_probe_contract.json",
+      "eurostat_counterpart_discovery_probe_status": "EXECUTED_PASS_SEMANTIC_REVIEW_FAIL_INSTRUMENT_SCOPE",
+      "eurostat_counterpart_discovery_probe_effect": "NO_REOPEN; discovery confirmed Romania counterpart data, but frozen semantic review failed because the public instrument set does not cover complete RMD F2-F8.",
+      "eurostat_counterpart_discovery_probe_execution_state": "EXECUTED_MANUAL_RERUN_ATTEMPT_2",
+      "eurostat_counterpart_discovery_probe_execution_effect": "NONE UNTIL RETAINED RESULT REVIEW; Scientific CI provides a manual-only branch-ref bridge without enabling automatic PR/push acquisition.",
+      "oecd_counterpart_discovery_probe_execution_state": "EXECUTED_MANUAL_RERUN_ATTEMPT_2",
+      "oecd_counterpart_discovery_probe_execution_effect": "NONE UNTIL RETAINED RESULT REVIEW; Scientific CI provides a manual-only branch-ref bridge, and provider throttling/access failures remain indeterminate.",
+      "external_semantic_lineage_review_contract": "model/dynamics/sectoral_financial_positions_external_semantic_lineage_review_contract.json",
+      "external_semantic_lineage_review_status": "EUROSTAT_FAIL_INSTRUMENT_SCOPE_OECD_FAIL_SECTOR_SCOPE",
+      "external_semantic_lineage_review_effect": "No current public external counterpart source is semantically admissible on the frozen RMD boundary; readiness remains unchanged.",
+      "eurostat_counterpart_discovery_probe_vintage": "data/source_vintages/sectoral-financial-positions-eurostat-counterpart-discovery-vintage-2026-09-19",
+      "eurostat_counterpart_semantic_review_assessment": "model/dynamics/sectoral_financial_positions_eurostat_counterpart_discovery_assessment.json",
+      "oecd_counterpart_discovery_probe_vintage": "data/source_vintages/sectoral-financial-positions-oecd-counterpart-discovery-vintage-2026-09-19",
+      "oecd_counterpart_semantic_review_assessment": "model/dynamics/sectoral_financial_positions_oecd_counterpart_discovery_assessment.json",
+      "external_counterpart_recovery_state": "FROZEN_UNTIL_NEW_SOURCE_OR_CHANGED_DATASET_TRIGGER",
+      "bnr_cnf_source_screening": "model/dynamics/sectoral_financial_positions_bnr_cnf_source_screening.json",
+      "bnr_cnf_source_screening_status": "OFFICIAL_ANNUAL_COUNTERPART_STOCK_MATRIX_CONFIRMED_FREQUENCY_AND_TRANSACTION_HISTORY_FAIL_NO_REOPEN",
+      "reference_mode_recovery_terminal_assessment": "model/dynamics/reference_mode_recovery_terminal_assessment.json",
+      "reference_mode_recovery_stage_status": "STAGE_COMPLETE_FROZEN_9_OF_10_UNDER_CURRENT_PUBLIC_EVIDENCE_BOUNDARY",
+      "bnr_quarterly_s13_source_screening": "model/dynamics/sectoral_financial_positions_bnr_quarterly_s13_source_screening.json",
+      "bnr_quarterly_s13_source_screening_status": "OFFICIAL_QUARTERLY_S13_FINANCIAL_ACCOUNTS_CONFIRMED_FREQUENCY_PASS_SECTOR_COUNTERPART_CONSOLIDATION_FAIL_NO_REOPEN"
     }
   ],
-  "closure_rule": "Integrated behavioural closure may not be declared validated until the reference modes required by each active loop have explicit observed targets or a documented reason why only qualitative/reference-pattern validation is possible."
+  "closure_rule": "Integrated behavioural closure may not be declared validated until the reference modes required by each active loop have explicit observed targets or a documented reason why only qualitative/reference-pattern validation is possible.",
+  "closure_readiness_policy": {
+    "ready_statuses_for_integrated_quantitative_closure": [
+      "OBSERVED_SERIES_AVAILABLE"
+    ],
+    "qualitative_exception_requires_explicit_contract_change": true,
+    "qualitative_exception_required_fields": [
+      "id",
+      "validation_basis",
+      "justification"
+    ],
+    "current_qualitative_exceptions": [],
+    "rule": "A required reference mode counts as ready for integrated quantitative behavioural-closure validation only when it has an observed series under a ready status, unless a future explicit contract change registers a mode-specific qualitative exception with a stated validation basis and justification. Partial, source-identified, or unresolved modes remain blockers."
+  }
 }

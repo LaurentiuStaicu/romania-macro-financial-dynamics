@@ -1,0 +1,103 @@
+{
+  "assessment_version": "0.1",
+  "assessed_on": "2026-09-19",
+  "stage": "Scientific Baseline Consolidation / Merge Readiness",
+  "status": "NOT_READY_REVIEWABILITY_BLOCKER_SCIENTIFIC_BASELINE_GREEN",
+  "purpose": "Assess whether the completed scientific-integrity branch is suitable to leave draft and become review/merge-ready without changing scientific conclusions, releasing a version, or merging automatically.",
+  "pull_request": {
+    "number": 47,
+    "base": "main",
+    "head": "audit/scientific-integrity-2026-09-18",
+    "head_sha": "24f7d03a2408c22069fa8ad48260b190114874a6",
+    "state": "open",
+    "draft": true,
+    "mergeable": true,
+    "commits": 870,
+    "changed_files": 483,
+    "additions": 240418,
+    "deletions": 427,
+    "reviews": 0,
+    "review_threads": 0,
+    "comments": 0
+  },
+  "scientific_gate": {
+    "scientific_ci": "SUCCESS",
+    "all_head_workflows_success": true,
+    "validation_recovery_stage": "STAGE_COMPLETE_EVIDENCE_TRIGGERED_BASELINE_HOLD",
+    "active_calibration_cycle_open": false,
+    "behavioural_closure_active": false,
+    "validated_reference_behavioural_mechanisms": 0,
+    "verdict": "PASS"
+  },
+  "reviewability_gate": {
+    "github_documentation": {
+      "repository_limits_url": "https://docs.github.com/en/repositories/creating-and-managing-repositories/repository-limits",
+      "review_guidance_url": "https://docs.github.com/en/pull-requests/concepts/helping-others-review-your-changes",
+      "documented_diff_file_limit": 300,
+      "documented_loadable_diff_line_limit": 20000,
+      "documented_compare_commit_listing_limit": 250
+    },
+    "observed_changed_files": 483,
+    "observed_additions": 240418,
+    "observed_commits": 870,
+    "exceeds_diff_file_limit": true,
+    "exceeds_loadable_diff_line_limit": true,
+    "exceeds_compare_commit_listing_limit": true,
+    "verdict": "FAIL"
+  },
+  "payload_characterization": {
+    "changed_data_files": 102,
+    "changed_data_bytes_at_head": 10263610,
+    "large_source_vintage_payload_is_arbitrary_generated_junk": false,
+    "exact_offline_vintage_retention_is_scientifically_governed": true,
+    "examples": [
+      {
+        "path": "data/source_vintages/bnr-legacy-xls-cell-extraction-vintage-2026-09-19",
+        "rationale": "Tests freeze exact retained extraction files, byte sizes and SHA-256 hashes."
+      },
+      {
+        "path": "data/source_vintages/sovereign-yield-quarterly-vintage-2026-09-19",
+        "rationale": "Tests require the exact reviewed raw and normalized vintage with raw-to-normalized lineage."
+      },
+      {
+        "path": "data/source_vintages/fiscal-reaction-ameco-actual-vintage-2026-09-19",
+        "rationale": "Tests require the exact reviewed AMECO raw ZIPs and normalized actual-only history."
+      }
+    ],
+    "disposition": "DO_NOT_DELETE_OR_REGENERATE_AD_HOC_TO_SHRINK_PR"
+  },
+  "metadata_consistency": {
+    "readme_current_status_before_repair": "STALE_VALIDATION_RECOVERY_IN_PROGRESS",
+    "v0_1_0_release_note_current_wording_before_repair": "AMBIGUOUS_HISTORICAL_CURRENT_STAGE_WORDING",
+    "required_repair": "COMPLETED",
+    "readme_current_status_after_repair": "EVIDENCE_TRIGGERED_BASELINE_HOLD",
+    "v0_1_0_release_note_after_repair": "EXPLICIT_HISTORICAL_SNAPSHOT_WORDING"
+  },
+  "blockers": [
+    "The PR is too large for complete GitHub diff rendering/review under documented platform limits.",
+    "The commit history is larger than GitHub's compare commit-listing limit.",
+    "A substantial fraction of the diff is immutable source-vintage provenance that is scientifically retained and should not be deleted merely to reduce review size."
+  ],
+  "permitted_next_actions": [
+    "Repair stale public metadata without changing version/tag/release.",
+    "Keep PR #47 draft.",
+    "Prepare a non-destructive consolidation/splitting strategy that preserves the exact terminal tree and provenance.",
+    "Run clean-checkout and scientific CI on any proposed consolidated review series before considering it equivalent."
+  ],
+  "prohibited_next_actions": [
+    "Mark PR #47 ready for review solely because CI is green.",
+    "Merge PR #47 automatically.",
+    "Delete retained source vintages solely to make the diff smaller.",
+    "Change release/tag/version as part of this gate.",
+    "Rewrite scientific boundaries or reopen failed empirical cycles to create a smaller patch."
+  ],
+  "merge_readiness": {
+    "scientific_integrity_ready": true,
+    "github_reviewability_ready": false,
+    "metadata_consistency_ready_after_repair": true,
+    "overall_merge_ready": false,
+    "human_merge_decision_authorized_by_this_assessment": false
+  },
+  "recommended_next_state": "DRAFT_CONSOLIDATION_REQUIRED_BEFORE_REVIEW_READY",
+  "assessment_snapshot_note": "PR size metrics are frozen from head 24f7d03a2408c22069fa8ad48260b190114874a6 before this merge-readiness gate and metadata-repair commits; subsequent gate-only commits can only increase commit/file/diff size and therefore cannot invalidate the reviewability FAIL conclusion."
+}

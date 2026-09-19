@@ -1,0 +1,116 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "fiscal_primary_balance_reaction",
+  "purpose": "Freeze the scientifically admissible measurement frequency and observable family before any fiscal-reaction model selection. The retained quarterly primary balance remains valid source evidence, but the reaction-function boundary is moved to annual frequency because the official Commission output gap is annual/model-based.",
+  "verdict": "ANNUAL_REACTION_BOUNDARY_REQUIRED_QUARTERLY_REACTION_NOT_ADMISSIBLE",
+  "frequency_decision": {
+    "selected": "annual",
+    "rejected": "quarterly",
+    "rationale": [
+      "The Commission AMECO output gap AVGDGP is an annual estimate from the EU Commonly Agreed Methodology; no official quarterly counterpart is frozen.",
+      "Interpolating or forward-filling annual output gaps into quarterly observations would manufacture pseudo-information and understate measurement uncertainty.",
+      "A source-consistent annual AMECO family exists for primary balance, output gap and Maastricht/EDP debt."
+    ]
+  },
+  "annual_observable_family": {
+    "primary_balance": {
+      "source": "European Commission AMECO",
+      "variable": "UBLGI",
+      "concept": "Net lending (+) or net borrowing (-) excluding interest: general government, ESA 2010",
+      "preferred_unit": "Percentage of GDP at current prices (excessive deficit procedure)",
+      "source_chapter_zip": "https://ec.europa.eu/economy_finance/db_indicators/ameco/documents/ameco16.zip"
+    },
+    "output_gap": {
+      "source": "European Commission AMECO / EUCAM",
+      "variable": "AVGDGP",
+      "concept": "Gap between actual and potential gross domestic product",
+      "unit": "Percentage of potential gross domestic product at constant prices",
+      "source_chapter_zip": "https://ec.europa.eu/economy_finance/db_indicators/ameco/documents/ameco6.zip",
+      "methodology": "EU Commonly Agreed Methodology (EUCAM)",
+      "methodology_url": "https://economy-finance.ec.europa.eu/publications/eus-commonly-agreed-production-function-methodology-estimating-potential-output-eucam_en"
+    },
+    "debt": {
+      "source": "European Commission AMECO",
+      "variable": "UDGG",
+      "concept": "General government consolidated gross debt: Excessive deficit procedure, ESA 2010",
+      "preferred_unit": "Percentage of GDP at current prices (excessive deficit procedure)",
+      "source_chapter_zip": "https://ec.europa.eu/economy_finance/db_indicators/ameco/documents/ameco18.zip"
+    }
+  },
+  "release_boundary": {
+    "current_release": "Spring 2026 Economic Forecast",
+    "release_date": "2026-06-03",
+    "release_page": "https://economy-finance.ec.europa.eu/economic-research-and-databases/economic-databases/ameco-database_en",
+    "estimation_observations_may_include_forecasts": false,
+    "latest_completed_year_allowed_in_first_vintage": 2024,
+    "forecast_years_2025_2027_excluded": true
+  },
+  "debt_gap_decision": {
+    "registered_debt_gap_rejected": true,
+    "replacement_for_future_candidate": "lagged_debt_to_gdp_level",
+    "reason": "No stable empirically observed Romanian debt target has been identified. The Treaty 60% debt reference value is a legal surveillance reference, not evidence that Romanian primary-balance policy reacts to a fixed debt gap around 60%. The post-2024 framework is based on country-specific medium-term/net-expenditure paths and sustainability safeguards.",
+    "no_60pct_gap_construction": true
+  },
+  "ex_ante_regime_evidence": {
+    "romanian_edp_2009_2013": {
+      "start_decision": "2009-07-07",
+      "abrogation": "2013-06-21",
+      "source": "https://eur-lex.europa.eu/eli/dec/2013/318/oj/eng"
+    },
+    "romanian_edp_2020_present": {
+      "start_decision": "2020-04-03",
+      "source": "https://economy-finance.ec.europa.eu/economic-governance-framework/stability-and-growth-pact/corrective-arm-excessive-deficit-procedure/excessive-deficit-procedures-overview/romania_en"
+    },
+    "general_escape_clause": {
+      "active_years_for_annual_descriptive_boundary": [
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "activation": "2020-03-23",
+      "deactivated_end_of": 2023,
+      "sources": [
+        "https://www.consilium.europa.eu/en/press/press-releases/2020/03/23/statement-of-eu-ministers-of-finance-on-the-stability-and-growth-pact-in-light-of-the-covid-19-crisis/",
+        "https://economy-finance.ec.europa.eu/document/download/a3bb3063-6478-44a5-a270-933e49fb304b_en?filename=ip294_en.pdf"
+      ]
+    },
+    "reformed_eu_fiscal_framework": {
+      "effective_date": "2024-04-30",
+      "source": "http://data.europa.eu/eli/reg/2024/1263/oj",
+      "observed_completed_years_in_first_boundary": [
+        2024
+      ]
+    },
+    "revised_romania_corrective_path": {
+      "effective_recommendation_date": "2025-07-08",
+      "source": "https://www.consilium.europa.eu/en/press/press-releases/2025/07/08/stability-and-growth-pact-council-opens-new-excessive-deficit-procedure-for-austria-and-revises-the-corrective-path-for-romania/",
+      "enters_first_actual_vintage": false
+    }
+  },
+  "regime_identification_boundary": {
+    "regime_dummies_authorized_for_estimation_now": false,
+    "reason": "The first actual-only annual boundary ends in 2024, leaving only one completed year under the reformed framework and strong overlap between the 2020 EDP and the 2020-2023 general escape clause. Separate regime coefficients would therefore be weakly or non-identifiable in a single-country annual sample.",
+    "retain_regime_timeline_for_future_reopening": true
+  },
+  "next_gate": "Preregister one parsimonious annual structural-selection candidate family before any fit. Freeze whether the target is primary-balance level or change, lag/timing conventions for AVGDGP and UDGG, baseline model, selection/evaluation windows and identifiability gates. Regime coefficients remain prohibited in the first cycle.",
+  "hard_rules": {
+    "no_quarterly_output_gap_interpolation": true,
+    "no_quarterly_reaction_estimation": true,
+    "no_debt_gap_60pct_substitution": true,
+    "no_forecast_years_in_estimation_sample": true,
+    "no_regime_coefficients_yet": true,
+    "no_parameter_estimation": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "source_materialisation": {
+    "status": "EXACT_ACTUAL_ONLY_AMECO_SOURCE_VINTAGE_RETAINED",
+    "path": "data/source_vintages/fiscal-reaction-ameco-actual-vintage-2026-09-19",
+    "coverage": "1995-2024",
+    "rows": 30,
+    "normalized_csv_sha256": "4d6ab4c737ffb50d48d4866539e6f069b03bc90945bc7a645ac4bd7f88ef2193",
+    "promotion_review": "model/calibration_validation/fiscal_reaction_ameco_source_vintage_promotion_review.json"
+  }
+}

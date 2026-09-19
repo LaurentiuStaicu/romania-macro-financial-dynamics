@@ -39,7 +39,16 @@
       "Behavioural Closure": "INACTIVE",
       "Empirical Parameterization": "PARTIAL_AND_MECHANISM_SPECIFIC",
       "Validation": "PARTIAL_RETROSPECTIVE_WITH_NO_VALIDATED_REFERENCE_BEHAVIOURAL_MECHANISM"
-    }
+    },
+    "accounting_readiness_gate": "model/accounting/accounting_readiness_gate.json",
+    "canonical_multi_instrument_stock_initialization_ready": false,
+    "canonical_full_2025_stock_flow_benchmark_ready": false,
+    "reference_mode_closure_ready": false,
+    "reference_mode_ready_count": 9,
+    "reference_mode_required_count": 10,
+    "reference_mode_recovery_terminal_assessment": "model/dynamics/reference_mode_recovery_terminal_assessment.json",
+    "reference_mode_recovery_stage_status": "STAGE_COMPLETE_FROZEN_9_OF_10_UNDER_CURRENT_PUBLIC_EVIDENCE_BOUNDARY",
+    "reference_mode_recovery_next_operational_state": "EVIDENCE_TRIGGERED_BASELINE_HOLD"
   },
   "empirical_dynamics": {
     "contract": "model/empirical_dynamics/contract.json",
@@ -48,7 +57,10 @@
     "activated_means_admitted_for_calibration_not_precalibrated": true,
     "unparameterized_behaviour_may_not_drive_reference_simulation": true,
     "activated_label_is_not_feedback_activation": true,
-    "feedback_activation_requires_system_dynamics_conformity_gate": true
+    "feedback_activation_requires_system_dynamics_conformity_gate": true,
+    "active_calibration_cycle_open": false,
+    "activated_mechanisms_count": 0,
+    "validation_disposition_governs_current_status": true
   },
   "calibration_validation": {
     "validation_recovery_contract": "model/calibration_validation/validation_recovery_contract.json",
@@ -59,6 +71,26 @@
     "government_repricing_ledger_contract": "model/calibration_validation/government_repricing_ledger_contract.json",
     "government_repricing_ledger_assessment": "model/calibration_validation/government_repricing_ledger_assessment.json",
     "validated_reference_behavioural_mechanisms": 0,
-    "fresh_future_confirmation_from": "2026-08"
+    "fresh_future_confirmation_from": "2026-08",
+    "prospective_monetary_confirmation_status": "model/calibration_validation/prospective_monetary_confirmation_status.json",
+    "prospective_monetary_confirmation_contract": "model/calibration_validation/prospective_monetary_confirmation_contract.json",
+    "mechanism_source_readiness": "model/calibration_validation/mechanism_source_readiness.json",
+    "mechanism_reopen_conditions_registry": "model/calibration_validation/mechanism_reopen_conditions_registry.json"
+  },
+  "scientific_baseline_manifest": "model/registries/scientific_baseline_manifest.json",
+  "scientific_stage": {
+    "name": "Validation Recovery / Empirical Basis Expansion",
+    "terminal_assessment": "model/registries/validation_recovery_stage_terminal_assessment.json",
+    "status": "STAGE_COMPLETE_EVIDENCE_TRIGGERED_BASELINE_HOLD",
+    "next_operational_state": "EVIDENCE_TRIGGERED_BASELINE_HOLD",
+    "model_complete": false,
+    "release_ready": false
+  },
+  "repository_governance": {
+    "merge_readiness_assessment": "model/registries/scientific_baseline_merge_readiness_assessment.json",
+    "current_merge_readiness_status": "NOT_READY_REVIEWABILITY_BLOCKER_SCIENTIFIC_BASELINE_GREEN",
+    "pull_request_must_remain_draft": true,
+    "automatic_merge_authorized": false,
+    "release_or_version_change_authorized": false
   }
 }

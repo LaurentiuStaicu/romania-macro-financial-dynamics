@@ -1,0 +1,96 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "mechanism_id": "fiscal_primary_balance_reaction",
+  "phase": "Fiscal Reaction — AMECO Actual-Only Annual Source Materialisation",
+  "purpose": "Materialise one source-consistent annual Romania table for the preregistered fiscal-reaction observables after the AMECO structure probe resolved exact provider rows. This source gate does not estimate a reaction function.",
+  "estimation_authorized": false,
+  "source_release": {
+    "institution": "European Commission DG ECFIN",
+    "database": "AMECO",
+    "release": "Spring 2026 Economic Forecast",
+    "release_date": "2026-06-03",
+    "release_page": "https://economy-finance.ec.europa.eu/economic-research-and-databases/economic-databases/ameco-database_en",
+    "actual_only_last_year": 2024,
+    "forecast_years_excluded": [
+      2025,
+      2026,
+      2027
+    ]
+  },
+  "sources": [
+    {
+      "id": "output_gap",
+      "url": "https://ec.europa.eu/economy_finance/db_indicators/ameco/documents/ameco6.zip",
+      "member": "AMECO6.TXT",
+      "code": "ROM.1.0.0.0.AVGDGP",
+      "country": "Romania",
+      "variable": "AVGDGP",
+      "concept": "Gap between actual and potential gross domestic product at 2020 reference levels",
+      "unit": "(Percentage of potential gross domestic product at constant prices)"
+    },
+    {
+      "id": "primary_balance",
+      "url": "https://ec.europa.eu/economy_finance/db_indicators/ameco/documents/ameco16.zip",
+      "member": "AMECO16.TXT",
+      "code": "ROM.1.0.319.0.UBLGI",
+      "country": "Romania",
+      "variable": "UBLGI",
+      "concept": "Net lending (+) or net borrowing (-) excluding interest: general government",
+      "unit": "(Percentage of GDP at current prices (excessive deficit procedure))"
+    },
+    {
+      "id": "debt",
+      "url": "https://ec.europa.eu/economy_finance/db_indicators/ameco/documents/ameco18.zip",
+      "member": "AMECO18.TXT",
+      "code": "ROM.1.0.319.0.UDGG",
+      "country": "Romania",
+      "variable": "UDGG",
+      "concept": "General government consolidated gross debt :- Excessive deficit procedure (based on ESA 2010)",
+      "unit": "(Percentage of GDP at current prices (excessive deficit procedure))"
+    }
+  ],
+  "coverage_gate": {
+    "first_expected_common_actual_year": 1995,
+    "last_expected_common_actual_year": 2024,
+    "expected_common_actual_observations": 30,
+    "common_finite_years_only": true,
+    "no_interpolation": true,
+    "no_forward_fill": true,
+    "no_missing_to_zero": true
+  },
+  "output_schema": [
+    "year",
+    "primary_balance_pct_gdp",
+    "output_gap_pct_potential_gdp",
+    "debt_pct_gdp",
+    "source_status"
+  ],
+  "vintage_rules": {
+    "fetch_all_chapter_zips_in_same_live_run": true,
+    "retain_exact_zip_bytes_and_sha256": true,
+    "retain_exact_selected_row_bytes_and_sha256": true,
+    "retain_normalized_output_hash": true,
+    "retain_materializer_script_hash": true,
+    "source_vintage_contract": "data/provenance/source_vintage_contract.json"
+  },
+  "hard_rules": {
+    "no_forecast_years_in_output": true,
+    "no_quarterly_interpolation": true,
+    "no_debt_gap_construction": true,
+    "no_regime_dummy_construction": true,
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_causal_claim": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true,
+    "live_provider_work_manual_only": true
+  },
+  "result_effect": {
+    "if_materialisation_passes": "SOURCE_EVIDENCE_READY_FOR_EXPLICIT_REPOSITORY_SNAPSHOT_REVIEW_ONLY",
+    "calibration_cycle_open": false,
+    "mechanism_classification": "DEFERRED",
+    "validated_reference_behavioural_mechanisms_change": 0
+  },
+  "next_gate": "After explicit source-vintage review and repository retention, preregister a separate annual structural-selection candidate family and identifiability windows before any coefficient estimation."
+}

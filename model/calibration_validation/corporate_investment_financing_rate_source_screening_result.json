@@ -1,0 +1,74 @@
+{
+  "result_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "corporate_investment_response",
+  "phase": "Corporate Investment — Financing-Rate Source Continuity Screening",
+  "verdict": "UP_TO_ONE_YEAR_FIXATION_MEASUREMENT_ELIGIBLE_TOTAL_FIXATION_TOO_SPARSE",
+  "model_outcomes_used": false,
+  "estimation_authorized": false,
+  "reviewed_workflow": {
+    "run_id": 35435860757,
+    "artifact_id": 10582283925,
+    "artifact_name": "corporate-investment-financing-rate-screening-70c8f54befe75b8331c613e53d968266fba93bbe",
+    "artifact_zip_sha256": "cf63ce2efa2622bb9ac40a232f4c5a477b124e07565653df5a5f7e964e6b5203",
+    "pr_merge_sha": "70c8f54befe75b8331c613e53d968266fba93bbe",
+    "source_branch_head_sha": "aaec8ed1b7506156b061d8c18bebc7f16a732bc7"
+  },
+  "expected_files": [
+    {
+      "path": "corporate_investment_financing_rate_source_screening.json",
+      "bytes": 3306,
+      "sha256": "5274d90959b959461f6e866204bbf4572d36b1a93b6872de1787498d5badb374"
+    },
+    {
+      "path": "total_fixation.csv",
+      "bytes": 110687,
+      "sha256": "c477b14e6770564000d015d00ce7f06314013108949f30cfce474315c4597796"
+    },
+    {
+      "path": "up_to_one_year_fixation.csv",
+      "bytes": 70356,
+      "sha256": "eb80c64535727f194348a0ba7c04356cea761884273b332af55eac79addcf1c0"
+    }
+  ],
+  "source_continuity": {
+    "total_fixation": {
+      "series_key": "MIR.M.RO.B.A2A.A.R.A.2240.RON.N",
+      "finite_observations": 88,
+      "first_period": "2017-09",
+      "last_period": "2026-07",
+      "finite_month_coverage_fraction": 0.822429906542056,
+      "complete_three_month_quarters": 19,
+      "complete_quarter_coverage_fraction": 0.5428571428571428,
+      "longest_consecutive_month_run": 17
+    },
+    "up_to_one_year_fixation": {
+      "series_key": "MIR.M.RO.B.A2A.F.R.A.2240.RON.N",
+      "finite_observations": 108,
+      "first_period": "2017-08",
+      "last_period": "2026-07",
+      "finite_month_coverage_fraction": 1,
+      "complete_three_month_quarters": 35,
+      "complete_quarter_coverage_fraction": 1,
+      "longest_consecutive_month_run": 108
+    }
+  },
+  "preregistered_rule": {
+    "minimum_alternative_complete_quarter_coverage_fraction": 0.9,
+    "minimum_advantage_over_total_fixation": 0.2,
+    "alternative_passed": true
+  },
+  "scientific_interpretation": "The narrower up-to-one-year initial-rate-fixation family is eligible as the financing-cost measurement because it passes the preregistered source-continuity gate without using investment outcomes. It remains a marginal new-business rate for this fixation family and may not be relabelled as the effective rate on the outstanding NFC debt stock or as a total-all-fixations rate.",
+  "hard_boundaries": {
+    "automatic_behavioural_admission": false,
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_investment_outcome_access": true,
+    "no_lag_selection": true,
+    "no_holdout_opening": true,
+    "no_causal_claim": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "promotion_rule": "Only artifact 10582283925 with the exact ZIP digest and per-file byte sizes/SHA-256 values above may be retained as the financing-rate screening source vintage."
+}

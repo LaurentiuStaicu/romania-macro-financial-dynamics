@@ -1,0 +1,89 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "reference_mode": "sectoral_financial_positions",
+  "phase": "BNR Quarterly Financial Accounts S13 Source Screening",
+  "purpose": "Classify the indexed BNR quarterly financial-accounts publication for general government (S13) against the frozen RMD sectoral-financial-position boundary, after terminal-stage audit identified it as a distinct national quarterly dissemination path.",
+  "official_source": {
+    "institution": "National Bank of Romania",
+    "title": "Conturile financiare trimestriale ale sectorului institutional Administratii publice (S.13) - Trimestrul II 2024",
+    "url": "https://bnro.ro/files/d/Statistica/seturi%20de%20date/Conturi_fin_trim/Analiza%20conturi%20financiare%20trimestriale%20administratii%20publice%202024T2.pdf",
+    "latest_indexed_reference_period_in_screening": "2024-Q2",
+    "history_start": "1998-Q4",
+    "frequency": "quarterly",
+    "data_status": "semifinal for 2024-Q2 publication"
+  },
+  "confirmed_semantics": {
+    "reporting_sector": "S13 general government and its subsectors S1311, S1313, S1314",
+    "consolidation": "consolidated within and across the reported general-government subsectors",
+    "financial_instrument_detail": true,
+    "sequence_of_accounts": [
+      "stocks",
+      "financial transactions",
+      "revaluations",
+      "other changes in volume"
+    ],
+    "quarterly_history_available": true
+  },
+  "frozen_rmd_boundary_comparison": {
+    "required_frequency": "quarterly",
+    "frequency_pass": true,
+    "required_rmd_sectors": [
+      "H",
+      "C",
+      "F",
+      "G",
+      "X",
+      "BNR"
+    ],
+    "required_instruments": [
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7",
+      "F8"
+    ],
+    "required_measures": [
+      "stock",
+      "financial_transaction"
+    ],
+    "required_counterpart_structure": true,
+    "required_consolidation": "non-consolidated sector/counterpart positions and transactions compatible with the RMD reference boundary",
+    "sector_scope_pass": false,
+    "counterpart_structure_pass": false,
+    "consolidation_pass": false,
+    "instrument_and_sequence_evidence_useful": true
+  },
+  "decisive_limits": [
+    "The publication covers only S13 and its general-government subsectors; it does not expose the full RMD sector set H/C/F/G/BNR/X.",
+    "The published quarterly S13 series are consolidated, while the frozen RMD sectoral-position boundary requires non-consolidated sector/counterpart positions and transactions.",
+    "The indexed publication describes claims and liabilities by financial instrument and sequence-of-account category, not a complete quarterly who-to-whom matrix across the required RMD sectors.",
+    "Therefore the source cannot identify S121 central bank, the non-central-bank financial sector F, households/NPISH, NFCs and rest-of-world counterpart structure simultaneously on the frozen boundary."
+  ],
+  "verdict": "OFFICIAL_QUARTERLY_S13_FINANCIAL_ACCOUNTS_CONFIRMED_FREQUENCY_PASS_SECTOR_COUNTERPART_CONSOLIDATION_FAIL_NO_REOPEN",
+  "disposition": {
+    "formal_reopen_trigger_satisfied": false,
+    "reference_mode_status_change": false,
+    "current_reference_mode_status": "PARTIAL_SERIES_AVAILABLE",
+    "readiness_change": 0,
+    "current_readiness": "9/10",
+    "exact_historical_extraction_authorized": false,
+    "reference_mode_promotion_authorized": false,
+    "accounting_readiness_change": false,
+    "system_dynamics_activation": false,
+    "behavioural_closure_change": false
+  },
+  "non_reopen_conditions": [
+    "Use S13-only quarterly accounts as if they represented all required RMD sectors.",
+    "Treat consolidated S13 data as non-consolidated sector/counterpart positions.",
+    "Infer missing counterpart sectors from instrument totals.",
+    "Combine the S13 publication with unrelated marginal sector series through residual allocation.",
+    "Relax the frozen full-sector counterpart boundary because this national quarterly source has a long history."
+  ],
+  "reopen_value": {
+    "source_family_classified": true,
+    "future_value": "The source is useful as an official national S13 quarterly control and semantic reference. It becomes relevant to reopening only if BNR exposes an expanded quarterly non-consolidated counterpart dataset covering the full RMD sector and F2-F8 stock/transaction boundary."
+  }
+}

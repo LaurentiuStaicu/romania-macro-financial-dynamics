@@ -1,0 +1,246 @@
+{
+  "registry_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "purpose": "Canonical reopen-condition registry for behavioural-mechanism research. It operationalises the closed scientific baseline by stating what new evidence or external event is required before each frozen/deferred mechanism may advance, and what does not constitute a reopen trigger. Reopening authorises only the next declared evidence/identification gate; it never automatically authorises estimation, holdout inspection, causal claims, System Dynamics activation or behavioural closure.",
+  "source_readiness_registry": "model/calibration_validation/mechanism_source_readiness.json",
+  "current_baseline_action": "HOLD_CLOSED_BASELINE_UNTIL_DECLARED_REOPEN_TRIGGER",
+  "current_active_calibration_cycle_open": false,
+  "current_validated_reference_behavioural_mechanisms": 0,
+  "mechanisms": {
+    "monetary_policy_lending_rate_pass_through": {
+      "classification": "CANDIDATE",
+      "source_readiness": "SOURCE_AND_FORM_FROZEN_WAITING_FOR_PROSPECTIVE_IDENTIFYING_EVENTS",
+      "governing_evidence": [
+        "model/calibration_validation/prospective_monetary_confirmation_contract.json",
+        "model/calibration_validation/prospective_monetary_confirmation_status.json"
+      ],
+      "frozen_boundary": "The household-housing contemporaneous delta-policy form and beta are frozen; response values are reserved from 2026-08 and no non-zero BNR policy-rate event has yet supplied prospective identifying variation.",
+      "reopen_when": [
+        "Stage 1 diagnostic opens only after the first non-zero BNR policy-rate event in the reserved prospective window and official publication of the same-month ECB MIR household-housing response.",
+        "Formal confirmation opens only after at least four distinct non-zero policy-event months and at least 1.0 percentage point of cumulative absolute policy-rate movement, under the unchanged frozen contract."
+      ],
+      "evidence_that_does_not_reopen": [
+        "elapsed time without a non-zero policy-rate event",
+        "unchanged-rate BNR meetings",
+        "non-event months counted as identifying observations",
+        "market expectations treated as policy events",
+        "inspection of reserved MIR responses before the event and official release",
+        "refitting beta or changing the selected candidate"
+      ],
+      "reopen_effect": "PROSPECTIVE_EVENT_CONDITIONED_DIAGNOSTIC_OR_CONFIRMATION_GATE_ONLY"
+    },
+    "government_refinancing_effective_rate": {
+      "classification": "DEFERRED",
+      "source_readiness": "STRUCTURALLY_INCOMPLETE_PUBLIC_REPRICING_LEDGER",
+      "governing_evidence": [
+        "model/calibration_validation/government_repricing_ledger_contract.json",
+        "model/calibration_validation/government_repricing_ledger_assessment.json"
+      ],
+      "frozen_boundary": "The public repricing ledger has no same-boundary opening outstanding principal, realized repriced principal or matched old/new effective rates across the material MoF portfolio; the repricing parameter is not point-identifiable.",
+      "reopen_when": "An official or otherwise reproducible source supplies same-boundary opening principal plus matched refinancing/reset principal and old/new effective rates across material debt blocks, sufficient to repass the frozen ledger completeness and reconciliation gates.",
+      "evidence_that_does_not_reopen": [
+        "issue size substituted for opening outstanding principal",
+        "aggregate financing or refinancing need substituted for realized repriced principal",
+        "maturity share substituted for refixing share",
+        "Eurostat Maastricht apparent cost substituted for the MoF portfolio-cost boundary",
+        "synthetic allocation across currency, instrument or fixed/floating blocks"
+      ],
+      "reopen_effect": "REPASS_REPRICING_LEDGER_COMPLETENESS_AND_IDENTIFICATION_GATES_ONLY"
+    },
+    "aggregate_bank_credit_response": {
+      "classification": "CANDIDATE",
+      "source_readiness": "BLS_CANONICAL_11_OF_12_EXACT_WORKBOOK_RECOVERY_RETAINED_SINGLE_GAP_2025_Q2",
+      "governing_evidence": [
+        "model/calibration_validation/aggregate_bank_credit_source_boundary_review.json",
+        "model/calibration_validation/bnr_bls_2025q2_source_discovery_terminal_assessment.json",
+        "model/calibration_validation/bnr_prudential_source_discovery_terminal_assessment.json",
+        "model/calibration_validation/bank_credit_prudential_population_boundary_review.json"
+      ],
+      "frozen_boundary": "The realised BNR BLS panel is 11/12 with 2025-Q2 missing at exact workbook precision, and the matched BNR prudential history remains unresolved under the Romanian-legal-entity-bank population boundary. Direct CBD2 substitution is rejected and the aggregate reduced form still mixes demand and supply.",
+      "reopen_when": [
+        "BNR exposes the exact official 2025-Q2 BLS workbook endpoint or an exact official machine-readable BLS time-series/catalog target with matching realised-round semantics.",
+        "BNR exposes a definitionally matched prudential table history, stable machine-readable series/export/API or explicit official population/consolidation bridge satisfying the frozen prudential reopen triggers."
+      ],
+      "evidence_that_does_not_reopen": [
+        "rounded BLS publication text substituted for exact workbook cells",
+        "guessed BNR filenames, timestamps or internal endpoints",
+        "numerical similarity between CBD2 and BNR prudential values",
+        "third-party reproductions",
+        "synthetic aggregation of NFC and household survey signals",
+        "source completeness treated as identification of a bank-supply channel"
+      ],
+      "reopen_effect": "SOURCE_MATERIALISATION_AND_SECTOR_SUPPLY_DEMAND_IDENTIFICATION_GATE_ONLY"
+    },
+    "exchange_rate_pass_through_to_inflation": {
+      "classification": "CANDIDATE",
+      "source_readiness": "FROZEN_TESTED_FORM_FAILED_BEFORE_HOLDOUT",
+      "governing_evidence": [
+        "model/calibration_validation/fx_inflation_pass_through_source_boundary_review.json",
+        "model/calibration_validation/fx_inflation_structural_selection_result.json",
+        "model/calibration_validation/fx_inflation_selection_execution_gate.json"
+      ],
+      "frozen_boundary": "The preregistered FX pass-through form failed structural selection before the untouched 2021-01..2026-06 final evaluation window could open.",
+      "reopen_when": [
+        "A separately preregistered cycle is justified by genuinely new measurement evidence such as an exact Romania transaction-price import-price index.",
+        "A separately preregistered cycle is justified by new identification evidence such as an independently defensible exogenous FX-shock design or independently established regime-identification evidence."
+      ],
+      "evidence_that_does_not_reopen": [
+        "searching additional lags or AR orders on the same evidence cycle",
+        "adding regime dummies or asymmetry after observing the failed result",
+        "opening the untouched final evaluation to rescue the failed form",
+        "changing sign domains or external-price controls post outcome"
+      ],
+      "reopen_effect": "NEW_PREREGISTERED_MEASUREMENT_OR_IDENTIFICATION_CYCLE_ONLY"
+    },
+    "sovereign_yield_spread_response": {
+      "classification": "CANDIDATE",
+      "source_readiness": "FROZEN_TESTED_FORM_FAILED_BEFORE_HOLDOUT",
+      "governing_evidence": [
+        "model/calibration_validation/sovereign_yield_source_boundary_review.json",
+        "model/calibration_validation/sovereign_yield_structural_selection_result.json"
+      ],
+      "frozen_boundary": "The fiscal-augmented common-market AR candidate failed predictive and sign-consistency gates before the untouched 2023-Q1..2026-Q1 final evaluation window opened.",
+      "reopen_when": "A separately preregistered cycle is justified by genuinely new measurement or identification evidence, such as an exact retained domestic policy-rate vintage or an independently justified issuance/refinancing observable.",
+      "evidence_that_does_not_reopen": [
+        "post-result lag search on the same data",
+        "adding or dropping fiscal variables after observing the failed selection",
+        "changing coefficient sign assumptions post outcome",
+        "opening the final evaluation window to choose a replacement form"
+      ],
+      "reopen_effect": "NEW_PREREGISTERED_MEASUREMENT_OR_IDENTIFICATION_CYCLE_ONLY"
+    },
+    "household_consumption_response": {
+      "classification": "CANDIDATE",
+      "source_readiness": "COMPLETE_DSTI_TEXT_WINDOW_OFFICIAL_POPULATION_BRIDGE_SCREENED_NOT_FOUND",
+      "governing_evidence": [
+        "model/calibration_validation/household_consumption_source_boundary_review.json",
+        "model/calibration_validation/household_consumption_borrower_burden_alignment_review.json",
+        "model/calibration_validation/household_consumption_population_bridge_source_screening.json"
+      ],
+      "frozen_boundary": "Housing-loan DSTI levels are observed, but the borrower population does not align with aggregate S1M consumption and no official representativeness bridge has been identified.",
+      "reopen_when": [
+        "An observed Romania aggregate household debt-service burden aligned to S1M consumption becomes available.",
+        "An independently observed representativeness bridge from housing-loan borrowers to the aggregate S1M consumption population becomes available.",
+        "An observed housing-borrower consumption/income target becomes available under a separately preregistered borrower-specific mechanism."
+      ],
+      "evidence_that_does_not_reopen": [
+        "owner-occupier status used as a mortgage-borrower proxy",
+        "cross-country representativeness transfer",
+        "synthetic borrower weights",
+        "fit-selected mortgage versus consumer-credit rates",
+        "merging new-loan and outstanding-loan DSTI"
+      ],
+      "reopen_effect": "POPULATION_ALIGNMENT_OR_SEPARATE_TARGET_PREREGISTRATION_GATE_ONLY"
+    },
+    "corporate_investment_response": {
+      "classification": "CANDIDATE",
+      "source_readiness": "FROZEN_TESTED_FORM_FAILED_BEFORE_HOLDOUT",
+      "governing_evidence": [
+        "model/calibration_validation/corporate_investment_source_boundary_review.json",
+        "model/calibration_validation/corporate_investment_structural_selection_result.json",
+        "model/calibration_validation/corporate_investment_structural_selection_promotion_review.json"
+      ],
+      "frozen_boundary": "The preregistered core and support-augmented investment-rate forms failed structural selection before the untouched 2024-Q1..2026-Q1 final evaluation window opened.",
+      "reopen_when": "A separately preregistered cycle is justified by genuinely new measurement or identification evidence that changes the admissible source/design boundary rather than merely respecifying the failed form.",
+      "evidence_that_does_not_reopen": [
+        "changing lags on the same evidence cycle",
+        "changing coefficient signs or predictor set post outcome",
+        "changing target or financing-rate family after failed selection",
+        "adding interactions or regimes post outcome",
+        "opening the final evaluation window to rescue the failed form"
+      ],
+      "reopen_effect": "NEW_PREREGISTERED_MEASUREMENT_OR_IDENTIFICATION_CYCLE_ONLY"
+    },
+    "credit_risk_npl_response": {
+      "classification": "DEFERRED",
+      "source_readiness": "AGGREGATE_NPL_EXACT_MORTGAGE_PORTFOLIO_FAMILY_OBSERVED_JOINT_BOUNDARY_AND_ACTIVITY_UNRESOLVED",
+      "governing_evidence": [
+        "model/calibration_validation/credit_risk_npl_source_boundary_review.json",
+        "model/calibration_validation/debt_service_source_screening.json",
+        "model/calibration_validation/credit_risk_mortgage_portfolio_source_screening.json"
+      ],
+      "frozen_boundary": "The exact aggregate NPL target has no matched aggregate debt-service burden; the mortgage-specific alternative lacks an exact machine-readable mortgage NPL history and a preregistered target/population/activity boundary.",
+      "reopen_when": [
+        "Retain an aggregate Romania debt-service burden aligned to the exact aggregate NPL target and freeze the activity/output boundary.",
+        "Retain exact machine-readable mortgage NPL plus housing-loan burden histories, reconcile population/coverage/weighting, freeze an activity/output observable and preregister a mortgage-specific target/form."
+      ],
+      "evidence_that_does_not_reopen": [
+        "DTI-O substituted for debt-service burden",
+        "digitising BNR mortgage NPL charts",
+        "choosing aggregate versus mortgage target after model fit",
+        "assuming aggregate DSTI from housing-loan DSTI",
+        "ignoring NPL recognition, cure, write-off, sale or reporting breaks"
+      ],
+      "reopen_effect": "MATCHED_TARGET_BURDEN_ACTIVITY_MEASUREMENT_GATE_ONLY"
+    },
+    "fiscal_primary_balance_reaction": {
+      "classification": "DEFERRED",
+      "source_readiness": "FROZEN_TESTED_ANNUAL_FORM_FAILED_BEFORE_HOLDOUT",
+      "governing_evidence": [
+        "model/calibration_validation/fiscal_primary_balance_source_boundary_review.json",
+        "model/calibration_validation/fiscal_reaction_annual_structural_selection_result.json",
+        "model/calibration_validation/fiscal_reaction_annual_selection_execution_gate.json"
+      ],
+      "frozen_boundary": "The preregistered annual lagged-state fiscal-reaction form failed structural selection before the untouched 2018-2024 final evaluation window opened.",
+      "reopen_when": "A separately preregistered cycle is justified by genuinely new measurement or identification evidence, such as a cyclically adjusted primary-balance vintage, longer real-time historical vintages or an independently justified regime/identification design.",
+      "evidence_that_does_not_reopen": [
+        "respecifying the annual form on the same evidence cycle",
+        "changing output-gap sign/domain assumptions after the failed result",
+        "opening the untouched final evaluation to choose a replacement form",
+        "using later revised information as if available in real time"
+      ],
+      "reopen_effect": "NEW_PREREGISTERED_MEASUREMENT_OR_IDENTIFICATION_CYCLE_ONLY"
+    },
+    "monetary_policy_reaction_function": {
+      "classification": "DEFERRED",
+      "source_readiness": "QUANTITATIVE_EXPECTATIONS_AND_QUARTERLY_GAP_CONCEPTS_OBSERVED_FORMATION_TIME_AND_REAL_TIME_VINTAGES_NOT_RETAINED",
+      "governing_evidence": [
+        "model/calibration_validation/monetary_policy_reaction_source_screening.json",
+        "model/calibration_validation/monetary_policy_reaction_source_discovery_terminal_assessment.json"
+      ],
+      "frozen_boundary": "Quantitative private inflation expectations and the quarterly BNR GDP-gap concept are confirmed, but reproducible machine-readable formation-date expectations and real-time GDP-gap vintage histories are not retained.",
+      "reopen_when": [
+        "BNR exposes a machine-readable quantitative analyst-expectations history indexed by survey formation date or an official reproducible mapping to formation dates.",
+        "BNR exposes machine-readable quarterly GDP-gap vintages with report/decision information cutoffs and revision timing.",
+        "Equivalent stable official API/export/data-annex mappings satisfy the same time semantics."
+      ],
+      "evidence_that_does_not_reopen": [
+        "digitising analyst-expectations or GDP-gap charts",
+        "treating target-horizon-shifted chart coordinates as formation dates",
+        "backfilling later revised GDP-gap paths into earlier policy decisions",
+        "substituting qualitative consumer balances, BNR staff forecasts or annual AMECO gaps",
+        "guessing hidden BNR database endpoints"
+      ],
+      "reopen_effect": "REAL_TIME_INFORMATION_SET_MATERIALISATION_AND_IDENTIFICATION_PREREGISTRATION_GATE_ONLY"
+    },
+    "external_fx_refinancing_feedback": {
+      "classification": "DEFERRED",
+      "source_readiness": "PARTIAL_AGGREGATE_AND_S13_RISK_MARGINS_RETAINED_JOINT_EXPOSURE_UNIDENTIFIED",
+      "governing_evidence": [
+        "model/calibration_validation/external_fx_refinancing_source_boundary_review.json",
+        "model/calibration_validation/external_fx_refinancing_source_screening_2026-09-19.json"
+      ],
+      "frozen_boundary": "Available official sources expose only marginal sector, currency, maturity/refinancing or S13 risk information; the joint sector × currency × residual-maturity/refinancing exposure and sector hedging needed to close the chain are unidentified.",
+      "reopen_when": "A new official source identifies joint sector × currency × residual-maturity/refinancing exposure, or sector-specific hedging information sufficient to close the required exposure boundary.",
+      "evidence_that_does_not_reopen": [
+        "recombining existing marginal ECB BPS, BNR external-debt and MoF risk tables",
+        "assuming independence across sector, currency and residual maturity",
+        "using central-bank reserve-template residual maturity for broader external-debt sectors",
+        "inventing sector hedging ratios"
+      ],
+      "reopen_effect": "JOINT_EXPOSURE_IDENTIFICATION_GATE_ONLY"
+    }
+  },
+  "governance": {
+    "no_mechanism_may_reopen_only_because_the_queue_is_exhausted": true,
+    "unchanged_source_topology_does_not_reopen_a_frozen_boundary": true,
+    "repeated_search_without_new_official_or_identification_evidence_is_not_progress": true,
+    "reopen_authorizes_only_the_declared_next_gate": true,
+    "reopen_does_not_authorize_automatic_estimation_or_refit": true,
+    "reopen_does_not_authorize_holdout_inspection_unless_the_governing_contract_explicitly_does": true,
+    "reopen_does_not_establish_causality": true,
+    "reopen_does_not_activate_system_dynamics_feedback": true,
+    "reopen_does_not_activate_behavioural_closure": true,
+    "accounting_constraints_remain_binding_across_all_reopened_mechanisms": true
+  }
+}

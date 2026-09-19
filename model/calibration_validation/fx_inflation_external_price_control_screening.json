@@ -1,0 +1,80 @@
+{
+  "screening_version": "0.1",
+  "screened_on": "2026-09-19",
+  "mechanism_id": "exchange_rate_pass_through_to_inflation",
+  "purpose": "Choose an external-price control family before pass-through estimation so the control is not selected after inspecting model fit.",
+  "preferred_direct_control": {
+    "dataset": "Eurostat sts_inpi_m — Import prices in industry, monthly data",
+    "target": "Romania industrial import transaction-price index",
+    "status": "ROMANIA_COVERAGE_NOT_CONFIRMED",
+    "evidence": [
+      "Eurostat defines the indicator as monthly transaction-price development of imported industrial goods.",
+      "Under the European business-statistics framework euro-area countries are required to transmit import prices; only some non-euro EU/EFTA countries transmit them.",
+      "Current provider and dataset-mirror searches did not identify the standard Romania total-industry series. This is treated as non-confirmation, not proof that every possible Romanian subseries is absent."
+    ],
+    "decision": "DO_NOT_USE_UNLESS_EXACT_ROMANIA_SERIES_IS_MATERIALISED"
+  },
+  "preregistered_fallback": {
+    "source_family": "Eurostat International Trade in Goods Statistics — Indices by SITC/BEC/CPA",
+    "target": "Romania monthly import unit-value index for total imports from world, Eurostat IVU (2021=100)",
+    "status": "EXACT_TOTAL_IMPORT_WORLD_UVI_SOURCE_BOUNDARY_CONFIRMED_LIVE",
+    "rationale": [
+      "Eurostat documents monthly and annual unit-value indices for imports and exports of each EU country, with short-term coverage beginning in January 2002.",
+      "The live Eurostat dissemination API for ext_st_27_2020msbec confirms Romania / imports / WORLD / TOTAL and exposes indic_et=IVU labelled 'Unit value index (2021=100)'.",
+      "The current short-term API extract exposes no separate currency dimension. The retained control is therefore identified by the exact provider dimensions and IVU concept, without inventing a RON-versus-EUR variant that the extract does not expose.",
+      "Unit-value indices are constructed from trade values and quantities and can move with product composition; they are an external-price proxy, not a pure transaction-price import-price index."
+    ],
+    "required_dimensions_before_use": [
+      "freq = M",
+      "reporting country geo = RO",
+      "flow stk_flow = IMP",
+      "partner = WORLD",
+      "product bclas_bec = TOTAL",
+      "indicator indic_et = IVU",
+      "provider label = Unit value index (2021=100)"
+    ],
+    "materialisation_rule": "Use exactly ext_st_27_2020msbec with freq=M, geo=RO, stk_flow=IMP, partner=WORLD, bclas_bec=TOTAL and indic_et=IVU. Do not substitute INT/CAP/CONS/CONS_TRA, a different partner aggregate, another indicator, or a post-fit-selected currency/product variant.",
+    "dataset_identifier": "ext_st_27_2020msbec",
+    "dataset_label": "Member States EU27 (from 2020) trade by BEC product group",
+    "live_product_boundary_probe": {
+      "workflow_run_id": 35433021506,
+      "artifact_id": 10582085328,
+      "artifact_zip_sha256": "b33e08527e05ffe98082829b76c9ff4091fddded3a83f925e7a3a5edc1556c2a",
+      "provider_updated": "2026-09-15T11:00:00+0200",
+      "raw_query_sha256": "7645b492934c31682d2f31950150a30cbacfbdb4c3a3273d69b3134a1d280a70",
+      "raw_query_bytes": 213374,
+      "bclas_bec_codes": [
+        "TOTAL",
+        "INT",
+        "CAP",
+        "CONS",
+        "CONS_TRA"
+      ],
+      "total_ivu_non_null_observations": 294,
+      "total_ivu_first_period": "2002-01",
+      "total_ivu_last_period": "2026-06",
+      "interpretation": "The earlier screening conclusion that the Member-State short-term family lacked TOTAL was falsified by the live provider structure. The original ex-ante total-import/world fallback is available and no BEC subcategory choice is needed."
+    }
+  },
+  "methodological_limits": {
+    "UVI_is_not_direct_import_price_index": true,
+    "composition_effects_possible": true,
+    "euro_denomination_selected_before_fit": false,
+    "no_RON_denomination_switch_after_fit": true,
+    "no_EU_or_euro_area_aggregate_substitution_for_Romania": true,
+    "no_global_commodity_index_substitution_without_new_contract": true,
+    "no_post_fit_control_selection": true,
+    "no_BEC_product_selection_without_new_contract": true,
+    "member_state_short_term_dataset_may_not_be_relabelled_total_imports": false,
+    "short_term_api_currency_dimension_exposed": false,
+    "rule_on_currency": "Do not infer a currency denomination not exposed by the exact short-term dataset dimensions. Preserve the provider IVU concept and document Eurostat methodology separately."
+  },
+  "disposition": {
+    "external_price_control_status": "EXACT_TOTAL_IMPORT_WORLD_IVU_SOURCE_BOUNDARY_FROZEN_MATERIALISATION_PENDING",
+    "calibration_cycle_open": false,
+    "mechanism_classification": "CANDIDATE",
+    "central_feedback": false,
+    "validated_reference_behavioural_mechanisms_change": 0,
+    "behavioural_closure": "UNCHANGED_INACTIVE"
+  }
+}

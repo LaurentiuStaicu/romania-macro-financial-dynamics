@@ -1,0 +1,279 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "aggregate_bank_credit_response",
+  "purpose": "Determine whether the current public-data boundary is sufficient to open a scientifically defensible calibration/validation cycle for the bank-credit response mechanism without conflating loan demand, credit supply, prudential state variables or sector composition.",
+  "verdict": "SOURCE_FEASIBILITY_PASS_CALIBRATION_NOT_OPENED_SECTOR_AND_DEMAND_SUPPLY_BOUNDARY_REQUIRED",
+  "current_registry_form": "gCredit = alpha + beta_y*gActivity - beta_r*real_lending_rate - beta_npl*NPL + beta_cap*capital_buffer",
+  "current_classification": "CANDIDATE",
+  "official_source_evidence": [
+    {
+      "institution": "National Bank of Romania",
+      "source": "Monthly Bulletin, January 2025, Table 11.1 Key prudential indicators",
+      "url": "https://muzeu.bnr.ro/uploads/2025-03-07monthlybulletinno.012025_documentpdf_545_1743160358.pdf",
+      "findings": [
+        "Total capital ratio is published for Romanian legal-entity credit institutions; the current prudential reporting basis starts in June 2014 under Commission Implementing Regulation (EU) No 680/2014 and continues under Regulation (EU) 2021/451 from June 2021.",
+        "The NPL ratio is published under the EBA/CRR non-performing-exposure definition.",
+        "The January 2025 bulletin contains monthly NPL observations and quarterly total-capital-ratio observations for 2024, demonstrating an exact tabular source path rather than a need for chart digitisation."
+      ]
+    },
+    {
+      "institution": "National Bank of Romania",
+      "source": "Bank Lending Survey, May 2024",
+      "url": "https://muzeu.bnr.ro/uploads/2024-5-banklendingsurvey-may2024_documentpdf_545_1733753844.pdf",
+      "findings": [
+        "The survey is conducted quarterly and covers the top 10 banks, accounting for approximately 80 percent of the loan stock.",
+        "The questionnaire treats non-financial corporations and households separately.",
+        "It reports realised credit standards and loan demand as distinct net-percentage concepts, alongside credit terms/conditions and risk assessments."
+      ]
+    },
+    {
+      "institution": "National Bank of Romania",
+      "source": "2014 presentation on the EBA non-performing-exposure indicator",
+      "url": "https://www.bnr.ro/files/d/Noutati/Prezentari%20si%20interviuri/R_E20140505Guv.pdf",
+      "findings": [
+        "The harmonised EBA non-performing-exposure indicator was specified for quarterly reporting with first reference date 30 September 2014.",
+        "This establishes a methodological lower-bound/review point for a long NPL history; earlier NPL concepts must not be concatenated silently."
+      ]
+    }
+  ],
+  "existing_rmd_credit_evidence": {
+    "retained_snapshot": "model/dynamics/private_credit_reference_snapshot.json",
+    "nfc_stock_key": "BSI.M.RO.N.A.A20.A.1.U6.2240.Z01.E",
+    "households_npish_stock_key": "BSI.M.RO.N.A.A20.A.1.U6.2250.Z01.E",
+    "nfc_flow_key": "BSI.M.RO.N.A.A20.A.4.U6.2240.Z01.E",
+    "households_npish_flow_key": "BSI.M.RO.N.A.A20.A.4.U6.2250.Z01.E",
+    "interpretation": "RMD already retains sector-specific monthly stock and financial-transaction components for NFCs and households/NPISH. The aggregate credit reference mode is their exact same-month sum, so no new synthetic sector split is needed."
+  },
+  "scientific_boundary_decisions": {
+    "aggregate_single_equation_not_yet_eligible_for_calibration": true,
+    "reason": "The current aggregate reduced form mixes credit demand and credit supply. NPL and capital ratios are endogenous prudential state variables and cannot by themselves identify a bank-supply channel.",
+    "preserve_sector_specific_credit_components": true,
+    "do_not_synthetically_aggregate_BLS_NFC_and_household_signals": true,
+    "BLS_credit_standards_role": "Direct survey proxy for changes in bank lending standards/supply conditions; not automatically a causal instrument.",
+    "BLS_loan_demand_role": "Direct survey proxy for reported loan-demand change; keep separate from supply standards.",
+    "NPL_role": "Prudential/credit-risk state control, not an exogenous credit-supply shock.",
+    "total_capital_ratio_role": "Banking-system prudential state control, not an exogenous supply shock and not a substitute for a capital-buffer shock.",
+    "realised_BLS_values_only_for_model_evaluation": true,
+    "expected_BLS_values_may_not_replace_realised_values": true,
+    "chart_digitisation_for_canonical_series": false
+  },
+  "source_materialisation_gate": {
+    "calibration_cycle_open": false,
+    "required_before_any_estimation": [
+      "Enumerate and retain the exact official BNR BLS spreadsheet rounds needed for the chosen history; every included file requires its original URL, bytes/hash, survey round and realised-versus-expected column semantics.",
+      "Exact retained quarterly realised BNR Bank Lending Survey credit-standard series for NFCs and households, with source provenance.",
+      "Exact retained quarterly realised BNR Bank Lending Survey loan-demand series for NFCs and households, with source provenance.",
+      "Exact retained harmonised NPL-ratio history with methodological break metadata; no silent concatenation of pre-EBA definitions.",
+      "Resolve the prudential-control boundary prospectively: retain a definitionally matched quarterly NPL series and freeze whether the capital state is total capital ratio or CET1 before any model fit. Annual or mismatched-population substitutes are not admissible.",
+      "Exact retained total-capital-ratio history on the CRR supervisory-reporting boundary, with the 2021 reporting-regulation transition recorded.",
+      "Explicit mapping of lending-rate and activity observables to the NFC and household credit components.",
+      "A preregistered structural-selection and untouched holdout design written only after the source series above are frozen."
+    ],
+    "prohibited_shortcuts": [
+      "Use NPL or capital ratio as if either were a clean exogenous bank-supply instrument.",
+      "Infer loan demand from credit growth alone.",
+      "Average NFC and household BLS net percentages into a synthetic aggregate without a separately justified weighting contract.",
+      "Digitise historical BLS/NPL/capital charts when exact tables or official spreadsheets are unavailable.",
+      "Difference credit stocks to manufacture credit flows.",
+      "Open a holdout or choose lags after inspecting evaluation outcomes."
+    ],
+    "pass_effect": "Passing source materialisation authorises a separately preregistered sector-specific candidate-selection cycle only. It does not activate the bank-credit balance-sheet loop or establish causal identification.",
+    "fail_effect": "Keep aggregate_bank_credit_response as CANDIDATE with no central feedback activation and do not estimate the current aggregate equation."
+  },
+  "preferred_future_candidate_boundary": {
+    "unit_of_analysis": "sector-specific, at minimum NFC and household/NPISH credit paths",
+    "target_priority": "ECB BSI financial transactions and/or stock growth kept definitionally distinct",
+    "supply_demand_separation": "Use realised BLS credit standards and realised BLS loan demand as separate observables; test whether they add out-of-sample information beyond persistence/activity/rate baselines.",
+    "causal_claim": "Not permitted from predictive selection alone.",
+    "central_feedback_activation": "Not permitted from source feasibility or predictive selection alone."
+  },
+  "disposition": {
+    "mechanism_classification": "CANDIDATE",
+    "central_feedback": false,
+    "active_calibration_cycle_open": false,
+    "validated_reference_behavioural_mechanisms_change": 0,
+    "behavioural_closure": "UNCHANGED_INACTIVE",
+    "accounting_spine": "UNCHANGED"
+  },
+  "bls_machine_readable_source_catalog": {
+    "status": "CANONICAL_11_OF_12_EXACT_REALIZED_ROUNDS_RETAINED_SINGLE_GAP_2025_Q2",
+    "discovery_date": "2026-09-19",
+    "files": [
+      {
+        "round": "2023 May",
+        "url": "https://www.bnr.ro/uploads/2023-5-banklendingsurvey-may2023_xls_547_1733754096.xls",
+        "format": "xls",
+        "content_not_materialised": false,
+        "raw_vintage": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19",
+        "value_extraction_status": "NOT_CANONICAL_LEGACY_XLS"
+      },
+      {
+        "round": "2024 February",
+        "url": "https://www.bnr.ro/uploads/2024-2-banklendingsurvey-february2024_xls_547_1733753857.xls",
+        "format": "xls",
+        "content_not_materialised": false,
+        "raw_vintage": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19",
+        "value_extraction_status": "NOT_CANONICAL_LEGACY_XLS"
+      },
+      {
+        "round": "2024 May",
+        "url": "https://www.bnr.ro/uploads/2024-5-banklendingsurvey-may2024_xls_547_1733753844.xls",
+        "format": "xls",
+        "content_not_materialised": false,
+        "raw_vintage": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19",
+        "value_extraction_status": "NOT_CANONICAL_LEGACY_XLS"
+      },
+      {
+        "round": "2024 November",
+        "url": "https://www.bnr.ro/uploads/2024-11-banklendingsurvey-november2024_xls_547_1733753815.xls",
+        "format": "xls",
+        "content_not_materialised": false,
+        "raw_vintage": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19",
+        "value_extraction_status": "NOT_CANONICAL_LEGACY_XLS"
+      },
+      {
+        "round": "2025 May",
+        "url": "https://www.bnr.ro/uploads/2025-06-13blst1may2025_xls_547_1749803028.xlsx",
+        "format": "xlsx",
+        "content_not_materialised": true,
+        "value_extraction_status": "NEXT_XLSX_BRIDGE_CANDIDATE"
+      },
+      {
+        "round": "2025 Q3 / November release",
+        "url": "https://www.bnr.ro/uploads/2025-12-09sondajblst3-noiembrie2025_xls_547_1765281659.xls",
+        "format": "xls",
+        "content_not_materialised": false,
+        "raw_vintage": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19",
+        "value_extraction_status": "NOT_CANONICAL_LEGACY_XLS"
+      }
+    ],
+    "provider_access_observation": "GitHub Actions successfully retrieved seven exact official BNR BLS workbooks from 2023-2025 as valid OLE2 XLS files; the prior web-layer Request Rejected behavior was an access-path limitation, not missing files.",
+    "historical_coverage_claimed": true,
+    "next_required_step": "No active 2025-Q2 BLS source-discovery task remains under the current public surface. Reopen only if new official BNR evidence exposes the exact workbook endpoint or an exact official machine-readable time-series/catalog target with matching realised-round semantics; then use the frozen workbook-recovery/promotion chain. Do not infer archive URLs or substitute publication-rounded values. Separately, the matched prudential path remains frozen until its own new-official-evidence trigger.",
+    "retained_raw_vintage": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19",
+    "may_2025_xlsx_bridge": {
+      "status": "EXACT_TWO_XLSX_WORKBOOKS_RETAINED_AND_LAYOUT_REVIEWED",
+      "retained_vintage": "data/source_vintages/bnr-bls-may2025-xlsx-vintage-2026-09-19",
+      "promotion_review": "model/calibration_validation/bnr_bls_may2025_xlsx_promotion_review.json",
+      "layout_review": "model/calibration_validation/bnr_bls_may2025_xlsx_layout_review.json",
+      "round": "2025-Q1 / reference date 31/03/2025",
+      "exact_realised_observables": {
+        "nfc_credit_standards_net_pct": 11.71,
+        "nfc_loan_demand_net_pct": 22.55,
+        "household_mortgage_credit_standards_net_pct": -19.74,
+        "household_consumer_credit_standards_net_pct": 15.38,
+        "household_mortgage_loan_demand_net_pct": 35.23,
+        "household_consumer_loan_demand_net_pct": -17.12
+      },
+      "interpretation": "The XLSX round demonstrates deterministic supply/demand semantics and sector separation but contains only one survey round. It is not a historical BLS time series.",
+      "dsti_limit": "P0303/P1103 are lending-term change questions about maximum debt-service-to-income, not levels of borrower DSTI."
+    },
+    "historical_coverage_complete": false,
+    "canonical_panel": "data/processed/bnr_bls_realised_rounds.csv",
+    "canonical_observed_round_count": 11,
+    "canonical_expected_round_count": 12,
+    "canonical_missing_rounds": [
+      "2025-Q2"
+    ],
+    "canonical_promotion_review": "model/calibration_validation/bnr_bls_canonical_panel_promotion_review.json",
+    "2025q2_source_discovery_terminal_assessment": "model/calibration_validation/bnr_bls_2025q2_source_discovery_terminal_assessment.json",
+    "2025q2_source_discovery_stage_status": "STAGE_CLOSED_FROZEN_SINGLE_GAP_2025_Q2_UNDER_CURRENT_PUBLIC_DISCOVERY_SURFACE_NO_MODEL_EFFECT"
+  },
+  "external_prudential_source_screening": {
+    "status": "QUARTERLY_CBD2_SERIES_RETAINED_DIRECT_BNR_POPULATION_SUBSTITUTION_REJECTED",
+    "sources": {
+      "cet1_quarterly_domestic_banks": {
+        "institution": "ECB / ESCB",
+        "dataset": "CBD2 — Consolidated Banking data",
+        "series_key": "CBD2.Q.RO.W0.11._Z._Z.A.A.I4008._Z._Z._Z._Z._Z._Z.PC",
+        "concept": "Common equity Tier 1 (CET1) ratio, domestic banks, Romania, quarterly",
+        "confirmed_latest_example": "2025-Q3 = 20.2275 percent (provisional in the indexed ECB page)",
+        "role": "Candidate prudential-state control only.",
+        "semantic_limit": "CET1 ratio is not the same variable as the BNR total capital ratio currently named in the source gate. It may not silently replace that variable."
+      },
+      "npl_annual_broad_boundary": {
+        "institution": "ECB / ESCB",
+        "dataset": "CBD2 — Consolidated Banking data",
+        "series_key": "CBD2.A.RO.W0.67._Z._Z.A.F.I3632._Z._Z._Z._Z._Z._Z.PC",
+        "concept": "Gross non-performing loans-to-gross loans ratio, domestic banks plus foreign subsidiaries/branches, FINREP reporters, Romania, annual",
+        "confirmed_latest_example": "2024 = 2.6254 percent (provisional in the indexed ECB page)",
+        "role": "Definition/frequency cross-check only.",
+        "semantic_limit": "Annual frequency and the 67-sector population do not match the desired quarterly BNR system-state control; no interpolation or repeated-quarter use is permitted."
+      },
+      "cbd2_quarterly_npl_family": {
+        "status": "EXACT_ROMANIA_QUARTERLY_SERIES_CONFIRMED",
+        "exact_series_key": "CBD2.Q.RO.W0.11._Z._Z.A.F.I3632._Z._Z._Z._Z._Z._Z.PC",
+        "evidence": "ECB Data Portal explicitly lists Romania among quarterly domestic-bank FINREP I3632 NPL-ratio series."
+      },
+      "npl_quarterly_domestic_banks": {
+        "institution": "ECB / ESCB",
+        "dataset": "CBD2 — Consolidated Banking data",
+        "series_key": "CBD2.Q.RO.W0.11._Z._Z.A.F.I3632._Z._Z._Z._Z._Z._Z.PC",
+        "concept": "Gross non-performing loans and advances as percent of total gross loans and advances, domestic banks, FINREP reporters, Romania, quarterly",
+        "coverage": "2014-Q4 onward in the indexed ECB Data Portal",
+        "confirmed_latest_example": "2025-Q3 = 3.7504 percent in the indexed ECB dataset page",
+        "role": "Candidate quarterly credit-risk/prudential state control.",
+        "semantic_limit": "Domestic banks and FINREP reporters; population/reporting-framework compatibility with BNR system-wide indicators must be documented before use."
+      },
+      "solvency_ratio_candidate": {
+        "institution": "ECB / ESCB",
+        "dataset": "CBD2 — Consolidated Banking data",
+        "series_key": "CBD2.Q.RO.W0.11._Z._Z.A.A.I4001._Z._Z._Z._Z._Z._Z.PC",
+        "concept": "Solvency ratio [%], domestic banks, Romania, quarterly",
+        "status": "EXACT_ROMANIA_QUARTERLY_SERIES_CONFIRMED_AND_RETAINED",
+        "coverage": "2014-Q4 to 2026-Q1 in the retained 2026-09-19 source vintage",
+        "role": "Definitionally closer prudential capital-state candidate than CET1, subject to explicit population/consolidation bridge to the BNR total-capital-ratio boundary.",
+        "retained_vintage": "data/source_vintages/bank-credit-prudential-coverage-vintage-2026-09-19",
+        "semantic_limit": "The CBD2 domestic-bank/full-sample boundary is not numerically identical to the BNR Romanian-legal-entity population; observed differences may not be balanced away or ignored."
+      }
+    },
+    "decision_rules": [
+      "Do not choose CET1 versus total capital ratio after observing predictive fit.",
+      "Do not forward-fill an annual NPL ratio into quarterly observations.",
+      "Do not mix domestic-bank-only and domestic-plus-foreign-branch populations without an explicit boundary bridge.",
+      "Any future switch from total capital ratio to CET1 requires a preregistered source/variable contract before model outcomes are inspected.",
+      "Prefer a confirmed quarterly Romania solvency-ratio series over substituting CET1 only if its exact CBD2 tuple, coverage and population are retained before model fit."
+    ],
+    "calibration_effect": "NONE_DIRECT_SUBSTITUTION_REJECTED",
+    "population_boundary_decision": {
+      "direct_cbd2_to_bnr_equivalence": false,
+      "basis": "BNR Romanian-legal-entity-bank population is not the same control/consolidation population as CBD2 sector 11 domestic banking groups and stand-alone banks.",
+      "review": "model/calibration_validation/bank_credit_prudential_population_boundary_review.json",
+      "numeric_similarity_can_bridge": false,
+      "future_preferred_source": "Exact BNR-population statistical-table history or another officially documented matched population."
+    },
+    "next_admissible_source_task": "No active matched-prudential discovery task remains under the current public surface. Reopen only on new official BNR link/catalog/export/population-bridge evidence; do not repeat the same discovery probes or infer endpoints.",
+    "source_enumeration_status": "FROZEN_INCOMPLETE_3_OF_11_CURRENT_PUBLIC_DISCOVERY_EXHAUSTED_NO_MODEL_EFFECT",
+    "exact_primary_years_identified": [
+      2019,
+      2022,
+      2024
+    ],
+    "interactive_database_discovery_status": "OFFICIAL_DATABASE_CONFIRMED_TARGET_SERIES_NOT_IDENTIFIED_STAGE_FROZEN",
+    "discovery_stage_status": "STAGE_CLOSED_FROZEN_INCOMPLETE_UNDER_CURRENT_PUBLIC_DISCOVERY_SURFACE_NO_MODEL_EFFECT"
+  },
+  "prudential_coverage_diagnostic": {
+    "status": "EXECUTED_SUCCESS_CBD2_VINTAGE_RETAINED_DIRECT_BNR_SUBSTITUTION_REJECTED",
+    "contract": "model/calibration_validation/bank_credit_prudential_coverage_contract.json",
+    "promotion_review": "model/calibration_validation/bank_credit_prudential_coverage_promotion_review.json",
+    "retained_vintage": "data/source_vintages/bank-credit-prudential-coverage-vintage-2026-09-19",
+    "formal_calibration_gate": false,
+    "calibration_effect": "NONE",
+    "availability": {
+      "npl_ratio": true,
+      "solvency_ratio": true,
+      "cet1_ratio": true
+    },
+    "coverage": "All three exact Romania CBD2 series contain 46 quarterly observations from 2014-Q4 through 2026-Q1.",
+    "conclusion": "Quarterly CBD2 NPL/solvency/CET1 availability is confirmed, but official population definitions reject direct substitution for the BNR Romanian-legal-entity-bank anchor. The next defensible source path is exact BNR-population table materialisation or a genuinely matched official source.",
+    "population_boundary_review": "model/calibration_validation/bank_credit_prudential_population_boundary_review.json"
+  },
+  "prudential_population_boundary_review": "model/calibration_validation/bank_credit_prudential_population_boundary_review.json",
+  "bnr_prudential_table_materialisation_contract": "model/calibration_validation/bnr_prudential_table_materialisation_contract.json",
+  "bnr_prudential_table_source_enumeration": "model/calibration_validation/bnr_prudential_table_source_enumeration.json",
+  "bnr_prudential_interactive_database_discovery_review": "model/calibration_validation/bnr_prudential_interactive_database_discovery_review.json",
+  "bnr_prudential_source_discovery_terminal_assessment": "model/calibration_validation/bnr_prudential_source_discovery_terminal_assessment.json",
+  "bnr_bls_2025q2_source_discovery_terminal_assessment": "model/calibration_validation/bnr_bls_2025q2_source_discovery_terminal_assessment.json",
+  "bnr_bls_2025q2_source_discovery_stage_status": "STAGE_CLOSED_FROZEN_SINGLE_GAP_2025_Q2_UNDER_CURRENT_PUBLIC_DISCOVERY_SURFACE_NO_MODEL_EFFECT"
+}

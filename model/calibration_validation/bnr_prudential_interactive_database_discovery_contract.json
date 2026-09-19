@@ -1,0 +1,76 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "mechanism_id": "aggregate_bank_credit_response",
+  "phase": "BNR Prudential Interactive Database Discovery",
+  "purpose": "Determine whether the official BNR interactive statistical database exposes machine-readable, definitionally matched prudential series before continuing manual PDF enumeration. Discovery is metadata-only: values, model outcomes and numerical similarity may not determine admission.",
+  "official_surface": {
+    "current_page": "https://www.bnr.ro/1074-baza-de-date-interactiva",
+    "legacy_documented_page": "http://www.bnr.ro/Baza-de-date-interactiva-604.aspx",
+    "institution": "National Bank of Romania",
+    "observation": "BNR officially documents an interactive database containing monthly and quarterly statistical series, but the currently crawlable public page does not enumerate all underlying datasets/series.",
+    "target_presence_pre_discovery": "UNKNOWN"
+  },
+  "target_series": [
+    {
+      "id": "total_capital_ratio",
+      "required_label_semantics": [
+        "Rata fondurilor proprii totale",
+        "fostul indicator de solvabilitate"
+      ],
+      "required_population": "banks that are Romanian legal entities",
+      "required_frequency": "quarterly",
+      "required_common_window": "2015-Q4..2025-Q4",
+      "unit": "percent"
+    },
+    {
+      "id": "eba_npl_ratio",
+      "required_label_semantics": [
+        "Rata creditelor neperformante",
+        "definiția ABE"
+      ],
+      "required_population": "banks that are Romanian legal entities",
+      "required_frequency": "quarterly",
+      "required_common_window": "2015-Q4..2025-Q4",
+      "unit": "percent"
+    }
+  ],
+  "discovery_pass_requires": {
+    "official_bnr_host_or_documented_bnr_export": true,
+    "stable_dataset_or_series_identifier": true,
+    "machine_readable_export_or_api": true,
+    "exact_population_metadata": true,
+    "exact_variable_semantics": true,
+    "quarterly_frequency": true,
+    "coverage_including_all_41_common_window_quarters": true,
+    "revision_or_status_metadata_if_available": true
+  },
+  "discovery_fail_or_inconclusive_rules": {
+    "page_exists_but_target_not_listed_in_search_index": "INCONCLUSIVE_NOT_ABSENT",
+    "third_party_reproduction_without_official_identifier": "FAIL_NOT_OFFICIAL_SOURCE",
+    "target_label_without_population_metadata": "INCONCLUSIVE_POPULATION_UNRESOLVED",
+    "annual_only_series": "FAIL_FREQUENCY_MISMATCH",
+    "chart_only_surface": "FAIL_NOT_MACHINE_READABLE",
+    "value_similarity_to_bnr_bulletins": "NO_EFFECT"
+  },
+  "precedence_if_pass": {
+    "effect": "A confirmed exact BNR machine-readable source supersedes unresolved PDF URL enumeration as the preferred acquisition path, subject to a separate retained-source materialisation and promotion contract.",
+    "pdf_path_deleted": false,
+    "numeric_extraction_in_this_gate": false,
+    "canonical_series_mutation": false,
+    "estimation_authorized": false
+  },
+  "hard_rules": {
+    "no_value_inspection_for_discovery": true,
+    "no_model_outcome_access": true,
+    "no_numeric_similarity_admission": true,
+    "no_screen_scraping_as_machine_readable_claim": true,
+    "no_third_party_series_promotion": true,
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_lag_selection": true,
+    "no_holdout_opening": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  }
+}

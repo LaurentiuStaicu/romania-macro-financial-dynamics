@@ -1,5 +1,5 @@
 {
-  "gate_version": "0.1",
+  "gate_version": "0.2",
   "name": "System Dynamics / Systems Thinking Conformity Gate",
   "applies_to": [
     "Reset Integrity",
@@ -21,8 +21,23 @@
   },
   "system_boundary": {
     "status": "PASS_FOR_ACCOUNTING_CORE_WARNING_FOR_BEHAVIOURAL_BOUNDARY",
-    "sectors": ["H", "C", "F", "G", "X", "BNR"],
-    "instruments": ["F2", "F3", "F4", "F5", "F6", "F7", "F8"],
+    "sectors": [
+      "H",
+      "C",
+      "F",
+      "G",
+      "X",
+      "BNR"
+    ],
+    "instruments": [
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7",
+      "F8"
+    ],
     "accounting_boundary": "Closed for double-entry conservation across represented holder/issuer positions.",
     "behavioural_boundary_status": "PARTIAL",
     "rule": "Every behavioural mechanism must explicitly classify each driver as endogenous, exogenous, observed forcing, policy input, or unresolved before activation."
@@ -49,7 +64,26 @@
       "government_effective_interest_rate",
       "sectoral_financial_positions"
     ],
-    "rule": "Reference modes are empirical or explicitly hypothesised behaviour-over-time targets. Missing reference modes block integrated behavioural-closure validation but do not invalidate the accounting core."
+    "rule": "Reference modes are empirical or explicitly hypothesised behaviour-over-time targets. For the current integrated quantitative closure gate, a required mode is ready only under the registry's explicit ready status or a separately contracted qualitative exception. One required mode remains a blocker. Missing or partial reference modes block integrated behavioural-closure validation but do not invalidate the accounting core.",
+    "ready_statuses_for_integrated_quantitative_closure": [
+      "OBSERVED_SERIES_AVAILABLE"
+    ],
+    "qualitative_exceptions_registered": [],
+    "current_closure_readiness": "BLOCKED",
+    "current_ready_variables": [
+      "policy_rate",
+      "household_lending_rate",
+      "nfc_lending_rate",
+      "credit_stock",
+      "credit_flow",
+      "government_debt_stock",
+      "government_interest_burden",
+      "government_refinancing_need",
+      "government_effective_interest_rate"
+    ],
+    "current_blocking_variables": [
+      "sectoral_financial_positions"
+    ]
   },
   "feedback_activation_gate": {
     "all_must_pass": true,
@@ -115,5 +149,26 @@
     "Behavioural Closure": "INACTIVE",
     "Empirical Parameterization": "PARTIAL_AND_MECHANISM_SPECIFIC",
     "Validation": "PARTIAL_RETROSPECTIVE_WITH_NO_VALIDATED_REFERENCE_BEHAVIOURAL_MECHANISM"
+  },
+  "feedback_topology_gate": {
+    "closed_loop_candidates": [
+      "government_refinancing_interest_loop",
+      "government_issuance_yield_loop",
+      "bank_credit_balance_sheet_loop",
+      "monetary_credit_transmission_loop"
+    ],
+    "open_feedback_chains": [
+      "external_fx_refinancing_loop"
+    ],
+    "rule": "A feedback loop must have a contiguous closed causal path and a polarity consistent with the product of declared link signs. An open causal chain may remain as a qualitative candidate but must not be labelled or activated as a closed loop, and no missing closing link may be invented for methodological completeness."
+  },
+  "empirical_activation_governance": {
+    "empirical_contract": "model/empirical_dynamics/contract.json",
+    "mechanism_registry": "model/empirical_dynamics/mechanism_registry.json",
+    "governing_validation_disposition": "model/calibration_validation/validation_recovery_disposition.json",
+    "current_active_calibration_cycle_open": false,
+    "current_activated_mechanisms": [],
+    "validated_reference_behavioural_mechanisms": 0,
+    "rule": "ACTIVATED is only an admission to a currently open calibration/validation cycle. When that cycle closes, the frozen validation disposition governs current mechanism status. A stale pre-recovery ACTIVATED or central_feedback label may not survive a CANDIDATE or DEFERRED disposition and may never activate a System Dynamics feedback loop by itself."
   }
 }

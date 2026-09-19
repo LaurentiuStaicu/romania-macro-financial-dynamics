@@ -1,0 +1,126 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "mechanism_id": "exchange_rate_pass_through_to_inflation",
+  "phase": "FX Inflation Pass-Through — Structural Selection Preregistration",
+  "purpose": "Freeze numeric identifiability and predictive-selection gates for the single preregistered monthly FX candidate before any coefficient estimation. The candidate must add out-of-sample predictive information beyond inflation persistence, calendar seasonality and the retained import-UVI external-price baseline. Passing does not establish causal exchange-rate pass-through.",
+  "estimation_authorized": false,
+  "transform_lag_window_contract": "model/calibration_validation/fx_inflation_transform_lag_window_contract.json",
+  "prerequisite_source_vintage": "data/source_vintages/fx-inflation-monthly-levels-vintage-2026-09-19",
+  "design_builder": {
+    "module": "src/romania_macro_financial_dynamics/fx_inflation_design.py",
+    "runner": "scripts/build_fx_inflation_selection_design.py",
+    "verified_design_rows_through_selection_end": 185,
+    "initial_calibration_rows": 113,
+    "structural_selection_rows": 72,
+    "final_evaluation_loaded_by_builder": false
+  },
+  "fitting_method": {
+    "estimator": "ordinary least squares",
+    "intercept": true,
+    "month_fixed_effects": true,
+    "regularization": false,
+    "p_values_used_for_model_selection": false,
+    "standardized_design_used_for_condition_number": true,
+    "no_model_averaging": true,
+    "no_post_fit_variable_dropping": true
+  },
+  "models": [
+    {
+      "id": "persistence",
+      "equation": "pi_t = pi_t-1",
+      "estimated_parameters": 0
+    },
+    {
+      "id": "ar2_seasonal",
+      "equation": "pi_t = alpha + month_FE + phi1*pi_t-1 + phi2*pi_t-2",
+      "estimated_parameters": 14
+    },
+    {
+      "id": "external_price_baseline",
+      "equation": "ar2_seasonal + delta0*dpstar_t + delta13*dpstar_1_3_mean",
+      "estimated_parameters": 16
+    },
+    {
+      "id": "fx_candidate",
+      "equation": "external_price_baseline + gamma0*de_0 + gamma13*de_1_3_mean + gamma46*de_4_6_mean + gamma712*de_7_12_mean",
+      "estimated_parameters": 20
+    }
+  ],
+  "windows": {
+    "initial_calibration": "2005-08..2014-12",
+    "structural_selection": "2015-01..2020-12",
+    "final_evaluation": "2021-01..2026-06",
+    "expanding_origin": true,
+    "one_step_ahead": true,
+    "minimum_training_observations_per_origin": 113,
+    "final_evaluation_open_rule": "Only a separately authorized execution that passes every frozen selection and identifiability gate may permit a later, separate final-evaluation gate. Selection failure leaves all 2021-01..2026-06 performance unopened."
+  },
+  "identifiability_gates": {
+    "full_column_rank_required": true,
+    "all_non_intercept_predictors_must_have_positive_variance": true,
+    "standardized_design_condition_number_max": 30,
+    "finite_coefficients_required": true,
+    "finite_predictions_required": true,
+    "rule": "Any rank, zero-variance, conditioning or finite-value failure is an identification failure. No regularization, variable deletion, alternate lag blocks or target changes may rescue this cycle."
+  },
+  "sign_consistency_gates": {
+    "cumulative_0_3": "gamma0 + gamma13",
+    "cumulative_0_12": "gamma0 + gamma13 + gamma46 + gamma712",
+    "expected_direction": "non-negative because positive de_t is RON depreciation",
+    "cumulative_0_3_nonnegative_fraction_min": 0.7,
+    "cumulative_0_12_nonnegative_fraction_min": 0.7,
+    "individual_block_signs_are_hard_gates": false,
+    "no_causal_interpretation": true
+  },
+  "structural_selection_gates": {
+    "minimum_evaluable_origins": 72,
+    "candidate_rmse_improvement_vs_external_price_baseline_fraction_min": 0.02,
+    "candidate_rmse_improvement_vs_ar2_seasonal_fraction_min": 0.03,
+    "candidate_rmse_improvement_vs_persistence_fraction_min": 0,
+    "candidate_mae_may_not_exceed_external_price_baseline_by_more_than_fraction": 0,
+    "candidate_absolute_bias_max_monthly_percentage_points": 0.15,
+    "all_identifiability_gates_must_pass": true,
+    "all_sign_consistency_gates_must_pass": true,
+    "rule": "The FX candidate passes only if all gates pass. Improvement against persistence or AR alone cannot compensate for failure to improve the mandatory external-price baseline."
+  },
+  "final_evaluation_gates_if_later_opened": {
+    "candidate_rmse_improvement_vs_external_price_baseline_fraction_min": 0.01,
+    "candidate_mae_may_not_exceed_external_price_baseline_by_more_than_fraction": 0.01,
+    "candidate_absolute_bias_max_monthly_percentage_points": 0.15,
+    "refit_policy": "At each final-evaluation origin refit the frozen model form only on target months strictly earlier than that origin.",
+    "causal_claim_allowed": false,
+    "system_dynamics_activation_allowed": false
+  },
+  "diagnostics_not_selection_criteria": {
+    "report_model_metrics_by_year": true,
+    "report_fx_cumulative_coefficient_paths": true,
+    "report_standardized_condition_number_path": true,
+    "report_largest_absolute_residual_months": true,
+    "report_subperiod_metrics": [
+      "2015-01..2017-12",
+      "2018-01..2020-12",
+      "2021-01..2026-06 only if later opened"
+    ],
+    "note": "Diagnostics may justify a future separately preregistered cycle but may not respecify this cycle."
+  },
+  "hard_rules": {
+    "no_alternative_target_transform": true,
+    "no_AR_order_search": true,
+    "no_alternative_fx_lag_search": true,
+    "no_external_price_lag_search": true,
+    "no_regime_dummy_search": true,
+    "no_asymmetry_search": true,
+    "no_regularization_rescue": true,
+    "no_holdout_peeking_before_selection_pass": true,
+    "no_causal_claim": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "verdict_rules": {
+    "PASS_TO_FINAL_EVALUATION": "All frozen selection, sign and identifiability gates pass; a separate gate may then be considered for 2021-01..2026-06.",
+    "FAIL_BEFORE_HOLDOUT": "Any required gate fails; the final-evaluation window remains unopened and this tested form is frozen.",
+    "interpretation": "A failure rejects this specific predictive form within this evidence cycle, not the general economic existence of exchange-rate pass-through."
+  },
+  "next_gate": "Implement an offline guarded selection runner that exactly enforces this contract and defaults to no estimation. Only after runner tests and Scientific CI may one bounded 2015-01..2020-12 structural-selection execution be separately authorized."
+}

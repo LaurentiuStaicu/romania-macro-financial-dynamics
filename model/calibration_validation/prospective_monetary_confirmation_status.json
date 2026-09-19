@@ -1,0 +1,53 @@
+{
+  "status_version": "0.1",
+  "stage": "Prospective Monetary Confirmation",
+  "as_of_date": "2026-09-19",
+  "mechanism_id": "monetary_policy_lending_rate_pass_through",
+  "selected_target": "household_housing",
+  "selected_candidate": "delta_policy_contemporaneous",
+  "frozen_equation": "lend[t] = lend[t-1] + beta * (policy[t]-policy[t-1])",
+  "frozen_beta": 0.49746478873239447,
+  "prospective_window": {
+    "reserved_from": "2026-08",
+    "driver_checked_through": "2026-09-19",
+    "response_series_values_inspected": false,
+    "policy_driver_only_checked": true,
+    "formal_confirmation_opened": false,
+    "response_release_gate": "Do not inspect a same-month MIR response before its official ECB MIR publication date. For an October 2026 identifying event, the scheduled October-reference MIR release is 2026-12-02."
+  },
+  "policy_driver_evidence": {
+    "last_decision_in_reserved_window": {
+      "date": "2026-08-10",
+      "policy_rate_pct": 6.5,
+      "decision": "UNCHANGED",
+      "source_type": "BNR decision reported from the central-bank communiqué",
+      "source_url": "https://agerpres.ro/economic/2026/08/10/update-banca-centrala-a-mentinut-dobanda-cheie-la-6-50-pe-an--1583696"
+    },
+    "next_scheduled_policy_meeting": {
+      "date": "2026-10-08",
+      "source_type": "Official BNR social-calendar post",
+      "source_url": "https://bsky.app/profile/bnr.ro/post/3msq2oyu2sv2b"
+    }
+  },
+  "identification_gate": {
+    "nonzero_policy_rate_events_in_reserved_window": 0,
+    "identifying_driver_variation_available": false,
+    "status": "WAIT_FOR_NEW_POLICY_RATE_EVENT",
+    "reason": "The August 2026 policy decision kept the policy rate unchanged at 6.50%, and no later BNR monetary-policy meeting occurs before the as-of date. Without a non-zero policy-rate event, the frozen delta-policy candidate cannot be prospectively distinguished from persistence."
+  },
+  "hard_rules": {
+    "do_not_inspect_reserved_MIR_response_values_before_identifying_event": true,
+    "do_not_refit_beta": true,
+    "do_not_respecify_candidate": true,
+    "do_not_open_NFC_holdout": true,
+    "do_not_claim_validation_from_elapsed_time": true,
+    "do_not_use_market_expectations_as_policy_rate_events": true
+  },
+  "disposition": {
+    "household_mechanism_status": "CANDIDATE",
+    "validated_reference_behavioural_mechanisms": 0,
+    "behavioural_closure": "UNCHANGED_INACTIVE",
+    "next_check_condition": "After an actually observed non-zero BNR policy-rate decision, and only when the corresponding prospectively reserved response observation becomes available under the frozen confirmation contract."
+  },
+  "contract": "model/calibration_validation/prospective_monetary_confirmation_contract.json"
+}

@@ -1,0 +1,48 @@
+{
+  "contract_version": "0.1",
+  "phase": "Reference Mode Recovery — Government Effective Interest Rate",
+  "purpose": "Materialize the official Ministry of Finance year-end average interest rate of the government-debt portfolio as the empirical reference mode for government_effective_interest_rate, while keeping its source definition distinct from Eurostat apparent cost, realized cash interest, marginal market yields and the unobserved repricing transition parameter.",
+  "reference_mode": {
+    "id": "government_effective_interest_rate",
+    "source_series": "data/processed/government_debt_average_interest_rate_mof_2014_2023.csv",
+    "provenance": "data/provenance/government_debt_average_interest_rate_mof_2014_2023.json",
+    "time_resolution": "annual_year_end",
+    "unit": "percent",
+    "required_years": [
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "minimum_observation_count": 10
+  },
+  "concept_boundary": {
+    "source_is_MoF_portfolio_average_interest_rate": true,
+    "source_boundary_is_direct_government_debt_portfolio": true,
+    "year_end_metric_uses_following_year_forecast_interest_over_reference_year_end_stock": true,
+    "not_Eurostat_Maastricht_apparent_cost": true,
+    "not_same_year_realized_cash_interest_rate": true,
+    "not_marginal_sovereign_yield": true,
+    "not_average_new_issuance_yield": true,
+    "does_not_identify_repricing_share_m": true,
+    "does_not_identify_matched_old_new_rates": true
+  },
+  "hard_rules": {
+    "no_quarterly_interpolation": true,
+    "no_forward_fill_into_unobserved_years": true,
+    "no_missing_to_zero": true,
+    "no_Eurostat_substitution": true,
+    "no_market_yield_substitution": true,
+    "no_repricing_parameter_estimation": true,
+    "government_refinancing_mechanism_may_change": false,
+    "behavioural_closure_may_change": false
+  },
+  "promotion_rule": "Promote government_effective_interest_rate to OBSERVED_SERIES_AVAILABLE only if all ten 2014-2023 MoF values are finite and unique by year, every documented overlapping Ministry strategy observation is exactly consistent, the retained 2019-2023 legacy series matches exactly, and the source definition/provenance explicitly preserves the MoF portfolio-cost boundary. Promotion makes an annual observed reference target available but does not validate or activate the government refinancing/effective-rate mechanism.",
+  "negative_result_rule": "Any overlap inconsistency, missing year, non-finite value or definition mismatch leaves the mode blocked. Eurostat apparent cost, D41PAY/debt ratios, market yields or interpolation may not be used to fill a failure."
+}

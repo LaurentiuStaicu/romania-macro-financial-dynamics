@@ -1,5 +1,5 @@
 {
-  "contract_version": "0.1",
+  "contract_version": "0.2",
   "purpose": "Executable structural dynamic core constrained by the accounting spine; behavioural closure remains inactive until mechanisms pass explicit empirical and identifiability gates.",
   "time": {
     "canonical_unit": "year",
@@ -120,7 +120,13 @@
   "integration": {
     "baseline_method": "explicit_euler",
     "reason": "transparent reference integrator for structural tests; later validated simulation may add another integrator only with equivalence/error tests",
-    "integration_error_test_required": true
+    "integration_error_test_required": true,
+    "time_step_rule": {
+      "explicit_euler_first_order_delay_max_dt_fraction_of_tau": "strictly_less_than_1_over_3",
+      "scope": "reference structural simulation and any later active first-order delay using explicit Euler",
+      "rationale": "Prevent coarse-step oscillation or qualitative distortion and require a conservative step relative to the shortest active time constant.",
+      "activation_requirement": "Every active delay must have a finite positive tau and pass the dt/tau gate plus time-step halving sensitivity before reference-model activation."
+    }
   },
   "empirical_initialization_gate": {
     "unresolved_accounting_cells_allowed": false,
@@ -154,6 +160,9 @@
     "finite_large_value_extreme_condition",
     "delay_steady_state",
     "integration_error_convergence",
-    "incomplete_empirical_initialization_rejected"
+    "incomplete_empirical_initialization_rejected",
+    "delay_time_step_ratio_gate",
+    "coarse_euler_delay_step_rejected",
+    "delay_invalid_tau_rejected"
   ]
 }

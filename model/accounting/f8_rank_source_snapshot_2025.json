@@ -1,0 +1,79 @@
+{
+  "snapshot_version": "0.1",
+  "instrument": "F8",
+  "benchmark": "2025",
+  "purpose": "Retained compact source snapshot for deterministic offline reproduction of the F8 exact aggregate-control rank/nullspace audit. It preserves only the published aggregate values used by Phase C; it is not a replacement for the full raw source artifact and does not create bilateral observations.",
+  "provenance": {
+    "source_runtime": "scripts/audit_qsa_f8_other_accounts_coverage.py",
+    "successful_audit_head_sha": "92c17108b8c870db52f3cfdaa9926ec436cbd2d9",
+    "workflow_run_id": 35374754702,
+    "workflow_artifact_id": 10559174442,
+    "workflow_artifact_sha256": "82d4b1afb608f3890092111cf5d6e48c0416cdeacc6dda0922496af3ae99d162",
+    "phase_A_report_path_in_artifact": "f8_phase_a_artifacts/f8_other_accounts_coverage_audit.json",
+    "phase_A_report_sha256": "84a3b212a1fa4886f249cd8cb75c9a6c87478faeb2def455f509f16e1f980f35",
+    "phase_A_report_bytes": 245157,
+    "series_requested": 444,
+    "series_status_counts": {
+      "AVAILABLE": 76,
+      "HTTP_ERROR": 368
+    },
+    "network_errors_present": false,
+    "bilateral_total_F8_cells_resolved": 0
+  },
+  "resident_W0_controls_million_RON": {
+    "stock": {
+      "holder_total": {
+        "H": 144768.72,
+        "C": 792785.05,
+        "F": 36741.7209375,
+        "G": 173666.22,
+        "BNR": 3289.49
+      },
+      "issuer_total": {
+        "H": 100224.35,
+        "C": 870310.73,
+        "F": 25399.73046875,
+        "G": 209053.25,
+        "BNR": 0
+      }
+    },
+    "flow": {
+      "holder_total": {
+        "H": 2453.7,
+        "C": 6029.17,
+        "F": 1427.1299438476562,
+        "G": 20428.87,
+        "BNR": 2339.5
+      },
+      "issuer_total": {
+        "H": 499.38999999999993,
+        "C": 15149.16,
+        "F": 1308.2500457763672,
+        "G": 6746.070000000001,
+        "BNR": 0
+      }
+    }
+  },
+  "external_W1_controls_million_RON": {
+    "stock": {
+      "assets": 167132.57,
+      "liabilities": 220869.44
+    },
+    "flow": {
+      "assets": 19961.87,
+      "liabilities": 10986.380000000001
+    }
+  },
+  "conditional_stock_BNR_zero_source": {
+    "resident_W0_issuer_total_million_RON": 0,
+    "scope": "stock only",
+    "promoted": false
+  },
+  "hard_boundary": {
+    "benchmark_mutation": false,
+    "bilateral_materialization": false,
+    "synthetic_allocation": false,
+    "missing_to_zero": false,
+    "behavioural_closure_changed": false
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "aggregate_bank_credit_response",
+  "snapshot_id": "bank-credit-prudential-coverage-vintage-2026-09-19",
+  "verdict": "PASS_QUARTERLY_CBD2_SERIES_RETAINED_DIRECT_BNR_SUBSTITUTION_REJECTED",
+  "estimation_authorized": false,
+  "reviewed_workflow": {
+    "run_id": 35437334373,
+    "artifact_id": 10582377035,
+    "artifact_name": "bank-credit-prudential-coverage-8921528941184dfaa621328c7366995bc2cb5fb8",
+    "artifact_zip_sha256": "4168935ee09b3449b76907f92c40aff945190bdc2c581c7a76f4ba29697ea87b",
+    "source_branch_head_sha": "197b6874acfe61b783ab5328d5a9dad9ffc5eeff"
+  },
+  "expected_files": [
+    {
+      "path": "bank_credit_prudential_coverage_audit.json",
+      "bytes": 10476,
+      "sha256": "402756e41f85c4b7be253152bcb2ee5bae29993f2c8af7b98432c4447f738a9f"
+    },
+    {
+      "path": "raw/7850e697edad1a854afb.csv",
+      "bytes": 28788,
+      "sha256": "f084e5f358fab5b35b05e263a22002b807bbf58d3070d549508099d3f8b6ce9b"
+    },
+    {
+      "path": "raw/69e096cd0068518021b8.csv",
+      "bytes": 26380,
+      "sha256": "d0e2e93e462d5384ec05d33d2c56dfcd4794b027643aa60eb87524d2080bb6fe"
+    },
+    {
+      "path": "raw/9236952e5af9654db308.csv",
+      "bytes": 28677,
+      "sha256": "01b0b221f126facdc7f995a78e764c0e71a9eab4c5401058559e7ea0d1e8d5d2"
+    }
+  ],
+  "exact_series": {
+    "npl_ratio": {
+      "series_key": "CBD2.Q.RO.W0.11._Z._Z.A.F.I3632._Z._Z._Z._Z._Z._Z.PC",
+      "rows": 46,
+      "first_period": "2014-Q4",
+      "last_period": "2026-Q1"
+    },
+    "solvency_ratio": {
+      "series_key": "CBD2.Q.RO.W0.11._Z._Z.A.A.I4001._Z._Z._Z._Z._Z._Z.PC",
+      "rows": 46,
+      "first_period": "2014-Q4",
+      "last_period": "2026-Q1"
+    },
+    "cet1_ratio": {
+      "series_key": "CBD2.Q.RO.W0.11._Z._Z.A.A.I4008._Z._Z._Z._Z._Z._Z.PC",
+      "rows": 46,
+      "first_period": "2014-Q4",
+      "last_period": "2026-Q1"
+    }
+  },
+  "bnr_boundary_diagnostic": {
+    "interpretation": "The retained ECB CBD2 series are valid quarterly prudential diagnostics, but official population definitions establish that CBD2 sector 11 is not definitionally equivalent to the BNR Romanian-legal-entity-bank anchor. Numerical proximity cannot bridge the different control/consolidation populations.",
+    "selected_examples_pp": {
+      "npl_2024_q4": 0.8553,
+      "solvency_2024_q4": -0.8061,
+      "cet1_2024_q4": -0.782
+    }
+  },
+  "hard_boundaries": {
+    "no_calibration_or_refit": true,
+    "no_cet1_substitution_for_solvency_after_outcomes": true,
+    "no_population_bridge_by_numeric_similarity": true,
+    "no_interpolation": true,
+    "no_causal_claim": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true,
+    "no_cbd2_direct_substitution_for_bnr_anchor": true
+  },
+  "promotion_rule": "Only artifact 10582377035 with the exact ZIP digest and exact per-file byte/SHA-256 values above may be retained as the canonical prudential coverage vintage.",
+  "population_boundary_review": "model/calibration_validation/bank_credit_prudential_population_boundary_review.json",
+  "next_source_gate": "Recover an exact BNR-population prudential history from official BNR statistical tables under a separately preregistered deterministic materialisation/provenance contract, or identify a genuinely population-matched official machine-readable source."
+}

@@ -1,0 +1,74 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "mechanism_id": "household_consumption_response",
+  "phase": "BNR Household DSTI Workbook Access Probe",
+  "purpose": "Probe exact official BNR Bank Lending Survey workbook URLs already indexed publicly, retain response bytes and hashes when accessible, and determine whether an exact machine-readable household DSTI history can be recovered without chart digitisation. This is source acquisition only and does not parse, transform, select, estimate or admit a behavioural model.",
+  "source_family": "National Bank of Romania Bank Lending Survey (BLS)",
+  "candidate_workbooks": [
+    {
+      "id": "bls_2023_feb",
+      "url": "https://www.bnr.ro/uploads/2023-2-sondajprivindcreditareacompaniilornefinanciare%C5%9Fipopula%C5%A3iei%2Cfebruarie2023_xls_547_1726573485.xls",
+      "discovery_basis": "official BNR URL indexed by web search"
+    },
+    {
+      "id": "bls_2023_may",
+      "url": "https://www.bnr.ro/uploads/2023-5-banklendingsurvey-may2023_xls_547_1733754096.xls",
+      "discovery_basis": "official BNR URL indexed by web search"
+    },
+    {
+      "id": "bls_2024_feb",
+      "url": "https://www.bnr.ro/uploads/2024-2-banklendingsurvey-february2024_xls_547_1733753857.xls",
+      "discovery_basis": "official BNR URL indexed by web search"
+    },
+    {
+      "id": "bls_2024_may",
+      "url": "https://www.bnr.ro/uploads/2024-5-banklendingsurvey-may2024_xls_547_1733753844.xls",
+      "discovery_basis": "official BNR URL indexed by web search"
+    },
+    {
+      "id": "bls_2024_nov",
+      "url": "https://www.bnr.ro/uploads/2024-11-banklendingsurvey-november2024_xls_547_1733753815.xls",
+      "discovery_basis": "official BNR URL indexed by web search"
+    },
+    {
+      "id": "bls_2025_feb",
+      "url": "https://muzeu.bnr.ro/uploads/2025-02sondajblsfebruarie_xls_547_1741171064.xls",
+      "discovery_basis": "official BNR museum-host URL indexed by web search"
+    },
+    {
+      "id": "bls_2025_nov",
+      "url": "https://www.bnr.ro/uploads/2025-12-09sondajblst3-noiembrie2025_xls_547_1765281659.xls",
+      "discovery_basis": "official BNR URL indexed by web search"
+    }
+  ],
+  "probe_rules": {
+    "max_attempts_per_url": 2,
+    "timeout_seconds": 45,
+    "retain_all_response_bytes": true,
+    "compute_sha256": true,
+    "record_http_status": true,
+    "record_content_type": true,
+    "record_content_disposition": true,
+    "record_last_modified": true,
+    "classify_spreadsheet_only_if_binary_signature_matches": true,
+    "allowed_binary_signatures": [
+      "OLE2_CFBF_D0CF11E0A1B11AE1",
+      "ZIP_PK_0304"
+    ],
+    "no_html_request_rejection_as_spreadsheet": true,
+    "no_chart_digitisation": true,
+    "no_value_extraction": true
+  },
+  "hard_rules": {
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_household_consumption_outcome_access": true,
+    "no_dsti_semantic_substitution": true,
+    "no_chart_digitisation": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "pass_effect": "ACCESSIBLE_WORKBOOK_BYTES_READY_FOR_EXPLICIT_REPOSITORY_REVIEW_ONLY",
+  "failure_effect": "PROVIDER_ACCESS_BLOCKED_OR_NON_SPREADSHEET_RESPONSE_RETAINED_AS_SOURCE_ACCESS_EVIDENCE_ONLY"
+}

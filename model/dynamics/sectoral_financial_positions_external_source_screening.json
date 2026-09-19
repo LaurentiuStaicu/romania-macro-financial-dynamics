@@ -1,0 +1,224 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "reference_mode": "sectoral_financial_positions",
+  "phase": "External Source Screening — Sectoral Financial Positions",
+  "purpose": "Screen official sources outside the already exhausted retained ECB-QSA query path for a possible future source-reopen trigger. Screening does not change the reference-mode target, accounting state or readiness and does not treat a new dissemination layer as independent evidence without source-lineage review.",
+  "frozen_current_state": {
+    "status": "PARTIAL_SERIES_AVAILABLE",
+    "readiness_count_change": 0,
+    "internal_source_recovery": "FROZEN_UNTIL_REOPEN_TRIGGER",
+    "canonical_accounting_instruments_complete": [
+      "F3"
+    ],
+    "behavioural_closure": "UNCHANGED_INACTIVE"
+  },
+  "screened_sources": [
+    {
+      "id": "OECD_QUARTERLY_COUNTERPART_FINANCIAL_ACCOUNTS",
+      "institution": "OECD",
+      "official_dataset_family_url": "https://www.oecd.org/en/data/datasets/financial-accounts-and-balance-sheets.html",
+      "candidate_dataflows": {
+        "stocks": {
+          "id": "OECD.SDD.NAD,DSD_NASEC20@DF_T725R_Q",
+          "title": "Quarterly Financial Balance Sheets (stocks) - counterpart information",
+          "structure_url": "https://sdmx.oecd.org/public/rest/dataflow/OECD.SDD.NAD/DSD_NASEC20@DF_T725R_Q/?references=all"
+        },
+        "flows": {
+          "id": "OECD.SDD.NAD,DSD_NASEC20@DF_T625R_Q",
+          "title": "Quarterly Financial Accounts (flows) - counterpart information",
+          "structure_url": "https://sdmx.oecd.org/public/rest/dataflow/OECD.SDD.NAD/DSD_NASEC20@DF_T625R_Q/?references=all"
+        }
+      },
+      "semantic_fit": "POTENTIALLY_HIGH",
+      "positive_evidence": [
+        "OECD explicitly describes both quarterly counterpart-position and counterpart-flow tables by institutional sector and financial instrument.",
+        "The OECD Data Explorer exposes SDMX API endpoints for both dataflows.",
+        "The counterpart tables can in principle represent relationships between non-financial corporations, financial corporations, government, households/NPISH and rest of world by instrument."
+      ],
+      "lineage_boundary": [
+        "OECD states that Quarterly Sector Accounts (financial part) are an OECD-ECB collection.",
+        "Therefore an OECD observation is not assumed to be statistically independent from the ECB/European financial-accounts source chain.",
+        "A future retained Romania result must record its source metadata/lineage before it can count as a source-reopen trigger."
+      ],
+      "romania_exact_observation_coverage_retained": true,
+      "status": "DISCOVERY_PASS_SEMANTIC_REVIEW_FAIL_SECTOR_SCOPE_NO_REOPEN",
+      "access_operational_context": {
+        "checked_on": "2026-09-19",
+        "api_data_download_limit_per_hour": 60,
+        "excess_requests": "TEMPORARILY_BLOCKED",
+        "interpretation": "Provider throttling/access failures are INDETERMINATE and cannot be treated as absent Romania data."
+      },
+      "discovery_vintage": "data/source_vintages/sectoral-financial-positions-oecd-counterpart-discovery-vintage-2026-09-19",
+      "discovery_result": {
+        "state": "PASS",
+        "stocks_row_count": 105435,
+        "flows_row_count": 105435,
+        "stocks_raw_sha256": "039d910150ece7d264284ffc8dfb713e99d255cb17bd366b66decfa214c4ae5f",
+        "flows_raw_sha256": "7585836c1b3b181fa233fbc21243813498911215b5ac9b28e7073da17e52629a"
+      },
+      "semantic_lineage_review_assessment": "model/dynamics/sectoral_financial_positions_oecd_counterpart_discovery_assessment.json",
+      "semantic_lineage_review_verdict": "FAIL_REQUIRED_SECTOR_SCOPE_INCOMPLETE",
+      "scope_limit": [
+        "The retained Romania counterpart tables contain exact F2-F8 instrument codes for both stocks and financial transactions.",
+        "Reporting sectors are limited to S1/S11/S12/S13/S1M and counterpart sectors to S1/S11/S12/S13/S1M/S2; S121 central bank is absent.",
+        "Therefore RMD BNR cannot be observed and RMD F = S12 - S121 cannot be constructed without a prohibited assumption."
+      ]
+    },
+    {
+      "id": "EUROSTAT_QUARTERLY_COUNTERPART_FINANCIAL_ACCOUNTS",
+      "institution": "Eurostat",
+      "dataset_code": "nasq_10_f_cp",
+      "official_metadata_url": "https://ec.europa.eu/eurostat/cache/metadata/en/nasq_10_f_esms.htm",
+      "statistics_api_base": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/nasq_10_f_cp",
+      "semantic_fit": "HIGH_FOR_EXPLICIT_QUARTERLY_WHO_TO_WHOM_DISCOVERY",
+      "positive_evidence": [
+        "Eurostat quarterly financial-flows/stocks metadata explicitly identifies nasq_10_f_cp as Financial accounts: counterpart information.",
+        "The mandatory core quarterly dataset includes who-to-whom tables for deposits and short-term/long-term loans, with mandatory backdata from 2012-Q4.",
+        "Counterpart-sector details for securities are mandatory from 2013-Q4.",
+        "The reference area covers all EU Member States and dissemination frequency is quarterly."
+      ],
+      "lineage_boundary": [
+        "Quarterly financial-account data are reported to the ECB, validated there and transmitted to Eurostat for republication.",
+        "Therefore Eurostat is not assumed to be a statistically independent source from the existing European financial-accounts chain.",
+        "Its scientific value here is potential access to an explicit counterpart dissemination table that was not yet retained in the RMD source-recovery chain."
+      ],
+      "scope_limit": [
+        "Discovery confirms Romania counterpart rows and schema, but the retained na_item code set is not the complete RMD F2-F8 instrument boundary.",
+        "F2 lacks F21 currency; F5 is partial; F6/F7/F8 are absent.",
+        "No historical extraction or reference-mode promotion is authorized from Eurostat nasq_10_f_cp under the frozen RMD boundary."
+      ],
+      "romania_exact_observation_coverage_retained": true,
+      "status": "DISCOVERY_PASS_SEMANTIC_REVIEW_FAIL_INSTRUMENT_SCOPE_NO_REOPEN",
+      "discovery_vintage": "data/source_vintages/sectoral-financial-positions-eurostat-counterpart-discovery-vintage-2026-09-19",
+      "discovery_result": {
+        "state": "PASS",
+        "non_null_observation_count": 64995,
+        "time_codes": [
+          "2025-Q1",
+          "2025-Q2",
+          "2025-Q3",
+          "2025-Q4",
+          "2026-Q1"
+        ],
+        "raw_response_sha256": "547c9e65c60900aa259ba547efb60faedbaa22e8d8a66e1caed6cbd2cbd189ae"
+      },
+      "semantic_lineage_review_assessment": "model/dynamics/sectoral_financial_positions_eurostat_counterpart_discovery_assessment.json",
+      "semantic_lineage_review_verdict": "FAIL_REQUIRED_INSTRUMENT_SCOPE_INCOMPLETE"
+    },
+    {
+      "id": "BNR_NATIONAL_FINANCIAL_ACCOUNTS_PUBLICATIONS",
+      "institution": "National Bank of Romania",
+      "official_publication_example": "https://www.bnr.ro/uploads/2024-cnf_documentpdf_545_1766149176.pdf",
+      "semantic_fit": "HIGH_FOR_ANNUAL_COUNTERPART_STOCK_MATRIX_LOW_FOR_FROZEN_QUARTERLY_STOCK_AND_TRANSACTION_HISTORY",
+      "exact_quarterly_F2_F8_counterpart_machine_readable_history_identified": false,
+      "status": "OFFICIAL_ANNUAL_COUNTERPART_STOCK_MATRIX_CONFIRMED_FREQUENCY_AND_TRANSACTION_HISTORY_FAIL_NO_REOPEN",
+      "latest_screened_publication": "Conturile nationale financiare - Raport anual 2024",
+      "latest_publication_data_cutoff": "end-October 2025",
+      "latest_publication_report_window": "2020-2024",
+      "exact_annual_2024_counterpart_stock_matrix_identified": true,
+      "annual_2024_counterpart_stock_matrix_scope": {
+        "consolidation": "non-consolidated",
+        "unit": "million RON",
+        "sector_codes": [
+          "S11",
+          "S121",
+          "S122+S123",
+          "S124+S125+S126+S127",
+          "S128+S129",
+          "S13",
+          "S14+S15",
+          "S2"
+        ],
+        "instrument_codes": [
+          "AF1",
+          "AF2",
+          "AF3",
+          "AF4",
+          "AF5",
+          "AF6",
+          "AF7",
+          "AF8"
+        ],
+        "accounting_entries": [
+          "A",
+          "P"
+        ]
+      },
+      "exact_quarterly_stock_and_transaction_history_identified": false,
+      "screening_assessment": "model/dynamics/sectoral_financial_positions_bnr_cnf_source_screening.json",
+      "scope_limit": [
+        "The 2024 annual CNF report exposes a non-consolidated sector-by-counterpart stock matrix with S121 and AF2-AF8, allowing exact semantic mapping of the RMD sectors for that annual stock snapshot.",
+        "The counterpart-matrix section is explicitly stocks for 2024; it is not a quarterly counterpart history.",
+        "No matched quarterly F2-F8 financial-transaction counterpart history is identified in the screened annual publication.",
+        "The frozen reference-mode extraction contract requires quarterly stock and financial transactions with at least 40 common quarters, so this source cannot promote the mode or change readiness."
+      ]
+    },
+    {
+      "id": "BNR_QUARTERLY_S13_FINANCIAL_ACCOUNTS",
+      "institution": "National Bank of Romania",
+      "official_publication_example": "https://bnro.ro/files/d/Statistica/seturi%20de%20date/Conturi_fin_trim/Analiza%20conturi%20financiare%20trimestriale%20administratii%20publice%202024T2.pdf",
+      "semantic_fit": "HIGH_FOR_QUARTERLY_S13_SEQUENCE_LOW_FOR_FULL_RMD_COUNTERPART_BOUNDARY",
+      "quarterly_history_start": "1998-Q4",
+      "latest_indexed_reference_period": "2024-Q2",
+      "reporting_scope": "S13 and subsectors S1311/S1313/S1314 only",
+      "consolidation": "consolidated",
+      "full_sequence_of_accounts": true,
+      "full_rmd_sector_counterpart_scope": false,
+      "screening_assessment": "model/dynamics/sectoral_financial_positions_bnr_quarterly_s13_source_screening.json",
+      "status": "OFFICIAL_QUARTERLY_S13_FINANCIAL_ACCOUNTS_CONFIRMED_FREQUENCY_PASS_SECTOR_COUNTERPART_CONSOLIDATION_FAIL_NO_REOPEN",
+      "scope_limit": [
+        "Quarterly frequency and stock/transaction sequence are confirmed for S13.",
+        "The source does not expose the complete RMD sector set or a full who-to-whom counterpart matrix.",
+        "The published S13 quarterly data are consolidated, which does not match the frozen non-consolidated sector/counterpart boundary.",
+        "No reference-mode promotion or exact historical extraction is authorized."
+      ]
+    }
+  ],
+  "decision": {
+    "immediate_reference_mode_reopen_authorized": false,
+    "reference_mode_promotion_authorized": false,
+    "accounting_readiness_change": false,
+    "next_admissible_action": "Hold the external counterpart recovery path closed. Eurostat passes discovery but fails complete F2-F8 instrument scope; OECD passes complete F2-F8 discovery but lacks Romania S121; the BNR annual CNF counterpart matrix has exact S121/AF2-AF8 stock semantics but not the required quarterly stock+transaction history; and the indexed BNR quarterly financial-accounts publication has a long stock/transaction sequence only for consolidated S13, not the full non-consolidated RMD sector-by-counterpart boundary. Reopen only on a genuinely new or changed official source satisfying the full quarterly S121 + F2-F8 stock/transaction counterpart boundary.",
+    "oecd_probe_justified": true,
+    "eurostat_counterpart_probe_justified": true,
+    "discovery_priority": [],
+    "eurostat_probe_execution_state": "EXECUTED_PASS_SEMANTIC_REVIEW_FAIL_NO_REOPEN",
+    "trigger_broadening_to_bypass_execution_precondition_authorized": false,
+    "oecd_probe_execution_state": "EXECUTED_PASS_SEMANTIC_REVIEW_FAIL_NO_REOPEN",
+    "oecd_provider_access_failures_have_no_scientific_effect": true,
+    "manual_dispatch_bridge": {
+      "workflow": ".github/workflows/scientific-ci.yml",
+      "default_branch_presence": true,
+      "dispatch_ref": "audit/scientific-integrity-2026-09-18",
+      "live_jobs": [
+        "manual-eurostat-counterpart-probe",
+        "manual-oecd-counterpart-probe"
+      ],
+      "pull_request_or_push_live_execution": false
+    },
+    "post_discovery_semantic_lineage_review_contract": "model/dynamics/sectoral_financial_positions_external_semantic_lineage_review_contract.json",
+    "discovery_pass_effect": "A discovery PASS does not authorize value extraction or promotion. It only opens the frozen Semantic + Lineage Review, which must pass before a separate exact historical extraction contract can be preregistered.",
+    "eurostat_exact_historical_extraction_authorized": false,
+    "oecd_exact_historical_extraction_authorized": false,
+    "external_counterpart_recovery_state": "EXHAUSTED_NO_SEMANTICALLY_ADMISSIBLE_CURRENT_PUBLIC_SOURCE",
+    "current_reference_mode_status": "PARTIAL_SERIES_AVAILABLE",
+    "reference_mode_readiness_change": 0,
+    "bnr_annual_cnf_screening_assessment": "model/dynamics/sectoral_financial_positions_bnr_cnf_source_screening.json",
+    "bnr_annual_cnf_screening_state": "ANNUAL_SEMANTIC_STOCK_PASS_QUARTERLY_TRANSACTION_HISTORY_FAIL_NO_REOPEN",
+    "current_public_source_completion_status": "EUROSTAT_INSTRUMENT_SCOPE_FAIL_OECD_S121_SCOPE_FAIL_BNR_ANNUAL_FREQUENCY_TRANSACTION_HISTORY_FAIL_BNR_QUARTERLY_S13_SECTOR_COUNTERPART_CONSOLIDATION_FAIL",
+    "bnr_quarterly_s13_screening_assessment": "model/dynamics/sectoral_financial_positions_bnr_quarterly_s13_source_screening.json",
+    "bnr_quarterly_s13_screening_state": "QUARTERLY_FREQUENCY_PASS_SECTOR_COUNTERPART_CONSOLIDATION_FAIL_NO_REOPEN"
+  },
+  "hard_rules": {
+    "no_reinterpretation_of_historical_phase_A_D": true,
+    "no_missing_to_zero": true,
+    "no_residual_allocation": true,
+    "no_sector_dropping_after_result": true,
+    "no_tolerance_change": true,
+    "no_reference_mode_promotion_from_discovery_probe": true,
+    "no_accounting_readiness_promotion": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  }
+}

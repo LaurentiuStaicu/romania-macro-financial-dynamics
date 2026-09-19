@@ -1,0 +1,65 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Reference Mode Recovery — Private Non-Financial Credit Stock and Flow",
+  "verdict": "PROMOTE_BOTH_TO_OBSERVED_SERIES_AVAILABLE",
+  "reference_modes": [
+    "credit_stock",
+    "credit_flow"
+  ],
+  "source_basis": {
+    "contract": "model/dynamics/private_credit_reference_contract.json",
+    "audit_script": "scripts/audit_ecb_private_credit_reference.py",
+    "retained_snapshot": "model/dynamics/private_credit_reference_snapshot.json",
+    "workflow_run_id": 35409985524,
+    "workflow_artifact_id": 10573686121,
+    "workflow_branch_head_sha": "258eac8a18746bc4cb410d8d6f2fb3c1d8cfbbc5",
+    "workflow_artifact_sha256": "9920fd53f9338c7bb2e2221e3b6c2057c5aea94246e6d6b6204b9b351a3d41ba",
+    "audit_report_sha256": "b50ecb53130f0a9bd5731487737d14d70a66ebf6688202cf856e5b995630ebdd"
+  },
+  "coverage": {
+    "stock_components": {
+      "nfc": 260,
+      "households_npish": 260,
+      "first": "2004-12",
+      "last": "2026-07",
+      "complete_2025": true
+    },
+    "flow_components": {
+      "nfc": 259,
+      "households_npish": 259,
+      "first": "2005-01",
+      "last": "2026-07",
+      "complete_2025": true
+    },
+    "aggregate_credit_stock": {
+      "observations": 260,
+      "first": "2004-12",
+      "last": "2026-07"
+    },
+    "aggregate_credit_flow": {
+      "observations": 259,
+      "first": "2005-01",
+      "last": "2026-07"
+    }
+  },
+  "scientific_interpretation": [
+    "credit_stock is the same-month sum of directly published ECB BSI end-of-period loan stocks for domestic NFCs (S.11) and households/NPISH (S.14/S.15), from MFIs excluding the NCB, all currencies combined.",
+    "credit_flow is the same-month sum of directly published ECB BSI financial transactions for those same two counterpart sectors.",
+    "The flow is not a first difference of the stock and is not interpreted as gross new-lending originations.",
+    "The aggregation intentionally excludes other financial sectors rather than using the broader non-MFI excluding general-government aggregate.",
+    "Promotion improves observed reference-mode coverage only. It does not activate the bank-credit balance-sheet loop or monetary-credit transmission loop, validate causal effects, or mutate the Accounting Spine."
+  ],
+  "disposition": {
+    "credit_stock_previous_status": "SOURCE_IDENTIFIED_NOT_MATERIALIZED",
+    "credit_stock_new_status": "OBSERVED_SERIES_AVAILABLE",
+    "credit_flow_previous_status": "SOURCE_IDENTIFIED_NOT_MATERIALIZED",
+    "credit_flow_new_status": "OBSERVED_SERIES_AVAILABLE",
+    "time_resolution": "monthly",
+    "unit": "Millions of Euro",
+    "accounting_spine": "UNCHANGED",
+    "behavioural_closure": "UNCHANGED_INACTIVE",
+    "bank_credit_balance_sheet_loop": "UNCHANGED_QUANTITATIVELY_INACTIVE",
+    "monetary_credit_transmission_loop": "UNCHANGED_QUANTITATIVELY_INACTIVE",
+    "validated_reference_behavioural_mechanisms": 0
+  }
+}

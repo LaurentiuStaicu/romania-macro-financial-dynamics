@@ -1,0 +1,59 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "mechanism_id": "fiscal_primary_balance_reaction",
+  "phase": "Fiscal Reaction — AMECO Annual Source Structure Probe",
+  "purpose": "Resolve the exact Spring-2026 AMECO file/member structure and Romania/unit rows for the preregistered annual primary-balance, output-gap and debt observables before writing a parser or materializing an annual reaction dataset.",
+  "estimation_authorized": false,
+  "source_release": {
+    "institution": "European Commission DG ECFIN",
+    "database": "AMECO",
+    "release": "Spring 2026 Economic Forecast",
+    "release_date": "2026-06-03",
+    "release_page": "https://economy-finance.ec.europa.eu/economic-research-and-databases/economic-databases/ameco-database_en"
+  },
+  "chapter_sources": [
+    {
+      "id": "domestic_product",
+      "url": "https://ec.europa.eu/economy_finance/db_indicators/ameco/documents/ameco6.zip",
+      "required_variable": "AVGDGP",
+      "required_concept": "Gap between actual and potential gross domestic product",
+      "expected_frequency": "annual"
+    },
+    {
+      "id": "general_government",
+      "url": "https://ec.europa.eu/economy_finance/db_indicators/ameco/documents/ameco16.zip",
+      "required_variable": "UBLGI",
+      "required_concept": "Net lending (+) or net borrowing (-) excluding interest: general government, ESA 2010",
+      "expected_frequency": "annual"
+    },
+    {
+      "id": "gross_public_debt",
+      "url": "https://ec.europa.eu/economy_finance/db_indicators/ameco/documents/ameco18.zip",
+      "required_variable": "UDGG",
+      "required_concept": "General government consolidated gross debt: excessive deficit procedure, ESA 2010",
+      "expected_frequency": "annual"
+    }
+  ],
+  "resolution_rules": {
+    "country_label_required": "Romania",
+    "country_code_may_not_be_assumed": true,
+    "unit_code_may_not_be_assumed": true,
+    "variable_code_must_be_found_in_official_payload": true,
+    "retain_exact_zip_bytes_and_sha256": true,
+    "retain_member_inventory": true,
+    "retain_matching_member_bytes": true,
+    "no_value_transformation_in_probe": true
+  },
+  "next_gate": "Only after the exact AMECO member/row structure is retained may an actual-only annual source materializer be written. The later materializer must exclude forecast years 2025-2027 and retain observations only through completed year 2024.",
+  "hard_rules": {
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_forecast_year_use": true,
+    "no_country_code_guess": true,
+    "no_unit_code_guess": true,
+    "no_quarterly_interpolation": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "mechanism_id": "fiscal_primary_balance_reaction",
+  "phase": "Fiscal Primary Balance Reaction — Annual Structural Selection Preregistration",
+  "purpose": "Preregister one parsimonious annual conditional primary-balance candidate before any coefficient estimation, using only the exact retained 1995-2024 AMECO actual-only source vintage. The cycle asks whether lagged debt and lagged cyclical position add predictive information beyond primary-balance persistence. It does not identify causal fiscal policy, discretionary policy, structural balance, or debt sustainability, and it does not activate a System Dynamics feedback.",
+  "prerequisite_source_vintage": {
+    "path": "data/source_vintages/fiscal-reaction-ameco-actual-vintage-2026-09-19",
+    "promotion_review": "model/calibration_validation/fiscal_reaction_ameco_source_vintage_promotion_review.json",
+    "rows": 30,
+    "first_year": 1995,
+    "last_year": 2024,
+    "normalized_csv_sha256": "4d6ab4c737ffb50d48d4866539e6f069b03bc90945bc7a645ac4bd7f88ef2193",
+    "exact_raw_reproducibility_required": true
+  },
+  "measurement_boundary": {
+    "review": "model/calibration_validation/fiscal_reaction_annual_measurement_boundary_review.json",
+    "frequency": "annual",
+    "forecast_years_allowed": false,
+    "regime_coefficients_allowed": false,
+    "synthetic_debt_gap_allowed": false,
+    "quarterly_interpolation_allowed": false
+  },
+  "target": {
+    "column": "primary_balance_pct_gdp",
+    "concept": "AMECO UBLGI general-government net lending/borrowing excluding interest",
+    "unit": "percentage points of GDP",
+    "transformation": "level",
+    "reason": "The level specification is the conventional fiscal-reaction observable and preserves the retained source concept. A change specification is a distinct candidate family and is not searched inside this cycle.",
+    "structural_primary_balance_label": false,
+    "discretionary_policy_label": false
+  },
+  "predictors": {
+    "lagged_primary_balance": {
+      "column": "primary_balance_pct_gdp",
+      "lag_years": 1,
+      "role": "persistence control"
+    },
+    "lagged_debt": {
+      "column": "debt_pct_gdp",
+      "lag_years": 1,
+      "role": "fiscal-state predictor",
+      "interpretation": "Observed debt-to-GDP level only; it is not a gap from 60 percent or any other target."
+    },
+    "lagged_output_gap": {
+      "column": "output_gap_pct_potential_gdp",
+      "lag_years": 1,
+      "role": "cyclical-state predictor",
+      "interpretation": "Retained AMECO/EUCAM model-based output-gap estimate. Lagging is frozen ex ante to avoid using same-year cyclical information as if it were predetermined fiscal information."
+    }
+  },
+  "baseline_models": [
+    {
+      "id": "persistence",
+      "equation": "PB[t] = PB[t-1]",
+      "estimated_parameters": 0,
+      "role": "naive annual benchmark"
+    },
+    {
+      "id": "primary_balance_ar",
+      "equation": "PB[t] = alpha + rho*PB[t-1]",
+      "estimated_parameters": 2,
+      "role": "parsimonious estimated persistence benchmark"
+    }
+  ],
+  "candidate_models": [
+    {
+      "id": "lagged_state_fiscal_balance_ar",
+      "equation": "PB[t] = alpha + rho*PB[t-1] + beta_d*DebtGDP[t-1] + beta_y*OutputGap[t-1]",
+      "estimated_parameters": 4,
+      "parameter_interpretation": {
+        "beta_d": "incremental conditional association of prior-year debt-to-GDP with current primary balance; non-negative sign is the preregistered conventional fiscal-response direction but is not a causal or sustainability coefficient",
+        "beta_y": "incremental conditional association of prior-year output gap with current primary balance; non-negative sign is the preregistered cyclical direction but does not isolate discretionary policy or automatic stabilizers"
+      }
+    }
+  ],
+  "information_timing": {
+    "all_candidate_predictors": "t-1 only",
+    "no_same_year_output_gap": true,
+    "no_same_year_debt": true,
+    "no_future_leakage": true,
+    "interpretation": "One-year-ahead conditional prediction from previously observed annual states. AMECO release-vintage revision uncertainty remains and real-time-vintage forecasting is not claimed."
+  },
+  "fitting_method": {
+    "estimator": "ordinary least squares",
+    "intercept": true,
+    "regularization": false,
+    "p_values_used_for_model_selection": false,
+    "predictor_standardization_for_estimation": false,
+    "standardized_design_used_for_condition_number": true,
+    "missing_value_policy": "No imputation. A target year is evaluable only when target and every required lagged input are finite.",
+    "no_model_averaging": true,
+    "no_post_fit_variable_dropping": true
+  },
+  "windows": {
+    "first_lagged_usable_target": 1996,
+    "initial_calibration": "1996..2009",
+    "structural_selection": "2010..2017",
+    "final_evaluation": "2018..2024",
+    "structural_selection_method": "Expanding-origin one-step-ahead predictions. At each target year, each estimable model is fitted using only earlier target years.",
+    "final_evaluation_open_rule": "Open final-evaluation model performance only if the candidate passes every structural-selection and identifiability gate. If it fails, 2018-2024 final-evaluation performance remains unopened and cannot rescue the form.",
+    "no_respecification_after_selection": true,
+    "sample_size_note": "The source vintage has only 30 actual annual observations. The windows deliberately keep the candidate at four parameters, use expanding-origin evaluation, and prohibit added controls or regime coefficients inside this cycle."
+  },
+  "identifiability_gates": {
+    "minimum_training_observations_per_origin": 14,
+    "full_column_rank_required": true,
+    "all_non_intercept_predictors_must_have_positive_variance": true,
+    "standardized_design_condition_number_max": 20,
+    "finite_coefficients_required": true,
+    "parameter_domains": {
+      "rho": [-0.5, 1.2],
+      "beta_d": [0, null],
+      "beta_y": [0, null]
+    },
+    "parameter_domain_consistency_fraction_min": 0.75,
+    "rule": "Rank, condition-number or coefficient-domain failure is an identification failure. Do not rescue the candidate with regularization, variable deletion, alternative lags, target differencing or regime terms inside this cycle."
+  },
+  "structural_selection_gates": {
+    "minimum_evaluable_origins": 8,
+    "candidate_rmse_improvement_vs_persistence_fraction_min": 0.05,
+    "candidate_rmse_improvement_vs_primary_balance_ar_fraction_min": 0.03,
+    "candidate_mae_may_not_exceed_best_baseline_by_more_than_fraction": 0.02,
+    "candidate_absolute_bias_max_percentage_points": 1.0,
+    "all_parameter_domains_must_pass": true,
+    "rule": "The candidate passes only if every identifiability and predictive gate passes. Improvement over persistence alone is insufficient; incremental predictive value over the estimated AR baseline is mandatory."
+  },
+  "final_evaluation_gates_if_opened": {
+    "minimum_observations": 7,
+    "candidate_rmse_improvement_vs_primary_balance_ar_fraction_min": 0.01,
+    "candidate_mae_may_not_exceed_primary_balance_ar_by_more_than_fraction": 0.02,
+    "candidate_absolute_bias_max_percentage_points": 1.0,
+    "parameter_refit_policy": "At each final-evaluation origin, refit the frozen model form only on target years strictly earlier than that target year; no form, lag, target, variable or gate may change.",
+    "causal_claim_allowed": false,
+    "sustainability_claim_allowed": false,
+    "system_dynamics_activation_allowed": false
+  },
+  "robustness_diagnostics_not_selection_criteria": {
+    "report_residual_autocorrelation": true,
+    "report_coefficient_path_across_origins": true,
+    "report_standardized_condition_number_path": true,
+    "report_predictions_by_subperiod": [
+      "2010..2013",
+      "2014..2017",
+      "2018..2024 if opened"
+    ],
+    "report_influence_diagnostics": true,
+    "report_regime_timeline_as_context_only": true,
+    "note": "Diagnostics may motivate a future separately preregistered cycle but may not respecify this one."
+  },
+  "hard_rules": {
+    "no_target_transformation_search": true,
+    "no_alternative_lag_search": true,
+    "no_same_year_predictors": true,
+    "no_extra_predictors_after_fit": true,
+    "no_regime_coefficients": true,
+    "no_debt_gap_60pct_substitution": true,
+    "no_forecast_years": true,
+    "no_missing_value_imputation": true,
+    "no_regularization_rescue": true,
+    "no_holdout_peeking_before_selection_pass": true,
+    "no_causal_fiscal_claim": true,
+    "no_debt_sustainability_claim_from_coefficient": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "verdict_rules": {
+    "PASS_TO_FINAL_EVALUATION": "All structural-selection and identifiability gates pass; the frozen annual form may be evaluated on 2018-2024.",
+    "FAIL_BEFORE_HOLDOUT": "Any required structural-selection or identifiability gate fails; final evaluation stays unopened.",
+    "CANDIDATE_AFTER_FINAL_EVALUATION": "The frozen form passes final predictive gates but remains a non-causal candidate; separate validation, regime robustness and System Dynamics activation gates are still required.",
+    "REJECT_TESTED_FORM": "The frozen annual form fails permitted evaluation. This rejects this form within this cycle, not the general possibility of fiscal adjustment to debt or cyclical conditions."
+  },
+  "estimation_authorization": {
+    "authorized_by_this_contract": false,
+    "next_gate": "Implement an offline runner that exactly enforces this frozen contract, add synthetic/unit tests and a default no-estimation guard. Only after CI verification may one bounded structural-selection execution be separately authorized."
+  }
+}

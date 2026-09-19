@@ -1,0 +1,62 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "mechanism_id": "exchange_rate_pass_through_to_inflation",
+  "phase": "FX Inflation Pass-Through — External Price Control Boundary",
+  "purpose": "Freeze the exact external-price proxy before any common-source materialisation or pass-through estimation, preserving the originally intended total-import/world boundary and preventing post-fit BEC-product selection.",
+  "estimation_authorized": false,
+  "preferred_direct_control": {
+    "dataset": "sts_inpi_m",
+    "concept": "Romania industrial import transaction-price index",
+    "status": "ROMANIA_EXACT_COVERAGE_NOT_CONFIRMED",
+    "use_now": false
+  },
+  "selected_fallback_control": {
+    "institution": "Eurostat",
+    "dataset": "ext_st_27_2020msbec",
+    "exact_dimensions": {
+      "freq": "M",
+      "stk_flow": "IMP",
+      "indic_et": "IVU",
+      "partner": "WORLD",
+      "bclas_bec": "TOTAL",
+      "geo": "RO"
+    },
+    "provider_indicator_label": "Unit value index (2021=100)",
+    "role": "external-price proxy",
+    "conceptual_limit": "Unit-value indices approximate price evolution but can also move because of product-composition and quality changes. They are not relabelled as direct transaction-price import-price indices.",
+    "currency_boundary": "The exact short-term API structure probed on 2026-09-19 exposes no currency dimension. No RON/EUR/USD UVI variant may be invented, inferred, or selected after fit.",
+    "live_structure_evidence": {
+      "workflow_run_id": 35433021506,
+      "artifact_id": 10582085328,
+      "artifact_zip_sha256": "b33e08527e05ffe98082829b76c9ff4091fddded3a83f925e7a3a5edc1556c2a",
+      "provider_updated": "2026-09-15T11:00:00+0200",
+      "raw_sha256": "7645b492934c31682d2f31950150a30cbacfbdb4c3a3273d69b3134a1d280a70",
+      "raw_bytes": 213374,
+      "non_null_observations": 294,
+      "first_period": "2002-01",
+      "last_period": "2026-06"
+    }
+  },
+  "rejected_alternatives_inside_this_cycle": [
+    "bclas_bec=INT",
+    "bclas_bec=CAP",
+    "bclas_bec=CONS",
+    "bclas_bec=CONS_TRA",
+    "EU or euro-area aggregate substituted for Romania",
+    "global commodity-price index substituted without a new preregistered contract",
+    "a silently inferred currency-denominated UVI variant"
+  ],
+  "hard_rules": {
+    "no_post_fit_external_price_control_selection": true,
+    "no_BEC_subcategory_search": true,
+    "no_currency_variant_search": true,
+    "no_relabelling_UVI_as_transaction_price_index": true,
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_causal_claim": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "next_gate": "Probe the current HICP CP00 provider unit/base and exact monthly dimensions, then preregister and materialise one exact common raw-source vintage for ECB EXR, Eurostat HICP and Eurostat TOTAL/IVU. Source completion alone does not authorize estimation."
+}

@@ -1,0 +1,110 @@
+{
+  "assessment_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "phase": "Eurostat Counterpart Discovery — Semantic + Lineage Review",
+  "reference_mode": "sectoral_financial_positions",
+  "contract": "model/dynamics/sectoral_financial_positions_external_semantic_lineage_review_contract.json",
+  "discovery_contract": "model/dynamics/sectoral_financial_positions_eurostat_counterpart_probe_contract.json",
+  "discovery_vintage": "data/source_vintages/sectoral-financial-positions-eurostat-counterpart-discovery-vintage-2026-09-19",
+  "discovery_result": {
+    "state": "PASS",
+    "http_status": 200,
+    "non_null_observation_count": 64995,
+    "raw_response_bytes": 1127348,
+    "raw_response_sha256": "547c9e65c60900aa259ba547efb60faedbaa22e8d8a66e1caed6cbd2cbd189ae",
+    "artifact_id": 10586785016,
+    "artifact_zip_sha256": "8d3fc54dab1d55d5aa898d85f31d68d3a713d7e724c535541d1e8cef46a86cb2"
+  },
+  "value_review_performed": false,
+  "reconciliation_review_performed": false,
+  "review_results": {
+    "SECTOR_MAPPING": {
+      "status": "PASS",
+      "construction": {
+        "H": "S14_S15",
+        "C": "S11",
+        "F": "S12 minus S121, same source concepts",
+        "G": "S13",
+        "BNR": "S121",
+        "X": "counterpart sector S2, with external orientation determined from reporting-sector asset/liability semantics"
+      },
+      "evidence": "Retained JSON-stat metadata exposes reporting-sector codes S11,S12,S121,S13,S14_S15 and counterpart code S2."
+    },
+    "COUNTERPART_ORIENTATION": {
+      "status": "PASS",
+      "evidence": "JSON-stat labels distinguish 'Sector' from 'Counterpart sector'; finpos separately identifies ASS and LIAB, so orientation does not require sign inference."
+    },
+    "INSTRUMENT_MAPPING": {
+      "status": "FAIL",
+      "required_rmd_instruments": [
+        "F2",
+        "F3",
+        "F4",
+        "F5",
+        "F6",
+        "F7",
+        "F8"
+      ],
+      "retained_source_na_item_codes": [
+        "F22_F29",
+        "F3",
+        "F3_FDI",
+        "F31",
+        "F32",
+        "F4",
+        "F4_FDI",
+        "F41",
+        "F42",
+        "F511",
+        "F511_FDI",
+        "F52"
+      ],
+      "exact_or_complete": {
+        "F2": false,
+        "F3": true,
+        "F4": true,
+        "F5": false,
+        "F6": false,
+        "F7": false,
+        "F8": false
+      },
+      "blockers": [
+        "F2 is not complete because F21 currency is absent; F22_F29 covers deposits only.",
+        "F5 is not complete: retained counterpart codes expose F511 listed shares and F52 investment fund shares but not the full F5 boundary.",
+        "F6 is absent.",
+        "F7 is absent.",
+        "F8 is absent."
+      ],
+      "rule_applied": "Missing required instruments are an unconditional semantic-review FAIL; broader totals, residual allocation, missing-to-zero and post-result boundary reduction are prohibited."
+    },
+    "STOCK_FLOW_SEMANTICS": {
+      "status": "PASS",
+      "evidence": "stk_flow contains separate TRN and STK categories; Eurostat metadata separately defines financial transactions and closing balance-sheet stocks."
+    },
+    "ASSET_LIABILITY_SEMANTICS": {
+      "status": "PASS",
+      "evidence": "finpos contains explicit ASS and LIAB categories."
+    },
+    "UNIT_SCALING": {
+      "status": "PASS",
+      "evidence": "unit includes MIO_NAC = million units of national currency, alongside MIO_EUR and PC_GDP; no value-based unit inference is needed."
+    },
+    "CONSOLIDATION_AND_VALUATION": {
+      "status": "PASS",
+      "evidence": "Eurostat metadata states quarterly financial accounts are non-consolidated and stocks/flows are in principle recorded at exchange or market value."
+    },
+    "LINEAGE": {
+      "status": "PASS",
+      "evidence": "Eurostat metadata states national quarterly financial-account data are transmitted to the ECB, validated there and then transmitted to Eurostat for republication; this dissemination is not independent measurement."
+    }
+  },
+  "verdict": "FAIL_REQUIRED_INSTRUMENT_SCOPE_INCOMPLETE",
+  "disposition": "SOURCE_NOT_SEMANTICALLY_ADMISSIBLE_FOR_RMD_SECTORAL_POSITION_EXTRACTION_NO_READINESS_CHANGE",
+  "exact_historical_extraction_authorized": false,
+  "reference_mode_promotion": false,
+  "readiness_count_change": 0,
+  "accounting_readiness_change": false,
+  "historical_phase_A_D_reinterpreted": false,
+  "behavioural_closure_change": false,
+  "next_action": "Proceed to the separately preregistered OECD counterpart discovery probe. Reopen Eurostat only if a future public counterpart dataset/version exposes the complete frozen RMD F2-F8 instrument boundary without prohibited substitutions."
+}

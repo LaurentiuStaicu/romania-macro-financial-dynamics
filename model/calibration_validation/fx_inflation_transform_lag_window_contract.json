@@ -1,0 +1,184 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "mechanism_id": "exchange_rate_pass_through_to_inflation",
+  "phase": "FX Inflation Pass-Through — Transform, Lag and Window Preregistration",
+  "purpose": "Freeze one parsimonious monthly predictive pass-through candidate family before any coefficient estimation. The cycle asks whether preregistered RON/EUR depreciation history adds predictive information for Romania monthly HICP inflation beyond inflation persistence, calendar seasonality and the retained total-import/world UVI external-price proxy. It does not identify exogenous exchange-rate shocks or causal structural pass-through.",
+  "estimation_authorized": false,
+  "prerequisite_source_vintage": {
+    "path": "data/source_vintages/fx-inflation-monthly-levels-vintage-2026-09-19",
+    "promotion_review": "model/calibration_validation/fx_inflation_source_vintage_promotion_review.json",
+    "rows": 294,
+    "first_period": "2002-01",
+    "last_period": "2026-06",
+    "normalized_csv_sha256": "bba995fe9e435cc124a5b66c035a5e65085ef705f912bf6c018dcd0d4a4748ea"
+  },
+  "source_methodology_boundary": {
+    "hicp_is_not_seasonally_adjusted": true,
+    "hicp_dataset": "prc_hicp_minr",
+    "hicp_unit": "I25",
+    "hicp_product": "coicop18=TOTAL",
+    "external_price_proxy": "ext_st_27_2020msbec / IMP / IVU / WORLD / TOTAL / RO",
+    "external_price_proxy_limit": "UVI is composition-sensitive and is not a direct transaction-price import-price index.",
+    "exchange_rate": "EXR.M.RON.EUR.SP00.A monthly average RON per EUR"
+  },
+  "transformations": {
+    "target_monthly_hicp_inflation": {
+      "symbol": "pi_t",
+      "formula": "100 * (ln(HICP_t) - ln(HICP_t-1))",
+      "input": "hicp_total_2025_100",
+      "unit": "log percentage points per month",
+      "no_year_on_year_substitution": true
+    },
+    "fx_depreciation": {
+      "symbol": "de_t",
+      "formula": "100 * (ln(RON_per_EUR_t) - ln(RON_per_EUR_t-1))",
+      "input": "ron_per_eur_monthly_average",
+      "positive_interpretation": "RON depreciation against EUR",
+      "unit": "log percent per month",
+      "no_end_of_period_substitution": true
+    },
+    "external_price_change": {
+      "symbol": "dpstar_t",
+      "formula": "100 * (ln(UVI_t) - ln(UVI_t-1))",
+      "input": "import_uvi_total_world_2021_100",
+      "unit": "log percent per month",
+      "interpretation": "change in composition-sensitive external-price proxy"
+    }
+  },
+  "regime_boundary": {
+    "estimation_target_start": "2005-08",
+    "reason": "Romania adopted inflation targeting in August 2005. Earlier retained months may be used only as lag/transformation history and never as target observations in this cycle.",
+    "pre_start_target_observations_allowed": false,
+    "later_regime_dummies_in_first_cycle": false,
+    "managed_float_endogeneity_acknowledged": true
+  },
+  "seasonal_treatment": {
+    "reason": "Official HICP is not seasonally adjusted.",
+    "method": "Calendar-month fixed effects with January as the omitted reference month.",
+    "dummy_count": 11,
+    "included_in_every_estimated_baseline_and_candidate": true,
+    "post_fit_switch_to_seasonally_adjusted_series": false
+  },
+  "persistence_boundary": {
+    "inflation_lags_months": [
+      1,
+      2
+    ],
+    "rationale": "AR(2) is frozen as a compact monthly inflation-persistence baseline and is identical across external-price baseline and FX candidate.",
+    "no_AR_order_search": true
+  },
+  "external_price_baseline": {
+    "regressors": [
+      {
+        "id": "dpstar_0",
+        "definition": "dpstar_t"
+      },
+      {
+        "id": "dpstar_1_3_mean",
+        "definition": "mean(dpstar_t-1, dpstar_t-2, dpstar_t-3)"
+      }
+    ],
+    "rationale": "Current and recent import-UVI changes are retained as an ex-ante external-price baseline. No longer UVI lag search is allowed in this cycle.",
+    "no_external_price_lag_search": true
+  },
+  "fx_lag_blocks": [
+    {
+      "id": "de_0",
+      "months": [
+        0
+      ],
+      "definition": "de_t"
+    },
+    {
+      "id": "de_1_3_mean",
+      "months": [
+        1,
+        2,
+        3
+      ],
+      "definition": "mean(de_t-1 .. de_t-3)"
+    },
+    {
+      "id": "de_4_6_mean",
+      "months": [
+        4,
+        5,
+        6
+      ],
+      "definition": "mean(de_t-4 .. de_t-6)"
+    },
+    {
+      "id": "de_7_12_mean",
+      "months": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "definition": "mean(de_t-7 .. de_t-12)"
+    }
+  ],
+  "fx_lag_rationale": "Historical Romania studies report most pass-through within the first 12 months and commonly report 3/6/9/12-month horizons. Fixed lag blocks reduce free parameters and prohibit post-fit lag-length selection while preserving coarse timing information.",
+  "frozen_models": {
+    "naive_persistence": {
+      "equation": "pi_t = pi_t-1",
+      "role": "naive benchmark",
+      "estimated_parameters": 0
+    },
+    "ar2_seasonal": {
+      "equation": "pi_t = alpha + month_FE + phi1*pi_t-1 + phi2*pi_t-2",
+      "role": "inflation-persistence benchmark"
+    },
+    "external_price_baseline": {
+      "equation": "pi_t = alpha + month_FE + phi1*pi_t-1 + phi2*pi_t-2 + delta0*dpstar_t + delta13*dpstar_1_3_mean",
+      "role": "mandatory non-FX baseline"
+    },
+    "fx_candidate": {
+      "equation": "external_price_baseline + gamma0*de_0 + gamma13*de_1_3_mean + gamma46*de_4_6_mean + gamma712*de_7_12_mean",
+      "role": "only admissible FX pass-through candidate in this cycle"
+    }
+  },
+  "fx_sign_interpretation": {
+    "hard_individual_block_sign_constraints": false,
+    "cumulative_0_12_definition": "gamma0 + gamma13 + gamma46 + gamma712",
+    "cumulative_0_3_definition": "gamma0 + gamma13",
+    "preregistered_direction": "Cumulative 0-12 and cumulative 0-3 FX effects are expected to be non-negative for a depreciation-positive quote, but individual later block coefficients are not forced positive.",
+    "causal_interpretation_allowed": false
+  },
+  "windows": {
+    "transformation_history_start": "2002-01",
+    "first_eligible_target": "2005-08",
+    "initial_calibration": "2005-08..2014-12",
+    "structural_selection": "2015-01..2020-12",
+    "final_evaluation": "2021-01..2026-06",
+    "structural_selection_method": "Expanding-origin one-step-ahead monthly predictions. At each target month, each estimated model is fit only on eligible target months strictly earlier than that month.",
+    "final_evaluation_open_rule": "Open 2021-01..2026-06 only if the frozen FX candidate passes every structural-selection and identifiability gate in a separately authorized execution. Failure keeps the full final-evaluation window unopened.",
+    "no_respecification_after_selection": true
+  },
+  "future_selection_gates_to_freeze_before_execution": {
+    "candidate_must_improve_over_external_price_baseline": true,
+    "candidate_must_improve_over_ar2_seasonal": true,
+    "identifiability_and_conditioning_required": true,
+    "cumulative_fx_sign_consistency_required": true,
+    "residual_and_subperiod_diagnostics_are_not_respecification_licenses": true
+  },
+  "hard_rules": {
+    "no_year_on_year_target_search": true,
+    "no_AR_order_search": true,
+    "no_alternative_fx_lag_search": true,
+    "no_external_price_lag_search": true,
+    "no_seasonal_adjustment_switch": true,
+    "no_regime_dummy_search": true,
+    "no_asymmetry_search_in_first_cycle": true,
+    "no_parameter_estimation": true,
+    "no_model_selection_execution": true,
+    "no_final_evaluation_access": true,
+    "no_causal_claim": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "next_gate": "Implement an offline transformation and design-matrix builder that reproduces these frozen definitions, verifies target/lag dates and final-evaluation isolation, and defaults to no estimation. Then preregister numeric identifiability and structural-selection thresholds before any bounded selection execution."
+}

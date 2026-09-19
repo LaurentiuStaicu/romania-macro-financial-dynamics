@@ -1,0 +1,72 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "fiscal_primary_balance_reaction",
+  "snapshot_id": "fiscal-primary-balance-quarterly-vintage-2026-09-19",
+  "verdict": "PASS_EXACT_REVIEWED_ARTIFACT_ELIGIBLE_FOR_PROMOTION",
+  "estimation_authorized": false,
+  "reviewed_workflow": {
+    "run_id": 35431513915,
+    "artifact_id": 10580294031,
+    "artifact_name": "fiscal-primary-balance-materialisation-bf2314456295c6ac3950cfde2640de58bffe2c2f",
+    "artifact_zip_sha256": "567781d80fabcc0db2a0c15adc56bea0282cad82730837cc2eae79b58707170b",
+    "head_sha": "ce902273002c0498f469b660bc7fb9bd8c358d6e"
+  },
+  "expected_files": [
+    {
+      "path": "fiscal_primary_balance_materialisation_audit.json",
+      "bytes": 4224,
+      "sha256": "63d6135d988f1db2dcd60c0e23659d2f3d2d685a7c307a241b290d04d310845a"
+    },
+    {
+      "path": "fiscal_primary_balance_quarterly_source.csv",
+      "bytes": 3374,
+      "sha256": "0b855058e3a0937c3759628fbb97e30895a211d07285bef4be29b819e552237f"
+    },
+    {
+      "path": "raw/gov_10q_ggnfa_RO_B9_NSA_PC_GDP.json",
+      "bytes": 7504,
+      "sha256": "6bdefb865bdfb90e0f61c6afe54ce119fd56b9de12a6d8c10b4fcf254c49e365"
+    },
+    {
+      "path": "raw/gov_10q_ggnfa_RO_D41PAY_NSA_PC_GDP.json",
+      "bytes": 7397,
+      "sha256": "db9928f8134424c784ba875affd4aba56f7ca2b09c390495bfddfbd3bc972a90"
+    },
+    {
+      "path": "snapshot_manifest.json",
+      "bytes": 3065,
+      "sha256": "d595958bf55bfa4dfb19d28b6825707b7d790ab4ba2f20f300251405b3987320"
+    }
+  ],
+  "coverage": {
+    "rows": 105,
+    "first_period": "2000-Q1",
+    "last_period": "2026-Q1"
+  },
+  "matched_dataset_updated": "2026-07-21T11:00:00+0200",
+  "provenance": {
+    "source_vintage_contract": "data/provenance/source_vintage_contract.json",
+    "fetcher_script_sha256": "7a6dc16c89b2b959a37f3829f3c072377296c5d99dfa0a8241ccc066095524b8"
+  },
+  "validation_checks": {
+    "b9_and_d41pay_same_updated_metadata": true,
+    "retained_d41pay_overlap_count": 105,
+    "retained_d41pay_max_absolute_difference_pp": 0,
+    "primary_balance_identity_max_absolute_error": 1.7763568394002505e-15,
+    "latest_2026_q1": {
+      "b9_pct_gdp": -5.5,
+      "d41pay_pct_gdp": 3.7,
+      "primary_balance_pct_gdp": -1.8
+    }
+  },
+  "hard_boundaries": {
+    "no_parameter_estimation": true,
+    "no_output_gap_construction": true,
+    "no_debt_gap_construction": true,
+    "no_regime_inference": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "promotion_rule": "Only the exact reviewed artifact may be promoted. Promotion must fail on any ZIP digest, file set, byte-size or SHA-256 mismatch."
+}

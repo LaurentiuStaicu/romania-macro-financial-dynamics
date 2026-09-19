@@ -1,0 +1,80 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Reference Mode Recovery — Sectoral Financial Positions / Phase B exact aggregate identity",
+  "verdict": "AGGREGATE_IDENTITY_GATE_FAILED_STRICT_STOCK_RECONCILIATION_NO_PROMOTION",
+  "reference_mode": "sectoral_financial_positions",
+  "contract": "model/dynamics/sectoral_financial_positions_aggregate_identity_contract.json",
+  "prerequisite": "model/dynamics/sectoral_financial_positions_strict_gate_assessment.json",
+  "source_basis": {
+    "audit_script": "scripts/audit_ecb_sectoral_financial_positions_aggregate_identity.py",
+    "workflow_run_id": 35413214512,
+    "workflow_artifact_id": 10575340633,
+    "workflow_head_sha": "1fc8620c2981a82cf9bada147fbba9158aaf1461",
+    "workflow_artifact_sha256": "ceb66df05377d7b5794f4fa587fd49a921edfc6f0c76d51c895dcc204fb60bb1",
+    "artifact_retention_until": "2026-12-18T01:37:13Z"
+  },
+  "source_result": {
+    "series_requested": 48,
+    "series_available": 40,
+    "series_http_error": 8,
+    "mandatory_missing_series_count": 0,
+    "structural_H_C_F1_checks_pass": true,
+    "unavailable_series_are_exactly_optional_H_C_F1": true
+  },
+  "coverage": {
+    "stock_common_observation_count": 45,
+    "flow_common_observation_count": 45,
+    "first_common_period": "2015-Q1",
+    "last_common_period": "2026-Q1",
+    "all_required_2025_quarters_present": true
+  },
+  "reconciliation": {
+    "preregistered_tolerance_million_RON": 0.1,
+    "stock": {
+      "pass": false,
+      "max_absolute_residual_million_RON": 0.16539062504307367,
+      "failing_periods": {
+        "2021-Q3": -0.16539062504307367,
+        "2022-Q3": 0.1150000001071021,
+        "2024-Q1": -0.1185156247811392
+      }
+    },
+    "flow": {
+      "pass": true,
+      "max_absolute_residual_million_RON": 0.020312500442514647,
+      "failing_periods": {}
+    }
+  },
+  "scientific_interpretation": [
+    "The exact aggregate identity route resolves the Phase A source-coverage problem without converting any missing F2-F8 component to zero.",
+    "All mandatory total-F and mandatory-F1 sources are available, while the eight unavailable series are exactly the preregistered optional H/C F1 series and therefore do not count as source failures.",
+    "The resulting six-sector stock and flow histories contain 45 common quarters and all 2025 quarters.",
+    "Financial transactions reconcile within the preregistered 0.1 million RON tolerance for every common quarter.",
+    "Stock reconciliation fails the preregistered fixed tolerance in three quarters, so Phase B cannot promote the mode even though the maximum discrepancy is small relative to the series scale.",
+    "The fixed 0.1 million RON threshold may not be relaxed post hoc."
+  ],
+  "next_justified_path": {
+    "phase": "Phase C source-precision consistency",
+    "condition": "Only a separately preregistered rule derived from source metadata, not from observed Phase B residual magnitudes, may assess whether the stock discrepancies are fully explained by published rounding precision.",
+    "allowed_metadata": "ECB SDMX DECIMALS and UNIT_MULT attributes from the relevant source series.",
+    "forbidden": "Choosing a new fixed tolerance from the observed 0.165390625 million RON maximum residual."
+  },
+  "disposition": {
+    "previous_status": "PARTIAL_SERIES_AVAILABLE",
+    "new_status": "PARTIAL_SERIES_AVAILABLE",
+    "readiness_count_change": 0,
+    "accounting_spine": "UNCHANGED",
+    "accounting_readiness": "UNCHANGED",
+    "behavioural_closure": "UNCHANGED_INACTIVE"
+  },
+  "executed_contract_snapshot": "model/dynamics/sectoral_financial_positions_aggregate_identity_contract_executed_2026-09-19.json",
+  "executed_contract_workflow_head_sha": "1fc8620c2981a82cf9bada147fbba9158aaf1461",
+  "executed_contract_blob_sha": "20c1ae829cdfff6c77e46193a0d68edc8f94326d",
+  "post_run_methodology_review": "model/dynamics/sectoral_financial_positions_esa_f1_applicability_review.json",
+  "nonretroactivity": {
+    "executed_contract_may_be_rewritten_by_review": false,
+    "phase_B_result_reinterpreted": false,
+    "later_phase_C_D_results_reinterpreted": false,
+    "readiness_change": 0
+  }
+}

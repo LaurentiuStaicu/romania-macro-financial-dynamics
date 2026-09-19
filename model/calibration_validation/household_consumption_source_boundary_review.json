@@ -1,0 +1,163 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "household_consumption_response",
+  "purpose": "Determine whether the currently registered quarterly household-consumption response equation is source-admissible for Romania before any structural selection or parameter estimation.",
+  "verdict": "CORE_CONSUMPTION_AND_INCOME_SOURCES_AVAILABLE_FULL_REGISTERED_FORM_NOT_SOURCE_ADMISSIBLE",
+  "current_registry_form": "gC = alpha + beta_y*gYd - beta_r*real_borrowing_rate - beta_ds*debt_service_ratio",
+  "exact_primary_sources": {
+    "household_final_consumption": {
+      "institution": "ECB Data Portal / Eurostat QSA",
+      "dataset": "QSA",
+      "series_key": "QSA.Q.N.RO.W0.S1M.S1.N.D.P3._Z._Z._Z.XDC._T.S.V.N._T",
+      "concept": "Final consumption expenditure of households and NPISH, Romania, quarterly, current prices, non-seasonally adjusted",
+      "source_url": "https://data.ecb.europa.eu/data/datasets/QSA",
+      "status": "EXACT_SERIES_CONFIRMED"
+    },
+    "household_gross_disposable_income": {
+      "institution": "ECB Data Portal / Eurostat QSA",
+      "dataset": "QSA",
+      "series_key": "QSA.Q.N.RO.W0.S1M.S1._Z.B.B6G._Z._Z._Z.XDC._T.S.V.N._T",
+      "seasonally_adjusted_series_key": "QSA.Q.Y.RO.W0.S1M.S1._Z.B.B6G._Z._Z._Z.XDC._T.S.V.N._T",
+      "concept": "Gross disposable income of households and NPISH, Romania, quarterly",
+      "status": "EXACT_SERIES_CONFIRMED",
+      "coverage_note": "The indexed non-seasonally-adjusted series runs from 1999-Q1 through at least 2025-Q3."
+    }
+  },
+  "borrowing_rate_boundary": {
+    "status": "MULTIPLE_DEFINITIONALLY_DISTINCT_MIR_SERIES_AVAILABLE_RATE_AGGREGATION_NOT_FROZEN",
+    "examples": [
+      {
+        "series_key": "MIR.M.RO.B.A2B.A.C.A.2250.RON.N",
+        "concept": "Household consumption-loan APRC, new business, RON, monthly"
+      },
+      {
+        "series_key": "MIR.M.RO.B.A2C.A.R.A.2250.RON.P",
+        "concept": "House-purchase AAR/NDER, pure new loans, RON, monthly"
+      }
+    ],
+    "rule": "Do not select housing, consumption, outstanding-stock or a synthetic weighted borrowing rate after inspecting household-consumption fit. A future source contract must freeze the economically relevant rate family and monthly-to-quarterly aggregation before estimation."
+  },
+  "debt_service_boundary": {
+    "BIS": {
+      "institution": "Bank for International Settlements",
+      "dataset": "Debt service ratios",
+      "documented_scope": "Quarterly total-private-non-financial-sector DSR for 32 economies; household/NFC breakdown for 17 economies.",
+      "romania_household_series_status": "SECTORAL_BIS_DSR_UNAVAILABLE_FOR_ROMANIA_IN_DOCUMENTED_17_COUNTRY_BREAKDOWN",
+      "interpretation": "The current BIS documentation explicitly lists the 17 economies with household/NFC DSR breakdowns and Romania is not among them. Do not substitute a total-PNFS series."
+    },
+    "available_non_equivalent_Romania_measure": {
+      "source": "ECB QSA",
+      "series_key": "QSA.A.N.RO.W0.S1M.S1.N.L.LE.F4.T._Z.XDC_R_B6G_CY._T.S.V.N._T",
+      "concept": "Household loans as ratio of gross disposable income, annual",
+      "status": "OBSERVED_BUT_NOT_DSR",
+      "reason": "Debt-to-income is a stock-to-income leverage measure. It omits scheduled amortisation and interest-payment burden and therefore cannot substitute for a debt-service ratio."
+    },
+    "historical_microprudential_thresholds": {
+      "status": "NOT_AGGREGATE_TIME_SERIES",
+      "interpretation": "Regulatory borrower debt-service caps or indebtedness thresholds describe lending rules, not an observed aggregate household DSR history; they may not be inserted as the macro state variable."
+    },
+    "bnr_dsti_alternative": {
+      "status": "OFFICIAL_HOUSING_LOAN_DSTI_LEVEL_OBSERVATIONS_CONFIRMED_MACHINE_READABLE_LONGITUDINAL_HISTORY_NOT_RETAINED",
+      "concept": "BNR bank-average DSTI levels for new and outstanding housing-loan portfolios",
+      "semantic_limit": "Observed housing-loan borrower/portfolio burden, not definitionally identical to a macro household-sector DSR; new-loan and outstanding-loan measures must remain separate.",
+      "next_gate": "Either retain exact machine-readable longitudinal housing-loan DSTI levels or preregister a publication-text-only alternative borrower-burden candidate family over 2023-Q1..2025-Q2, preserving source precision and keeping new versus outstanding loans separate.",
+      "publication_level_boundary_review": "model/calibration_validation/bnr_household_dsti_level_publication_boundary_review.json",
+      "confirmed_text_observation_examples": {
+        "2023-Q1": {
+          "new_housing_loans": 35,
+          "outstanding_housing_loans": 41
+        },
+        "2023-Q2": {
+          "new_housing_loans": 35,
+          "outstanding_housing_loans": 42
+        },
+        "2023-Q3": {
+          "new_housing_loans": 34,
+          "outstanding_housing_loans": 42
+        },
+        "2023-Q4": {
+          "new_housing_loans": 35,
+          "outstanding_housing_loans": 41
+        },
+        "2024-Q1": {
+          "new_housing_loans": 34,
+          "outstanding_housing_loans": 41
+        },
+        "2024-Q2": {
+          "new_housing_loans": 34.6,
+          "outstanding_housing_loans": 41
+        },
+        "2024-Q3": {
+          "new_housing_loans": 34.8,
+          "outstanding_housing_loans": 40.9
+        },
+        "2024-Q4": {
+          "new_housing_loans": 35,
+          "outstanding_housing_loans": 41
+        },
+        "2025-Q1": {
+          "new_housing_loans": 35,
+          "outstanding_housing_loans": 41,
+          "qualifier": "approximately/roughly"
+        },
+        "2025-Q2": {
+          "new_housing_loans": 37,
+          "outstanding_housing_loans": 42
+        }
+      },
+      "publication_text_coverage": {
+        "window_start": "2023-Q1",
+        "window_end": "2025-Q2",
+        "directly_observed_quarters": 10,
+        "expected_quarters": 10,
+        "missing_quarters": [],
+        "coverage_fraction": 1
+      }
+    }
+  },
+  "transformation_boundary": {
+    "consumption_and_income_current_price_levels_available": true,
+    "real_growth_transform_not_yet_frozen": true,
+    "seasonal_adjustment_not_yet_frozen": true,
+    "deflator_source_not_yet_frozen": true,
+    "rule": "Do not choose nominal versus real growth, seasonal treatment, deflator, or lag structure from evaluation fit. These belong in a separate preregistered structural-selection contract only after the source boundary is complete."
+  },
+  "source_admissibility": {
+    "registered_full_form_admissible": false,
+    "reasons": [
+      "The registered macro household DSR term is not identified by an exact Romania household-sector DSR source.",
+      "BNR housing-loan DSTI levels are directly observed in publication text for every quarter from 2023-Q1 through 2025-Q2, but the measure covers housing-loan borrowers/portfolios rather than the aggregate S1M consumption population.",
+      "A targeted screening of ECB HFCS, INS ABF/TEMPO and ECB CES identified no observed public Romania bridge from housing-loan borrower burden to aggregate S1M consumption or an aligned borrower-subpopulation consumption target.",
+      "The household borrowing-rate concept is not uniquely defined by the registry and cannot be selected post hoc to repair the population mismatch.",
+      "Real/nominal and seasonal transformations for consumption and disposable income have not yet been frozen."
+    ],
+    "nested_form_automatically_authorized": false,
+    "nested_form_rule": "Removing the DSR term or selecting an income-only/rate-only form requires a new preregistered candidate-family contract. Source incompleteness does not authorize dropping variables after seeing outcomes.",
+    "population_alignment_status": "BLOCKED_NO_OBSERVED_PUBLIC_BRIDGE_IDENTIFIED",
+    "housing_dsti_directly_admissible_as_registered_debt_service_ratio": false,
+    "public_population_bridge_found": false
+  },
+  "prohibited_shortcuts": [
+    "Use household loans-to-disposable-income as a debt-service ratio.",
+    "Use a regulatory debt-service cap or borrower indebtedness threshold as an aggregate DSR observation.",
+    "Choose mortgage versus consumer borrowing rates after model fit.",
+    "Construct a synthetic household DSR from debt stock, a new-business rate and an assumed maturity without a separately preregistered measurement model.",
+    "Drop the DSR term and fit a nested equation merely because the DSR source is missing.",
+    "Choose seasonal adjustment, deflator or lag structure after opening evaluation outcomes."
+  ],
+  "disposition": {
+    "mechanism_classification": "CANDIDATE",
+    "source_readiness": "CORE_QSA_SOURCES_CONFIRMED_COMPLETE_DSTI_TEXT_WINDOW_PUBLIC_POPULATION_BRIDGE_SCREENED_NOT_FOUND",
+    "active_calibration_cycle_open": false,
+    "estimation_or_refit_allowed": false,
+    "central_feedback": false,
+    "validated_reference_behavioural_mechanisms_change": 0,
+    "behavioural_closure": "UNCHANGED_INACTIVE",
+    "accounting_spine": "UNCHANGED"
+  },
+  "debt_service_source_screening": "model/calibration_validation/debt_service_source_screening.json",
+  "debt_service_level_publication_boundary_review": "model/calibration_validation/bnr_household_dsti_level_publication_boundary_review.json",
+  "borrower_burden_population_alignment_review": "model/calibration_validation/household_consumption_borrower_burden_alignment_review.json",
+  "population_bridge_source_screening": "model/calibration_validation/household_consumption_population_bridge_source_screening.json"
+}

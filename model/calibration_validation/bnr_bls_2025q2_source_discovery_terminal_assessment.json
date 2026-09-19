@@ -1,0 +1,102 @@
+{
+  "assessment_version": "0.1",
+  "assessed_on": "2026-09-19",
+  "mechanism_id": "aggregate_bank_credit_response",
+  "stage": "BNR BLS 2025-Q2 Exact Source Discovery",
+  "status": "STAGE_CLOSED_FROZEN_SINGLE_GAP_2025_Q2_UNDER_CURRENT_PUBLIC_DISCOVERY_SURFACE_NO_MODEL_EFFECT",
+  "scope": "Close the exact-source discovery stage for the sole missing canonical BNR Bank Lending Survey realised round, 2025-Q2, without manufacturing workbook URLs, substituting rounded publication text for exact workbook cells, treating search non-discovery as source absence, or opening calibration.",
+  "canonical_state": {
+    "panel": "data/processed/bnr_bls_realised_rounds.csv",
+    "promotion_review": "model/calibration_validation/bnr_bls_canonical_panel_promotion_review.json",
+    "window": "2022-Q4..2025-Q3",
+    "expected_quarters": 12,
+    "observed_quarters": 11,
+    "missing_quarters": [
+      "2025-Q2"
+    ],
+    "canonical_panel_status": "FROZEN_11_OF_12_SINGLE_GAP_2025_Q2",
+    "rounded_publication_values_are_canonical": false
+  },
+  "semantic_anchor": {
+    "publication_title": "Bank Lending Survey, August 2025",
+    "publication_url": "https://www.bnr.ro/uploads/2025-11-06blst1august2025_documentpdf_545_1762420562.pdf",
+    "realised_quarter": "2025-Q2",
+    "publication_text_status": "COMPLETE_FOR_ALL_SIX_PREREGISTERED_OBSERVABLES_BUT_ROUNDED",
+    "exact_workbook_status": "OFFICIAL_ANNEX_EXISTENCE_KNOWN_EXACT_WORKBOOK_URL_AND_BYTES_UNRETAINED",
+    "recovery_contract": "model/calibration_validation/bnr_bls_missing_round_workbook_recovery_contract.json"
+  },
+  "discovery_channels": [
+    {
+      "id": "exact_official_workbook_endpoint_discovery",
+      "result": "NO_EXACT_2025_Q2_XLS_XLSX_ENDPOINT_IDENTIFIED",
+      "finding": "Targeted public/indexed searches around the exact official publication slug, publication date, title variants, XLS/XLSX file types and known BNR BLS naming conventions did not expose an exact official 2025-Q2 workbook endpoint. This is non-discovery, not evidence that the workbook never existed."
+    },
+    {
+      "id": "historical_official_bnr_time_series_surface",
+      "url": "https://www.bnr.ro/2042-sondaj-privind-creditarea-companiilor-nefinanciare-si-a-populatiei",
+      "result": "OFFICIAL_TIME_SERIES_SURFACE_CONFIRMED_TARGET_HREF_UNRESOLVED",
+      "finding": "BNR's historical survey page states that questionnaire results are available as time series. The current public crawl/search surface does not expose the exact historical target behind that time-series reference, so no file or dataset may be promoted from it."
+    },
+    {
+      "id": "current_official_bnr_survey_surface",
+      "url": "https://www.bnr.ro/12055-sondaj-privind-creditarea-companiilor-nefinanciare-si-a-populatiei",
+      "result": "OFFICIAL_SURVEY_SURFACE_CONFIRMED_EXACT_2025_Q2_MACHINE_READABLE_HREF_UNRESOLVED",
+      "finding": "The current BNR survey surface is confirmed, but the audited public crawl/search representation does not expose an exact machine-readable 2025-Q2 annex target."
+    },
+    {
+      "id": "definitionally_equivalent_official_alternative_screening",
+      "result": "NO_EXACT_DEFINITIONALLY_EQUIVALENT_SUBSTITUTE_IDENTIFIED",
+      "finding": "No alternative official source was identified that supplies the same six realised BNR survey observables for 2025-Q2 at exact workbook precision and the same survey boundary. Different surveys, populations or frequencies are not substitutes."
+    }
+  ],
+  "exhaustion_assessment": {
+    "current_public_discovery_surface_exhausted_for_exact_endpoint_identity": true,
+    "source_absence_claimed": false,
+    "same_query_repetition_authorized": false,
+    "filename_pattern_generation_authorized": false,
+    "timestamp_bruteforce_authorized": false,
+    "directory_scraping_authorized": false,
+    "internal_endpoint_guessing_authorized": false,
+    "third_party_canonicalization_authorized": false,
+    "rounded_report_substitution_authorized": false,
+    "reason": "All admissible public-discovery paths available in this pass either confirm the official report/survey surface without yielding the exact machine-readable 2025-Q2 target or yield no definitionally equivalent official substitute. Repeating the same indexed queries cannot improve exact-source identity without new provider-side evidence."
+  },
+  "terminal_disposition": {
+    "active_2025q2_source_discovery_task_remains": false,
+    "exact_workbook_endpoint_status": "FROZEN_UNIDENTIFIED_UNTIL_NEW_OFFICIAL_EVIDENCE",
+    "historical_time_series_target_status": "FROZEN_UNRESOLVED_UNTIL_NEW_OFFICIAL_OR_ARCHIVAL_TARGET_EVIDENCE",
+    "source_byte_acquisition_authorized": false,
+    "numeric_extraction_authorized": false,
+    "canonical_panel_mutation_authorized": false,
+    "parameter_estimation_authorized": false,
+    "model_selection_authorized": false,
+    "lag_selection_authorized": false,
+    "holdout_opening_authorized": false,
+    "system_dynamics_activation": false,
+    "behavioural_closure_change": false
+  },
+  "reopen_triggers": [
+    "BNR exposes the exact official XLS/XLSX annex URL for the 2025-Q2 Bank Lending Survey round through its current page, archive, search or another official link surface.",
+    "BNR exposes a stable official time-series file, dataset or series identifier that contains the six preregistered realised observables for 2025-Q2 at sufficient precision and with matching survey semantics.",
+    "An official BNR archive or preserved official-page target resolves the historical time-series link to a reproducible machine-readable source with the required semantics.",
+    "BNR publishes a replacement machine-readable BLS catalogue, export or API that establishes the exact 2025-Q2 values and definitions."
+  ],
+  "non_reopen_conditions": [
+    "Repeating the same search-engine queries without a new official clue.",
+    "Guessing BNR upload filenames, file-type suffixes, timestamps, directory paths or internal endpoints.",
+    "Using rounded narrative/report values as exact workbook-cell replacements.",
+    "Using a third-party reproduction as canonical evidence.",
+    "Using a different survey, population, frequency or semantic variable merely because its values appear similar."
+  ],
+  "model_effect": {
+    "mechanism_classification_change": false,
+    "mechanism_classification": "CANDIDATE",
+    "active_calibration_cycle_open": false,
+    "canonical_panel_observed_round_count_change": 0,
+    "canonical_panel_remains_11_of_12": true,
+    "validated_reference_behavioural_mechanisms_change": 0,
+    "bank_credit_feedback_activation": false,
+    "behavioural_closure": "UNCHANGED_INACTIVE",
+    "accounting_spine": "UNCHANGED"
+  }
+}

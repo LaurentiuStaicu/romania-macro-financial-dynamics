@@ -1,0 +1,59 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "corporate_investment_response",
+  "phase": "Corporate Investment — Structural Selection Result Review",
+  "verdict": "FAIL_BEFORE_HOLDOUT",
+  "reviewed_workflow": {
+    "run_id": 35436365822,
+    "artifact_id": 10582335814,
+    "artifact_name": "corporate-investment-structural-selection-1d14578f229df5616c30601f92e950ce51d58a32",
+    "artifact_zip_sha256": "011b4c3fdd64744476691b28671af01af1b7f6df12beda9303eeaa4c4a6ab0a1",
+    "source_branch_head_sha": "d59f22b61a12b74c128c66635ed84dccd6bc91e0"
+  },
+  "expected_file": {
+    "path": "corporate_investment_structural_selection_result.json",
+    "bytes": 4264,
+    "sha256": "bf5f0b601028641568ba784134a3ed47ab857dcb92dbeb6ddc29fa932385cf05"
+  },
+  "selection_summary": {
+    "window": "2022-Q1..2023-Q4",
+    "origins": 8,
+    "final_evaluation_window": "2024-Q1..2026-Q1",
+    "final_evaluation_opened": false,
+    "selected_form_for_final_evaluation": null,
+    "primary_passes_all_gates": false,
+    "augmented_passes_all_gates": false,
+    "metrics": {
+      "persistence_rmse": 0.7517774971567587,
+      "investment_rate_ar_rmse": 0.7006248172593503,
+      "core_rmse": 1.1079414721207752,
+      "augmented_rmse": 1.2156396893276757,
+      "core_rmse_improvement_vs_persistence": -0.4737624846594073,
+      "core_rmse_improvement_vs_ar": -0.581362014058729,
+      "augmented_rmse_improvement_vs_core": -0.09720569174177496
+    },
+    "core_parameter_domain_fractions": {
+      "rho": 1,
+      "beta_g": 0.75,
+      "beta_r": 0
+    },
+    "augmented_parameter_domain_fractions": {
+      "rho": 1,
+      "beta_g": 0.75,
+      "beta_r": 0,
+      "beta_s": 1
+    }
+  },
+  "interpretation": "The preregistered lagged-driver corporate-investment forms fail predictive and parameter-domain gates on the structural-selection window. The final evaluation remains unopened. This rejects only these tested forms and does not establish absence of any investment response to activity, financing conditions or investment grants.",
+  "prohibited_rescue_actions": [
+    "open final holdout",
+    "change the financing-rate sign convention",
+    "search alternative lags inside this cycle",
+    "drop predictors post hoc",
+    "add interactions or regimes",
+    "relabel D.92 as EU funding",
+    "activate System Dynamics feedback"
+  ],
+  "canonical_promotion_rule": "Only artifact 10582335814 with the exact ZIP digest and exact result-file byte/SHA-256 values above may be promoted as the canonical structural-selection result."
+}

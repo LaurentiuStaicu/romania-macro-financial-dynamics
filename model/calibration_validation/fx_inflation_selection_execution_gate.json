@@ -1,0 +1,24 @@
+{
+  "gate_version": "0.1",
+  "authorized_on": "2026-09-19",
+  "mechanism_id": "exchange_rate_pass_through_to_inflation",
+  "contract": "model/calibration_validation/fx_inflation_structural_selection_contract.json",
+  "source_csv_sha256": "bba995fe9e435cc124a5b66c035a5e65085ef705f912bf6c018dcd0d4a4748ea",
+  "selection_execution_authorized": false,
+  "selection_execution_consumed": true,
+  "authorized_scope": "STRUCTURAL_SELECTION_2015_01_TO_2020_12_ONLY",
+  "final_evaluation_authorized": false,
+  "authorized_output": "model/calibration_validation/fx_inflation_structural_selection_result.json",
+  "authorization_basis": "Exact monthly source vintage retained; transform/lag/window and numeric selection gates preregistered; no-estimation design builder and guarded selection runner passed Scientific CI.",
+  "hard_rules": {
+    "single_write_result": true,
+    "no_final_evaluation": true,
+    "no_respecification": true,
+    "no_target_or_lag_search": true,
+    "no_regime_or_asymmetry_search": true,
+    "no_causal_claim": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "consumed_by_result": "model/calibration_validation/fx_inflation_structural_selection_result.json"
+}
