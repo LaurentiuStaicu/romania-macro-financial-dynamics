@@ -131,17 +131,17 @@
     {
       "id": "fiscal_primary_balance_reaction",
       "classification": "DEFERRED",
-      "source_readiness": "ANNUAL_AMECO_SOURCE_AND_FORM_FROZEN_RUNNER_IMPLEMENTATION_PENDING",
-      "next_admissible_action": "Implement and test an offline runner that exactly enforces the frozen annual fiscal-reaction structural-selection contract. Default execution must perform no estimation; final-evaluation years must remain inaccessible unless a separately authorized bounded selection execution passes every frozen gate.",
+      "source_readiness": "FROZEN_TESTED_ANNUAL_FORM_FAILED_BEFORE_HOLDOUT",
+      "next_admissible_action": "Do not open 2018-2024 final evaluation and do not respecify the annual fiscal-reaction form on the same evidence cycle. Reopen only through a separately preregistered cycle justified by genuinely new measurement or identification evidence, such as a cyclically adjusted primary-balance vintage, longer real-time historical vintages, or an independently justified regime/identification design.",
       "blockers": [
-        "The exact AMECO actual-only source vintage contains only 30 common annual observations (1995-2024), so the first candidate family must be parsimonious and strongly preregistered.",
-        "The former debt-gap concept has been rejected; a future candidate may use lagged debt-to-GDP level only under the annual measurement boundary, not a synthetic 60% gap.",
-        "EDP, pandemic escape-clause and post-2024 framework regimes are dated ex ante but separate regime coefficients are not currently identifiable in this short single-country annual sample.",
-        "No annual structural-selection contract, target transformation, windows or identifiability gates are frozen yet."
+        "The preregistered lagged-state annual candidate failed structural selection before holdout.",
+        "Candidate RMSE was worse than naive primary-balance persistence over 2010-2017.",
+        "The preregistered non-negative output-gap coefficient domain failed at every expanding-origin fit.",
+        "The 2018-2024 final-evaluation window remains unopened and cannot be used to rescue or respecify this cycle."
       ],
       "source_boundary_review": "model/calibration_validation/fiscal_primary_balance_source_boundary_review.json",
       "estimation_or_refit_allowed": false,
-      "priority_group": "OFFLINE_RUNNER_IMPLEMENTATION_PENDING",
+      "priority_group": "FREEZE_TESTED_FORM_UNTIL_NEW_EVIDENCE",
       "materialisation_contract": "model/calibration_validation/fiscal_primary_balance_materialisation_contract.json",
       "materialiser_workflow": ".github/workflows/fiscal-primary-balance-materialisation.yml",
       "retained_source_vintage": "data/source_vintages/fiscal-primary-balance-quarterly-vintage-2026-09-19",
@@ -151,7 +151,9 @@
       "annual_materialiser_workflow": ".github/workflows/ameco-fiscal-reaction-materialisation.yml",
       "retained_annual_source_vintage": "data/source_vintages/fiscal-reaction-ameco-actual-vintage-2026-09-19",
       "annual_promotion_review": "model/calibration_validation/fiscal_reaction_ameco_source_vintage_promotion_review.json",
-      "annual_structural_selection_contract": "model/calibration_validation/fiscal_reaction_annual_structural_selection_contract.json"
+      "annual_structural_selection_contract": "model/calibration_validation/fiscal_reaction_annual_structural_selection_contract.json",
+      "annual_selection_result": "model/calibration_validation/fiscal_reaction_annual_structural_selection_result.json",
+      "annual_selection_execution_gate": "model/calibration_validation/fiscal_reaction_annual_selection_execution_gate.json"
     },
     {
       "id": "monetary_policy_reaction_function",
@@ -185,9 +187,9 @@
   ],
   "priority_rule": "Priority is determined by the shortest scientifically admissible path to new independent evidence, not by a desire to activate a feedback loop. Waiting mechanisms remain frozen; source-incomplete mechanisms are not fit with proxies.",
   "current_next_step": {
-    "mechanism_id": "fiscal_primary_balance_reaction",
-    "action": "IMPLEMENT_ANNUAL_FISCAL_REACTION_OFFLINE_RUNNER_NO_ESTIMATION",
-    "reason": "The exact annual source vintage and parsimonious structural-selection contract are frozen. The next admissible task is implementation verification only; no coefficient estimation is authorized by contract creation.",
+    "mechanism_id": "exchange_rate_pass_through_to_inflation",
+    "action": "RESOLVE_EXTERNAL_PRICE_PRODUCT_BOUNDARY_NO_ESTIMATION",
+    "reason": "The fiscal annual candidate has now failed before holdout and is frozen. Among remaining non-waiting mechanisms, the exchange-rate pass-through source boundary has exact FX/HICP sources identified but an unresolved ex-ante external-price product definition that can be advanced without fitting a behavioural equation.",
     "calibration_cycle_open": false
   },
   "coverage_rule": {
