@@ -1,12 +1,9 @@
 name: Sectoral Financial Positions Phase B Audit
 
+
+# Phase B live QSA source refresh is manual-only after the retained immutable
+# reconciliation-failure run. Canonical scientific state is reproduced offline.
 on:
-  pull_request:
-    paths:
-      - "model/dynamics/sectoral_financial_positions_aggregate_identity_contract.json"
-      - "scripts/audit_ecb_sectoral_financial_positions_phase_b.py"
-      - "tests/test_sectoral_financial_positions_aggregate_identity_contract.py"
-      - ".github/workflows/sectoral-financial-positions-phase-b-audit.yml"
   workflow_dispatch:
 
 permissions:
