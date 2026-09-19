@@ -72,7 +72,7 @@
     "machine_readable_bnr_source_identified_in_this_review": false,
     "chart_digitisation_required": false,
     "reason_chart_digitisation_not_required": "BNR Monthly Bulletins publish the relevant indicators as exact statistical tables; future recovery should parse and retain table values under a preregistered source-vintage contract rather than digitise charts.",
-    "next_admissible_source_task": "Complete exact primary-source enumeration under the frozen BNR prudential-table contract. Current evidence independently identifies 3 of 11 year-level primary publications; unresolved years remain unresolved, not negative evidence. Do not acquire/promote bytes or extract numeric values until the full year-source map is frozen.",
+    "next_admissible_source_task": "No active matched-prudential source-discovery task remains. Reopen only on genuinely new official BNR evidence: an exact unresolved Monthly Bulletin link/archive listing, a stable machine-readable series/export/API with matched population metadata, or an explicit population/consolidation bridge. Do not repeat the same discovery probes.",
     "reopen_triggers": [
       "An official machine-readable BNR series on the Romanian-legal-entity bank population is identified.",
       "A deterministic retained BNR Monthly Bulletin table-extraction path is preregistered and passes exact semantic/provenance review.",
@@ -80,7 +80,7 @@
     ],
     "materialisation_contract": "model/calibration_validation/bnr_prudential_table_materialisation_contract.json",
     "source_enumeration": "model/calibration_validation/bnr_prudential_table_source_enumeration.json",
-    "source_enumeration_status": "INCOMPLETE_SOURCE_ENUMERATION_NO_MODEL_EFFECT",
+    "source_enumeration_status": "FROZEN_INCOMPLETE_3_OF_11_CURRENT_PUBLIC_DISCOVERY_EXHAUSTED_NO_MODEL_EFFECT",
     "exact_primary_years_identified": [
       2019,
       2022,
@@ -88,7 +88,9 @@
     ],
     "interactive_database_discovery_contract": "model/calibration_validation/bnr_prudential_interactive_database_discovery_contract.json",
     "interactive_database_discovery_review": "model/calibration_validation/bnr_prudential_interactive_database_discovery_review.json",
-    "interactive_database_discovery_status": "OFFICIAL_DATABASE_SURFACE_CONFIRMED_TARGET_SERIES_NOT_IDENTIFIED_IN_PUBLIC_INDEX"
+    "interactive_database_discovery_status": "OFFICIAL_DATABASE_CONFIRMED_TARGET_SERIES_NOT_IDENTIFIED_STAGE_FROZEN",
+    "source_discovery_terminal_assessment": "model/calibration_validation/bnr_prudential_source_discovery_terminal_assessment.json",
+    "discovery_stage_status": "STAGE_CLOSED_FROZEN_INCOMPLETE_UNDER_CURRENT_PUBLIC_DISCOVERY_SURFACE_NO_MODEL_EFFECT"
   },
   "modelling_effect": {
     "estimation_or_refit_authorized": false,
