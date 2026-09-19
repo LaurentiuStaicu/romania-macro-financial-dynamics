@@ -64,23 +64,25 @@
     {
       "id": "sovereign_yield_spread_response",
       "classification": "CANDIDATE",
-      "source_readiness": "SOURCE_VINTAGE_RETAINED_STRUCTURAL_SELECTION_CONTRACT_FROZEN_RUNNER_PENDING",
-      "next_admissible_action": "Implement a deterministic offline structural-selection runner that enforces the frozen sovereign-yield contract exactly. Add unit tests for windows, information timing, gates and holdout non-access. Do not execute coefficient estimation until that runner has passed CI and a bounded execution gate is explicitly opened.",
+      "source_readiness": "FROZEN_TESTED_FORM_FAILED_BEFORE_HOLDOUT",
+      "next_admissible_action": "Do not open 2023-Q1..2026-Q1 final-evaluation performance and do not respecify on the same evidence cycle. Reopen sovereign-yield modelling only under a separately preregistered cycle triggered by genuinely new measurement or identification evidence, such as an exact retained domestic policy-rate vintage or an independently justified issuance/refinancing observable.",
       "blockers": [
-        "The exact source vintage is retained and the structural-selection contract is frozen.",
-        "No contract-enforcing offline selection runner has yet passed CI.",
-        "Final-evaluation data must remain performance-unopened unless every structural-selection gate passes."
+        "The preregistered fiscal-augmented common-market AR form failed structural selection before holdout.",
+        "Its RMSE was worse than both persistence and the common-market AR baseline.",
+        "The preregistered fiscal coefficient sign-consistency gates failed.",
+        "Post-result lag search, variable addition, sign changes or final-holdout inspection are prohibited in this cycle."
       ],
       "source_boundary_review": "model/calibration_validation/sovereign_yield_source_boundary_review.json",
       "materialisation_contract": "model/calibration_validation/sovereign_yield_quarterly_materialisation_contract.json",
       "estimation_or_refit_allowed": false,
-      "priority_group": "OFFLINE_SELECTION_RUNNER_IMPLEMENTATION_PENDING",
+      "priority_group": "FREEZE_TESTED_FORM_UNTIL_NEW_EVIDENCE",
       "materialiser_script": "scripts/audit_sovereign_yield_quarterly_materialisation.py",
       "materialiser_workflow": ".github/workflows/sovereign-yield-quarterly-materialisation.yml",
       "live_execution_policy": "MANUAL_ONLY_LIVE_SOURCE_EVIDENCE",
       "retained_source_vintage": "data/source_vintages/sovereign-yield-quarterly-vintage-2026-09-19",
       "promotion_review": "model/calibration_validation/sovereign_yield_source_vintage_promotion_review.json",
-      "structural_selection_contract": "model/calibration_validation/sovereign_yield_structural_selection_contract.json"
+      "structural_selection_contract": "model/calibration_validation/sovereign_yield_structural_selection_contract.json",
+      "selection_result": "model/calibration_validation/sovereign_yield_structural_selection_result.json"
     },
     {
       "id": "household_consumption_response",
@@ -175,9 +177,9 @@
   ],
   "priority_rule": "Priority is determined by the shortest scientifically admissible path to new independent evidence, not by a desire to activate a feedback loop. Waiting mechanisms remain frozen; source-incomplete mechanisms are not fit with proxies.",
   "current_next_step": {
-    "mechanism_id": "sovereign_yield_spread_response",
-    "action": "IMPLEMENT_OFFLINE_SOVEREIGN_SELECTION_RUNNER_NO_EXECUTION",
-    "reason": "Source vintage and structural-selection specification are frozen. The next safe step is executable enforcement of the preregistered model forms, windows, information timing and gates; estimation remains closed until the runner itself passes CI.",
+    "mechanism_id": "fiscal_primary_balance_reaction",
+    "action": "RUN_MANUAL_PRIMARY_BALANCE_SOURCE_MATERIALISER_AND_RETAIN_EVIDENCE",
+    "reason": "The sovereign-yield tested form is closed at FAIL_BEFORE_HOLDOUT. The fiscal-primary-balance mechanism already has a frozen matched B9/D41PAY source boundary and manual materialiser; retaining that exact source vintage is the shortest next admissible path to new independent evidence. No reaction-function estimation is authorized.",
     "calibration_cycle_open": false
   },
   "coverage_rule": {
