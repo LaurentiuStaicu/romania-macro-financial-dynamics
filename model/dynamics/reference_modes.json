@@ -133,8 +133,10 @@
       "ecb_quality_context": "model/dynamics/sectoral_financial_positions_ecb_quality_context.json",
       "exploratory_esa_f1_semantics_diagnostic_assessment": "model/dynamics/sectoral_financial_positions_esa_f1_semantics_diagnostic_assessment.json",
       "post_run_s1n_boundary_diagnostic_contract": "model/dynamics/sectoral_financial_positions_s1n_boundary_diagnostic_contract.json",
-      "post_run_s1n_boundary_diagnostic_status": "PREREGISTERED_NOT_EXECUTED",
-      "post_run_s1n_boundary_diagnostic_effect": "NONE_UNTIL_RETAINED_LIVE_EVIDENCE_AND_SEPARATE_FORMAL_RETEST_CONTRACT"
+      "post_run_s1n_boundary_diagnostic_status": "EXECUTED_NEGATIVE_NO_REOPEN_EVIDENCE",
+      "post_run_s1n_boundary_diagnostic_effect": "NONE; all eight exact S1N F/F1 stock/flow asset/liability queries returned ECB HTTP 404 with no network errors, so the diagnostic does not justify a formal boundary retest or readiness promotion.",
+      "post_run_s1n_boundary_diagnostic_assessment": "model/dynamics/sectoral_financial_positions_s1n_boundary_diagnostic_assessment.json",
+      "post_run_s1n_boundary_diagnostic_vintage": "data/source_vintages/sectoral-financial-positions-s1n-boundary-vintage-2026-09-19"
     }
   ],
   "closure_rule": "Integrated behavioural closure may not be declared validated until the reference modes required by each active loop have explicit observed targets or a documented reason why only qualitative/reference-pattern validation is possible.",
