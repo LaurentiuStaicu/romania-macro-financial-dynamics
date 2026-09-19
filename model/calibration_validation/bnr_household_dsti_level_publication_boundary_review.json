@@ -22,6 +22,46 @@
   },
   "explicit_publication_text_observations": [
     {
+      "quarter": "2023-Q1",
+      "source": "BNR Bank Lending Survey, May 2023",
+      "url": "https://www.bnr.ro/uploads/2023-5-banklendingsurvey-may2023_documentpdf_545_1733754096.pdf",
+      "new_housing_loans_dsti_percent": 35,
+      "outstanding_housing_loans_dsti_percent": 41,
+      "publication_precision_dp": 0,
+      "extraction": "DIRECT_REPORT_TEXT",
+      "chart_digitisation": false
+    },
+    {
+      "quarter": "2023-Q2",
+      "source": "BNR Bank Lending Survey, August 2023",
+      "url": "https://www.bnr.ro/uploads/2023-8-banklendingsurvey-august2023_documentpdf_545_1733754083.pdf",
+      "new_housing_loans_dsti_percent": 35,
+      "outstanding_housing_loans_dsti_percent": 42,
+      "publication_precision_dp": 0,
+      "extraction": "DIRECT_REPORT_TEXT",
+      "chart_digitisation": false
+    },
+    {
+      "quarter": "2023-Q3",
+      "source": "BNR Bank Lending Survey, November 2023",
+      "url": "https://www.bnr.ro/uploads/2023-11-banklendingsurvey-november2023_documentpdf_545_1733754070.pdf",
+      "new_housing_loans_dsti_percent": 34,
+      "outstanding_housing_loans_dsti_percent": 42,
+      "publication_precision_dp": 0,
+      "extraction": "DIRECT_REPORT_TEXT",
+      "chart_digitisation": false
+    },
+    {
+      "quarter": "2023-Q4",
+      "source": "BNR Bank Lending Survey, February 2024",
+      "url": "https://bnr.ro/files/d/Pubs_ro/SondajCreditare/BLS%20februarie%202024_RO.pdf",
+      "new_housing_loans_dsti_percent": 35,
+      "outstanding_housing_loans_dsti_percent": 41,
+      "publication_precision_dp": 0,
+      "extraction": "DIRECT_REPORT_TEXT",
+      "chart_digitisation": false
+    },
+    {
       "quarter": "2024-Q1",
       "source": "BNR Bank Lending Survey, May 2024",
       "url": "https://muzeu.bnr.ro/uploads/2024-5-sondajprivindcreditareacompaniilornefinanciare%C5%9Fipopula%C5%A3iei%2Cmai2024_documentpdf_545_1726479128.pdf",
@@ -55,6 +95,16 @@
       "chart_digitisation": false
     },
     {
+      "quarter": "2025-Q1",
+      "source": "BNR Bank Lending Survey, May 2025",
+      "url": "https://www.bnr.ro/uploads/2025-06-13blst1may2025_documentpdf_545_1749803028.pdf",
+      "new_housing_loans_dsti_percent": 35,
+      "outstanding_housing_loans_dsti_percent": 41,
+      "publication_precision_qualifier": "approximately/roughly",
+      "extraction": "DIRECT_REPORT_TEXT",
+      "chart_digitisation": false
+    },
+    {
       "quarter": "2025-Q2",
       "source": "BNR Bank Lending Survey, August 2025",
       "url": "https://www.bnr.ro/uploads/2025-11-06blst1august2025_documentpdf_545_1762420562.pdf",
@@ -75,7 +125,7 @@
     "exact_longitudinal_level_history_retained": false,
     "current_retained_legacy_bls_workbooks_are_not_level_series": true,
     "reason": "The retained legacy workbooks encode BLS response distributions/net percentages, including P0303/P1103 lending-term-change questions. They do not by themselves constitute the published bank-average DSTI level history.",
-    "next_gate": "Identify and retain an official machine-readable table/workbook/range for the housing-loan DSTI level series, separately for new and outstanding loans, or preregister a publication-text-only candidate family with its shorter explicit-observation window before any estimation."
+    "next_gate": "Recover the missing 2024-Q4 publication-text level and identify/retain an official machine-readable housing-loan DSTI level history, separately for new and outstanding loans. A publication-text-only candidate family would require a separate preregistration and must preserve the approximate precision qualifier for 2025-Q1."
   },
   "modelling_boundary": {
     "registered_macro_dsr_term_identified": false,
@@ -103,5 +153,16 @@
     "validated_reference_behavioural_mechanisms_change": 0,
     "behavioural_closure": "UNCHANGED_INACTIVE",
     "accounting_spine": "UNCHANGED"
+  },
+  "publication_text_coverage": {
+    "window_start": "2023-Q1",
+    "window_end": "2025-Q2",
+    "expected_quarters": 10,
+    "directly_observed_quarters": 9,
+    "missing_quarters": [
+      "2024-Q4"
+    ],
+    "coverage_fraction": 0.9,
+    "complete_longitudinal_history": false
   }
 }
