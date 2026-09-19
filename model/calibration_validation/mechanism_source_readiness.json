@@ -114,17 +114,19 @@
     {
       "id": "corporate_investment_response",
       "classification": "CANDIDATE",
-      "source_readiness": "NFC_GFCF_RATE_AND_D92_GRANTS_CONFIRMED_EU_SPECIFIC_IMPULSE_DEMAND_AND_TRANSFORMS_BLOCKED",
-      "next_admissible_action": "Retain/materialize S11 GFCF and S11 D92 investment-grant vintages, then preregister whether a renamed investment-grants-support candidate family is scientifically preferable to the unresolved EU-specific term; freeze demand and transformations before any fit.",
+      "source_readiness": "SOURCE_VINTAGE_RETAINED_MEASUREMENT_DESIGN_PREREGISTERED_SUPPLEMENTAL_SOURCES_PENDING",
+      "next_admissible_action": "Materialize the exact Romania S11 gross-value-added and seasonally adjusted real-GDP source vintages, then derive only the preregistered investment-rate, investment-grants-support, real-GDP-growth and quarterly NFC lending-rate measurement series. Do not fit or search lags.",
       "blockers": [
-        "Exact Romania S11 quarterly GFCF, a direct S11 investment-rate target, S11 D92 investment grants and the NFC new-business lending rate are source-identified.",
-        "The registered target remains gI; the direct investment-rate series is a non-equivalent alternative that requires a new preregistered candidate-family contract.",
-        "D92 does not isolate EU-origin grants and may not keep the EU_fund_impulse label without an origin bridge.",
-        "Demand observable, gI seasonal/real transformation, monthly-to-quarterly rate aggregation and real-rate deflator are not frozen."
+        "Exact retained NFC investment, D92 investment-grant, investment-rate and NFC new-business lending-rate source families are now present in-repository.",
+        "The next candidate family selects the observed NFC investment-rate target; the legacy gI growth target is not selected for this cycle.",
+        "S11 gross value added and seasonally adjusted real GDP still require exact retained source vintages before the frozen support-intensity and demand-growth transformations can be reproduced offline.",
+        "Lag structure, autoregressive order and final evaluation design remain intentionally unselected until a separate preregistered structural-selection contract."
       ],
       "estimation_or_refit_allowed": false,
-      "priority_group": "SOURCE_BOUNDARY_BLOCKED_NO_ESTIMATION",
-      "source_boundary_review": "model/calibration_validation/corporate_investment_source_boundary_review.json"
+      "priority_group": "MATERIALISE_SUPPLEMENTAL_MEASUREMENT_SOURCES_NO_ESTIMATION",
+      "source_boundary_review": "model/calibration_validation/corporate_investment_source_boundary_review.json",
+      "retained_source_vintage": "data/source_vintages/corporate-investment-source-family-vintage-2026-09-19",
+      "measurement_design_contract": "model/calibration_validation/corporate_investment_measurement_design_contract.json"
     },
     {
       "id": "credit_risk_npl_response",
@@ -201,8 +203,8 @@
   "priority_rule": "Priority is determined by the shortest scientifically admissible path to new independent evidence, not by a desire to activate a feedback loop. Waiting mechanisms remain frozen; source-incomplete mechanisms are not fit with proxies.",
   "current_next_step": {
     "mechanism_id": "corporate_investment_response",
-    "action": "MATERIALISE_NFC_GFCF_D92_AND_RATE_SOURCES_NO_ESTIMATION",
-    "reason": "The FX candidate is now frozen after failing before holdout. Among remaining non-waiting mechanisms, corporate investment has exact S11 GFCF, S11 D92 investment-grant and NFC lending-rate source families already identified, so exact source retention can add independent evidence without fitting a behavioural equation.",
+    "action": "MATERIALISE_SUPPLEMENTAL_S11_GVA_AND_REAL_GDP_SOURCES_NO_ESTIMATION",
+    "reason": "The exact corporate-investment source family has been retained and the measurement boundary is now frozen ex ante. The shortest admissible path to new independent evidence is to retain the two still-missing official source families required by that contract and derive the frozen measurement series without fitting.",
     "calibration_cycle_open": false
   },
   "coverage_rule": {
