@@ -49,5 +49,6 @@
     "scientific_evidence_and_provenance_may_not_be_removed_to_satisfy_reset": true,
     "reset_integrity_does_not_freeze_scientific_development": true
   },
-  "interpretation": "This gate constrains repository scope, not scientific conclusions. Adding a genuinely necessary scientific directory is allowed only by explicitly updating this contract and documenting why the reset boundary should expand."
+  "interpretation": "This gate constrains repository scope, not scientific conclusions. Adding a genuinely necessary scientific directory is allowed only by explicitly updating this contract and documenting why the reset boundary should expand.",
+  "scientific_baseline_manifest": "model/registries/scientific_baseline_manifest.json"
 }
