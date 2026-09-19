@@ -44,7 +44,7 @@
     "canonical_multi_instrument_stock_initialization_ready": false,
     "canonical_full_2025_stock_flow_benchmark_ready": false,
     "reference_mode_closure_ready": false,
-    "reference_mode_ready_count": 5,
+    "reference_mode_ready_count": 7,
     "reference_mode_required_count": 10
   },
   "empirical_dynamics": {
