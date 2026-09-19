@@ -131,8 +131,8 @@
     {
       "id": "fiscal_primary_balance_reaction",
       "classification": "DEFERRED",
-      "source_readiness": "ANNUAL_AMECO_ACTUAL_SOURCE_VINTAGE_RETAINED_STRUCTURAL_SELECTION_PREREGISTRATION_PENDING",
-      "next_admissible_action": "Preregister a parsimonious annual fiscal-reaction candidate family using only the retained 1995-2024 actual AMECO vintage. Freeze the target transformation (primary-balance level versus change), lag/timing rules, non-fiscal baseline, selection/evaluation windows and identifiability gates before any fit. Do not add regime coefficients in the first cycle.",
+      "source_readiness": "ANNUAL_AMECO_SOURCE_AND_FORM_FROZEN_RUNNER_IMPLEMENTATION_PENDING",
+      "next_admissible_action": "Implement and test an offline runner that exactly enforces the frozen annual fiscal-reaction structural-selection contract. Default execution must perform no estimation; final-evaluation years must remain inaccessible unless a separately authorized bounded selection execution passes every frozen gate.",
       "blockers": [
         "The exact AMECO actual-only source vintage contains only 30 common annual observations (1995-2024), so the first candidate family must be parsimonious and strongly preregistered.",
         "The former debt-gap concept has been rejected; a future candidate may use lagged debt-to-GDP level only under the annual measurement boundary, not a synthetic 60% gap.",
@@ -141,7 +141,7 @@
       ],
       "source_boundary_review": "model/calibration_validation/fiscal_primary_balance_source_boundary_review.json",
       "estimation_or_refit_allowed": false,
-      "priority_group": "STRUCTURAL_SELECTION_PREREGISTRATION_PENDING",
+      "priority_group": "OFFLINE_RUNNER_IMPLEMENTATION_PENDING",
       "materialisation_contract": "model/calibration_validation/fiscal_primary_balance_materialisation_contract.json",
       "materialiser_workflow": ".github/workflows/fiscal-primary-balance-materialisation.yml",
       "retained_source_vintage": "data/source_vintages/fiscal-primary-balance-quarterly-vintage-2026-09-19",
@@ -150,7 +150,8 @@
       "annual_materialiser_script": "scripts/audit_ameco_fiscal_reaction_materialisation.py",
       "annual_materialiser_workflow": ".github/workflows/ameco-fiscal-reaction-materialisation.yml",
       "retained_annual_source_vintage": "data/source_vintages/fiscal-reaction-ameco-actual-vintage-2026-09-19",
-      "annual_promotion_review": "model/calibration_validation/fiscal_reaction_ameco_source_vintage_promotion_review.json"
+      "annual_promotion_review": "model/calibration_validation/fiscal_reaction_ameco_source_vintage_promotion_review.json",
+      "annual_structural_selection_contract": "model/calibration_validation/fiscal_reaction_annual_structural_selection_contract.json"
     },
     {
       "id": "monetary_policy_reaction_function",
@@ -185,8 +186,8 @@
   "priority_rule": "Priority is determined by the shortest scientifically admissible path to new independent evidence, not by a desire to activate a feedback loop. Waiting mechanisms remain frozen; source-incomplete mechanisms are not fit with proxies.",
   "current_next_step": {
     "mechanism_id": "fiscal_primary_balance_reaction",
-    "action": "PREREGISTER_ANNUAL_FISCAL_REACTION_STRUCTURAL_SELECTION_NO_ESTIMATION",
-    "reason": "The exact actual-only AMECO annual source vintage is now retained for 1995-2024 and the measurement/regime boundary is frozen. The next admissible step is to freeze one parsimonious candidate family, timing, windows and identifiability gates before any coefficient estimation.",
+    "action": "IMPLEMENT_ANNUAL_FISCAL_REACTION_OFFLINE_RUNNER_NO_ESTIMATION",
+    "reason": "The exact annual source vintage and parsimonious structural-selection contract are frozen. The next admissible task is implementation verification only; no coefficient estimation is authorized by contract creation.",
     "calibration_cycle_open": false
   },
   "coverage_rule": {
