@@ -136,7 +136,12 @@
       "post_run_s1n_boundary_diagnostic_status": "EXECUTED_NEGATIVE_NO_REOPEN_EVIDENCE",
       "post_run_s1n_boundary_diagnostic_effect": "NONE; all eight exact S1N F/F1 stock/flow asset/liability queries returned ECB HTTP 404 with no network errors, so the diagnostic does not justify a formal boundary retest or readiness promotion.",
       "post_run_s1n_boundary_diagnostic_assessment": "model/dynamics/sectoral_financial_positions_s1n_boundary_diagnostic_assessment.json",
-      "post_run_s1n_boundary_diagnostic_vintage": "data/source_vintages/sectoral-financial-positions-s1n-boundary-vintage-2026-09-19"
+      "post_run_s1n_boundary_diagnostic_vintage": "data/source_vintages/sectoral-financial-positions-s1n-boundary-vintage-2026-09-19",
+      "external_source_screening": "model/dynamics/sectoral_financial_positions_external_source_screening.json",
+      "oecd_counterpart_discovery_probe_contract": "model/dynamics/sectoral_financial_positions_oecd_counterpart_probe_contract.json",
+      "oecd_counterpart_discovery_probe_status": "PREREGISTERED_MANUAL_NOT_EXECUTED",
+      "oecd_counterpart_discovery_probe_effect": "NONE_UNTIL_RETAINED_RESULT_AND_SEPARATE_SEMANTIC_LINEAGE_REVIEW",
+      "external_reopen_screening_summary": "OECD quarterly counterpart stock/flow dataflows are a preregistered discovery candidate only; OECD documents the quarterly financial sector-accounts collection as OECD-ECB, so country coverage alone cannot establish independent reopen evidence."
     }
   ],
   "closure_rule": "Integrated behavioural closure may not be declared validated until the reference modes required by each active loop have explicit observed targets or a documented reason why only qualitative/reference-pattern validation is possible.",
