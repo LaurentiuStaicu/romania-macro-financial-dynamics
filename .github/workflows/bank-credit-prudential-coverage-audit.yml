@@ -3,12 +3,7 @@ name: Bank Credit Prudential Source Coverage
 # Live-provider refresh/coverage diagnostic only. Manual-only by design:
 # provider outcomes may create new evidence but may not open calibration.
 on:
-  pull_request:
-    paths:
-      - "model/calibration_validation/bank_credit_prudential_coverage_contract.json"
-      - "scripts/audit_ecb_bank_credit_prudential_coverage.py"
-      - "tests/test_bank_credit_prudential_coverage_contract.py"
-      - ".github/workflows/bank-credit-prudential-coverage-audit.yml"
+  workflow_dispatch:
 
 permissions:
   contents: read
