@@ -1,0 +1,37 @@
+name: BNR Household DSTI Workbook Access Probe
+
+# One-shot PR bootstrap to establish provider access and retain exact bytes.
+# After this reviewed run, live probing must be moved to manual-only.
+on:
+  pull_request:
+    paths:
+      - "model/calibration_validation/bnr_household_dsti_workbook_probe_contract.json"
+      - "scripts/audit_bnr_household_dsti_workbook_probe.py"
+      - "tests/test_bnr_household_dsti_workbook_probe.py"
+      - ".github/workflows/bnr-household-dsti-workbook-probe.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  probe-bnr-dsti-workbooks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Verify frozen probe contract and signature logic
+        run: python -m unittest tests.test_bnr_household_dsti_workbook_probe -v
+      - name: Probe exact official workbook URLs
+        env:
+          BNR_DSTI_WORKBOOK_PROBE_OUT: bnr_dsti_workbook_probe_artifacts
+        run: python scripts/audit_bnr_household_dsti_workbook_probe.py
+      - name: Upload source-access evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bnr-household-dsti-workbook-probe-${{ github.sha }}
+          path: bnr_dsti_workbook_probe_artifacts/
+          if-no-files-found: error
+          retention-days: 90
