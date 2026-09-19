@@ -76,5 +76,6 @@
   "historical_phase_b_contract": "model/dynamics/sectoral_financial_positions_aggregate_identity_contract.json",
   "historical_phase_b_executed_contract_snapshot": "model/dynamics/sectoral_financial_positions_aggregate_identity_contract_executed_2026-09-19.json",
   "historical_phase_b_assessment": "model/dynamics/sectoral_financial_positions_aggregate_identity_assessment.json",
-  "exploratory_esa_f1_reaudit_assessment": "model/dynamics/sectoral_financial_positions_esa_f1_applicability_reaudit_assessment.json"
+  "exploratory_esa_f1_reaudit_assessment": "model/dynamics/sectoral_financial_positions_esa_f1_applicability_reaudit_assessment.json",
+  "ecb_quality_context": "model/dynamics/sectoral_financial_positions_ecb_quality_context.json"
 }
