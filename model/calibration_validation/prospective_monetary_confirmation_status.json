@@ -12,7 +12,8 @@
     "driver_checked_through": "2026-09-19",
     "response_series_values_inspected": false,
     "policy_driver_only_checked": true,
-    "formal_confirmation_opened": false
+    "formal_confirmation_opened": false,
+    "response_release_gate": "Do not inspect a same-month MIR response before its official ECB MIR publication date. For an October 2026 identifying event, the scheduled October-reference MIR release is 2026-12-02."
   },
   "policy_driver_evidence": {
     "last_decision_in_reserved_window": {
@@ -47,5 +48,6 @@
     "validated_reference_behavioural_mechanisms": 0,
     "behavioural_closure": "UNCHANGED_INACTIVE",
     "next_check_condition": "After an actually observed non-zero BNR policy-rate decision, and only when the corresponding prospectively reserved response observation becomes available under the frozen confirmation contract."
-  }
+  },
+  "contract": "model/calibration_validation/prospective_monetary_confirmation_contract.json"
 }
