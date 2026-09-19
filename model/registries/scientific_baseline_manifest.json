@@ -1,5 +1,5 @@
 {
-  "manifest_version": "0.3",
+  "manifest_version": "0.4",
   "baseline_id": "scientific-integrity-2026-09-19",
   "purpose": "Single canonical cross-registry snapshot of RMD scientific maturity. Values in this manifest must agree with the authoritative accounting, dynamics, reference-mode, empirical-mechanism and validation registries; the manifest is not an independent source of scientific truth.",
   "authority": {
@@ -15,7 +15,8 @@
     "prospective_confirmation_contract": "model/calibration_validation/prospective_monetary_confirmation_contract.json",
     "prospective_confirmation_status": "model/calibration_validation/prospective_monetary_confirmation_status.json",
     "mechanism_source_readiness": "model/calibration_validation/mechanism_source_readiness.json",
-    "sectoral_financial_positions_external_source_screening": "model/dynamics/sectoral_financial_positions_external_source_screening.json"
+    "sectoral_financial_positions_external_source_screening": "model/dynamics/sectoral_financial_positions_external_source_screening.json",
+    "mechanism_reopen_conditions": "model/calibration_validation/mechanism_reopen_conditions_registry.json"
   },
   "canonical_state": {
     "accounting": {
@@ -101,7 +102,10 @@
         "DEFER_UNTIL_FINAL_BLS_GAP_OR_NEW_MATCHED_PRUDENTIAL_SOURCE": 1
       },
       "current_empirical_queue_state": "ALL_REGISTERED_MECHANISMS_FROZEN_WAITING_OR_EXPLICITLY_BLOCKED",
-      "calibration_cycle_open": false
+      "calibration_cycle_open": false,
+      "reopen_registry_entry_count": 11,
+      "all_reopen_conditions_registered": true,
+      "reopen_governance_state": "DECLARED_TRIGGER_REQUIRED_NO_AUTOMATIC_ESTIMATION"
     }
   },
   "hard_invariants": [
@@ -116,6 +120,8 @@
     "Every non-rejected behavioural mechanism has exactly one readiness entry and no duplicate readiness ownership.",
     "A closed calibration cycle with zero activated mechanisms may not contain any mechanism authorized for estimation or refit.",
     "After exhaustive source screening, a new empirical cycle requires a declared evidence/reopen trigger; queue exhaustion is not permission to respecify a failed form.",
-    "The exhausted sectoral-financial-position external counterpart path may reopen only on a declared new-source or changed-dataset trigger; repeating the same Eurostat/OECD source boundary is not scientific progress."
+    "The exhausted sectoral-financial-position external counterpart path may reopen only on a declared new-source or changed-dataset trigger; repeating the same Eurostat/OECD source boundary is not scientific progress.",
+    "Every non-rejected behavioural mechanism has exactly one canonical reopen-condition entry with governing evidence and explicit non-reopen conditions.",
+    "Reopening a behavioural mechanism authorizes only its declared next evidence/identification gate and never automatically authorizes estimation/refit, holdout inspection, causal claims, System Dynamics activation or behavioural closure."
   ]
 }
