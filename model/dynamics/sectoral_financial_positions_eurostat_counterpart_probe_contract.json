@@ -32,11 +32,28 @@
     "required_geo_identity": "RO",
     "minimum_non_null_observations": 1,
     "required_dimension_ids": [
+      "freq",
+      "unit",
+      "sector2",
+      "sector",
+      "stk_flow",
+      "finpos",
+      "na_item",
       "geo",
       "time"
     ],
     "effect_if_pass": "EUROSTAT_ROMANIA_COUNTERPART_SCHEMA_AND_RECENT_DATA_RETAINED_FOR_EXPLICIT_MAPPING_LINEAGE_REVIEW_ONLY",
-    "effect_if_fail": "NO_REOPEN_EVIDENCE_FROM_EUROSTAT_COUNTERPART_DISCOVERY_PROBE"
+    "effect_if_fail": "NO_REOPEN_EVIDENCE_FROM_EUROSTAT_COUNTERPART_DISCOVERY_PROBE",
+    "required_counterpart_dimension": "sector2",
+    "required_stock_flow_codes": [
+      "STK",
+      "TRN"
+    ],
+    "required_financial_position_codes": [
+      "ASS",
+      "LIAB"
+    ],
+    "rationale": "A schema-discovery PASS must establish the actual counterpart-account structure, not merely a Romania/time slice. The response must expose frequency, unit, reporting sector, counterpart sector, stock/transaction, asset/liability, instrument, geography and time dimensions; required stock/transaction and asset/liability codes must also be present before a semantic mapping review is authorized."
   },
   "retained_outputs": {
     "raw_json_response": true,

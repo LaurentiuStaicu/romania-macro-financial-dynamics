@@ -53,6 +53,32 @@ class SectoralFinancialPositionsEurostatCounterpartProbeContractTests(unittest.T
         self.assertEqual(rule["required_geo_identity"], "RO")
         self.assertEqual(rule["minimum_non_null_observations"], 1)
         self.assertEqual(
+            set(rule["required_dimension_ids"]),
+            {
+                "freq",
+                "unit",
+                "sector2",
+                "sector",
+                "stk_flow",
+                "finpos",
+                "na_item",
+                "geo",
+                "time",
+            },
+        )
+        self.assertEqual(
+            rule["required_counterpart_dimension"],
+            "sector2",
+        )
+        self.assertEqual(
+            set(rule["required_stock_flow_codes"]),
+            {"STK", "TRN"},
+        )
+        self.assertEqual(
+            set(rule["required_financial_position_codes"]),
+            {"ASS", "LIAB"},
+        )
+        self.assertEqual(
             rule["effect_if_pass"],
             "EUROSTAT_ROMANIA_COUNTERPART_SCHEMA_AND_RECENT_DATA_RETAINED_FOR_EXPLICIT_MAPPING_LINEAGE_REVIEW_ONLY",
         )
