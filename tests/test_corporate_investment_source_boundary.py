@@ -35,6 +35,21 @@ class CorporateInvestmentSourceBoundaryTests(unittest.TestCase):
             self.review["disposition"]["estimation_or_refit_allowed"]
         )
 
+        self.assertEqual(
+            sources["nfc_gfcf"]["series_key"],
+            "QSA.Q.N.RO.W0.S11.S1.N.D.P51G._Z._Z._Z.XDC._T.S.V.N._T",
+        )
+        self.assertEqual(
+            sources["nfc_gfcf"]["coverage"],
+            "1999-Q1 to 2025-Q4",
+        )
+        self.assertEqual(
+            self.review["sector_specific_investment_boundary"][
+                "qsa_family_status"
+            ],
+            "EXACT_ROMANIA_NFC_GFCF_SERIES_CONFIRMED",
+        )
+
     def test_aggregate_gfcf_cannot_be_relabelled_corporate(self) -> None:
         self.assertIn(
             "not be relabelled corporate investment",
@@ -43,6 +58,10 @@ class CorporateInvestmentSourceBoundaryTests(unittest.TestCase):
         self.assertIn(
             "Do not substitute total-economy GFCF",
             self.review["sector_specific_investment_boundary"]["rule"],
+        )
+        self.assertIn(
+            "not yet frozen",
+            self.review["exact_sources"]["nfc_gfcf"]["semantic_limit"],
         )
 
     def test_eu_payments_are_not_investment_impulse_by_construction(self) -> None:

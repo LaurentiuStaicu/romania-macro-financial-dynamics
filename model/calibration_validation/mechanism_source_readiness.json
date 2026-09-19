@@ -89,13 +89,13 @@
     {
       "id": "corporate_investment_response",
       "classification": "CANDIDATE",
-      "source_readiness": "AGGREGATE_GFCF_AND_NFC_RATE_CONFIRMED_CORPORATE_TARGET_AND_EU_IMPULSE_BLOCKED",
-      "next_admissible_action": "Recover the exact Romania S11 quarterly GFCF source boundary and define whether an EU-fund variable can be bridged to realised NFC investment; do not estimate the current equation.",
+      "source_readiness": "NFC_GFCF_AND_NFC_RATE_CONFIRMED_EU_IMPULSE_DEMAND_AND_TRANSFORMATIONS_BLOCKED",
+      "next_admissible_action": "Retain/materialize the exact Romania S11 GFCF vintage, then resolve the EU-fund accounting bridge, demand observable and gI/real-rate transformations under preregistered contracts; do not estimate the current equation.",
       "blockers": [
-        "Total-economy quarterly GFCF and the NFC new-business lending rate are exact and available.",
-        "A retained sector-specific Romania NFC investment target is not yet frozen.",
-        "Cohesion/RRF payment data do not directly measure quarterly realised NFC fixed investment.",
-        "Demand observable and monthly-to-quarterly/real-rate transformations are not preregistered."
+        "Exact Romania S11 quarterly GFCF is confirmed in QSA and the NFC new-business lending rate is exact and available.",
+        "Cohesion/RRF payment data do not directly measure quarterly realised NFC fixed investment and no EU-fund accounting bridge is frozen.",
+        "Demand observable is not preregistered.",
+        "The exact S11 source is nominal/non-seasonally-adjusted while the registered gI transformation, seasonal treatment, monthly-to-quarterly rate aggregation and real-rate deflator are not frozen."
       ],
       "estimation_or_refit_allowed": false,
       "priority_group": "SOURCE_BOUNDARY_BLOCKED_NO_ESTIMATION",
