@@ -142,14 +142,15 @@
     {
       "id": "household_consumption_response",
       "classification": "CANDIDATE",
-      "source_readiness": "COMPLETE_DSTI_TEXT_WINDOW_PUBLIC_POPULATION_BRIDGE_SCREENED_NOT_FOUND",
-      "next_admissible_action": "Keep household-consumption estimation closed. Reopen only if new official evidence satisfies one of three frozen triggers: (1) an observed Romania aggregate household burden measure aligned to S1M consumption, (2) an independently observed representativeness bridge from housing-loan borrowers to the aggregate consumption population, or (3) an observed housing-borrower consumption/income target under a separately preregistered mechanism. Current screening of ECB HFCS, INS ABF/TEMPO and ECB CES does not provide such a Romania bridge; do not replace it with cross-country transfer, synthetic weights or fit-selected proxies.",
+      "source_readiness": "COMPLETE_DSTI_TEXT_WINDOW_OFFICIAL_POPULATION_BRIDGE_SCREENED_NOT_FOUND",
+      "next_admissible_action": "Keep household-consumption estimation closed. Reopen only if new official evidence satisfies one of three frozen triggers: (1) an observed Romania aggregate household burden measure aligned to S1M consumption, (2) an independently observed representativeness bridge from housing-loan borrowers to the aggregate consumption population, or (3) an observed housing-borrower consumption/income target under a separately preregistered mechanism. Screening now includes ECB HFCS, INS ABF/TEMPO, Eurostat HBS 2020 scientific-use microdata and ECB CES; none supplies the required Romania mortgage-borrower-to-S1M bridge. Do not replace it with owner-occupier status, cross-country transfer, synthetic weights or fit-selected proxies.",
       "blockers": [
         "BNR publication text directly observes both new-loan and outstanding housing-loan DSTI levels for every quarter from 2023-Q1 through 2025-Q2.",
         "The registered household-consumption target is aggregate QSA S1M (households plus NPISH), whereas BNR DSTI covers respondent-bank housing/mortgage-loan borrower portfolios.",
-        "A targeted official-source screening found no observed public Romania bridge from the housing-loan borrower population to aggregate S1M consumption.",
-        "ECB HFCS contains conceptually suitable household finance/consumption variables, but Romania is not identified as a participant in the relevant waves screened.",
+        "A targeted official-source screening found no observed Romania bridge from the housing-loan borrower population to aggregate S1M consumption.",
+        "ECB HFCS is conceptually suitable and BNR is an HFCN member institution, but no Romania country dataset is identified in the 2017, 2021 or latest 2023 waves.",
         "INS ABF/TEMPO supplies quarterly household budget/consumption aggregates, but no public mortgage-borrower-status breakdown or common DSTI-consumption linkage was identified.",
+        "Eurostat HBS 2020 scientific-use files include Romania household consumption, income and weights, but the released SUF manual identifies no mortgage/loan-status field; owner-occupier status is not an admissible borrower proxy.",
         "ECB CES does not provide an identified Romania country series capable of closing this population boundary.",
         "New-loan and outstanding-loan DSTI are definitionally distinct and may not be synthetically merged.",
         "Selecting a mortgage, consumer-credit or synthetic weighted borrowing rate cannot repair the population mismatch and remains prohibited post hoc.",
@@ -189,10 +190,10 @@
         "exact_machine_readable_history_retained": false
       },
       "borrower_burden_population_alignment_review": "model/calibration_validation/household_consumption_borrower_burden_alignment_review.json",
-      "population_alignment_status": "BLOCKED_NO_OBSERVED_PUBLIC_BRIDGE_IDENTIFIED",
+      "population_alignment_status": "BLOCKED_NO_OBSERVED_OFFICIAL_BRIDGE_IDENTIFIED",
       "housing_dsti_directly_admissible_in_registered_aggregate_consumption_form": false,
       "population_bridge_source_screening": "model/calibration_validation/household_consumption_population_bridge_source_screening.json",
-      "public_population_bridge_found": false
+      "official_population_bridge_found": false
     },
     {
       "id": "corporate_investment_response",
