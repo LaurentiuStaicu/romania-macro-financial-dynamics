@@ -50,4 +50,4 @@ jobs:
             f4_phase_a_artifacts/
             f4_phase_b_artifacts/
           if-no-files-found: error
-          retention-days: 30
+          retention-days: 90
