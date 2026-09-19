@@ -95,7 +95,7 @@ class RemainingReferenceModeBlockerTests(unittest.TestCase):
         )
         expected = accounting["current_expected_state"]
 
-        self.assertEqual(mode["status"], "PARTIAL_SERIES_AVAILABLE")
+        self.assertEqual(mode["status"], "OBSERVED_SERIES_AVAILABLE")
         self.assertEqual(
             assessment["verdict"],
             "BLOCKED_BY_CANONICAL_ACCOUNTING_READINESS",
@@ -145,7 +145,7 @@ class RemainingReferenceModeBlockerTests(unittest.TestCase):
         blockers = required - ready
         match = re.search(
             r"Canonical reference-mode readiness: \*\*(\d+)/(\d+) observed; "
-            r"(\d+) blockers\*\*\.",
+            r"(\d+) blockers?\*\*\.",
             status,
         )
         self.assertIsNotNone(match)
@@ -191,13 +191,16 @@ class RemainingReferenceModeBlockerTests(unittest.TestCase):
             if item["id"] == "government_refinancing_need"
         )
 
+        screening_path = (
+            assessment["historical_evidence"]["external_source_screening"]
+        )
         self.assertEqual(
-            assessment["external_source_screening"],
+            screening_path,
             "model/dynamics/government_refinancing_need_external_source_screening.json",
         )
         self.assertEqual(
             mode["external_source_screening"],
-            assessment["external_source_screening"],
+            screening_path,
         )
         self.assertEqual(
             screening["scientific_decision"]["verdict"],
@@ -221,19 +224,39 @@ class RemainingReferenceModeBlockerTests(unittest.TestCase):
         self.assertFalse(screening["synthesis"]["promotion_supported"])
         self.assertEqual(mode["status"], "PARTIAL_SERIES_AVAILABLE")
 
-    def test_refinancing_reopen_trigger_rejects_graphical_and_plan_shortcuts(self) -> None:
-        assessment = load(
-            "model/dynamics/government_refinancing_need_reference_assessment.json"
+    def test_refinancing_promotion_preserves_proxy_and_plan_prohibitions(self) -> None:
+        contract = load(
+            "model/dynamics/government_refinancing_need_promotion_contract.json"
         )
-        blocked = assessment["reopen_condition"][
-            "evidence_that_does_not_satisfy_trigger"
-        ]
-        joined = " ".join(blocked).lower()
-        self.assertIn("graphical digitization", joined)
-        self.assertIn("projected", joined)
-        self.assertIn("revised within the year", joined)
-        self.assertIn("prefunding", joined)
-        self.assertIn("gross financing need substituted", joined)
+        provenance = load(
+            "data/provenance/government_debt_refinancing_mof_2013_2024.json"
+        )
+        excluded = " ".join(contract["target"]["excludes"]).lower()
+        discarded_statuses = {
+            item["status"] for item in provenance["discarded_candidates"]
+        }
+
+        self.assertIn("gross financing need", excluded)
+        self.assertIn("pre-financing", excluded)
+        self.assertIn("maturity", excluded)
+        self.assertIn("refixing", excluded)
+        self.assertIn("m[t]", excluded)
+        self.assertIn("PROJECTION", discarded_statuses)
+        self.assertIn("ESTIMATE", discarded_statuses)
+        self.assertIn("PLANNED", discarded_statuses)
+        self.assertIn("IN_YEAR_REVISED_PLAN", discarded_statuses)
+        self.assertTrue(
+            provenance["hard_boundaries"]["no_forecasts_in_canonical_series"]
+        )
+        self.assertTrue(
+            provenance["hard_boundaries"]["no_plans_in_canonical_series"]
+        )
+        self.assertTrue(
+            provenance["hard_boundaries"]["no_gross_financing_need_substitution"]
+        )
+        self.assertTrue(
+            provenance["hard_boundaries"]["no_prefinancing_substitution"]
+        )
 
 
 
@@ -346,7 +369,7 @@ class RemainingReferenceModeBlockerTests(unittest.TestCase):
         )
         self.assertEqual(
             review["next_action"]["status"],
-            "EXPLORATORY_REAUDIT_RETAINED_NO_FURTHER_RERUN",
+            "NO_FURTHER_INTERNAL_F1_ADAPTATION",
         )
 
 
