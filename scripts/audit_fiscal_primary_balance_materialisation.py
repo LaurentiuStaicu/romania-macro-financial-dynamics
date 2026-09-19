@@ -8,6 +8,7 @@ import os
 import urllib.error
 import urllib.parse
 import urllib.request
+from datetime import UTC, datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -233,6 +234,14 @@ def load_retained_interest_snapshot() -> dict:
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     contract = load_contract()
+    fetcher_script_path = Path(__file__).resolve()
+    fetcher_script_sha256 = sha256(fetcher_script_path.read_bytes())
+    fetched_at_utc = (
+        datetime.now(UTC)
+        .replace(microsecond=0)
+        .isoformat()
+        .replace("+00:00", "Z")
+    )
     items = contract["source"]["items"]
 
     b9 = fetch_item(contract, items["overall_balance"]["na_item"])
@@ -314,6 +323,9 @@ def main() -> None:
     report = {
         "audit_version": "0.1",
         "phase": contract["phase"],
+        "generated_at_utc": fetched_at_utc,
+        "fetcher_script": "scripts/audit_fiscal_primary_balance_materialisation.py",
+        "fetcher_script_sha256": fetcher_script_sha256,
         "status": "SOURCE_MATERIALISATION_EVIDENCE_READY_FOR_REPOSITORY_REVIEW",
         "estimation_authorized": False,
         "provider_dataset_updated": b9_updated,
@@ -351,10 +363,70 @@ def main() -> None:
         "validated_reference_behavioural_mechanisms_change": 0,
         "central_feedback_activation": False,
     }
-    (OUT / "fiscal_primary_balance_materialisation_audit.json").write_text(
+    report_path = OUT / "fiscal_primary_balance_materialisation_audit.json"
+    report_path.write_text(
         json.dumps(report, indent=2, ensure_ascii=False) + "\n",
         encoding="utf-8",
     )
+
+    raw_sources = []
+    for name, result in (("B9", b9), ("D41PAY", interest)):
+        raw_sources.append(
+            {
+                "name": name,
+                "institution": contract["source"]["institution"],
+                "url": result["url"],
+                "accept": "application/json",
+                "status": result["http_status"],
+                "content_type": result["content_type"],
+                "bytes": result["raw_bytes"],
+                "sha256": result["raw_sha256"],
+                "path": result["raw_path"],
+                "dataset_updated": result["metadata"].get("updated"),
+            }
+        )
+
+    manifest = {
+        "snapshot_version": "0.1",
+        "snapshot_id": "fiscal-primary-balance-quarterly-vintage-2026-09-19",
+        "fetched_at_utc": fetched_at_utc,
+        "source_vintage_contract": "data/provenance/source_vintage_contract.json",
+        "fetcher_script": "scripts/audit_fiscal_primary_balance_materialisation.py",
+        "fetcher_script_sha256": fetcher_script_sha256,
+        "workflow_context": {
+            "github_sha": os.environ.get("GITHUB_SHA"),
+            "github_run_id": os.environ.get("GITHUB_RUN_ID"),
+            "github_event_name": os.environ.get("GITHUB_EVENT_NAME"),
+        },
+        "raw_sources": raw_sources,
+        "normalized_outputs": [
+            {
+                "path": str(csv_path.relative_to(OUT)),
+                "sha256": sha256(csv_body),
+                "derived_from_raw_sha256": [
+                    b9["raw_sha256"],
+                    interest["raw_sha256"],
+                ],
+                "normalizer": "scripts/audit_fiscal_primary_balance_materialisation.py",
+                "normalizer_sha256": fetcher_script_sha256,
+                "rows": len(common),
+            }
+        ],
+        "audit_report": {
+            "path": str(report_path.relative_to(OUT)),
+            "sha256": sha256(report_path.read_bytes()),
+        },
+        "matched_dataset_updated": b9_updated,
+        "hard_boundaries": contract["hard_rules"],
+        "canonical_promotion": (
+            "REQUIRES_EXPLICIT_REPOSITORY_REVIEW_AND_COMMIT"
+        ),
+    }
+    (OUT / "snapshot_manifest.json").write_text(
+        json.dumps(manifest, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+
     print(
         json.dumps(
             {
