@@ -32,7 +32,7 @@
     "F8": "Aggregate-only rank boundary; zero unconditional unique bilateral cells."
   },
   "blocker": {
-    "reason": "The original full bilateral boundary remains blocked by canonical Accounting Readiness. Phase A tested an explicit F2-F8 aggregate construction and failed because eight exact component series were not disseminated. Phase B then preregistered and tested the exact ESA aggregate identity F2-F8 = total financial instruments F - F1. Phase B resolved source coverage, produced 45 common quarterly observations including all 2025 quarters, and passed the financial-transaction reconciliation gate. However the stock system identity exceeded the preregistered fixed 0.1 million RON tolerance in three quarters (maximum absolute residual 0.165390625 million RON). Because that threshold was frozen before the source run, the mode remains PARTIAL_SERIES_AVAILABLE. Any further check must be based on preregistered source precision metadata rather than a post-hoc relaxed fixed tolerance.",
+    "reason": "The original bilateral boundary remains blocked by Accounting Readiness. Phase A strict component aggregation failed on eight unavailable exact component series. Phase B exact F-minus-F1 aggregation resolved source coverage and produced 45 common quarters, but stock reconciliation exceeded the preregistered 0.1 million RON fixed tolerance in three quarters. Phase C then used ECB DECIMALS metadata to derive a source-precision envelope of 0.08 million RON without changing the Phase B threshold; five stock residuals still exceeded that envelope, while all flow residuals passed. The remaining stock discrepancy therefore cannot be explained solely by declared publication precision, and the mode remains PARTIAL_SERIES_AVAILABLE.",
     "blocker_is_structural_identification_not_missing_value_imputation": true
   },
   "prohibited_shortcuts": [
@@ -48,11 +48,14 @@
     "readiness_count_change": 0,
     "behavioural_closure": "UNCHANGED_INACTIVE",
     "strict_aggregate_gate": "FAILED_NO_PROMOTION",
-    "aggregate_identity_gate": "FAILED_STRICT_STOCK_RECONCILIATION_NO_PROMOTION"
+    "aggregate_identity_gate": "FAILED_STRICT_STOCK_RECONCILIATION_NO_PROMOTION",
+    "rounding_consistency_gate": "FAILED_NO_PROMOTION"
   },
   "boundary_review": "model/dynamics/sectoral_financial_positions_boundary_review.json",
   "strict_source_gate_contract": "model/dynamics/sectoral_financial_positions_reference_contract.json",
   "strict_source_gate_assessment": "model/dynamics/sectoral_financial_positions_strict_gate_assessment.json",
   "aggregate_identity_contract": "model/dynamics/sectoral_financial_positions_aggregate_identity_contract.json",
-  "aggregate_identity_assessment": "model/dynamics/sectoral_financial_positions_aggregate_identity_assessment.json"
+  "aggregate_identity_assessment": "model/dynamics/sectoral_financial_positions_aggregate_identity_assessment.json",
+  "rounding_consistency_contract": "model/dynamics/sectoral_financial_positions_rounding_consistency_contract.json",
+  "rounding_consistency_assessment": "model/dynamics/sectoral_financial_positions_rounding_consistency_assessment.json"
 }
