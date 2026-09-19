@@ -1,0 +1,168 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "mechanism_id": "aggregate_bank_credit_response",
+  "phase": "BNR BLS — Cross-Round Semantic Mapping and Realised-Round Panel",
+  "purpose": "Map only preregistered realised Bank Lending Survey net-percentage observables across the retained seven legacy XLS extractions plus the independently reviewed May-2025 XLSX round. Mapping is based on stable BLS question IDs/coordinates and pre-existing May-2025 semantics, not on model outcomes. Missing survey quarters are reported explicitly and never interpolated.",
+  "legacy_extraction_assessment": "model/calibration_validation/bnr_legacy_xls_cell_extraction_assessment.json",
+  "legacy_extraction_vintage": "data/source_vintages/bnr-legacy-xls-cell-extraction-vintage-2026-09-19",
+  "xlsx_layout_review": "model/calibration_validation/bnr_bls_may2025_xlsx_layout_review.json",
+  "source_round_mapping": [
+    {
+      "source_id": "bls_2023_feb",
+      "file": "bls_2023_feb_cells.json"
+    },
+    {
+      "source_id": "bls_2023_may",
+      "file": "bls_2023_may_cells.json"
+    },
+    {
+      "source_id": "bls_2024_feb",
+      "file": "bls_2024_feb_cells.json"
+    },
+    {
+      "source_id": "bls_2024_may",
+      "file": "bls_2024_may_cells.json"
+    },
+    {
+      "source_id": "bls_2024_nov",
+      "file": "bls_2024_nov_cells.json"
+    },
+    {
+      "source_id": "bls_2025_feb",
+      "file": "bls_2025_feb_cells.json"
+    },
+    {
+      "source_id": "bls_2025_nov",
+      "file": "bls_2025_nov_cells.json"
+    }
+  ],
+  "sheet_name_aliases": {
+    "companies": [
+      "Companies",
+      "companii"
+    ],
+    "households": [
+      "Households",
+      "populatie"
+    ]
+  },
+  "realised_observables": [
+    {
+      "id": "nfc_credit_standards",
+      "question_id": "C01",
+      "question_cell": "A2",
+      "net_percentage_cell": "C13",
+      "metric_label_cell": "B13",
+      "allowed_metric_labels": [
+        "Net percentage",
+        "Sold conjunctural"
+      ],
+      "sign_convention": "positive = net tightening; negative = net easing"
+    },
+    {
+      "id": "nfc_loan_demand",
+      "question_id": "C05",
+      "question_cell": "A225",
+      "net_percentage_cell": "C235",
+      "metric_label_cell": "B235",
+      "allowed_metric_labels": [
+        "Net percentage",
+        "Sold conjunctural"
+      ],
+      "sign_convention": "positive = net increase in demand; negative = net decrease"
+    },
+    {
+      "id": "household_mortgage_credit_standards",
+      "question_id": "P01",
+      "question_cell": "A2",
+      "net_percentage_cell": "C12",
+      "metric_label_cell": "B12",
+      "allowed_metric_labels": [
+        "Net percentage",
+        "Sold conjunctural"
+      ],
+      "sign_convention": "positive = net tightening; negative = net easing"
+    },
+    {
+      "id": "household_consumer_credit_standards",
+      "question_id": "P01",
+      "question_cell": "A2",
+      "net_percentage_cell": "D12",
+      "metric_label_cell": "B12",
+      "allowed_metric_labels": [
+        "Net percentage",
+        "Sold conjunctural"
+      ],
+      "sign_convention": "positive = net tightening; negative = net easing"
+    },
+    {
+      "id": "household_mortgage_loan_demand",
+      "question_id": "P06",
+      "question_cell": "A90",
+      "net_percentage_cell": "C99",
+      "metric_label_cell": "B99",
+      "allowed_metric_labels": [
+        "Net percentage",
+        "Sold conjunctural"
+      ],
+      "sign_convention": "positive = net increase in demand; negative = net decrease"
+    },
+    {
+      "id": "household_consumer_loan_demand",
+      "question_id": "P13",
+      "question_cell": "A293",
+      "net_percentage_cell": "C303",
+      "metric_label_cell": "B303",
+      "allowed_metric_labels": [
+        "Net percentage",
+        "Sold conjunctural"
+      ],
+      "sign_convention": "positive = net increase in demand; negative = net decrease"
+    }
+  ],
+  "date_rule": {
+    "legacy_round_date_cell": "A1",
+    "format": "DD/MM/YYYY",
+    "quarter_assignment": "calendar quarter containing the retained round reference date"
+  },
+  "may_2025_rule": {
+    "source": "model/calibration_validation/bnr_bls_may2025_xlsx_layout_review.json",
+    "use_only_reviewed_realised_bls_semantics": true,
+    "round": "2025-Q1",
+    "no_reinspection_or_respecification": true
+  },
+  "dsti_boundary": {
+    "legacy_question_ids": [
+      "P0303",
+      "P1103"
+    ],
+    "status": "EXCLUDED_FROM_BORROWER_DSTI_LEVEL_PANEL",
+    "reason": "These are BLS lending-term change questions whose outputs are response distributions/net percentages, not borrower DSTI levels."
+  },
+  "completeness_rule": {
+    "expected_frequency": "quarterly",
+    "infer_missing_round_values": false,
+    "interpolation_allowed": false,
+    "forward_fill_allowed": false,
+    "synthetic_quarter_creation": false,
+    "report_missing_quarters_between_first_and_last_observed": true
+  },
+  "hard_rules": {
+    "no_nfc_household_signal_aggregation": true,
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_lag_selection": true,
+    "no_holdout_opening": true,
+    "no_causal_claim": true,
+    "no_dsti_level_claim": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "output_files": {
+    "panel": "bnr_bls_realised_rounds.csv",
+    "audit": "bnr_bls_cross_round_mapping_audit.json"
+  },
+  "pass_effect": "BLS_MULTI_ROUND_SEMANTIC_MAPPING_AVAILABLE_WITH_EXPLICIT_COVERAGE_GAPS",
+  "next_gate": "Enumerate and recover the exact missing official BNR BLS rounds before any structural-selection contract. Do not interpolate missing quarters."
+}
