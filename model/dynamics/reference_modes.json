@@ -141,7 +141,7 @@
       "oecd_counterpart_discovery_probe_contract": "model/dynamics/sectoral_financial_positions_oecd_counterpart_probe_contract.json",
       "oecd_counterpart_discovery_probe_status": "EXECUTED_PASS_SEMANTIC_REVIEW_FAIL_SECTOR_SCOPE",
       "oecd_counterpart_discovery_probe_effect": "NO_REOPEN; discovery and F2-F8 instrument scope passed, but frozen semantic review failed because Romania counterpart tables do not expose S121 central bank required for BNR and F=S12-S121.",
-      "external_reopen_screening_summary": "Eurostat nasq_10_f_cp passes counterpart discovery but fails the complete F2-F8 instrument boundary; OECD quarterly counterpart stocks/flows pass complete F2-F8 discovery but Romania does not expose S121; the latest official BNR CNF annual report provides a non-consolidated 2024 counterpart stock matrix with S121 and AF2-AF8, but fails the frozen quarterly stock+financial-transaction history requirement. No current public source satisfies the full boundary.",
+      "external_reopen_screening_summary": "Eurostat nasq_10_f_cp passes counterpart discovery but fails complete F2-F8 instrument scope; OECD quarterly counterpart stocks/flows pass complete F2-F8 discovery but Romania lacks S121; the BNR annual CNF report supplies a non-consolidated 2024 counterpart stock matrix with S121 and AF2-AF8 but not the required quarterly stock+transaction history; and the BNR quarterly financial-accounts publication supplies a long stock/transaction sequence only for consolidated S13, not the full non-consolidated RMD sector-by-counterpart boundary. No current public source satisfies the full frozen boundary.",
       "eurostat_counterpart_discovery_probe_contract": "model/dynamics/sectoral_financial_positions_eurostat_counterpart_probe_contract.json",
       "eurostat_counterpart_discovery_probe_status": "EXECUTED_PASS_SEMANTIC_REVIEW_FAIL_INSTRUMENT_SCOPE",
       "eurostat_counterpart_discovery_probe_effect": "NO_REOPEN; discovery confirmed Romania counterpart data, but frozen semantic review failed because the public instrument set does not cover complete RMD F2-F8.",
@@ -160,7 +160,9 @@
       "bnr_cnf_source_screening": "model/dynamics/sectoral_financial_positions_bnr_cnf_source_screening.json",
       "bnr_cnf_source_screening_status": "OFFICIAL_ANNUAL_COUNTERPART_STOCK_MATRIX_CONFIRMED_FREQUENCY_AND_TRANSACTION_HISTORY_FAIL_NO_REOPEN",
       "reference_mode_recovery_terminal_assessment": "model/dynamics/reference_mode_recovery_terminal_assessment.json",
-      "reference_mode_recovery_stage_status": "STAGE_COMPLETE_FROZEN_9_OF_10_UNDER_CURRENT_PUBLIC_EVIDENCE_BOUNDARY"
+      "reference_mode_recovery_stage_status": "STAGE_COMPLETE_FROZEN_9_OF_10_UNDER_CURRENT_PUBLIC_EVIDENCE_BOUNDARY",
+      "bnr_quarterly_s13_source_screening": "model/dynamics/sectoral_financial_positions_bnr_quarterly_s13_source_screening.json",
+      "bnr_quarterly_s13_source_screening_status": "OFFICIAL_QUARTERLY_S13_FINANCIAL_ACCOUNTS_CONFIRMED_FREQUENCY_PASS_SECTOR_COUNTERPART_CONSOLIDATION_FAIL_NO_REOPEN"
     }
   ],
   "closure_rule": "Integrated behavioural closure may not be declared validated until the reference modes required by each active loop have explicit observed targets or a documented reason why only qualitative/reference-pattern validation is possible.",
