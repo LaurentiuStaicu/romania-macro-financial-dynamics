@@ -36,7 +36,7 @@
       "id": "aggregate_bank_credit_response",
       "classification": "CANDIDATE",
       "source_readiness": "BLS_CANONICAL_11_OF_12_EXACT_WORKBOOK_RECOVERY_RETAINED_SINGLE_GAP_2025_Q2",
-      "next_admissible_action": "Keep calibration closed. The BNR interactive database is now a registered reopen surface, but no exact target machine-readable prudential series has been identified. Reopen that path only on an official stable series/export/API identifier with matched population metadata. Otherwise continue PDF source enumeration only when exact official links are independently exposed; do not infer endpoints, URLs or values.",
+      "next_admissible_action": "Keep calibration closed. The matched BNR prudential source-discovery stage is closed under the current public surface and must not be repeated without a new official trigger. Reopen the prudential path only if BNR exposes a new exact bulletin link/archive listing, a stable matched machine-readable series/export/API, or an explicit population bridge. Independently, BLS may reopen only if the exact official 2025-Q2 workbook endpoint is identified.",
       "blockers": [
         "The canonical realised BNR BLS panel now contains 11 exact observed rounds from 2022-Q4 through 2025-Q3; only 2025-Q2 remains missing.",
         "Exact 2023-Q2, 2023-Q3 and 2024-Q2 workbooks are retained with hashes, all six preregistered observables are semantically mapped, and those three rounds are canonically promoted without interpolation.",
@@ -104,7 +104,7 @@
       "prudential_population_boundary_status": "DIRECT_CBD2_TO_BNR_POPULATION_EQUIVALENCE_REJECTED_NEW_MATCHED_SOURCE_REQUIRED",
       "bnr_prudential_table_materialisation_contract": "model/calibration_validation/bnr_prudential_table_materialisation_contract.json",
       "bnr_prudential_table_source_enumeration": "model/calibration_validation/bnr_prudential_table_source_enumeration.json",
-      "bnr_prudential_source_enumeration_status": "INCOMPLETE_SOURCE_ENUMERATION_NO_MODEL_EFFECT",
+      "bnr_prudential_source_enumeration_status": "FROZEN_INCOMPLETE_3_OF_11_CURRENT_PUBLIC_DISCOVERY_EXHAUSTED_NO_MODEL_EFFECT",
       "bnr_prudential_exact_primary_years_identified": [
         2019,
         2022,
@@ -113,7 +113,9 @@
       "bnr_prudential_exact_primary_identified_count": 3,
       "bnr_prudential_required_year_count": 11,
       "bnr_prudential_interactive_database_discovery_review": "model/calibration_validation/bnr_prudential_interactive_database_discovery_review.json",
-      "bnr_prudential_interactive_database_discovery_status": "OFFICIAL_DATABASE_SURFACE_CONFIRMED_TARGET_SERIES_NOT_IDENTIFIED_IN_PUBLIC_INDEX"
+      "bnr_prudential_interactive_database_discovery_status": "OFFICIAL_DATABASE_CONFIRMED_TARGET_SERIES_NOT_IDENTIFIED_STAGE_FROZEN",
+      "bnr_prudential_source_discovery_terminal_assessment": "model/calibration_validation/bnr_prudential_source_discovery_terminal_assessment.json",
+      "bnr_prudential_source_discovery_stage_status": "STAGE_CLOSED_FROZEN_INCOMPLETE_UNDER_CURRENT_PUBLIC_DISCOVERY_SURFACE_NO_MODEL_EFFECT"
     },
     {
       "id": "exchange_rate_pass_through_to_inflation",
