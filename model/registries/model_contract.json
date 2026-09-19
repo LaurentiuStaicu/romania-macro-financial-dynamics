@@ -45,7 +45,10 @@
     "canonical_full_2025_stock_flow_benchmark_ready": false,
     "reference_mode_closure_ready": false,
     "reference_mode_ready_count": 9,
-    "reference_mode_required_count": 10
+    "reference_mode_required_count": 10,
+    "reference_mode_recovery_terminal_assessment": "model/dynamics/reference_mode_recovery_terminal_assessment.json",
+    "reference_mode_recovery_stage_status": "STAGE_COMPLETE_FROZEN_9_OF_10_UNDER_CURRENT_PUBLIC_EVIDENCE_BOUNDARY",
+    "reference_mode_recovery_next_operational_state": "EVIDENCE_TRIGGERED_BASELINE_HOLD"
   },
   "empirical_dynamics": {
     "contract": "model/empirical_dynamics/contract.json",
