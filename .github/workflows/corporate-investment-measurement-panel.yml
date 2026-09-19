@@ -1,0 +1,47 @@
+name: Corporate Investment Offline Measurement Panel
+
+on:
+  pull_request:
+    paths:
+      - "model/calibration_validation/corporate_investment_measurement_panel_contract.json"
+      - "model/calibration_validation/corporate_investment_measurement_design_contract.json"
+      - "scripts/audit_corporate_investment_measurement_panel.py"
+      - "tests/test_corporate_investment_measurement_panel_contract.py"
+      - "tests/test_corporate_investment_measurement_panel_logic.py"
+      - "data/source_vintages/corporate-investment-source-family-vintage-2026-09-19/**"
+      - "data/source_vintages/corporate-investment-supplemental-source-vintage-2026-09-19/**"
+      - ".github/workflows/corporate-investment-measurement-panel.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-offline-measurement-panel:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify frozen measurement contracts and logic
+        run: |
+          python -m unittest tests.test_corporate_investment_measurement_panel_contract -v
+          python -m unittest tests.test_corporate_investment_measurement_panel_logic -v
+
+      - name: Build deterministic offline measurement panel
+        env:
+          CORPORATE_INVESTMENT_MEASUREMENT_OUT: corporate_investment_measurement_artifacts
+        run: python scripts/audit_corporate_investment_measurement_panel.py
+
+      - name: Upload offline measurement evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: corporate-investment-measurement-panel-${{ github.sha }}
+          path: corporate_investment_measurement_artifacts/
+          if-no-files-found: error
+          retention-days: 90
