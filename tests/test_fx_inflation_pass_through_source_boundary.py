@@ -19,7 +19,8 @@ class FxInflationPassThroughSourceBoundaryTests(unittest.TestCase):
         )
         registry = load("model/empirical_dynamics/mechanism_registry.json")
         mechanism = next(
-            item for item in registry["mechanisms"]
+            item
+            for item in registry["mechanisms"]
             if item["id"] == "exchange_rate_pass_through_to_inflation"
         )
 
@@ -27,14 +28,16 @@ class FxInflationPassThroughSourceBoundaryTests(unittest.TestCase):
             review["primary_sources"]["exchange_rate"]["series_key"],
             "EXR.M.RON.EUR.SP00.A",
         )
+        inflation = review["primary_sources"]["inflation"]
         self.assertEqual(
-            review["primary_sources"]["inflation"]["dataset"],
-            "prc_hicp_midx — HICP monthly index",
+            inflation["dataset"],
+            "prc_hicp_minr — HICP ECOICOP version 2, monthly indices and rates",
         )
-        self.assertEqual(
-            review["primary_sources"]["inflation"]["coicop"],
-            "CP00",
-        )
+        self.assertEqual(inflation["product_dimension"], "coicop18")
+        self.assertEqual(inflation["product_code"], "TOTAL")
+        self.assertEqual(inflation["unit"], "I25")
+        self.assertIn("2025=100", inflation["unit_label"])
+        self.assertIn("archived", inflation["migration_note"])
         self.assertFalse(
             review["source_materialisation_gate"]["calibration_cycle_open"]
         )
@@ -68,21 +71,35 @@ class FxInflationPassThroughSourceBoundaryTests(unittest.TestCase):
             "model/calibration_validation/"
             "fx_inflation_external_price_control_screening.json",
         )
+        self.assertEqual(
+            screen["contract"],
+            "model/calibration_validation/"
+            "fx_inflation_external_price_control_contract.json",
+        )
+        exact = screen["exact_control"]["dimensions"]
+        self.assertEqual(exact["indic_et"], "IVU")
+        self.assertEqual(exact["partner"], "WORLD")
+        self.assertEqual(exact["bclas_bec"], "TOTAL")
+        self.assertEqual(exact["geo"], "RO")
         self.assertFalse(screen["calibration_may_open"])
         self.assertIn(
             "after inspecting model fit",
             screening["purpose"],
         )
-        self.assertIn("euro-area import prices", prohibited)
+        self.assertIn("euro-area", prohibited)
         self.assertIn("lag length", prohibited)
         self.assertIn("cpi and hicp", prohibited)
+        self.assertIn("cons_tra", prohibited)
 
     def test_sign_convention_and_no_causal_activation_are_explicit(self) -> None:
         review = load(
             "model/calibration_validation/"
             "fx_inflation_pass_through_source_boundary_review.json"
         )
-        self.assertEqual(review["transformation_boundary"]["fx_quote"], "RON_per_EUR")
+        self.assertEqual(
+            review["transformation_boundary"]["fx_quote"],
+            "RON_per_EUR",
+        )
         self.assertIn(
             "depreciation",
             review["transformation_boundary"][
@@ -96,7 +113,9 @@ class FxInflationPassThroughSourceBoundaryTests(unittest.TestCase):
         )
         self.assertFalse(review["disposition"]["central_feedback"])
         self.assertEqual(
-            review["disposition"]["validated_reference_behavioural_mechanisms_change"],
+            review["disposition"][
+                "validated_reference_behavioural_mechanisms_change"
+            ],
             0,
         )
 
