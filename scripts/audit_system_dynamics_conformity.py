@@ -189,6 +189,118 @@ def reference_mode_readiness(
     }
 
 
+def empirical_activation_governance(
+    contract: dict,
+    registry: dict,
+    disposition: dict,
+) -> dict[str, object]:
+    mechanisms = registry.get("mechanisms", [])
+    mechanism_ids = [str(item["id"]) for item in mechanisms]
+    if len(mechanism_ids) != len(set(mechanism_ids)):
+        raise RuntimeError("Empirical mechanism registry contains duplicate IDs")
+
+    vocabulary = set(registry.get("status_vocabulary", []))
+    by_id = {str(item["id"]): item for item in mechanisms}
+    for mechanism_id, item in by_id.items():
+        classification = str(item["classification"])
+        if classification not in vocabulary:
+            raise RuntimeError(
+                f"Empirical mechanism {mechanism_id} has unsupported status "
+                f"{classification}"
+            )
+
+    contract_activated = set(contract.get("activated_mechanisms", []))
+    registry_activated = {
+        mechanism_id
+        for mechanism_id, item in by_id.items()
+        if item["classification"] == "ACTIVATED"
+    }
+    if contract_activated != registry_activated:
+        raise RuntimeError(
+            "Empirical contract activated-mechanism list disagrees with registry"
+        )
+
+    post = contract.get("post_validation_disposition", {})
+    previous = set(post.get("previous_calibration_admissions", []))
+    status_map = post.get("current_status_of_previous_admissions", {})
+    if set(status_map) != previous:
+        raise RuntimeError(
+            "Post-validation status map does not cover exactly the previous admissions"
+        )
+    missing_previous = previous - set(by_id)
+    if missing_previous:
+        raise RuntimeError(
+            "Post-validation governance references unknown mechanisms: "
+            f"{sorted(missing_previous)}"
+        )
+    for mechanism_id, expected_status in status_map.items():
+        actual = str(by_id[mechanism_id]["classification"])
+        if actual != expected_status:
+            raise RuntimeError(
+                f"Post-validation status for {mechanism_id} is {actual}, "
+                f"expected {expected_status}"
+            )
+        evidence = by_id[mechanism_id].get(
+            "validation_recovery_disposition"
+        )
+        if not isinstance(evidence, dict):
+            raise RuntimeError(
+                f"{mechanism_id} lacks explicit validation-recovery disposition"
+            )
+        if str(evidence.get("status")) != expected_status:
+            raise RuntimeError(
+                f"{mechanism_id} embedded recovery status disagrees with registry"
+            )
+        if not str(evidence.get("source", "")).strip():
+            raise RuntimeError(
+                f"{mechanism_id} recovery disposition lacks a source"
+            )
+
+    activated_after = set(
+        post.get("activated_mechanisms_after_disposition", [])
+    )
+    if activated_after != contract_activated:
+        raise RuntimeError(
+            "Post-validation activated set disagrees with empirical contract"
+        )
+
+    validated = int(
+        disposition["validated_reference_behavioural_mechanisms"]
+    )
+    if int(post.get("validated_reference_behavioural_mechanisms", -1)) != validated:
+        raise RuntimeError(
+            "Empirical post-validation count disagrees with validation disposition"
+        )
+
+    active_cycle = bool(post.get("active_calibration_cycle_open"))
+    if not active_cycle and contract_activated:
+        raise RuntimeError(
+            "Closed calibration cycle cannot retain ACTIVATED mechanisms"
+        )
+
+    central_feedback = {
+        mechanism_id
+        for mechanism_id, item in by_id.items()
+        if item.get("central_feedback") is True
+    }
+    if not central_feedback <= registry_activated:
+        raise RuntimeError(
+            "Only mechanisms in an open ACTIVATED calibration cycle may be "
+            "labelled central_feedback"
+        )
+
+    return {
+        "active_calibration_cycle_open": active_cycle,
+        "activated_mechanisms": sorted(registry_activated),
+        "previous_calibration_admissions": sorted(previous),
+        "current_status_of_previous_admissions": {
+            key: status_map[key] for key in sorted(status_map)
+        },
+        "central_feedback_mechanisms": sorted(central_feedback),
+        "validated_reference_behavioural_mechanisms": validated,
+    }
+
+
 def main() -> None:
     model = load("model/registries/model_contract.json")
     core = load("model/dynamics/core_contract.json")
@@ -199,6 +311,8 @@ def main() -> None:
     disposition = load(
         "model/calibration_validation/validation_recovery_disposition.json"
     )
+    empirical_contract = load("model/empirical_dynamics/contract.json")
+    empirical_registry = load("model/empirical_dynamics/mechanism_registry.json")
     accounting_readiness = load("model/accounting/accounting_readiness_gate.json")
 
     check(
@@ -233,6 +347,29 @@ def main() -> None:
         ]
         is True,
         "Behavioural closure must not override incomplete Accounting Spine readiness",
+    )
+
+    empirical_governance = empirical_activation_governance(
+        empirical_contract,
+        empirical_registry,
+        disposition,
+    )
+    check(
+        model["empirical_dynamics"]["active_calibration_cycle_open"]
+        is empirical_governance["active_calibration_cycle_open"],
+        "Model contract active-calibration-cycle state is stale",
+    )
+    check(
+        model["empirical_dynamics"]["activated_mechanisms_count"]
+        == len(empirical_governance["activated_mechanisms"]),
+        "Model contract activated-mechanism count is stale",
+    )
+    check(
+        model["empirical_dynamics"][
+            "validation_disposition_governs_current_status"
+        ]
+        is True,
+        "Current empirical mechanism status must be governed by frozen validation disposition",
     )
 
     structures = feedback["loops"]
@@ -472,6 +609,7 @@ def main() -> None:
         "reference_mode_closure_readiness": reference_readiness["status"],
         "reference_mode_ready_variables": reference_readiness["ready_modes"],
         "reference_mode_blocking_variables": reference_readiness["blocking_modes"],
+        "empirical_activation_governance": empirical_governance,
     }
     print(json.dumps(report, indent=2))
 
