@@ -96,6 +96,7 @@ class ScientificBaselineMergeReadinessAssessmentTests(unittest.TestCase):
             {
                 "CONSOLIDATION_COMPLETE_HUMAN_REVIEW_DECISION_PENDING",
                 "REVIEW_READY_MERGE_DECISION_PENDING",
+                "MERGE_AUTHORIZED_INTEGRATION_PENDING",
             },
         )
         self.assertFalse(g["automatic_merge_authorized"])
