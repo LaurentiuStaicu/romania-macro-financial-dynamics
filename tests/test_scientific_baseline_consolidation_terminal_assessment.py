@@ -106,6 +106,7 @@ class ScientificBaselineConsolidationTerminalAssessmentTests(unittest.TestCase):
                 "CONSOLIDATION_COMPLETE_HUMAN_REVIEW_DECISION_PENDING",
                 "REVIEW_READY_MERGE_DECISION_PENDING",
                 "MERGE_AUTHORIZED_INTEGRATION_PENDING",
+                "INTEGRATION_COMPLETE",
             },
         )
         self.assertFalse(gov["automatic_merge_authorized"])

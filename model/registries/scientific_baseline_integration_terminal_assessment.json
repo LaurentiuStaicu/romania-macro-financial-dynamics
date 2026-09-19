@@ -1,0 +1,98 @@
+{
+  "assessment_version": "0.1",
+  "assessed_on": "2026-09-19",
+  "stage": "Scientific Baseline Integration",
+  "status": "INTEGRATION_COMPLETE_EVIDENCE_TRIGGERED_BASELINE_HOLD",
+  "purpose": "Formally close the scientific-baseline repository integration stage after the reviewed stack was merged bottom-up into main, the superseded chronological audit PR was closed without direct merge, and the resulting main head passed post-merge Scientific CI.",
+  "authorities": {
+    "merge_authorization": "model/registries/scientific_baseline_merge_authorization.json",
+    "review_ready_assessment": "model/registries/scientific_baseline_review_ready_assessment.json",
+    "consolidation_terminal_assessment": "model/registries/scientific_baseline_consolidation_terminal_assessment.json",
+    "scientific_stage_terminal_assessment": "model/registries/validation_recovery_stage_terminal_assessment.json"
+  },
+  "merged_stack": [
+    {
+      "pull_request": 48,
+      "role": "retained source vintages and provenance",
+      "merge_commit_sha": "1ebd397c4d4419176e8eed7893c5c01d2ca743d5"
+    },
+    {
+      "pull_request": 49,
+      "role": "contracts, registries and model core",
+      "merge_commit_sha": "406baa51d473eaa752f537961a91c7d57c0bf6cd"
+    },
+    {
+      "pull_request": 50,
+      "role": "audit scripts and workflows",
+      "merge_commit_sha": "748928a80b7509b61ac0b3d0b9bf356e202a321e"
+    },
+    {
+      "pull_request": 51,
+      "role": "scientific invariant and regression tests",
+      "merge_commit_sha": "0e4bd4501943d037500f4e31248c2ba93811590d"
+    },
+    {
+      "pull_request": 52,
+      "role": "terminal consolidation, review and merge authorization governance",
+      "merge_commit_sha": "9efab3020d10ade5e2d94f5df1e44f91d88ea08a"
+    }
+  ],
+  "original_audit_pull_request": {
+    "number": 47,
+    "disposition": "CLOSED_SUPERSEDED_NOT_MERGED_DIRECTLY",
+    "validated_scientific_terminal_tree": "f8ca0b757b4be46cc19b36564e9f0eed69ef95ce",
+    "historical_role": "complete chronological scientific-integrity audit history"
+  },
+  "post_merge_verification": {
+    "main_head_after_stack_merge": "9efab3020d10ade5e2d94f5df1e44f91d88ea08a",
+    "scientific_ci": {
+      "run_id": 35460843724,
+      "conclusion": "SUCCESS"
+    },
+    "f2m_component_materialization": {
+      "run_id": 35460843633,
+      "conclusion": "SUCCESS"
+    },
+    "f4_partial_materialization": {
+      "run_id": 35460843615,
+      "conclusion": "SUCCESS"
+    },
+    "canonical_reproduction_requires_live_network": false
+  },
+  "final_scientific_state": {
+    "scientific_stage": "STAGE_COMPLETE_EVIDENCE_TRIGGERED_BASELINE_HOLD",
+    "next_operational_state": "EVIDENCE_TRIGGERED_BASELINE_HOLD",
+    "model_complete": false,
+    "release_ready": false,
+    "canonical_complete_stock_and_flow_instruments": [
+      "F3"
+    ],
+    "canonical_full_2025_stock_flow_benchmark_ready": false,
+    "reference_modes_ready": 9,
+    "reference_modes_required": 10,
+    "validated_reference_behavioural_mechanisms": 0,
+    "active_calibration_cycle_open": false,
+    "behavioural_closure_active": false,
+    "complete_endogenous_system_dynamics_model": false
+  },
+  "integration_effects": {
+    "scientific_content_activation_from_merge": false,
+    "accounting_completion_from_merge": false,
+    "reference_mode_promotion_from_merge": false,
+    "calibration_or_refit_authorized": false,
+    "holdout_opening_authorized": false,
+    "system_dynamics_feedback_activation": false,
+    "behavioural_closure_activation": false,
+    "release_or_tag_authorized": false,
+    "version_change_authorized": false
+  },
+  "terminal_governance": {
+    "repository_integration_complete": true,
+    "merge_decision_pending": false,
+    "autonomous_integration_tasks_remaining": false,
+    "release_decision_separate": true,
+    "release_or_version_change_authorized": false,
+    "current_repository_state": "INTEGRATION_COMPLETE",
+    "current_scientific_state": "EVIDENCE_TRIGGERED_BASELINE_HOLD"
+  }
+}

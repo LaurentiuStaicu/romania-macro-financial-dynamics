@@ -18,7 +18,9 @@ The consolidation terminal state was **CONSOLIDATION_COMPLETE_HUMAN_REVIEW_DECIS
 
 This transition changes repository review state only. No accounting classification, reference-mode status, empirical mechanism, calibration gate, System Dynamics feedback or behavioural closure has changed.
 
-A subsequent human continuation decision has authorized the reviewed stack #48–#52 for bottom-up merge into `main`, recorded in `model/registries/scientific_baseline_merge_authorization.json`. The current repository-governance state is **MERGE_AUTHORIZED_INTEGRATION_PENDING**. This authorization is limited to repository integration: release, tag, version changes, calibration/refit, holdout opening, System Dynamics feedback activation and behavioural closure remain unauthorized.
+A subsequent human continuation decision authorized the reviewed stack #48–#52 for bottom-up merge into `main`, recorded in `model/registries/scientific_baseline_merge_authorization.json`. That integration is now **complete**. PRs #48–#52 were merged sequentially into `main`, PR #47 was closed as superseded rather than merged directly, and the resulting `main` head passed post-merge Scientific CI. The terminal repository assessment is `model/registries/scientific_baseline_integration_terminal_assessment.json`.
+
+The current repository-governance state is **INTEGRATION_COMPLETE** while the scientific operational state remains **EVIDENCE_TRIGGERED_BASELINE_HOLD**. Integration did not complete missing accounting instruments, promote the 10th reference mode, validate a behavioural mechanism, open calibration/refit, activate System Dynamics feedback or behavioural closure, create a release/tag, or change the version.
 
 ## Canonical modeling paradigm
 
