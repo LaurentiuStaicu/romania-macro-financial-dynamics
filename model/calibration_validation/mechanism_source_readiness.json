@@ -349,12 +349,14 @@
     "mechanism_id": "SCIENTIFIC_BASELINE",
     "action": "HOLD_CLOSED_BASELINE_UNTIL_DECLARED_REOPEN_TRIGGER",
     "reason": "Cross-registry mechanism readiness is now consolidated and executable in Scientific CI. All non-rejected behavioural mechanisms are either frozen after preregistered failure, waiting for prospective identifying events, or blocked by explicit source/measurement/identification triggers. No new empirical cycle should open merely because the queue is exhausted.",
-    "calibration_cycle_open": false
+    "calibration_cycle_open": false,
+    "reopen_conditions_registry": "model/calibration_validation/mechanism_reopen_conditions_registry.json"
   },
   "coverage_rule": {
     "scope": "ALL_NON_REJECTED_MECHANISMS",
     "rule": "Every mechanism whose registry classification is CANDIDATE, DEFERRED or ACTIVATED must have exactly one source-readiness entry. REJECTED shortcuts are excluded because they have no admissible estimation path unless separately reopened.",
     "duplicate_entries_allowed": false,
     "missing_entries_allowed": false
-  }
+  },
+  "mechanism_reopen_conditions_registry": "model/calibration_validation/mechanism_reopen_conditions_registry.json"
 }
