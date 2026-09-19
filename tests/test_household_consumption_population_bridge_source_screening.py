@@ -23,12 +23,19 @@ class HouseholdConsumptionPopulationBridgeSourceScreeningTests(unittest.TestCase
         self.assertEqual(hfcs["conceptual_fit"], "HIGH_IF_ROMANIA_PARTICIPATED")
         self.assertEqual(
             hfcs["bridge_status"],
-            "NOT_AVAILABLE_FOR_ROMANIA",
+            "NO_ROMANIA_HFCS_COUNTRY_DATASET_IN_RELEVANT_AVAILABLE_WAVES",
         )
         self.assertIn(
-            "NOT_A_PARTICIPATING_COUNTRY",
+            "HFCN_MEMBER_INSTITUTION",
             hfcs["romania_status"],
         )
+        self.assertIn(
+            "2023_WAVES_IDENTIFIED",
+            hfcs["romania_status"],
+        )
+        evidence = " ".join(hfcs["participation_evidence"])
+        self.assertIn("Banca Națională a României", evidence)
+        self.assertIn("fifth wave", evidence)
 
     def test_abf_public_aggregates_do_not_supply_mortgage_borrower_bridge(self) -> None:
         sources = {item["id"]: item for item in self.review["screened_sources"]}
