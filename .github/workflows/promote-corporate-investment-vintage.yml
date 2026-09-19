@@ -1,8 +1,5 @@
-name: Promote Reviewed Corporate Investment Structural Selection Result
+name: Promote Reviewed BNR Household DSTI Workbook Vintage
 
-# One-shot promotion of the exact reviewed structural-selection result.
-# The reviewed verdict is FAIL_BEFORE_HOLDOUT. This workflow must not open
-# final evaluation, refit, respecify or activate any behavioural feedback.
 on:
   pull_request:
     types: [labeled]
@@ -12,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  promote-reviewed-selection-result:
+  promote-reviewed-bnr-dsti-vintage:
     if: ${{ github.event.label.name == 'promote-corporate-investment-vintage' }}
     runs-on: ubuntu-latest
     steps:
@@ -22,7 +19,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 1
 
-      - name: Download exact reviewed selection artifact
+      - name: Download exact reviewed artifact
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -30,51 +27,44 @@ jobs:
             -H "Authorization: Bearer ${GH_TOKEN}" \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10582335814/zip" \
-            -o /tmp/corporate-investment-selection-reviewed.zip
-          echo "011b4c3fdd64744476691b28671af01af1b7f6df12beda9303eeaa4c4a6ab0a1  /tmp/corporate-investment-selection-reviewed.zip" | sha256sum -c -
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10582576588/zip" \
+            -o /tmp/bnr-dsti-reviewed.zip
+          echo "f5efeb0952af48e82c41106bff63908877dcd45176b49a0f085d7ef11d2e109b  /tmp/bnr-dsti-reviewed.zip" | sha256sum -c -
 
-      - name: Verify exact reviewed result
+      - name: Verify reviewed file set and hashes
         run: |
-          rm -rf /tmp/corporate-investment-selection-reviewed
-          mkdir -p /tmp/corporate-investment-selection-reviewed
-          unzip -q /tmp/corporate-investment-selection-reviewed.zip -d /tmp/corporate-investment-selection-reviewed
+          rm -rf /tmp/bnr-dsti-reviewed
+          mkdir -p /tmp/bnr-dsti-reviewed
+          unzip -q /tmp/bnr-dsti-reviewed.zip -d /tmp/bnr-dsti-reviewed
           python - <<'PY'
-          import hashlib
-          import json
+          import hashlib, json
           from pathlib import Path
-
-          root=Path("/tmp/corporate-investment-selection-reviewed")
-          review=json.loads(Path(
-              "model/calibration_validation/"
-              "corporate_investment_structural_selection_promotion_review.json"
-          ).read_text(encoding="utf-8"))
-          files=[p for p in root.rglob("*") if p.is_file()]
-          if len(files) != 1:
-              raise SystemExit(f"unexpected reviewed artifact file set: {files}")
-          expected=review["expected_file"]
-          path=root/expected["path"]
-          data=path.read_bytes()
-          if len(data)!=expected["bytes"]:
-              raise SystemExit("reviewed selection-result byte size mismatch")
-          if hashlib.sha256(data).hexdigest()!=expected["sha256"]:
-              raise SystemExit("reviewed selection-result SHA-256 mismatch")
-          result=json.loads(data)
-          assert result["selection_verdict"] == "FAIL_BEFORE_HOLDOUT"
-          assert result["final_evaluation_opened"] is False
-          assert result["selected_form_for_final_evaluation"] is None
-          assert result["system_dynamics_activation"] is False
-          print("Exact failed corporate-investment selection result verified.")
+          root=Path("/tmp/bnr-dsti-reviewed")
+          review=json.loads(Path("model/calibration_validation/bnr_household_dsti_workbook_promotion_review.json").read_text())
+          actual={str(p.relative_to(root)) for p in root.rglob("*") if p.is_file()}
+          expected={x["path"] for x in review["expected_files"]}
+          if actual != expected:
+              raise SystemExit(f"file set mismatch: missing={expected-actual}, extra={actual-expected}")
+          for item in review["expected_files"]:
+              p=root/item["path"]
+              data=p.read_bytes()
+              if len(data)!=item["bytes"]:
+                  raise SystemExit(f"byte-size mismatch: {item['path']}")
+              if item["sha256"] and hashlib.sha256(data).hexdigest()!=item["sha256"]:
+                  raise SystemExit(f"sha mismatch: {item['path']}")
+              if item["path"].endswith(".xls") and not data.startswith(bytes.fromhex("D0CF11E0A1B11AE1")):
+                  raise SystemExit(f"not OLE2 xls: {item['path']}")
+          print("Reviewed BNR workbook artifact verified.")
           PY
 
-      - name: Commit exact canonical selection result to PR branch
+      - name: Commit immutable raw workbook vintage
         run: |
-          src="/tmp/corporate-investment-selection-reviewed/corporate_investment_structural_selection_result.json"
-          dest="model/calibration_validation/corporate_investment_structural_selection_result.json"
+          dest="data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19"
           test ! -e "$dest"
-          cp "$src" "$dest"
+          mkdir -p "$dest"
+          cp -a /tmp/bnr-dsti-reviewed/. "$dest/"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add "$dest"
-          git commit -m "investment: retain failed structural selection result"
+          git commit -m "data: retain exact BNR household DSTI workbook vintage"
           git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
