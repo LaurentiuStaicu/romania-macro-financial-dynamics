@@ -132,7 +132,9 @@
       "missing_quarters": [],
       "coverage_fraction": 1,
       "exact_machine_readable_history_retained": false
-    }
+    },
+    "aggregate_consumption_population_alignment_review": "model/calibration_validation/household_consumption_borrower_burden_alignment_review.json",
+    "aggregate_s1m_direct_admissibility": false
   },
   "shared_prohibitions": [
     "Do not construct a Romania household or NFC DSR from debt stock, a new-business rate and an assumed maturity.",
@@ -144,9 +146,9 @@
   ],
   "dispositions": {
     "household_consumption_response": {
-      "status": "COMPLETE_2023Q1_2025Q2_PUBLICATION_TEXT_HOUSING_DSTI_WINDOW_REGISTERED_MACRO_DSR_STILL_UNIDENTIFIED",
+      "status": "HOUSING_DSTI_TEXT_WINDOW_COMPLETE_BUT_AGGREGATE_S1M_POPULATION_ALIGNMENT_BLOCKED",
       "estimation_authorized": false,
-      "next_gate": "Either retain an exact machine-readable BNR housing-loan DSTI level history or preregister a publication-text-only alternative borrower-burden candidate family over the complete 2023-Q1..2025-Q2 window, preserving publication precision and keeping new versus outstanding loans separate. Neither path identifies the registered macro household DSR automatically."
+      "next_gate": "Do not estimate the registered aggregate-consumption equation with housing-loan DSTI. Reopen only with an observed aggregate burden source, an independently observed representativeness bridge, or a separately preregistered borrower-subpopulation consumption target. Machine-readable DSTI history alone is insufficient."
     },
     "credit_risk_npl_response": {
       "status": "DEFERRED_DEBT_SERVICE_BOUNDARY_UNRESOLVED",
