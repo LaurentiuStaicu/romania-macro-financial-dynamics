@@ -73,6 +73,46 @@ def fetch(url: str, timeout: int, attempts: int):
     return b"", {}, None, last_error
 
 
+def classify_candidate_response(
+    *,
+    status: int | None,
+    error: str | None,
+    sig: str,
+    rules: dict,
+) -> str:
+    if (
+        status == 200
+        and sig in rules["allowed_binary_signatures"]
+    ):
+        return "RECOVERED_SPREADSHEET_BYTES"
+    if status in set(rules["definitive_candidate_negative_http_statuses"]):
+        return "CANDIDATE_ENDPOINT_NEGATIVE"
+    return "INDETERMINATE_SOURCE_ACCESS"
+
+
+def classify_round(candidate_results: list[dict]) -> str:
+    states = [item["source_access_state"] for item in candidate_results]
+    if "RECOVERED_SPREADSHEET_BYTES" in states:
+        return "SPREADSHEET_BYTES_RECOVERED"
+    if "INDETERMINATE_SOURCE_ACCESS" in states:
+        return "INDETERMINATE_SOURCE_ACCESS"
+    return "NO_VALID_SPREADSHEET_BYTES_RECOVERED_FROM_PREREGISTERED_CANDIDATES"
+
+
+def overall_status(results: list[dict], contract: dict) -> str:
+    if any(
+        item["status"] == "SPREADSHEET_BYTES_RECOVERED"
+        for item in results
+    ):
+        return contract["overall_result_rule"]["if_any_recovered"]
+    if any(
+        item["status"] == "INDETERMINATE_SOURCE_ACCESS"
+        for item in results
+    ):
+        return contract["overall_result_rule"]["else_if_any_indeterminate"]
+    return contract["overall_result_rule"]["else"]
+
+
 def retained_suffix(sig: str) -> str:
     if sig == "OLE2_CFBF_D0CF11E0A1B11AE1":
         return ".xls"
@@ -123,6 +163,12 @@ def main() -> None:
                 retained.write_bytes(body)
                 retained_path = str(retained.relative_to(OUT))
 
+            source_access_state = classify_candidate_response(
+                status=status,
+                error=error,
+                sig=sig,
+                rules=rules,
+            )
             candidate_results.append(
                 {
                     "url": url,
@@ -132,6 +178,7 @@ def main() -> None:
                     "sha256": sha256(body) if body else None,
                     "signature": sig,
                     "spreadsheet_accessible": accessible,
+                    "source_access_state": source_access_state,
                     "retained_path": retained_path,
                     "content_type": headers.get("Content-Type"),
                     "content_disposition": headers.get("Content-Disposition"),
@@ -146,11 +193,7 @@ def main() -> None:
         results.append(
             {
                 "quarter": quarter,
-                "status": (
-                    "SPREADSHEET_BYTES_RECOVERED"
-                    if accessible_count
-                    else "NO_VALID_SPREADSHEET_BYTES_RECOVERED"
-                ),
+                "status": classify_round(candidate_results),
                 "discovery_status": round_spec["discovery_status"],
                 "requests_performed": len(candidate_results),
                 "accessible_candidate_count": accessible_count,
@@ -175,6 +218,22 @@ def main() -> None:
         "results": results,
         "recovered_quarters": recovered_quarters,
         "recovered_quarter_count": len(recovered_quarters),
+        "indeterminate_quarters": [
+            item["quarter"]
+            for item in results
+            if item["status"] == "INDETERMINATE_SOURCE_ACCESS"
+        ],
+        "candidate_negative_quarters": [
+            item["quarter"]
+            for item in results
+            if item["status"]
+            == "NO_VALID_SPREADSHEET_BYTES_RECOVERED_FROM_PREREGISTERED_CANDIDATES"
+        ],
+        "pending_no_exact_url_quarters": [
+            item["quarter"]
+            for item in results
+            if item["status"] == "NO_EXACT_URL_PREREGISTERED"
+        ],
         "canonical_panel_modified": False,
         "value_extraction_performed": False,
         "parameter_estimation_performed": False,
@@ -183,11 +242,7 @@ def main() -> None:
         "behavioural_closure_change": False,
         "promotion_boundary": contract["promotion_boundary"],
         "hard_rules": contract["hard_rules"],
-        "status": (
-            "RECOVERED_WORKBOOK_BYTES_READY_FOR_EXPLICIT_PROMOTION_REVIEW_ONLY"
-            if recovered_quarters
-            else "NEGATIVE_SOURCE_ACCESS_EVIDENCE_ONLY"
-        ),
+        "status": overall_status(results, contract),
     }
     (
         OUT / "bnr_bls_missing_round_workbook_recovery.json"

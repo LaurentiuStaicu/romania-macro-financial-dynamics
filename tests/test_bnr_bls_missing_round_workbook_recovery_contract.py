@@ -4,7 +4,12 @@ import json
 import unittest
 from pathlib import Path
 
-from scripts.audit_bnr_bls_missing_round_workbook_recovery import signature
+from scripts.audit_bnr_bls_missing_round_workbook_recovery import (
+    classify_candidate_response,
+    classify_round,
+    overall_status,
+    signature,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 P = (
@@ -78,6 +83,85 @@ class BNRBLSMissingRoundWorkbookRecoveryContractTests(unittest.TestCase):
         )
         self.assertEqual(signature(b"PK\x03\x04rest"), "ZIP_PK_0304")
         self.assertEqual(signature(b"<html>"), "OTHER")
+
+    def test_provider_failures_cannot_become_negative_evidence(self) -> None:
+        rules = self.contract["probe_rules"]
+        for status, error in (
+            (None, "TimeoutError"),
+            (429, "HTTPError:429"),
+            (503, "HTTPError:503"),
+            (200, None),
+        ):
+            self.assertEqual(
+                classify_candidate_response(
+                    status=status,
+                    error=error,
+                    sig="OTHER",
+                    rules=rules,
+                ),
+                "INDETERMINATE_SOURCE_ACCESS",
+            )
+
+    def test_only_exact_spreadsheet_signature_recovers_bytes(self) -> None:
+        rules = self.contract["probe_rules"]
+        self.assertEqual(
+            classify_candidate_response(
+                status=200,
+                error=None,
+                sig="OLE2_CFBF_D0CF11E0A1B11AE1",
+                rules=rules,
+            ),
+            "RECOVERED_SPREADSHEET_BYTES",
+        )
+        self.assertEqual(
+            classify_candidate_response(
+                status=404,
+                error="HTTPError:404",
+                sig="OTHER",
+                rules=rules,
+            ),
+            "CANDIDATE_ENDPOINT_NEGATIVE",
+        )
+
+    def test_round_and_overall_semantics_preserve_pending_and_indeterminate(self) -> None:
+        self.assertEqual(
+            classify_round(
+                [{"source_access_state": "INDETERMINATE_SOURCE_ACCESS"}]
+            ),
+            "INDETERMINATE_SOURCE_ACCESS",
+        )
+        self.assertEqual(
+            classify_round(
+                [{"source_access_state": "CANDIDATE_ENDPOINT_NEGATIVE"}]
+            ),
+            "NO_VALID_SPREADSHEET_BYTES_RECOVERED_FROM_PREREGISTERED_CANDIDATES",
+        )
+        results = [
+            {"quarter": "2023-Q2", "status": "INDETERMINATE_SOURCE_ACCESS"},
+            {"quarter": "2025-Q2", "status": "NO_EXACT_URL_PREREGISTERED"},
+        ]
+        self.assertEqual(
+            overall_status(results, self.contract),
+            "INDETERMINATE_SOURCE_ACCESS_RETRY_REQUIRED_NO_SCIENTIFIC_EFFECT",
+        )
+        self.assertTrue(
+            self.contract["overall_result_rule"][
+                "no_exact_url_quarter_has_zero_negative_effect"
+            ]
+        )
+
+    def test_manual_rerun_bridge_is_branch_locked_and_nonautomatic(self) -> None:
+        bridge = self.contract["manual_rerun_bridge"]
+        self.assertEqual(
+            bridge["job"],
+            "manual-bnr-bls-missing-round-recovery",
+        )
+        self.assertEqual(
+            bridge["required_head_ref"],
+            "audit/scientific-integrity-2026-09-18",
+        )
+        self.assertIn("github.run_attempt > 1", bridge["activation_condition"])
+        self.assertFalse(bridge["automatic_live_source_acquisition"])
 
     def test_live_execution_is_manual_only(self) -> None:
         self.assertEqual(

@@ -1,5 +1,5 @@
 {
-  "contract_version": "0.1",
+  "contract_version": "0.2",
   "frozen_on": "2026-09-19",
   "mechanism_id": "aggregate_bank_credit_response",
   "phase": "BNR BLS Missing-Round Workbook Recovery",
@@ -70,7 +70,21 @@
     "no_timestamp_brute_force": true,
     "no_directory_scraping": true,
     "no_value_extraction": true,
-    "no_chart_digitisation": true
+    "no_chart_digitisation": true,
+    "definitive_candidate_negative_http_statuses": [
+      404,
+      410
+    ],
+    "indeterminate_http_statuses_include": [
+      408,
+      425,
+      429,
+      500,
+      502,
+      503,
+      504
+    ],
+    "http_200_non_spreadsheet_is_indeterminate": true
   },
   "promotion_boundary": {
     "accessible_workbook_does_not_fill_panel": true,
@@ -94,5 +108,27 @@
   },
   "pass_effect": "RECOVERED_WORKBOOK_BYTES_READY_FOR_EXPLICIT_PROMOTION_REVIEW_ONLY",
   "failure_effect": "NEGATIVE_SOURCE_ACCESS_EVIDENCE_ONLY",
-  "execution_policy": "MANUAL_ONLY_LIVE_SOURCE_ACQUISITION"
+  "execution_policy": "MANUAL_ONLY_LIVE_SOURCE_ACQUISITION",
+  "source_response_semantics": {
+    "RECOVERED_SPREADSHEET_BYTES": "HTTP 200 plus an allowed OLE2/XLS or ZIP/XLSX binary signature. Recovery applies only to that exact preregistered quarter/candidate and authorizes promotion review only.",
+    "CANDIDATE_ENDPOINT_NEGATIVE": "HTTP 404 or 410 for an exact preregistered URL. This is negative evidence about current access through that candidate endpoint only; it is not proof that no historical workbook existed or that no alternative official URL exists.",
+    "INDETERMINATE_SOURCE_ACCESS": "Network/timeout errors, rate limiting, 5xx responses, other unexpected HTTP statuses, or HTTP 200 responses without a permitted spreadsheet signature. These have zero scientific effect and require retry or separate source clarification.",
+    "PENDING_NO_EXACT_URL": "No request is performed when no exact official workbook URL is preregistered. This is pending source identification, not negative evidence."
+  },
+  "overall_result_rule": {
+    "if_any_recovered": "RECOVERED_WORKBOOK_BYTES_READY_FOR_EXPLICIT_PROMOTION_REVIEW_ONLY",
+    "else_if_any_indeterminate": "INDETERMINATE_SOURCE_ACCESS_RETRY_REQUIRED_NO_SCIENTIFIC_EFFECT",
+    "else": "NO_WORKBOOK_BYTES_RECOVERED_FROM_PREREGISTERED_CANDIDATES_NO_PANEL_EFFECT",
+    "partial_recovery_does_not_imply_complete_missing_round_recovery": true,
+    "no_exact_url_quarter_has_zero_negative_effect": true
+  },
+  "manual_rerun_bridge": {
+    "workflow": ".github/workflows/scientific-ci.yml",
+    "job": "manual-bnr-bls-missing-round-recovery",
+    "required_head_ref": "audit/scientific-integrity-2026-09-18",
+    "activation_condition": "(github.event_name == 'workflow_dispatch' && github.ref_name == 'audit/scientific-integrity-2026-09-18') || (github.event_name == 'pull_request' && github.head_ref == 'audit/scientific-integrity-2026-09-18' && github.run_attempt > 1)",
+    "initial_pull_request_attempt": "SKIPPED",
+    "automatic_live_source_acquisition": false,
+    "scientific_role": "Manual source acquisition only; this does not open calibration, extract workbook values, append the canonical panel or change mechanism status."
+  }
 }

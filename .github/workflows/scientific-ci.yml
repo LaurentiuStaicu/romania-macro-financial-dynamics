@@ -77,6 +77,37 @@ jobs:
           if-no-files-found: error
           retention-days: 90
 
+  manual-bnr-bls-missing-round-recovery:
+    if: ${{ (github.event_name == 'workflow_dispatch' && github.ref_name == 'audit/scientific-integrity-2026-09-18') || (github.event_name == 'pull_request' && github.head_ref == 'audit/scientific-integrity-2026-09-18' && github.run_attempt > 1) }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out selected manual ref
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify frozen BNR BLS missing-round recovery contract
+        run: |
+          python -m unittest tests.test_bnr_bls_missing_round_workbook_recovery_contract -v
+
+      - name: Probe only preregistered official BNR workbook candidates
+        env:
+          BNR_BLS_MISSING_ROUND_RECOVERY_OUT: bnr_bls_missing_round_recovery_artifacts
+        run: python scripts/audit_bnr_bls_missing_round_workbook_recovery.py
+
+      - name: Upload BNR BLS source-acquisition evidence only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: manual-bnr-bls-missing-round-recovery-${{ github.sha }}
+          path: bnr_bls_missing_round_recovery_artifacts/
+          if-no-files-found: error
+          retention-days: 90
+
   verify-baseline:
     runs-on: ubuntu-latest
 
