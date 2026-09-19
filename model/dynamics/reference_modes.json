@@ -127,7 +127,8 @@
       "rounding_consistency_assessment": "model/dynamics/sectoral_financial_positions_rounding_consistency_assessment.json",
       "source_discrepancy_assessment": "model/dynamics/sectoral_financial_positions_source_discrepancy_assessment.json",
       "exploratory_esa_f1_reaudit_assessment": "model/dynamics/sectoral_financial_positions_esa_f1_applicability_reaudit_assessment.json",
-      "historical_phase_b_assessment": "model/dynamics/sectoral_financial_positions_aggregate_identity_assessment.json"
+      "historical_phase_b_assessment": "model/dynamics/sectoral_financial_positions_aggregate_identity_assessment.json",
+      "ecb_quality_context": "model/dynamics/sectoral_financial_positions_ecb_quality_context.json"
     }
   ],
   "closure_rule": "Integrated behavioural closure may not be declared validated until the reference modes required by each active loop have explicit observed targets or a documented reason why only qualitative/reference-pattern validation is possible.",
