@@ -51,9 +51,11 @@ class FiscalPrimaryBalanceSourceBoundaryTests(unittest.TestCase):
         output = self.review["output_gap_boundary"]
         self.assertEqual(
             output["status"],
-            "MODEL_BASED_LATENT_OR_ESTIMATED_VARIABLE_NOT_DIRECTLY_OBSERVED",
+            "ANNUAL_AMECO_EUCAM_SOURCE_VINTAGE_RETAINED_MODEL_BASED_MEASURE",
         )
-        self.assertIn("Do not treat real GDP growth", output["rule"])
+        self.assertEqual(output["source_variable"], "AVGDGP")
+        self.assertIn("Do not interpolate", output["rule"])
+        self.assertIn("model-based", output["rule"])
 
     def test_observed_fiscal_data_do_not_authorize_taylor_rule(self) -> None:
         admissibility = self.review["source_admissibility"]
@@ -61,7 +63,14 @@ class FiscalPrimaryBalanceSourceBoundaryTests(unittest.TestCase):
         self.assertFalse(
             admissibility["simple_taylor_style_rule_automatically_authorized"]
         )
-        self.assertIn("regime-aware", admissibility["rule"])
+        self.assertIn(
+            "does not authorize a fiscal reaction equation",
+            admissibility["rule"],
+        )
+        self.assertIn(
+            "identifiability gates",
+            admissibility["rule"],
+        )
         self.assertFalse(
             self.review["disposition"]["estimation_or_refit_allowed"]
         )
