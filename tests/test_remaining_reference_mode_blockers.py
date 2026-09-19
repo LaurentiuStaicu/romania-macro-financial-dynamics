@@ -234,5 +234,71 @@ class RemainingReferenceModeBlockerTests(unittest.TestCase):
 
 
 
+    def test_sectoral_position_internal_recovery_path_is_exhausted_without_promotion(self) -> None:
+        references = load("model/dynamics/reference_modes.json")
+        assessment = load(
+            "model/dynamics/sectoral_financial_positions_reference_assessment.json"
+        )
+        phase_a = load(
+            "model/dynamics/sectoral_financial_positions_strict_gate_assessment.json"
+        )
+        phase_b = load(
+            "model/dynamics/sectoral_financial_positions_aggregate_identity_assessment.json"
+        )
+        phase_c = load(
+            "model/dynamics/sectoral_financial_positions_rounding_consistency_assessment.json"
+        )
+        phase_d = load(
+            "model/dynamics/sectoral_financial_positions_source_discrepancy_assessment.json"
+        )
+
+        mode = next(
+            item for item in references["modes"]
+            if item["id"] == "sectoral_financial_positions"
+        )
+
+        self.assertEqual(mode["status"], "PARTIAL_SERIES_AVAILABLE")
+        self.assertEqual(
+            phase_a["verdict"],
+            "STRICT_F2_F8_AGGREGATE_GATE_FAILED_NO_PROMOTION",
+        )
+        self.assertEqual(
+            phase_b["verdict"],
+            "AGGREGATE_IDENTITY_GATE_FAILED_STRICT_STOCK_RECONCILIATION_NO_PROMOTION",
+        )
+        self.assertEqual(
+            phase_c["verdict"],
+            "SOURCE_PRECISION_GATE_FAILED_NO_PROMOTION",
+        )
+        self.assertEqual(
+            phase_d["verdict"],
+            "DIAGNOSTIC_LOCALIZED_RESIDENT_SECTOR_ADDITIVITY_NO_PROMOTION",
+        )
+        self.assertTrue(
+            phase_d["closure_of_internal_recovery_path"][
+                "no_further_internal_reinterpretation_justified"
+            ]
+        )
+        self.assertEqual(
+            phase_d["disposition"]["further_internal_source_recovery"],
+            "FROZEN_UNTIL_REOPEN_TRIGGER",
+        )
+        self.assertEqual(
+            assessment["disposition"]["further_internal_source_recovery"],
+            "FROZEN_UNTIL_REOPEN_TRIGGER",
+        )
+        self.assertEqual(
+            phase_d["localization"]["stock"][
+                "max_absolute_total_economy_external_residual_million_RON"
+            ],
+            0.010000000591389835,
+        )
+        for item in phase_d["localization"]["stock"][
+            "phase_C_failing_periods"
+        ].values():
+            self.assertEqual(item["dominant"], "RESIDENT_SECTOR_ADDITIVITY")
+
+
+
 if __name__ == "__main__":
     unittest.main()
