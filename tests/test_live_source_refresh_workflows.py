@@ -34,6 +34,31 @@ class LiveSourceRefreshWorkflowTests(unittest.TestCase):
                 relative,
             )
 
+
+    def test_sectoral_position_has_no_parallel_phase_aliases(self) -> None:
+        forbidden_paths = [
+            ".github/workflows/sectoral-financial-positions-phase-b-audit.yml",
+            "scripts/audit_ecb_sectoral_financial_positions_phase_b.py",
+            "model/dynamics/sectoral_financial_positions_phase_b_assessment.json",
+            ".github/workflows/sectoral-financial-positions-phase-c-diagnostic.yml",
+            "scripts/audit_ecb_sectoral_financial_positions_phase_c.py",
+            "model/dynamics/sectoral_financial_positions_phase_c_diagnostic_contract.json",
+            "tests/test_sectoral_financial_positions_phase_c_diagnostic_contract.py",
+        ]
+        for relative in forbidden_paths:
+            self.assertFalse((ROOT / relative).exists(), relative)
+
+        registry = (
+            ROOT / "model" / "dynamics" / "reference_modes.json"
+        ).read_text(encoding="utf-8")
+        self.assertNotIn('"phase_b_assessment"', registry)
+        self.assertIn(
+            '"historical_phase_b_assessment": '
+            '"model/dynamics/sectoral_financial_positions_aggregate_identity_assessment.json"',
+            registry,
+        )
+
+
     def test_offline_reproduction_workflows_remain_automatic(self) -> None:
         offline_automatic = [
             ".github/workflows/f4-partial-materialization-audit.yml",

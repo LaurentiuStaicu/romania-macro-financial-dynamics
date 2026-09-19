@@ -12,7 +12,8 @@
     "workflow_head_sha": "84d0d40c360269449ccc613cdbb6336c23b6c98e",
     "workflow_artifact_sha256": "48048cdd4c4ce912fc78151791df58821fd18c009b98c50d825449f43ceb7e43",
     "artifact_retention_until": "2026-12-18T01:56:05Z",
-    "audit_script": "scripts/audit_ecb_sectoral_financial_positions_phase_b.py"
+    "executed_audit_script_path_at_run": "scripts/audit_ecb_sectoral_financial_positions_phase_b.py",
+    "archived_equivalent_script": "scripts/audit_ecb_sectoral_financial_positions_esa_f1_applicability_reaudit.py"
   },
   "result": {
     "series_requested": 34,
@@ -52,13 +53,11 @@
   },
   "scientific_interpretation": [
     "This run used the later ESA-consistent F1 applicability refinement after the original Phase A-D source outcomes were already known. It is therefore exploratory/post-run evidence, not a replacement for the preregistered historical Phase B gate.",
-    "Phase B resolves Phase A's publication-coverage problem: every mandatory total-F/F1 series exists and a 45-quarter common history is available.",
-    "The aggregate identity nevertheless fails the preregistered system-reconciliation gate, so the mode cannot be promoted.",
-    "The failure is not repaired by changing the tolerance. Stock residuals are economically material and persistent.",
-    "Flow reconciliation is near exact in 44 of 45 common quarters, with a single 2021-Q3 discontinuity. This makes a targeted source-semantics/break diagnostic scientifically justified.",
-    "No conclusion is drawn yet about whether the discrepancy is caused by F1 liability placement, W1 accounting-entry orientation, a QSA break/reclassification, or another compilation convention.",
-    "The corrected-applicability construction does not rescue the reference mode: system reconciliation fails by orders of magnitude relative to the frozen 0.1 million RON gate.",
-    "Because the run is post-outcome and non-preregistered as a distinct formal phase, its only admissible effect is diagnostic. It cannot alter the historical A-D verdicts, readiness count, Accounting Spine or behavioural closure."
+    "The exploratory construction recovered all 34 series required by its revised applicability boundary across 45 common quarters; that source coverage is not the historical Phase B source gate.",
+    "The exploratory construction itself fails system reconciliation by economically material margins and therefore cannot support promotion.",
+    "Almost all exploratory flow periods reconcile near rounding scale except one large 2021-Q3 discontinuity; this remains a diagnostic clue only.",
+    "No orientation, structural-zero rule, tolerance, sector boundary, readiness state, Accounting Spine state or behavioural-closure state may be changed from this post-run evidence.",
+    "The canonical historical Phase B remains model/dynamics/sectoral_financial_positions_aggregate_identity_assessment.json and its downstream Phase C/D chain remains unchanged."
   ],
   "prohibited_post_result_changes": [
     "increase the 0.1 million RON reconciliation tolerance",
@@ -79,5 +78,6 @@
     "accounting_spine": "UNCHANGED",
     "behavioural_closure": "UNCHANGED_INACTIVE",
     "further_internal_source_recovery": "FROZEN_UNTIL_REOPEN_TRIGGER"
-  }
+  },
+  "canonical_historical_phase_b_assessment": "model/dynamics/sectoral_financial_positions_aggregate_identity_assessment.json"
 }
