@@ -97,7 +97,8 @@
       "Treat correlation between RON depreciation and inflation as causal pass-through.",
       "Import pre-inflation-targeting or pre-current-regime coefficients as current Romanian parameters.",
       "Substitute INT, CAP, CONS or CONS_TRA for TOTAL after seeing model performance.",
-      "Infer a RON- or EUR-denominated IVU variant that is not exposed by the exact short-term dataset query."
+      "Infer a RON- or EUR-denominated IVU variant that is not exposed by the exact short-term dataset query.",
+      "Silently substitute euro-area or EU aggregate import prices for the exact Romania total-import/world UVI control."
     ],
     "pass_effect": "Authorises a separately preregistered structural-selection cycle against autoregressive and external-price baselines; no causal or System Dynamics activation follows automatically.",
     "fail_effect": "Retain the mechanism as CANDIDATE and do not estimate an under-controlled distributed-lag equation."
