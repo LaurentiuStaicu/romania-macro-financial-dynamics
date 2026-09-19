@@ -139,6 +139,34 @@
       "priority_group": "MANUAL_LIVE_MATERIALISATION_PENDING_AFTER_SOVEREIGN",
       "materialisation_contract": "model/calibration_validation/fiscal_primary_balance_materialisation_contract.json",
       "materialiser_workflow": ".github/workflows/fiscal-primary-balance-materialisation.yml"
+    },
+    {
+      "id": "monetary_policy_reaction_function",
+      "classification": "DEFERRED",
+      "source_readiness": "POLICY_INSTRUMENT_OBSERVED_IDENTIFICATION_EXPECTATIONS_AND_REGIME_BOUNDARY_UNRESOLVED",
+      "next_admissible_action": "Keep the policy rate observed/exogenous for early validation. Before any reaction-function estimation, preregister an inflation-gap/activity-gap measurement boundary, an expectations source, policy-regime dates and an identification strategy for simultaneous policy responses.",
+      "blockers": [
+        "Observed policy-rate history alone does not identify a policy reaction function.",
+        "Inflation gap and activity gap require target/potential-output measurement choices.",
+        "Inflation expectations source and horizon are not frozen.",
+        "Managed-float intervention and regime changes create simultaneous/endogenous policy responses."
+      ],
+      "estimation_or_refit_allowed": false,
+      "priority_group": "DEFER_UNTIL_REACTION_FUNCTION_IDENTIFICATION_CONTRACT"
+    },
+    {
+      "id": "external_fx_refinancing_feedback",
+      "classification": "DEFERRED",
+      "source_readiness": "AGGREGATE_DEBT_AND_FX_OBSERVED_CURRENCY_MATURITY_HEDGING_EXPOSURE_UNRESOLVED",
+      "next_admissible_action": "Reopen only after currency- and maturity-resolved public/private external debt exposures are retained on a reproducible boundary, together with treatment of hedging and refinancing schedules. Aggregate F3/F4 stocks are insufficient.",
+      "blockers": [
+        "Aggregate debt stocks do not identify currency denomination.",
+        "Maturity/refinancing schedules are not retained on the same sector/instrument boundary.",
+        "Hedging of FX exposure is not observed in aggregate accounts.",
+        "No synthetic currency allocation from total debt is authorised."
+      ],
+      "estimation_or_refit_allowed": false,
+      "priority_group": "DEFER_UNTIL_CURRENCY_MATURITY_EXPOSURE_SOURCE"
     }
   ],
   "priority_rule": "Priority is determined by the shortest scientifically admissible path to new independent evidence, not by a desire to activate a feedback loop. Waiting mechanisms remain frozen; source-incomplete mechanisms are not fit with proxies.",
@@ -147,5 +175,11 @@
     "action": "RUN_MANUAL_QUARTERLY_SOURCE_MATERIALISER_AND_RETAIN_EVIDENCE",
     "reason": "The exact source tuple, deterministic transformations, offline parser tests, materialiser script and manual-only GitHub workflow are implemented. The remaining admissible step is a retained successful live source run and repository review; calibration remains closed.",
     "calibration_cycle_open": false
+  },
+  "coverage_rule": {
+    "scope": "ALL_NON_REJECTED_MECHANISMS",
+    "rule": "Every mechanism whose registry classification is CANDIDATE, DEFERRED or ACTIVATED must have exactly one source-readiness entry. REJECTED shortcuts are excluded because they have no admissible estimation path unless separately reopened.",
+    "duplicate_entries_allowed": false,
+    "missing_entries_allowed": false
   }
 }

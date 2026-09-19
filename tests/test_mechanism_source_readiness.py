@@ -31,6 +31,27 @@ class MechanismSourceReadinessTests(unittest.TestCase):
                 mechanism["id"],
             )
 
+    def test_readiness_map_covers_every_non_rejected_registry_mechanism_once(self) -> None:
+        registry = load("model/empirical_dynamics/mechanism_registry.json")
+        required = {
+            item["id"]
+            for item in registry["mechanisms"]
+            if item["classification"] != "REJECTED"
+        }
+        listed = [item["id"] for item in self.readiness["mechanisms"]]
+        self.assertEqual(len(listed), len(set(listed)))
+        self.assertEqual(set(listed), required)
+        self.assertEqual(
+            self.readiness["coverage_rule"]["scope"],
+            "ALL_NON_REJECTED_MECHANISMS",
+        )
+        self.assertFalse(
+            self.readiness["coverage_rule"]["duplicate_entries_allowed"]
+        )
+        self.assertFalse(
+            self.readiness["coverage_rule"]["missing_entries_allowed"]
+        )
+
     def test_next_step_is_materialisation_not_calibration(self) -> None:
         step = self.readiness["current_next_step"]
         self.assertEqual(
@@ -75,6 +96,18 @@ class MechanismSourceReadinessTests(unittest.TestCase):
                 "priority_group"
             ],
             "DEFER_UNTIL_NEW_SOURCE",
+        )
+        self.assertEqual(
+            mechanisms["monetary_policy_reaction_function"][
+                "priority_group"
+            ],
+            "DEFER_UNTIL_REACTION_FUNCTION_IDENTIFICATION_CONTRACT",
+        )
+        self.assertEqual(
+            mechanisms["external_fx_refinancing_feedback"][
+                "priority_group"
+            ],
+            "DEFER_UNTIL_CURRENCY_MATURITY_EXPOSURE_SOURCE",
         )
 
 
