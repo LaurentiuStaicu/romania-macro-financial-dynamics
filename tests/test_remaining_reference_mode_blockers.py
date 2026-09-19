@@ -348,5 +348,35 @@ class RemainingReferenceModeBlockerTests(unittest.TestCase):
 
 
 
+    def test_ecb_quality_context_supports_freeze_without_changing_gate(self) -> None:
+        references = load("model/dynamics/reference_modes.json")
+        assessment = load(
+            "model/dynamics/sectoral_financial_positions_reference_assessment.json"
+        )
+        context = load(
+            "model/dynamics/sectoral_financial_positions_ecb_quality_context.json"
+        )
+        mode = next(
+            item for item in references["modes"]
+            if item["id"] == "sectoral_financial_positions"
+        )
+
+        expected = "model/dynamics/sectoral_financial_positions_ecb_quality_context.json"
+        self.assertEqual(assessment["ecb_quality_context"], expected)
+        self.assertEqual(mode["ecb_quality_context"], expected)
+        self.assertEqual(mode["status"], "PARTIAL_SERIES_AVAILABLE")
+        self.assertEqual(
+            context["disposition"]["sectoral_financial_positions_status"],
+            "PARTIAL_SERIES_AVAILABLE",
+        )
+        self.assertEqual(context["disposition"]["readiness_count_change"], 0)
+        for value in context["hard_boundaries"].values():
+            self.assertTrue(value)
+        self.assertIn(
+            "cannot promote",
+            context["relationship_to_rmd_evidence"]["interpretation"],
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
