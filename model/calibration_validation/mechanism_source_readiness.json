@@ -142,18 +142,19 @@
     {
       "id": "household_consumption_response",
       "classification": "CANDIDATE",
-      "source_readiness": "COMPLETE_2023Q1_2025Q2_HOUSING_DSTI_PUBLICATION_TEXT_WINDOW_MACHINE_READABLE_HISTORY_AND_REGISTERED_MACRO_DSR_UNRESOLVED",
-      "next_admissible_action": "Choose the next measurement gate before any estimation: either retain an exact machine-readable BNR housing-loan DSTI level history, or preregister a publication-text-only alternative borrower-burden candidate family over the complete 2023-Q1..2025-Q2 window. Preserve reported precision/qualifiers, keep new-loan and outstanding-loan DSTI separate, freeze the relevant borrowing-rate family and consumption/income transformations ex ante, and do not relabel housing-loan DSTI as the registered macro household DSR.",
+      "source_readiness": "COMPLETE_DSTI_TEXT_WINDOW_BUT_AGGREGATE_CONSUMPTION_POPULATION_ALIGNMENT_BLOCKED",
+      "next_admissible_action": "Do not open household-consumption estimation with the observed housing-loan DSTI series. Reopen only if one of three source gates is met: (1) an observed aggregate household burden measure aligned to S1M consumption, (2) an independently observed representativeness bridge from housing-loan borrowers to the aggregate consumption population, or (3) an observed borrower-subpopulation consumption/income target under a separately preregistered mechanism. A longer or machine-readable housing-DSTI history alone is not sufficient.",
       "blockers": [
-        "Official BNR publication text directly observes both new-loan and outstanding housing-loan DSTI levels in every quarter from 2023-Q1 through 2025-Q2.",
-        "The observed measure is a respondent-bank housing-loan portfolio statistic, not a macro household-sector DSR.",
-        "New-loan and outstanding-loan DSTI remain definitionally distinct and may not be synthetically merged.",
-        "The exact machine-readable longitudinal BNR housing-loan DSTI level history has not yet been retained; publication-text values must preserve their stated precision and qualifiers and chart digitisation is prohibited.",
-        "Household borrowing-rate family and consumption/income real/seasonal transformations remain unfrozen.",
-        "The registered macro DSR term therefore remains unidentified and the current household-consumption equation remains source-inadmissible for estimation."
+        "BNR publication text directly observes both new-loan and outstanding housing-loan DSTI levels for every quarter from 2023-Q1 through 2025-Q2.",
+        "The registered household-consumption target is aggregate QSA S1M (households plus NPISH), whereas BNR DSTI covers respondent-bank housing/mortgage-loan borrower portfolios.",
+        "No observed representativeness bridge maps the housing-loan borrower population to aggregate S1M consumption.",
+        "No aligned borrower-subpopulation consumption/income target is currently retained.",
+        "New-loan and outstanding-loan DSTI are definitionally distinct and may not be synthetically merged.",
+        "Selecting a mortgage, consumer-credit or synthetic weighted borrowing rate cannot repair the population mismatch and remains prohibited post hoc.",
+        "The registered macro DSR term remains unidentified; estimation and behavioural closure remain closed."
       ],
       "estimation_or_refit_allowed": false,
-      "priority_group": "DEFER_UNTIL_PREREGISTERED_DSTI_CANDIDATE_MEASUREMENT_AND_RATE_TRANSFORM_BOUNDARIES",
+      "priority_group": "DEFER_UNTIL_BORROWER_BURDEN_POPULATION_ALIGNMENT",
       "source_boundary_review": "model/calibration_validation/household_consumption_source_boundary_review.json",
       "debt_service_source_screening": "model/calibration_validation/debt_service_source_screening.json",
       "retained_bnr_dsti_workbook_vintage": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19",
@@ -184,7 +185,10 @@
         "missing_quarters": [],
         "coverage_fraction": 1,
         "exact_machine_readable_history_retained": false
-      }
+      },
+      "borrower_burden_population_alignment_review": "model/calibration_validation/household_consumption_borrower_burden_alignment_review.json",
+      "population_alignment_status": "BLOCKED",
+      "housing_dsti_directly_admissible_in_registered_aggregate_consumption_form": false
     },
     {
       "id": "corporate_investment_response",
