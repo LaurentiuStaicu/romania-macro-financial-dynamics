@@ -68,6 +68,7 @@
     "government_repricing_ledger_contract": "model/calibration_validation/government_repricing_ledger_contract.json",
     "government_repricing_ledger_assessment": "model/calibration_validation/government_repricing_ledger_assessment.json",
     "validated_reference_behavioural_mechanisms": 0,
-    "fresh_future_confirmation_from": "2026-08"
+    "fresh_future_confirmation_from": "2026-08",
+    "prospective_monetary_confirmation_status": "model/calibration_validation/prospective_monetary_confirmation_status.json"
   }
 }
