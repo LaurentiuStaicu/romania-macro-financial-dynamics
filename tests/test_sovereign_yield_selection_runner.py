@@ -111,25 +111,36 @@ class SovereignYieldSelectionRunnerTests(unittest.TestCase):
             self.assertIn('"estimation_performed": false', result.stdout.lower())
             self.assertFalse(output.exists())
 
-    def test_execution_is_blocked_without_explicit_gate(self) -> None:
-        self.assertFalse(GATE.exists())
-        with tempfile.TemporaryDirectory() as directory:
-            output = Path(directory) / "selection.json"
-            result = subprocess.run(
-                [
-                    sys.executable,
-                    str(RUNNER),
-                    "--execute-selection",
-                    "--output",
-                    str(output),
-                ],
-                cwd=ROOT,
-                capture_output=True,
-                text=True,
-            )
-            self.assertNotEqual(result.returncode, 0)
-            self.assertIn("not authorized", result.stderr.lower())
-            self.assertFalse(output.exists())
+    def test_execution_gate_never_authorizes_final_evaluation(self) -> None:
+        if not GATE.exists():
+            with tempfile.TemporaryDirectory() as directory:
+                output = Path(directory) / "selection.json"
+                result = subprocess.run(
+                    [
+                        sys.executable,
+                        str(RUNNER),
+                        "--execute-selection",
+                        "--output",
+                        str(output),
+                    ],
+                    cwd=ROOT,
+                    capture_output=True,
+                    text=True,
+                )
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("not authorized", result.stderr.lower())
+                self.assertFalse(output.exists())
+            return
+
+        import json
+
+        gate = json.loads(GATE.read_text(encoding="utf-8"))
+        self.assertTrue(gate["selection_execution_authorized"])
+        self.assertFalse(gate["final_evaluation_authorized"])
+        self.assertEqual(
+            gate["authorized_scope"],
+            "STRUCTURAL_SELECTION_2017_Q1_TO_2022_Q4_ONLY",
+        )
 
 
 if __name__ == "__main__":
