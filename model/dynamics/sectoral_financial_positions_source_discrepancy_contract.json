@@ -1,0 +1,64 @@
+{
+  "contract_version": "0.1",
+  "phase": "Reference Mode Recovery — Sectoral Financial Positions / Phase D source-discrepancy localization",
+  "purpose": "Diagnostic-only decomposition of the Phase C six-sector system residual into resident-sector additivity versus direct total-economy/external consistency. Phase D cannot promote a reference mode, change a tolerance, allocate a residual, or alter Accounting Spine readiness.",
+  "prerequisites": {
+    "phase_B": "model/dynamics/sectoral_financial_positions_aggregate_identity_assessment.json",
+    "phase_C": "model/dynamics/sectoral_financial_positions_rounding_consistency_assessment.json",
+    "required_phase_C_verdict": "SOURCE_PRECISION_GATE_FAILED_NO_PROMOTION"
+  },
+  "source": {
+    "institution": "European Central Bank / ESCB",
+    "dataset": "QSA — Quarterly Sector Accounts",
+    "represented_boundary": "F2-F8 = total F - F1",
+    "resident_components": [
+      "S1M",
+      "S11",
+      "S12",
+      "S13"
+    ],
+    "direct_total_economy": "S1",
+    "external": "W1 S1/S1",
+    "measures": [
+      "LE",
+      "F"
+    ],
+    "entries": [
+      "A",
+      "L"
+    ],
+    "instruments": [
+      "F",
+      "F1"
+    ],
+    "requested_start": "2014-Q1",
+    "requested_end": "2026-Q2"
+  },
+  "identities": {
+    "domestic_sector_sum_net": "net(S1M)+net(S11)+net(S12)+net(S13), each on F-F1 boundary with preregistered H/C F1 structural applicability",
+    "direct_total_economy_net": "net(S1) on F-F1 boundary",
+    "X_net": "represented W1 liabilities minus represented W1 assets",
+    "resident_additivity_residual": "domestic_sector_sum_net - direct_total_economy_net",
+    "total_economy_external_residual": "direct_total_economy_net + X_net",
+    "six_sector_residual_decomposition": "resident_additivity_residual + total_economy_external_residual must equal the six-sector residual up to computational epsilon"
+  },
+  "outputs": [
+    "quarterly resident_additivity_residual for stock and flow",
+    "quarterly total_economy_external_residual for stock and flow",
+    "quarterly reconstructed six-sector residual",
+    "max absolute residual by component",
+    "dominant component by absolute magnitude for each Phase C failing stock quarter"
+  ],
+  "interpretation_rule": "The diagnostic may localize the public-data inconsistency but cannot decide that either identity is dispensable. A direct S1 series may not replace the required H/C/F/G/BNR sector histories, and no discrepancy may be allocated to a sector.",
+  "hard_rules": {
+    "diagnostic_only": true,
+    "no_reference_mode_promotion": true,
+    "no_readiness_count_change": true,
+    "no_new_tolerance": true,
+    "no_residual_balancing": true,
+    "no_sector_dropping": true,
+    "no_source_substitution": true,
+    "no_accounting_readiness_change": true,
+    "no_behavioural_activation": true
+  }
+}
