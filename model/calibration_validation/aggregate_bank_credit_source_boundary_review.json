@@ -240,7 +240,8 @@
       "review": "model/calibration_validation/bank_credit_prudential_population_boundary_review.json",
       "numeric_similarity_can_bridge": false,
       "future_preferred_source": "Exact BNR-population statistical-table history or another officially documented matched population."
-    }
+    },
+    "next_admissible_source_task": "Enumerate and freeze official BNR Monthly Bulletin PDF sources under the matched-population materialisation contract before any numeric extraction."
   },
   "prudential_coverage_diagnostic": {
     "status": "EXECUTED_SUCCESS_CBD2_VINTAGE_RETAINED_DIRECT_BNR_SUBSTITUTION_REJECTED",
@@ -258,5 +259,6 @@
     "conclusion": "Quarterly CBD2 NPL/solvency/CET1 availability is confirmed, but official population definitions reject direct substitution for the BNR Romanian-legal-entity-bank anchor. The next defensible source path is exact BNR-population table materialisation or a genuinely matched official source.",
     "population_boundary_review": "model/calibration_validation/bank_credit_prudential_population_boundary_review.json"
   },
-  "prudential_population_boundary_review": "model/calibration_validation/bank_credit_prudential_population_boundary_review.json"
+  "prudential_population_boundary_review": "model/calibration_validation/bank_credit_prudential_population_boundary_review.json",
+  "bnr_prudential_table_materialisation_contract": "model/calibration_validation/bnr_prudential_table_materialisation_contract.json"
 }
