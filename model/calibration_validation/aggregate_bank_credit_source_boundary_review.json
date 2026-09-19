@@ -247,7 +247,8 @@
       2019,
       2022,
       2024
-    ]
+    ],
+    "interactive_database_discovery_status": "OFFICIAL_DATABASE_SURFACE_CONFIRMED_TARGET_SERIES_NOT_IDENTIFIED_IN_PUBLIC_INDEX"
   },
   "prudential_coverage_diagnostic": {
     "status": "EXECUTED_SUCCESS_CBD2_VINTAGE_RETAINED_DIRECT_BNR_SUBSTITUTION_REJECTED",
@@ -267,5 +268,6 @@
   },
   "prudential_population_boundary_review": "model/calibration_validation/bank_credit_prudential_population_boundary_review.json",
   "bnr_prudential_table_materialisation_contract": "model/calibration_validation/bnr_prudential_table_materialisation_contract.json",
-  "bnr_prudential_table_source_enumeration": "model/calibration_validation/bnr_prudential_table_source_enumeration.json"
+  "bnr_prudential_table_source_enumeration": "model/calibration_validation/bnr_prudential_table_source_enumeration.json",
+  "bnr_prudential_interactive_database_discovery_review": "model/calibration_validation/bnr_prudential_interactive_database_discovery_review.json"
 }
