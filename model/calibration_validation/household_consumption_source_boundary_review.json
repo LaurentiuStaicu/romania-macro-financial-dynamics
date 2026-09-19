@@ -43,8 +43,8 @@
       "institution": "Bank for International Settlements",
       "dataset": "Debt service ratios",
       "documented_scope": "Quarterly total-private-non-financial-sector DSR for 32 economies; household/NFC breakdown for 17 economies.",
-      "romania_household_series_status": "NOT_CONFIRMED_IN_CURRENT_BIS_SCREENING",
-      "interpretation": "Do not treat absence from current indexed search as proof of universal non-publication; it is sufficient to block the registered DSR term until an exact Romania household series is retained."
+      "romania_household_series_status": "SECTORAL_BIS_DSR_UNAVAILABLE_FOR_ROMANIA_IN_DOCUMENTED_17_COUNTRY_BREAKDOWN",
+      "interpretation": "The current BIS documentation explicitly lists the 17 economies with household/NFC DSR breakdowns and Romania is not among them. Do not substitute a total-PNFS series."
     },
     "available_non_equivalent_Romania_measure": {
       "source": "ECB QSA",
@@ -56,6 +56,12 @@
     "historical_microprudential_thresholds": {
       "status": "NOT_AGGREGATE_TIME_SERIES",
       "interpretation": "Regulatory borrower debt-service caps or indebtedness thresholds describe lending rules, not an observed aggregate household DSR history; they may not be inserted as the macro state variable."
+    },
+    "bnr_dsti_alternative": {
+      "status": "OFFICIAL_BORROWER_LEVEL_MEASURE_IDENTIFIED_MACHINE_READABLE_HISTORY_NOT_RETAINED",
+      "concept": "BNR household debt service-to-income for new and outstanding loan portfolios",
+      "semantic_limit": "Not definitionally identical to a macro household-sector DSR; any use requires a new candidate-family measurement contract.",
+      "next_gate": "Retain exact official BNR DSTI history without chart digitisation."
     }
   },
   "transformation_boundary": {
@@ -92,5 +98,6 @@
     "validated_reference_behavioural_mechanisms_change": 0,
     "behavioural_closure": "UNCHANGED_INACTIVE",
     "accounting_spine": "UNCHANGED"
-  }
+  },
+  "debt_service_source_screening": "model/calibration_validation/debt_service_source_screening.json"
 }
