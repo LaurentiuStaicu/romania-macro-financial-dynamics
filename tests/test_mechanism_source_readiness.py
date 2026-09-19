@@ -52,21 +52,22 @@ class MechanismSourceReadinessTests(unittest.TestCase):
             self.readiness["coverage_rule"]["missing_entries_allowed"]
         )
 
-    def test_next_step_holds_closed_baseline_after_consolidation(self) -> None:
+    def test_next_step_is_declared_selective_fiscal_source_reopen(self) -> None:
         step = self.readiness["current_next_step"]
         self.assertEqual(
             step["mechanism_id"],
-            "SCIENTIFIC_BASELINE",
+            "fiscal_primary_balance_reaction",
         )
         self.assertEqual(
             step["action"],
-            "HOLD_CLOSED_BASELINE_UNTIL_DECLARED_REOPEN_TRIGGER",
+            "MATERIALISE_CAPB_REALTIME_VINTAGE_SOURCE_EVIDENCE",
         )
         self.assertFalse(step["calibration_cycle_open"])
-        self.assertIn(
-            "Cross-registry mechanism readiness",
-            step["reason"],
+        self.assertEqual(
+            step["authorized_scope"],
+            "CAPB_REALTIME_VINTAGE_SOURCE_MATERIALISATION_AND_TIMING_ADJUDICATION_ONLY",
         )
+        self.assertIn("declared reopen trigger", step["reason"])
 
         mechanisms = {
             item["id"]: item for item in self.readiness["mechanisms"]
@@ -277,11 +278,20 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         fiscal = mechanisms["fiscal_primary_balance_reaction"]
         self.assertEqual(
             fiscal["source_readiness"],
-            "FROZEN_TESTED_ANNUAL_FORM_FAILED_BEFORE_HOLDOUT",
+            "REOPENED_NEW_MEASUREMENT_EVIDENCE_CAPB_REALTIME_VINTAGE_MATERIALISATION",
         )
         self.assertEqual(
             fiscal["priority_group"],
-            "FREEZE_TESTED_FORM_UNTIL_NEW_EVIDENCE",
+            "SELECTIVE_REOPEN_SOURCE_MATERIALISATION",
+        )
+        self.assertTrue(fiscal["selective_reopen_active"])
+        self.assertEqual(
+            fiscal["capb_realtime_vintage_contract"],
+            "model/calibration_validation/fiscal_reaction_capb_realtime_vintage_contract.json",
+        )
+        self.assertEqual(
+            fiscal["capb_realtime_vintage_workflow"],
+            ".github/workflows/fiscal-reaction-capb-realtime-vintage-materialisation.yml",
         )
         self.assertFalse(fiscal["estimation_or_refit_allowed"])
 
