@@ -119,12 +119,13 @@
       "role": "Partial sectoral-financial-position reference boundary. The original holder-by-issuer multi-instrument state remains governed by Accounting Readiness; a narrower aggregate F2-F8 behaviour-over-time boundary is scientifically admissible in principle but failed its first strict exact-component source gate and remains unpromoted.",
       "source": "ECB QSA Accounting Spine and retained instrument-specific recovery artifacts; only F3 is canonically complete across stock and flow.",
       "time_resolution": "quarterly",
-      "current_endogeneity": "ACCOUNTING_CORE",
+      "current_endogeneity": "OBSERVED_PARTIAL_ACCOUNTING_REFERENCE",
       "assessment": "model/dynamics/sectoral_financial_positions_reference_assessment.json",
       "boundary_review": "model/dynamics/sectoral_financial_positions_boundary_review.json",
       "strict_source_gate_assessment": "model/dynamics/sectoral_financial_positions_strict_gate_assessment.json",
       "aggregate_identity_assessment": "model/dynamics/sectoral_financial_positions_aggregate_identity_assessment.json",
-      "rounding_consistency_assessment": "model/dynamics/sectoral_financial_positions_rounding_consistency_assessment.json"
+      "rounding_consistency_assessment": "model/dynamics/sectoral_financial_positions_rounding_consistency_assessment.json",
+      "source_discrepancy_assessment": "model/dynamics/sectoral_financial_positions_source_discrepancy_assessment.json"
     }
   ],
   "closure_rule": "Integrated behavioural closure may not be declared validated until the reference modes required by each active loop have explicit observed targets or a documented reason why only qualitative/reference-pattern validation is possible.",
