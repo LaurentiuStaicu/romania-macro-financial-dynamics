@@ -35,22 +35,25 @@
     {
       "id": "aggregate_bank_credit_response",
       "classification": "CANDIDATE",
-      "source_readiness": "PRUDENTIAL_CBD2_VINTAGE_RETAINED_BLS_RAW_ARCHIVE_PARTIAL_XLSX_EXTRACTION_BRIDGE_NEXT",
-      "next_admissible_action": "Retain the exact official May-2025 BNR Bank Lending Survey XLSX workbook(s), then inspect workbook sheet/range semantics deterministically. Do not yet construct the historical BLS series or estimate a credit-response equation.",
+      "source_readiness": "PRUDENTIAL_CONTROLS_RETAINED_BLS_SCHEMA_FROZEN_MULTI_ROUND_HISTORY_BLOCKED",
+      "next_admissible_action": "Reopen only if official multi-round machine-readable BNR BLS history is found or a deterministic reviewed extraction path for the retained legacy XLS archive becomes available. Do not infer missing rounds, digitize charts or fit a single-round credit equation.",
       "blockers": [
         "Exact quarterly ECB CBD2 NPL, solvency-ratio and CET1 histories are retained for 2014-Q4..2026-Q1.",
         "The CBD2-to-BNR population/consolidation bridge remains unresolved; numerical similarity is not a bridge.",
-        "Seven official BNR BLS legacy XLS workbooks are retained, but canonical value extraction from OLE2 files is not admitted.",
-        "An exact May-2025 BNR BLS XLSX source is publicly indexed and is the next deterministic layout/extraction bridge.",
-        "Realised NFC and household BLS credit standards and loan demand must remain separate; no synthetic aggregate is authorized."
+        "The May-2025 BNR XLSX round fixes exact realised standards/demand semantics for NFC and household credit paths.",
+        "The May-2025 XLSX workbook contains one survey round only; no longitudinal BLS history is present.",
+        "Seven retained historical BNR workbooks are legacy OLE2 XLS and lack a canonical artifact_tool extraction path.",
+        "No synthetic aggregation of NFC and household BLS signals is authorized."
       ],
       "source_boundary_review": "model/calibration_validation/aggregate_bank_credit_source_boundary_review.json",
       "estimation_or_refit_allowed": false,
-      "priority_group": "RETAIN_AND_INSPECT_BNR_BLS_XLSX_NO_ESTIMATION",
+      "priority_group": "DEFER_UNTIL_MACHINE_READABLE_MULTI_ROUND_BLS_HISTORY",
       "prudential_coverage_contract": "model/calibration_validation/bank_credit_prudential_coverage_contract.json",
       "retained_prudential_vintage": "data/source_vintages/bank-credit-prudential-coverage-vintage-2026-09-19",
       "prudential_promotion_review": "model/calibration_validation/bank_credit_prudential_coverage_promotion_review.json",
-      "retained_bnr_bls_raw_vintage": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19"
+      "retained_bnr_bls_raw_vintage": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19",
+      "retained_bnr_bls_xlsx_vintage": "data/source_vintages/bnr-bls-may2025-xlsx-vintage-2026-09-19",
+      "bnr_bls_xlsx_layout_review": "model/calibration_validation/bnr_bls_may2025_xlsx_layout_review.json"
     },
     {
       "id": "exchange_rate_pass_through_to_inflation",
@@ -221,9 +224,9 @@
   ],
   "priority_rule": "Priority is determined by the shortest scientifically admissible path to new independent evidence, not by a desire to activate a feedback loop. Waiting mechanisms remain frozen; source-incomplete mechanisms are not fit with proxies.",
   "current_next_step": {
-    "mechanism_id": "aggregate_bank_credit_response",
-    "action": "RETAIN_AND_INSPECT_BNR_BLS_MAY_2025_XLSX_NO_ESTIMATION",
-    "reason": "Prudential coverage is now retained and the remaining high-value source blocker is BLS demand/supply separation. The May-2025 official BNR workbook is available as XLSX, enabling a deterministic sheet/range inspection without converting the legacy XLS archive or opening calibration.",
+    "mechanism_id": "external_fx_refinancing_feedback",
+    "action": "SCREEN_OFFICIAL_CURRENCY_AND_RESIDUAL_MATURITY_SOURCES_NO_ESTIMATION",
+    "reason": "Bank-credit source semantics have advanced as far as current machine-readable evidence permits. The external FX/refinancing feedback remains the only explicitly open SD chain; the next admissible task is source screening only, to test whether official currency-denomination and residual-maturity/refinancing evidence exists without inventing a closing link.",
     "calibration_cycle_open": false
   },
   "coverage_rule": {
