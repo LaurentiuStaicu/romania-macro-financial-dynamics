@@ -87,7 +87,15 @@
     "release_ready": false,
     "latest_reopen_trigger_monitoring": "model/registries/reopen_trigger_monitoring_2026_09_19.json",
     "latest_reopen_trigger_monitoring_status": "NO_DECLARED_REOPEN_TRIGGER_SATISFIED_BASELINE_HOLD_CONTINUES",
-    "active_autonomous_empirical_task": null
+    "active_autonomous_empirical_task": "FISCAL_PRIMARY_BALANCE_CAPB_REALTIME_VINTAGE_MATERIALISATION",
+    "latest_reopen_trigger_assessment": "model/registries/fiscal_capb_reopen_assessment_2026_09_19.json",
+    "latest_reopen_trigger_assessment_status": "FISCAL_PRIMARY_BALANCE_REOPEN_TRIGGER_SATISFIED_PREREGISTRATION_ONLY",
+    "latest_reopen_trigger_monitoring_superseded_for": [
+      "fiscal_primary_balance_reaction"
+    ],
+    "selective_reopen_active": true,
+    "selective_reopen_mechanism": "fiscal_primary_balance_reaction",
+    "selective_reopen_scope": "CAPB_REALTIME_VINTAGE_SOURCE_MATERIALISATION_AND_TIMING_ADJUDICATION_ONLY"
   },
   "repository_governance": {
     "merge_readiness_assessment": "model/registries/scientific_baseline_merge_readiness_assessment.json",
