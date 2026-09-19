@@ -1,0 +1,162 @@
+{
+  "result_version": "0.1-selection",
+  "mechanism_id": "corporate_investment_response",
+  "source_csv_sha256": "d8d3765fe9e83bd29620de1d02e914626a5f5e1b4071e005ff138b55f127ba69",
+  "selection_window": "2022-Q1..2023-Q4",
+  "final_evaluation_window": "2024-Q1..2026-Q1",
+  "final_evaluation_opened": false,
+  "calibration_fits": {
+    "investment_rate_ar": {
+      "model_id": "investment_rate_ar",
+      "parameters": {
+        "alpha": 5.493726207053896,
+        "rho": 0.7610075562868155
+      },
+      "training_observations": 16,
+      "design_rank": 2,
+      "standardized_condition_number": 1.0
+    },
+    "core_lagged_drivers_ar": {
+      "model_id": "core_lagged_drivers_ar",
+      "parameters": {
+        "alpha": -0.4135367474034375,
+        "rho": 0.8702341033072016,
+        "beta_g": 0.03322054805299873,
+        "beta_r": 0.6369525401820623
+      },
+      "training_observations": 16,
+      "design_rank": 4,
+      "standardized_condition_number": 2.7660218612764775
+    },
+    "support_augmented_lagged_drivers_ar": {
+      "model_id": "support_augmented_lagged_drivers_ar",
+      "parameters": {
+        "alpha": -1.4848553316895732,
+        "rho": 0.8871399286164776,
+        "beta_g": 0.03418667896716898,
+        "beta_r": 0.6297676097183602,
+        "beta_s": 0.6117366188577253
+      },
+      "training_observations": 16,
+      "design_rank": 5,
+      "standardized_condition_number": 2.7962204435231874
+    }
+  },
+  "selection_models": {
+    "persistence": {
+      "periods": [
+        "2022-Q1",
+        "2022-Q2",
+        "2022-Q3",
+        "2022-Q4",
+        "2023-Q1",
+        "2023-Q2",
+        "2023-Q3",
+        "2023-Q4"
+      ],
+      "metrics": {
+        "n": 8,
+        "rmse": 0.7517774971567587,
+        "mae": 0.5539328061625004,
+        "bias_actual_minus_predicted": 0.03880277101250007
+      },
+      "origin_count": 8
+    },
+    "investment_rate_ar": {
+      "periods": [
+        "2022-Q1",
+        "2022-Q2",
+        "2022-Q3",
+        "2022-Q4",
+        "2023-Q1",
+        "2023-Q2",
+        "2023-Q3",
+        "2023-Q4"
+      ],
+      "metrics": {
+        "n": 8,
+        "rmse": 0.7006248172593503,
+        "mae": 0.5556570896206554,
+        "bias_actual_minus_predicted": -0.10990430024102915
+      },
+      "origin_count": 8
+    },
+    "core_lagged_drivers_ar": {
+      "periods": [
+        "2022-Q1",
+        "2022-Q2",
+        "2022-Q3",
+        "2022-Q4",
+        "2023-Q1",
+        "2023-Q2",
+        "2023-Q3",
+        "2023-Q4"
+      ],
+      "metrics": {
+        "n": 8,
+        "rmse": 1.1079414721207752,
+        "mae": 0.8437777593194324,
+        "bias_actual_minus_predicted": -0.49631936050494474
+      },
+      "origin_count": 8
+    },
+    "support_augmented_lagged_drivers_ar": {
+      "periods": [
+        "2022-Q1",
+        "2022-Q2",
+        "2022-Q3",
+        "2022-Q4",
+        "2023-Q1",
+        "2023-Q2",
+        "2023-Q3",
+        "2023-Q4"
+      ],
+      "metrics": {
+        "n": 8,
+        "rmse": 1.2156396893276757,
+        "mae": 0.9294791429257465,
+        "bias_actual_minus_predicted": -0.6371192716765037
+      },
+      "origin_count": 8
+    }
+  },
+  "core_parameter_domain_fractions": {
+    "rho": 1.0,
+    "beta_g": 0.75,
+    "beta_r": 0.0
+  },
+  "augmented_parameter_domain_fractions": {
+    "rho": 1.0,
+    "beta_g": 0.75,
+    "beta_r": 0.0,
+    "beta_s": 1.0
+  },
+  "core_rmse_improvement_vs_baselines": {
+    "persistence": -0.4737624846594073,
+    "investment_rate_ar": -0.581362014058729
+  },
+  "augmented_rmse_improvement_vs_core": -0.09720569174177496,
+  "primary_gates": {
+    "minimum_evaluable_origins": true,
+    "rmse_vs_persistence": false,
+    "rmse_vs_investment_rate_ar": false,
+    "mae_vs_best_baseline": false,
+    "absolute_bias": true,
+    "parameter_domains": false
+  },
+  "augmented_gates": {
+    "primary_passed": false,
+    "minimum_evaluable_origins": true,
+    "rmse_vs_core": false,
+    "mae_vs_core": false,
+    "absolute_bias": true,
+    "parameter_domains": false
+  },
+  "primary_passes_all_gates": false,
+  "augmented_passes_all_gates": false,
+  "selected_form_for_final_evaluation": null,
+  "selection_verdict": "FAIL_BEFORE_HOLDOUT",
+  "causal_claim_allowed": false,
+  "system_dynamics_activation": false,
+  "behavioural_closure_change": false
+}
