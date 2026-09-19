@@ -70,7 +70,9 @@
     "validated_reference_behavioural_mechanisms": 0,
     "fresh_future_confirmation_from": "2026-08",
     "prospective_monetary_confirmation_status": "model/calibration_validation/prospective_monetary_confirmation_status.json",
-    "prospective_monetary_confirmation_contract": "model/calibration_validation/prospective_monetary_confirmation_contract.json"
+    "prospective_monetary_confirmation_contract": "model/calibration_validation/prospective_monetary_confirmation_contract.json",
+    "mechanism_source_readiness": "model/calibration_validation/mechanism_source_readiness.json",
+    "mechanism_reopen_conditions_registry": "model/calibration_validation/mechanism_reopen_conditions_registry.json"
   },
   "scientific_baseline_manifest": "model/registries/scientific_baseline_manifest.json"
 }
