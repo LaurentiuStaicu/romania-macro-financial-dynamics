@@ -70,7 +70,10 @@ class HouseholdConsumptionSourceBoundaryTests(unittest.TestCase):
 
     def test_housing_dsti_cannot_enter_aggregate_s1m_without_population_bridge(self) -> None:
         admissibility = self.review["source_admissibility"]
-        self.assertEqual(admissibility["population_alignment_status"], "BLOCKED")
+        self.assertEqual(
+            admissibility["population_alignment_status"],
+            "BLOCKED_NO_OBSERVED_PUBLIC_BRIDGE_IDENTIFIED",
+        )
         self.assertFalse(
             admissibility["housing_dsti_directly_admissible_as_registered_debt_service_ratio"]
         )
@@ -78,6 +81,11 @@ class HouseholdConsumptionSourceBoundaryTests(unittest.TestCase):
             self.review["borrower_burden_population_alignment_review"],
             "model/calibration_validation/household_consumption_borrower_burden_alignment_review.json",
         )
+        self.assertEqual(
+            self.review["population_bridge_source_screening"],
+            "model/calibration_validation/household_consumption_population_bridge_source_screening.json",
+        )
+        self.assertFalse(admissibility["public_population_bridge_found"])
 
     def test_borrowing_rate_family_cannot_be_selected_post_hoc(self) -> None:
         rate = self.review["borrowing_rate_boundary"]
