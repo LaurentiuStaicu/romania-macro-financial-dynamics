@@ -97,49 +97,61 @@
     "accounting_spine": "UNCHANGED"
   },
   "bls_machine_readable_source_catalog": {
-    "status": "DIRECT_OFFICIAL_SPREADSHEETS_IDENTIFIED_PROVIDER_ACCESS_BLOCKED_IN_CURRENT_ENVIRONMENT",
+    "status": "PARTIAL_RAW_ARCHIVE_RETAINED_LEGACY_XLS_EXTRACTION_PENDING_XLSX_BRIDGE_AVAILABLE",
     "discovery_date": "2026-09-19",
     "files": [
       {
         "round": "2023 May",
         "url": "https://www.bnr.ro/uploads/2023-5-banklendingsurvey-may2023_xls_547_1733754096.xls",
         "format": "xls",
-        "content_not_materialised": true
+        "content_not_materialised": false,
+        "raw_vintage": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19",
+        "value_extraction_status": "NOT_CANONICAL_LEGACY_XLS"
       },
       {
         "round": "2024 February",
         "url": "https://www.bnr.ro/uploads/2024-2-banklendingsurvey-february2024_xls_547_1733753857.xls",
         "format": "xls",
-        "content_not_materialised": true
+        "content_not_materialised": false,
+        "raw_vintage": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19",
+        "value_extraction_status": "NOT_CANONICAL_LEGACY_XLS"
       },
       {
         "round": "2024 May",
         "url": "https://www.bnr.ro/uploads/2024-5-banklendingsurvey-may2024_xls_547_1733753844.xls",
         "format": "xls",
-        "content_not_materialised": true
+        "content_not_materialised": false,
+        "raw_vintage": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19",
+        "value_extraction_status": "NOT_CANONICAL_LEGACY_XLS"
       },
       {
         "round": "2024 November",
         "url": "https://www.bnr.ro/uploads/2024-11-banklendingsurvey-november2024_xls_547_1733753815.xls",
         "format": "xls",
-        "content_not_materialised": true
+        "content_not_materialised": false,
+        "raw_vintage": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19",
+        "value_extraction_status": "NOT_CANONICAL_LEGACY_XLS"
       },
       {
         "round": "2025 May",
         "url": "https://www.bnr.ro/uploads/2025-06-13blst1may2025_xls_547_1749803028.xlsx",
         "format": "xlsx",
-        "content_not_materialised": true
+        "content_not_materialised": true,
+        "value_extraction_status": "NEXT_XLSX_BRIDGE_CANDIDATE"
       },
       {
         "round": "2025 Q3 / November release",
         "url": "https://www.bnr.ro/uploads/2025-12-09sondajblst3-noiembrie2025_xls_547_1765281659.xls",
         "format": "xls",
-        "content_not_materialised": true
+        "content_not_materialised": false,
+        "raw_vintage": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19",
+        "value_extraction_status": "NOT_CANONICAL_LEGACY_XLS"
       }
     ],
-    "provider_access_observation": "The official BNR URLs are indexed publicly but return a Request Rejected response to automated access from the current environment. This is an access limitation, not evidence of missing files or missing observations.",
+    "provider_access_observation": "GitHub Actions successfully retrieved seven exact official BNR BLS workbooks from 2023-2025 as valid OLE2 XLS files; the prior web-layer Request Rejected behavior was an access-path limitation, not missing files.",
     "historical_coverage_claimed": false,
-    "next_required_step": "Enumerate the official BNR survey spreadsheet archive and retain exact file bytes/hashes before constructing any canonical BLS history. Do not infer missing rounds from URL patterns."
+    "next_required_step": "Retain and inspect the exact May-2025 BNR XLSX workbook(s) with a deterministic spreadsheet reader. Use them to freeze sheet/range semantics for realised NFC and household credit standards, loan demand and DSTI before attempting any broader BLS extraction.",
+    "retained_raw_vintage": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19"
   },
   "external_prudential_source_screening": {
     "status": "CANDIDATE_MACHINE_READABLE_CONTROLS_IDENTIFIED_SEMANTIC_ALIGNMENT_PENDING",
@@ -180,11 +192,13 @@
       "solvency_ratio_candidate": {
         "institution": "ECB / ESCB",
         "dataset": "CBD2 — Consolidated Banking data",
-        "item_code": "I4001",
-        "concept": "Solvency ratio [%]",
-        "status": "ITEM_SEMANTICS_CONFIRMED_ROMANIA_EXACT_QUARTERLY_TUPLE_NOT_YET_CONFIRMED",
-        "evidence": "ECB Data Portal explicitly identifies I4001 as Solvency ratio in quarterly CBD2 series for other EU countries; the exact Romania series must be observed directly before registration.",
-        "role": "Potential definitionally closer capital-state control than CET1, pending exact Romania coverage and boundary check."
+        "series_key": "CBD2.Q.RO.W0.11._Z._Z.A.A.I4001._Z._Z._Z._Z._Z._Z.PC",
+        "concept": "Solvency ratio [%], domestic banks, Romania, quarterly",
+        "status": "EXACT_ROMANIA_QUARTERLY_SERIES_CONFIRMED_AND_RETAINED",
+        "coverage": "2014-Q4 to 2026-Q1 in the retained 2026-09-19 source vintage",
+        "role": "Definitionally closer prudential capital-state candidate than CET1, subject to explicit population/consolidation bridge to the BNR total-capital-ratio boundary.",
+        "retained_vintage": "data/source_vintages/bank-credit-prudential-coverage-vintage-2026-09-19",
+        "semantic_limit": "The CBD2 domestic-bank/full-sample boundary is not numerically identical to the BNR Romanian-legal-entity population; observed differences may not be balanced away or ignored."
       }
     },
     "decision_rules": [
@@ -197,10 +211,18 @@
     "calibration_effect": "NONE"
   },
   "prudential_coverage_diagnostic": {
-    "status": "PREREGISTERED_NOT_EXECUTED",
+    "status": "EXECUTED_SUCCESS_SOURCE_VINTAGE_RETAINED_BOUNDARY_BRIDGE_PENDING",
     "contract": "model/calibration_validation/bank_credit_prudential_coverage_contract.json",
+    "promotion_review": "model/calibration_validation/bank_credit_prudential_coverage_promotion_review.json",
+    "retained_vintage": "data/source_vintages/bank-credit-prudential-coverage-vintage-2026-09-19",
     "formal_calibration_gate": false,
     "calibration_effect": "NONE",
-    "purpose": "Probe the exact quarterly Romania CBD2 NPL, preregistered solvency-ratio candidate, and CET1 series before any prudential variable selection."
+    "availability": {
+      "npl_ratio": true,
+      "solvency_ratio": true,
+      "cet1_ratio": true
+    },
+    "coverage": "All three exact Romania CBD2 series contain 46 quarterly observations from 2014-Q4 through 2026-Q1.",
+    "conclusion": "The solvency availability question is resolved positively. Population/consolidation alignment with BNR remains unresolved, and CET1 does not automatically substitute for solvency."
   }
 }
