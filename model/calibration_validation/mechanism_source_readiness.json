@@ -285,18 +285,24 @@
     {
       "id": "monetary_policy_reaction_function",
       "classification": "DEFERRED",
-      "source_readiness": "TARGET_AND_POLICY_OBSERVED_EXPECTATIONS_UNITS_GAP_VINTAGES_AND_IDENTIFICATION_UNRESOLVED",
-      "next_admissible_action": "Reopen only after retaining unit-compatible expectations and quarterly activity-gap vintages with revision timing, plus a preregistered managed-float/intervention and simultaneity identification strategy. Keep the policy rate observed/exogenous meanwhile.",
+      "source_readiness": "QUANTITATIVE_EXPECTATIONS_AND_QUARTERLY_GAP_CONCEPTS_OBSERVED_FORMATION_TIME_AND_REAL_TIME_VINTAGES_NOT_RETAINED",
+      "next_admissible_action": "Keep the policy rate observed/exogenous. Reopen only after retaining a machine-readable BNR financial-analyst expectations history indexed by survey formation date and a quarterly BNR GDP-gap vintage history mapped to the information set available at each policy decision. Then preregister managed-float/intervention treatment, policy-regime boundaries and simultaneity identification before any reaction-function fit. Do not digitise charts, use target-horizon-shifted expectation coordinates as formation dates, or backfill later revised gaps into earlier decisions.",
       "blockers": [
-        "BNR flat target 2.5% ±1 pp and policy-rate history are observed.",
-        "DG ECFIN CONS_006 is a qualitative balance, not percentage inflation expectations; Romania's consistent series includes econometric restoration.",
-        "No current immutable machine-readable quantitative financial-analyst expectations series has been retained.",
-        "AMECO output gap is annual and model-based; no quarterly real-time gap vintage is retained.",
-        "Managed-float intervention and simultaneous policy responses remain untreated."
+        "BNR flat inflation target 2.5% ±1 pp and policy-rate history are observed.",
+        "DG ECFIN CONS_006 remains a qualitative response balance and is not percentage inflation expectations.",
+        "BNR publications confirm quantitative financial-analyst inflation expectations at 1-year and 2-year horizons in percent, but no immutable machine-readable formation-date history has been retained.",
+        "Historical BNR analyst-expectations charts may plot observations at the horizon to which they refer rather than at survey formation date; this mapping cannot be used directly in a policy-information set.",
+        "BNR Inflation Reports publish a quarterly model-based GDP gap and expose report information cutoffs, but no retained real-time vintage history has been materialized.",
+        "The BNR GDP-gap path is revised between forecast rounds, so later revised values may not be treated as if known at earlier policy decisions.",
+        "Managed-float intervention, policy-regime changes and simultaneous policy responses remain untreated."
       ],
       "estimation_or_refit_allowed": false,
-      "priority_group": "DEFER_UNTIL_EXPECTATIONS_GAP_VINTAGE_IDENTIFICATION_CONTRACT",
-      "source_boundary_review": "model/calibration_validation/monetary_policy_reaction_source_screening.json"
+      "priority_group": "DEFER_UNTIL_FORMATION_TIME_EXPECTATIONS_AND_REAL_TIME_GAP_VINTAGES",
+      "source_boundary_review": "model/calibration_validation/monetary_policy_reaction_source_screening.json",
+      "quantitative_analyst_expectations_concept_observed": true,
+      "quantitative_expectations_machine_readable_formation_time_history_retained": false,
+      "quarterly_bnr_gap_observed_in_reports": true,
+      "real_time_gap_vintages_retained": false
     },
     {
       "id": "external_fx_refinancing_feedback",
