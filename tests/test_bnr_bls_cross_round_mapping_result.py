@@ -22,14 +22,17 @@ class BNRBLSCrossRoundMappingResultTests(unittest.TestCase):
         self.audit = json.loads(AUDIT.read_text(encoding="utf-8"))
 
     def test_retained_panel_has_only_observed_rounds(self) -> None:
-        self.assertEqual(len(self.rows), 8)
+        self.assertEqual(len(self.rows), 11)
         self.assertEqual(
             [row["quarter"] for row in self.rows],
             [
                 "2022-Q4",
                 "2023-Q1",
+                "2023-Q2",
+                "2023-Q3",
                 "2023-Q4",
                 "2024-Q1",
+                "2024-Q2",
                 "2024-Q3",
                 "2024-Q4",
                 "2025-Q1",
@@ -40,13 +43,34 @@ class BNRBLSCrossRoundMappingResultTests(unittest.TestCase):
     def test_coverage_gaps_are_explicit_and_unfilled(self) -> None:
         self.assertEqual(
             self.audit["missing_quarters"],
-            ["2023-Q2", "2023-Q3", "2024-Q2", "2025-Q2"],
+            ["2025-Q2"],
         )
-        self.assertEqual(self.audit["observed_round_count"], 8)
+        self.assertEqual(self.audit["observed_round_count"], 11)
         self.assertEqual(self.audit["expected_quarter_count_between_bounds"], 12)
-        self.assertAlmostEqual(self.audit["coverage_fraction"], 8 / 12)
+        self.assertAlmostEqual(self.audit["coverage_fraction"], 11 / 12)
         self.assertFalse(self.audit["interpolation_performed"])
         self.assertFalse(self.audit["synthetic_quarters_created"])
+
+    def test_recovered_round_identity_anomalies_are_explicit_not_normalised(self) -> None:
+        rows = {row["quarter"]: row for row in self.rows}
+        self.assertEqual(rows["2023-Q2"]["reference_date"], "")
+        self.assertEqual(rows["2024-Q2"]["reference_date"], "")
+        self.assertEqual(rows["2023-Q3"]["reference_date"], "30/09/2023")
+        recovered = self.audit["recovered_missing_round_validations"]["rounds"]
+        self.assertEqual(
+            recovered["2023-Q2"]["round_identity"]["raw_workbook_header"],
+            "31/03/2023",
+        )
+        self.assertEqual(
+            recovered["2024-Q2"]["round_identity"]["raw_workbook_header"],
+            "31/06/2024",
+        )
+        self.assertFalse(
+            recovered["2023-Q2"]["round_identity"]["silent_date_normalisation_performed"]
+        )
+        self.assertFalse(
+            recovered["2024-Q2"]["round_identity"]["silent_date_normalisation_performed"]
+        )
 
     def test_known_legacy_header_anomalies_are_preserved_as_diagnostics(self) -> None:
         validations = self.audit["legacy_round_validations"]

@@ -35,21 +35,19 @@
     {
       "id": "aggregate_bank_credit_response",
       "classification": "CANDIDATE",
-      "source_readiness": "BLS_CANONICAL_8_OF_12_PUBLICATION_BRIDGE_COMPLETE_ENOUGH_FOR_CORROBORATION_MISSING_WORKBOOK_RECOVERY_CONTRACT_FROZEN",
-      "next_admissible_action": "Execute the frozen manual-only BNR BLS missing-round workbook recovery contract for 2023-Q2, 2023-Q3 and 2024-Q2 using only preregistered exact candidates, and add 2025-Q2 only after its exact official annex URL is independently identified. A successful probe may retain workbook bytes only; panel append still requires immutable promotion review plus deterministic six-observable extraction. Do not promote publication-rounded values, infer URLs, interpolate quarters, aggregate NFC/household signals, or fit a credit equation.",
+      "source_readiness": "BLS_CANONICAL_11_OF_12_EXACT_WORKBOOK_RECOVERY_RETAINED_SINGLE_GAP_2025_Q2",
+      "next_admissible_action": "Keep calibration closed. Reopen BLS recovery only when the exact official 2025-Q2 workbook endpoint is independently identified, then repeat the frozen recovery, retention, semantic-coordinate review and canonical-promotion chain. Separately resolve the CBD2-to-BNR prudential population/consolidation bridge before any sector-specific candidate-selection cycle. Do not estimate the current aggregate credit equation.",
       "blockers": [
-        "Exact quarterly ECB CBD2 NPL, solvency-ratio and CET1 histories are retained for 2014-Q4..2026-Q1.",
-        "The CBD2-to-BNR population/consolidation bridge remains unresolved; numerical similarity is not a bridge.",
-        "Cross-round BNR BLS semantics for C01/C05/P01/P06/P13 are frozen and deterministically materialized for eight canonical observed rounds from 2022-Q4 through 2025-Q3.",
-        "Official BNR publication text directly confirms all six preregistered observables for 2023-Q3, 2024-Q2 and 2025-Q2, and the two NFC observables for 2023-Q2.",
-        "The four 2023-Q2 household observables are not uniquely identified at canonical precision from publication text; reported response shares are insufficient substitutes for workbook-cell net percentages.",
-        "A manual-only missing-round recovery contract is frozen. Exact candidate endpoints are preregistered for 2023-Q2, 2023-Q3 and 2024-Q2; 2025-Q2 remains without an independently retained exact annex URL.",
-        "Exact workbook-cell precision remains unrecovered for all four canonical missing quarters 2023-Q2, 2023-Q3, 2024-Q2 and 2025-Q2. Publication-rounded values may corroborate but may not overwrite the canonical panel.",
-        "No interpolation, forward-fill, inferred missing response category, wildcard/timestamp brute force, synthetic NFC/household aggregation, credit-equation estimation or model selection is authorized."
+        "The canonical realised BNR BLS panel now contains 11 exact observed rounds from 2022-Q4 through 2025-Q3; only 2025-Q2 remains missing.",
+        "Exact 2023-Q2, 2023-Q3 and 2024-Q2 workbooks are retained with hashes, all six preregistered observables are semantically mapped, and those three rounds are canonically promoted without interpolation.",
+        "For 2025-Q2 the official publication text is corroborative, but the exact official workbook endpoint/bytes are not retained; rounded publication values may not replace workbook-cell precision.",
+        "The CBD2-to-BNR prudential population/consolidation bridge remains unresolved; numerical similarity is not a bridge.",
+        "The aggregate reduced form still mixes credit demand and supply, while NPL and capital ratios are endogenous prudential state variables; source completeness alone does not identify a bank-supply channel.",
+        "No NFC/household synthetic aggregation, interpolation, forward-fill, credit-equation estimation, model selection or holdout opening is authorized."
       ],
       "source_boundary_review": "model/calibration_validation/aggregate_bank_credit_source_boundary_review.json",
       "estimation_or_refit_allowed": false,
-      "priority_group": "DEFER_UNTIL_MACHINE_READABLE_MULTI_ROUND_BLS_HISTORY",
+      "priority_group": "DEFER_UNTIL_FINAL_BLS_GAP_OR_PRUDENTIAL_BOUNDARY_BRIDGE",
       "prudential_coverage_contract": "model/calibration_validation/bank_credit_prudential_coverage_contract.json",
       "retained_prudential_vintage": "data/source_vintages/bank-credit-prudential-coverage-vintage-2026-09-19",
       "prudential_promotion_review": "model/calibration_validation/bank_credit_prudential_coverage_promotion_review.json",
@@ -63,12 +61,9 @@
       "retained_realised_round_panel": "data/processed/bnr_bls_realised_rounds.csv",
       "cross_round_mapping_audit": "model/calibration_validation/bnr_bls_cross_round_mapping_audit.json",
       "cross_round_mapping_workflow": ".github/workflows/bnr-bls-cross-round-mapping.yml",
-      "observed_round_count": 8,
+      "observed_round_count": 11,
       "expected_quarter_count_between_bounds": 12,
       "missing_rounds": [
-        "2023-Q2",
-        "2023-Q3",
-        "2024-Q2",
         "2025-Q2"
       ],
       "publication_text_bridge_contract": "model/calibration_validation/bnr_bls_publication_text_bridge_contract.json",
@@ -83,9 +78,6 @@
       ],
       "publication_text_direct_or_exact_status_quo_observations": 20,
       "canonical_missing_rounds": [
-        "2023-Q2",
-        "2023-Q3",
-        "2024-Q2",
         "2025-Q2"
       ],
       "missing_round_recovery_contract": "model/calibration_validation/bnr_bls_missing_round_workbook_recovery_contract.json",
@@ -93,11 +85,21 @@
       "missing_round_recovery_workflow": ".github/workflows/bnr-bls-missing-round-workbook-recovery.yml",
       "missing_round_recovery_execution_policy": "MANUAL_ONLY_LIVE_SOURCE_ACQUISITION",
       "recovery_endpoint_status": {
-        "2023-Q2": "EXACT_ENDPOINT_CONFIRMED_BY_WEB_AS_APPLICATION_VND_MS_EXCEL_BINARY_NOT_RETAINED",
-        "2023-Q3": "EXACT_ENDPOINT_CONFIRMED_BY_WEB_AS_APPLICATION_VND_MS_EXCEL_BINARY_NOT_RETAINED",
-        "2024-Q2": "CANDIDATE_ENDPOINT_PREREGISTERED_BINARY_NOT_CONFIRMED",
+        "2023-Q2": "RECOVERED_EXACT_OLE2_WORKBOOK_RETAINED_SEMANTICALLY_MAPPED_AND_CANONICALLY_PROMOTED",
+        "2023-Q3": "RECOVERED_EXACT_OLE2_WORKBOOK_RETAINED_SEMANTICALLY_MAPPED_AND_CANONICALLY_PROMOTED",
+        "2024-Q2": "RECOVERED_EXACT_OLE2_WORKBOOK_RETAINED_SEMANTICALLY_MAPPED_AND_CANONICALLY_PROMOTED",
         "2025-Q2": "OFFICIAL_ANNEX_EXISTENCE_KNOWN_EXACT_URL_UNIDENTIFIED"
-      }
+      },
+      "recovered_exact_rounds": [
+        "2023-Q2",
+        "2023-Q3",
+        "2024-Q2"
+      ],
+      "retained_missing_round_recovery_vintage": "data/source_vintages/bnr-bls-missing-round-recovery-vintage-2026-09-19",
+      "missing_round_semantic_review": "model/calibration_validation/bnr_bls_missing_round_semantic_mapping_audit.json",
+      "panel_regeneration_candidate_contract": "model/calibration_validation/bnr_bls_panel_regeneration_candidate_contract.json",
+      "canonical_panel_promotion_review": "model/calibration_validation/bnr_bls_canonical_panel_promotion_review.json",
+      "canonical_panel_sha256": "c5dad2c9577431e9765bc02b166e8d5a2b4c4b4c8e761fbb5bbce50f4e6498ff"
     },
     {
       "id": "exchange_rate_pass_through_to_inflation",

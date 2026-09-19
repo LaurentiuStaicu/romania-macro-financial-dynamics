@@ -75,12 +75,12 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         aggregate_credit = mechanisms["aggregate_bank_credit_response"]
         self.assertEqual(
             aggregate_credit["source_readiness"],
-            "BLS_CANONICAL_8_OF_12_PUBLICATION_BRIDGE_COMPLETE_ENOUGH_FOR_CORROBORATION_MISSING_WORKBOOK_RECOVERY_CONTRACT_FROZEN",
+            "BLS_CANONICAL_11_OF_12_EXACT_WORKBOOK_RECOVERY_RETAINED_SINGLE_GAP_2025_Q2",
         )
-        self.assertEqual(aggregate_credit["observed_round_count"], 8)
+        self.assertEqual(aggregate_credit["observed_round_count"], 11)
         self.assertEqual(
             aggregate_credit["missing_rounds"],
-            ["2023-Q2", "2023-Q3", "2024-Q2", "2025-Q2"],
+            ["2025-Q2"],
         )
         self.assertEqual(
             aggregate_credit["cross_round_mapping_audit"],
@@ -120,11 +120,23 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         )
         self.assertEqual(
             aggregate_credit["recovery_endpoint_status"]["2023-Q2"],
-            "EXACT_ENDPOINT_CONFIRMED_BY_WEB_AS_APPLICATION_VND_MS_EXCEL_BINARY_NOT_RETAINED",
+            "RECOVERED_EXACT_OLE2_WORKBOOK_RETAINED_SEMANTICALLY_MAPPED_AND_CANONICALLY_PROMOTED",
         )
         self.assertEqual(
             aggregate_credit["recovery_endpoint_status"]["2025-Q2"],
             "OFFICIAL_ANNEX_EXISTENCE_KNOWN_EXACT_URL_UNIDENTIFIED",
+        )
+        self.assertEqual(
+            aggregate_credit["canonical_panel_promotion_review"],
+            "model/calibration_validation/bnr_bls_canonical_panel_promotion_review.json",
+        )
+        self.assertEqual(
+            aggregate_credit["recovered_exact_rounds"],
+            ["2023-Q2", "2023-Q3", "2024-Q2"],
+        )
+        self.assertEqual(
+            aggregate_credit["priority_group"],
+            "DEFER_UNTIL_FINAL_BLS_GAP_OR_PRUDENTIAL_BOUNDARY_BRIDGE",
         )
         self.assertFalse(aggregate_credit["estimation_or_refit_allowed"])
 
