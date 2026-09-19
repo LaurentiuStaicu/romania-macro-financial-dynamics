@@ -278,8 +278,25 @@ class MechanismSourceReadinessTests(unittest.TestCase):
             mechanisms["monetary_policy_reaction_function"][
                 "priority_group"
             ],
-            "DEFER_UNTIL_EXPECTATIONS_GAP_VINTAGE_IDENTIFICATION_CONTRACT",
+            "DEFER_UNTIL_FORMATION_TIME_EXPECTATIONS_AND_REAL_TIME_GAP_VINTAGES",
         )
+        monetary_rule = mechanisms["monetary_policy_reaction_function"]
+        self.assertEqual(
+            monetary_rule["source_readiness"],
+            "QUANTITATIVE_EXPECTATIONS_AND_QUARTERLY_GAP_CONCEPTS_OBSERVED_FORMATION_TIME_AND_REAL_TIME_VINTAGES_NOT_RETAINED",
+        )
+        self.assertTrue(
+            monetary_rule["quantitative_analyst_expectations_concept_observed"]
+        )
+        self.assertFalse(
+            monetary_rule[
+                "quantitative_expectations_machine_readable_formation_time_history_retained"
+            ]
+        )
+        self.assertTrue(monetary_rule["quarterly_bnr_gap_observed_in_reports"])
+        self.assertFalse(monetary_rule["real_time_gap_vintages_retained"])
+        self.assertFalse(monetary_rule["estimation_or_refit_allowed"])
+
         self.assertEqual(
             mechanisms["external_fx_refinancing_feedback"][
                 "priority_group"
