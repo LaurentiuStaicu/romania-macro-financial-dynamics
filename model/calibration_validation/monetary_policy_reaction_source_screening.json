@@ -100,5 +100,8 @@
     "behavioural_closure": "UNCHANGED_INACTIVE",
     "source_readiness": "QUANTITATIVE_EXPECTATIONS_AND_QUARTERLY_GAP_CONCEPTS_OBSERVED_FORMATION_TIME_AND_REAL_TIME_VINTAGES_NOT_RETAINED"
   },
-  "reopen_trigger": "Retain a machine-readable quantitative financial-analyst expectations history indexed by survey formation date (or a reproducible source preserving that mapping); retain quarterly BNR activity-gap vintages with information cutoffs/revision timing; then freeze policy-regime/intervention and simultaneity identification before any reaction-function fit."
+  "reopen_trigger": "Retain a machine-readable quantitative financial-analyst expectations history indexed by survey formation date (or a reproducible source preserving that mapping); retain quarterly BNR activity-gap vintages with information cutoffs/revision timing; then freeze policy-regime/intervention and simultaneity identification before any reaction-function fit.",
+  "source_discovery_terminal_assessment": "model/calibration_validation/monetary_policy_reaction_source_discovery_terminal_assessment.json",
+  "source_discovery_stage_status": "STAGE_CLOSED_FROZEN_UNDER_CURRENT_PUBLIC_DISCOVERY_SURFACE_NO_MODEL_EFFECT",
+  "source_discovery_reopen_policy": "Do not repeat the same public-source searches or infer hidden endpoints. Reopen source discovery only when new official BNR evidence exposes a machine-readable formation-date expectations history, a real-time GDP-gap vintage history, stable target series/API metadata, or an official data annex preserving the required time semantics."
 }
