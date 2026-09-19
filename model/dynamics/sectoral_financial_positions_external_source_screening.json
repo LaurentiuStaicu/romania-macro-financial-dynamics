@@ -109,17 +109,57 @@
     {
       "id": "BNR_NATIONAL_FINANCIAL_ACCOUNTS_PUBLICATIONS",
       "institution": "National Bank of Romania",
-      "official_publication_example": "https://www.bnr.ro/files/d/Pubs_ro/cnf/CNF_2018-2022.pdf",
-      "semantic_fit": "NATIONAL_FINANCIAL_ACCOUNTS_CONTEXT",
+      "official_publication_example": "https://www.bnr.ro/uploads/2024-cnf_documentpdf_545_1766149176.pdf",
+      "semantic_fit": "HIGH_FOR_ANNUAL_COUNTERPART_STOCK_MATRIX_LOW_FOR_FROZEN_QUARTERLY_STOCK_AND_TRANSACTION_HISTORY",
       "exact_quarterly_F2_F8_counterpart_machine_readable_history_identified": false,
-      "status": "NO_EXACT_NEW_QUARTERLY_COUNTERPART_SOURCE_IDENTIFIED_IN_CURRENT_SCREENING"
+      "status": "OFFICIAL_ANNUAL_COUNTERPART_STOCK_MATRIX_CONFIRMED_FREQUENCY_AND_TRANSACTION_HISTORY_FAIL_NO_REOPEN",
+      "latest_screened_publication": "Conturile nationale financiare - Raport anual 2024",
+      "latest_publication_data_cutoff": "end-October 2025",
+      "latest_publication_report_window": "2020-2024",
+      "exact_annual_2024_counterpart_stock_matrix_identified": true,
+      "annual_2024_counterpart_stock_matrix_scope": {
+        "consolidation": "non-consolidated",
+        "unit": "million RON",
+        "sector_codes": [
+          "S11",
+          "S121",
+          "S122+S123",
+          "S124+S125+S126+S127",
+          "S128+S129",
+          "S13",
+          "S14+S15",
+          "S2"
+        ],
+        "instrument_codes": [
+          "AF1",
+          "AF2",
+          "AF3",
+          "AF4",
+          "AF5",
+          "AF6",
+          "AF7",
+          "AF8"
+        ],
+        "accounting_entries": [
+          "A",
+          "P"
+        ]
+      },
+      "exact_quarterly_stock_and_transaction_history_identified": false,
+      "screening_assessment": "model/dynamics/sectoral_financial_positions_bnr_cnf_source_screening.json",
+      "scope_limit": [
+        "The 2024 annual CNF report exposes a non-consolidated sector-by-counterpart stock matrix with S121 and AF2-AF8, allowing exact semantic mapping of the RMD sectors for that annual stock snapshot.",
+        "The counterpart-matrix section is explicitly stocks for 2024; it is not a quarterly counterpart history.",
+        "No matched quarterly F2-F8 financial-transaction counterpart history is identified in the screened annual publication.",
+        "The frozen reference-mode extraction contract requires quarterly stock and financial transactions with at least 40 common quarters, so this source cannot promote the mode or change readiness."
+      ]
     }
   ],
   "decision": {
     "immediate_reference_mode_reopen_authorized": false,
     "reference_mode_promotion_authorized": false,
     "accounting_readiness_change": false,
-    "next_admissible_action": "Hold the external counterpart recovery path closed. Eurostat passed discovery but failed the frozen F2-F8 instrument scope; OECD passed discovery and complete instrument scope but failed the frozen RMD sector scope because S121 is absent for Romania. Reopen only on a declared new-source or changed-dataset trigger capable of supplying both exact S121 sector separation and complete F2-F8 stocks/transactions. Do not repeat the same source probes merely because readiness remains 9/10.",
+    "next_admissible_action": "Hold the external counterpart recovery path closed. Eurostat passed discovery but failed the frozen F2-F8 instrument scope; OECD passed discovery and complete instrument scope but failed the frozen RMD sector scope because S121 is absent for Romania. The latest official BNR annual CNF publication adds a strong national semantic cross-check: its 2024 non-consolidated counterpart stock matrix exposes S121 and AF2-AF8, but it fails the frozen quarterly-frequency and stock+financial-transaction-history requirements. Reopen only on a declared new-source or changed-dataset trigger capable of supplying exact S121 sector separation and complete F2-F8 quarterly stocks and transactions. Do not repeat the same source probes merely because readiness remains 9/10.",
     "oecd_probe_justified": true,
     "eurostat_counterpart_probe_justified": true,
     "discovery_priority": [],
@@ -141,9 +181,11 @@
     "discovery_pass_effect": "A discovery PASS does not authorize value extraction or promotion. It only opens the frozen Semantic + Lineage Review, which must pass before a separate exact historical extraction contract can be preregistered.",
     "eurostat_exact_historical_extraction_authorized": false,
     "oecd_exact_historical_extraction_authorized": false,
-    "external_counterpart_recovery_state": "EXHAUSTED_NO_SEMANTICALLY_ADMISSIBLE_CURRENT_PUBLIC_SOURCE",
+    "external_counterpart_recovery_state": "EXHAUSTED_NO_SEMANTICALLY_AND_FREQUENCY_COMPLETE_CURRENT_PUBLIC_SOURCE",
     "current_reference_mode_status": "PARTIAL_SERIES_AVAILABLE",
-    "reference_mode_readiness_change": 0
+    "reference_mode_readiness_change": 0,
+    "bnr_annual_cnf_screening_assessment": "model/dynamics/sectoral_financial_positions_bnr_cnf_source_screening.json",
+    "bnr_annual_cnf_screening_state": "ANNUAL_SEMANTIC_STOCK_PASS_QUARTERLY_TRANSACTION_HISTORY_FAIL_NO_REOPEN"
   },
   "hard_rules": {
     "no_reinterpretation_of_historical_phase_A_D": true,
