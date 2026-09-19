@@ -4,10 +4,12 @@ on:
   pull_request:
     paths:
       - "model/calibration_validation/bnr_bls_missing_round_semantic_mapping_contract.json"
+      - "model/calibration_validation/bnr_bls_missing_round_semantic_mapping_audit.json"
       - "model/calibration_validation/bnr_bls_cross_round_mapping_contract.json"
       - "data/source_vintages/bnr-bls-missing-round-cell-extraction-vintage-2026-09-19/**"
       - "scripts/audit_bnr_bls_missing_round_semantic_mapping.py"
       - "tests/test_bnr_bls_missing_round_semantic_mapping_contract.py"
+      - "tests/test_bnr_bls_missing_round_semantic_mapping_result.py"
       - ".github/workflows/bnr-bls-missing-round-semantic-mapping.yml"
   workflow_dispatch:
 
@@ -23,14 +25,19 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Verify frozen semantic and round-identity contract
+      - name: Verify frozen semantic contract and retained result
         run: |
           python -m unittest tests.test_bnr_bls_missing_round_semantic_mapping_contract -v
+          python -m unittest tests.test_bnr_bls_missing_round_semantic_mapping_result -v
 
       - name: Apply inherited coordinates to retained cell extractions only
         env:
           BNR_BLS_MISSING_ROUND_SEMANTIC_OUT: bnr_bls_missing_round_semantic_mapping_artifacts
         run: python scripts/audit_bnr_bls_missing_round_semantic_mapping.py
+
+      - name: Verify regenerated semantic audit is byte-clean
+        run: |
+          cmp             bnr_bls_missing_round_semantic_mapping_artifacts/bnr_bls_missing_round_semantic_mapping_audit.json             model/calibration_validation/bnr_bls_missing_round_semantic_mapping_audit.json
 
       - name: Upload semantic review evidence only
         uses: actions/upload-artifact@v4
