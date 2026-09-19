@@ -85,7 +85,10 @@
       2019,
       2022,
       2024
-    ]
+    ],
+    "interactive_database_discovery_contract": "model/calibration_validation/bnr_prudential_interactive_database_discovery_contract.json",
+    "interactive_database_discovery_review": "model/calibration_validation/bnr_prudential_interactive_database_discovery_review.json",
+    "interactive_database_discovery_status": "OFFICIAL_DATABASE_SURFACE_CONFIRMED_TARGET_SERIES_NOT_IDENTIFIED_IN_PUBLIC_INDEX"
   },
   "modelling_effect": {
     "estimation_or_refit_authorized": false,
