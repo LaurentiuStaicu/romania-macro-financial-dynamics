@@ -36,7 +36,7 @@
       "id": "aggregate_bank_credit_response",
       "classification": "CANDIDATE",
       "source_readiness": "BLS_CANONICAL_11_OF_12_EXACT_WORKBOOK_RECOVERY_RETAINED_SINGLE_GAP_2025_Q2",
-      "next_admissible_action": "Keep calibration closed. For BLS, reopen only if the exact official 2025-Q2 workbook endpoint is independently identified. For prudential controls, execute source enumeration under the frozen BNR prudential-table materialisation contract and freeze the year-level official-PDF source map before numeric extraction. Do not estimate the current aggregate credit equation.",
+      "next_admissible_action": "Keep calibration closed. For BLS, reopen only if the exact official 2025-Q2 workbook endpoint is independently identified. For prudential controls, complete the exact year-level BNR Monthly Bulletin source enumeration; only 3 of 11 primary year sources are independently identified. Search-index non-discovery is not source absence, fallbacks remain unopened, and no numeric extraction or model estimation is authorized.",
       "blockers": [
         "The canonical realised BNR BLS panel now contains 11 exact observed rounds from 2022-Q4 through 2025-Q3; only 2025-Q2 remains missing.",
         "Exact 2023-Q2, 2023-Q3 and 2024-Q2 workbooks are retained with hashes, all six preregistered observables are semantically mapped, and those three rounds are canonically promoted without interpolation.",
@@ -102,7 +102,16 @@
       "canonical_panel_sha256": "c5dad2c9577431e9765bc02b166e8d5a2b4c4b4c8e761fbb5bbce50f4e6498ff",
       "prudential_population_boundary_review": "model/calibration_validation/bank_credit_prudential_population_boundary_review.json",
       "prudential_population_boundary_status": "DIRECT_CBD2_TO_BNR_POPULATION_EQUIVALENCE_REJECTED_NEW_MATCHED_SOURCE_REQUIRED",
-      "bnr_prudential_table_materialisation_contract": "model/calibration_validation/bnr_prudential_table_materialisation_contract.json"
+      "bnr_prudential_table_materialisation_contract": "model/calibration_validation/bnr_prudential_table_materialisation_contract.json",
+      "bnr_prudential_table_source_enumeration": "model/calibration_validation/bnr_prudential_table_source_enumeration.json",
+      "bnr_prudential_source_enumeration_status": "INCOMPLETE_SOURCE_ENUMERATION_NO_MODEL_EFFECT",
+      "bnr_prudential_exact_primary_years_identified": [
+        2019,
+        2022,
+        2024
+      ],
+      "bnr_prudential_exact_primary_identified_count": 3,
+      "bnr_prudential_required_year_count": 11
     },
     {
       "id": "exchange_rate_pass_through_to_inflation",
