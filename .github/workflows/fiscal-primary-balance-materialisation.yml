@@ -1,19 +1,16 @@
 name: Fiscal Primary Balance Source Materialisation
 
-# Live-source refresh/materialisation is manual-only. Before this workflow
-# reaches the default branch, one explicit PR label provides a one-shot
-# bootstrap trigger. Ordinary PR activity never calls the provider.
+# Live-source refresh/materialisation is manual-only. The pre-merge bootstrap
+# run has been retained as an immutable reviewed source vintage. Future refresh
+# work remains workflow_dispatch-only and never runs in ordinary PR/CI activity.
 on:
   workflow_dispatch:
-  pull_request:
-    types: [labeled]
 
 permissions:
   contents: read
 
 jobs:
   materialise-fiscal-primary-balance:
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.label.name == 'run-live-fiscal-primary-balance' }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
