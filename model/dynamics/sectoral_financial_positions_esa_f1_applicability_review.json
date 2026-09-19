@@ -89,8 +89,20 @@
     "behavioural_closure_changed": false
   },
   "next_action": {
-    "status": "NO_IMMEDIATE_SOURCE_RERUN",
-    "rule": "If this corrected applicability treatment is ever tested, create a new separately preregistered future phase/contract before opening a new source result. Do not overwrite the executed Phase B contract or its A-D assessments.",
-    "rationale": "The correction is methodological and was identified after the A-D source outcomes. Preserving experiment history has priority over retroactive contract cleanup."
+    "status": "EXPLORATORY_REAUDIT_RETAINED_NO_FURTHER_RERUN",
+    "rule": "The corrected-applicability run is retained as exploratory evidence only. Do not reinterpret historical A-D or tune F1 orientation/structural-zero rules from its residuals. Any future formal test requires a new independently preregistered phase before opening new source outcomes.",
+    "rationale": "The exploratory run occurred after the original A-D outcomes and showed large reconciliation failures. Its scientific value is diagnostic; it does not authorize adaptive source remapping."
+  },
+  "exploratory_reaudit": {
+    "status": "EXECUTED_AFTER_HISTORICAL_A_D_EXPLORATORY_ONLY",
+    "assessment": "model/dynamics/sectoral_financial_positions_esa_f1_applicability_reaudit_assessment.json",
+    "executed_contract_snapshot": "model/dynamics/sectoral_financial_positions_esa_f1_applicability_reaudit_contract_executed_2026-09-19.json",
+    "workflow_run_id": 35414165822,
+    "workflow_artifact_id": 10575740521,
+    "workflow_head_sha": "84d0d40c360269449ccc613cdbb6336c23b6c98e",
+    "workflow_artifact_sha256": "48048cdd4c4ce912fc78151791df58821fd18c009b98c50d825449f43ceb7e43",
+    "formal_gate": false,
+    "readiness_effect": 0,
+    "result": "RECONCILIATION_FAIL_NO_PROMOTION"
   }
 }
