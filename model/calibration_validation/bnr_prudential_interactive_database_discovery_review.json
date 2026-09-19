@@ -1,0 +1,53 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "aggregate_bank_credit_response",
+  "governed_by": "model/calibration_validation/bnr_prudential_interactive_database_discovery_contract.json",
+  "status": "OFFICIAL_DATABASE_SURFACE_CONFIRMED_TARGET_SERIES_NOT_IDENTIFIED_IN_PUBLIC_INDEX",
+  "official_evidence": [
+    {
+      "source": "BNR current interactive database page",
+      "url": "https://www.bnr.ro/1074-baza-de-date-interactiva",
+      "finding": "BNR exposes an official interactive statistical database surface. The crawlable page confirms the service but does not expose a complete underlying dataset/series catalogue."
+    },
+    {
+      "source": "BNR statistical metadata document indexed on official site",
+      "url": "https://www.bnr.ro/uploads/editor/1740961259.pdf",
+      "finding": "BNR documentation states that its interactive database contains monthly and quarterly series; the cited example concerns external-sector data and does not establish that prudential indicators are included."
+    }
+  ],
+  "web_search_screening": {
+    "target_queries": [
+      "BNR interactive database total capital ratio",
+      "BNR interactive database non-performing loan ratio",
+      "BNR baza de date interactivă indicatori prudențialitate"
+    ],
+    "exact_target_machine_readable_series_identified": false,
+    "search_index_non_discovery_is_absence": false,
+    "third_party_references_to_bnr_database_found": true,
+    "third_party_references_promotable": false
+  },
+  "interpretation": "The official database is a valid reopen surface, but current public/indexed evidence does not identify stable machine-readable series IDs or exports for the two target prudential indicators. This is inconclusive discovery, not evidence of source absence.",
+  "disposition": {
+    "interactive_database_path_status": "OPEN_REOPEN_TRIGGER_NOT_YET_MATERIALISABLE",
+    "pdf_source_enumeration_status": "INCOMPLETE_SOURCE_ENUMERATION_NO_MODEL_EFFECT",
+    "pdf_path_remains_active": true,
+    "source_byte_acquisition_authorized": false,
+    "numeric_extraction_authorized": false,
+    "canonical_series_mutation_authorized": false,
+    "structural_selection_authorized": false,
+    "estimation_or_refit_authorized": false
+  },
+  "next_admissible_action": "Reopen this path only when the BNR interactive database exposes, through an official browser/export/API surface, stable identifiers and metadata for the exact prudential targets. Do not infer internal endpoints or treat search-index silence as absence. Continue the existing PDF source-enumeration path only when exact official links are independently exposed.",
+  "hard_rules": {
+    "no_internal_endpoint_guessing": true,
+    "no_value_peeking": true,
+    "no_third_party_promotion": true,
+    "no_search_index_failure_as_negative_evidence": true,
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_holdout_opening": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  }
+}
