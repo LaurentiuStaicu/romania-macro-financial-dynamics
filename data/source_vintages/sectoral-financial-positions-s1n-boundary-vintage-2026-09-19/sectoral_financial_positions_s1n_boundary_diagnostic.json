@@ -1,0 +1,172 @@
+{
+  "audit_version": "0.1",
+  "phase": "Post-run Sectoral Financial Positions — S1N boundary coverage/explanation diagnostic",
+  "reference_mode": "sectoral_financial_positions",
+  "formal_reference_mode_gate": false,
+  "source": {
+    "series_requested": 8,
+    "series_status_counts": {
+      "HTTP_ERROR": 8
+    },
+    "network_errors": []
+  },
+  "side_statuses": {
+    "stock": {
+      "A": "missing:Q.N.RO.W0.S1N.S1.N.A.LE.F._Z._Z.XDC._T.S.V.N._T",
+      "L": "missing:Q.N.RO.W0.S1N.S1.N.L.LE.F._Z._Z.XDC._T.S.V.N._T"
+    },
+    "flow": {
+      "A": "missing:Q.N.RO.W0.S1N.S1.N.A.F.F._Z._Z.XDC._T.S.V.N._T",
+      "L": "missing:Q.N.RO.W0.S1N.S1.N.L.F.F._Z._Z.XDC._T.S.V.N._T"
+    }
+  },
+  "coverage": {
+    "stock": {
+      "available": false,
+      "common_observation_count": 0,
+      "first_period": null,
+      "last_period": null,
+      "missing_required_2025_periods": [
+        "2025-Q1",
+        "2025-Q2",
+        "2025-Q3",
+        "2025-Q4"
+      ],
+      "minimum_common_observation_count_pass": false
+    },
+    "flow": {
+      "available": false,
+      "common_observation_count": 0,
+      "first_period": null,
+      "last_period": null,
+      "missing_required_2025_periods": [
+        "2025-Q1",
+        "2025-Q2",
+        "2025-Q3",
+        "2025-Q4"
+      ],
+      "minimum_common_observation_count_pass": false
+    }
+  },
+  "coverage_gate_pass": false,
+  "frozen_phase_C_envelope_million_RON": 0.08,
+  "historical_phase_D_residuals_million_RON": {
+    "2017-Q2": -0.08453124971129,
+    "2021-Q3": -0.15539062535390258,
+    "2022-Q3": 0.11500000022351742,
+    "2023-Q2": 0.08992187562398612,
+    "2024-Q1": -0.10851562465541065
+  },
+  "stock_explanation": {
+    "2017-Q2": {
+      "historical_residual_million_RON": -0.08453124971129,
+      "s1n_available": false
+    },
+    "2021-Q3": {
+      "historical_residual_million_RON": -0.15539062535390258,
+      "s1n_available": false
+    },
+    "2022-Q3": {
+      "historical_residual_million_RON": 0.11500000022351742,
+      "s1n_available": false
+    },
+    "2023-Q2": {
+      "historical_residual_million_RON": 0.08992187562398612,
+      "s1n_available": false
+    },
+    "2024-Q1": {
+      "historical_residual_million_RON": -0.10851562465541065,
+      "s1n_available": false
+    }
+  },
+  "explanatory_gate_pass": false,
+  "disposition": "NO_REOPEN_EVIDENCE_FROM_S1N",
+  "promotion_eligible": false,
+  "readiness_count_change": 0,
+  "historical_A_D_reinterpreted": false,
+  "accounting_readiness_changed": false,
+  "behavioural_closure_changed": false,
+  "interpretation": "Post-run boundary diagnostic only. Even a positive S1N explanation is only evidence that a new formal reference-boundary retest may be preregistered; it cannot promote the mode or rewrite A-D.",
+  "source_results": {
+    "Q.N.RO.W0.S1N.S1.N.L.F.F1._Z._Z.XDC._T.S.V.N._T": {
+      "key": "Q.N.RO.W0.S1N.S1.N.L.F.F1._Z._Z.XDC._T.S.V.N._T",
+      "url": "https://data-api.ecb.europa.eu/service/data/QSA/Q.N.RO.W0.S1N.S1.N.L.F.F1._Z._Z.XDC._T.S.V.N._T?startPeriod=2014-Q1&endPeriod=2026-Q2&format=csvdata",
+      "http_status": 404,
+      "raw_path": "raw/e90ec43cdcfa3b5ecd65.csv",
+      "raw_sha256": "93bb001c40e056b5f1acab628dadbb44ca521cfc4a52142164ad0827f22c334c",
+      "raw_bytes": 551,
+      "observations": {},
+      "status": "HTTP_ERROR"
+    },
+    "Q.N.RO.W0.S1N.S1.N.L.LE.F1._Z._Z.XDC._T.S.V.N._T": {
+      "key": "Q.N.RO.W0.S1N.S1.N.L.LE.F1._Z._Z.XDC._T.S.V.N._T",
+      "url": "https://data-api.ecb.europa.eu/service/data/QSA/Q.N.RO.W0.S1N.S1.N.L.LE.F1._Z._Z.XDC._T.S.V.N._T?startPeriod=2014-Q1&endPeriod=2026-Q2&format=csvdata",
+      "http_status": 404,
+      "raw_path": "raw/de615d987bae2f3db9b6.csv",
+      "raw_sha256": "222ddb2cefe56ff2c244ab661f7cf8155d2b6c13c406acf21b304821eb39ad3a",
+      "raw_bytes": 554,
+      "observations": {},
+      "status": "HTTP_ERROR"
+    },
+    "Q.N.RO.W0.S1N.S1.N.L.LE.F._Z._Z.XDC._T.S.V.N._T": {
+      "key": "Q.N.RO.W0.S1N.S1.N.L.LE.F._Z._Z.XDC._T.S.V.N._T",
+      "url": "https://data-api.ecb.europa.eu/service/data/QSA/Q.N.RO.W0.S1N.S1.N.L.LE.F._Z._Z.XDC._T.S.V.N._T?startPeriod=2014-Q1&endPeriod=2026-Q2&format=csvdata",
+      "http_status": 404,
+      "raw_path": "raw/d011170c6aeb45175892.csv",
+      "raw_sha256": "65d5c860dd2cdf6444efa8c4557b1e51f5e0d002bb39d36d54d8411e8012aa28",
+      "raw_bytes": 551,
+      "observations": {},
+      "status": "HTTP_ERROR"
+    },
+    "Q.N.RO.W0.S1N.S1.N.A.F.F._Z._Z.XDC._T.S.V.N._T": {
+      "key": "Q.N.RO.W0.S1N.S1.N.A.F.F._Z._Z.XDC._T.S.V.N._T",
+      "url": "https://data-api.ecb.europa.eu/service/data/QSA/Q.N.RO.W0.S1N.S1.N.A.F.F._Z._Z.XDC._T.S.V.N._T?startPeriod=2014-Q1&endPeriod=2026-Q2&format=csvdata",
+      "http_status": 404,
+      "raw_path": "raw/6a841f835f2b2d47ce8e.csv",
+      "raw_sha256": "b02d9a91f0fe7bf9d4ef9d734d4ed0501b3aaaafe58e0f025f648b92dcf98ec4",
+      "raw_bytes": 548,
+      "observations": {},
+      "status": "HTTP_ERROR"
+    },
+    "Q.N.RO.W0.S1N.S1.N.L.F.F._Z._Z.XDC._T.S.V.N._T": {
+      "key": "Q.N.RO.W0.S1N.S1.N.L.F.F._Z._Z.XDC._T.S.V.N._T",
+      "url": "https://data-api.ecb.europa.eu/service/data/QSA/Q.N.RO.W0.S1N.S1.N.L.F.F._Z._Z.XDC._T.S.V.N._T?startPeriod=2014-Q1&endPeriod=2026-Q2&format=csvdata",
+      "http_status": 404,
+      "raw_path": "raw/7fa794aa01dae9058589.csv",
+      "raw_sha256": "2103ae886622dc5107831d85faee26d1bddc13ec67098594764ad0be2991510c",
+      "raw_bytes": 548,
+      "observations": {},
+      "status": "HTTP_ERROR"
+    },
+    "Q.N.RO.W0.S1N.S1.N.A.F.F1._Z._Z.XDC._T.S.V.N._T": {
+      "key": "Q.N.RO.W0.S1N.S1.N.A.F.F1._Z._Z.XDC._T.S.V.N._T",
+      "url": "https://data-api.ecb.europa.eu/service/data/QSA/Q.N.RO.W0.S1N.S1.N.A.F.F1._Z._Z.XDC._T.S.V.N._T?startPeriod=2014-Q1&endPeriod=2026-Q2&format=csvdata",
+      "http_status": 404,
+      "raw_path": "raw/9d84c00e657fd30d20e1.csv",
+      "raw_sha256": "36609f8e513c8e68843b353c1999661cc1455dd9a8599cdb7f8aea5688f0d287",
+      "raw_bytes": 551,
+      "observations": {},
+      "status": "HTTP_ERROR"
+    },
+    "Q.N.RO.W0.S1N.S1.N.A.LE.F._Z._Z.XDC._T.S.V.N._T": {
+      "key": "Q.N.RO.W0.S1N.S1.N.A.LE.F._Z._Z.XDC._T.S.V.N._T",
+      "url": "https://data-api.ecb.europa.eu/service/data/QSA/Q.N.RO.W0.S1N.S1.N.A.LE.F._Z._Z.XDC._T.S.V.N._T?startPeriod=2014-Q1&endPeriod=2026-Q2&format=csvdata",
+      "http_status": 404,
+      "raw_path": "raw/0b2915e0a5f60aec8441.csv",
+      "raw_sha256": "bdea3f35bd93a108bf1f48d6b3ecee694c69fb0dc8222d8f8365c15a65623713",
+      "raw_bytes": 551,
+      "observations": {},
+      "status": "HTTP_ERROR"
+    },
+    "Q.N.RO.W0.S1N.S1.N.A.LE.F1._Z._Z.XDC._T.S.V.N._T": {
+      "key": "Q.N.RO.W0.S1N.S1.N.A.LE.F1._Z._Z.XDC._T.S.V.N._T",
+      "url": "https://data-api.ecb.europa.eu/service/data/QSA/Q.N.RO.W0.S1N.S1.N.A.LE.F1._Z._Z.XDC._T.S.V.N._T?startPeriod=2014-Q1&endPeriod=2026-Q2&format=csvdata",
+      "http_status": 404,
+      "raw_path": "raw/e2e9d47ac0843d028497.csv",
+      "raw_sha256": "c643aa8b1e9c1552c8460ed35cf49e1c3b487982113d967c4a93afe6a4d50422",
+      "raw_bytes": 554,
+      "observations": {},
+      "status": "HTTP_ERROR"
+    }
+  }
+}
