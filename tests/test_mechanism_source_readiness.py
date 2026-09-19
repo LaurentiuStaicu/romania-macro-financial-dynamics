@@ -52,17 +52,21 @@ class MechanismSourceReadinessTests(unittest.TestCase):
             self.readiness["coverage_rule"]["missing_entries_allowed"]
         )
 
-    def test_next_step_advances_after_failed_corporate_form(self) -> None:
+    def test_next_step_consolidates_post_screening_baseline(self) -> None:
         step = self.readiness["current_next_step"]
         self.assertEqual(
             step["mechanism_id"],
-            "monetary_policy_reaction_function",
+            "SCIENTIFIC_BASELINE",
         )
         self.assertEqual(
             step["action"],
-            "SCREEN_INFLATION_EXPECTATIONS_AND_GAP_MEASUREMENT_SOURCES_NO_ESTIMATION",
+            "CONSOLIDATE_POST_SCREENING_MECHANISM_READINESS_AND_INVARIANTS",
         )
         self.assertFalse(step["calibration_cycle_open"])
+        self.assertIn(
+            "Every registered behavioural mechanism",
+            step["reason"],
+        )
 
         mechanisms = {
             item["id"]: item for item in self.readiness["mechanisms"]
@@ -161,13 +165,13 @@ class MechanismSourceReadinessTests(unittest.TestCase):
             mechanisms["monetary_policy_reaction_function"][
                 "priority_group"
             ],
-            "DEFER_UNTIL_REACTION_FUNCTION_IDENTIFICATION_CONTRACT",
+            "DEFER_UNTIL_EXPECTATIONS_GAP_VINTAGE_IDENTIFICATION_CONTRACT",
         )
         self.assertEqual(
             mechanisms["external_fx_refinancing_feedback"][
                 "priority_group"
             ],
-            "DEFER_UNTIL_CURRENCY_RESIDUAL_MATURITY_HEDGING_SOURCE",
+            "DEFER_UNTIL_JOINT_EXPOSURE_SOURCE",
         )
 
 
