@@ -95,6 +95,17 @@
       "chart_digitisation": false
     },
     {
+      "quarter": "2024-Q4",
+      "source": "BNR Bank Lending Survey, February 2025",
+      "url": "https://www.luba.ro/static/images/files/sondaj.pdf",
+      "source_identity_note": "Publicly indexed mirror of the BNR February-2025 Bank Lending Survey report; report title, BNR branding and methodology identify the original BNR publication. Exact official BNR file URL was not indexed in the current source search.",
+      "new_housing_loans_dsti_percent": 35,
+      "outstanding_housing_loans_dsti_percent": 41,
+      "publication_precision_dp": 0,
+      "extraction": "DIRECT_REPORT_TEXT",
+      "chart_digitisation": false
+    },
+    {
       "quarter": "2025-Q1",
       "source": "BNR Bank Lending Survey, May 2025",
       "url": "https://www.bnr.ro/uploads/2025-06-13blst1may2025_documentpdf_545_1749803028.pdf",
@@ -125,7 +136,7 @@
     "exact_longitudinal_level_history_retained": false,
     "current_retained_legacy_bls_workbooks_are_not_level_series": true,
     "reason": "The retained legacy workbooks encode BLS response distributions/net percentages, including P0303/P1103 lending-term-change questions. They do not by themselves constitute the published bank-average DSTI level history.",
-    "next_gate": "Recover the missing 2024-Q4 publication-text level and identify/retain an official machine-readable housing-loan DSTI level history, separately for new and outstanding loans. A publication-text-only candidate family would require a separate preregistration and must preserve the approximate precision qualifier for 2025-Q1."
+    "next_gate": "Identify and retain an official machine-readable housing-loan DSTI level history, separately for new and outstanding loans. The complete 2023-Q1..2025-Q2 publication-text sequence may support a separately preregistered publication-text-only candidate family, but it must preserve source precision (including the approximate qualifier for 2025-Q1) and cannot be relabelled as the registered macro household DSR."
   },
   "modelling_boundary": {
     "registered_macro_dsr_term_identified": false,
@@ -158,11 +169,10 @@
     "window_start": "2023-Q1",
     "window_end": "2025-Q2",
     "expected_quarters": 10,
-    "directly_observed_quarters": 9,
-    "missing_quarters": [
-      "2024-Q4"
-    ],
-    "coverage_fraction": 0.9,
-    "complete_longitudinal_history": false
+    "directly_observed_quarters": 10,
+    "missing_quarters": [],
+    "coverage_fraction": 1,
+    "complete_longitudinal_history": true,
+    "precision_boundary": "Complete only at the precision and qualifiers explicitly reported in publication text; this is not an exact workbook-cell or machine-readable source history."
   }
 }
