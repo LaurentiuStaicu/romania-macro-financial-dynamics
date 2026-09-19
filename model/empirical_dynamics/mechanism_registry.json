@@ -15,9 +15,9 @@
   "mechanisms": [
     {
       "id": "monetary_policy_lending_rate_pass_through",
-      "classification": "ACTIVATED",
+      "classification": "CANDIDATE",
       "maps_to_dynamic_core_loop": "monetary_credit_transmission_loop",
-      "central_feedback": true,
+      "central_feedback": false,
       "functional_form": "r_lend[t] = r_lend[t-1] + lambda * (alpha + beta * policy_rate[t] - r_lend[t-1])",
       "implementation": "partial_adjustment_rate",
       "parameters": [
@@ -64,19 +64,24 @@
         "lambda practically non-identifiable",
         "fails to improve materially over persistence/naive lending-rate baseline out of sample",
         "residual dynamics show systematic omitted lag structure"
-      ]
+      ],
+      "validation_recovery_disposition": {
+        "status": "CANDIDATE",
+        "source": "model/calibration_validation/validation_recovery_disposition.json",
+        "interpretation": "The household delta-policy form passed structural selection but the fresh holdout contained no policy-rate movement and could not distinguish the candidate from persistence. NFC tested forms failed structural selection before holdout. The generic pass-through mechanism therefore remains a candidate and is not an active central feedback."
+      }
     },
     {
       "id": "government_refinancing_effective_rate",
-      "classification": "ACTIVATED",
+      "classification": "DEFERRED",
       "maps_to_dynamic_core_loop": "government_refinancing_interest_loop",
-      "central_feedback": true,
+      "central_feedback": false,
       "functional_form": "effective_rate[t] = (1-m[t])*effective_rate[t-1] + m[t]*marginal_market_yield[t]",
       "implementation": "refinancing_effective_rate",
       "parameters": [
         {
           "id": "m[t]",
-          "status": "DATA_DERIVED_OR_ESTIMATE_0.5",
+          "status": "UNIDENTIFIED_NO_DEFAULT",
           "unit": "fraction_per_period",
           "bounds": [
             0,
@@ -105,7 +110,12 @@
       "rejection_or_degradation_criteria": [
         "maturity/refinancing share cannot be bounded from data",
         "implied effective-rate path violates observed interest expenditure beyond declared reconciliation tolerance"
-      ]
+      ],
+      "validation_recovery_disposition": {
+        "status": "DEFERRED",
+        "source": "model/calibration_validation/government_repricing_ledger_assessment.json",
+        "interpretation": "Ledger completeness failed before estimation and the repricing share is not point-identifiable at the current public-data boundary. No synthetic allocation is permitted; the mechanism is deferred."
+      }
     },
     {
       "id": "household_consumption_response",
