@@ -23,6 +23,18 @@ class DebtServiceSourceScreeningTests(unittest.TestCase):
         self.assertTrue(any("not the BIS macro" in x for x in bnr["semantic_boundary"]))
         self.assertTrue(any("New-loan DSTI" in x for x in bnr["semantic_boundary"]))
 
+    def test_bnr_housing_dsti_levels_are_observed_but_not_macro_dsr(self):
+        bnr=self.r["bnr_household_dsti"]
+        self.assertTrue(bnr["official_quarterly_level_observations_confirmed"])
+        self.assertEqual(
+            bnr["publication_level_boundary_review"],
+            "model/calibration_validation/bnr_household_dsti_level_publication_boundary_review.json",
+        )
+        obs={item["quarter"]:item for item in bnr["confirmed_publication_text_observations"]}
+        self.assertEqual(obs["2024-Q2"]["new_housing_loans_dsti_percent"],34.6)
+        self.assertEqual(obs["2025-Q2"]["outstanding_housing_loans_dsti_percent"],42.0)
+        self.assertFalse(bnr["exact_machine_readable_history_retained"])
+
     def test_screening_does_not_authorize_estimation(self):
         d=self.r["dispositions"]
         self.assertFalse(d["household_consumption_response"]["estimation_authorized"])
