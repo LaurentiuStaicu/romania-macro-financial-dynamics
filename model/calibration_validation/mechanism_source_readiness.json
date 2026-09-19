@@ -36,11 +36,11 @@
       "id": "aggregate_bank_credit_response",
       "classification": "CANDIDATE",
       "source_readiness": "BLS_CANONICAL_11_OF_12_EXACT_WORKBOOK_RECOVERY_RETAINED_SINGLE_GAP_2025_Q2",
-      "next_admissible_action": "Keep calibration closed. The matched BNR prudential source-discovery stage is closed under the current public surface and must not be repeated without a new official trigger. Reopen the prudential path only if BNR exposes a new exact bulletin link/archive listing, a stable matched machine-readable series/export/API, or an explicit population bridge. Independently, BLS may reopen only if the exact official 2025-Q2 workbook endpoint is identified.",
+      "next_admissible_action": "Keep calibration closed. The matched BNR prudential source-discovery stage and the sole remaining BLS 2025-Q2 exact-source discovery stage are both frozen under the current public surface. Reopen the prudential path only on its declared new-official-evidence triggers. Reopen the BLS path only if BNR exposes an exact 2025-Q2 workbook endpoint or an exact official machine-readable time-series/catalog target with matching realised-round semantics.",
       "blockers": [
         "The canonical realised BNR BLS panel now contains 11 exact observed rounds from 2022-Q4 through 2025-Q3; only 2025-Q2 remains missing.",
         "Exact 2023-Q2, 2023-Q3 and 2024-Q2 workbooks are retained with hashes, all six preregistered observables are semantically mapped, and those three rounds are canonically promoted without interpolation.",
-        "For 2025-Q2 the official publication text is corroborative, but the exact official workbook endpoint/bytes are not retained; rounded publication values may not replace workbook-cell precision.",
+        "For 2025-Q2 the official publication text is complete but rounded; the exact official workbook endpoint/bytes remain unretained. The current public discovery surface is exhausted for exact endpoint identity and is frozen until a declared new-official-evidence trigger; rounded publication values may not replace workbook-cell precision.",
         "Official definitions reject direct CBD2-to-BNR substitution: BNR prudential indicators cover Romanian-legal-entity banks, while CBD2 sector 11 covers domestic banking groups/stand-alone banks under a consolidated domestic-control framework. A new matched source or exact BNR-table history is required.",
         "The aggregate reduced form still mixes credit demand and supply, while NPL and capital ratios are endogenous prudential state variables; source completeness alone does not identify a bank-supply channel.",
         "No NFC/household synthetic aggregation, interpolation, forward-fill, credit-equation estimation, model selection or holdout opening is authorized."
@@ -88,7 +88,7 @@
         "2023-Q2": "RECOVERED_EXACT_OLE2_WORKBOOK_RETAINED_SEMANTICALLY_MAPPED_AND_CANONICALLY_PROMOTED",
         "2023-Q3": "RECOVERED_EXACT_OLE2_WORKBOOK_RETAINED_SEMANTICALLY_MAPPED_AND_CANONICALLY_PROMOTED",
         "2024-Q2": "RECOVERED_EXACT_OLE2_WORKBOOK_RETAINED_SEMANTICALLY_MAPPED_AND_CANONICALLY_PROMOTED",
-        "2025-Q2": "OFFICIAL_ANNEX_EXISTENCE_KNOWN_EXACT_URL_UNIDENTIFIED"
+        "2025-Q2": "FROZEN_EXACT_ENDPOINT_UNIDENTIFIED_UNTIL_NEW_OFFICIAL_EVIDENCE"
       },
       "recovered_exact_rounds": [
         "2023-Q2",
@@ -115,7 +115,9 @@
       "bnr_prudential_interactive_database_discovery_review": "model/calibration_validation/bnr_prudential_interactive_database_discovery_review.json",
       "bnr_prudential_interactive_database_discovery_status": "OFFICIAL_DATABASE_CONFIRMED_TARGET_SERIES_NOT_IDENTIFIED_STAGE_FROZEN",
       "bnr_prudential_source_discovery_terminal_assessment": "model/calibration_validation/bnr_prudential_source_discovery_terminal_assessment.json",
-      "bnr_prudential_source_discovery_stage_status": "STAGE_CLOSED_FROZEN_INCOMPLETE_UNDER_CURRENT_PUBLIC_DISCOVERY_SURFACE_NO_MODEL_EFFECT"
+      "bnr_prudential_source_discovery_stage_status": "STAGE_CLOSED_FROZEN_INCOMPLETE_UNDER_CURRENT_PUBLIC_DISCOVERY_SURFACE_NO_MODEL_EFFECT",
+      "bnr_bls_2025q2_source_discovery_terminal_assessment": "model/calibration_validation/bnr_bls_2025q2_source_discovery_terminal_assessment.json",
+      "bnr_bls_2025q2_source_discovery_stage_status": "STAGE_CLOSED_FROZEN_SINGLE_GAP_2025_Q2_UNDER_CURRENT_PUBLIC_DISCOVERY_SURFACE_NO_MODEL_EFFECT"
     },
     {
       "id": "exchange_rate_pass_through_to_inflation",
