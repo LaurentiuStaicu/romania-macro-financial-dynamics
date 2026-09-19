@@ -71,7 +71,8 @@ class MechanismSourceReadinessTests(unittest.TestCase):
             step["execution_mode"],
             "MANUAL_ONLY_LIVE_SOURCE_EVIDENCE",
         )
-        self.assertIn("declared reopen trigger", step["reason"])
+        self.assertIn("manual-only", step["reason"])
+        self.assertIn("no retained CAPB vintage", step["reason"])
 
         mechanisms = {
             item["id"]: item for item in self.readiness["mechanisms"]
