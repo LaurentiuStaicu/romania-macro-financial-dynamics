@@ -171,20 +171,15 @@
       "classification": "CANDIDATE",
       "maps_to_dynamic_core_loop": null,
       "central_feedback": false,
-      "functional_form": "gI = alpha + beta_d*demand_growth - beta_r*real_corporate_lending_rate + beta_eu*EU_fund_impulse",
-      "implementation": "corporate_investment_growth",
-      "parameters": [
-        "alpha",
-        "beta_d",
-        "beta_r",
-        "beta_eu"
-      ],
-      "estimation_plan": "Calibration remains closed. Retain exact aggregate GFCF and NFC lending-rate sources only as source evidence. Before estimation, materialize a sector-consistent NFC investment target, freeze the demand observable and quarterly financing-cost transformation, and define an ex-ante accounting bridge for any EU-fund impulse. Cumulative programme payments may not be differenced and relabelled as corporate investment. Any reduced form requires a new preregistered candidate-family contract.",
+      "functional_form": "No admitted corporate-investment behavioural form. The preregistered quarterly lagged real-activity + up-to-one-year NFC new-business financing-rate candidate, and its D.92 support extension, were tested on 2022-Q1..2023-Q4 and failed before holdout.",
+      "implementation": null,
+      "parameters": [],
+      "estimation_plan": "Freeze the 2026-09-19 tested investment-intensity forms at FAIL_BEFORE_HOLDOUT. Do not inspect 2024-Q1..2026-Q1 final-evaluation performance, change the financing-rate sign convention, search alternative lags, drop predictors, add interactions/regimes, switch target, or reinterpret D.92 after observing this result. Reopen only in a separately preregistered cycle triggered by genuinely new measurement or identification evidence.",
       "observables": [
-        "gross_fixed_capital_formation",
-        "real_GDP_or_demand",
-        "corporate_lending_rate",
-        "EU_fund_disbursement_or_investment_proxy"
+        "NFC investment rate (P51G / NFC GVA)",
+        "real GDP year-on-year growth",
+        "NFC RON new-business lending rate with variable/up-to-one-year initial fixation",
+        "NFC D.92 investment-grant support intensity"
       ],
       "evidence": [
         "ec_2026_romania_forecast",
@@ -192,20 +187,36 @@
         "eurostat_namq_10_gdp"
       ],
       "limits": [
-        "public and private investment are mixed in aggregate GFCF",
-        "EU-funded investment creates large policy-driven variation",
-        "total-economy GFCF may not be relabelled as corporate investment without a sector bridge",
-        "cumulative EU programme payments are not a quarterly NFC investment impulse without an explicit accounting bridge"
+        "the tested 34-quarter panel is short",
+        "real GDP growth is an activity proxy rather than an identified demand shock",
+        "the selected NFC financing-rate series is a marginal new-business rate, not an effective stock rate",
+        "D.92 is sector-consistent investment support but not EU-specific",
+        "the tested core and support-augmented forms failed predictive and parameter-domain gates before final evaluation"
       ],
       "rejection_or_degradation_criteria": [
-        "financing-cost term not identifiable",
-        "candidate loses to demand-only baseline out of sample",
-        "parameter instability around EU-fund cycles"
+        "tested lagged-driver forms failed before holdout on predictive and financing-rate parameter-domain gates",
+        "any future reopening requires genuinely new evidence and a separately preregistered cycle rather than post-result respecification"
       ],
       "source_boundary_review": "model/calibration_validation/corporate_investment_source_boundary_review.json",
       "measurement_design_contract": "model/calibration_validation/corporate_investment_measurement_design_contract.json",
       "retained_source_vintage": "data/source_vintages/corporate-investment-source-family-vintage-2026-09-19",
-      "measurement_design_status": "PREREGISTERED_MEASUREMENT_ONLY_NO_BEHAVIOURAL_FORM_ADMITTED"
+      "measurement_design_status": "TESTED_FORM_FAILED_BEFORE_HOLDOUT_MEASUREMENT_VINTAGES_RETAINED",
+      "supplemental_source_vintage": "data/source_vintages/corporate-investment-supplemental-source-vintage-2026-09-19",
+      "financing_rate_screening_result": "model/calibration_validation/corporate_investment_financing_rate_source_screening_result.json",
+      "measurement_panel_vintage": "data/source_vintages/corporate-investment-measurement-panel-vintage-2026-09-19",
+      "structural_selection_contract": "model/calibration_validation/corporate_investment_structural_selection_contract.json",
+      "structural_selection_result": "model/calibration_validation/corporate_investment_structural_selection_result.json",
+      "structural_selection_disposition": {
+        "status": "TESTED_FORM_FAILED_BEFORE_HOLDOUT",
+        "selection_window": "2022-Q1..2023-Q4",
+        "final_evaluation_window": "2024-Q1..2026-Q1",
+        "final_evaluation_opened": false,
+        "selected_form_for_final_evaluation": null,
+        "core_rmse_improvement_vs_persistence": -0.4737624846594073,
+        "core_rmse_improvement_vs_investment_rate_ar": -0.581362014058729,
+        "financing_rate_domain_fraction": 0,
+        "interpretation": "The frozen lagged-driver candidate underperformed both preregistered baselines and its financing-rate coefficient failed the expected non-positive domain at every selection origin. This rejects the tested forms in this cycle, not the general possibility that activity, financing conditions or investment support affect corporate investment."
+      }
     },
     {
       "id": "aggregate_bank_credit_response",
