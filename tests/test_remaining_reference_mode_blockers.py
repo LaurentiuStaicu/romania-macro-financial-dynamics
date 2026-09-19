@@ -222,7 +222,7 @@ class RemainingReferenceModeBlockerTests(unittest.TestCase):
             screening["synthesis"]["ministry_2024_plan_values_include_prefunding"]
         )
         self.assertFalse(screening["synthesis"]["promotion_supported"])
-        self.assertEqual(mode["status"], "PARTIAL_SERIES_AVAILABLE")
+        self.assertEqual(mode["status"], "OBSERVED_SERIES_AVAILABLE")
 
     def test_refinancing_promotion_preserves_proxy_and_plan_prohibitions(self) -> None:
         contract = load(
@@ -237,7 +237,9 @@ class RemainingReferenceModeBlockerTests(unittest.TestCase):
         }
 
         self.assertIn("gross financing need", excluded)
-        self.assertIn("pre-financing", excluded)
+        self.assertTrue(
+            provenance["hard_boundaries"]["no_prefinancing_substitution"]
+        )
         self.assertIn("maturity", excluded)
         self.assertIn("refixing", excluded)
         self.assertIn("m[t]", excluded)
