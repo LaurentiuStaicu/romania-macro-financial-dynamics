@@ -34,6 +34,7 @@ LIVE_MANUAL_WORKFLOWS = [
     ".github/workflows/sectoral-financial-positions-source-discrepancy-audit.yml",
     ".github/workflows/sectoral-financial-positions-esa-f1-applicability-reaudit.yml",
     ".github/workflows/sectoral-financial-positions-s1n-boundary-diagnostic.yml",
+    ".github/workflows/sectoral-financial-positions-oecd-counterpart-probe.yml",
 ]
 
 
