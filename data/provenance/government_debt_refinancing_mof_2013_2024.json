@@ -1,0 +1,185 @@
+{
+  "provenance_version": "0.2",
+  "retrieved_or_verified_date": "2026-09-19",
+  "variable": "government_refinancing_need",
+  "contract": "model/dynamics/government_refinancing_need_promotion_contract.json",
+  "series_status": "CANDIDATE_FOR_PROMOTION_PENDING_REPOSITORY_GATE",
+  "canonical_empirical_mapping": "Annual Ministry of Finance government-debt refinancing/principal-repayment component in billion RON, distinct from budget deficit, gross financing need and separately reported pre-financing.",
+  "coverage": {
+    "first_period": "2013",
+    "last_period": "2024",
+    "observation_count": 12,
+    "consecutive_completed_years": 12,
+    "forecast_or_planned_observations": 0
+  },
+  "sources": [
+    {
+      "id": "mof_annual_debt_report_2014",
+      "institution": "Romania Ministry of Finance",
+      "url": "https://www.mfinante.gov.ro/static/10/Mfp/buletin/executii/Annual_rep_govpubdebt_attheendofDec2014.pdf",
+      "observations": {
+        "2013": {
+          "value_bn_RON": 55.8,
+          "status": "FINAL_ANNUAL_REPORT"
+        },
+        "2014": {
+          "value_bn_RON": 47.9,
+          "status": "FINAL_ANNUAL_REPORT"
+        }
+      },
+      "definition_note": "Table 2 financing needs; refinancing of government public debt. Footnote defines principal and government-securities refinancing reimbursements on government public debt under national legislation, including guarantees and excluding temporary financing."
+    },
+    {
+      "id": "mof_monthly_debt_report_2016_11",
+      "institution": "Romania Ministry of Finance",
+      "url": "https://mfinante.gov.ro/static/10/Mfp/buletin/executii/Rapdatpublicanov_2016en.pdf",
+      "observations": {
+        "2015": {
+          "value_bn_RON": 53.0256,
+          "status": "RETROSPECTIVE_MONTHLY_REPORT_COMPLETED_YEAR"
+        }
+      },
+      "definition_note": "Borrowing requirement table reports completed-year 2015 principal repayments, decomposed into domestic government-security refinancing, external-loan principal and local-loan principal; footnote identifies debt repaid from budget."
+    },
+    {
+      "id": "mof_monthly_debt_report_2017_05",
+      "institution": "Romania Ministry of Finance",
+      "url": "https://mfinante.gov.ro/static/10/Mfp/buletin/executii/Publicdebtreportmay_2017.pdf",
+      "observations": {
+        "2016": {
+          "value_bn_RON": 50.8751,
+          "status": "RETROSPECTIVE_MONTHLY_REPORT_COMPLETED_YEAR"
+        }
+      },
+      "definition_note": "Borrowing requirement table reports completed-year 2016 principal repayments and component breakdown, with GDP for 2016 already updated from NSI."
+    },
+    {
+      "id": "mof_annual_debt_report_2018",
+      "institution": "Romania Ministry of Finance",
+      "url": "https://www.mfinante.gov.ro/static/10/Mfp/buletin/executii/raportanualprivindDPG31dec2018engl.pdf",
+      "observations": {
+        "2017": {
+          "value_bn_RON": 40.3,
+          "status": "FINAL_ANNUAL_REPORT"
+        },
+        "2018": {
+          "value_bn_RON": 43.4,
+          "status": "FINAL_ANNUAL_REPORT"
+        }
+      }
+    },
+    {
+      "id": "mof_annual_debt_report_2019",
+      "institution": "Romania Ministry of Finance",
+      "url": "https://www.mfinante.gov.ro/static/10/Mfp/buletin/executii/raportanualprivindDPG31dec2019engl24072020.pdf",
+      "observations": {
+        "2019": {
+          "value_bn_RON": 47.2,
+          "status": "OPERATIVE_EXECUTION_COMPLETED_YEAR"
+        }
+      }
+    },
+    {
+      "id": "mof_strategy_2021_2023",
+      "institution": "Romania Ministry of Finance",
+      "url": "https://www.mfinante.gov.ro/static/10/Mfp/buletin/executii/Strategie2021-2023_en.pdf",
+      "observations": {
+        "2020": {
+          "value_bn_RON": 46.6,
+          "status": "OPERATIVE_EXECUTION_COMPLETED_YEAR"
+        }
+      }
+    },
+    {
+      "id": "mof_annual_debt_report_2022",
+      "institution": "Romania Ministry of Finance",
+      "url": "https://www.mfinante.gov.ro/static/10/Mfp/buletin/executii/Raportprivinddatoriapublicaguv_31122022en.pdf",
+      "observations": {
+        "2021": {
+          "value_bn_RON": 53.5,
+          "status": "FINAL_ANNUAL_REPORT"
+        },
+        "2022": {
+          "value_bn_RON": 78.9,
+          "status": "FINAL_ANNUAL_REPORT"
+        }
+      },
+      "definition_note": "Table reports refinancing of Government Public Debt and explicitly defines it as capital-installment repayments and government-security refinancing under national law, excluding temporary financing."
+    },
+    {
+      "id": "mof_monthly_debt_report_2024_12",
+      "institution": "Romania Ministry of Finance",
+      "url": "https://mfinante.gov.ro/static/10/Mfp/buletin/executii/Publicdebtreport122024.pdf",
+      "observations": {
+        "2023": {
+          "value_bn_RON": 95.8347,
+          "status": "RETROSPECTIVE_MONTHLY_REPORT_COMPLETED_YEAR"
+        },
+        "2024": {
+          "value_bn_RON": 95.6546,
+          "status": "YEAR_END_UPDATED_EXECUTION"
+        }
+      },
+      "definition_note": "December 31 2024 borrowing-requirement table reports principal repayments separately from deficit and pre-financing. The 2023 financing need is explicitly updated from the 31 December 2023 budget execution; the 2024 table is the December 31 year-end report."
+    }
+  ],
+  "discarded_candidates": [
+    {
+      "year": 2013,
+      "value_bn_RON": 55.6,
+      "status": "PROJECTION",
+      "source_id": "mof_strategy_2014_2016",
+      "reason": "Forecast/projection loses to final annual-report observation 55.8."
+    },
+    {
+      "year": 2014,
+      "value_bn_RON": 45.7,
+      "status": "PROJECTION",
+      "source_id": "mof_strategy_2014_2016",
+      "reason": "Forecast/projection loses to final annual-report observation 47.9."
+    },
+    {
+      "year": 2015,
+      "value_bn_RON": 50,
+      "status": "ESTIMATE",
+      "source_id": "mof_strategy_2016_2018",
+      "reason": "Estimate loses to retrospective completed-year observation 53.0256."
+    },
+    {
+      "year": 2016,
+      "value_bn_RON": 48.6,
+      "status": "PLANNED",
+      "source_id": "mof_strategy_2016_2018",
+      "reason": "Plan loses to retrospective completed-year observation 50.8751."
+    },
+    {
+      "year": 2023,
+      "value_bn_RON": 95.8,
+      "status": "OPERATIVE_EXECUTION_COMPLETED_YEAR",
+      "source_id": "mof_strategy_2024_2026",
+      "reason": "Superseded by higher-precedence retrospective December 2024 report value 95.8347."
+    },
+    {
+      "year": 2024,
+      "value_bn_RON": 95.2221,
+      "status": "IN_YEAR_REVISED_PLAN",
+      "source_id": "mof_monthly_debt_report_2024_11",
+      "reason": "November in-year plan loses to December 31 year-end updated execution value 95.6546."
+    }
+  ],
+  "definition_bridge": {
+    "status": "PASS",
+    "reasoning": "Across retained sources the selected variable is the annual principal-repayment/government-debt-refinancing component of financing needs. Wording evolves from 'Refinancing of Government Public Debt' to 'Principal repayments', but the component remains separate from the budget deficit and any pre-financing; component tables identify domestic government-security refinancing plus external/local principal repayments.",
+    "gross_financing_need_not_used_as_observation": true,
+    "prefinancing_not_used_as_refinancing": true,
+    "maturity_or_refixing_proxy_not_used": true
+  },
+  "hard_boundaries": {
+    "no_forecasts_in_canonical_series": true,
+    "no_plans_in_canonical_series": true,
+    "no_gross_financing_need_substitution": true,
+    "no_prefinancing_substitution": true,
+    "no_repricing_parameter_inference": true,
+    "no_behavioural_activation": true
+  }
+}
