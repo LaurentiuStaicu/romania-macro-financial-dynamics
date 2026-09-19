@@ -1,6 +1,6 @@
 name: Sectoral Financial Positions S1N Boundary Diagnostic
 
-# Post-run live-source diagnostic only. It is intentionally manual-only and
+# Post-run live-provider refresh/diagnostic only. It is intentionally manual-only and
 # cannot rewrite historical A-D, promote the reference mode, or change readiness.
 on:
   workflow_dispatch:
