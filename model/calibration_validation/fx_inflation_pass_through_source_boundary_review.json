@@ -1,0 +1,86 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "exchange_rate_pass_through_to_inflation",
+  "purpose": "Freeze the raw source boundary and sign/coverage rules required before any distributed-lag exchange-rate pass-through estimation for Romania.",
+  "verdict": "PRIMARY_FX_AND_HICP_SOURCES_IDENTIFIED_CALIBRATION_NOT_OPENED_EXTERNAL_PRICE_CONTROL_PENDING",
+  "current_classification": "CANDIDATE",
+  "primary_sources": {
+    "exchange_rate": {
+      "institution": "European Central Bank",
+      "dataset": "EXR — Exchange Rates",
+      "series_key": "EXR.M.RON.EUR.SP00.A",
+      "concept": "Monthly average Romanian leu per euro ECB reference exchange rate",
+      "source_url": "https://data.ecb.europa.eu/data/datasets/EXR/EXR.M.RON.EUR.SP00.A",
+      "source_coverage_evidence": "ECB Data Portal reports monthly coverage beginning in January 1999.",
+      "frequency": "monthly",
+      "collection_indicator": "average"
+    },
+    "inflation": {
+      "institution": "Eurostat",
+      "dataset": "prc_hicp_midx — HICP monthly index",
+      "geography": "RO",
+      "coicop": "CP00",
+      "concept": "Romania all-items Harmonised Index of Consumer Prices",
+      "source_url": "https://ec.europa.eu/eurostat/databrowser/product/page/prc_hicp_midx",
+      "frequency": "monthly",
+      "coverage_note": "Eurostat catalogue identifies monthly HICP index coverage beginning in 1996; exact Romania vintage must be retained when materialised."
+    }
+  },
+  "external_price_control_screen": {
+    "preferred_dataset": "Eurostat sts_inpi_m — Import prices in industry, monthly data",
+    "concept": "Monthly transaction-price development of imported industrial goods purchased by domestic residents.",
+    "source_url": "https://ec.europa.eu/eurostat/databrowser/view/sts_inpi_m/default/table",
+    "current_status": "ROMANIA_SPECIFIC_COVERAGE_NOT_YET_CONFIRMED",
+    "reason": "Eurostat states that euro-area countries are required to transmit industrial import prices, while only some non-euro EU/EFTA countries provide them. Dataset existence therefore does not prove a Romanian series.",
+    "rule": "Do not choose a substitute external-price control after observing model fit. If Romanian import-price coverage is unavailable, freeze an alternative external-price control in a new contract before opening outcomes."
+  },
+  "transformation_boundary": {
+    "fx_quote": "RON_per_EUR",
+    "positive_fx_change_interpretation": "RON depreciation against the euro",
+    "fx_change_candidate": "log difference of the monthly-average RON-per-EUR series",
+    "inflation_raw_input": "HICP CP00 monthly index",
+    "inflation_transform": "NOT_YET_FROZEN_BEFORE_SOURCE_MATERIALISATION",
+    "rationale": "Monthly log change, year-on-year inflation and seasonally adjusted transforms answer different questions. The transform and lag horizon must be preregistered only after raw-source completeness and revision properties are frozen, not chosen from fit."
+  },
+  "scientific_boundaries": {
+    "causal_claim_from_distributed_lag_alone": false,
+    "policy_regime_dependence_must_be_tested": true,
+    "pre_2005_coefficients_may_not_be_imported": true,
+    "managed_float_intervention_is_endogenous": true,
+    "energy_tax_and_administered_price_shocks_are_potential_confounders": true,
+    "autoregressive_inflation_baseline_required": true,
+    "external_price_baseline_required": true,
+    "lag_horizon_must_be_preregistered_before_holdout": true,
+    "no_post_holdout_lag_selection": true
+  },
+  "source_materialisation_gate": {
+    "calibration_cycle_open": false,
+    "required_before_estimation": [
+      "Retain the exact ECB EXR monthly RON/EUR series with provider key, vintage metadata and raw-source hash.",
+      "Retain the exact Eurostat Romania HICP CP00 monthly series with dataset dimensions, vintage metadata and raw-source hash.",
+      "Establish whether Romania has a definitionally suitable exact industrial import-price series in sts_inpi_m; record a pass or explicit unavailability.",
+      "If the preferred import-price control is unavailable, preregister a replacement external-price control before inspecting pass-through fit.",
+      "Freeze inflation transform, lag horizon, estimation start date/regime boundary, structural-selection window and untouched evaluation window before estimation."
+    ],
+    "prohibited_shortcuts": [
+      "Use end-of-period exchange rates when the frozen driver is monthly average without a new source-boundary contract.",
+      "Switch between CPI and HICP after seeing model performance.",
+      "Select monthly versus year-on-year inflation transform from holdout fit.",
+      "Choose lag length after opening untouched evaluation data.",
+      "Treat correlation between RON depreciation and inflation as causal pass-through.",
+      "Import pre-inflation-targeting or pre-current-regime coefficients as current Romanian parameters.",
+      "Silently substitute euro-area import prices for a missing Romanian import-price series."
+    ],
+    "pass_effect": "Authorises a separately preregistered structural-selection cycle against autoregressive and external-price baselines; no causal or System Dynamics activation follows automatically.",
+    "fail_effect": "Retain the mechanism as CANDIDATE and do not estimate an under-controlled distributed-lag equation."
+  },
+  "disposition": {
+    "mechanism_classification": "CANDIDATE",
+    "central_feedback": false,
+    "active_calibration_cycle_open": false,
+    "validated_reference_behavioural_mechanisms_change": 0,
+    "behavioural_closure": "UNCHANGED_INACTIVE",
+    "accounting_spine": "UNCHANGED"
+  }
+}

@@ -283,7 +283,7 @@
       "parameters": [
         "gamma_1..gamma_K"
       ],
-      "estimation_plan": "Re-estimate distributed-lag pass-through on the inflation-targeting/current-regime sample; test parameter stability and avoid importing pre-2005 magnitudes.",
+      "estimation_plan": "Calibration remains closed. First retain exact monthly ECB EXR.M.RON.EUR.SP00.A and Eurostat Romania HICP CP00 source vintages, then resolve the external-price-control coverage gate before freezing the inflation transform, regime start, lag horizon, structural-selection window and untouched evaluation window. Compare any distributed-lag candidate against an inflation autoregression plus an ex-ante external-price baseline. Do not interpret predictive improvement as causal pass-through and do not import pre-current-regime coefficients.",
       "observables": [
         "HICP_or_CPI_inflation",
         "RON_EUR_exchange_rate",
@@ -298,13 +298,16 @@
       "limits": [
         "documented regime dependence",
         "energy/tax/import-price shocks confound pass-through",
-        "managed-float interventions are endogenous"
+        "managed-float interventions are endogenous",
+        "Romania-specific import-price control coverage must be verified rather than inferred from Eurostat dataset existence",
+        "inflation transform and lag horizon must be frozen before untouched evaluation data are opened"
       ],
       "rejection_or_degradation_criteria": [
         "distributed-lag weights unstable",
         "no gain over inflation autoregression plus external-price baseline",
         "historical coefficient confidence intervals include economically negligible pass-through on current regime"
-      ]
+      ],
+      "source_boundary_review": "model/calibration_validation/fx_inflation_pass_through_source_boundary_review.json"
     },
     {
       "id": "credit_risk_npl_response",
