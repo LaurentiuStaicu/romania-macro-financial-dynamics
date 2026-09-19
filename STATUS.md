@@ -30,6 +30,16 @@ The 10 August 2026 BNR meeting left the policy rate unchanged, so the prospectiv
 
 No accounting instrument, reference mode or behavioural mechanism is reopened. Calibration/refit, reserved-response or holdout inspection, System Dynamics feedback activation and behavioural closure remain unauthorized. The scientific operational state therefore remains **EVIDENCE_TRIGGERED_BASELINE_HOLD**.
 
+
+### Fiscal reaction selective reopen — 2026-09-19
+
+A deeper follow-up screen found one declared reopen trigger that **is satisfied** and therefore supersedes the earlier no-trigger monitoring conclusion for `fiscal_primary_balance_reaction` only. European Commission AMECO publishes the Romania series `ROM.1.0.319.0.UBLGBPS`, a structural/cyclically adjusted general-government primary balance excluding interest, and the official AMECO archive preserves release-specific machine-readable vintages. This is genuinely new measurement/vintage evidence under the frozen fiscal reopen rule.
+
+The mechanism remains **DEFERRED**. The selective reopen authorizes only `CAPB_REALTIME_VINTAGE_SOURCE_MATERIALISATION_AND_TIMING_ADJUDICATION_ONLY`. The next gate is to retain exact official AMECO release archives and exact matched `UBLGBPS` row bytes with hashes, then adjudicate what information was available at each release date. No parameter estimation, refit, reuse or inspection of the untouched 2018–2024 final-evaluation window, post-result lag/predictor search, causal claim, System Dynamics feedback activation or behavioural-closure activation is authorized.
+
+All other conclusions of the earlier reopen-trigger monitoring pass remain unchanged. The global scientific boundary remains **EVIDENCE_TRIGGERED_BASELINE_HOLD**, with one explicitly scoped source-evidence task active inside that hold.
+
+
 ## Canonical modeling paradigm
 
 **Romanian Monetary Dynamics (RMD) is an accounting-constrained, stock-flow-consistent dynamic model with a developing System Dynamics feedback architecture; behavioural closure remains inactive pending empirical identification and validation.**
