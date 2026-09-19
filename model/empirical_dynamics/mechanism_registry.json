@@ -360,7 +360,7 @@
       "functional_form": "Delta primary_balance = f(debt_gap, output_gap, institutional/fiscal-package regime)",
       "implementation": null,
       "parameters": [],
-      "estimation_plan": "Keep the fiscal reaction DEFERRED. Debt-to-GDP and interest expenditure are already retained and B9 is directly available, but first materialise a matched primary-balance series on one adjustment/unit boundary. Then freeze a debt-gap definition, an output-gap measurement model and dated institutional/discretionary fiscal regimes before any reaction-function estimation. Do not impose a stable Taylor-style fiscal rule merely because fiscal accounting inputs are observed.",
+      "estimation_plan": "Keep the fiscal reaction DEFERRED. The matched quarterly primary-balance measurement boundary is now frozen as B9 + D41PAY using Eurostat gov_10q_ggnfa, S13, NSA, PC_GDP fetched in the same live run. First retain that source snapshot. Then freeze debt-gap, output-gap and dated institutional/discretionary fiscal-regime measurement in a separate preregistered contract before any reaction-function estimation. Do not impose a stable Taylor-style fiscal rule from accounting observability alone.",
       "observables": [
         "primary_balance",
         "debt_to_gdp",
@@ -381,7 +381,8 @@
         "reaction coefficients regime-unstable",
         "rule obscures discrete policy measures or performs worse than explicit exogenous fiscal-package representation"
       ],
-      "source_boundary_review": "model/calibration_validation/fiscal_primary_balance_source_boundary_review.json"
+      "source_boundary_review": "model/calibration_validation/fiscal_primary_balance_source_boundary_review.json",
+      "primary_balance_materialisation_contract": "model/calibration_validation/fiscal_primary_balance_materialisation_contract.json"
     },
     {
       "id": "monetary_policy_reaction_function",

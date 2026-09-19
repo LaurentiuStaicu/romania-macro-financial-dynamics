@@ -1,0 +1,38 @@
+name: Fiscal Primary Balance Source Materialisation
+
+# Live-source refresh/materialisation is manual-only. A successful run creates
+# new-vintage source evidence but does not open fiscal-reaction calibration.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  materialise-fiscal-primary-balance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify frozen primary-balance materialisation contract
+        run: python -m unittest tests.test_fiscal_primary_balance_materialisation_contract -v
+
+      - name: Run live fiscal primary-balance source materialisation
+        env:
+          FISCAL_PRIMARY_BALANCE_OUT: fiscal_primary_balance_artifacts
+        run: python scripts/audit_fiscal_primary_balance_materialisation.py
+
+      - name: Upload fiscal primary-balance evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fiscal-primary-balance-materialisation-${{ github.sha }}
+          path: fiscal_primary_balance_artifacts/
+          if-no-files-found: error
+          retention-days: 90

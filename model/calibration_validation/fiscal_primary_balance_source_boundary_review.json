@@ -37,10 +37,13 @@
   },
   "primary_balance_measurement_boundary": {
     "accounting_identity": "primary_balance = net_lending_borrowing + interest_expenditure, when both components share a compatible accounting/unit/seasonal boundary and interest expenditure is expressed as a positive use.",
-    "current_status": "COMPONENTS_IDENTIFIED_BUT_MATCHED_PRIMARY_BALANCE_SERIES_NOT_YET_MATERIALISED",
-    "blocker": "The retained D41PAY snapshot is non-seasonally adjusted while the exact B9 key currently used elsewhere is seasonally adjusted; do not add mismatched variants.",
-    "admissible_next_step": "Preregister one adjustment/unit boundary and materialise matched B9 and D41PAY on that same boundary before computing primary balance.",
-    "no_cash_budget_substitution": true
+    "current_status": "MATCHED_NSA_PC_GDP_MATERIALISATION_CONTRACT_FROZEN_MANUAL_LIVE_RUN_PENDING",
+    "blocker": "The matched identity is now frozen on gov_10q_ggnfa / S13 / NSA / PC_GDP, but no successful retained live materialisation artifact has yet been promoted to the repository.",
+    "admissible_next_step": "Run the manual-only matched B9/D41PAY materialiser, retain raw hashes and the derived quarterly primary-balance CSV, then explicitly review/commit a snapshot before any debt-gap/output-gap/regime contract.",
+    "no_cash_budget_substitution": true,
+    "materialisation_contract": "model/calibration_validation/fiscal_primary_balance_materialisation_contract.json",
+    "materialiser_script": "scripts/audit_fiscal_primary_balance_materialisation.py",
+    "materialiser_workflow": ".github/workflows/fiscal-primary-balance-materialisation.yml"
   },
   "output_gap_boundary": {
     "registered_concept": "output_gap",
@@ -79,7 +82,7 @@
   ],
   "disposition": {
     "mechanism_classification": "DEFERRED",
-    "source_readiness": "FISCAL_COMPONENTS_OBSERVED_PRIMARY_BALANCE_MATCHING_OUTPUT_GAP_AND_REGIMES_UNRESOLVED",
+    "source_readiness": "PRIMARY_BALANCE_MATERIALISER_FROZEN_MANUAL_LIVE_RUN_PENDING_OUTPUT_GAP_AND_REGIMES_UNRESOLVED",
     "active_calibration_cycle_open": false,
     "estimation_or_refit_allowed": false,
     "central_feedback": false,
