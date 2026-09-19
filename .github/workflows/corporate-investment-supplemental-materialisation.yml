@@ -1,0 +1,41 @@
+name: Corporate Investment Supplemental Source Materialisation
+
+# Explicit one-shot PR source acquisition. The existing corporate-investment
+# materialisation label is deliberately reused so no unreviewed new trigger
+# mechanism is introduced. This workflow retains source evidence only.
+on:
+  pull_request:
+    types: [labeled]
+
+permissions:
+  contents: read
+
+jobs:
+  materialise-corporate-investment-supplemental-sources:
+    if: ${{ github.event.label.name == 'run-corporate-investment-materialisation' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify frozen supplemental source contract
+        run: python -m unittest tests.test_corporate_investment_supplemental_materialisation_contract -v
+
+      - name: Run exact live supplemental source materialisation
+        env:
+          CORPORATE_INVESTMENT_SUPPLEMENTAL_OUT: corporate_investment_supplemental_artifacts
+        run: python scripts/audit_corporate_investment_supplemental_materialisation.py
+
+      - name: Upload supplemental source evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: corporate-investment-supplemental-materialisation-${{ github.sha }}
+          path: corporate_investment_supplemental_artifacts/
+          if-no-files-found: error
+          retention-days: 90

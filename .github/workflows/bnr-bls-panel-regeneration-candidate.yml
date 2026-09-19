@@ -1,0 +1,34 @@
+name: BNR BLS Panel Regeneration Candidate
+
+on:
+  pull_request:
+    paths:
+      - "model/calibration_validation/bnr_bls_panel_regeneration_candidate_contract.json"
+      - "model/calibration_validation/bnr_bls_canonical_panel_promotion_review.json"
+      - "model/calibration_validation/bnr_bls_cross_round_mapping_audit.json"
+      - "data/processed/bnr_bls_realised_rounds.csv"
+      - "tests/test_bnr_bls_panel_regeneration_candidate_contract.py"
+      - "tests/test_bnr_bls_canonical_panel_promotion_review.py"
+      - ".github/workflows/bnr-bls-panel-regeneration-candidate.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-historical-candidate-and-canonical-promotion:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify frozen historical candidate contract
+        run: python -m unittest tests.test_bnr_bls_panel_regeneration_candidate_contract -v
+
+      - name: Verify exact reviewed candidate was canonically promoted
+        run: python -m unittest tests.test_bnr_bls_canonical_panel_promotion_review -v
+
+      - name: Verify current canonical cross-round result
+        run: python -m unittest tests.test_bnr_bls_cross_round_mapping_result -v

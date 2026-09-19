@@ -1,0 +1,30 @@
+name: Corporate Investment Financing Rate Source Screening
+
+on:
+  pull_request:
+    types: [labeled]
+
+permissions:
+  contents: read
+
+jobs:
+  screen-financing-rate-source-continuity:
+    if: ${{ github.event.label.name == 'run-corporate-investment-materialisation' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Verify preregistered source-continuity gate
+        run: python -m unittest tests.test_corporate_investment_financing_rate_source_screening -v
+      - name: Run source-continuity screening only
+        env:
+          CORPORATE_INVESTMENT_RATE_SCREENING_OUT: corporate_investment_rate_screening_artifacts
+        run: python scripts/audit_corporate_investment_financing_rate_source_screening.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: corporate-investment-financing-rate-screening-${{ github.sha }}
+          path: corporate_investment_rate_screening_artifacts/
+          if-no-files-found: error
+          retention-days: 90

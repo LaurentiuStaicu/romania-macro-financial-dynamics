@@ -1,0 +1,39 @@
+name: Sectoral Financial Positions Rounding Consistency Audit
+
+
+# Phase C live QSA precision refresh is manual after the retained immutable run.
+# Canonical scientific state is reproduced offline from the committed assessment.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit-sectoral-financial-positions-phase-c:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify preregistered Phase C source-precision contract
+        run: python -m unittest tests.test_sectoral_financial_positions_rounding_consistency_contract -v
+
+      - name: Probe ECB QSA source precision and rounding consistency
+        env:
+          SECTORAL_POSITIONS_PHASE_C_AUDIT_OUT: sectoral_positions_phase_c_audit_artifacts
+        run: python scripts/audit_ecb_sectoral_financial_positions_rounding_consistency.py
+
+      - name: Upload Phase C source-precision evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sectoral-financial-positions-phase-c-${{ github.sha }}
+          path: sectoral_positions_phase_c_audit_artifacts/
+          if-no-files-found: error
+          retention-days: 90

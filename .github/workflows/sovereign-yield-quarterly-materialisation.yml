@@ -1,0 +1,40 @@
+name: Sovereign Yield Quarterly Source Materialisation
+
+# Live provider refresh/materialisation is intentionally manual-only.
+# The pre-merge bootstrap run has been retained as an immutable reviewed source
+# vintage. Future refreshes remain workflow_dispatch-only and must never run as
+# part of ordinary PR/CI activity.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  materialise-sovereign-yield-sources:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify frozen quarterly materialisation contract
+        run: python -m unittest tests.test_sovereign_yield_quarterly_materialisation_contract -v
+
+      - name: Run live sovereign-yield source materialisation
+        env:
+          SOVEREIGN_YIELD_MATERIALISATION_OUT: sovereign_yield_materialisation_artifacts
+        run: python scripts/audit_sovereign_yield_quarterly_materialisation.py
+
+      - name: Upload sovereign-yield source evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sovereign-yield-quarterly-materialisation-${{ github.sha }}
+          path: sovereign_yield_materialisation_artifacts/
+          if-no-files-found: error
+          retention-days: 90

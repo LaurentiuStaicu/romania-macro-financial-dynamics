@@ -1,0 +1,39 @@
+name: BNR BLS Missing-Round Workbook Recovery
+
+# Live BNR source acquisition is manual-only. A successful response creates
+# new source evidence only; it cannot mutate the canonical BLS panel or open
+# estimation without a separate promotion/extraction review.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  recover-missing-bnr-bls-workbooks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify frozen recovery contract
+        run: |
+          python -m unittest \
+            tests.test_bnr_bls_missing_round_workbook_recovery_contract -v
+
+      - name: Probe only preregistered official workbook endpoints
+        env:
+          BNR_BLS_MISSING_ROUND_RECOVERY_OUT: bnr_bls_missing_round_recovery_artifacts
+        run: python scripts/audit_bnr_bls_missing_round_workbook_recovery.py
+
+      - name: Upload source-acquisition evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bnr-bls-missing-round-recovery-${{ github.sha }}
+          path: bnr_bls_missing_round_recovery_artifacts/
+          if-no-files-found: error
+          retention-days: 90

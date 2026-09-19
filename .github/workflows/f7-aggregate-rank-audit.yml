@@ -1,0 +1,43 @@
+name: F7 Aggregate Rank Audit
+
+on:
+  pull_request:
+    paths:
+      - "model/accounting/f7_financial_derivatives_coverage_assessment.json"
+      - "model/accounting/f7_aggregate_rank_contract.json"
+      - "model/accounting/f7_aggregate_rank_assessment.json"
+      - "scripts/audit_f7_aggregate_rank.py"
+      - "tests/test_f7_aggregate_rank_contract.py"
+      - ".github/workflows/f7-aggregate-rank-audit.yml"
+      - "model/accounting/reconciliation_2025.json"
+      - "STATUS.md"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit-f7-rank:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify F7 rank contract and retained assessment
+        run: python -m unittest tests.test_f7_aggregate_rank_contract -v
+
+      - name: Reproduce F7 aggregate-rank audit offline
+        run: python scripts/audit_f7_aggregate_rank.py --out f7_rank_artifacts
+
+      - name: Upload F7 rank evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: f7-aggregate-rank-${{ github.sha }}
+          path: f7_rank_artifacts/
+          if-no-files-found: error
+          retention-days: 90

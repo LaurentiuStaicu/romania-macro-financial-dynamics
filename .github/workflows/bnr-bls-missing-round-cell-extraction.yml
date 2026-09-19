@@ -1,0 +1,50 @@
+name: BNR BLS Missing-Round Cell Extraction
+
+on:
+  pull_request:
+    paths:
+      - "model/calibration_validation/bnr_bls_missing_round_cell_extraction_contract.json"
+      - "data/source_vintages/bnr-bls-missing-round-recovery-vintage-2026-09-19/**"
+      - "scripts/audit_bnr_bls_missing_round_cell_extraction.py"
+      - "scripts/audit_bnr_legacy_xls_cell_extraction.py"
+      - "tests/test_bnr_bls_missing_round_cell_extraction_contract.py"
+      - ".github/workflows/bnr-bls-missing-round-cell-extraction.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  extract-retained-missing-round-workbooks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Install exact retained xlrd extraction engine
+        run: |
+          mkdir -p /tmp/xlrd
+          python -m pip download             --disable-pip-version-check             --no-deps             --only-binary=:all:             --dest /tmp/xlrd             xlrd==2.0.2
+          echo "ea762c3d29f4cca48d82df517b6d89fbce4db3107f9d78713e48cd321d5c9aa9  /tmp/xlrd/xlrd-2.0.2-py2.py3-none-any.whl" | sha256sum -c -
+          python -m pip install --no-deps /tmp/xlrd/xlrd-2.0.2-py2.py3-none-any.whl
+
+      - name: Verify frozen extraction contract
+        run: |
+          python -m unittest tests.test_bnr_bls_missing_round_cell_extraction_contract -v
+
+      - name: Serialize all non-empty cells from exact retained workbooks
+        env:
+          XLRD_DISTRIBUTION_FILENAME: xlrd-2.0.2-py2.py3-none-any.whl
+          XLRD_DISTRIBUTION_SHA256: ea762c3d29f4cca48d82df517b6d89fbce4db3107f9d78713e48cd321d5c9aa9
+          BNR_BLS_MISSING_ROUND_CELL_EXTRACTION_OUT: bnr_bls_missing_round_cell_extraction_artifacts
+        run: python scripts/audit_bnr_bls_missing_round_cell_extraction.py
+
+      - name: Upload extraction evidence only
+        uses: actions/upload-artifact@v4
+        with:
+          name: bnr-bls-missing-round-cell-extraction-${{ github.sha }}
+          path: bnr_bls_missing_round_cell_extraction_artifacts/
+          if-no-files-found: error
+          retention-days: 90
