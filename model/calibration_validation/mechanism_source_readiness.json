@@ -64,20 +64,22 @@
     {
       "id": "sovereign_yield_spread_response",
       "classification": "CANDIDATE",
-      "source_readiness": "MATERIALISER_IMPLEMENTED_MANUAL_LIVE_RUN_PENDING",
-      "next_admissible_action": "Run the manual-only sovereign-yield quarterly materialisation workflow, retain its raw provider responses/hashes and generated quarterly CSV, then review and explicitly commit a source snapshot before any structural-selection contract is opened.",
+      "source_readiness": "EXACT_SOURCE_VINTAGE_RETAINED_STRUCTURAL_SELECTION_PREREGISTRATION_PENDING",
+      "next_admissible_action": "Write a separate sovereign-yield structural-selection contract that freezes baseline forms, candidate lag structure, selection window, untouched evaluation window and benchmark comparison before any coefficient estimation. Do not estimate or activate the mechanism yet.",
       "blockers": [
-        "The source materialiser and exact provider tuple/transform rules are implemented, but no retained successful live materialisation artifact has yet been promoted into the repository.",
-        "A live run is new-vintage evidence and must remain workflow_dispatch/manual-only; Scientific CI must not call providers.",
-        "No regression is authorised by the materialisation contract."
+        "The exact quarterly source vintage is now retained immutably in the repository and passes the frozen provenance review.",
+        "Baseline forms, lag structure, structural-selection window and untouched evaluation window are not yet preregistered.",
+        "No regression or parameter estimation is authorised until that separate selection contract is frozen."
       ],
       "source_boundary_review": "model/calibration_validation/sovereign_yield_source_boundary_review.json",
       "materialisation_contract": "model/calibration_validation/sovereign_yield_quarterly_materialisation_contract.json",
       "estimation_or_refit_allowed": false,
-      "priority_group": "MANUAL_LIVE_MATERIALISATION_PENDING",
+      "priority_group": "STRUCTURAL_SELECTION_PREREGISTRATION_PENDING",
       "materialiser_script": "scripts/audit_sovereign_yield_quarterly_materialisation.py",
       "materialiser_workflow": ".github/workflows/sovereign-yield-quarterly-materialisation.yml",
-      "live_execution_policy": "MANUAL_ONLY_LIVE_SOURCE_EVIDENCE"
+      "live_execution_policy": "MANUAL_ONLY_LIVE_SOURCE_EVIDENCE",
+      "retained_source_vintage": "data/source_vintages/sovereign-yield-quarterly-vintage-2026-09-19",
+      "promotion_review": "model/calibration_validation/sovereign_yield_source_vintage_promotion_review.json"
     },
     {
       "id": "household_consumption_response",
@@ -173,8 +175,8 @@
   "priority_rule": "Priority is determined by the shortest scientifically admissible path to new independent evidence, not by a desire to activate a feedback loop. Waiting mechanisms remain frozen; source-incomplete mechanisms are not fit with proxies.",
   "current_next_step": {
     "mechanism_id": "sovereign_yield_spread_response",
-    "action": "RUN_MANUAL_QUARTERLY_SOURCE_MATERIALISER_AND_RETAIN_EVIDENCE",
-    "reason": "The exact source tuple, deterministic transformations, offline parser tests, materialiser script and manual-only GitHub workflow are implemented. The remaining admissible step is a retained successful live source run and repository review; calibration remains closed.",
+    "action": "WRITE_SOVEREIGN_YIELD_STRUCTURAL_SELECTION_CONTRACT_NO_ESTIMATION",
+    "reason": "The exact reviewed 84-quarter source vintage is now retained with raw bytes, SHA-256 lineage and deterministic normalized output. The next admissible step is preregistration of structural selection; calibration and behavioural activation remain closed.",
     "calibration_cycle_open": false
   },
   "coverage_rule": {
