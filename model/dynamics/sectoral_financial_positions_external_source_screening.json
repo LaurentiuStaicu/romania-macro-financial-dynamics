@@ -153,13 +153,33 @@
         "No matched quarterly F2-F8 financial-transaction counterpart history is identified in the screened annual publication.",
         "The frozen reference-mode extraction contract requires quarterly stock and financial transactions with at least 40 common quarters, so this source cannot promote the mode or change readiness."
       ]
+    },
+    {
+      "id": "BNR_QUARTERLY_S13_FINANCIAL_ACCOUNTS",
+      "institution": "National Bank of Romania",
+      "official_publication_example": "https://bnro.ro/files/d/Statistica/seturi%20de%20date/Conturi_fin_trim/Analiza%20conturi%20financiare%20trimestriale%20administratii%20publice%202024T2.pdf",
+      "semantic_fit": "HIGH_FOR_QUARTERLY_S13_SEQUENCE_LOW_FOR_FULL_RMD_COUNTERPART_BOUNDARY",
+      "quarterly_history_start": "1998-Q4",
+      "latest_indexed_reference_period": "2024-Q2",
+      "reporting_scope": "S13 and subsectors S1311/S1313/S1314 only",
+      "consolidation": "consolidated",
+      "full_sequence_of_accounts": true,
+      "full_rmd_sector_counterpart_scope": false,
+      "screening_assessment": "model/dynamics/sectoral_financial_positions_bnr_quarterly_s13_source_screening.json",
+      "status": "OFFICIAL_QUARTERLY_S13_FINANCIAL_ACCOUNTS_CONFIRMED_FREQUENCY_PASS_SECTOR_COUNTERPART_CONSOLIDATION_FAIL_NO_REOPEN",
+      "scope_limit": [
+        "Quarterly frequency and stock/transaction sequence are confirmed for S13.",
+        "The source does not expose the complete RMD sector set or a full who-to-whom counterpart matrix.",
+        "The published S13 quarterly data are consolidated, which does not match the frozen non-consolidated sector/counterpart boundary.",
+        "No reference-mode promotion or exact historical extraction is authorized."
+      ]
     }
   ],
   "decision": {
     "immediate_reference_mode_reopen_authorized": false,
     "reference_mode_promotion_authorized": false,
     "accounting_readiness_change": false,
-    "next_admissible_action": "Hold the external counterpart recovery path closed. Eurostat passed discovery but failed the frozen F2-F8 instrument scope; OECD passed discovery and complete instrument scope but failed the frozen RMD sector scope because S121 is absent for Romania. The latest official BNR annual CNF publication adds a strong national semantic cross-check: its 2024 non-consolidated counterpart stock matrix exposes S121 and AF2-AF8, but it fails the frozen quarterly-frequency and stock+financial-transaction-history requirements. Reopen only on a declared new-source or changed-dataset trigger capable of supplying exact S121 sector separation and complete F2-F8 quarterly stocks and transactions. Do not repeat the same source probes merely because readiness remains 9/10.",
+    "next_admissible_action": "Hold the external counterpart recovery path closed. Eurostat passes discovery but fails complete F2-F8 instrument scope; OECD passes complete F2-F8 discovery but lacks Romania S121; the BNR annual CNF counterpart matrix has exact S121/AF2-AF8 stock semantics but not the required quarterly stock+transaction history; and the indexed BNR quarterly financial-accounts publication has a long stock/transaction sequence only for consolidated S13, not the full non-consolidated RMD sector-by-counterpart boundary. Reopen only on a genuinely new or changed official source satisfying the full quarterly S121 + F2-F8 stock/transaction counterpart boundary.",
     "oecd_probe_justified": true,
     "eurostat_counterpart_probe_justified": true,
     "discovery_priority": [],
@@ -186,7 +206,9 @@
     "reference_mode_readiness_change": 0,
     "bnr_annual_cnf_screening_assessment": "model/dynamics/sectoral_financial_positions_bnr_cnf_source_screening.json",
     "bnr_annual_cnf_screening_state": "ANNUAL_SEMANTIC_STOCK_PASS_QUARTERLY_TRANSACTION_HISTORY_FAIL_NO_REOPEN",
-    "current_public_source_completion_status": "EUROSTAT_INSTRUMENT_SCOPE_FAIL_OECD_S121_SCOPE_FAIL_BNR_ANNUAL_FREQUENCY_TRANSACTION_HISTORY_FAIL"
+    "current_public_source_completion_status": "EUROSTAT_INSTRUMENT_SCOPE_FAIL_OECD_S121_SCOPE_FAIL_BNR_ANNUAL_FREQUENCY_TRANSACTION_HISTORY_FAIL_BNR_QUARTERLY_S13_SECTOR_COUNTERPART_CONSOLIDATION_FAIL",
+    "bnr_quarterly_s13_screening_assessment": "model/dynamics/sectoral_financial_positions_bnr_quarterly_s13_source_screening.json",
+    "bnr_quarterly_s13_screening_state": "QUARTERLY_FREQUENCY_PASS_SECTOR_COUNTERPART_CONSOLIDATION_FAIL_NO_REOPEN"
   },
   "hard_rules": {
     "no_reinterpretation_of_historical_phase_A_D": true,
