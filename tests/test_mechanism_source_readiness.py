@@ -201,6 +201,27 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         )
         self.assertFalse(household["official_population_bridge_found"])
         self.assertFalse(household["estimation_or_refit_allowed"])
+        credit_risk = mechanisms["credit_risk_npl_response"]
+        self.assertEqual(
+            credit_risk["source_readiness"],
+            "AGGREGATE_NPL_EXACT_MORTGAGE_PORTFOLIO_FAMILY_OBSERVED_JOINT_BOUNDARY_AND_ACTIVITY_UNRESOLVED",
+        )
+        self.assertEqual(
+            credit_risk["priority_group"],
+            "DEFER_UNTIL_MATCHED_AGGREGATE_OR_MORTGAGE_PORTFOLIO_SOURCE",
+        )
+        self.assertEqual(
+            credit_risk["mortgage_portfolio_source_screening"],
+            "model/calibration_validation/credit_risk_mortgage_portfolio_source_screening.json",
+        )
+        self.assertTrue(credit_risk["mortgage_npl_publication_observed"])
+        self.assertFalse(
+            credit_risk["mortgage_npl_exact_machine_readable_history_retained"]
+        )
+        self.assertFalse(credit_risk["mortgage_target_selected"])
+        self.assertFalse(credit_risk["dti_o_debt_service_substitution_allowed"])
+        self.assertFalse(credit_risk["estimation_or_refit_allowed"])
+
         fiscal = mechanisms["fiscal_primary_balance_reaction"]
         self.assertEqual(
             fiscal["source_readiness"],
