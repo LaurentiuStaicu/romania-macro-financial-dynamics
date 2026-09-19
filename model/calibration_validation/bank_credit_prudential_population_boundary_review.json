@@ -1,0 +1,105 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "aggregate_bank_credit_response",
+  "phase": "Aggregate Bank Credit — Prudential Population and Consolidation Boundary Review",
+  "purpose": "Determine whether retained ECB CBD2 Romania prudential series are definitionally equivalent to the BNR prudential indicators intended as Romanian banking-system state controls. This is a semantic/population review; model fit and numerical proximity are not admission criteria.",
+  "verdict": "DIRECT_CBD2_TO_BNR_POPULATION_EQUIVALENCE_REJECTED_NEW_MATCHED_SOURCE_REQUIRED",
+  "official_evidence": [
+    {
+      "institution": "National Bank of Romania",
+      "source": "Monthly Bulletin January 2025, Table 11.1 — Main prudential indicators",
+      "url": "https://www.bnr.ro/uploads/2025-03-07buletinlunarnr.012025_documentpdf_545_1741348451.pdf",
+      "findings": [
+        "BNR states that the prudential indicators cover only banks that are Romanian legal entities.",
+        "From June 2014 the indicators use the EU 680/2014 supervisory-reporting framework; from June 2021 that framework is replaced by EU 2021/451.",
+        "The table publishes exact quarterly prudential values and is the definitionally preferred anchor for a BNR-population series."
+      ]
+    },
+    {
+      "institution": "National Bank of Romania",
+      "source": "Annual Report 2023 — banking-system ownership/population tables",
+      "url": "https://www.bnr.ro/uploads/2023-6-raportanual_documentpdf_545_1725958068.pdf",
+      "findings": [
+        "BNR separately reports Romanian-legal-entity credit institutions and branches of foreign legal-entity credit institutions.",
+        "The Romanian-legal-entity category includes institutions with majority foreign capital, so legal incorporation in Romania is not equivalent to domestic control/ownership."
+      ]
+    },
+    {
+      "institution": "European Central Bank",
+      "source": "Consolidated banking data — key definitions relating to domestic banks",
+      "url": "https://www.ecb.europa.eu/stats/supervisory_prudential_statistics/consolidated_banking_data/html/index.ro.html",
+      "findings": [
+        "CBD2 domestic-bank data concern domestically controlled banking groups and stand-alone banks.",
+        "For banking groups, the consolidated-banking framework includes cross-border and cross-sector consolidation."
+      ]
+    },
+    {
+      "institution": "European Central Bank",
+      "source": "ECB Data Portal CBD2 dataset metadata",
+      "url": "https://data.ecb.europa.eu/data/datasets/CBD2",
+      "findings": [
+        "The retained Romania series use CBD reference sector breakdown 11: domestic banking groups and stand-alone banks.",
+        "The retained NPL ratio is additionally limited to FINREP reporters, while retained solvency/CET1 controls use the full-sample reporting-framework code."
+      ]
+    }
+  ],
+  "structural_comparison": {
+    "bnr_anchor": {
+      "population": "Banks that are Romanian legal entities; foreign-bank branches are a separate category.",
+      "ownership_implication": "Includes Romanian-incorporated institutions with majority foreign capital.",
+      "consolidation_equivalence_to_cbd2": "NOT_ESTABLISHED"
+    },
+    "ecb_cbd2_sector_11": {
+      "population": "Domestic banking groups and stand-alone banks.",
+      "control_basis": "Domestically controlled banks/groups under the CBD framework.",
+      "consolidation": "Banking groups are consolidated across borders and sectors.",
+      "reporting_framework_note": "The retained NPL ratio is FINREP-reporters; retained solvency/CET1 controls use the full-sample code."
+    },
+    "exact_equivalence": {
+      "population_match": false,
+      "control_basis_match": false,
+      "consolidation_perimeter_match": false,
+      "reporting_population_match": false,
+      "direct_series_substitution_allowed": false,
+      "numeric_similarity_can_override_semantics": false
+    }
+  },
+  "current_source_disposition": {
+    "retained_cbd2_vintage": "data/source_vintages/bank-credit-prudential-coverage-vintage-2026-09-19",
+    "cbd2_role": "Diagnostic/cross-source prudential evidence only; not a definitionally matched replacement for the BNR anchor.",
+    "bnr_table_source_status": "EXACT_TABULAR_OFFICIAL_SOURCE_FAMILY_IDENTIFIED_MACHINE_READABLE_HISTORY_NOT_RETAINED",
+    "machine_readable_bnr_source_identified_in_this_review": false,
+    "chart_digitisation_required": false,
+    "reason_chart_digitisation_not_required": "BNR Monthly Bulletins publish the relevant indicators as exact statistical tables; future recovery should parse and retain table values under a preregistered source-vintage contract rather than digitise charts.",
+    "next_admissible_source_task": "Preregister a BNR Monthly Bulletin prudential-table materialisation contract that freezes publication vintages, exact table/column semantics, quarterly reference dates, reporting-break metadata and deterministic extraction before values are promoted. Alternatively admit a genuinely matched official machine-readable source only if its institution population and consolidation perimeter are documented as equivalent.",
+    "reopen_triggers": [
+      "An official machine-readable BNR series on the Romanian-legal-entity bank population is identified.",
+      "A deterministic retained BNR Monthly Bulletin table-extraction path is preregistered and passes exact semantic/provenance review.",
+      "An official source publishes an explicit mapping/common-sample bridge between the BNR Romanian-legal-entity population and CBD2 sector 11 with consolidation treatment documented."
+    ]
+  },
+  "modelling_effect": {
+    "estimation_or_refit_authorized": false,
+    "current_aggregate_equation_authorized": false,
+    "structural_selection_authorized": false,
+    "causal_identification_claim_allowed": false,
+    "bank_credit_feedback_activation": false,
+    "system_dynamics_activation": false,
+    "behavioural_closure_change": false,
+    "validated_reference_behavioural_mechanisms_change": 0
+  },
+  "hard_rules": {
+    "no_population_bridge_by_numeric_similarity": true,
+    "no_cbd2_direct_substitution_for_bnr_anchor": true,
+    "no_cet1_post_hoc_substitution_for_total_capital": true,
+    "no_interpolation": true,
+    "no_chart_digitisation": true,
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_holdout_opening": true,
+    "no_causal_claim": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  }
+}
