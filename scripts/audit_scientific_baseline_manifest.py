@@ -177,6 +177,22 @@ def main() -> None:
         == mechanism_by_id["monetary_policy_lending_rate_pass_through"]["classification"],
         "Baseline monetary mechanism status is stale",
     )
+    monetary = mechanism_by_id["monetary_policy_lending_rate_pass_through"]
+    check(
+        monetary["prospective_confirmation"]["contract"]
+        == "model/calibration_validation/prospective_monetary_confirmation_contract.json",
+        "Monetary candidate is not bound to the prospective confirmation contract",
+    )
+    check(
+        monetary["prospective_confirmation"]["status"]
+        == "model/calibration_validation/prospective_monetary_confirmation_status.json",
+        "Monetary candidate is not bound to prospective confirmation status",
+    )
+    check(
+        monetary["prospective_confirmation"]["current_gate_status"]
+        == prospective_status["identification_gate"]["status"],
+        "Monetary candidate prospective gate status is stale",
+    )
     check(
         validation["government_refinancing_effective_rate_status"]
         == mechanism_by_id["government_refinancing_effective_rate"]["classification"],
