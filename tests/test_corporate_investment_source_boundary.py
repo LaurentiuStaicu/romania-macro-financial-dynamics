@@ -45,6 +45,15 @@ class CorporateInvestmentSourceBoundaryTests(unittest.TestCase):
         )
 
         self.assertEqual(
+            sources["nfc_investment_rate"]["series_key"],
+            "QSA.Q.N.RO.W0.S11.S1.N.D.P51G._Z._Z._Z.XDC_R_B1G_CY._T.S.V.C4._T",
+        )
+        self.assertIn(
+            "not the registered gI",
+            sources["nfc_investment_rate"]["semantic_limit"],
+        )
+
+        self.assertEqual(
             sources["nfc_gfcf"]["series_key"],
             "QSA.Q.N.RO.W0.S11.S1.N.D.P51G._Z._Z._Z.XDC._T.S.V.N._T",
         )
@@ -89,6 +98,18 @@ class CorporateInvestmentSourceBoundaryTests(unittest.TestCase):
         prohibited = " ".join(self.review["prohibited_shortcuts"]).lower()
         self.assertIn("cumulative eu programme payments", prohibited)
         self.assertIn("heterogeneous rrf", prohibited)
+
+    def test_direct_investment_rate_is_alternative_not_post_hoc_substitute(self) -> None:
+        alternative = self.review["alternative_target_boundary"]
+        self.assertEqual(
+            alternative["status"],
+            "EXACT_INVESTMENT_RATE_TARGET_AVAILABLE_NOT_SELECTED",
+        )
+        self.assertIn("different behavioural questions", alternative["non_equivalence"])
+        self.assertIn(
+            "new preregistered candidate-family contract",
+            alternative["future_gate"],
+        )
 
     def test_missing_eu_bridge_does_not_authorize_reduced_form(self) -> None:
         admissibility = self.review["source_admissibility"]

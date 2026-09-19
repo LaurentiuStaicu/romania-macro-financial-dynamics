@@ -52,6 +52,15 @@
       "semantic_basis": "ESA 2010 D92 investment grants are capital transfers in cash or kind made by government or the rest of the world to finance all or part of the acquisition of fixed assets.",
       "eu_relevance": "D92 may include grants paid directly by EU institutions, but the published W0/S1 series does not isolate EU-origin grants from domestic-government or other rest-of-world sources.",
       "role": "Observed sector-consistent investment-support measure and candidate input for a separately preregistered alternative model family; not an automatic replacement for EU_fund_impulse."
+    },
+    "nfc_investment_rate": {
+      "institution": "ECB Data Portal / Eurostat Quarterly Sector Accounts",
+      "dataset": "QSA",
+      "series_key": "QSA.Q.N.RO.W0.S11.S1.N.D.P51G._Z._Z._Z.XDC_R_B1G_CY._T.S.V.C4._T",
+      "concept": "Gross fixed capital formation of non-financial corporations as a ratio of NFC gross value added, Romania, quarterly",
+      "status": "EXACT_SERIES_CONFIRMED",
+      "role": "Direct observed corporate investment-intensity target that avoids constructing a price deflator.",
+      "semantic_limit": "This is an investment-rate/intensity measure, not the registered gI investment-growth target. Switching targets requires a new preregistered candidate-family contract and an untouched evaluation design."
     }
   },
   "sector_specific_investment_boundary": {
@@ -95,7 +104,7 @@
   "source_admissibility": {
     "registered_full_form_admissible": false,
     "reasons": [
-      "The exact Romania S11 quarterly GFCF target is confirmed, but the registered gI transformation, seasonal treatment and deflator remain unfrozen.",
+      "The exact Romania S11 quarterly GFCF level and a direct S11 investment-rate target are confirmed, but the registered gI transformation, seasonal treatment and deflator remain unfrozen.",
       "An exact S11 D92 investment-grants series exists, but it does not identify EU-origin grants and therefore cannot be substituted for the registered EU_fund_impulse without a new candidate-family contract.",
       "The demand-growth observable is unspecified.",
       "The NFC lending rate is monthly and the quarterly aggregation/real-rate deflator are not frozen."
@@ -120,5 +129,12 @@
     "validated_reference_behavioural_mechanisms_change": 0,
     "behavioural_closure": "UNCHANGED_INACTIVE",
     "accounting_spine": "UNCHANGED"
+  },
+  "alternative_target_boundary": {
+    "status": "EXACT_INVESTMENT_RATE_TARGET_AVAILABLE_NOT_SELECTED",
+    "series": "QSA.Q.N.RO.W0.S11.S1.N.D.P51G._Z._Z._Z.XDC_R_B1G_CY._T.S.V.C4._T",
+    "rationale": "The observed P51G-to-B1G ratio is sector-consistent and dimensionless, so it avoids importing a total-economy investment deflator into an S11 target.",
+    "non_equivalence": "Investment intensity and investment growth answer different behavioural questions. The rate may not replace gI merely because the gI real-volume transformation is unresolved.",
+    "future_gate": "A new preregistered candidate-family contract must choose between gI and the investment-rate target before any outcome-based structural selection, and may not use the same evaluation window to choose the target and validate it."
   }
 }

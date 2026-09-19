@@ -97,10 +97,10 @@
       "source_readiness": "NFC_GFCF_RATE_AND_D92_GRANTS_CONFIRMED_EU_SPECIFIC_IMPULSE_DEMAND_AND_TRANSFORMS_BLOCKED",
       "next_admissible_action": "Retain/materialize S11 GFCF and S11 D92 investment-grant vintages, then preregister whether a renamed investment-grants-support candidate family is scientifically preferable to the unresolved EU-specific term; freeze demand and transformations before any fit.",
       "blockers": [
-        "Exact Romania S11 quarterly GFCF, S11 D92 investment grants and the NFC new-business lending rate are source-identified.",
+        "Exact Romania S11 quarterly GFCF, a direct S11 investment-rate target, S11 D92 investment grants and the NFC new-business lending rate are source-identified.",
+        "The registered target remains gI; the direct investment-rate series is a non-equivalent alternative that requires a new preregistered candidate-family contract.",
         "D92 does not isolate EU-origin grants and may not keep the EU_fund_impulse label without an origin bridge.",
-        "Demand observable is not preregistered.",
-        "The S11 target and D92 source are nominal/non-seasonally-adjusted while gI, seasonal treatment, rate aggregation and real-rate deflator remain unfrozen."
+        "Demand observable, gI seasonal/real transformation, monthly-to-quarterly rate aggregation and real-rate deflator are not frozen."
       ],
       "estimation_or_refit_allowed": false,
       "priority_group": "SOURCE_BOUNDARY_BLOCKED_NO_ESTIMATION",
