@@ -35,9 +35,11 @@ No accounting instrument, reference mode or behavioural mechanism is reopened. C
 
 A deeper follow-up screen found one declared reopen trigger that **is satisfied** and therefore supersedes the earlier no-trigger monitoring conclusion for `fiscal_primary_balance_reaction` only. European Commission AMECO publishes the Romania series `ROM.1.0.319.0.UBLGBPS`, a structural/cyclically adjusted general-government primary balance excluding interest, and the official AMECO archive preserves release-specific machine-readable vintages. This is genuinely new measurement/vintage evidence under the frozen fiscal reopen rule.
 
-The mechanism remains **DEFERRED**. The selective reopen authorizes only `CAPB_REALTIME_VINTAGE_SOURCE_MATERIALISATION_AND_TIMING_ADJUDICATION_ONLY`. The next gate is to retain exact official AMECO release archives and exact matched `UBLGBPS` row bytes with hashes, then adjudicate what information was available at each release date. No parameter estimation, refit, reuse or inspection of the untouched 2018–2024 final-evaluation window, post-result lag/predictor search, causal claim, System Dynamics feedback activation or behavioural-closure activation is authorized.
+The mechanism remains **DEFERRED**. The selective reopen authorizes only `CAPB_REALTIME_VINTAGE_SOURCE_MATERIALISATION_AND_TIMING_ADJUDICATION_ONLY`. The source tooling and manual GitHub Actions workflow are now integrated and green, but the live acquisition has **not yet been executed**. The current execution state is `READY_MANUAL_WORKFLOW_DISPATCH_REQUIRED_NOT_EXECUTED`, recorded in `model/registries/fiscal_capb_materialisation_execution_readiness_2026_09_19.json`.
 
-All other conclusions of the earlier reopen-trigger monitoring pass remain unchanged. The global scientific boundary remains **EVIDENCE_TRIGGERED_BASELINE_HOLD**, with one explicitly scoped source-evidence task active inside that hold.
+The next gate is a manual dispatch of the frozen workflow to retain exact official AMECO release archives and exact matched `UBLGBPS` row bytes with hashes. Only after that artifact is retained and reviewed may timing adjudication begin. No autonomous task is claimed while that manual gate is pending. No parameter estimation, refit, reuse or inspection of the untouched 2018–2024 final-evaluation window, post-result lag/predictor search, causal claim, System Dynamics feedback activation or behavioural-closure activation is authorized.
+
+All other conclusions of the earlier reopen-trigger monitoring pass remain unchanged. The global scientific boundary remains **EVIDENCE_TRIGGERED_BASELINE_HOLD**, with one explicitly scoped **manual source-evidence gate** active inside that hold.
 
 
 ## Canonical modeling paradigm
