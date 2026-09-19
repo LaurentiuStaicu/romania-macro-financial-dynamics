@@ -1,0 +1,77 @@
+{
+  "screening_version": "0.1",
+  "screened_on": "2026-09-19",
+  "reference_mode": "government_refinancing_need",
+  "purpose": "Evaluate whether newly identified IMF/MoF public sources are sufficient to promote government_refinancing_need beyond PARTIAL_SERIES_AVAILABLE without mixing forecasts, revisions, graphical approximations, gross financing need, and realized Ministry refinancing.",
+  "sources": [
+    {
+      "id": "imf_2025_article_iv_figure2",
+      "institution": "International Monetary Fund",
+      "url": "https://www.imf.org/-/media/files/publications/cr/2025/english/1rouea2025001-source-pdf.pdf",
+      "location": "Figure 2, page 20 of staff report / PDF page 24",
+      "evidence": "Historical chart labelled Fiscal Deficit, Public Debt, and Gross Financing Needs for 2014-2024, sourced to Romanian authorities and IMF staff calculations.",
+      "status": "CONCEPT_AND_HISTORY_CONFIRMED_GRAPHICAL_ONLY",
+      "promotion_value": "The chart confirms that a long historical GFN concept exists, but exact annual numeric GFN values are not tabulated in the historical figure. Graphical digitization would introduce avoidable approximation and is not accepted as canonical observed data."
+    },
+    {
+      "id": "imf_2025_article_iv_dsa_baseline",
+      "institution": "International Monetary Fund",
+      "url": "https://www.imf.org/-/media/files/publications/cr/2025/english/1rouea2025001-source-pdf.pdf",
+      "location": "Annex III Figure 3 / PDF page 40",
+      "evidence": {
+        "2024_actual_gross_financing_needs_pct_gdp": 14.1,
+        "2024_actual_debt_service_pct_gdp": 7.5
+      },
+      "status": "ONE_EXACT_HISTORICAL_ACTUAL_PLUS_PROJECTIONS",
+      "promotion_value": "The table provides an exact 2024 Actual GFN observation, but 2025 onward values are projections. One exact historical point does not solve the long-history gate."
+    },
+    {
+      "id": "mof_base_prospectus_supplement_nov_2024",
+      "institution": "Romania Ministry of Finance",
+      "url": "https://mfinante.gov.ro/static/10/Mfp/trezorerie/supliment4RomaniaBaseProspectus14112024.pdf",
+      "evidence": {
+        "2024_financing_plan_initial_bn_RON": 181,
+        "2024_financing_plan_revised_2024_09_02_bn_RON": 217
+      },
+      "status": "INTRA_YEAR_PLAN_REVISION_NOT_OUTTURN",
+      "promotion_value": "Demonstrates that financing-plan values are revised during the year and therefore require explicit vintage/status handling."
+    },
+    {
+      "id": "mof_investor_presentation_nov_2024",
+      "institution": "Romania Ministry of Finance",
+      "url": "https://www.mfinante.gov.ro/static/10/Mfp/buget/sitebuget/InvestorPresentationNovember2024.pdf",
+      "evidence": {
+        "2024_government_financing_needs_revised_bn_RON": 235,
+        "includes_prefunding_of_2025": true
+      },
+      "status": "LATER_PLAN_VALUE_INCLUDES_PREFUNDING",
+      "promotion_value": "Confirms a later 2024 financing-plan revision and explicitly includes pre-funding of 2025, so this value is not interchangeable with an annual realized refinancing observation."
+    },
+    {
+      "id": "imf_sdds_romania_general_government_debt_metadata",
+      "institution": "International Monetary Fund SDDS metadata supplied by Romania",
+      "url": "https://dsbb.imf.org/sdds/dqaf-base/country/ROU/category/GGD00",
+      "evidence": "Romanian Ministry of Finance debt data are preliminary when first released and revised quarterly and annually; an annual government public-debt report is required by law by June 30 of the following year.",
+      "status": "REVISION_GOVERNANCE_RELEVANT",
+      "promotion_value": "Supports requiring explicit vintage/revision status when combining Ministry annual debt-management observations."
+    }
+  ],
+  "synthesis": {
+    "longer_historical_GFN_concept_exists": true,
+    "exact_machine_readable_historical_GFN_series_recovered": false,
+    "exact_2024_IMF_actual_GFN_pct_GDP": 14.1,
+    "ministry_2024_plan_values_are_revision_sensitive": true,
+    "ministry_2024_plan_values_include_prefunding": true,
+    "existing_2017_2023_realized_or_operative_refinancing_series_remains_distinct_from_GFN": true,
+    "promotion_supported": false
+  },
+  "scientific_decision": {
+    "verdict": "NO_PROMOTION",
+    "retained_status": "PARTIAL_SERIES_AVAILABLE",
+    "reason": "The new sources strengthen concept validity and revision governance but do not provide a sufficiently long exact observed series on one frozen empirical boundary. IMF historical GFN is graphical, the exact IMF DSA table has only 2024 as Actual before projections, and Ministry 2024 financing-plan values are revised and include pre-funding. None of these should be silently merged with the retained 2017-2023 Ministry refinancing series.",
+    "readiness_count_change": 0,
+    "behavioural_closure_change": false,
+    "government_repricing_mechanism_change": false
+  },
+  "updated_reopen_trigger": "Accept promotion evidence only from a preregistered exact historical series/table/API with explicit actual-versus-forecast status, stable concept/boundary, and frozen revision-vintage handling, or from a longer Ministry realized refinancing history meeting a preregistered sufficiency rule. Graphical digitization, financing plans, prefunding-inclusive plan totals, and projected GFN do not satisfy the trigger."
+}
