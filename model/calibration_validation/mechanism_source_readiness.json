@@ -35,15 +35,16 @@
     {
       "id": "aggregate_bank_credit_response",
       "classification": "CANDIDATE",
-      "source_readiness": "BLS_MULTI_ROUND_SEMANTIC_MAPPING_AVAILABLE_WITH_EXPLICIT_COVERAGE_GAPS",
-      "next_admissible_action": "Recover and retain the exact official BNR BLS rounds for 2023-Q2, 2023-Q3, 2024-Q2 and 2025-Q2 before any structural-selection contract. Regenerate the retained panel only from observed official rounds; do not interpolate missing quarters, combine NFC/household signals synthetically, or fit a credit equation.",
+      "source_readiness": "BLS_CANONICAL_8_OF_12_PLUS_OFFICIAL_PUBLICATION_TEXT_BRIDGE_EXACT_WORKBOOK_GAPS_REMAIN",
+      "next_admissible_action": "Recover and retain exact official BNR BLS workbook bytes and exact cell values for 2023-Q2, 2023-Q3, 2024-Q2 and 2025-Q2 before any structural-selection contract, prioritising 2023-Q2 because its household publication text does not identify unique exact net percentages. Use the official-publication bridge only for semantic/sign/reporting-precision corroboration; do not promote publication-rounded values into the canonical panel, interpolate gaps, aggregate NFC/household signals, or fit a credit equation.",
       "blockers": [
         "Exact quarterly ECB CBD2 NPL, solvency-ratio and CET1 histories are retained for 2014-Q4..2026-Q1.",
         "The CBD2-to-BNR population/consolidation bridge remains unresolved; numerical similarity is not a bridge.",
-        "Cross-round BNR BLS semantics for C01/C05/P01/P06/P13 are now frozen and deterministically materialized for eight observed rounds from 2022-Q4 through 2025-Q3.",
-        "The retained realised-round panel has 8 of 12 calendar quarters between its bounds; exact official BNR BLS rounds remain missing for 2023-Q2, 2023-Q3, 2024-Q2 and 2025-Q2.",
-        "Missing BNR BLS rounds may not be interpolated, forward-filled or inferred from adjacent surveys.",
-        "No synthetic aggregation of NFC and household BLS signals is authorized, and no credit-equation estimation or model selection is open."
+        "Cross-round BNR BLS semantics for C01/C05/P01/P06/P13 are frozen and deterministically materialized for eight canonical observed rounds from 2022-Q4 through 2025-Q3.",
+        "Official BNR publication text directly confirms all six preregistered observables for 2023-Q3, 2024-Q2 and 2025-Q2, and the two NFC observables for 2023-Q2.",
+        "The four 2023-Q2 household observables are not uniquely identified at canonical precision from publication text; reported response shares are insufficient substitutes for workbook-cell net percentages.",
+        "Exact workbook-cell precision remains unrecovered for all four canonical missing quarters 2023-Q2, 2023-Q3, 2024-Q2 and 2025-Q2. Publication-rounded values may corroborate but may not overwrite the canonical panel.",
+        "No interpolation, forward-fill, inferred missing response category, synthetic NFC/household aggregation, credit-equation estimation or model selection is authorized."
       ],
       "source_boundary_review": "model/calibration_validation/aggregate_bank_credit_source_boundary_review.json",
       "estimation_or_refit_allowed": false,
@@ -64,6 +65,23 @@
       "observed_round_count": 8,
       "expected_quarter_count_between_bounds": 12,
       "missing_rounds": [
+        "2023-Q2",
+        "2023-Q3",
+        "2024-Q2",
+        "2025-Q2"
+      ],
+      "publication_text_bridge_contract": "model/calibration_validation/bnr_bls_publication_text_bridge_contract.json",
+      "publication_text_bridge": "model/calibration_validation/bnr_bls_publication_text_bridge.json",
+      "publication_text_fully_covered_rounds": [
+        "2023-Q3",
+        "2024-Q2",
+        "2025-Q2"
+      ],
+      "publication_text_partial_rounds": [
+        "2023-Q2"
+      ],
+      "publication_text_direct_or_exact_status_quo_observations": 20,
+      "canonical_missing_rounds": [
         "2023-Q2",
         "2023-Q3",
         "2024-Q2",
