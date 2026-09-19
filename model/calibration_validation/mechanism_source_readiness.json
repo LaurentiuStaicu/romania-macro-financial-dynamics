@@ -100,16 +100,18 @@
     {
       "id": "household_consumption_response",
       "classification": "CANDIDATE",
-      "source_readiness": "CORE_QSA_SOURCES_CONFIRMED_REGISTERED_FORM_BLOCKED_BY_DSR_AND_RATE_BOUNDARY",
-      "next_admissible_action": "Search for and retain an exact Romania household DSR source; in parallel freeze the household borrowing-rate family only through a new source contract. Do not estimate the current or a nested consumption equation.",
+      "source_readiness": "BIS_SECTORAL_DSR_UNAVAILABLE_BNR_DSTI_ALTERNATIVE_IDENTIFIED_HISTORY_NOT_RETAINED",
+      "next_admissible_action": "Enumerate and retain the exact official BNR household DSTI history, separating new-loan and outstanding-loan measures. Do not digitize charts and do not treat DSTI as the registered macro DSR without a separately preregistered candidate-family contract.",
       "blockers": [
-        "Exact QSA household consumption and gross disposable income are available.",
-        "No exact Romania household DSR has been retained; annual household debt-to-income is not a substitute.",
-        "Housing versus consumption borrowing-rate choice and quarterly aggregation are not yet preregistered."
+        "Romania is not among the 17 economies in the current BIS documentation with household/NFC sectoral DSR breakdowns.",
+        "BNR publishes household borrower/loan-portfolio DSTI, but the exact machine-readable historical series has not been retained.",
+        "BNR new-loan and outstanding-loan DSTI are definitionally distinct and neither may be selected after fit.",
+        "Household borrowing-rate family and consumption/income real/seasonal transformations remain unfrozen."
       ],
       "estimation_or_refit_allowed": false,
-      "priority_group": "SOURCE_BOUNDARY_BLOCKED_NO_ESTIMATION",
-      "source_boundary_review": "model/calibration_validation/household_consumption_source_boundary_review.json"
+      "priority_group": "RETAIN_BNR_DSTI_HISTORY_NO_ESTIMATION",
+      "source_boundary_review": "model/calibration_validation/household_consumption_source_boundary_review.json",
+      "debt_service_source_screening": "model/calibration_validation/debt_service_source_screening.json"
     },
     {
       "id": "corporate_investment_response",
@@ -142,13 +144,15 @@
       "next_admissible_action": "Search for an exact Romania borrower debt-service burden on a portfolio boundary compatible with the NPL target; separately preregister aggregate versus sector-specific NPL and the activity variable before any estimation.",
       "blockers": [
         "Exact quarterly Romania CBD2 NPL ratio is available from 2014-Q4.",
-        "No exact reconciled Romania household/NFC debt-service burden is retained.",
-        "Output-growth observable and aggregate versus sector-specific NPL target are not frozen.",
+        "Romania is not among the 17 economies in the current BIS documentation with household/NFC sectoral DSR breakdowns.",
+        "BNR household DSTI is borrower/loan-portfolio specific and is not aligned to an aggregate or NFC-inclusive NPL target.",
+        "Output-growth observable and aggregate versus sector-specific NPL target remain unfrozen.",
         "Lag structure and treatment of regulatory/portfolio-management breaks remain unresolved."
       ],
       "source_boundary_review": "model/calibration_validation/credit_risk_npl_source_boundary_review.json",
       "estimation_or_refit_allowed": false,
-      "priority_group": "DEFER_UNTIL_DEBT_SERVICE_SOURCE"
+      "priority_group": "DEFER_UNTIL_DEBT_SERVICE_SOURCE",
+      "debt_service_source_screening": "model/calibration_validation/debt_service_source_screening.json"
     },
     {
       "id": "fiscal_primary_balance_reaction",
@@ -210,8 +214,8 @@
   "priority_rule": "Priority is determined by the shortest scientifically admissible path to new independent evidence, not by a desire to activate a feedback loop. Waiting mechanisms remain frozen; source-incomplete mechanisms are not fit with proxies.",
   "current_next_step": {
     "mechanism_id": "household_consumption_response",
-    "action": "SCREEN_OFFICIAL_HOUSEHOLD_DEBT_SERVICE_SOURCES_NO_ESTIMATION",
-    "reason": "The corporate-investment cycle is frozen after failing before holdout. The household-consumption and credit-risk candidates share an unresolved debt-service measurement boundary; an official-source screening can add independent evidence to both without fitting any behavioural equation.",
+    "action": "ENUMERATE_AND_RETAIN_BNR_HOUSEHOLD_DSTI_HISTORY_NO_ESTIMATION",
+    "reason": "The BIS sectoral-DSR path is now closed for Romania, while BNR publishes a potentially useful observed household DSTI family. Retaining its exact history is the shortest admissible way to determine whether a new borrower-burden consumption candidate can be defined without synthetic debt-service construction.",
     "calibration_cycle_open": false
   },
   "coverage_rule": {
