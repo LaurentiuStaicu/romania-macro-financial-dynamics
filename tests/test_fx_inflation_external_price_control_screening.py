@@ -42,7 +42,7 @@ class FxInflationExternalPriceControlScreeningTests(unittest.TestCase):
         self.assertTrue(limits["euro_denomination_selected_before_fit"])
         self.assertTrue(limits["no_RON_denomination_switch_after_fit"])
         self.assertIn(
-            "unit-value index denominated in euro",
+            "unit = unit-value index denominated in euro",
             fallback["required_dimensions_before_use"],
         )
         self.assertTrue(limits["UVI_is_not_direct_import_price_index"])

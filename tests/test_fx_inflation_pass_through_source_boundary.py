@@ -50,16 +50,29 @@ class FxInflationPassThroughSourceBoundaryTests(unittest.TestCase):
             "model/calibration_validation/"
             "fx_inflation_pass_through_source_boundary_review.json"
         )
+        screening = load(
+            "model/calibration_validation/"
+            "fx_inflation_external_price_control_screening.json"
+        )
         screen = review["external_price_control_screen"]
         prohibited = " ".join(
             review["source_materialisation_gate"]["prohibited_shortcuts"]
         ).lower()
 
         self.assertEqual(
-            screen["current_status"],
-            "ROMANIA_SPECIFIC_COVERAGE_NOT_YET_CONFIRMED",
+            screening["preferred_direct_control"]["status"],
+            "ROMANIA_COVERAGE_NOT_CONFIRMED",
         )
-        self.assertIn("before opening outcomes", screen["rule"])
+        self.assertEqual(
+            screen["screening"],
+            "model/calibration_validation/"
+            "fx_inflation_external_price_control_screening.json",
+        )
+        self.assertFalse(screen["calibration_may_open"])
+        self.assertIn(
+            "before inspecting model fit",
+            screening["purpose"],
+        )
         self.assertIn("euro-area import prices", prohibited)
         self.assertIn("lag length", prohibited)
         self.assertIn("cpi and hicp", prohibited)
