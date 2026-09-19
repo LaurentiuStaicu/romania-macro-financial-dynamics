@@ -1,11 +1,16 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import unittest
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
 P=ROOT/"model"/"calibration_validation"/"bnr_legacy_xls_cell_extraction_assessment.json"
+VINTAGE=ROOT/"data"/"source_vintages"/"bnr-legacy-xls-cell-extraction-vintage-2026-09-19"
+
+def sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 class BNRLegacyXLSCellExtractionAssessmentTests(unittest.TestCase):
     def setUp(self):
@@ -25,6 +30,19 @@ class BNRLegacyXLSCellExtractionAssessmentTests(unittest.TestCase):
             "ea762c3d29f4cca48d82df517b6d89fbce4db3107f9d78713e48cd321d5c9aa9",
         )
         self.assertEqual(len(self.a["expected_files"]),8)
+
+    def test_exact_reviewed_extraction_is_retained_offline(self):
+        expected={item["path"] for item in self.a["expected_files"]}
+        actual={
+            str(path.relative_to(VINTAGE))
+            for path in VINTAGE.rglob("*")
+            if path.is_file()
+        }
+        self.assertEqual(actual,expected)
+        for item in self.a["expected_files"]:
+            path=VINTAGE/item["path"]
+            self.assertEqual(path.stat().st_size,item["bytes"])
+            self.assertEqual(sha256(path),item["sha256"])
 
     def test_question_anchor_coordinates_are_stable(self):
         schema=self.a["schema_stability"]
