@@ -49,18 +49,19 @@
     {
       "id": "exchange_rate_pass_through_to_inflation",
       "classification": "CANDIDATE",
-      "source_readiness": "SOURCE_VINTAGE_AND_TRANSFORM_LAG_WINDOWS_FROZEN_OFFLINE_BUILDER_PENDING",
-      "next_admissible_action": "Implement and test an offline transformation/design builder that exactly enforces the frozen monthly log transforms, August-2005 start, AR(2), calendar-month fixed effects, UVI baseline and FX lag blocks. The default runner must stop at 2020-12, perform no coefficient estimation and expose no 2021-01..2026-06 values.",
+      "source_readiness": "FROZEN_TESTED_FORM_FAILED_BEFORE_HOLDOUT",
+      "next_admissible_action": "Do not open 2021-01..2026-06 final evaluation and do not respecify transforms, AR order, FX lag blocks, external-price lags, regime dummies or asymmetry on this evidence cycle. Reopen only through a separately preregistered cycle justified by genuinely new measurement or identification evidence, such as an exact Romania transaction-price import-price index, an independently justified exogenous FX-shock design, or new regime-identification evidence.",
       "blockers": [
-        "The exact common monthly level vintage is now retained, but the inflation/FX/UVI transformations are intentionally not yet frozen.",
-        "A current-regime start boundary and treatment of the August-2005 inflation-targeting break must be fixed before fit.",
-        "The lag horizon/candidate family, seasonal treatment, structural-selection window and untouched final-evaluation window remain unregistered.",
-        "Source retention does not identify causal exchange-rate shocks; managed-float intervention and common inflation shocks remain potential endogeneity/confounding channels."
+        "The preregistered FX candidate failed structural selection before holdout.",
+        "Incremental RMSE improvement over the mandatory external-price baseline was approximately 0.014%, below the preregistered 2% gate.",
+        "The FX candidate underperformed the AR(2)+seasonal baseline on RMSE and was slightly worse than the external-price baseline on MAE.",
+        "Positive cumulative FX sign consistency and good conditioning were insufficient to overcome the predictive-gain failures.",
+        "The 2021-01..2026-06 final-evaluation window remains unopened and cannot be used to rescue or respecify this cycle."
       ],
       "source_boundary_review": "model/calibration_validation/fx_inflation_pass_through_source_boundary_review.json",
       "external_price_screening": "model/calibration_validation/fx_inflation_external_price_control_screening.json",
       "estimation_or_refit_allowed": false,
-      "priority_group": "OFFLINE_TRANSFORM_DESIGN_BUILDER_PENDING",
+      "priority_group": "FREEZE_TESTED_FORM_UNTIL_NEW_EVIDENCE",
       "external_price_control_contract": "model/calibration_validation/fx_inflation_external_price_control_contract.json",
       "monthly_materialisation_contract": "model/calibration_validation/fx_inflation_monthly_materialisation_contract.json",
       "materialiser_script": "scripts/audit_fx_inflation_monthly_materialisation.py",
@@ -68,7 +69,10 @@
       "retained_source_vintage": "data/source_vintages/fx-inflation-monthly-levels-vintage-2026-09-19",
       "promotion_review": "model/calibration_validation/fx_inflation_source_vintage_promotion_review.json",
       "live_execution_policy": "MANUAL_ONLY_LIVE_SOURCE_EVIDENCE",
-      "transform_lag_window_contract": "model/calibration_validation/fx_inflation_transform_lag_window_contract.json"
+      "transform_lag_window_contract": "model/calibration_validation/fx_inflation_transform_lag_window_contract.json",
+      "structural_selection_contract": "model/calibration_validation/fx_inflation_structural_selection_contract.json",
+      "selection_result": "model/calibration_validation/fx_inflation_structural_selection_result.json",
+      "selection_execution_gate": "model/calibration_validation/fx_inflation_selection_execution_gate.json"
     },
     {
       "id": "sovereign_yield_spread_response",
@@ -196,9 +200,9 @@
   ],
   "priority_rule": "Priority is determined by the shortest scientifically admissible path to new independent evidence, not by a desire to activate a feedback loop. Waiting mechanisms remain frozen; source-incomplete mechanisms are not fit with proxies.",
   "current_next_step": {
-    "mechanism_id": "exchange_rate_pass_through_to_inflation",
-    "action": "IMPLEMENT_FX_INFLATION_OFFLINE_TRANSFORM_DESIGN_BUILDER_NO_ESTIMATION",
-    "reason": "The exact monthly source vintage and all transform/lag/window choices are now frozen. Implementation must be verified without estimating coefficients or opening the 2021-2026 final-evaluation window.",
+    "mechanism_id": "corporate_investment_response",
+    "action": "MATERIALISE_NFC_GFCF_D92_AND_RATE_SOURCES_NO_ESTIMATION",
+    "reason": "The FX candidate is now frozen after failing before holdout. Among remaining non-waiting mechanisms, corporate investment has exact S11 GFCF, S11 D92 investment-grant and NFC lending-rate source families already identified, so exact source retention can add independent evidence without fitting a behavioural equation.",
     "calibration_cycle_open": false
   },
   "coverage_rule": {
