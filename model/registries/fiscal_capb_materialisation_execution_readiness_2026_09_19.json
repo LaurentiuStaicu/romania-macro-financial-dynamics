@@ -1,0 +1,34 @@
+{
+  "assessment_version": "0.1",
+  "assessed_on": "2026-09-19",
+  "mechanism_id": "fiscal_primary_balance_reaction",
+  "status": "READY_FOR_MANUAL_LIVE_SOURCE_MATERIALISATION_NOT_YET_EXECUTED",
+  "prerequisite_reopen_assessment": "model/registries/fiscal_capb_reopen_assessment_2026_09_19.json",
+  "contract": "model/calibration_validation/fiscal_reaction_capb_realtime_vintage_contract.json",
+  "workflow": ".github/workflows/fiscal-reaction-capb-realtime-vintage-materialisation.yml",
+  "materializer": "scripts/materialise_fiscal_reaction_capb_realtime_vintages.py",
+  "integration": {
+    "selective_reopen_pr": 55,
+    "merge_commit_sha": "8090d622672d1ca9a28443230a4ab2b032bf6f1d",
+    "post_merge_scientific_ci_run_id": 35462911345,
+    "post_merge_scientific_ci_conclusion": "SUCCESS"
+  },
+  "execution_state": {
+    "live_provider_work_manual_only": true,
+    "workflow_dispatch_required": true,
+    "execution_performed": false,
+    "workflow_run_id": null,
+    "retained_source_vintage_created": false,
+    "retained_artifact_reviewed": false,
+    "timing_adjudication_authorized_after_materialisation_only": true
+  },
+  "scientific_effects": {
+    "mechanism_classification": "DEFERRED",
+    "active_calibration_cycle_open": false,
+    "estimation_or_refit_authorized": false,
+    "prior_final_evaluation_2018_2024_opening_authorized": false,
+    "system_dynamics_feedback_activation": false,
+    "behavioural_closure_activation": false
+  },
+  "next_gate": "Manually dispatch the frozen CAPB real-time vintage materialisation workflow. Only after its artifact is retained and reviewed may the separate information-set/timing adjudication begin."
+}
