@@ -1,5 +1,5 @@
 {
-  "enumeration_version": "0.1",
+  "enumeration_version": "0.2",
   "frozen_on": "2026-09-19",
   "mechanism_id": "aggregate_bank_credit_response",
   "phase": "BNR Prudential Table Exact Source Enumeration",
@@ -22,7 +22,7 @@
       2025
     ]
   },
-  "status": "INCOMPLETE_SOURCE_ENUMERATION_NO_MODEL_EFFECT",
+  "status": "FROZEN_INCOMPLETE_3_OF_11_CURRENT_PUBLIC_DISCOVERY_EXHAUSTED_NO_MODEL_EFFECT",
   "purpose": "Freeze only independently identified exact official BNR Monthly Bulletin source URLs for the matched prudential source family before any numeric extraction. Unresolved primary URLs remain unresolved; search-index non-discovery is not evidence that an official bulletin does not exist.",
   "discovery_methodology": {
     "official_archive": "https://www.bnr.ro/12058-buletine-lunare",
@@ -32,7 +32,10 @@
     "fallback_selection_opened": false,
     "values_inspected": false,
     "numeric_extraction_performed": false,
-    "pdf_bytes_retained_in_this_phase": false
+    "pdf_bytes_retained_in_this_phase": false,
+    "current_public_discovery_surface_exhausted": true,
+    "same_query_repetition_authorized": false,
+    "stage_closed": true
   },
   "year_sources": [
     {
@@ -168,9 +171,11 @@
     "numeric_extraction_authorized": false,
     "canonical_series_mutation_authorized": false,
     "structural_selection_authorized": false,
-    "estimation_or_refit_authorized": false
+    "estimation_or_refit_authorized": false,
+    "stage_closed_frozen": true,
+    "reopen_requires_new_official_evidence": true
   },
-  "next_admissible_action": "Continue independent discovery of exact official primary URLs. Do not infer filenames or timestamps. If the current indexed/archive surface cannot expose them, freeze this path until exact links can be obtained through an official archive/browser surface; do not activate fallbacks merely because a search engine omitted the primary.",
+  "next_admissible_action": "No active enumeration work remains under the current public discovery surface. Reopen only when BNR exposes a new exact official primary-link clue, archive/browser listing, or matched machine-readable prudential catalogue/export. Do not repeat the same searches, infer filenames/timestamps, or activate fallbacks from search omission.",
   "hard_rules": {
     "no_url_pattern_generation": true,
     "no_timestamp_bruteforce": true,
@@ -183,6 +188,8 @@
     "no_model_selection": true,
     "no_holdout_opening": true,
     "no_system_dynamics_activation": true,
-    "no_behavioural_closure_change": true
-  }
+    "no_behavioural_closure_change": true,
+    "no_repeat_same_discovery_without_new_official_trigger": true
+  },
+  "terminal_assessment": "model/calibration_validation/bnr_prudential_source_discovery_terminal_assessment.json"
 }
