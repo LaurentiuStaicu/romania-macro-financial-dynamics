@@ -60,7 +60,7 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         )
         self.assertEqual(
             step["action"],
-            "SCREEN_OFFICIAL_HOUSEHOLD_DEBT_SERVICE_SOURCES_NO_ESTIMATION",
+            "ENUMERATE_AND_RETAIN_BNR_HOUSEHOLD_DSTI_HISTORY_NO_ESTIMATION",
         )
         self.assertFalse(step["calibration_cycle_open"])
 
@@ -90,6 +90,21 @@ class MechanismSourceReadinessTests(unittest.TestCase):
             "FREEZE_TESTED_FORM_UNTIL_NEW_EVIDENCE",
         )
         self.assertFalse(investment["estimation_or_refit_allowed"])
+
+        household = mechanisms["household_consumption_response"]
+        self.assertEqual(
+            household["source_readiness"],
+            "BIS_SECTORAL_DSR_UNAVAILABLE_BNR_DSTI_ALTERNATIVE_IDENTIFIED_HISTORY_NOT_RETAINED",
+        )
+        self.assertEqual(
+            household["priority_group"],
+            "RETAIN_BNR_DSTI_HISTORY_NO_ESTIMATION",
+        )
+        self.assertEqual(
+            household["debt_service_source_screening"],
+            "model/calibration_validation/debt_service_source_screening.json",
+        )
+        self.assertFalse(household["estimation_or_refit_allowed"])
         fiscal = mechanisms["fiscal_primary_balance_reaction"]
         self.assertEqual(
             fiscal["source_readiness"],
