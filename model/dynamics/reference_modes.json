@@ -34,19 +34,23 @@
     },
     {
       "id": "credit_stock",
-      "status": "SOURCE_IDENTIFIED_NOT_MATERIALIZED",
-      "role": "Required reference mode for bank-credit balance-sheet feedback.",
-      "source": "BNR/ECB monetary and financial statistics; exact canonical series pending boundary audit",
-      "time_resolution": "TBD",
-      "current_endogeneity": "UNRESOLVED"
+      "status": "OBSERVED_SERIES_AVAILABLE",
+      "role": "Observed monthly private non-financial credit stock reference mode: end-of-period ECB BSI loan stocks for domestic NFCs (S.11) plus households/NPISH (S.14/S.15), MFIs excluding the NCB, all currencies combined.",
+      "source": "ECB BSI exact S.11 and S.14/S.15 end-of-period loan-stock series for Romania; retained compact snapshot with immutable workflow provenance.",
+      "time_resolution": "monthly",
+      "current_endogeneity": "OBSERVED_TARGET",
+      "assessment": "model/dynamics/private_credit_reference_assessment.json",
+      "retained_snapshot": "model/dynamics/private_credit_reference_snapshot.json"
     },
     {
       "id": "credit_flow",
-      "status": "SOURCE_IDENTIFIED_NOT_MATERIALIZED",
-      "role": "Required reference mode for credit creation/contraction and monetary-credit transmission.",
-      "source": "ECB QSA/BNR candidate sources; exact transaction definition pending audit",
-      "time_resolution": "quarterly_or_monthly_TBD",
-      "current_endogeneity": "UNRESOLVED"
+      "status": "OBSERVED_SERIES_AVAILABLE",
+      "role": "Observed monthly private non-financial credit-flow reference mode: ECB BSI financial transactions for domestic NFCs (S.11) plus households/NPISH (S.14/S.15). It is not a first difference of the loan stock and not gross new-lending originations.",
+      "source": "ECB BSI exact S.11 and S.14/S.15 financial-transaction series for Romania; retained compact snapshot with immutable workflow provenance.",
+      "time_resolution": "monthly",
+      "current_endogeneity": "OBSERVED_TARGET",
+      "assessment": "model/dynamics/private_credit_reference_assessment.json",
+      "retained_snapshot": "model/dynamics/private_credit_reference_snapshot.json"
     },
     {
       "id": "government_debt_stock",
