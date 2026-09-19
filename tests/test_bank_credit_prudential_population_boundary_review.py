@@ -30,10 +30,18 @@ class BankCreditPrudentialPopulationBoundaryReviewTests(unittest.TestCase):
         self.assertEqual(state["bnr_table_source_status"],"EXACT_TABULAR_OFFICIAL_SOURCE_FAMILY_IDENTIFIED_MACHINE_READABLE_HISTORY_NOT_RETAINED")
         self.assertFalse(state["machine_readable_bnr_source_identified_in_this_review"])
         self.assertFalse(state["chart_digitisation_required"])
-        self.assertIn("source enumeration",state["next_admissible_source_task"].lower())
         action=state["next_admissible_source_task"].lower()
-        self.assertIn("extract numeric values",action)
-        self.assertIn("until the full year-source map is frozen",action)
+        self.assertIn("no active matched-prudential source-discovery task remains",action)
+        self.assertIn("reopen only",action)
+        self.assertIn("do not repeat the same discovery probes",action)
+        self.assertEqual(
+            state["discovery_stage_status"],
+            "STAGE_CLOSED_FROZEN_INCOMPLETE_UNDER_CURRENT_PUBLIC_DISCOVERY_SURFACE_NO_MODEL_EFFECT",
+        )
+        self.assertEqual(
+            state["source_discovery_terminal_assessment"],
+            "model/calibration_validation/bnr_prudential_source_discovery_terminal_assessment.json",
+        )
 
     def test_no_model_or_sd_activation_follows(self):
         effect=self.review["modelling_effect"]
