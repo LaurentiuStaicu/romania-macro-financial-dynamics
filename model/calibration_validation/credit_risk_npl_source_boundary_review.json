@@ -3,7 +3,7 @@
   "reviewed_on": "2026-09-19",
   "mechanism_id": "credit_risk_npl_response",
   "purpose": "Determine whether the deferred aggregate NPL response equation has a definitionally complete Romania source boundary before any risk-model estimation.",
-  "verdict": "QUARTERLY_NPL_OBSERVED_DEBT_SERVICE_BURDEN_NOT_IDENTIFIED_ESTIMATION_DEFERRED",
+  "verdict": "AGGREGATE_NPL_EXACT_MORTGAGE_PORTFOLIO_NPL_DSTI_FAMILY_OBSERVED_JOINT_BOUNDARY_UNRECONCILED_ESTIMATION_DEFERRED",
   "current_registry_form": "dNPL = alpha - beta_y*gOutput + beta_ds*debt_service + rho*NPL_lag",
   "exact_risk_source": {
     "institution": "European Central Bank / ESCB",
@@ -17,9 +17,14 @@
     "semantic_limit": "The aggregate banking-system NPL ratio is a stock-quality outcome affected by recognition, cures, write-offs, sales and portfolio composition; it is not a pure borrower-default incidence measure."
   },
   "sector_specific_npl_family": {
-    "status": "ECB_CBD2_SECTOR_BREAKDOWNS_EXIST_NOT_YET_FROZEN_FOR_ROMANIA_MODEL",
-    "evidence": "CBD2 publishes I3632 with counterpart-sector breakdowns such as S11 in the same consolidated-banking framework.",
-    "rule": "Do not choose aggregate versus NFC/household NPL target after viewing model performance. A future target-boundary contract must freeze the portfolio before estimation."
+    "status": "BNR_MORTGAGE_NPL_PUBLICATION_FAMILY_OBSERVED_NOT_SELECTED_AS_MODEL_TARGET",
+    "evidence": [
+      "BNR Financial Stability Report, December 2023 directly reports mortgage NPL = 1.7 percent in September 2023 and plots mortgage NPL separately from consumer and total household credit.",
+      "BNR Financial Stability Report, June 2024 directly reports mortgage NPL = 1.7 percent in March 2024, versus 5.9 percent for consumer loans and 3.3 percent for household bank loans overall.",
+      "The BNR charts show longer mortgage-NPL histories, but chart digitisation is prohibited and no exact machine-readable mortgage-NPL series has yet been retained."
+    ],
+    "current_target_selection": "UNFROZEN",
+    "rule": "Do not replace the exact aggregate ECB CBD2 NPL target with mortgage NPL after viewing fit. Any mortgage target requires a separately preregistered target/source contract and exact machine-readable retained history."
   },
   "debt_service_boundary": {
     "required_registered_concept": "debt_service_burden",
@@ -41,12 +46,21 @@
       },
       {
         "source": "National Bank of Romania",
-        "concept": "Household borrower/loan-portfolio DSTI for new and outstanding loans",
-        "status": "OFFICIAL_MEASURE_IDENTIFIED_NOT_DEFINITIONALLY_MATCHED_TO_AGGREGATE_NPL_BOUNDARY",
-        "why_not_use_proxy": "Household borrower DSTI cannot represent debt service for an aggregate or NFC-inclusive banking-system NPL target."
+        "concept": "Housing-loan borrower/portfolio DSTI for new and outstanding mortgage loans, with direct publication-text observations 2023-Q1..2025-Q2",
+        "status": "OFFICIAL_MORTGAGE_DSTI_LEVELS_OBSERVED_CLOSER_TO_MORTGAGE_NPL_BOUNDARY_BUT_JOINT_SOURCE_NOT_RECONCILED",
+        "why_not_use_proxy": "Outstanding housing-loan DSTI is conceptually closer to a mortgage NPL stock than to the registered aggregate NPL target, but exact reporting-population, bank-coverage, weighting and machine-readable joint-history compatibility with the mortgage NPL source are not demonstrated. It may not be used for the aggregate target or silently promote a mortgage target.",
+        "boundary_review": "model/calibration_validation/bnr_household_dsti_level_publication_boundary_review.json",
+        "mortgage_portfolio_screening": "model/calibration_validation/credit_risk_mortgage_portfolio_source_screening.json"
       }
     ],
-    "prohibited_measurement_model": "Do not synthesize debt service as debt stock times a lending rate plus assumed amortisation/maturity without a separately preregistered measurement model and independent validation."
+    "prohibited_measurement_model": "Do not synthesize debt service as debt stock times a lending rate plus assumed amortisation/maturity without a separately preregistered measurement model and independent validation.",
+    "dti_o_boundary": {
+      "source": "BNR Central Credit Register / Financial Stability Report, June 2024",
+      "concept": "DTI-O = total borrower debt / annual disposable income at origination",
+      "status": "OBSERVED_BUT_NOT_DEBT_SERVICE_BURDEN",
+      "reported_mortgage_exposure_value_coverage_percent": 25,
+      "rule": "DTI-O is leverage at origination, not scheduled debt service relative to income, and may not substitute for DSTI/debt_service."
+    }
   },
   "output_growth_boundary": {
     "registered_concept": "gOutput",
@@ -66,13 +80,26 @@
   "source_admissibility": {
     "registered_full_form_admissible": false,
     "reasons": [
-      "The NPL target is observed exactly, but debt_service_burden is not retained on a definitionally matched borrower/portfolio boundary.",
-      "The output-growth observable is not frozen.",
-      "Aggregate versus sector-specific NPL target is not frozen for the future candidate family.",
-      "Lag structure and treatment of regulatory/portfolio-management breaks are not preregistered."
+      "The exact registered aggregate NPL target remains available, but no definitionally matched aggregate Romania debt-service burden has been retained.",
+      "A narrower BNR mortgage NPL and housing-loan DSTI source family is now observed in official publications, but no exact machine-readable, jointly reconciled portfolio history has been retained and the mortgage target has not been preregistered.",
+      "BNR DTI-O is an origination leverage ratio rather than debt-service burden and has incomplete reported coverage; it cannot close the debt-service term.",
+      "The output/activity observable is not frozen on either the aggregate or possible future mortgage portfolio boundary.",
+      "Lag structure and treatment of NPL recognition, cures, write-offs, sales and regulatory/portfolio breaks are not preregistered."
     ],
     "reduced_form_automatically_authorized": false,
-    "reduced_form_rule": "Dropping debt service or estimating an output-plus-lag equation because debt service is unavailable requires a new preregistered candidate-family contract and independent evaluation design."
+    "reduced_form_rule": "Dropping debt service or estimating an output-plus-lag equation because debt service is unavailable requires a new preregistered candidate-family contract and independent evaluation design.",
+    "future_reopen_paths": [
+      {
+        "id": "AGGREGATE_TARGET_PATH",
+        "requirement": "Retain an observed debt-service burden definitionally aligned to the aggregate NPL target, then freeze activity and lag/break treatment before any new candidate-family contract.",
+        "target_switch": false
+      },
+      {
+        "id": "MORTGAGE_PORTFOLIO_PATH",
+        "requirement": "Retain exact machine-readable mortgage NPL and housing-loan burden histories, reconcile their reporting population/coverage/weighting, freeze a mortgage-aligned activity variable, and preregister a new sector-specific target/form before estimation.",
+        "target_switch_requires_new_contract": true
+      }
+    ]
   },
   "prohibited_shortcuts": [
     "Construct debt service from loan stock multiplied by a new-business lending rate.",
@@ -81,11 +108,15 @@
     "Use debt-to-income or debt-to-GDP as a debt-service burden.",
     "Choose aggregate versus sector-specific NPL after model fit.",
     "Concatenate pre-2014 national NPL definitions with the harmonised FINREP series without an explicit bridge.",
-    "Drop the debt-service term and fit a nested model without preregistration."
+    "Drop the debt-service term and fit a nested model without preregistration.",
+    "Treat DTI-O as debt-service burden or DSTI.",
+    "Assume mortgage NPL and housing-loan DSTI have identical reporting populations because both refer to housing loans.",
+    "Digitise BNR mortgage-NPL charts to manufacture a canonical target history.",
+    "Switch from aggregate to mortgage NPL after inspecting model fit."
   ],
   "disposition": {
     "mechanism_classification": "DEFERRED",
-    "source_readiness": "NPL_EXACT_DEBT_SERVICE_AND_TARGET_BOUNDARY_UNRESOLVED",
+    "source_readiness": "AGGREGATE_NPL_EXACT_MORTGAGE_PORTFOLIO_FAMILY_OBSERVED_JOINT_BOUNDARY_AND_ACTIVITY_UNRESOLVED",
     "active_calibration_cycle_open": false,
     "estimation_or_refit_allowed": false,
     "central_feedback": false,
@@ -93,5 +124,6 @@
     "behavioural_closure": "UNCHANGED_INACTIVE",
     "accounting_spine": "UNCHANGED"
   },
-  "debt_service_source_screening": "model/calibration_validation/debt_service_source_screening.json"
+  "debt_service_source_screening": "model/calibration_validation/debt_service_source_screening.json",
+  "mortgage_portfolio_source_screening": "model/calibration_validation/credit_risk_mortgage_portfolio_source_screening.json"
 }
