@@ -73,7 +73,9 @@
       "Activate the government issuance-yield feedback loop from in-sample fit."
     ],
     "pass_effect": "Authorises a separately preregistered predictive yield-response selection/validation cycle only; no causal or System Dynamics activation follows automatically.",
-    "fail_effect": "Retain the mechanism as CANDIDATE and keep the government issuance-yield loop quantitatively inactive."
+    "fail_effect": "Retain the mechanism as CANDIDATE and keep the government issuance-yield loop quantitatively inactive.",
+    "estimation_frequency_selected": "quarterly",
+    "estimation_frequency_basis": "Fiscal debt and B9 are directly quarterly; monthly yields are aggregated only after a frozen three-month completeness rule, avoiding pseudo-monthly fiscal replication."
   },
   "disposition": {
     "mechanism_classification": "CANDIDATE",
@@ -82,5 +84,6 @@
     "validated_reference_behavioural_mechanisms_change": 0,
     "behavioural_closure": "UNCHANGED_INACTIVE",
     "accounting_spine": "UNCHANGED"
-  }
+  },
+  "quarterly_materialisation_contract": "model/calibration_validation/sovereign_yield_quarterly_materialisation_contract.json"
 }
