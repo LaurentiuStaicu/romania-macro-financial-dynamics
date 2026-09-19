@@ -12,8 +12,12 @@ class BNRPrudentialTableSourceEnumerationTests(unittest.TestCase):
         self.e=json.loads(P.read_text(encoding="utf-8"))
 
     def test_enumeration_is_explicitly_incomplete_not_negative_evidence(self):
-        self.assertEqual(self.e["status"],"INCOMPLETE_SOURCE_ENUMERATION_NO_MODEL_EFFECT")
+        self.assertEqual(self.e["status"],"FROZEN_INCOMPLETE_3_OF_11_CURRENT_PUBLIC_DISCOVERY_EXHAUSTED_NO_MODEL_EFFECT")
         self.assertFalse(self.e["completion_gate"]["enumeration_complete"])
+        self.assertTrue(self.e["completion_gate"]["stage_closed_frozen"])
+        self.assertTrue(self.e["completion_gate"]["reopen_requires_new_official_evidence"])
+        self.assertTrue(self.e["discovery_methodology"]["current_public_discovery_surface_exhausted"])
+        self.assertFalse(self.e["discovery_methodology"]["same_query_repetition_authorized"])
         self.assertEqual(self.e["counts"]["required_data_years"],11)
         self.assertEqual(self.e["counts"]["exact_primary_identified"],3)
         self.assertEqual(self.e["counts"]["unresolved_primary"],8)
@@ -58,6 +62,11 @@ class BNRPrudentialTableSourceEnumerationTests(unittest.TestCase):
         self.assertTrue(hard["no_search_index_failure_as_negative_evidence"])
         self.assertTrue(hard["no_fallback_without_documented_primary_source_or_layout_failure"])
         self.assertTrue(hard["no_value_inspection"])
+        self.assertTrue(hard["no_repeat_same_discovery_without_new_official_trigger"])
+        self.assertEqual(
+            self.e["terminal_assessment"],
+            "model/calibration_validation/bnr_prudential_source_discovery_terminal_assessment.json",
+        )
 
 if __name__=="__main__":
     unittest.main()
