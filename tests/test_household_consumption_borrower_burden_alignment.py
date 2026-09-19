@@ -43,6 +43,15 @@ class HouseholdConsumptionBorrowerBurdenAlignmentTests(unittest.TestCase):
         self.assertFalse(comparison["debt_instrument_coverage_match"])
         self.assertFalse(comparison["target_population_bridge_observed"])
         self.assertFalse(comparison["subgroup_consumption_target_observed"])
+        self.assertTrue(comparison["official_public_source_screening_completed"])
+        self.assertEqual(
+            comparison["screening_result"],
+            "BLOCKED_NO_OBSERVED_PUBLIC_BRIDGE_IDENTIFIED",
+        )
+        self.assertEqual(
+            self.review["population_bridge_source_screening"],
+            "model/calibration_validation/household_consumption_population_bridge_source_screening.json",
+        )
 
     def test_rate_selection_cannot_repair_population_mismatch(self) -> None:
         rates = self.review["borrowing_rate_alignment"]
@@ -58,7 +67,10 @@ class HouseholdConsumptionBorrowerBurdenAlignmentTests(unittest.TestCase):
 
     def test_gate_keeps_estimation_and_closure_closed(self) -> None:
         disposition = self.review["disposition"]
-        self.assertEqual(disposition["population_alignment_status"], "BLOCKED")
+        self.assertEqual(
+            disposition["population_alignment_status"],
+            "BLOCKED_NO_OBSERVED_PUBLIC_BRIDGE_IDENTIFIED",
+        )
         self.assertTrue(disposition["housing_dsti_observed"])
         self.assertFalse(
             disposition["housing_dsti_directly_admissible_in_registered_aggregate_consumption_form"]
