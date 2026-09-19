@@ -82,7 +82,7 @@ class CorporateInvestmentMeasurementDesignContractTests(unittest.TestCase):
         self.assertFalse(timing["lag_search_allowed"])
         self.assertEqual(
             self.c["next_gate"]["action"],
-            "MATERIALISE_SUPPLEMENTAL_S11_GVA_AND_REAL_GDP_SOURCES_AND_DERIVE_FROZEN_MEASUREMENT_SERIES",
+            "REBUILD_OFFLINE_MEASUREMENT_PANEL_WITH_RETAINED_UP_TO_ONE_YEAR_RATE_SOURCE",
         )
 
 
