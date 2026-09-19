@@ -1,0 +1,38 @@
+name: Sectoral Financial Positions S1N Boundary Diagnostic
+
+# Post-run live-source diagnostic only. It is intentionally manual-only and
+# cannot rewrite historical A-D, promote the reference mode, or change readiness.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  s1n-boundary-diagnostic:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify frozen S1N diagnostic contract
+        run: python -m unittest tests.test_sectoral_financial_positions_s1n_boundary -v
+
+      - name: Run live S1N boundary diagnostic
+        env:
+          SECTORAL_POSITIONS_S1N_AUDIT_OUT: sectoral_positions_s1n_audit_artifacts
+        run: python scripts/audit_ecb_sectoral_financial_positions_s1n_boundary.py
+
+      - name: Upload S1N diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sectoral-financial-positions-s1n-boundary-${{ github.sha }}
+          path: sectoral_positions_s1n_audit_artifacts/
+          if-no-files-found: error
+          retention-days: 90

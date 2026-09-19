@@ -24,6 +24,7 @@ class LiveSourceRefreshWorkflowTests(unittest.TestCase):
             ".github/workflows/sectoral-financial-positions-source-discrepancy-audit.yml",
             ".github/workflows/sectoral-financial-positions-esa-f1-applicability-reaudit.yml",
             ".github/workflows/sectoral-financial-positions-esa-f1-semantics-diagnostic.yml",
+            ".github/workflows/sectoral-financial-positions-s1n-boundary-diagnostic.yml",
         ]
         for relative in manual_only:
             text = (ROOT / relative).read_text(encoding="utf-8")
@@ -93,6 +94,7 @@ class LiveSourceRefreshWorkflowTests(unittest.TestCase):
             "audit_ecb_sectoral_financial_positions_source_discrepancy.py",
             "audit_ecb_sectoral_financial_positions_esa_f1_applicability_reaudit.py",
             "audit_ecb_sectoral_financial_positions_esa_f1_semantics_diagnostic.py",
+            "audit_ecb_sectoral_financial_positions_s1n_boundary.py",
         ]
         for script in forbidden:
             self.assertNotIn(script, text)

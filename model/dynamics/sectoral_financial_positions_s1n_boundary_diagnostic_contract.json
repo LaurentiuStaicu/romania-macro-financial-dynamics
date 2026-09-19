@@ -1,0 +1,119 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "phase": "Post-run Sectoral Financial Positions — S1N boundary coverage/explanation diagnostic",
+  "reference_mode": "sectoral_financial_positions",
+  "formal_reference_mode_gate": false,
+  "purpose": "Test a newly identified post-run boundary question: whether an officially published Romania QSA 'not sectorised' (S1N) financial position exists on the same historical F-minus-F1 boundary and can account for the Phase D resident-sector additivity residual, without rewriting historical A-D or promoting the reference mode.",
+  "discovery_basis": {
+    "identified_after_historical_A_D": true,
+    "eurostat_sequence_accounts": "Eurostat's institutional-sector sequence explicitly includes S1N in financial balance sheets alongside S1M, S13, S12, S11 and S1.",
+    "eurostat_financial_datasets": [
+      "nasq_10_f_bs",
+      "nasq_10_f_tr"
+    ],
+    "quarterly_financial_data_origin": "Eurostat states that quarterly financial sector-account data are sent by the ECB.",
+    "interpretation_limit": "The existence of the S1N code in the framework does not establish that Romania publishes the exact S1N F/F1 series required by this diagnostic."
+  },
+  "nonretroactivity": {
+    "phase_A_reinterpreted": false,
+    "phase_B_reinterpreted": false,
+    "phase_C_reinterpreted": false,
+    "phase_D_reinterpreted": false,
+    "historical_verdict_changed": false,
+    "readiness_count_changed": false,
+    "accounting_readiness_changed": false,
+    "behavioural_closure_changed": false
+  },
+  "source": {
+    "institution": "European Central Bank / ESCB",
+    "dataset": "QSA — Quarterly Sector Accounts",
+    "api": "ECB Data Portal SDMX REST API",
+    "frequency": "Q",
+    "adjustment": "N",
+    "reference_area": "RO",
+    "counterpart_area": "W0",
+    "reference_sector": "S1N",
+    "counterpart_sector": "S1",
+    "unit": "XDC",
+    "unit_multiplier": 6,
+    "valuation": "V",
+    "requested_start": "2014-Q1",
+    "requested_end": "2026-Q2",
+    "measures": {
+      "stock": "LE",
+      "flow": "F"
+    },
+    "entries": [
+      "A",
+      "L"
+    ],
+    "instruments": [
+      "F",
+      "F1"
+    ],
+    "exact_series_key_rule": "Q.N.RO.W0.S1N.S1.N.{A_or_L}.{LE_or_F}.{F_or_F1}._Z._Z.XDC._T.S.V.N._T",
+    "required_series_count": 8,
+    "F1_rule": "SOURCE_REQUIRED_ON_BOTH_SIDES_FOR_BOTH_MEASURES; no structural-zero assumption is permitted."
+  },
+  "coverage_gate": {
+    "minimum_common_observation_count": 40,
+    "required_benchmark_periods": [
+      "2025-Q1",
+      "2025-Q2",
+      "2025-Q3",
+      "2025-Q4"
+    ],
+    "stock_and_flow_required": true,
+    "all_eight_series_required": true,
+    "no_missing_to_zero": true,
+    "no_interpolation": true
+  },
+  "historical_diagnostic_basis": {
+    "phase_C_assessment": "model/dynamics/sectoral_financial_positions_rounding_consistency_assessment.json",
+    "phase_D_assessment": "model/dynamics/sectoral_financial_positions_source_discrepancy_assessment.json",
+    "frozen_source_precision_envelope_million_RON": 0.08,
+    "envelope_origin": "Phase C ECB DECIMALS-derived rounding envelope; no new tolerance is selected from S1N outcomes.",
+    "phase_C_failing_stock_periods": [
+      "2017-Q2",
+      "2021-Q3",
+      "2022-Q3",
+      "2023-Q2",
+      "2024-Q1"
+    ],
+    "historical_residual_definition": "resident_additivity_residual = net(S1M)+net(S11)+net(S12)+net(S13)-net(S1), all on the historical represented F-minus-F1 boundary.",
+    "proposed_explanation_identity": "If S1N belongs to the missing resident aggregation boundary, corrected_residual = historical_resident_additivity_residual + net(S1N,F-minus-F1).",
+    "sign_rule": "No sign may be chosen post hoc. S1N enters with coefficient +1 exactly because the historical residual omitted S1N from the resident-sector sum."
+  },
+  "explanatory_gate": {
+    "prerequisites": [
+      "coverage_gate passes for stock and flow",
+      "S1N stock net position is finite for every one of the five historical Phase C failing stock periods"
+    ],
+    "pass_condition": "For every historical Phase C failing stock period, abs(historical resident-additivity residual + S1N represented net stock position) <= 0.08 million RON + 1e-9 computational epsilon.",
+    "computational_epsilon_million_RON": 1e-9,
+    "no_new_fixed_tolerance": true,
+    "no_fit_or_parameter_selection": true
+  },
+  "result_semantics": {
+    "if_source_unavailable": "NO_REOPEN_EVIDENCE_FROM_S1N; retain historical A-D and PARTIAL_SERIES_AVAILABLE.",
+    "if_coverage_pass_explanation_fail": "S1N_PUBLISHED_BUT_DOES_NOT_EXPLAIN_FROZEN_RESIDUALS; retain historical A-D and PARTIAL_SERIES_AVAILABLE.",
+    "if_explanation_pass": "S1N_EXPLANATORY_CANDIDATE_REOPEN_TRIGGER_ONLY; a separate future formal reference-mode contract must be preregistered before any complete retest or promotion.",
+    "promotion_effect": "NONE",
+    "readiness_count_change": 0
+  },
+  "hard_rules": {
+    "diagnostic_only": true,
+    "no_reference_mode_promotion": true,
+    "no_historical_A_D_rewrite": true,
+    "no_phase_C_envelope_change": true,
+    "no_residual_allocation": true,
+    "no_sector_dropping": true,
+    "no_S1N_missing_to_zero": true,
+    "no_S1N_F1_structural_zero_assumption": true,
+    "no_accounting_readiness_change": true,
+    "no_accounting_benchmark_mutation": true,
+    "no_behavioural_activation": true,
+    "live_provider_work_manual_only": true
+  }
+}

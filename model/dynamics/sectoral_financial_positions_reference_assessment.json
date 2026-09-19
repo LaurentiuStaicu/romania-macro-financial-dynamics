@@ -81,5 +81,13 @@
   "historical_phase_b_assessment": "model/dynamics/sectoral_financial_positions_aggregate_identity_assessment.json",
   "exploratory_esa_f1_reaudit_assessment": "model/dynamics/sectoral_financial_positions_esa_f1_applicability_reaudit_assessment.json",
   "ecb_quality_context": "model/dynamics/sectoral_financial_positions_ecb_quality_context.json",
-  "exploratory_esa_f1_semantics_diagnostic_assessment": "model/dynamics/sectoral_financial_positions_esa_f1_semantics_diagnostic_assessment.json"
+  "exploratory_esa_f1_semantics_diagnostic_assessment": "model/dynamics/sectoral_financial_positions_esa_f1_semantics_diagnostic_assessment.json",
+  "post_run_s1n_boundary_diagnostic": {
+    "status": "PREREGISTERED_NOT_EXECUTED",
+    "contract": "model/dynamics/sectoral_financial_positions_s1n_boundary_diagnostic_contract.json",
+    "formal_reference_mode_gate": false,
+    "readiness_effect": 0,
+    "historical_A_D_reinterpreted": false,
+    "rationale": "A post-run external framework review identified S1N (not sectorised) as an explicit sector-account presentation category, including in Eurostat financial-balance-sheet layouts. The diagnostic is frozen before inspecting Romania's candidate S1N F/F1 financial outcomes and can only determine whether a future formal boundary retest is justified."
+  }
 }
