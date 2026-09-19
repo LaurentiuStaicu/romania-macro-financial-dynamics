@@ -6,7 +6,7 @@ from pathlib import Path
 
 import xlrd
 
-from scripts.audit_bnr_legacy_xls_cell_extraction import extract_workbook, sha256
+from audit_bnr_legacy_xls_cell_extraction import extract_workbook, sha256
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT = (
