@@ -1,7 +1,8 @@
-name: Promote Reviewed Corporate Investment Supplemental Source Vintage
+name: Promote Reviewed Corporate Investment Financing-Rate Screening Vintage
 
-# One-shot promotion of the exact already-reviewed supplemental artifact.
-# No provider refetch, source transformation, model selection or estimation.
+# One-shot promotion of the exact reviewed source-continuity screening artifact.
+# This retains the evidence used for measurement-family selection; it does not
+# refetch the provider, fit the investment model or activate behaviour.
 on:
   pull_request:
     types: [labeled]
@@ -11,7 +12,7 @@ permissions:
   contents: write
 
 jobs:
-  promote-reviewed-supplemental-vintage:
+  promote-reviewed-financing-rate-screening-vintage:
     if: ${{ github.event.label.name == 'promote-corporate-investment-vintage' }}
     runs-on: ubuntu-latest
     steps:
@@ -29,55 +30,40 @@ jobs:
             -H "Authorization: Bearer ${GH_TOKEN}" \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10581859400/zip" \
-            -o /tmp/corporate-investment-supplemental-reviewed.zip
-          echo "e32ebf8edab4e72e9b6cbfa491411df553e7d96229852ea6645658882bd0f491  /tmp/corporate-investment-supplemental-reviewed.zip" | sha256sum -c -
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10582283925/zip" \
+            -o /tmp/corporate-investment-rate-screening-reviewed.zip
+          echo "cf63ce2efa2622bb9ac40a232f4c5a477b124e07565653df5a5f7e964e6b5203  /tmp/corporate-investment-rate-screening-reviewed.zip" | sha256sum -c -
 
       - name: Verify every reviewed file
         run: |
-          rm -rf /tmp/corporate-investment-supplemental-reviewed
-          mkdir -p /tmp/corporate-investment-supplemental-reviewed
-          unzip -q /tmp/corporate-investment-supplemental-reviewed.zip -d /tmp/corporate-investment-supplemental-reviewed
+          rm -rf /tmp/corporate-investment-rate-screening-reviewed
+          mkdir -p /tmp/corporate-investment-rate-screening-reviewed
+          unzip -q /tmp/corporate-investment-rate-screening-reviewed.zip -d /tmp/corporate-investment-rate-screening-reviewed
           python - <<'PY'
           import hashlib
           import json
           from pathlib import Path
-
-          root = Path("/tmp/corporate-investment-supplemental-reviewed")
-          review = json.loads(
-              Path(
-                  "model/calibration_validation/"
-                  "corporate_investment_supplemental_source_vintage_promotion_review.json"
-              ).read_text(encoding="utf-8")
-          )
-          actual = {
-              str(path.relative_to(root))
-              for path in root.rglob("*")
-              if path.is_file()
-          }
-          expected = {item["path"] for item in review["expected_files"]}
+          root=Path("/tmp/corporate-investment-rate-screening-reviewed")
+          review=json.loads(Path("model/calibration_validation/corporate_investment_financing_rate_source_screening_result.json").read_text(encoding="utf-8"))
+          actual={str(p.relative_to(root)) for p in root.rglob("*") if p.is_file()}
+          expected={item["path"] for item in review["expected_files"]}
           if actual != expected:
-              raise SystemExit(
-                  f"artifact file set mismatch: missing={expected-actual}, "
-                  f"extra={actual-expected}"
-              )
+              raise SystemExit(f"artifact file set mismatch: missing={expected-actual}, extra={actual-expected}")
           for item in review["expected_files"]:
-              path = root / item["path"]
-              data = path.read_bytes()
-              digest = hashlib.sha256(data).hexdigest()
-              if len(data) != item["bytes"] or digest != item["sha256"]:
+              data=(root/item["path"]).read_bytes()
+              if len(data)!=item["bytes"] or hashlib.sha256(data).hexdigest()!=item["sha256"]:
                   raise SystemExit(f"review mismatch for {item['path']}")
-          print("Exact reviewed supplemental corporate-investment artifact verified.")
+          print("Exact reviewed financing-rate screening artifact verified.")
           PY
 
-      - name: Commit immutable supplemental source vintage to PR branch
+      - name: Commit immutable screening source vintage to PR branch
         run: |
-          dest="data/source_vintages/corporate-investment-supplemental-source-vintage-2026-09-19"
+          dest="data/source_vintages/corporate-investment-financing-rate-screening-vintage-2026-09-19"
           test ! -e "$dest"
           mkdir -p "$dest"
-          cp -a /tmp/corporate-investment-supplemental-reviewed/. "$dest/"
+          cp -a /tmp/corporate-investment-rate-screening-reviewed/. "$dest/"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add "$dest"
-          git commit -m "data: retain exact corporate-investment supplemental source vintage"
+          git commit -m "data: retain corporate-investment financing-rate screening vintage"
           git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
