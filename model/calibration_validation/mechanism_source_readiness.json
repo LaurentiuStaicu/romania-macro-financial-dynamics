@@ -131,19 +131,20 @@
     {
       "id": "fiscal_primary_balance_reaction",
       "classification": "DEFERRED",
-      "source_readiness": "PRIMARY_BALANCE_MATERIALISER_FROZEN_MANUAL_LIVE_RUN_PENDING_OUTPUT_GAP_AND_REGIMES_UNRESOLVED",
-      "next_admissible_action": "Run the manual-only matched B9/D41PAY NSA-PC_GDP materialiser and retain a same-vintage primary-balance snapshot; output-gap, debt-gap and regime measurement remain separate blockers before any estimation.",
+      "source_readiness": "MATCHED_PRIMARY_BALANCE_VINTAGE_RETAINED_OUTPUT_GAP_DEBT_GAP_REGIMES_UNRESOLVED",
+      "next_admissible_action": "Preregister the fiscal-reaction measurement boundary: exact debt-gap reference/target, output-gap source or estimation model, and dated institutional/discretionary fiscal regimes. Prefer independent official sources; do not infer gaps or break dates from the reaction-function residuals.",
       "blockers": [
-        "Exact matched source boundary is frozen: gov_10q_ggnfa, S13, NSA, PC_GDP, B9 plus D41PAY.",
-        "No retained successful matched primary-balance live artifact has yet been committed.",
-        "Output gap and debt gap are not directly observed definitions.",
-        "Discrete fiscal/EDP regime indicators are not encoded ex ante."
+        "Matched B9 + D41PAY primary balance is retained exactly for 2000-Q1..2026-Q1.",
+        "No debt-gap target/reference definition is frozen.",
+        "No output-gap source or measurement model is frozen.",
+        "EDP/institutional and major discretionary fiscal regimes are not encoded ex ante."
       ],
       "source_boundary_review": "model/calibration_validation/fiscal_primary_balance_source_boundary_review.json",
       "estimation_or_refit_allowed": false,
-      "priority_group": "MANUAL_LIVE_MATERIALISATION_PENDING_AFTER_SOVEREIGN",
+      "priority_group": "MEASUREMENT_AND_REGIME_PREREGISTRATION_PENDING",
       "materialisation_contract": "model/calibration_validation/fiscal_primary_balance_materialisation_contract.json",
-      "materialiser_workflow": ".github/workflows/fiscal-primary-balance-materialisation.yml"
+      "materialiser_workflow": ".github/workflows/fiscal-primary-balance-materialisation.yml",
+      "retained_source_vintage": "data/source_vintages/fiscal-primary-balance-quarterly-vintage-2026-09-19"
     },
     {
       "id": "monetary_policy_reaction_function",
@@ -178,8 +179,8 @@
   "priority_rule": "Priority is determined by the shortest scientifically admissible path to new independent evidence, not by a desire to activate a feedback loop. Waiting mechanisms remain frozen; source-incomplete mechanisms are not fit with proxies.",
   "current_next_step": {
     "mechanism_id": "fiscal_primary_balance_reaction",
-    "action": "RUN_MANUAL_PRIMARY_BALANCE_SOURCE_MATERIALISER_AND_RETAIN_EVIDENCE",
-    "reason": "The sovereign-yield tested form is closed at FAIL_BEFORE_HOLDOUT. The fiscal-primary-balance mechanism already has a frozen matched B9/D41PAY source boundary and manual materialiser; retaining that exact source vintage is the shortest next admissible path to new independent evidence. No reaction-function estimation is authorized.",
+    "action": "PREREGISTER_FISCAL_GAP_AND_REGIME_MEASUREMENT_BOUNDARY_NO_ESTIMATION",
+    "reason": "The matched primary-balance source vintage is now retained. The shortest next admissible path is to resolve debt-gap, output-gap and dated fiscal-regime measurement from independent evidence before defining or estimating any reaction function.",
     "calibration_cycle_open": false
   },
   "coverage_rule": {
