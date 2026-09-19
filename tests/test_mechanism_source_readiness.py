@@ -146,6 +146,26 @@ class MechanismSourceReadinessTests(unittest.TestCase):
             aggregate_credit["prudential_population_boundary_review"],
             "model/calibration_validation/bank_credit_prudential_population_boundary_review.json",
         )
+        self.assertEqual(
+            aggregate_credit["bnr_prudential_table_source_enumeration"],
+            "model/calibration_validation/bnr_prudential_table_source_enumeration.json",
+        )
+        self.assertEqual(
+            aggregate_credit["bnr_prudential_source_enumeration_status"],
+            "INCOMPLETE_SOURCE_ENUMERATION_NO_MODEL_EFFECT",
+        )
+        self.assertEqual(
+            aggregate_credit["bnr_prudential_exact_primary_years_identified"],
+            [2019, 2022, 2024],
+        )
+        self.assertEqual(
+            aggregate_credit["bnr_prudential_exact_primary_identified_count"],
+            3,
+        )
+        self.assertEqual(
+            aggregate_credit["bnr_prudential_required_year_count"],
+            11,
+        )
         self.assertFalse(aggregate_credit["estimation_or_refit_allowed"])
 
         investment = mechanisms["corporate_investment_response"]
