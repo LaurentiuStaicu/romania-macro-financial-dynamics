@@ -134,11 +134,11 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         household = mechanisms["household_consumption_response"]
         self.assertEqual(
             household["source_readiness"],
-            "OFFICIAL_HOUSING_LOAN_DSTI_LEVEL_OBSERVATIONS_CONFIRMED_MACHINE_READABLE_LONGITUDINAL_HISTORY_NOT_RETAINED",
+            "COMPLETE_2023Q1_2025Q2_HOUSING_DSTI_PUBLICATION_TEXT_WINDOW_MACHINE_READABLE_HISTORY_AND_REGISTERED_MACRO_DSR_UNRESOLVED",
         )
         self.assertEqual(
             household["priority_group"],
-            "DEFER_UNTIL_MACHINE_READABLE_DSTI_LEVEL_HISTORY_OR_PREREGISTERED_TEXT_ONLY_CANDIDATE",
+            "DEFER_UNTIL_PREREGISTERED_DSTI_CANDIDATE_MEASUREMENT_AND_RATE_TRANSFORM_BOUNDARIES",
         )
         self.assertEqual(
             household["debt_service_source_screening"],
@@ -150,7 +150,17 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         )
         self.assertEqual(
             household["confirmed_publication_text_quarters"],
-            ["2024-Q1", "2024-Q2", "2024-Q3", "2025-Q2"],
+            [
+                "2023-Q1", "2023-Q2", "2023-Q3", "2023-Q4",
+                "2024-Q1", "2024-Q2", "2024-Q3", "2024-Q4",
+                "2025-Q1", "2025-Q2",
+            ],
+        )
+        self.assertEqual(household["publication_text_window"]["observed_quarters"], 10)
+        self.assertEqual(household["publication_text_window"]["missing_quarters"], [])
+        self.assertEqual(household["publication_text_window"]["coverage_fraction"], 1.0)
+        self.assertFalse(
+            household["publication_text_window"]["exact_machine_readable_history_retained"]
         )
         self.assertFalse(household["registered_macro_dsr_identified"])
         self.assertTrue(household["alternative_housing_loan_burden_observed"])
