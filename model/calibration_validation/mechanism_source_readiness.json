@@ -49,17 +49,21 @@
     {
       "id": "exchange_rate_pass_through_to_inflation",
       "classification": "CANDIDATE",
-      "source_readiness": "PRIMARY_FX_HICP_IDENTIFIED_EXTERNAL_PRICE_MEMBER_STATE_DATASET_FOUND_PRODUCT_BOUNDARY_UNRESOLVED",
-      "next_admissible_action": "Resolve the external-price product boundary in a new preregistered contract: the exact Member-State short-term dataset ext_st_27_2020msbec is known, but the documented products are CAP/CNS/CTR/INT rather than the previously preregistered total-import control. Do not select a BEC category from fit.",
+      "source_readiness": "EXACT_FX_HICP_TOTAL_IMPORT_UVI_BOUNDARIES_FROZEN_MATERIALISATION_PENDING",
+      "next_admissible_action": "Materialise one exact common monthly level-only source vintage for ECB EXR.M.RON.EUR.SP00.A, Eurostat prc_hicp_minr I25/TOTAL/RO, and Eurostat ext_st_27_2020msbec IMP/WORLD/TOTAL/IVU/RO. Retain raw bytes and hashes. Do not choose transforms, lags, regimes or estimate coefficients.",
       "blockers": [
-        "Romania sts_inpi_m coverage remains unconfirmed.",
-        "Eurostat ext_st_27_2020msbec is the exact monthly Member-State BEC short-term family, but it does not satisfy the preregistered total-goods product boundary.",
-        "Choosing intermediate, capital, consumer non-durables or transport-related goods requires a new ex-ante product-boundary contract."
+        "No exact common retained source vintage across FX, current ECOICOP-v2 HICP and total-import/world UVI exists yet.",
+        "Inflation, FX and external-price transformations are intentionally not frozen until raw source completeness and revision metadata are retained.",
+        "Lag horizon, regime boundary, structural-selection and untouched evaluation windows remain unregistered and therefore estimation remains prohibited."
       ],
       "source_boundary_review": "model/calibration_validation/fx_inflation_pass_through_source_boundary_review.json",
       "external_price_screening": "model/calibration_validation/fx_inflation_external_price_control_screening.json",
       "estimation_or_refit_allowed": false,
-      "priority_group": "SOURCE_MATERIALISATION_PENDING"
+      "priority_group": "SOURCE_MATERIALISATION_PENDING",
+      "external_price_control_contract": "model/calibration_validation/fx_inflation_external_price_control_contract.json",
+      "monthly_materialisation_contract": "model/calibration_validation/fx_inflation_monthly_materialisation_contract.json",
+      "materialiser_script": "scripts/audit_fx_inflation_monthly_materialisation.py",
+      "materialiser_workflow": ".github/workflows/fx-inflation-monthly-materialisation.yml"
     },
     {
       "id": "sovereign_yield_spread_response",
@@ -188,8 +192,8 @@
   "priority_rule": "Priority is determined by the shortest scientifically admissible path to new independent evidence, not by a desire to activate a feedback loop. Waiting mechanisms remain frozen; source-incomplete mechanisms are not fit with proxies.",
   "current_next_step": {
     "mechanism_id": "exchange_rate_pass_through_to_inflation",
-    "action": "RESOLVE_EXTERNAL_PRICE_PRODUCT_BOUNDARY_NO_ESTIMATION",
-    "reason": "The fiscal annual candidate has now failed before holdout and is frozen. Among remaining non-waiting mechanisms, the exchange-rate pass-through source boundary has exact FX/HICP sources identified but an unresolved ex-ante external-price product definition that can be advanced without fitting a behavioural equation.",
+    "action": "MATERIALISE_FX_HICP_TOTAL_IMPORT_UVI_NO_ESTIMATION",
+    "reason": "The external-price product boundary and the current ECOICOP-v2 HICP boundary are now frozen from live provider evidence. The next admissible task is exact raw-source retention and common-level materialisation only; transformations, lag selection and coefficient estimation remain prohibited.",
     "calibration_cycle_open": false
   },
   "coverage_rule": {
