@@ -22,6 +22,13 @@ class BNRBLSCrossRoundMappingContractTests(unittest.TestCase):
         self.assertEqual(obs["household_consumer_loan_demand"]["question_id"],"P13")
         self.assertEqual(obs["household_consumer_loan_demand"]["net_percentage_cell"],"C303")
 
+    def test_legacy_round_date_authority_is_explicit(self):
+        rule=self.c["date_rule"]
+        self.assertEqual(rule["legacy_round_date_authoritative_sheet"],"companies")
+        self.assertEqual(rule["legacy_round_date_cell"],"A1")
+        self.assertEqual(rule["household_header_diagnostic_cells"],["A1","B1"])
+        self.assertFalse(rule["household_header_date_consistency_required"])
+
     def test_dsti_term_change_is_excluded_from_level_claims(self):
         boundary=self.c["dsti_boundary"]
         self.assertEqual(boundary["legacy_question_ids"],["P0303","P1103"])
