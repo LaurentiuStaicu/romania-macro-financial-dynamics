@@ -249,7 +249,7 @@
       "classification": "CANDIDATE",
       "maps_to_dynamic_core_loop": "government_issuance_yield_loop",
       "central_feedback": false,
-      "functional_form": "spread = alpha + beta_d*debt_to_gdp + beta_f*deficit_to_gdp + beta_x*external_risk_proxy",
+      "functional_form": "No admitted sovereign-yield behavioural form. The preregistered quarterly fiscal-augmented common-market AR candidate was tested and failed before holdout.",
       "implementation": "sovereign_spread",
       "parameters": [
         "alpha",
@@ -257,7 +257,7 @@
         "beta_f",
         "beta_x"
       ],
-      "estimation_plan": "Calibration remains closed. Treat the directly observed ECB Romania 10-year RON series as a sovereign-yield target, not a pure credit spread. Before estimation, freeze and retain a common long-rate benchmark, financial-stress control, exact fiscal debt/deficit inputs, estimation frequency and mixed-frequency rule. A future candidate should be framed as a yield-response equation unless a definitionally matched same-currency spread is independently recovered. Predictive success alone does not establish causal fiscal effects or activate the government issuance-yield loop.",
+      "estimation_plan": "Freeze the 2026-09-19 tested form at FAIL_BEFORE_HOLDOUT. Do not open final-evaluation performance, refit, search alternative lags, add policy-rate or issuance variables after observing this result, or activate the government issuance-yield loop. Reopen only in a separately preregistered cycle triggered by genuinely new measurement/identification evidence.",
       "observables": [
         "Romania_sovereign_yield_or_spread",
         "debt_to_gdp",
@@ -273,14 +273,28 @@
         "global risk and ratings/news can dominate",
         "low-frequency fiscal data constrain identification",
         "a RON-versus-EUR long-rate differential is not a pure sovereign credit spread",
-        "low-frequency fiscal controls require a preregistered mixed-frequency or lower-frequency treatment"
+        "low-frequency fiscal controls require a preregistered mixed-frequency or lower-frequency treatment",
+        "the tested 2026-09-19 fiscal-augmented yield form failed before final evaluation and may not be rescued by post-result respecification"
       ],
       "rejection_or_degradation_criteria": [
         "fiscal coefficients are not practically identifiable",
         "simple global-risk/persistence baseline performs as well or better out of sample",
         "parameter signs flip across regimes"
       ],
-      "source_boundary_review": "model/calibration_validation/sovereign_yield_source_boundary_review.json"
+      "source_boundary_review": "model/calibration_validation/sovereign_yield_source_boundary_review.json",
+      "structural_selection_disposition": {
+        "status": "TESTED_FORM_FAILED_BEFORE_HOLDOUT",
+        "source": "model/calibration_validation/sovereign_yield_structural_selection_result.json",
+        "tested_form": "fiscal_augmented_common_market_ar",
+        "selection_window": "2017-Q1..2022-Q4",
+        "final_evaluation_window": "2023-Q1..2026-Q1",
+        "final_evaluation_opened": false,
+        "rmse_improvement_vs_persistence": -0.11689596621586085,
+        "rmse_improvement_vs_common_market_ar": -0.03776185934400522,
+        "fiscal_beta_d_domain_fraction": 0.08333333333333333,
+        "fiscal_beta_b_domain_fraction": 0.7083333333333334,
+        "interpretation": "The frozen candidate failed predictive and fiscal-sign consistency gates before holdout. This rejects the tested form within this cycle, not the general possibility that fiscal conditions affect Romanian sovereign yields."
+      }
     },
     {
       "id": "exchange_rate_pass_through_to_inflation",
