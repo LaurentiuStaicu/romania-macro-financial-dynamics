@@ -31,7 +31,9 @@ class BankCreditPrudentialPopulationBoundaryReviewTests(unittest.TestCase):
         self.assertFalse(state["machine_readable_bnr_source_identified_in_this_review"])
         self.assertFalse(state["chart_digitisation_required"])
         self.assertIn("source enumeration",state["next_admissible_source_task"].lower())
-        self.assertIn("before extracting any numeric values",state["next_admissible_source_task"].lower())
+        action=state["next_admissible_source_task"].lower()
+        self.assertIn("extract numeric values",action)
+        self.assertIn("until the full year-source map is frozen",action)
 
     def test_no_model_or_sd_activation_follows(self):
         effect=self.review["modelling_effect"]
