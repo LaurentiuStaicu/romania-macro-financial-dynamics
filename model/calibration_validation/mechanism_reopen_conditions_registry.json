@@ -3,7 +3,7 @@
   "frozen_on": "2026-09-19",
   "purpose": "Canonical reopen-condition registry for behavioural-mechanism research. It operationalises the closed scientific baseline by stating what new evidence or external event is required before each frozen/deferred mechanism may advance, and what does not constitute a reopen trigger. Reopening authorises only the next declared evidence/identification gate; it never automatically authorises estimation, holdout inspection, causal claims, System Dynamics activation or behavioural closure.",
   "source_readiness_registry": "model/calibration_validation/mechanism_source_readiness.json",
-  "current_baseline_action": "MATERIALISE_CAPB_REALTIME_VINTAGE_SOURCE_EVIDENCE",
+  "current_baseline_action": "MANUAL_DISPATCH_CAPB_REALTIME_VINTAGE_MATERIALISATION",
   "current_active_calibration_cycle_open": false,
   "current_validated_reference_behavioural_mechanisms": 0,
   "mechanisms": {
@@ -175,7 +175,7 @@
     },
     "fiscal_primary_balance_reaction": {
       "classification": "DEFERRED",
-      "source_readiness": "REOPENED_NEW_MEASUREMENT_EVIDENCE_CAPB_REALTIME_VINTAGE_MATERIALISATION",
+      "source_readiness": "REOPENED_CAPB_SOURCE_GATE_READY_MANUAL_MATERIALISATION_PENDING",
       "governing_evidence": [
         "model/calibration_validation/fiscal_primary_balance_source_boundary_review.json",
         "model/calibration_validation/fiscal_reaction_annual_structural_selection_result.json",
@@ -191,10 +191,11 @@
         "opening the untouched final evaluation to choose a replacement form",
         "using later revised information as if available in real time"
       ],
-      "reopen_effect": "CAPB_REALTIME_VINTAGE_SOURCE_MATERIALISATION_AND_TIMING_ADJUDICATION_ONLY",
+      "reopen_effect": "MANUAL_CAPB_REALTIME_VINTAGE_SOURCE_MATERIALISATION_THEN_TIMING_ADJUDICATION_ONLY",
       "reopened_on": "2026-09-19",
       "reopen_trigger_satisfied": true,
-      "reopen_authorized_scope": "CAPB_REALTIME_VINTAGE_SOURCE_MATERIALISATION_AND_TIMING_ADJUDICATION_ONLY"
+      "reopen_authorized_scope": "CAPB_REALTIME_VINTAGE_SOURCE_MATERIALISATION_AND_TIMING_ADJUDICATION_ONLY",
+      "materialisation_execution_readiness": "model/registries/fiscal_capb_materialisation_execution_readiness_2026_09_19.json"
     },
     "monetary_policy_reaction_function": {
       "classification": "DEFERRED",
@@ -250,5 +251,6 @@
   },
   "selective_reopen_active": true,
   "selective_reopen_mechanism": "fiscal_primary_balance_reaction",
-  "selective_reopen_scope": "CAPB_REALTIME_VINTAGE_SOURCE_MATERIALISATION_AND_TIMING_ADJUDICATION_ONLY"
+  "selective_reopen_scope": "CAPB_REALTIME_VINTAGE_SOURCE_MATERIALISATION_AND_TIMING_ADJUDICATION_ONLY",
+  "selective_reopen_execution_state": "READY_MANUAL_WORKFLOW_DISPATCH_REQUIRED_NOT_EXECUTED"
 }
