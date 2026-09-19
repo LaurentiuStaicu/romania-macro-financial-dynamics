@@ -61,6 +61,12 @@ def main() -> None:
     sectoral_external_screening = load(
         "model/dynamics/sectoral_financial_positions_external_source_screening.json"
     )
+    reference_mode_terminal = load(
+        "model/dynamics/reference_mode_recovery_terminal_assessment.json"
+    )
+    bnr_cnf_screening = load(
+        "model/dynamics/sectoral_financial_positions_bnr_cnf_source_screening.json"
+    )
     empirical = load("model/empirical_dynamics/contract.json")
     mechanisms = load("model/empirical_dynamics/mechanism_registry.json")
     readiness = load(
@@ -101,6 +107,16 @@ def main() -> None:
         model["calibration_validation"]["mechanism_reopen_conditions_registry"]
         == "model/calibration_validation/mechanism_reopen_conditions_registry.json",
         "Model contract does not register mechanism reopen governance",
+    )
+    check(
+        model["dynamic_core"]["reference_mode_recovery_terminal_assessment"]
+        == "model/dynamics/reference_mode_recovery_terminal_assessment.json",
+        "Model contract does not register terminal reference-mode recovery assessment",
+    )
+    check(
+        model["dynamic_core"]["reference_mode_recovery_stage_status"]
+        == reference_mode_terminal["status"],
+        "Model contract reference-mode recovery stage status is stale",
     )
 
     # Accounting state is derived from the canonical accounting gate.
@@ -157,6 +173,37 @@ def main() -> None:
     check(ref_state["closure_ready"] is (not blockers), "Baseline reference closure flag is stale")
     check(model["dynamic_core"]["reference_mode_ready_count"] == len(ready), "Model reference ready count disagrees with baseline")
     check(model["dynamic_core"]["reference_mode_required_count"] == len(REQUIRED_REFERENCE_MODES), "Model reference required count disagrees with baseline")
+    check(
+        ref_state["recovery_stage_status"] == reference_mode_terminal["status"],
+        "Baseline reference-mode recovery stage status is stale",
+    )
+    check(
+        ref_state["recovery_substage_complete"]
+        is reference_mode_terminal["disposition"]["reference_mode_recovery_substage_complete"],
+        "Baseline reference-mode recovery completion flag is stale",
+    )
+    check(
+        ref_state["next_operational_state"]
+        == reference_mode_terminal["disposition"]["next_operational_state"],
+        "Baseline reference-mode next operational state is stale",
+    )
+    check(
+        reference_mode_terminal["required_reference_modes"] == len(REQUIRED_REFERENCE_MODES),
+        "Terminal assessment reference-mode required count is stale",
+    )
+    check(
+        reference_mode_terminal["ready_reference_modes"] == len(ready),
+        "Terminal assessment ready reference-mode count is stale",
+    )
+    check(
+        reference_mode_terminal["blocker_count"] == len(blockers),
+        "Terminal assessment blocker count is stale",
+    )
+    check(
+        reference_mode_terminal["disposition"]["integrated_reference_mode_closure_ready"]
+        is (not blockers),
+        "Terminal assessment closure-readiness flag is stale",
+    )
 
     sectoral_mode = by_id["sectoral_financial_positions"]
     external_decision = sectoral_external_screening["decision"]
@@ -164,6 +211,29 @@ def main() -> None:
         ref_state["external_counterpart_screening_state"]
         == external_decision["external_counterpart_recovery_state"],
         "Baseline external counterpart screening state is stale",
+    )
+    check(
+        ref_state["final_blocker_public_source_completion_status"]
+        == external_decision["current_public_source_completion_status"],
+        "Baseline final blocker public-source completion status is stale",
+    )
+    check(
+        reference_mode_terminal["blocker"]["current_public_source_completion_status"]
+        == external_decision["current_public_source_completion_status"],
+        "Terminal reference-mode blocker source-completion status is stale",
+    )
+    check(
+        bnr_cnf_screening["verdict"]
+        == "OFFICIAL_BNR_SEMANTIC_COUNTERPART_STOCK_EVIDENCE_FOUND_BUT_FREQUENCY_AND_TRANSACTION_HISTORY_FAIL_NO_REOPEN_NO_PROMOTION",
+        "BNR CNF screening verdict is stale",
+    )
+    check(
+        bnr_cnf_screening["disposition"]["current_readiness"] == "9/10",
+        "BNR CNF screening may not change reference-mode readiness",
+    )
+    check(
+        bnr_cnf_screening["disposition"]["quarterly_boundary_change_authorized"] is False,
+        "BNR annual CNF evidence may not relax the quarterly boundary",
     )
     check(
         ref_state[
@@ -479,6 +549,12 @@ def main() -> None:
         "reference_modes_ready": ref_state["ready_count"],
         "reference_modes_required": ref_state["required_count"],
         "reference_mode_blockers": ref_state["blockers"],
+        "reference_mode_recovery_stage_status": ref_state[
+            "recovery_stage_status"
+        ],
+        "reference_mode_next_operational_state": ref_state[
+            "next_operational_state"
+        ],
         "external_counterpart_screening_state": ref_state[
             "external_counterpart_screening_state"
         ],
