@@ -10,7 +10,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from collections import defaultdict
-from datetime import date, datetime
+from datetime import UTC, date, datetime
 from pathlib import Path
 from typing import Iterable
 
@@ -279,6 +279,14 @@ def write_raw(name: str, body: bytes) -> dict[str, object]:
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     contract = load_contract()
+    fetcher_script_path = Path(__file__).resolve()
+    fetcher_script_sha256 = sha256(fetcher_script_path.read_bytes())
+    fetched_at_utc = (
+        datetime.now(UTC)
+        .replace(microsecond=0)
+        .isoformat()
+        .replace("+00:00", "Z")
+    )
 
     target_key = contract["target"]["series_key"]
     benchmark_key = contract["common_long_rate_control"]["series_key"]
@@ -363,7 +371,9 @@ def main() -> None:
         "phase": contract["phase"],
         "mechanism_id": contract["mechanism_id"],
         "estimation_authorized": False,
-        "generated_at_utc": datetime.utcnow().replace(microsecond=0).isoformat() + "Z",
+        "generated_at_utc": fetched_at_utc,
+        "fetcher_script": "scripts/audit_sovereign_yield_quarterly_materialisation.py",
+        "fetcher_script_sha256": fetcher_script_sha256,
         "source_requests": fetched,
         "source_metadata": {
             "eurostat_b9": parsed["b9"]["metadata"],
@@ -405,6 +415,89 @@ def main() -> None:
     report_path = OUT / "sovereign_yield_quarterly_materialisation_audit.json"
     report_path.write_text(
         json.dumps(report, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+
+    raw_institutions = {
+        "romania_yield": "European Central Bank / ESCB",
+        "germany_yield": "European Central Bank / ESCB",
+        "new_ciss": "European Central Bank / ESCB",
+        "b9": "Eurostat",
+    }
+    raw_sources = []
+    for name, meta in fetched.items():
+        raw_sources.append(
+            {
+                "name": name,
+                "institution": raw_institutions[name],
+                "url": meta["url"],
+                "accept": "*/*",
+                "status": meta["http_status"],
+                "content_type": meta["content_type"],
+                "last_modified": meta["last_modified"],
+                "bytes": meta["bytes"],
+                "sha256": meta["sha256"],
+                "path": meta["path"],
+            }
+        )
+
+    manifest = {
+        "snapshot_version": "0.1",
+        "snapshot_id": "sovereign-yield-quarterly-vintage-2026-09-19",
+        "fetched_at_utc": fetched_at_utc,
+        "source_vintage_contract": "data/provenance/source_vintage_contract.json",
+        "fetcher_script": (
+            "scripts/audit_sovereign_yield_quarterly_materialisation.py"
+        ),
+        "fetcher_script_sha256": fetcher_script_sha256,
+        "workflow_context": {
+            "github_sha": os.environ.get("GITHUB_SHA"),
+            "github_run_id": os.environ.get("GITHUB_RUN_ID"),
+            "github_event_name": os.environ.get("GITHUB_EVENT_NAME"),
+        },
+        "raw_sources": raw_sources,
+        "repository_inputs": [
+            {
+                "path": (
+                    "model/dynamics/"
+                    "government_debt_stock_reference_snapshot.json"
+                ),
+                "sha256": debt_snapshot_sha,
+                "role": "quarterly Maastricht debt-to-GDP control",
+            }
+        ],
+        "normalized_outputs": [
+            {
+                "path": str(csv_path.relative_to(OUT)),
+                "sha256": sha256(csv_body),
+                "derived_from_raw_sha256": [
+                    fetched[name]["sha256"]
+                    for name in (
+                        "romania_yield",
+                        "germany_yield",
+                        "new_ciss",
+                        "b9",
+                    )
+                ],
+                "repository_input_sha256": [debt_snapshot_sha],
+                "normalizer": (
+                    "scripts/audit_sovereign_yield_quarterly_materialisation.py"
+                ),
+                "normalizer_sha256": fetcher_script_sha256,
+                "rows": len(common),
+            }
+        ],
+        "audit_report": {
+            "path": str(report_path.relative_to(OUT)),
+            "sha256": sha256(report_path.read_bytes()),
+        },
+        "hard_boundaries": contract["hard_rules"],
+        "canonical_promotion": (
+            "REQUIRES_EXPLICIT_REPOSITORY_REVIEW_AND_COMMIT"
+        ),
+    }
+    (OUT / "snapshot_manifest.json").write_text(
+        json.dumps(manifest, indent=2, ensure_ascii=False) + "\n",
         encoding="utf-8",
     )
     print(
