@@ -81,7 +81,7 @@ class GovernmentInterestBurdenReferenceAssessmentTests(unittest.TestCase):
         )
         self.assertEqual(
             model["dynamic_core"]["reference_mode_ready_count"],
-            4,
+            5,
         )
 
 
