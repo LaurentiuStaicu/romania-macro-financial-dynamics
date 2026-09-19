@@ -18,7 +18,7 @@
     "aggregate_recovery_path_result": "FAILED_FROZEN_NO_PROMOTION",
     "internal_qsa_recovery_state": "FROZEN_UNTIL_REOPEN_TRIGGER",
     "external_counterpart_recovery_state": "EXHAUSTED_NO_SEMANTICALLY_ADMISSIBLE_CURRENT_PUBLIC_SOURCE",
-    "current_public_source_completion_status": "EUROSTAT_INSTRUMENT_SCOPE_FAIL_OECD_S121_SCOPE_FAIL_BNR_ANNUAL_FREQUENCY_TRANSACTION_HISTORY_FAIL"
+    "current_public_source_completion_status": "EUROSTAT_INSTRUMENT_SCOPE_FAIL_OECD_S121_SCOPE_FAIL_BNR_ANNUAL_FREQUENCY_TRANSACTION_HISTORY_FAIL_BNR_QUARTERLY_S13_SECTOR_COUNTERPART_CONSOLIDATION_FAIL"
   },
   "completed_source_paths": [
     {
@@ -52,6 +52,13 @@
       "evidence": [
         "model/dynamics/sectoral_financial_positions_bnr_cnf_source_screening.json"
       ]
+    },
+    {
+      "id": "BNR_QUARTERLY_S13_FINANCIAL_ACCOUNTS",
+      "result": "QUARTERLY_FREQUENCY_AND_SEQUENCE_PASS_SECTOR_COUNTERPART_CONSOLIDATION_FAIL",
+      "evidence": [
+        "model/dynamics/sectoral_financial_positions_bnr_quarterly_s13_source_screening.json"
+      ]
     }
   ],
   "bnr_final_screening_evidence": {
@@ -61,7 +68,8 @@
       "BNR 2024 CNF explicitly publishes a non-consolidated 2024 stock matrix by counterpart sector with S121 and AF2-AF8.",
       "The same CNF report states that ESA 2010 series for 1995-2024 are available on the BNR website.",
       "BNR Annual Report 2024 states that the Statistics Directorate periodically transmits quarterly financial-account series under the ECB strategy and annual financial accounts to Eurostat, and prepared the 2025 benchmark revision.",
-      "The screened BNR annual counterpart matrix does not supply the frozen quarterly stock plus financial-transaction history with at least 40 common quarters."
+      "The screened BNR annual counterpart matrix does not supply the frozen quarterly stock plus financial-transaction history with at least 40 common quarters.",
+      "A separate indexed BNR quarterly S13 publication confirms a quarterly sequence from 1998-Q4 including stocks, financial transactions, revaluations and other volume changes, but only for consolidated general government S13/subsectors rather than the full non-consolidated RMD sector-by-counterpart boundary."
     ]
   },
   "stage_completion_rule": {
@@ -87,7 +95,8 @@
     "Constructing transactions as stock differences.",
     "Dropping BNR/S121 or any required instrument after observing source coverage.",
     "Relaxing the minimum common-history requirement after observing available data.",
-    "Using synthetic residual allocation, missing-to-zero rules or reconciliation fit to choose mappings."
+    "Using synthetic residual allocation, missing-to-zero rules or reconciliation fit to choose mappings.",
+    "Treating the consolidated BNR quarterly S13 sequence as the complete non-consolidated RMD sector-by-counterpart history."
   ],
   "disposition": {
     "reference_mode_recovery_substage_complete": true,
