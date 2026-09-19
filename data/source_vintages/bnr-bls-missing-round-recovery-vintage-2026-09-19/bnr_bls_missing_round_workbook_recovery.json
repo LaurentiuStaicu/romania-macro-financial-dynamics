@@ -1,0 +1,128 @@
+{
+  "audit_version": "0.1",
+  "generated_at_utc": "2026-09-19T15:24:47Z",
+  "phase": "BNR BLS Missing-Round Workbook Recovery",
+  "mechanism_id": "aggregate_bank_credit_response",
+  "target_missing_quarters": [
+    "2023-Q2",
+    "2023-Q3",
+    "2024-Q2",
+    "2025-Q2"
+  ],
+  "results": [
+    {
+      "quarter": "2023-Q2",
+      "status": "SPREADSHEET_BYTES_RECOVERED",
+      "discovery_status": "EXACT_ENDPOINT_CONFIRMED_BY_WEB_AS_APPLICATION_VND_MS_EXCEL",
+      "requests_performed": 1,
+      "accessible_candidate_count": 1,
+      "candidates": [
+        {
+          "url": "https://www.bnr.ro/uploads/2023-8-banklendingsurvey-august2023_xls_547_1733754083.xls",
+          "http_status": 200,
+          "error": null,
+          "bytes": 81920,
+          "sha256": "aec840a2c7c56037a4f971d0bc3b4c3a9aa05a8a2a4c8d486d10a70e6e4a91a9",
+          "signature": "OLE2_CFBF_D0CF11E0A1B11AE1",
+          "spreadsheet_accessible": true,
+          "source_access_state": "RECOVERED_SPREADSHEET_BYTES",
+          "retained_path": "2023-q2-candidate-1.xls",
+          "content_type": "application/vnd.ms-excel",
+          "content_disposition": null,
+          "last_modified": "Mon, 09 Dec 2024 14:21:23 GMT"
+        }
+      ]
+    },
+    {
+      "quarter": "2023-Q3",
+      "status": "SPREADSHEET_BYTES_RECOVERED",
+      "discovery_status": "EXACT_ENDPOINT_CONFIRMED_BY_WEB_AS_APPLICATION_VND_MS_EXCEL",
+      "requests_performed": 1,
+      "accessible_candidate_count": 1,
+      "candidates": [
+        {
+          "url": "https://www.bnr.ro/uploads/2023-11-banklendingsurvey-november2023_xls_547_1733754070.xls",
+          "http_status": 200,
+          "error": null,
+          "bytes": 81920,
+          "sha256": "44694ed4cef41fecdbab818532a67abeda739dd55c693a8537ecc65fc1d69f5c",
+          "signature": "OLE2_CFBF_D0CF11E0A1B11AE1",
+          "spreadsheet_accessible": true,
+          "source_access_state": "RECOVERED_SPREADSHEET_BYTES",
+          "retained_path": "2023-q3-candidate-1.xls",
+          "content_type": "application/vnd.ms-excel",
+          "content_disposition": null,
+          "last_modified": "Mon, 09 Dec 2024 14:21:10 GMT"
+        }
+      ]
+    },
+    {
+      "quarter": "2024-Q2",
+      "status": "SPREADSHEET_BYTES_RECOVERED",
+      "discovery_status": "CANDIDATE_ENDPOINT_NOT_YET_CONFIRMED",
+      "requests_performed": 1,
+      "accessible_candidate_count": 1,
+      "candidates": [
+        {
+          "url": "https://www.bnr.ro/uploads/2024-8-banklendingsurvey-august2024_xls_547_1733753826.xls",
+          "http_status": 200,
+          "error": null,
+          "bytes": 81408,
+          "sha256": "ee2d2e2d8bf88ba93a0f2ab01fc9950179f29dd79ebe5b4c251c5177cf749a4e",
+          "signature": "OLE2_CFBF_D0CF11E0A1B11AE1",
+          "spreadsheet_accessible": true,
+          "source_access_state": "RECOVERED_SPREADSHEET_BYTES",
+          "retained_path": "2024-q2-candidate-1.xls",
+          "content_type": "application/vnd.ms-excel",
+          "content_disposition": null,
+          "last_modified": "Mon, 09 Dec 2024 14:17:06 GMT"
+        }
+      ]
+    },
+    {
+      "quarter": "2025-Q2",
+      "status": "NO_EXACT_URL_PREREGISTERED",
+      "discovery_status": "OFFICIAL_ANNEX_EXISTENCE_KNOWN_EXACT_WORKBOOK_URL_UNIDENTIFIED",
+      "requests_performed": 0,
+      "candidates": []
+    }
+  ],
+  "recovered_quarters": [
+    "2023-Q2",
+    "2023-Q3",
+    "2024-Q2"
+  ],
+  "recovered_quarter_count": 3,
+  "indeterminate_quarters": [],
+  "candidate_negative_quarters": [],
+  "pending_no_exact_url_quarters": [
+    "2025-Q2"
+  ],
+  "canonical_panel_modified": false,
+  "value_extraction_performed": false,
+  "parameter_estimation_performed": false,
+  "model_selection_performed": false,
+  "system_dynamics_activation": false,
+  "behavioural_closure_change": false,
+  "promotion_boundary": {
+    "accessible_workbook_does_not_fill_panel": true,
+    "required_before_panel_append": [
+      "Retain exact workbook bytes in an immutable source vintage.",
+      "Freeze workbook identity/hash and source semantics in a promotion review.",
+      "Run deterministic cell extraction under the existing cross-round semantic mapping boundary or a separately frozen coordinate bridge if layout differs.",
+      "Require exact quarter identity and all six preregistered observables.",
+      "Regenerate the canonical panel and audit byte-cleanly with no interpolation."
+    ]
+  },
+  "hard_rules": {
+    "no_canonical_panel_mutation_in_probe": true,
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_lag_selection": true,
+    "no_holdout_opening": true,
+    "no_synthetic_quarter_creation": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "status": "RECOVERED_WORKBOOK_BYTES_READY_FOR_EXPLICIT_PROMOTION_REVIEW_ONLY"
+}
