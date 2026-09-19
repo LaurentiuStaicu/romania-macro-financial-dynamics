@@ -1,0 +1,42 @@
+name: Sectoral Financial Positions Phase C Diagnostic
+
+on:
+  pull_request:
+    paths:
+      - "model/dynamics/sectoral_financial_positions_phase_c_diagnostic_contract.json"
+      - "scripts/audit_ecb_sectoral_financial_positions_phase_c.py"
+      - "tests/test_sectoral_financial_positions_phase_c_diagnostic_contract.py"
+      - ".github/workflows/sectoral-financial-positions-phase-c-diagnostic.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose-sectoral-financial-positions-phase-c:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify preregistered Phase C diagnostic contract
+        run: python -m unittest tests.test_sectoral_financial_positions_phase_c_diagnostic_contract -v
+
+      - name: Probe ECB QSA F1 F11 F12 semantics
+        env:
+          SECTORAL_POSITIONS_PHASE_C_AUDIT_OUT: sectoral_positions_phase_c_audit_artifacts
+        run: python scripts/audit_ecb_sectoral_financial_positions_phase_c.py
+
+      - name: Upload Phase C diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sectoral-financial-positions-phase-c-${{ github.sha }}
+          path: sectoral_positions_phase_c_audit_artifacts/
+          if-no-files-found: error
+          retention-days: 90
