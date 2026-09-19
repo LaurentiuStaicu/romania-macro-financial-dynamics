@@ -26,11 +26,20 @@ class BankCreditPrudentialCoveragePromotionReviewTests(unittest.TestCase):
         self.assertEqual(len(self.r["expected_files"]),4)
 
     def test_population_bridge_and_model_fit_remain_closed(self):
+        self.assertEqual(
+            self.r["verdict"],
+            "PASS_QUARTERLY_CBD2_SERIES_RETAINED_DIRECT_BNR_SUBSTITUTION_REJECTED",
+        )
+        self.assertEqual(
+            self.r["population_boundary_review"],
+            "model/calibration_validation/bank_credit_prudential_population_boundary_review.json",
+        )
         self.assertFalse(self.r["estimation_authorized"])
         h=self.r["hard_boundaries"]
         self.assertTrue(h["no_calibration_or_refit"])
         self.assertTrue(h["no_cet1_substitution_for_solvency_after_outcomes"])
         self.assertTrue(h["no_population_bridge_by_numeric_similarity"])
+        self.assertTrue(h["no_cbd2_direct_substitution_for_bnr_anchor"])
         self.assertTrue(h["no_system_dynamics_activation"])
 
 if __name__=="__main__":
