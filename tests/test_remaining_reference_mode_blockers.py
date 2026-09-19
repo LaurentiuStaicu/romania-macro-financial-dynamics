@@ -95,7 +95,7 @@ class RemainingReferenceModeBlockerTests(unittest.TestCase):
         )
         expected = accounting["current_expected_state"]
 
-        self.assertEqual(mode["status"], "OBSERVED_SERIES_AVAILABLE")
+        self.assertEqual(mode["status"], "PARTIAL_SERIES_AVAILABLE")
         self.assertEqual(
             assessment["verdict"],
             "BLOCKED_BY_CANONICAL_ACCOUNTING_READINESS",
