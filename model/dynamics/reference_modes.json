@@ -50,11 +50,13 @@
     },
     {
       "id": "government_debt_stock",
-      "status": "PARTIAL_SERIES_AVAILABLE",
-      "role": "Reference mode for government debt accumulation and refinancing dynamics.",
-      "source": "ECB QSA F3 plus GFS/Eurostat controls and Ministry of Finance debt data",
+      "status": "OBSERVED_SERIES_AVAILABLE",
+      "role": "Observed quarterly behaviour-over-time reference mode for consolidated general-government gross Maastricht debt at nominal/face value; distinct from market-valued financial-accounts liabilities and holder-by-issuer Accounting Spine stocks.",
+      "source": "Eurostat gov_10q_ggdebt, Romania S13 GD; retained MIO_NAC and PC_GDP source snapshot with immutable audit provenance.",
       "time_resolution": "quarterly",
-      "current_endogeneity": "ACCOUNTING_STOCK_PARTIALLY_MATERIALIZED"
+      "current_endogeneity": "OBSERVED_TARGET",
+      "assessment": "model/dynamics/government_debt_stock_reference_assessment.json",
+      "retained_snapshot": "model/dynamics/government_debt_stock_reference_snapshot.json"
     },
     {
       "id": "government_interest_burden",
