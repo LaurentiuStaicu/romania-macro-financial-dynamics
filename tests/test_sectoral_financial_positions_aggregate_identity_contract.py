@@ -132,11 +132,18 @@ class SectoralFinancialPositionsAggregateIdentityContractTests(unittest.TestCase
         self.assertFalse(nonretro["reference_mode_promoted"])
         self.assertEqual(
             self.review["next_action"]["status"],
-            "NO_IMMEDIATE_SOURCE_RERUN",
+            "EXPLORATORY_REAUDIT_RETAINED_NO_FURTHER_RERUN",
         )
         self.assertIn(
-            "new separately preregistered future phase/contract",
+            "new independently preregistered phase",
             self.review["next_action"]["rule"],
+        )
+        exploratory = self.review["exploratory_reaudit"]
+        self.assertFalse(exploratory["formal_gate"])
+        self.assertEqual(exploratory["readiness_effect"], 0)
+        self.assertEqual(
+            exploratory["result"],
+            "RECONCILIATION_FAIL_NO_PROMOTION",
         )
 
 
