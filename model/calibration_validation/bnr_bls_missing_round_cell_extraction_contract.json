@@ -1,0 +1,78 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "mechanism_id": "aggregate_bank_credit_response",
+  "phase": "BNR BLS Missing-Round — Deterministic Legacy XLS Cell Extraction",
+  "purpose": "Serialize every non-empty cell from the three newly retained legacy BNR BLS workbooks before any model-facing semantic selection. Source bytes are immutable and hash-verified. This phase does not append the canonical panel, select a behavioural specification, estimate parameters, inspect outcomes, or activate feedback.",
+  "source_vintage": "data/source_vintages/bnr-bls-missing-round-recovery-vintage-2026-09-19",
+  "source_promotion_review": "model/calibration_validation/bnr_bls_missing_round_promotion_review.json",
+  "extraction_engine": {
+    "package": "xlrd",
+    "version": "2.0.2",
+    "distribution_filename": "xlrd-2.0.2-py2.py3-none-any.whl",
+    "distribution_sha256": "ea762c3d29f4cca48d82df517b6d89fbce4db3107f9d78713e48cd321d5c9aa9",
+    "allowed_format": "xls"
+  },
+  "files": [
+    {
+      "id": "bls_2023_aug",
+      "target_quarter": "2023-Q2",
+      "path": "2023-q2-candidate-1.xls",
+      "bytes": 81920,
+      "sha256": "aec840a2c7c56037a4f971d0bc3b4c3a9aa05a8a2a4c8d486d10a70e6e4a91a9"
+    },
+    {
+      "id": "bls_2023_nov",
+      "target_quarter": "2023-Q3",
+      "path": "2023-q3-candidate-1.xls",
+      "bytes": 81920,
+      "sha256": "44694ed4cef41fecdbab818532a67abeda739dd55c693a8537ecc65fc1d69f5c"
+    },
+    {
+      "id": "bls_2024_aug",
+      "target_quarter": "2024-Q2",
+      "path": "2024-q2-candidate-1.xls",
+      "bytes": 81408,
+      "sha256": "ee2d2e2d8bf88ba93a0f2ab01fc9950179f29dd79ebe5b4c251c5177cf749a4e"
+    }
+  ],
+  "preregistered_anchor_tokens": ["C01", "C05", "P01", "P06", "P13", "P0303", "P1103"],
+  "extraction_rules": {
+    "verify_exact_source_bytes_before_open": true,
+    "fail_on_source_hash_or_size_mismatch": true,
+    "fail_on_workbook_parse_error": true,
+    "serialize_every_non_empty_cell": true,
+    "preserve_sheet_order": true,
+    "preserve_cell_coordinates": true,
+    "preserve_cell_type": true,
+    "convert_excel_dates_to_iso8601": true,
+    "retain_numeric_values_without_rounding": true,
+    "no_formula_recalculation": true,
+    "no_chart_or_image_extraction": true,
+    "no_manual_transcription": true,
+    "no_cell_selection_by_model_outcome": true,
+    "no_missing_to_zero": true
+  },
+  "anchor_rule": "Anchor tokens are schema diagnostics only. This extraction phase cannot treat their surrounding values as model observables; semantic admission requires the separately frozen missing-round semantic mapping gate.",
+  "pass_gate": {
+    "exactly_three_workbooks_parse": true,
+    "all_source_bytes_match": true,
+    "at_least_one_sheet_per_workbook": true,
+    "at_least_one_non_empty_cell_per_workbook": true
+  },
+  "hard_rules": {
+    "no_behavioural_variable_selection": true,
+    "no_canonical_panel_mutation": true,
+    "no_longitudinal_series_materialisation": true,
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_model_outcome_access": true,
+    "no_holdout_opening": true,
+    "no_causal_claim": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true,
+    "offline_source_bytes_only": true
+  },
+  "pass_effect": "MISSING_ROUND_CELL_EXTRACTIONS_READY_FOR_EXPLICIT_SEMANTIC_COORDINATE_REVIEW_ONLY",
+  "fail_effect": "KEEP_THREE_RECOVERED_ROUNDS_OUT_OF_CANONICAL_PANEL"
+}
