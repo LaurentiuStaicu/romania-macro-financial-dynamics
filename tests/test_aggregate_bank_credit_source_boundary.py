@@ -110,6 +110,35 @@ class AggregateBankCreditSourceBoundaryTests(unittest.TestCase):
             catalog["provider_access_observation"],
         )
 
+    def test_prudential_machine_readable_candidates_do_not_change_variables_post_hoc(self) -> None:
+        review = load(
+            "model/calibration_validation/"
+            "aggregate_bank_credit_source_boundary_review.json"
+        )
+        screen = review["external_prudential_source_screening"]
+        sources = screen["sources"]
+
+        self.assertEqual(
+            sources["cet1_quarterly_domestic_banks"]["series_key"],
+            "CBD2.Q.RO.W0.11._Z._Z.A.A.I4008._Z._Z._Z._Z._Z._Z.PC",
+        )
+        self.assertIn(
+            "not the same variable",
+            sources["cet1_quarterly_domestic_banks"]["semantic_limit"],
+        )
+        self.assertEqual(
+            sources["npl_annual_broad_boundary"]["series_key"],
+            "CBD2.A.RO.W0.67._Z._Z.A.F.I3632._Z._Z._Z._Z._Z._Z.PC",
+        )
+        self.assertIn(
+            "Annual frequency",
+            sources["npl_annual_broad_boundary"]["semantic_limit"],
+        )
+        rules = " ".join(screen["decision_rules"]).lower()
+        self.assertIn("do not choose cet1 versus total capital ratio", rules)
+        self.assertIn("do not forward-fill", rules)
+        self.assertEqual(screen["calibration_effect"], "NONE")
+
     def test_no_system_dynamics_activation_follows_from_source_feasibility(self) -> None:
         review = load(
             "model/calibration_validation/"

@@ -65,6 +65,7 @@
       "Exact retained quarterly realised BNR Bank Lending Survey credit-standard series for NFCs and households, with source provenance.",
       "Exact retained quarterly realised BNR Bank Lending Survey loan-demand series for NFCs and households, with source provenance.",
       "Exact retained harmonised NPL-ratio history with methodological break metadata; no silent concatenation of pre-EBA definitions.",
+      "Resolve the prudential-control boundary prospectively: retain a definitionally matched quarterly NPL series and freeze whether the capital state is total capital ratio or CET1 before any model fit. Annual or mismatched-population substitutes are not admissible.",
       "Exact retained total-capital-ratio history on the CRR supervisory-reporting boundary, with the 2021 reporting-regulation transition recorded.",
       "Explicit mapping of lending-rate and activity observables to the NFC and household credit components.",
       "A preregistered structural-selection and untouched holdout design written only after the source series above are frozen."
@@ -139,5 +140,39 @@
     "provider_access_observation": "The official BNR URLs are indexed publicly but return a Request Rejected response to automated access from the current environment. This is an access limitation, not evidence of missing files or missing observations.",
     "historical_coverage_claimed": false,
     "next_required_step": "Enumerate the official BNR survey spreadsheet archive and retain exact file bytes/hashes before constructing any canonical BLS history. Do not infer missing rounds from URL patterns."
+  },
+  "external_prudential_source_screening": {
+    "status": "CANDIDATE_MACHINE_READABLE_CONTROLS_IDENTIFIED_SEMANTIC_ALIGNMENT_PENDING",
+    "sources": {
+      "cet1_quarterly_domestic_banks": {
+        "institution": "ECB / ESCB",
+        "dataset": "CBD2 — Consolidated Banking data",
+        "series_key": "CBD2.Q.RO.W0.11._Z._Z.A.A.I4008._Z._Z._Z._Z._Z._Z.PC",
+        "concept": "Common equity Tier 1 (CET1) ratio, domestic banks, Romania, quarterly",
+        "confirmed_latest_example": "2025-Q3 = 20.2275 percent (provisional in the indexed ECB page)",
+        "role": "Candidate prudential-state control only.",
+        "semantic_limit": "CET1 ratio is not the same variable as the BNR total capital ratio currently named in the source gate. It may not silently replace that variable."
+      },
+      "npl_annual_broad_boundary": {
+        "institution": "ECB / ESCB",
+        "dataset": "CBD2 — Consolidated Banking data",
+        "series_key": "CBD2.A.RO.W0.67._Z._Z.A.F.I3632._Z._Z._Z._Z._Z._Z.PC",
+        "concept": "Gross non-performing loans-to-gross loans ratio, domestic banks plus foreign subsidiaries/branches, FINREP reporters, Romania, annual",
+        "confirmed_latest_example": "2024 = 2.6254 percent (provisional in the indexed ECB page)",
+        "role": "Definition/frequency cross-check only.",
+        "semantic_limit": "Annual frequency and the 67-sector population do not match the desired quarterly BNR system-state control; no interpolation or repeated-quarter use is permitted."
+      },
+      "cbd2_quarterly_npl_family": {
+        "status": "FAMILY_CONFIRMED_EXACT_ROMANIA_SERIES_TUPLE_NOT_YET_RETAINED",
+        "evidence": "ECB CBD2 publishes quarterly I3632 NPL-ratio series for domestic banks and country breakdowns. A Romania-specific exact tuple must be retrieved and its population reconciled to the BNR control before use."
+      }
+    },
+    "decision_rules": [
+      "Do not choose CET1 versus total capital ratio after observing predictive fit.",
+      "Do not forward-fill an annual NPL ratio into quarterly observations.",
+      "Do not mix domestic-bank-only and domestic-plus-foreign-branch populations without an explicit boundary bridge.",
+      "Any future switch from total capital ratio to CET1 requires a preregistered source/variable contract before model outcomes are inspected."
+    ],
+    "calibration_effect": "NONE"
   }
 }
