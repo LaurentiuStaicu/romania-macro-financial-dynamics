@@ -1,17 +1,16 @@
 name: FX Inflation Monthly Source Materialisation
 
-# Live provider materialisation is a one-shot PR bootstrap trigger.
-# The result is source evidence only and performs no transforms or estimation.
+# Live provider refresh/materialisation is manual-only. The reviewed
+# 2026-09-19 level-only source vintage is retained immutably in-repository;
+# any future run is evidence for a new vintage and cannot overwrite it.
 on:
-  pull_request:
-    types: [labeled]
+  workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
   materialise-fx-inflation-monthly-sources:
-    if: ${{ github.event.label.name == 'run-fx-inflation-materialisation' }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
