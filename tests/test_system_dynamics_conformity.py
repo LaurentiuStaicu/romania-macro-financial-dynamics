@@ -14,6 +14,7 @@ from scripts.audit_system_dynamics_conformity import (
     path_is_contiguous,
     empirical_activation_governance,
     reference_mode_readiness,
+    validation_recovery_registry_alignment,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -175,6 +176,99 @@ class SystemDynamicsConformityTests(unittest.TestCase):
                 mutated_contract,
                 mutated_registry,
                 disposition,
+            )
+
+
+    def test_registry_matches_frozen_validation_recovery_artifacts(self) -> None:
+        registry = json.loads(
+            (
+                ROOT / "model" / "empirical_dynamics"
+                / "mechanism_registry.json"
+            ).read_text(encoding="utf-8")
+        )
+        holdout = json.loads(
+            (
+                ROOT / "model" / "calibration_validation"
+                / "validation_recovery_holdout.json"
+            ).read_text(encoding="utf-8")
+        )
+        selection_freeze = json.loads(
+            (
+                ROOT / "model" / "calibration_validation"
+                / "validation_recovery_selection_freeze.json"
+            ).read_text(encoding="utf-8")
+        )
+        government = json.loads(
+            (
+                ROOT / "model" / "calibration_validation"
+                / "government_repricing_ledger_assessment.json"
+            ).read_text(encoding="utf-8")
+        )
+        result = validation_recovery_registry_alignment(
+            registry,
+            holdout,
+            selection_freeze,
+            government,
+        )
+        self.assertEqual(
+            result["monetary_household_status"],
+            "CANDIDATE",
+        )
+        self.assertEqual(
+            result["monetary_household_candidate"],
+            "delta_policy_contemporaneous",
+        )
+        self.assertEqual(
+            result["monetary_holdout_nonzero_policy_changes"],
+            0,
+        )
+        self.assertIsNone(result["nfc_selected_candidate"])
+        self.assertFalse(result["nfc_final_holdout_opened"])
+        self.assertEqual(result["government_status"], "DEFERRED")
+        self.assertFalse(result["government_candidate_eligibility"])
+        self.assertFalse(result["government_estimation_run"])
+
+    def test_old_generic_monetary_form_cannot_reappear(self) -> None:
+        registry = json.loads(
+            (
+                ROOT / "model" / "empirical_dynamics"
+                / "mechanism_registry.json"
+            ).read_text(encoding="utf-8")
+        )
+        holdout = json.loads(
+            (
+                ROOT / "model" / "calibration_validation"
+                / "validation_recovery_holdout.json"
+            ).read_text(encoding="utf-8")
+        )
+        selection_freeze = json.loads(
+            (
+                ROOT / "model" / "calibration_validation"
+                / "validation_recovery_selection_freeze.json"
+            ).read_text(encoding="utf-8")
+        )
+        government = json.loads(
+            (
+                ROOT / "model" / "calibration_validation"
+                / "government_repricing_ledger_assessment.json"
+            ).read_text(encoding="utf-8")
+        )
+        mutated = copy.deepcopy(registry)
+        monetary = next(
+            item
+            for item in mutated["mechanisms"]
+            if item["id"] == "monetary_policy_lending_rate_pass_through"
+        )
+        monetary["functional_form"] = (
+            "r_lend[t] = r_lend[t-1] + lambda * "
+            "(alpha + beta * policy_rate[t] - r_lend[t-1])"
+        )
+        with self.assertRaises(RuntimeError):
+            validation_recovery_registry_alignment(
+                mutated,
+                holdout,
+                selection_freeze,
+                government,
             )
 
 
