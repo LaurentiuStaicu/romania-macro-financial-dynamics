@@ -174,5 +174,65 @@ class RemainingReferenceModeBlockerTests(unittest.TestCase):
 
 
 
+    def test_external_refinancing_screening_strengthens_but_does_not_promote(self) -> None:
+        assessment = load(
+            "model/dynamics/government_refinancing_need_reference_assessment.json"
+        )
+        screening = load(
+            "model/dynamics/government_refinancing_need_external_source_screening.json"
+        )
+        references = load("model/dynamics/reference_modes.json")
+
+        mode = next(
+            item for item in references["modes"]
+            if item["id"] == "government_refinancing_need"
+        )
+
+        self.assertEqual(
+            assessment["external_source_screening"],
+            "model/dynamics/government_refinancing_need_external_source_screening.json",
+        )
+        self.assertEqual(
+            mode["external_source_screening"],
+            assessment["external_source_screening"],
+        )
+        self.assertEqual(
+            screening["scientific_decision"]["verdict"],
+            "NO_PROMOTION",
+        )
+        self.assertEqual(
+            screening["scientific_decision"]["retained_status"],
+            "PARTIAL_SERIES_AVAILABLE",
+        )
+        self.assertFalse(screening["synthesis"]["exact_machine_readable_historical_GFN_series_recovered"])
+        self.assertEqual(
+            screening["synthesis"]["exact_2024_IMF_actual_GFN_pct_GDP"],
+            14.1,
+        )
+        self.assertTrue(
+            screening["synthesis"]["ministry_2024_plan_values_are_revision_sensitive"]
+        )
+        self.assertTrue(
+            screening["synthesis"]["ministry_2024_plan_values_include_prefunding"]
+        )
+        self.assertFalse(screening["synthesis"]["promotion_supported"])
+        self.assertEqual(mode["status"], "PARTIAL_SERIES_AVAILABLE")
+
+    def test_refinancing_reopen_trigger_rejects_graphical_and_plan_shortcuts(self) -> None:
+        assessment = load(
+            "model/dynamics/government_refinancing_need_reference_assessment.json"
+        )
+        blocked = assessment["reopen_condition"][
+            "evidence_that_does_not_satisfy_trigger"
+        ]
+        joined = " ".join(blocked).lower()
+        self.assertIn("graphical digitization", joined)
+        self.assertIn("projected", joined)
+        self.assertIn("revised within the year", joined)
+        self.assertIn("prefunding", joined)
+        self.assertIn("gross financing need substituted", joined)
+
+
+
 if __name__ == "__main__":
     unittest.main()
