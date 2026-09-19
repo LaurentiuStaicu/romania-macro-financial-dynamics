@@ -79,7 +79,7 @@
     "calibration": "Fit on 2017-08..2022-12 only for calibration diagnostics.",
     "structural_selection": "Expanding-origin one-step predictions over 2023-01..2025-01. At each origin only observations strictly earlier than the target month may be used to fit parameters.",
     "final_evaluation": "2025-02..2025-11 may be opened only if at least one candidate passes every structural-selection gate. A failed selection result cannot be rescued by final evaluation.",
-    "future_confirmation": "MIR observations from 2026-08 onward remain prospectively reserved regardless of the current result."
+    "future_confirmation": "MIR observations from 2026-08 onward remain prospectively reserved and are governed by model/calibration_validation/prospective_monetary_confirmation_contract.json. They may not influence model form or beta before their authorized staged evaluation."
   },
   "identifiability_gates": {
     "minimum_calibration_months": 48,
