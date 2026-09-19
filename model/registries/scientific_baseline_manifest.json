@@ -1,0 +1,90 @@
+{
+  "manifest_version": "0.1",
+  "baseline_id": "scientific-integrity-2026-09-19",
+  "purpose": "Single canonical cross-registry snapshot of RMD scientific maturity. Values in this manifest must agree with the authoritative accounting, dynamics, reference-mode, empirical-mechanism and validation registries; the manifest is not an independent source of scientific truth.",
+  "authority": {
+    "model_contract": "model/registries/model_contract.json",
+    "reset_integrity_contract": "model/registries/reset_integrity_contract.json",
+    "accounting_readiness_gate": "model/accounting/accounting_readiness_gate.json",
+    "accounting_reopen_conditions": "model/accounting/reopen_conditions_registry.json",
+    "system_dynamics_conformity_gate": "model/dynamics/system_dynamics_conformity_gate.json",
+    "reference_modes": "model/dynamics/reference_modes.json",
+    "empirical_contract": "model/empirical_dynamics/contract.json",
+    "mechanism_registry": "model/empirical_dynamics/mechanism_registry.json",
+    "validation_disposition": "model/calibration_validation/validation_recovery_disposition.json",
+    "prospective_confirmation_contract": "model/calibration_validation/prospective_monetary_confirmation_contract.json",
+    "prospective_confirmation_status": "model/calibration_validation/prospective_monetary_confirmation_status.json"
+  },
+  "canonical_state": {
+    "accounting": {
+      "complete_stock_and_flow_instruments": [
+        "F3"
+      ],
+      "incomplete_instruments": [
+        "F2",
+        "F4",
+        "F5",
+        "F6",
+        "F7",
+        "F8"
+      ],
+      "multi_instrument_stock_initialization_ready": false,
+      "full_2025_stock_flow_benchmark_ready": false
+    },
+    "reference_modes": {
+      "required_count": 10,
+      "ready_count": 8,
+      "closure_ready": false,
+      "ready": [
+        "policy_rate",
+        "household_lending_rate",
+        "nfc_lending_rate",
+        "credit_stock",
+        "credit_flow",
+        "government_debt_stock",
+        "government_interest_burden",
+        "government_effective_interest_rate"
+      ],
+      "blockers": [
+        "government_refinancing_need",
+        "sectoral_financial_positions"
+      ]
+    },
+    "system_dynamics": {
+      "complete_endogenous_system_dynamics_model": false,
+      "behavioural_closure_active": false,
+      "closed_candidate_feedback_loops": [
+        "government_refinancing_interest_loop",
+        "government_issuance_yield_loop",
+        "bank_credit_balance_sheet_loop",
+        "monetary_credit_transmission_loop"
+      ],
+      "open_candidate_feedback_chains": [
+        "external_fx_refinancing_loop"
+      ]
+    },
+    "empirical_validation": {
+      "active_calibration_cycle_open": false,
+      "activated_mechanisms_count": 0,
+      "validated_reference_behavioural_mechanisms": 0,
+      "monetary_pass_through_status": "CANDIDATE",
+      "government_refinancing_effective_rate_status": "DEFERRED",
+      "prospective_confirmation_status": "WAIT_FOR_NEW_POLICY_RATE_EVENT"
+    },
+    "source_reproduction": {
+      "canonical_reproduction_requires_live_network": false,
+      "live_refreshes_are_new_vintage_evidence": true,
+      "live_refresh_workflows_manual_only": true
+    }
+  },
+  "hard_invariants": [
+    "Accounting Spine remains a hard constraint.",
+    "Partial/component/aggregate-only artifacts do not count as complete canonical instruments.",
+    "Missing/TBD values are not zero.",
+    "Behavioural closure remains inactive unless all declared activation gates pass.",
+    "No stale ACTIVATED label survives a CANDIDATE/DEFERRED validation disposition.",
+    "Reference-mode readiness is derived from the canonical registry rather than manually promoted.",
+    "A live provider refresh may create evidence for a new vintage but may not rewrite a retained historical result.",
+    "Prospective monetary response values remain inaccessible until the frozen event and release gates authorize inspection."
+  ]
+}
