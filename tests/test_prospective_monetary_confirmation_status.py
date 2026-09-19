@@ -92,5 +92,63 @@ class ProspectiveMonetaryConfirmationStatusTests(unittest.TestCase):
 
 
 
+    def test_prospective_contract_freezes_form_parameter_and_event_gate(self) -> None:
+        contract = load(
+            "model/calibration_validation/prospective_monetary_confirmation_contract.json"
+        )
+        holdout = load(
+            "model/calibration_validation/validation_recovery_holdout.json"
+        )
+
+        inherited = contract["inherited_freeze"]
+        self.assertEqual(inherited["candidate"], "delta_policy_contemporaneous")
+        self.assertEqual(inherited["frozen_beta"], holdout["frozen_beta"])
+        self.assertFalse(inherited["candidate_form_may_change"])
+        self.assertFalse(inherited["beta_may_change"])
+        self.assertFalse(inherited["causal_claim_allowed"])
+
+        formal = contract["staged_evaluation"]["stage_3_formal_confirmation"]
+        self.assertEqual(formal["minimum_distinct_nonzero_policy_event_months"], 4)
+        self.assertEqual(formal["minimum_cumulative_absolute_policy_change_pp"], 1.0)
+        self.assertTrue(formal["event_conditioned_evaluation"])
+        self.assertEqual(
+            formal["gates"]["candidate_rmse_improvement_vs_persistence_fraction"],
+            0.05,
+        )
+
+    def test_first_event_is_diagnostic_only(self) -> None:
+        contract = load(
+            "model/calibration_validation/prospective_monetary_confirmation_contract.json"
+        )
+        first = contract["staged_evaluation"]["stage_1_first_event_diagnostic"]
+        self.assertEqual(first["status_effect"], "DIAGNOSTIC_ONLY_NO_VALIDATION")
+        self.assertIn("cannot validate", first["rule"])
+
+    def test_october_event_response_cannot_be_opened_before_december_release(self) -> None:
+        contract = load(
+            "model/calibration_validation/prospective_monetary_confirmation_contract.json"
+        )
+        releases = {
+            item["reference_period"]: item["release_date"]
+            for item in contract["current_schedule_evidence"]["ECB_MIR_release_calendar"][
+                "scheduled_releases"
+            ]
+        }
+        self.assertEqual(releases["2026-10"], "2026-12-02")
+        boundary = contract["prospective_data_boundary"]
+        self.assertTrue(boundary["no_response_peeking_before_official_release"])
+        self.assertEqual(
+            boundary["identifying_month_definition"],
+            "A calendar month in the reserved window for which policy[t]-policy[t-1] is non-zero.",
+        )
+
+    def test_model_contract_registers_prospective_contract(self) -> None:
+        model = load("model/registries/model_contract.json")
+        self.assertEqual(
+            model["calibration_validation"]["prospective_monetary_confirmation_contract"],
+            "model/calibration_validation/prospective_monetary_confirmation_contract.json",
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
