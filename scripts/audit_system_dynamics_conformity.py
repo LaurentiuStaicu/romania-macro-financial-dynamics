@@ -301,6 +301,153 @@ def empirical_activation_governance(
     }
 
 
+def validation_recovery_registry_alignment(
+    registry: dict,
+    holdout: dict,
+    selection_freeze: dict,
+    government_assessment: dict,
+) -> dict[str, object]:
+    by_id = {
+        str(item["id"]): item
+        for item in registry.get("mechanisms", [])
+    }
+
+    monetary_id = "monetary_policy_lending_rate_pass_through"
+    government_id = "government_refinancing_effective_rate"
+    if monetary_id not in by_id or government_id not in by_id:
+        raise RuntimeError(
+            "Empirical registry lacks a mechanism required by validation recovery"
+        )
+
+    monetary = by_id[monetary_id]
+    if monetary["classification"] != holdout["final_mechanism_verdict"]:
+        raise RuntimeError(
+            "Monetary registry status disagrees with final household holdout verdict"
+        )
+    if monetary.get("central_feedback") is not False:
+        raise RuntimeError(
+            "Unvalidated monetary candidate may not be central_feedback"
+        )
+
+    selected = monetary.get("validation_recovery_selected_form")
+    if not isinstance(selected, dict):
+        raise RuntimeError(
+            "Monetary registry lacks the frozen validation-recovery selected form"
+        )
+    exact_fields = (
+        "target",
+        "candidate",
+        "equation",
+        "holdout_nonzero_policy_changes",
+        "passes_all_final_holdout_gates",
+        "causal_claim",
+    )
+    for field in exact_fields:
+        if selected.get(field) != holdout.get(field):
+            raise RuntimeError(
+                f"Monetary registry frozen field {field} disagrees with holdout"
+            )
+    if selected.get("final_verdict") != holdout["final_mechanism_verdict"]:
+        raise RuntimeError(
+            "Monetary registry final verdict disagrees with holdout"
+        )
+    if abs(
+        float(selected["frozen_beta"]) - float(holdout["frozen_beta"])
+    ) > 1e-15:
+        raise RuntimeError(
+            "Monetary registry frozen beta disagrees with holdout"
+        )
+    if monetary.get("functional_form") != (
+        "household_housing candidate: "
+        + holdout["equation"]
+        + "; no NFC form is selected"
+    ):
+        raise RuntimeError(
+            "Monetary registry functional form is stale relative to recovery"
+        )
+    parameters = monetary.get("parameters", [])
+    if len(parameters) != 1:
+        raise RuntimeError(
+            "Frozen household monetary candidate must expose exactly one parameter"
+        )
+    beta = parameters[0]
+    if beta.get("id") != "beta_household_housing":
+        raise RuntimeError(
+            "Monetary registry exposes the wrong frozen candidate parameter"
+        )
+    if beta.get("status") != "FROZEN_CANDIDATE_NOT_VALIDATED":
+        raise RuntimeError(
+            "Monetary beta must remain explicitly candidate/not validated"
+        )
+    if abs(float(beta["value"]) - float(holdout["frozen_beta"])) > 1e-15:
+        raise RuntimeError(
+            "Monetary registry parameter value disagrees with holdout"
+        )
+
+    nfc = monetary.get("validation_recovery_nfc")
+    if not isinstance(nfc, dict):
+        raise RuntimeError(
+            "Monetary registry lacks the frozen NFC selection disposition"
+        )
+    frozen_nfc = selection_freeze["targets"]["nfc_upto1y"]
+    if nfc.get("selected_candidate") != frozen_nfc["selected_candidate"]:
+        raise RuntimeError(
+            "NFC registry selected form disagrees with selection freeze"
+        )
+    if nfc.get("final_holdout_opened") is not False:
+        raise RuntimeError(
+            "NFC registry may not claim an opened final holdout"
+        )
+    if nfc.get("status") != holdout["nfc_verdict"]:
+        raise RuntimeError(
+            "NFC registry status disagrees with final recovery disposition"
+        )
+
+    government = by_id[government_id]
+    if government["classification"] != government_assessment["final_verdict"]:
+        raise RuntimeError(
+            "Government registry status disagrees with repricing-ledger verdict"
+        )
+    if government.get("central_feedback") is not False:
+        raise RuntimeError(
+            "Deferred government mechanism may not be central_feedback"
+        )
+    if government_assessment["candidate_eligibility"] is not False:
+        raise RuntimeError(
+            "Government assessment unexpectedly grants candidate eligibility"
+        )
+    if government_assessment["estimation"]["run"] is not False:
+        raise RuntimeError(
+            "Government registry governance assumes estimation remained blocked"
+        )
+    government_disposition = government.get(
+        "validation_recovery_disposition"
+    )
+    if not isinstance(government_disposition, dict):
+        raise RuntimeError(
+            "Government registry lacks explicit recovery disposition"
+        )
+    if government_disposition.get("status") != "DEFERRED":
+        raise RuntimeError(
+            "Government embedded recovery status must remain DEFERRED"
+        )
+
+    return {
+        "monetary_household_status": monetary["classification"],
+        "monetary_household_candidate": selected["candidate"],
+        "monetary_household_frozen_beta": selected["frozen_beta"],
+        "monetary_holdout_nonzero_policy_changes":
+            selected["holdout_nonzero_policy_changes"],
+        "nfc_selected_candidate": nfc["selected_candidate"],
+        "nfc_final_holdout_opened": nfc["final_holdout_opened"],
+        "government_status": government["classification"],
+        "government_candidate_eligibility":
+            government_assessment["candidate_eligibility"],
+        "government_estimation_run":
+            government_assessment["estimation"]["run"],
+    }
+
+
 def main() -> None:
     model = load("model/registries/model_contract.json")
     core = load("model/dynamics/core_contract.json")
@@ -313,6 +460,15 @@ def main() -> None:
     )
     empirical_contract = load("model/empirical_dynamics/contract.json")
     empirical_registry = load("model/empirical_dynamics/mechanism_registry.json")
+    validation_holdout = load(
+        "model/calibration_validation/validation_recovery_holdout.json"
+    )
+    validation_selection_freeze = load(
+        "model/calibration_validation/validation_recovery_selection_freeze.json"
+    )
+    government_repricing_assessment = load(
+        "model/calibration_validation/government_repricing_ledger_assessment.json"
+    )
     accounting_readiness = load("model/accounting/accounting_readiness_gate.json")
 
     check(
@@ -353,6 +509,12 @@ def main() -> None:
         empirical_contract,
         empirical_registry,
         disposition,
+    )
+    recovery_alignment = validation_recovery_registry_alignment(
+        empirical_registry,
+        validation_holdout,
+        validation_selection_freeze,
+        government_repricing_assessment,
     )
     check(
         model["empirical_dynamics"]["active_calibration_cycle_open"]
@@ -626,6 +788,7 @@ def main() -> None:
         "reference_mode_ready_variables": reference_readiness["ready_modes"],
         "reference_mode_blocking_variables": reference_readiness["blocking_modes"],
         "empirical_activation_governance": empirical_governance,
+        "validation_recovery_registry_alignment": recovery_alignment,
     }
     print(json.dumps(report, indent=2))
 
