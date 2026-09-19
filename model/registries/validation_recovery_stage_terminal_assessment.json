@@ -1,0 +1,135 @@
+{
+  "assessment_version": "0.1",
+  "assessed_on": "2026-09-19",
+  "stage_name": "Validation Recovery / Empirical Basis Expansion",
+  "status": "STAGE_COMPLETE_EVIDENCE_TRIGGERED_BASELINE_HOLD",
+  "purpose": "Formally close the current autonomous scientific-recovery stage once all currently admissible accounting, reference-mode, source-discovery and behavioural-mechanism tasks have either completed their frozen gates or reached explicit evidence-triggered boundaries. Stage completion means no legitimate task remains executable from the current evidence set without violating preregistration, provenance, accounting or no-post-outcome-respecification rules. It does not mean that RMD is complete, calibrated, causally identified, behaviourally closed or release-ready.",
+  "authorities": {
+    "accounting_readiness": "model/accounting/accounting_readiness_gate.json",
+    "accounting_reopen_conditions": "model/accounting/reopen_conditions_registry.json",
+    "reference_modes": "model/dynamics/reference_modes.json",
+    "reference_mode_terminal_assessment": "model/dynamics/reference_mode_recovery_terminal_assessment.json",
+    "system_dynamics_conformity": "model/dynamics/system_dynamics_conformity_gate.json",
+    "mechanism_registry": "model/empirical_dynamics/mechanism_registry.json",
+    "mechanism_source_readiness": "model/calibration_validation/mechanism_source_readiness.json",
+    "mechanism_reopen_conditions": "model/calibration_validation/mechanism_reopen_conditions_registry.json",
+    "validation_disposition": "model/calibration_validation/validation_recovery_disposition.json",
+    "prospective_monetary_confirmation_contract": "model/calibration_validation/prospective_monetary_confirmation_contract.json",
+    "prospective_monetary_confirmation_status": "model/calibration_validation/prospective_monetary_confirmation_status.json",
+    "scientific_baseline_manifest": "model/registries/scientific_baseline_manifest.json"
+  },
+  "terminal_state": {
+    "accounting": {
+      "canonical_complete_stock_and_flow_instruments": [
+        "F3"
+      ],
+      "incomplete_or_partial_instruments": [
+        "F2",
+        "F4",
+        "F5",
+        "F6",
+        "F7",
+        "F8"
+      ],
+      "full_2025_stock_flow_benchmark_ready": false,
+      "active_unconditional_recovery_task_remains": false,
+      "reopen_registry_covers_all_incomplete_instruments": true,
+      "completion_interpretation": "Accounting recovery has reached explicit public-data/identification boundaries; incomplete instruments remain incomplete and may reopen only on their declared evidence triggers."
+    },
+    "reference_modes": {
+      "required": 10,
+      "ready": 9,
+      "blocker": "sectoral_financial_positions",
+      "integrated_closure_ready": false,
+      "recovery_stage_status": "STAGE_COMPLETE_FROZEN_9_OF_10_UNDER_CURRENT_PUBLIC_EVIDENCE_BOUNDARY",
+      "active_unconditional_recovery_task_remains": false,
+      "completion_interpretation": "The sole blocker has exhausted admissible current public source paths without a boundary-valid quarterly stock+transaction source. Readiness is not synthetically promoted."
+    },
+    "behavioural_mechanisms": {
+      "non_rejected_mechanisms": 11,
+      "candidate": 6,
+      "deferred": 5,
+      "activated": 0,
+      "validated_reference_behavioural_mechanisms": 0,
+      "estimation_or_refit_allowed": 0,
+      "active_calibration_cycle_open": false,
+      "reopen_registry_covers_all_non_rejected_mechanisms": true,
+      "completion_interpretation": "Every non-rejected mechanism is frozen, waiting for an external event, or blocked by a declared source/measurement/identification trigger."
+    },
+    "prospective_monetary_confirmation": {
+      "status": "WAIT_FOR_NEW_POLICY_RATE_EVENT",
+      "active_identifying_event_available": false,
+      "reserved_response_values_may_be_opened_now": false,
+      "interpretation": "Future external events may reopen a prospective confirmation gate; elapsed time and unchanged-rate meetings are not scientific progress."
+    },
+    "system_dynamics": {
+      "behavioural_closure_active": false,
+      "complete_endogenous_system_dynamics_model": false,
+      "quantitative_feedback_activation_from_stage_completion": false
+    },
+    "reproducibility": {
+      "canonical_reproduction_requires_live_network": false,
+      "live_refreshes_are_new_vintage_evidence": true,
+      "stage_terminal_state_must_be_audited_in_scientific_ci": true
+    }
+  },
+  "stage_completion_rule": {
+    "all_currently_admissible_tasks_resolved_or_frozen": true,
+    "no_queue_exhaustion_respecification": true,
+    "no_missing_to_zero_or_synthetic_allocation": true,
+    "no_unopened_holdout_used_to_rescue_failed_forms": true,
+    "no_current_public_source_path_left_unclassified_for_the_final_reference_blocker": true,
+    "no_mechanism_estimation_authorized": true,
+    "rationale": "A scientifically disciplined recovery stage can terminate with unresolved model components when the remaining uncertainty is structural/source-limited and every reopen condition is explicit. Continuing to search or refit without a new trigger would reduce scientific integrity rather than increase it."
+  },
+  "reopen_classes": [
+    {
+      "id": "ACCOUNTING_EVIDENCE_TRIGGER",
+      "rule": "A declared instrument-specific source/constraint in the accounting reopen registry becomes available."
+    },
+    {
+      "id": "REFERENCE_MODE_SOURCE_TRIGGER",
+      "rule": "A new or changed official dataset satisfies the sectoral-financial-position quarterly S121 + F2-F8 stock/transaction boundary."
+    },
+    {
+      "id": "BEHAVIOURAL_SOURCE_OR_IDENTIFICATION_TRIGGER",
+      "rule": "A mechanism-specific trigger in the behavioural reopen registry is satisfied."
+    },
+    {
+      "id": "PROSPECTIVE_POLICY_EVENT_TRIGGER",
+      "rule": "A future non-zero BNR policy-rate event and subsequent official MIR release satisfy the frozen prospective-confirmation contract."
+    }
+  ],
+  "non_reopen_conditions": [
+    "Repeating unchanged source searches or API probes.",
+    "Queue exhaustion by itself.",
+    "Post-outcome lag, predictor, sign, regime or target changes on a failed evidence cycle.",
+    "Relaxing source frequency, sector, instrument, population or precision boundaries after observing availability.",
+    "Using rounded, interpolated, synthetic or residual-balanced values where exact evidence is required.",
+    "Opening reserved holdouts or prospective response values outside their frozen gates."
+  ],
+  "next_operational_state": {
+    "id": "EVIDENCE_TRIGGERED_BASELINE_HOLD",
+    "active_autonomous_empirical_task": null,
+    "permitted_actions_without_reopen_trigger": [
+      "offline reproducibility verification",
+      "scientific integrity regression testing",
+      "documentation consistency checks",
+      "monitoring only the explicitly declared external/event triggers"
+    ],
+    "prohibited_actions_without_reopen_trigger": [
+      "new calibration or refit",
+      "new post-outcome model specification search",
+      "canonical accounting completion by synthetic allocation",
+      "reference-mode boundary relaxation",
+      "behavioural feedback activation",
+      "behavioural closure activation"
+    ]
+  },
+  "no_release_effect": {
+    "release_or_tag_authorized": false,
+    "merge_to_main_authorized_by_this_assessment": false,
+    "version_change_authorized": false,
+    "human_release_decision_still_required": true
+  }
+}
