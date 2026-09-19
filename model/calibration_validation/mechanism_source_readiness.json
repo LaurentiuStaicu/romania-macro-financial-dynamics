@@ -195,16 +195,18 @@
     {
       "id": "monetary_policy_reaction_function",
       "classification": "DEFERRED",
-      "source_readiness": "POLICY_INSTRUMENT_OBSERVED_IDENTIFICATION_EXPECTATIONS_AND_REGIME_BOUNDARY_UNRESOLVED",
-      "next_admissible_action": "Keep the policy rate observed/exogenous for early validation. Before any reaction-function estimation, preregister an inflation-gap/activity-gap measurement boundary, an expectations source, policy-regime dates and an identification strategy for simultaneous policy responses.",
+      "source_readiness": "TARGET_AND_POLICY_OBSERVED_EXPECTATIONS_UNITS_GAP_VINTAGES_AND_IDENTIFICATION_UNRESOLVED",
+      "next_admissible_action": "Reopen only after retaining unit-compatible expectations and quarterly activity-gap vintages with revision timing, plus a preregistered managed-float/intervention and simultaneity identification strategy. Keep the policy rate observed/exogenous meanwhile.",
       "blockers": [
-        "Observed policy-rate history alone does not identify a policy reaction function.",
-        "Inflation gap and activity gap require target/potential-output measurement choices.",
-        "Inflation expectations source and horizon are not frozen.",
-        "Managed-float intervention and regime changes create simultaneous/endogenous policy responses."
+        "BNR flat target 2.5% ±1 pp and policy-rate history are observed.",
+        "DG ECFIN CONS_006 is a qualitative balance, not percentage inflation expectations; Romania's consistent series includes econometric restoration.",
+        "No current immutable machine-readable quantitative financial-analyst expectations series has been retained.",
+        "AMECO output gap is annual and model-based; no quarterly real-time gap vintage is retained.",
+        "Managed-float intervention and simultaneous policy responses remain untreated."
       ],
       "estimation_or_refit_allowed": false,
-      "priority_group": "DEFER_UNTIL_REACTION_FUNCTION_IDENTIFICATION_CONTRACT"
+      "priority_group": "DEFER_UNTIL_EXPECTATIONS_GAP_VINTAGE_IDENTIFICATION_CONTRACT",
+      "source_boundary_review": "model/calibration_validation/monetary_policy_reaction_source_screening.json"
     },
     {
       "id": "external_fx_refinancing_feedback",
@@ -226,9 +228,9 @@
   ],
   "priority_rule": "Priority is determined by the shortest scientifically admissible path to new independent evidence, not by a desire to activate a feedback loop. Waiting mechanisms remain frozen; source-incomplete mechanisms are not fit with proxies.",
   "current_next_step": {
-    "mechanism_id": "monetary_policy_reaction_function",
-    "action": "SCREEN_INFLATION_EXPECTATIONS_AND_GAP_MEASUREMENT_SOURCES_NO_ESTIMATION",
-    "reason": "The external FX chain has gained partial official margins but remains jointly unidentified. The monetary-policy reaction function is the next mechanism where official observables may materially improve the source boundary without activating policy endogeneity or fitting a rule.",
+    "mechanism_id": "SCIENTIFIC_BASELINE",
+    "action": "CONSOLIDATE_POST_SCREENING_MECHANISM_READINESS_AND_INVARIANTS",
+    "reason": "Every registered behavioural mechanism is now either frozen after a preregistered failure, waiting for prospective events, or blocked by an explicit new-source/measurement/identification trigger. The scientifically useful next action is to consolidate this state into executable cross-registry invariants before any new empirical cycle.",
     "calibration_cycle_open": false
   },
   "coverage_rule": {
