@@ -1,12 +1,17 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import json
 from datetime import datetime
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
 CONTRACT=ROOT/"model"/"calibration_validation"/"bnr_bls_cross_round_mapping_contract.json"
+
+
+def sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def quarter_index(period: str) -> int:
@@ -129,6 +134,71 @@ def may_2025_row(contract: dict) -> dict:
     }
 
 
+def recovered_rows(contract: dict) -> tuple[list[dict], dict, Path]:
+    review_path=ROOT/contract["recovered_round_semantic_review"]
+    review=json.loads(review_path.read_text(encoding="utf-8"))
+    policy=contract["recovered_round_policy"]
+    if review["status"] != policy["required_status"]:
+        raise RuntimeError(f"recovered-round semantic review not passed: {review['status']}")
+    if review["passed_rounds"] != policy["allowed_quarters"]:
+        raise RuntimeError(
+            f"unexpected recovered-round set: {review['passed_rounds']}"
+        )
+
+    rows=[]
+    validations={}
+    for item in review["results"]:
+        quarter=item["target_quarter"]
+        if quarter not in policy["allowed_quarters"]:
+            raise RuntimeError(f"unauthorized recovered quarter: {quarter}")
+        if policy["require_all_six_observables_passed"] and not item["all_six_observables_passed"]:
+            raise RuntimeError(f"six-observable semantic gate failed: {quarter}")
+        if policy["require_dsti_boundary_markers_verified"] and not item["dsti_boundary_markers_verified"]:
+            raise RuntimeError(f"DSTI boundary markers failed: {quarter}")
+
+        identity=item["round_identity"]
+        authority=identity["authority"]
+        if authority=="WORKBOOK_COMPANIES_A1":
+            reference_date=identity["raw_workbook_header"]
+        elif authority=="OFFICIAL_BNR_PUBLICATION_QUARTER":
+            if identity.get("silent_date_normalisation_performed") is not False:
+                raise RuntimeError(f"silent date normalisation state invalid: {quarter}")
+            reference_date=""
+        else:
+            raise RuntimeError(f"unsupported recovered-round authority: {authority}")
+
+        source=item["row"]
+        row={
+            "quarter":quarter,
+            "reference_date":reference_date,
+            "source_id":source["source_id"],
+            "source_kind":source["source_kind"],
+            "nfc_credit_standards":float(source["nfc_credit_standards"]),
+            "nfc_loan_demand":float(source["nfc_loan_demand"]),
+            "household_mortgage_credit_standards":float(source["household_mortgage_credit_standards"]),
+            "household_consumer_credit_standards":float(source["household_consumer_credit_standards"]),
+            "household_mortgage_loan_demand":float(source["household_mortgage_loan_demand"]),
+            "household_consumer_loan_demand":float(source["household_consumer_loan_demand"]),
+        }
+        rows.append(row)
+
+        observable_validations={}
+        for key,value in item["observable_validations"].items():
+            copied=dict(value)
+            numeric_value=copied.get("value")
+            if isinstance(numeric_value,float) and numeric_value.is_integer():
+                copied["value"]=int(numeric_value)
+            observable_validations[key]=copied
+        validations[quarter]={
+            "source_id":item["source_id"],
+            "round_identity":item["round_identity"],
+            "observable_validations":observable_validations,
+            "all_six_observables_passed":item["all_six_observables_passed"],
+            "dsti_boundary_markers_verified":item["dsti_boundary_markers_verified"],
+        }
+    return rows,validations,review_path
+
+
 def all_quarters(start: str,end: str) -> list[str]:
     a,b=quarter_index(start),quarter_index(end)
     out=[]
@@ -142,6 +212,8 @@ def main() -> None:
     c=json.loads(CONTRACT.read_text(encoding="utf-8"))
     rows=[legacy_row(c,item) for item in c["source_round_mapping"]]
     rows.append(may_2025_row(c))
+    recovered,recovered_validations,semantic_path=recovered_rows(c)
+    rows.extend(recovered)
     rows.sort(key=lambda r:quarter_index(r["quarter"]))
 
     quarters=[r["quarter"] for r in rows]
@@ -168,10 +240,20 @@ def main() -> None:
         for row in rows:
             writer.writerow({key:row[key] for key in fields})
 
+    promotion_path=ROOT/c["canonical_promotion_review"]
+    promotion=json.loads(promotion_path.read_text(encoding="utf-8"))
+    expected_files={item["path"]:item for item in promotion["expected_candidate_files"]}
+    promoted_panel_sha=sha256(panel_path)
+    approved_sha=promotion["approved_post_promotion"]["canonical_panel_sha256"]
+    if promoted_panel_sha != approved_sha:
+        raise RuntimeError(
+            f"materialized panel SHA mismatch: {promoted_panel_sha} != {approved_sha}"
+        )
+
     audit={
         "audit_version":"0.1",
         "phase":c["phase"],
-        "status":"PASS_BLS_MULTI_ROUND_MAPPING_WITH_EXPLICIT_GAPS",
+        "status":c["canonical_status"],
         "observed_round_count":len(rows),
         "first_observed_quarter":quarters[0],
         "last_observed_quarter":quarters[-1],
@@ -193,6 +275,28 @@ def main() -> None:
         "system_dynamics_activation":False,
         "behavioural_closure_change":False,
         "hard_rules":c["hard_rules"],
+        "recovered_missing_round_validations":{
+            "semantic_review":c["recovered_round_semantic_review"],
+            "semantic_review_sha256":sha256(semantic_path),
+            "rounds":recovered_validations,
+        },
+        "canonical_panel_promotion":{
+            "review":c["canonical_promotion_review"],
+            "source_candidate_contract":promotion["source_candidate_contract"],
+            "source_workflow_run_id":promotion["source_workflow_run_id"],
+            "source_job_id":promotion["source_job_id"],
+            "source_artifact_id":promotion["source_artifact_id"],
+            "source_artifact_name":promotion["source_artifact_name"],
+            "source_artifact_zip_sha256":promotion["source_artifact_zip_sha256"],
+            "candidate_panel_sha256":expected_files["bnr_bls_realised_rounds_candidate.csv"]["sha256"],
+            "candidate_audit_sha256":expected_files["bnr_bls_panel_regeneration_candidate_audit.json"]["sha256"],
+            "previous_canonical_panel_sha256":promotion["expected_pre_promotion"]["canonical_panel_sha256"],
+            "promoted_canonical_panel_sha256":approved_sha,
+            "promoted_rounds":c["recovered_round_policy"]["allowed_quarters"],
+            "remaining_gap":missing[0] if len(missing)==1 else missing,
+            "parameter_estimation_authorized":promotion["promotion_effect"]["parameter_estimation_authorized"],
+            "behavioural_closure_change":promotion["promotion_effect"]["behavioural_closure_change"],
+        },
     }
     audit_path=ROOT/"model"/"calibration_validation"/c["output_files"]["audit"]
     audit_path.write_text(json.dumps(audit,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")

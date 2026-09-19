@@ -1,9 +1,9 @@
 {
-  "contract_version": "0.1",
+  "contract_version": "0.2",
   "frozen_on": "2026-09-19",
   "mechanism_id": "aggregate_bank_credit_response",
   "phase": "BNR BLS — Cross-Round Semantic Mapping and Realised-Round Panel",
-  "purpose": "Map only preregistered realised Bank Lending Survey net-percentage observables across the retained seven legacy XLS extractions plus the independently reviewed May-2025 XLSX round. Mapping is based on stable BLS question IDs/coordinates and pre-existing May-2025 semantics, not on model outcomes. Missing survey quarters are reported explicitly and never interpolated.",
+  "purpose": "Map preregistered realised Bank Lending Survey net-percentage observables across the retained seven legacy XLS extractions, the independently reviewed May-2025 XLSX round, and the three separately recovered/retained missing-round XLS workbooks admitted by the frozen semantic-coordinate review. Mapping is based on stable BLS question IDs/coordinates and explicit round-identity authority, not on model outcomes. Missing survey quarters are reported explicitly and never interpolated.",
   "legacy_extraction_assessment": "model/calibration_validation/bnr_legacy_xls_cell_extraction_assessment.json",
   "legacy_extraction_vintage": "data/source_vintages/bnr-legacy-xls-cell-extraction-vintage-2026-09-19",
   "xlsx_layout_review": "model/calibration_validation/bnr_bls_may2025_xlsx_layout_review.json",
@@ -170,6 +170,22 @@
     "panel": "bnr_bls_realised_rounds.csv",
     "audit": "bnr_bls_cross_round_mapping_audit.json"
   },
-  "pass_effect": "BLS_MULTI_ROUND_SEMANTIC_MAPPING_AVAILABLE_WITH_EXPLICIT_COVERAGE_GAPS",
-  "next_gate": "Enumerate and recover the exact missing official BNR BLS rounds before any structural-selection contract. Do not interpolate missing quarters."
+  "pass_effect": "BLS_MULTI_ROUND_SEMANTIC_MAPPING_AVAILABLE_WITH_SINGLE_EXPLICIT_GAP",
+  "next_gate": "Recover and semantically admit the exact official 2025-Q2 BNR BLS workbook before any BLS-completeness claim; separately resolve the prudential population/consolidation boundary before any sector-specific structural-selection cycle. Do not interpolate missing quarters or open estimation.",
+  "recovered_round_semantic_review": "model/calibration_validation/bnr_bls_missing_round_semantic_mapping_audit.json",
+  "recovered_round_policy": {
+    "allowed_quarters": [
+      "2023-Q2",
+      "2023-Q3",
+      "2024-Q2"
+    ],
+    "required_status": "PASS_MISSING_ROUND_SEMANTIC_COORDINATE_MAPPING_WITH_EXPLICIT_ROUND_IDENTITY_BRIDGES",
+    "require_all_six_observables_passed": true,
+    "require_dsti_boundary_markers_verified": true,
+    "workbook_companies_a1_reference_date": "retain exact raw workbook header",
+    "official_publication_quarter_reference_date": "leave blank; quarter is authoritative and no day-level date is fabricated",
+    "allow_publication_text_substitution": false
+  },
+  "canonical_promotion_review": "model/calibration_validation/bnr_bls_canonical_panel_promotion_review.json",
+  "canonical_status": "PASS_BLS_MULTI_ROUND_MAPPING_WITH_SINGLE_EXPLICIT_GAP"
 }

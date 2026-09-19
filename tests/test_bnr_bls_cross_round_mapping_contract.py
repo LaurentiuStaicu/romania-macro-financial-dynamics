@@ -29,6 +29,21 @@ class BNRBLSCrossRoundMappingContractTests(unittest.TestCase):
         self.assertEqual(rule["household_header_diagnostic_cells"],["A1","B1"])
         self.assertFalse(rule["household_header_date_consistency_required"])
 
+    def test_recovered_rounds_require_exact_semantic_review_not_publication_substitution(self):
+        policy=self.c["recovered_round_policy"]
+        self.assertEqual(
+            self.c["recovered_round_semantic_review"],
+            "model/calibration_validation/bnr_bls_missing_round_semantic_mapping_audit.json",
+        )
+        self.assertEqual(policy["allowed_quarters"],["2023-Q2","2023-Q3","2024-Q2"])
+        self.assertTrue(policy["require_all_six_observables_passed"])
+        self.assertTrue(policy["require_dsti_boundary_markers_verified"])
+        self.assertFalse(policy["allow_publication_text_substitution"])
+        self.assertEqual(
+            self.c["canonical_promotion_review"],
+            "model/calibration_validation/bnr_bls_canonical_panel_promotion_review.json",
+        )
+
     def test_dsti_term_change_is_excluded_from_level_claims(self):
         boundary=self.c["dsti_boundary"]
         self.assertEqual(boundary["legacy_question_ids"],["P0303","P1103"])

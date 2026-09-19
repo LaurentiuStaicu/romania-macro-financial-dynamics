@@ -4,11 +4,11 @@ on:
   pull_request:
     paths:
       - "model/calibration_validation/bnr_bls_panel_regeneration_candidate_contract.json"
-      - "model/calibration_validation/bnr_bls_missing_round_semantic_mapping_audit.json"
+      - "model/calibration_validation/bnr_bls_canonical_panel_promotion_review.json"
       - "model/calibration_validation/bnr_bls_cross_round_mapping_audit.json"
       - "data/processed/bnr_bls_realised_rounds.csv"
-      - "scripts/review_bnr_bls_panel_regeneration_candidate.py"
       - "tests/test_bnr_bls_panel_regeneration_candidate_contract.py"
+      - "tests/test_bnr_bls_canonical_panel_promotion_review.py"
       - ".github/workflows/bnr-bls-panel-regeneration-candidate.yml"
   workflow_dispatch:
 
@@ -16,7 +16,7 @@ permissions:
   contents: read
 
 jobs:
-  build-candidate-without-canonical-mutation:
+  verify-historical-candidate-and-canonical-promotion:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -24,24 +24,11 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Verify frozen panel-regeneration candidate contract
-        run: |
-          python -m unittest tests.test_bnr_bls_panel_regeneration_candidate_contract -v
+      - name: Verify frozen historical candidate contract
+        run: python -m unittest tests.test_bnr_bls_panel_regeneration_candidate_contract -v
 
-      - name: Build isolated eleven-round candidate
-        env:
-          BNR_BLS_PANEL_REGENERATION_OUT: bnr_bls_panel_regeneration_candidate_artifacts
-        run: python scripts/review_bnr_bls_panel_regeneration_candidate.py
+      - name: Verify exact reviewed candidate was canonically promoted
+        run: python -m unittest tests.test_bnr_bls_canonical_panel_promotion_review -v
 
-      - name: Prove canonical panel remains byte-clean
-        run: |
-          git diff --exit-code -- data/processed/bnr_bls_realised_rounds.csv
-          git diff --exit-code -- model/calibration_validation/bnr_bls_cross_round_mapping_audit.json
-
-      - name: Upload candidate panel and audit only
-        uses: actions/upload-artifact@v4
-        with:
-          name: bnr-bls-panel-regeneration-candidate-${{ github.sha }}
-          path: bnr_bls_panel_regeneration_candidate_artifacts/
-          if-no-files-found: error
-          retention-days: 90
+      - name: Verify current canonical cross-round result
+        run: python -m unittest tests.test_bnr_bls_cross_round_mapping_result -v

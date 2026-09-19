@@ -104,7 +104,7 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         )
         self.assertEqual(
             aggregate_credit["canonical_missing_rounds"],
-            ["2023-Q2", "2023-Q3", "2024-Q2", "2025-Q2"],
+            ["2025-Q2"],
         )
         self.assertEqual(
             aggregate_credit["missing_round_recovery_contract"],

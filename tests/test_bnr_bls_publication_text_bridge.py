@@ -24,19 +24,15 @@ class BNRBLSPublicationTextBridgeTests(unittest.TestCase):
             self.contract["precision_rule"]["canonical_panel_substitution_allowed"]
         )
         self.assertTrue(self.contract["hard_rules"]["no_canonical_panel_overwrite"])
-        self.assertEqual(len(self.panel), 8)
-        self.assertEqual(
-            [row["quarter"] for row in self.panel],
-            [
-                "2022-Q4",
-                "2023-Q1",
-                "2023-Q4",
-                "2024-Q1",
-                "2024-Q3",
-                "2024-Q4",
-                "2025-Q1",
-                "2025-Q3",
-            ],
+        by_quarter = {row["quarter"]: row for row in self.panel}
+        self.assertNotIn("2025-Q2", by_quarter)
+        for quarter in ("2023-Q2", "2023-Q3", "2024-Q2"):
+            self.assertEqual(
+                by_quarter[quarter]["source_kind"],
+                "retained_legacy_xls_semantic_coordinate_review",
+            )
+        self.assertTrue(
+            all(row["source_kind"] != "publication_text_bridge" for row in self.panel)
         )
 
     def test_three_rounds_have_complete_publication_text_evidence(self) -> None:
