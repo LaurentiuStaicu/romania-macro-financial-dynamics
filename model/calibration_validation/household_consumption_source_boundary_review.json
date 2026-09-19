@@ -127,12 +127,15 @@
     "registered_full_form_admissible": false,
     "reasons": [
       "The registered macro household DSR term is not identified by an exact Romania household-sector DSR source.",
-      "BNR housing-loan DSTI levels are directly observed in publication text for every quarter from 2023-Q1 through 2025-Q2, but they define a narrower borrower/portfolio burden concept and the exact machine-readable longitudinal level history has not been retained.",
-      "The household borrowing-rate concept is not uniquely defined by the registry and must be frozen ex ante.",
+      "BNR housing-loan DSTI levels are directly observed in publication text for every quarter from 2023-Q1 through 2025-Q2, but the measure covers housing-loan borrowers/portfolios rather than the aggregate S1M consumption population.",
+      "No observed representativeness bridge maps housing-loan borrower burden to aggregate S1M consumption, and no aligned borrower-subpopulation consumption target has been retained.",
+      "The household borrowing-rate concept is not uniquely defined by the registry and cannot be selected post hoc to repair the population mismatch.",
       "Real/nominal and seasonal transformations for consumption and disposable income have not yet been frozen."
     ],
     "nested_form_automatically_authorized": false,
-    "nested_form_rule": "Removing the DSR term or selecting an income-only/rate-only form requires a new preregistered candidate-family contract. Source incompleteness does not authorize dropping variables after seeing outcomes."
+    "nested_form_rule": "Removing the DSR term or selecting an income-only/rate-only form requires a new preregistered candidate-family contract. Source incompleteness does not authorize dropping variables after seeing outcomes.",
+    "population_alignment_status": "BLOCKED",
+    "housing_dsti_directly_admissible_as_registered_debt_service_ratio": false
   },
   "prohibited_shortcuts": [
     "Use household loans-to-disposable-income as a debt-service ratio.",
@@ -144,7 +147,7 @@
   ],
   "disposition": {
     "mechanism_classification": "CANDIDATE",
-    "source_readiness": "CORE_QSA_SOURCES_CONFIRMED_COMPLETE_DSTI_PUBLICATION_TEXT_WINDOW_REGISTERED_MACRO_DSR_AND_RATE_BOUNDARIES_STILL_INCOMPLETE",
+    "source_readiness": "CORE_QSA_SOURCES_CONFIRMED_COMPLETE_DSTI_TEXT_WINDOW_POPULATION_ALIGNMENT_BLOCKED",
     "active_calibration_cycle_open": false,
     "estimation_or_refit_allowed": false,
     "central_feedback": false,
@@ -153,5 +156,6 @@
     "accounting_spine": "UNCHANGED"
   },
   "debt_service_source_screening": "model/calibration_validation/debt_service_source_screening.json",
-  "debt_service_level_publication_boundary_review": "model/calibration_validation/bnr_household_dsti_level_publication_boundary_review.json"
+  "debt_service_level_publication_boundary_review": "model/calibration_validation/bnr_household_dsti_level_publication_boundary_review.json",
+  "borrower_burden_population_alignment_review": "model/calibration_validation/household_consumption_borrower_burden_alignment_review.json"
 }
