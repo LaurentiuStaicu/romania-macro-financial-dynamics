@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import csv
 import json
+import math
 import re
 import unittest
 from pathlib import Path
@@ -51,6 +53,30 @@ class RemainingReferenceModeBlockerTests(unittest.TestCase):
         )
         self.assertEqual(mechanism["classification"], "DEFERRED")
         self.assertFalse(mechanism["central_feedback"])
+
+    def test_partial_refinancing_series_preserves_observation_status(self) -> None:
+        series_path = (
+            ROOT
+            / "data"
+            / "processed"
+            / "government_debt_refinancing_mof_2017_2023.csv"
+        )
+        with series_path.open(encoding="utf-8", newline="") as handle:
+            rows = list(csv.DictReader(handle))
+
+        self.assertEqual([row["period"] for row in rows], [str(y) for y in range(2017, 2024)])
+        self.assertEqual(len(rows), 7)
+        self.assertTrue(
+            all(
+                math.isfinite(float(row["government_debt_refinancing_bn_ron"]))
+                and math.isfinite(float(row["gross_financing_need_bn_ron"]))
+                for row in rows
+            )
+        )
+        statuses = [row["observation_status"] for row in rows]
+        self.assertEqual(statuses.count("FINAL_ANNUAL_REPORT"), 4)
+        self.assertEqual(statuses.count("OPERATIVE_EXECUTION"), 3)
+        self.assertNotIn("FORECAST", statuses)
 
     def test_sectoral_positions_cannot_outrun_accounting_readiness(self) -> None:
         references = load("model/dynamics/reference_modes.json")
