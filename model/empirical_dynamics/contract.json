@@ -34,9 +34,9 @@
     ],
     "holdout_rule": "An inspected evaluation holdout cannot subsequently be reported as independent validation. The frozen household form may be tested on prospectively reserved observations only under its existing no-respecification rule.",
     "current_priorities": [
-      "preserve 2026-08 onward monetary observations for the first genuinely identifying new policy-rate episode",
+      "preserve 2026-08 onward monetary observations and follow the frozen prospective confirmation contract; do not inspect reserved MIR responses before an identifying policy event and the authorized release gate",
       "do not reopen government repricing estimation until matched instrument-level principal and old/new rate evidence satisfy the frozen ledger gates",
-      "materialize missing reference modes before integrated behavioural closure is reconsidered"
+      "retain the current 8/10 reference-mode readiness unless new evidence satisfies the explicit blocker/reopen contracts; do not promote government_refinancing_need or sectoral_financial_positions for methodological completeness"
     ],
     "prospective_confirmation_contract": "model/calibration_validation/prospective_monetary_confirmation_contract.json",
     "prospective_confirmation_status": "model/calibration_validation/prospective_monetary_confirmation_status.json"
