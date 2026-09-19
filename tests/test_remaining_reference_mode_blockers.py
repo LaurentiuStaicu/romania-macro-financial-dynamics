@@ -300,5 +300,53 @@ class RemainingReferenceModeBlockerTests(unittest.TestCase):
 
 
 
+    def test_exploratory_esa_f1_reaudit_cannot_replace_historical_phase_b(self) -> None:
+        references = load("model/dynamics/reference_modes.json")
+        historical = load(
+            "model/dynamics/sectoral_financial_positions_aggregate_identity_assessment.json"
+        )
+        exploratory = load(
+            "model/dynamics/sectoral_financial_positions_esa_f1_applicability_reaudit_assessment.json"
+        )
+        review = load(
+            "model/dynamics/sectoral_financial_positions_esa_f1_applicability_review.json"
+        )
+        mode = next(
+            item for item in references["modes"]
+            if item["id"] == "sectoral_financial_positions"
+        )
+
+        self.assertEqual(mode["status"], "PARTIAL_SERIES_AVAILABLE")
+        self.assertEqual(
+            historical["verdict"],
+            "AGGREGATE_IDENTITY_GATE_FAILED_STRICT_STOCK_RECONCILIATION_NO_PROMOTION",
+        )
+        self.assertEqual(
+            exploratory["verdict"],
+            "EXPLORATORY_ESA_F1_REAUDIT_RECONCILIATION_FAIL_NO_PROMOTION",
+        )
+        self.assertFalse(exploratory["formal_reference_mode_gate"])
+        self.assertFalse(
+            exploratory["disposition"]["historical_phase_B_reinterpreted"]
+        )
+        self.assertEqual(
+            exploratory["disposition"]["readiness_count_change"],
+            0,
+        )
+        self.assertEqual(
+            review["exploratory_reaudit"]["formal_gate"],
+            False,
+        )
+        self.assertEqual(
+            review["exploratory_reaudit"]["result"],
+            "RECONCILIATION_FAIL_NO_PROMOTION",
+        )
+        self.assertEqual(
+            review["next_action"]["status"],
+            "EXPLORATORY_REAUDIT_RETAINED_NO_FURTHER_RERUN",
+        )
+
+
+
 if __name__ == "__main__":
     unittest.main()
