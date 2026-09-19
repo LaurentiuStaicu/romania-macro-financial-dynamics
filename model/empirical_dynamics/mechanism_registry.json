@@ -179,7 +179,7 @@
         "beta_r",
         "beta_eu"
       ],
-      "estimation_plan": "Quarterly GFCF candidate with financing-cost and EU-fund terms; structural-selection data must be separated from later holdout evaluation.",
+      "estimation_plan": "Calibration remains closed. Retain exact aggregate GFCF and NFC lending-rate sources only as source evidence. Before estimation, materialize a sector-consistent NFC investment target, freeze the demand observable and quarterly financing-cost transformation, and define an ex-ante accounting bridge for any EU-fund impulse. Cumulative programme payments may not be differenced and relabelled as corporate investment. Any reduced form requires a new preregistered candidate-family contract.",
       "observables": [
         "gross_fixed_capital_formation",
         "real_GDP_or_demand",
@@ -193,13 +193,16 @@
       ],
       "limits": [
         "public and private investment are mixed in aggregate GFCF",
-        "EU-funded investment creates large policy-driven variation"
+        "EU-funded investment creates large policy-driven variation",
+        "total-economy GFCF may not be relabelled as corporate investment without a sector bridge",
+        "cumulative EU programme payments are not a quarterly NFC investment impulse without an explicit accounting bridge"
       ],
       "rejection_or_degradation_criteria": [
         "financing-cost term not identifiable",
         "candidate loses to demand-only baseline out of sample",
         "parameter instability around EU-fund cycles"
-      ]
+      ],
+      "source_boundary_review": "model/calibration_validation/corporate_investment_source_boundary_review.json"
     },
     {
       "id": "aggregate_bank_credit_response",

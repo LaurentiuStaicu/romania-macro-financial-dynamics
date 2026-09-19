@@ -1,0 +1,88 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "corporate_investment_response",
+  "purpose": "Determine whether the currently registered corporate-investment response equation can be sourced for Romania without mixing total-economy investment, corporate investment, financing-cost families and cumulative EU-budget payments.",
+  "verdict": "FINANCING_RATE_AND_AGGREGATE_GFCF_AVAILABLE_REGISTERED_CORPORATE_FORM_NOT_SOURCE_ADMISSIBLE",
+  "current_registry_form": "gI = alpha + beta_d*demand_growth - beta_r*real_corporate_lending_rate + beta_eu*EU_fund_impulse",
+  "exact_sources": {
+    "aggregate_gfcf": {
+      "institution": "ECB Data Portal / Eurostat national accounts",
+      "dataset": "MNA",
+      "series_key": "MNA.Q.Y.RO.W0.S1.S1.D.P51G.N11G._T._Z.EUR.V.N",
+      "concept": "Gross fixed capital formation, total economy, Romania, quarterly, calendar and seasonally adjusted, current prices",
+      "status": "EXACT_SERIES_CONFIRMED",
+      "semantic_limit": "Total-economy GFCF includes more than NFC investment and may not be relabelled corporate investment."
+    },
+    "aggregate_gfcf_real_growth": {
+      "institution": "ECB Data Portal / Eurostat national accounts",
+      "dataset": "MNA",
+      "series_key": "MNA.Q.Y.RO.W0.S1.S1.D.P51G.N11G._T._Z.XDC.LR.GY",
+      "concept": "Gross fixed capital formation annual growth rate, total economy, chain-linked volume",
+      "status": "EXACT_SERIES_CONFIRMED",
+      "semantic_limit": "Useful aggregate activity/investment reference only; still not sector-specific NFC investment."
+    },
+    "nfc_lending_rate": {
+      "institution": "ECB / ESCB",
+      "dataset": "MIR",
+      "series_key": "MIR.M.RO.B.A2A.A.R.A.2240.RON.N",
+      "concept": "RON new-business lending rate to non-financial corporations, total amount/fixation",
+      "status": "EXACT_SERIES_CONFIRMED",
+      "semantic_limit": "New-business rate is a marginal financing-cost observable, not the effective cost on the outstanding corporate debt stock."
+    }
+  },
+  "sector_specific_investment_boundary": {
+    "qsa_family_status": "NFC_GFCF_CONCEPT_PUBLISHED_IN_QSA_EXACT_ROMANIA_TUPLE_NOT_RETAINED_IN_THIS_PASS",
+    "expected_concept": "Gross fixed capital formation of non-financial corporations (S11), quarterly",
+    "rule": "Do not substitute total-economy GFCF for an S11 investment target. Exact Romania S11 GFCF coverage, seasonal treatment and history must be retained before any corporate-investment equation is opened."
+  },
+  "eu_fund_impulse_boundary": {
+    "cohesion_open_data": {
+      "institution": "European Commission Cohesion Open Data",
+      "status": "OFFICIAL_MACHINE_READABLE_PAYMENT_DATA_AVAILABLE",
+      "temporal_semantics": "The 2021-2027 payments dataset presents cumulative payment histories in annual time series; current-year values may update as payments occur.",
+      "semantic_limit": "EU budget payments are cash/budget execution to programmes and are not identical to quarterly realised fixed-capital formation by Romanian NFCs."
+    },
+    "rrf_and_other_eu_sources": {
+      "status": "HETEROGENEOUS_PROGRAMME_AND_DISBURSEMENT_TIMING",
+      "semantic_limit": "RRF tranches, cohesion payments, CAP flows and national co-financing have different accounting and timing boundaries. They may not be summed into a quarterly investment impulse without an explicit bridge."
+    },
+    "current_status": "EU_FUND_IMPULSE_NOT_DEFINITIONALLY_MATERIALISED",
+    "no_difference_of_cumulative_payments_as_investment": true,
+    "rule": "A future EU-fund variable requires an ex-ante accounting bridge from programme disbursement/payment timing to the investment concept used in the target equation, including treatment of public versus private beneficiaries and co-financing."
+  },
+  "demand_boundary": {
+    "registered_term": "demand_growth",
+    "status": "NOT_FROZEN",
+    "rule": "Real GDP, domestic demand, NFC value added and order/output indicators are not interchangeable. The demand observable must be selected by a preregistered source contract before fit."
+  },
+  "source_admissibility": {
+    "registered_full_form_admissible": false,
+    "reasons": [
+      "The current target is labelled corporate investment but only total-economy GFCF is exact in the retained source boundary.",
+      "The EU-fund impulse is not definitionally materialised on a quarterly NFC-investment boundary.",
+      "The demand-growth observable is unspecified.",
+      "The NFC lending rate is monthly and the quarterly aggregation/real-rate deflator are not frozen."
+    ],
+    "reduced_form_automatically_authorized": false,
+    "reduced_form_rule": "Dropping the EU-fund term or using total GFCF requires a new preregistered candidate-family contract; missing source structure is not permission for post-hoc simplification."
+  },
+  "prohibited_shortcuts": [
+    "Relabel total-economy GFCF as corporate investment.",
+    "Difference cumulative EU programme payments and call the result quarterly corporate investment.",
+    "Sum heterogeneous RRF, cohesion, CAP and other EU transfers without an accounting bridge.",
+    "Choose real GDP versus demand versus NFC activity after model fit.",
+    "Choose a lending-rate fixation bucket or real-rate deflator after opening evaluation outcomes.",
+    "Drop the EU-fund term because its source is inconvenient and fit a reduced form without preregistration."
+  ],
+  "disposition": {
+    "mechanism_classification": "CANDIDATE",
+    "source_readiness": "AGGREGATE_GFCF_AND_NFC_RATE_CONFIRMED_CORPORATE_TARGET_AND_EU_IMPULSE_BLOCKED",
+    "active_calibration_cycle_open": false,
+    "estimation_or_refit_allowed": false,
+    "central_feedback": false,
+    "validated_reference_behavioural_mechanisms_change": 0,
+    "behavioural_closure": "UNCHANGED_INACTIVE",
+    "accounting_spine": "UNCHANGED"
+  }
+}

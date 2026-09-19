@@ -89,13 +89,17 @@
     {
       "id": "corporate_investment_response",
       "classification": "CANDIDATE",
-      "source_readiness": "NOT_YET_SOURCE_SCREENED",
-      "next_admissible_action": "Perform source-boundary screening before calibration.",
+      "source_readiness": "AGGREGATE_GFCF_AND_NFC_RATE_CONFIRMED_CORPORATE_TARGET_AND_EU_IMPULSE_BLOCKED",
+      "next_admissible_action": "Recover the exact Romania S11 quarterly GFCF source boundary and define whether an EU-fund variable can be bridged to realised NFC investment; do not estimate the current equation.",
       "blockers": [
-        "EU-fund impulse and sector-consistent investment/credit-cost mapping not yet frozen."
+        "Total-economy quarterly GFCF and the NFC new-business lending rate are exact and available.",
+        "A retained sector-specific Romania NFC investment target is not yet frozen.",
+        "Cohesion/RRF payment data do not directly measure quarterly realised NFC fixed investment.",
+        "Demand observable and monthly-to-quarterly/real-rate transformations are not preregistered."
       ],
       "estimation_or_refit_allowed": false,
-      "priority_group": "SCREEN_LATER"
+      "priority_group": "SOURCE_BOUNDARY_BLOCKED_NO_ESTIMATION",
+      "source_boundary_review": "model/calibration_validation/corporate_investment_source_boundary_review.json"
     }
   ],
   "priority_rule": "Priority is determined by the shortest scientifically admissible path to new independent evidence, not by a desire to activate a feedback loop. Waiting mechanisms remain frozen; source-incomplete mechanisms are not fit with proxies.",
