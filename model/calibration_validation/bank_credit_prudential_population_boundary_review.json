@@ -72,12 +72,13 @@
     "machine_readable_bnr_source_identified_in_this_review": false,
     "chart_digitisation_required": false,
     "reason_chart_digitisation_not_required": "BNR Monthly Bulletins publish the relevant indicators as exact statistical tables; future recovery should parse and retain table values under a preregistered source-vintage contract rather than digitise charts.",
-    "next_admissible_source_task": "Preregister a BNR Monthly Bulletin prudential-table materialisation contract that freezes publication vintages, exact table/column semantics, quarterly reference dates, reporting-break metadata and deterministic extraction before values are promoted. Alternatively admit a genuinely matched official machine-readable source only if its institution population and consolidation perimeter are documented as equivalent.",
+    "next_admissible_source_task": "Execute source enumeration under the frozen BNR prudential-table materialisation contract. Freeze the year-level source map and exact official PDF URLs before extracting any numeric values.",
     "reopen_triggers": [
       "An official machine-readable BNR series on the Romanian-legal-entity bank population is identified.",
       "A deterministic retained BNR Monthly Bulletin table-extraction path is preregistered and passes exact semantic/provenance review.",
       "An official source publishes an explicit mapping/common-sample bridge between the BNR Romanian-legal-entity population and CBD2 sector 11 with consolidation treatment documented."
-    ]
+    ],
+    "materialisation_contract": "model/calibration_validation/bnr_prudential_table_materialisation_contract.json"
   },
   "modelling_effect": {
     "estimation_or_refit_authorized": false,
