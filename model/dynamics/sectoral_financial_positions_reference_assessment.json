@@ -1,0 +1,51 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Reference Mode Recovery — Sectoral Financial Positions",
+  "verdict": "BLOCKED_BY_CANONICAL_ACCOUNTING_READINESS",
+  "reference_mode": "sectoral_financial_positions",
+  "canonical_requirement": "Complete holder-by-issuer financial stocks and transactions by represented instrument on the RMD sector boundary.",
+  "accounting_gate": "model/accounting/accounting_readiness_gate.json",
+  "current_state": {
+    "canonical_complete_stock_instruments": [
+      "F3"
+    ],
+    "canonical_complete_stock_and_flow_instruments": [
+      "F3"
+    ],
+    "canonical_incomplete_instruments": [
+      "F2",
+      "F4",
+      "F8",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "canonical_multi_instrument_stock_initialization_ready": false,
+    "canonical_full_2025_stock_flow_benchmark_ready": false
+  },
+  "noncanonical_evidence_boundary": {
+    "F2": "F2M and external/aggregate components do not complete total F2.",
+    "F4": "Only an unconditional rank-unique partial core is materialized; unresolved bilateral cells remain.",
+    "F5": "Component evidence and rank constraints leave zero unique bilateral total-F5 cells.",
+    "F6": "Aggregate-only rank boundary; zero unconditional unique bilateral cells.",
+    "F7": "Aggregate evidence exists but bilateral stock/flow positions remain unidentified.",
+    "F8": "Aggregate-only rank boundary; zero unconditional unique bilateral cells."
+  },
+  "blocker": {
+    "reason": "The requested reference mode is itself the multi-instrument accounting state. Promoting it while six of seven canonical instruments remain incomplete would turn partial/component/aggregate constraints into a fictitious complete observed reference series.",
+    "blocker_is_structural_identification_not_missing_value_imputation": true
+  },
+  "prohibited_shortcuts": [
+    "count a component artifact as the complete instrument",
+    "convert aggregate rank constraints into bilateral observations",
+    "convert missing or TBD cells to zero",
+    "allocate unidentified bilateral cells by shares or residual balancing",
+    "describe F3-only or partial-instrument diagnostics as the full sectoral financial-position reference mode"
+  ],
+  "reopen_condition": "Promote only after the canonical Accounting Readiness Gate establishes complete stock and flow matrices for every instrument required by the declared sectoral-financial-positions boundary, or after an explicit narrower reference-mode boundary is scientifically justified and preregistered.",
+  "disposition": {
+    "status": "PARTIAL_SERIES_AVAILABLE",
+    "readiness_count_change": 0,
+    "behavioural_closure": "UNCHANGED_INACTIVE"
+  }
+}
