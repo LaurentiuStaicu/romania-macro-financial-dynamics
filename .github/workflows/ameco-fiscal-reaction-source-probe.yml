@@ -1,0 +1,39 @@
+name: AMECO Fiscal Reaction Source Structure Probe
+
+# Live-source structure probe. The pull-request label is a one-shot bootstrap
+# trigger before this workflow exists on the default branch; it will be removed
+# after retaining the probe evidence.
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [labeled]
+
+permissions:
+  contents: read
+
+jobs:
+  probe-ameco-fiscal-reaction-sources:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.label.name == 'run-ameco-fiscal-source-probe' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Run exact AMECO source-structure probe
+        env:
+          FISCAL_REACTION_AMECO_PROBE_OUT: fiscal_reaction_ameco_probe_artifacts
+        run: python scripts/audit_ameco_fiscal_reaction_source_structure.py
+
+      - name: Upload AMECO structure evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ameco-fiscal-reaction-source-probe-${{ github.sha }}
+          path: fiscal_reaction_ameco_probe_artifacts/
+          if-no-files-found: error
+          retention-days: 90
