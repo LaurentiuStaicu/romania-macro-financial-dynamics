@@ -14,7 +14,7 @@
     "valuation": "V",
     "unit": "XDC",
     "unit_multiplier": 6,
-    "represented_total_formula": "F minus F1",
+    "represented_total_formula": "Explicit sum F2+F3+F4+F5+F6+F7+F8",
     "measures": {
       "stock": {
         "sto": "LE",
@@ -68,7 +68,37 @@
       "orientation": "X assets = resident external liabilities; X liabilities = resident external assets"
     },
     "requested_start": "2014-Q1",
-    "requested_end": "2026-Q2"
+    "requested_end": "2026-Q2",
+    "instrument_dimensions": {
+      "F2": {
+        "maturity": "T",
+        "expenditure": "_Z"
+      },
+      "F3": {
+        "maturity": "T",
+        "expenditure": "_Z"
+      },
+      "F4": {
+        "maturity": "T",
+        "expenditure": "_Z"
+      },
+      "F5": {
+        "maturity": "_Z",
+        "expenditure": "_Z"
+      },
+      "F6": {
+        "maturity": "_Z",
+        "expenditure": "_Z"
+      },
+      "F7": {
+        "maturity": "T",
+        "expenditure": "_Z"
+      },
+      "F8": {
+        "maturity": "T",
+        "expenditure": "_Z"
+      }
+    }
   },
   "reference_mode": {
     "id": "sectoral_financial_positions",
@@ -99,14 +129,15 @@
     ]
   },
   "exact_series_key_rule": {
-    "resident": "Q.N.RO.W0.{sector_code}.S1.N.{A_or_L}.{LE_or_F}.{F_or_F1}._Z._Z.XDC._T.S.V.N._T",
-    "external": "Q.N.RO.W1.S1.S1.N.{A_or_L}.{LE_or_F}.{F_or_F1}._Z._Z.XDC._T.S.V.N._T",
-    "source_key_prefix_excluded_from_key": "QSA"
+    "resident": "Q.N.RO.W0.{sector_code}.S1.N.{A_or_L}.{LE_or_F}.{instrument}.{instrument_specific_maturity}.{instrument_specific_expenditure}.XDC._T.S.V.N._T",
+    "external": "Q.N.RO.W1.S1.S1.N.{A_or_L}.{LE_or_F}.{instrument}.{instrument_specific_maturity}.{instrument_specific_expenditure}.XDC._T.S.V.N._T",
+    "source_key_prefix_excluded_from_key": "QSA",
+    "dimensions_are_frozen_in_source_instrument_dimensions": true
   },
   "construction": {
-    "resident_component": "For each sector-code term, represented assets/liabilities = QSA(F) - QSA(F1), same period/entry/measure.",
+    "resident_component": "For each sector-code term and same period/entry/measure, represented assets/liabilities are the explicit sum of finite QSA F2,F3,F4,F5,F6,F7,F8 observations using each instrument's preregistered dimensions.",
     "composite_F": "Apply S12 - S121 after constructing boundary-matched values from same-period observations.",
-    "X": "Construct resident W1 represented assets/liabilities as F-F1; then set X assets = W1 resident liabilities and X liabilities = W1 resident assets.",
+    "X": "For W1 total-economy external positions, explicitly sum F2-F8 by entry/measure; then set X assets = resident W1 liabilities and X liabilities = resident W1 assets.",
     "net_position": "assets - liabilities",
     "stock_flow_semantics": "Stock and flow are separately published QSA concepts. Flow may not be constructed as a first difference of stock."
   },
@@ -130,8 +161,9 @@
     "no_stock_difference_flow_proxy": true,
     "no_BF90_total_substitution_without_F1_exclusion": true,
     "no_behavioural_activation": true,
-    "network_errors_block_positive_claim": true
+    "network_errors_block_positive_claim": true,
+    "no_total_F_minus_assumed_F1_zero": true
   },
-  "promotion_rule": "Promote sectoral_financial_positions to OBSERVED_SERIES_AVAILABLE only after a successful immutable live-source artifact is retained, every required sector has finite quarterly stock and transaction outputs on the exact F-minus-F1 boundary for at least the minimum common history and all 2025 quarters, both represented-system reconciliation gates pass in every common period within 0.1 million RON, and a repository snapshot/assessment records artifact identity and hashes. Promotion changes only aggregate reference-mode observability; Accounting Spine readiness, bilateral materialization and behavioural closure remain unchanged.",
-  "negative_result_rule": "If any required source component, sector, benchmark period, F composite, X orientation or system reconciliation fails, the existing PARTIAL_SERIES_AVAILABLE status remains. No broader BF90 measure, bilateral allocation, missing-to-zero rule or synthetic residual may rescue the gate."
+  "promotion_rule": "Promote sectoral_financial_positions to OBSERVED_SERIES_AVAILABLE only after a successful immutable live-source artifact is retained, every required sector has finite quarterly stock and transaction outputs on the exact explicit F2-F8 boundary for at least the minimum common history and all 2025 quarters, both represented-system reconciliation gates pass in every common period within 0.1 million RON, and a repository snapshot/assessment records artifact identity and hashes. Promotion changes only aggregate reference-mode observability; Accounting Spine readiness, bilateral materialization and behavioural closure remain unchanged.",
+  "negative_result_rule": "If any required source component, sector, benchmark period, F composite, X orientation or system reconciliation fails, the existing PARTIAL_SERIES_AVAILABLE status remains. No broader BF90 measure, total-F-minus-assumed-F1-zero shortcut, bilateral allocation, missing-to-zero rule or synthetic residual may rescue the gate."
 }
