@@ -76,13 +76,13 @@ class SystemDynamicsConformityTests(unittest.TestCase):
                 "credit_flow",
                 "government_debt_stock",
                 "government_interest_burden",
+                "government_effective_interest_rate",
             },
         )
         self.assertEqual(
             set(readiness["blocking_modes"]),
             {
                 "government_refinancing_need",
-                "government_effective_interest_rate",
                 "sectoral_financial_positions",
             },
         )
