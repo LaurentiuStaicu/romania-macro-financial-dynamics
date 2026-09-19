@@ -4,11 +4,14 @@ on:
   pull_request:
     paths:
       - "model/calibration_validation/bnr_bls_cross_round_mapping_contract.json"
+      - "model/calibration_validation/bnr_bls_cross_round_mapping_audit.json"
       - "model/calibration_validation/bnr_bls_may2025_xlsx_layout_review.json"
       - "model/calibration_validation/bnr_legacy_xls_cell_extraction_assessment.json"
+      - "data/processed/bnr_bls_realised_rounds.csv"
       - "data/source_vintages/bnr-legacy-xls-cell-extraction-vintage-2026-09-19/**"
       - "scripts/materialize_bnr_bls_cross_round_mapping.py"
       - "tests/test_bnr_bls_cross_round_mapping_contract.py"
+      - "tests/test_bnr_bls_cross_round_mapping_result.py"
       - ".github/workflows/bnr-bls-cross-round-mapping.yml"
   workflow_dispatch:
 
@@ -23,11 +26,16 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
-      - name: Verify frozen cross-round mapping contract
-        run: python -m unittest tests.test_bnr_bls_cross_round_mapping_contract -v
+      - name: Verify frozen cross-round mapping contract and retained result
+        run: |
+          python -m unittest tests.test_bnr_bls_cross_round_mapping_contract -v
+          python -m unittest tests.test_bnr_bls_cross_round_mapping_result -v
       - name: Materialize only preregistered realised BLS rounds
         run: python scripts/materialize_bnr_bls_cross_round_mapping.py
-      - name: Verify generated files are tracked cleanly
+      - name: Verify generated files are retained and byte-clean
         run: |
           test -f data/processed/bnr_bls_realised_rounds.csv
           test -f model/calibration_validation/bnr_bls_cross_round_mapping_audit.json
+          git diff --exit-code -- \
+            data/processed/bnr_bls_realised_rounds.csv \
+            model/calibration_validation/bnr_bls_cross_round_mapping_audit.json
