@@ -161,5 +161,14 @@
       "external_fx_refinancing_loop"
     ],
     "rule": "A feedback loop must have a contiguous closed causal path and a polarity consistent with the product of declared link signs. An open causal chain may remain as a qualitative candidate but must not be labelled or activated as a closed loop, and no missing closing link may be invented for methodological completeness."
+  },
+  "empirical_activation_governance": {
+    "empirical_contract": "model/empirical_dynamics/contract.json",
+    "mechanism_registry": "model/empirical_dynamics/mechanism_registry.json",
+    "governing_validation_disposition": "model/calibration_validation/validation_recovery_disposition.json",
+    "current_active_calibration_cycle_open": false,
+    "current_activated_mechanisms": [],
+    "validated_reference_behavioural_mechanisms": 0,
+    "rule": "ACTIVATED is only an admission to a currently open calibration/validation cycle. When that cycle closes, the frozen validation disposition governs current mechanism status. A stale pre-recovery ACTIVATED or central_feedback label may not survive a CANDIDATE or DEFERRED disposition and may never activate a System Dynamics feedback loop by itself."
   }
 }
