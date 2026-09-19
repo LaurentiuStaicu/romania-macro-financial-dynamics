@@ -142,17 +142,18 @@
     {
       "id": "household_consumption_response",
       "classification": "CANDIDATE",
-      "source_readiness": "OFFICIAL_HOUSING_LOAN_DSTI_LEVEL_OBSERVATIONS_CONFIRMED_MACHINE_READABLE_LONGITUDINAL_HISTORY_NOT_RETAINED",
-      "next_admissible_action": "Keep BLS P0303/P1103 excluded from DSTI levels. Recover an exact machine-readable quarterly history for BNR housing-loan DSTI levels, separately for new and outstanding loans, or preregister a publication-text-only alternative borrower-burden candidate family with a fixed observation window. Do not relabel this narrower housing-loan burden as the registered macro household DSR and do not estimate the consumption equation yet.",
+      "source_readiness": "COMPLETE_2023Q1_2025Q2_HOUSING_DSTI_PUBLICATION_TEXT_WINDOW_MACHINE_READABLE_HISTORY_AND_REGISTERED_MACRO_DSR_UNRESOLVED",
+      "next_admissible_action": "Choose the next measurement gate before any estimation: either retain an exact machine-readable BNR housing-loan DSTI level history, or preregister a publication-text-only alternative borrower-burden candidate family over the complete 2023-Q1..2025-Q2 window. Preserve reported precision/qualifiers, keep new-loan and outstanding-loan DSTI separate, freeze the relevant borrowing-rate family and consumption/income transformations ex ante, and do not relabel housing-loan DSTI as the registered macro household DSR.",
       "blockers": [
-        "Official BNR report text directly confirms housing-loan DSTI levels for multiple quarters, including 2024-Q1, 2024-Q2, 2024-Q3 and 2025-Q2.",
+        "Official BNR publication text directly observes both new-loan and outstanding housing-loan DSTI levels in every quarter from 2023-Q1 through 2025-Q2.",
         "The observed measure is a respondent-bank housing-loan portfolio statistic, not a macro household-sector DSR.",
         "New-loan and outstanding-loan DSTI remain definitionally distinct and may not be synthetically merged.",
-        "No exact machine-readable longitudinal BNR housing-loan DSTI level history has yet been retained; chart digitisation is prohibited.",
-        "Household borrowing-rate family and consumption/income real/seasonal transformations remain unfrozen."
+        "The exact machine-readable longitudinal BNR housing-loan DSTI level history has not yet been retained; publication-text values must preserve their stated precision and qualifiers and chart digitisation is prohibited.",
+        "Household borrowing-rate family and consumption/income real/seasonal transformations remain unfrozen.",
+        "The registered macro DSR term therefore remains unidentified and the current household-consumption equation remains source-inadmissible for estimation."
       ],
       "estimation_or_refit_allowed": false,
-      "priority_group": "DEFER_UNTIL_MACHINE_READABLE_DSTI_LEVEL_HISTORY_OR_PREREGISTERED_TEXT_ONLY_CANDIDATE",
+      "priority_group": "DEFER_UNTIL_PREREGISTERED_DSTI_CANDIDATE_MEASUREMENT_AND_RATE_TRANSFORM_BOUNDARIES",
       "source_boundary_review": "model/calibration_validation/household_consumption_source_boundary_review.json",
       "debt_service_source_screening": "model/calibration_validation/debt_service_source_screening.json",
       "retained_bnr_dsti_workbook_vintage": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19",
@@ -162,13 +163,28 @@
       "retained_legacy_xls_extraction_vintage": "data/source_vintages/bnr-legacy-xls-cell-extraction-vintage-2026-09-19",
       "dsti_level_publication_boundary_review": "model/calibration_validation/bnr_household_dsti_level_publication_boundary_review.json",
       "confirmed_publication_text_quarters": [
+        "2023-Q1",
+        "2023-Q2",
+        "2023-Q3",
+        "2023-Q4",
         "2024-Q1",
         "2024-Q2",
         "2024-Q3",
+        "2024-Q4",
+        "2025-Q1",
         "2025-Q2"
       ],
       "registered_macro_dsr_identified": false,
-      "alternative_housing_loan_burden_observed": true
+      "alternative_housing_loan_burden_observed": true,
+      "publication_text_window": {
+        "start": "2023-Q1",
+        "end": "2025-Q2",
+        "expected_quarters": 10,
+        "observed_quarters": 10,
+        "missing_quarters": [],
+        "coverage_fraction": 1,
+        "exact_machine_readable_history_retained": false
+      }
     },
     {
       "id": "corporate_investment_response",
