@@ -1,0 +1,36 @@
+name: Sectoral Financial Positions ESA F1 Applicability Re-audit
+
+# Exploratory post-run evidence only. This workflow is manual-only and cannot
+# change reference-mode readiness, historical A-D verdicts, Accounting Spine
+# readiness, or behavioural closure.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exploratory-esa-f1-applicability-reaudit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Re-run archived corrected-applicability diagnostic
+        env:
+          SECTORAL_POSITIONS_ESA_F1_REAUDIT_OUT: sectoral_positions_esa_f1_reaudit_artifacts
+        run: python scripts/audit_ecb_sectoral_financial_positions_esa_f1_applicability_reaudit.py
+
+      - name: Upload exploratory re-audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sectoral-financial-positions-esa-f1-reaudit-${{ github.sha }}
+          path: sectoral_positions_esa_f1_reaudit_artifacts/
+          if-no-files-found: error
+          retention-days: 90
