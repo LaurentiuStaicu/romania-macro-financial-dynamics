@@ -1,9 +1,9 @@
 {
-  "review_version": "0.1",
+  "review_version": "0.2",
   "reviewed_on": "2026-09-19",
   "mechanism_id": "aggregate_bank_credit_response",
   "governed_by": "model/calibration_validation/bnr_prudential_interactive_database_discovery_contract.json",
-  "status": "OFFICIAL_DATABASE_SURFACE_CONFIRMED_TARGET_SERIES_NOT_IDENTIFIED_IN_PUBLIC_INDEX",
+  "status": "OFFICIAL_DATABASE_CONFIRMED_TARGET_SERIES_NOT_IDENTIFIED_STAGE_FROZEN",
   "official_evidence": [
     {
       "source": "BNR current interactive database page",
@@ -29,16 +29,18 @@
   },
   "interpretation": "The official database is a valid reopen surface, but current public/indexed evidence does not identify stable machine-readable series IDs or exports for the two target prudential indicators. This is inconclusive discovery, not evidence of source absence.",
   "disposition": {
-    "interactive_database_path_status": "OPEN_REOPEN_TRIGGER_NOT_YET_MATERIALISABLE",
-    "pdf_source_enumeration_status": "INCOMPLETE_SOURCE_ENUMERATION_NO_MODEL_EFFECT",
-    "pdf_path_remains_active": true,
+    "interactive_database_path_status": "FROZEN_INCONCLUSIVE_UNTIL_NEW_OFFICIAL_CATALOG_OR_EXPORT_EVIDENCE",
+    "pdf_source_enumeration_status": "FROZEN_INCOMPLETE_3_OF_11_CURRENT_PUBLIC_DISCOVERY_EXHAUSTED_NO_MODEL_EFFECT",
+    "pdf_path_remains_active": false,
     "source_byte_acquisition_authorized": false,
     "numeric_extraction_authorized": false,
     "canonical_series_mutation_authorized": false,
     "structural_selection_authorized": false,
-    "estimation_or_refit_authorized": false
+    "estimation_or_refit_authorized": false,
+    "stage_closed": true,
+    "reopen_requires_new_official_evidence": true
   },
-  "next_admissible_action": "Reopen this path only when the BNR interactive database exposes, through an official browser/export/API surface, stable identifiers and metadata for the exact prudential targets. Do not infer internal endpoints or treat search-index silence as absence. Continue the existing PDF source-enumeration path only when exact official links are independently exposed.",
+  "next_admissible_action": "No active interactive-database discovery work remains under the current public/indexed surface. Reopen only when BNR exposes an official stable series/dataset identifier, export/API path or metadata catalogue for the exact prudential targets with matched population semantics.",
   "hard_rules": {
     "no_internal_endpoint_guessing": true,
     "no_value_peeking": true,
@@ -48,6 +50,8 @@
     "no_model_selection": true,
     "no_holdout_opening": true,
     "no_system_dynamics_activation": true,
-    "no_behavioural_closure_change": true
-  }
+    "no_behavioural_closure_change": true,
+    "no_repeat_same_discovery_without_new_official_trigger": true
+  },
+  "terminal_assessment": "model/calibration_validation/bnr_prudential_source_discovery_terminal_assessment.json"
 }
