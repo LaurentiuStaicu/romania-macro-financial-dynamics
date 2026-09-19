@@ -365,6 +365,63 @@ class RemainingReferenceModeBlockerTests(unittest.TestCase):
 
 
 
+    def test_external_oecd_probe_is_discovery_only_and_cannot_promote(self) -> None:
+        references = load("model/dynamics/reference_modes.json")
+        assessment = load(
+            "model/dynamics/sectoral_financial_positions_reference_assessment.json"
+        )
+        screening = load(
+            "model/dynamics/sectoral_financial_positions_external_source_screening.json"
+        )
+        contract = load(
+            "model/dynamics/sectoral_financial_positions_oecd_counterpart_probe_contract.json"
+        )
+        mode = next(
+            item for item in references["modes"]
+            if item["id"] == "sectoral_financial_positions"
+        )
+
+        self.assertEqual(mode["status"], "PARTIAL_SERIES_AVAILABLE")
+        self.assertEqual(
+            mode["external_source_screening"],
+            "model/dynamics/sectoral_financial_positions_external_source_screening.json",
+        )
+        self.assertEqual(
+            mode["oecd_counterpart_discovery_probe_status"],
+            "PREREGISTERED_MANUAL_NOT_EXECUTED",
+        )
+        self.assertEqual(
+            mode["oecd_counterpart_discovery_probe_effect"],
+            "NONE_UNTIL_RETAINED_RESULT_AND_SEPARATE_SEMANTIC_LINEAGE_REVIEW",
+        )
+        self.assertFalse(
+            screening["decision"]["immediate_reference_mode_reopen_authorized"]
+        )
+        self.assertFalse(
+            screening["decision"]["reference_mode_promotion_authorized"]
+        )
+        self.assertFalse(contract["formal_reference_mode_gate"])
+        self.assertTrue(
+            contract["hard_rules"]["no_reference_mode_promotion"]
+        )
+        self.assertTrue(
+            contract["hard_rules"]["no_historical_phase_A_D_reinterpretation"]
+        )
+        self.assertEqual(
+            assessment["oecd_counterpart_discovery_probe"]["status"],
+            "PREREGISTERED_MANUAL_NOT_EXECUTED",
+        )
+        self.assertFalse(
+            assessment["oecd_counterpart_discovery_probe"][
+                "formal_reference_mode_gate"
+            ]
+        )
+        self.assertEqual(
+            assessment["disposition"]["further_internal_source_recovery"],
+            "FROZEN_UNTIL_REOPEN_TRIGGER",
+        )
+
+
     def test_exploratory_esa_f1_reaudit_cannot_replace_historical_phase_b(self) -> None:
         references = load("model/dynamics/reference_modes.json")
         historical = load(
