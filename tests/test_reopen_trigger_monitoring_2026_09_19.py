@@ -52,7 +52,7 @@ class ReopenTriggerMonitoring20260919Tests(unittest.TestCase):
         accounting = self.a["findings"]["accounting_and_sectoral_financial_positions"]
         self.assertIn("not a proof", accounting["caveat"])
 
-    def test_model_contract_points_to_latest_monitoring_pass(self) -> None:
+    def test_monitoring_snapshot_is_retained_after_later_selective_reopen(self) -> None:
         stage = self.m["scientific_stage"]
         self.assertEqual(
             stage["latest_reopen_trigger_monitoring"],
@@ -62,8 +62,16 @@ class ReopenTriggerMonitoring20260919Tests(unittest.TestCase):
             stage["latest_reopen_trigger_monitoring_status"],
             "NO_DECLARED_REOPEN_TRIGGER_SATISFIED_BASELINE_HOLD_CONTINUES",
         )
+        self.assertEqual(
+            stage["latest_reopen_trigger_monitoring_superseded_for"],
+            ["fiscal_primary_balance_reaction"],
+        )
         self.assertEqual(stage["next_operational_state"], "EVIDENCE_TRIGGERED_BASELINE_HOLD")
-        self.assertIsNone(stage["active_autonomous_empirical_task"])
+        self.assertTrue(stage["selective_reopen_active"])
+        self.assertEqual(
+            stage["active_autonomous_empirical_task"],
+            "FISCAL_PRIMARY_BALANCE_CAPB_REALTIME_VINTAGE_MATERIALISATION",
+        )
 
 
 if __name__ == "__main__":
