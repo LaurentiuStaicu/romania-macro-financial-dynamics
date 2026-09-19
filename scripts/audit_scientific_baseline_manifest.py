@@ -67,6 +67,9 @@ def main() -> None:
     bnr_cnf_screening = load(
         "model/dynamics/sectoral_financial_positions_bnr_cnf_source_screening.json"
     )
+    bnr_quarterly_s13_screening = load(
+        "model/dynamics/sectoral_financial_positions_bnr_quarterly_s13_source_screening.json"
+    )
     empirical = load("model/empirical_dynamics/contract.json")
     mechanisms = load("model/empirical_dynamics/mechanism_registry.json")
     readiness = load(
@@ -259,6 +262,31 @@ def main() -> None:
     check(
         bnr_cnf_screening["disposition"]["quarterly_boundary_change_authorized"] is False,
         "BNR annual CNF evidence may not relax the quarterly boundary",
+    )
+    check(
+        bnr_quarterly_s13_screening["verdict"]
+        == "OFFICIAL_QUARTERLY_S13_FINANCIAL_ACCOUNTS_CONFIRMED_FREQUENCY_PASS_SECTOR_COUNTERPART_CONSOLIDATION_FAIL_NO_REOPEN",
+        "BNR quarterly S13 screening verdict is stale",
+    )
+    check(
+        bnr_quarterly_s13_screening["confirmed_semantics"]["quarterly_history_available"] is True,
+        "BNR quarterly S13 source must retain its quarterly-history evidence",
+    )
+    check(
+        bnr_quarterly_s13_screening["frozen_rmd_boundary_comparison"]["frequency_pass"] is True,
+        "BNR quarterly S13 frequency evidence is stale",
+    )
+    check(
+        bnr_quarterly_s13_screening["frozen_rmd_boundary_comparison"]["sector_scope_pass"] is False,
+        "BNR quarterly S13 may not satisfy the full RMD sector boundary",
+    )
+    check(
+        bnr_quarterly_s13_screening["frozen_rmd_boundary_comparison"]["counterpart_structure_pass"] is False,
+        "BNR quarterly S13 may not satisfy the full RMD counterpart boundary",
+    )
+    check(
+        bnr_quarterly_s13_screening["frozen_rmd_boundary_comparison"]["consolidation_pass"] is False,
+        "BNR quarterly S13 may not satisfy the non-consolidated RMD boundary",
     )
     check(
         ref_state[
