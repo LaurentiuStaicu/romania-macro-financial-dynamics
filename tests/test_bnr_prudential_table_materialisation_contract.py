@@ -28,6 +28,12 @@ class BNRPrudentialTableMaterialisationContractTests(unittest.TestCase):
         self.assertTrue(r["no_url_pattern_generation"])
         self.assertTrue(r["retain_discarded_candidates_and_reason"])
         self.assertEqual(r["minimum_required_quarter_coverage"],45)
+        self.assertTrue(r["year_level_source_selection"])
+        self.assertEqual(r["primary_publication_rule"],"January Y+1 Monthly Bulletin for year Y")
+        self.assertEqual(r["fixed_fallback_order"],["December Y Monthly Bulletin","February Y+1 Monthly Bulletin"])
+        self.assertTrue(r["no_quarter_specific_source_cherry_picking"])
+        self.assertTrue(r["fallback_requires_documented_non_value_reason"])
+        self.assertTrue(r["freeze_year_source_map_before_numeric_extraction"])
 
     def test_extraction_is_exact_table_based_not_digitisation(self):
         e=self.c["extraction_rules"]
