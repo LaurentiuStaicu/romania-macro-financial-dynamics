@@ -52,7 +52,7 @@ class MechanismSourceReadinessTests(unittest.TestCase):
             self.readiness["coverage_rule"]["missing_entries_allowed"]
         )
 
-    def test_next_step_advances_after_failed_fiscal_form(self) -> None:
+    def test_next_step_advances_after_exact_corporate_source_retention(self) -> None:
         step = self.readiness["current_next_step"]
         self.assertEqual(
             step["mechanism_id"],
@@ -60,13 +60,32 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         )
         self.assertEqual(
             step["action"],
-            "MATERIALISE_NFC_GFCF_D92_AND_RATE_SOURCES_NO_ESTIMATION",
+            "MATERIALISE_SUPPLEMENTAL_S11_GVA_AND_REAL_GDP_SOURCES_NO_ESTIMATION",
         )
         self.assertFalse(step["calibration_cycle_open"])
 
         mechanisms = {
             item["id"]: item for item in self.readiness["mechanisms"]
         }
+
+        investment = mechanisms["corporate_investment_response"]
+        self.assertEqual(
+            investment["source_readiness"],
+            "SOURCE_VINTAGE_RETAINED_MEASUREMENT_DESIGN_PREREGISTERED_SUPPLEMENTAL_SOURCES_PENDING",
+        )
+        self.assertEqual(
+            investment["retained_source_vintage"],
+            "data/source_vintages/corporate-investment-source-family-vintage-2026-09-19",
+        )
+        self.assertEqual(
+            investment["measurement_design_contract"],
+            "model/calibration_validation/corporate_investment_measurement_design_contract.json",
+        )
+        self.assertEqual(
+            investment["priority_group"],
+            "MATERIALISE_SUPPLEMENTAL_MEASUREMENT_SOURCES_NO_ESTIMATION",
+        )
+        self.assertFalse(investment["estimation_or_refit_allowed"])
         fiscal = mechanisms["fiscal_primary_balance_reaction"]
         self.assertEqual(
             fiscal["source_readiness"],
