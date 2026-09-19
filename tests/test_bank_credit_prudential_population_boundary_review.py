@@ -30,7 +30,8 @@ class BankCreditPrudentialPopulationBoundaryReviewTests(unittest.TestCase):
         self.assertEqual(state["bnr_table_source_status"],"EXACT_TABULAR_OFFICIAL_SOURCE_FAMILY_IDENTIFIED_MACHINE_READABLE_HISTORY_NOT_RETAINED")
         self.assertFalse(state["machine_readable_bnr_source_identified_in_this_review"])
         self.assertFalse(state["chart_digitisation_required"])
-        self.assertIn("preregister",state["next_admissible_source_task"].lower())
+        self.assertIn("source enumeration",state["next_admissible_source_task"].lower())
+        self.assertIn("before extracting any numeric values",state["next_admissible_source_task"].lower())
 
     def test_no_model_or_sd_activation_follows(self):
         effect=self.review["modelling_effect"]
