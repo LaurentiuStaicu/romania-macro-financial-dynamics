@@ -6,6 +6,12 @@ Romanian Monetary Dynamics (RMD) v0.1.0 is the initial public scientific-core ba
 
 The **Validation Recovery / Empirical Basis Expansion** stage has completed its currently admissible scientific work and is now in **EVIDENCE_TRIGGERED_BASELINE_HOLD**. This is stage completion at the current evidence boundary, not model completion: RMD remains empirically incomplete, behavioural closure remains inactive, no new calibration/refit is authorized, and release/merge/version decisions remain separate human decisions. The terminal stage assessment is `model/registries/validation_recovery_stage_terminal_assessment.json`.
 
+### Scientific baseline consolidation / merge readiness
+
+The scientific baseline itself is green, but PR #47 is **not review/merge-ready**. The frozen merge-readiness assessment is `model/registries/scientific_baseline_merge_readiness_assessment.json`. At the assessed head, the PR contained 870 commits, 483 changed files and 240,418 added lines. These exceed GitHub's documented review-display limits (300 files in a diff, 20,000 loadable diff lines and 250 commits in compare listings), so `mergeable=true` and green CI are not treated as sufficient evidence of reviewability. The PR must remain draft until a non-destructive consolidation/splitting strategy preserves the exact terminal scientific tree and provenance while producing a reviewable change series.
+
+The large `data/source_vintages` payload is not deleted merely to shrink the PR: multiple invariant tests deliberately freeze exact reviewed artifacts by file set, byte size and SHA-256 so canonical reproduction remains offline. Public metadata has been repaired without a version change: `README.md` now reports **Evidence-Triggered Baseline Hold**, while `releases/v0.1.0.md` explicitly describes the historical v0.1.0 snapshot. No merge, release, tag or version change is authorized by the merge-readiness gate.
+
 ## Canonical modeling paradigm
 
 **Romanian Monetary Dynamics (RMD) is an accounting-constrained, stock-flow-consistent dynamic model with a developing System Dynamics feedback architecture; behavioural closure remains inactive pending empirical identification and validation.**
