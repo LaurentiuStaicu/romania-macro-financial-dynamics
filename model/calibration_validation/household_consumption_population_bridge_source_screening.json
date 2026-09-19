@@ -1,0 +1,114 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "household_consumption_response",
+  "phase": "Household Consumption — Borrower-Population Bridge Source Screening",
+  "purpose": "Screen official household-level and household-budget sources for an observed Romania bridge between BNR housing-loan borrower DSTI and the registered aggregate S1M household-consumption target. This is source screening only; it does not construct weights, infer borrower consumption, or open estimation.",
+  "target_bridge": {
+    "source_population": "BNR respondent-bank housing/mortgage-loan borrowers represented by new/outstanding housing-loan DSTI",
+    "target_population": "ESA S1M households + NPISH aggregate consumption",
+    "required_observation": "An independently observed mapping, common microdata frame, or aligned borrower-subpopulation consumption/income target that links the housing-borrower burden population to the registered consumption population."
+  },
+  "screened_sources": [
+    {
+      "id": "ECB_HFCS",
+      "institution": "European Central Bank / Household Finance and Consumption Network",
+      "source_url": "https://www.ecb.europa.eu/stats/ecb_surveys/hfcs/html/index.en.html",
+      "conceptual_fit": "HIGH_IF_ROMANIA_PARTICIPATED",
+      "evidence": {
+        "household_level_finances_and_consumption": true,
+        "debt_service_to_income_available_in_hfcs_framework": true,
+        "consumption_and_saving_module": true
+      },
+      "romania_status": "NOT_A_PARTICIPATING_COUNTRY_IN_RELEVANT_HFCS_WAVES_IDENTIFIED",
+      "participation_evidence": [
+        "ECB 2021-wave methodology states that the fourth wave covered all 19 euro-area countries plus Croatia, Czech Republic and Hungary; Romania is not listed.",
+        "ECB 2017-wave FAQ states that the third wave covered 19 euro-area countries plus Croatia, Hungary and Poland; Romania is not listed.",
+        "The current ECB list of national institutions participating in HFCS does not list Romania."
+      ],
+      "bridge_status": "NOT_AVAILABLE_FOR_ROMANIA",
+      "reason": "The survey contains conceptually suitable household-level finance/consumption variables, but no Romania HFCS microdata frame is identified for the relevant waves."
+    },
+    {
+      "id": "INS_ABF_TEMPO",
+      "institution": "Institutul Național de Statistică",
+      "source_family": "Ancheta Bugetelor de Familie (ABF) / TEMPO",
+      "example_urls": [
+        "https://statistici.insse.ro/tempoins/index.jsp?ind=BUF113J&lang=ro&page=tempo3",
+        "https://statistici.insse.ro/tempoins/?ind=BUF110I&lang=ro&page=tempo3"
+      ],
+      "evidence": {
+        "quarterly_frequency_available": true,
+        "household_consumption_observed": true,
+        "household_budget_survey_since_2001": true,
+        "public_breakdowns_identified": [
+          "social category",
+          "residence environment",
+          "macroregion/region",
+          "product/consumption category"
+        ]
+      },
+      "mortgage_borrower_status_public_breakdown_identified": false,
+      "common_dsti_consumption_microdata_link_identified": false,
+      "bridge_status": "PUBLIC_AGGREGATES_DO_NOT_SUPPLY_OBSERVED_MORTGAGE_BORROWER_TO_AGGREGATE_BRIDGE",
+      "reason": "Public TEMPO ABF tables identified in this screening provide quarterly consumption/budget measures and demographic/social breakdowns, but no observed grouping by mortgage-borrower status or linkage to the BNR DSTI population was identified."
+    },
+    {
+      "id": "ECB_CES",
+      "institution": "European Central Bank",
+      "source_url": "https://data.ecb.europa.eu/data/data-categories/ecb-surveys/consumer-expectations-survey-ces/income-and-consumption",
+      "conceptual_fit": "POTENTIALLY_USEFUL_FOR_HIGH_FREQUENCY_SPENDING_BUT_GEOGRAPHICALLY_UNAVAILABLE",
+      "romania_status": "ROMANIA_NOT_PRESENT_IN_PUBLISHED_COUNTRY_SET_IDENTIFIED",
+      "bridge_status": "NOT_AVAILABLE_FOR_ROMANIA",
+      "reason": "Published CES income/spending series cover participating euro-area countries; no Romania country series was identified, and the survey would not by itself map BNR mortgage-borrower DSTI to aggregate S1M consumption."
+    }
+  ],
+  "screening_result": {
+    "observed_population_bridge_found": false,
+    "aligned_borrower_consumption_target_found": false,
+    "aligned_common_microdata_frame_found": false,
+    "aggregate_burden_source_found": false,
+    "conclusion": "No official public source identified in this screening closes the population boundary between BNR housing-loan DSTI and aggregate S1M consumption for Romania."
+  },
+  "admissible_future_paths": [
+    {
+      "id": "INS_ABF_MICRODATA_BORROWER_STATUS",
+      "trigger": "Official/research microdata documentation demonstrates mortgage-borrower status together with compatible consumption/income variables and accessible survey weights.",
+      "status": "UNVERIFIED_NOT_CURRENTLY_ADMISSIBLE"
+    },
+    {
+      "id": "BNR_BORROWER_CONSUMPTION_LINK",
+      "trigger": "BNR or another official source publishes a borrower-level or borrower-group consumption/income measure aligned to housing-loan DSTI.",
+      "status": "NOT_IDENTIFIED"
+    },
+    {
+      "id": "AGGREGATE_HOUSEHOLD_DSR",
+      "trigger": "An observed Romania household-sector debt-service burden aligned to S1M becomes available.",
+      "status": "NOT_IDENTIFIED"
+    }
+  ],
+  "insufficient_evidence": [
+    "Quarterly aggregate consumption from ABF or QSA without borrower-status stratification.",
+    "HFCS variable definitions from countries other than Romania.",
+    "Mortgage debt shares, homeownership rates or loan-stock shares used as synthetic population weights.",
+    "Correlation between housing-loan DSTI and aggregate consumption.",
+    "A longer DSTI time series without a population bridge."
+  ],
+  "hard_rules": {
+    "no_synthetic_population_weights": true,
+    "no_cross_country_hfcs_transfer": true,
+    "no_post_hoc_proxy_selection": true,
+    "no_target_redefinition": true,
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "disposition": {
+    "population_bridge_status": "BLOCKED_NO_OBSERVED_PUBLIC_BRIDGE_IDENTIFIED",
+    "household_consumption_estimation_authorized": false,
+    "registered_full_form_source_admissible": false,
+    "validated_reference_behavioural_mechanisms_change": 0,
+    "behavioural_closure": "UNCHANGED_INACTIVE"
+  }
+}
