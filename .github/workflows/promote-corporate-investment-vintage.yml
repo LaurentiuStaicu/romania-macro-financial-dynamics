@@ -1,7 +1,8 @@
-name: Promote Reviewed Corporate Investment Measurement Panel
+name: Promote Reviewed Corporate Investment Structural Selection Result
 
-# One-shot promotion of the exact reviewed derived measurement panel.
-# No provider refetch, estimation, model selection, holdout opening or activation.
+# One-shot promotion of the exact reviewed structural-selection result.
+# The reviewed verdict is FAIL_BEFORE_HOLDOUT. This workflow must not open
+# final evaluation, refit, respecify or activate any behavioural feedback.
 on:
   pull_request:
     types: [labeled]
@@ -11,7 +12,7 @@ permissions:
   contents: write
 
 jobs:
-  promote-reviewed-measurement-panel:
+  promote-reviewed-selection-result:
     if: ${{ github.event.label.name == 'promote-corporate-investment-vintage' }}
     runs-on: ubuntu-latest
     steps:
@@ -21,7 +22,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 1
 
-      - name: Download exact reviewed artifact
+      - name: Download exact reviewed selection artifact
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -29,43 +30,51 @@ jobs:
             -H "Authorization: Bearer ${GH_TOKEN}" \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10582279137/zip" \
-            -o /tmp/corporate-investment-panel-reviewed.zip
-          echo "52b6cf33101d80b2ed868d15cbc63a8ed9cc319a4eb7803e77d8742a26d92e6f  /tmp/corporate-investment-panel-reviewed.zip" | sha256sum -c -
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10582335814/zip" \
+            -o /tmp/corporate-investment-selection-reviewed.zip
+          echo "011b4c3fdd64744476691b28671af01af1b7f6df12beda9303eeaa4c4a6ab0a1  /tmp/corporate-investment-selection-reviewed.zip" | sha256sum -c -
 
-      - name: Verify every reviewed file
+      - name: Verify exact reviewed result
         run: |
-          rm -rf /tmp/corporate-investment-panel-reviewed
-          mkdir -p /tmp/corporate-investment-panel-reviewed
-          unzip -q /tmp/corporate-investment-panel-reviewed.zip -d /tmp/corporate-investment-panel-reviewed
+          rm -rf /tmp/corporate-investment-selection-reviewed
+          mkdir -p /tmp/corporate-investment-selection-reviewed
+          unzip -q /tmp/corporate-investment-selection-reviewed.zip -d /tmp/corporate-investment-selection-reviewed
           python - <<'PY'
           import hashlib
           import json
           from pathlib import Path
-          root=Path("/tmp/corporate-investment-panel-reviewed")
+
+          root=Path("/tmp/corporate-investment-selection-reviewed")
           review=json.loads(Path(
               "model/calibration_validation/"
-              "corporate_investment_measurement_panel_promotion_review.json"
+              "corporate_investment_structural_selection_promotion_review.json"
           ).read_text(encoding="utf-8"))
-          actual={str(p.relative_to(root)) for p in root.rglob("*") if p.is_file()}
-          expected={item["path"] for item in review["expected_files"]}
-          if actual != expected:
-              raise SystemExit(f"artifact file set mismatch: missing={expected-actual}, extra={actual-expected}")
-          for item in review["expected_files"]:
-              data=(root/item["path"]).read_bytes()
-              if len(data)!=item["bytes"] or hashlib.sha256(data).hexdigest()!=item["sha256"]:
-                  raise SystemExit(f"review mismatch for {item['path']}")
-          print("Exact reviewed corporate-investment measurement panel verified.")
+          files=[p for p in root.rglob("*") if p.is_file()]
+          if len(files) != 1:
+              raise SystemExit(f"unexpected reviewed artifact file set: {files}")
+          expected=review["expected_file"]
+          path=root/expected["path"]
+          data=path.read_bytes()
+          if len(data)!=expected["bytes"]:
+              raise SystemExit("reviewed selection-result byte size mismatch")
+          if hashlib.sha256(data).hexdigest()!=expected["sha256"]:
+              raise SystemExit("reviewed selection-result SHA-256 mismatch")
+          result=json.loads(data)
+          assert result["selection_verdict"] == "FAIL_BEFORE_HOLDOUT"
+          assert result["final_evaluation_opened"] is False
+          assert result["selected_form_for_final_evaluation"] is None
+          assert result["system_dynamics_activation"] is False
+          print("Exact failed corporate-investment selection result verified.")
           PY
 
-      - name: Commit immutable measurement-panel vintage to PR branch
+      - name: Commit exact canonical selection result to PR branch
         run: |
-          dest="data/source_vintages/corporate-investment-measurement-panel-vintage-2026-09-19"
+          src="/tmp/corporate-investment-selection-reviewed/corporate_investment_structural_selection_result.json"
+          dest="model/calibration_validation/corporate_investment_structural_selection_result.json"
           test ! -e "$dest"
-          mkdir -p "$dest"
-          cp -a /tmp/corporate-investment-panel-reviewed/. "$dest/"
+          cp "$src" "$dest"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add "$dest"
-          git commit -m "data: retain corporate-investment measurement panel vintage"
+          git commit -m "investment: retain failed structural selection result"
           git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
