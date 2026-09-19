@@ -142,24 +142,33 @@
     {
       "id": "household_consumption_response",
       "classification": "CANDIDATE",
-      "source_readiness": "LEGACY_XLS_EXTRACTION_RETAINED_BLS_DSTI_TERM_CHANGE_NOT_DSTI_LEVEL",
-      "next_admissible_action": "Do not use BLS P0303/P1103 net percentages as household DSTI levels. Reopen the household debt-burden measurement only if an exact machine-readable BNR history of borrower/loan DSTI levels is retained with new-loan versus outstanding-loan semantics, or under a separately preregistered alternative borrower-burden candidate family.",
+      "source_readiness": "OFFICIAL_HOUSING_LOAN_DSTI_LEVEL_OBSERVATIONS_CONFIRMED_MACHINE_READABLE_LONGITUDINAL_HISTORY_NOT_RETAINED",
+      "next_admissible_action": "Keep BLS P0303/P1103 excluded from DSTI levels. Recover an exact machine-readable quarterly history for BNR housing-loan DSTI levels, separately for new and outstanding loans, or preregister a publication-text-only alternative borrower-burden candidate family with a fixed observation window. Do not relabel this narrower housing-loan burden as the registered macro household DSR and do not estimate the consumption equation yet.",
       "blockers": [
-        "Seven exact official BNR BLS legacy workbooks are retained and now have a deterministic reviewed full-cell extraction path.",
-        "Across the extracted rounds, P0303/P1103 are stable BLS questions about changes in the maximum debt-service-to-income lending term, reported as response distributions/net percentages; they are not borrower DSTI levels.",
-        "Borrower-level new-loan versus outstanding-loan DSTI must remain separate and neither is automatically equivalent to the registered macro household DSR.",
-        "No exact machine-readable longitudinal BNR DSTI level history has yet been retained.",
+        "Official BNR report text directly confirms housing-loan DSTI levels for multiple quarters, including 2024-Q1, 2024-Q2, 2024-Q3 and 2025-Q2.",
+        "The observed measure is a respondent-bank housing-loan portfolio statistic, not a macro household-sector DSR.",
+        "New-loan and outstanding-loan DSTI remain definitionally distinct and may not be synthetically merged.",
+        "No exact machine-readable longitudinal BNR housing-loan DSTI level history has yet been retained; chart digitisation is prohibited.",
         "Household borrowing-rate family and consumption/income real/seasonal transformations remain unfrozen."
       ],
       "estimation_or_refit_allowed": false,
-      "priority_group": "DEFER_UNTIL_MACHINE_READABLE_DSTI_LEVEL_HISTORY",
+      "priority_group": "DEFER_UNTIL_MACHINE_READABLE_DSTI_LEVEL_HISTORY_OR_PREREGISTERED_TEXT_ONLY_CANDIDATE",
       "source_boundary_review": "model/calibration_validation/household_consumption_source_boundary_review.json",
       "debt_service_source_screening": "model/calibration_validation/debt_service_source_screening.json",
       "retained_bnr_dsti_workbook_vintage": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19",
       "bnr_dsti_promotion_review": "model/calibration_validation/bnr_household_dsti_workbook_promotion_review.json",
       "legacy_xls_extraction_contract": "model/calibration_validation/bnr_legacy_xls_cell_extraction_contract.json",
       "legacy_xls_extraction_assessment": "model/calibration_validation/bnr_legacy_xls_cell_extraction_assessment.json",
-      "retained_legacy_xls_extraction_vintage": "data/source_vintages/bnr-legacy-xls-cell-extraction-vintage-2026-09-19"
+      "retained_legacy_xls_extraction_vintage": "data/source_vintages/bnr-legacy-xls-cell-extraction-vintage-2026-09-19",
+      "dsti_level_publication_boundary_review": "model/calibration_validation/bnr_household_dsti_level_publication_boundary_review.json",
+      "confirmed_publication_text_quarters": [
+        "2024-Q1",
+        "2024-Q2",
+        "2024-Q3",
+        "2025-Q2"
+      ],
+      "registered_macro_dsr_identified": false,
+      "alternative_housing_loan_burden_observed": true
     },
     {
       "id": "corporate_investment_response",
