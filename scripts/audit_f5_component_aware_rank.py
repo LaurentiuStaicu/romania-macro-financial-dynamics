@@ -21,6 +21,15 @@ def variables() -> list[tuple[str, str, str]]:
     ]
 
 
+def parse_cell(label: str) -> tuple[str, str]:
+    parts = label.split("→")
+    if len(parts) != 2 or parts[0] not in SECTORS or parts[1] not in SECTORS:
+        raise RuntimeError(f"Invalid F5 topology cell: {label}")
+    if parts == ["X", "X"]:
+        raise RuntimeError("X→X is outside the F5 national-accounts boundary")
+    return parts[0], parts[1]
+
+
 def rref_nullspace(
     equations: list[dict[tuple[str, str, str], int]],
     vars_: list[tuple[str, str, str]],
@@ -85,10 +94,49 @@ def subset(
         return [(component, h, "X") for h in RESIDENT]
     if area == "W1" and entry == "L":
         return [(component, "X", i) for i in RESIDENT]
-    raise ValueError((area, entry))
+    raise RuntimeError(f"Invalid aggregate topology address: {area} {entry}")
 
 
-def build_equations(report: dict, measure: str):
+def validate_snapshot(snapshot: dict[str, object]) -> None:
+    if snapshot.get("instrument") != "F5":
+        raise RuntimeError("Retained rank topology snapshot is not F5")
+    provenance = snapshot.get("provenance")
+    if not isinstance(provenance, dict):
+        raise RuntimeError("F5 snapshot provenance is missing")
+    if provenance.get("network_errors_present") is not False:
+        raise RuntimeError("F5 topology must originate from a no-network-error run")
+    if int(provenance.get("series_requested", 0)) <= 0:
+        raise RuntimeError("F5 topology source-series count is missing")
+    topology = snapshot.get("coefficient_topology")
+    if not isinstance(topology, dict):
+        raise RuntimeError("F5 coefficient topology is missing")
+    if topology.get("same_for_stock_and_flow") is not True:
+        raise RuntimeError(
+            "F5 retained topology must explicitly match stock and flow"
+        )
+    boundary = snapshot.get("hard_boundary")
+    if not isinstance(boundary, dict):
+        raise RuntimeError("F5 snapshot hard boundary is missing")
+    for key in (
+        "benchmark_mutation",
+        "materialization",
+        "synthetic_allocation",
+        "missing_to_zero",
+        "behavioural_closure_changed",
+    ):
+        if boundary.get(key) is not False:
+            raise RuntimeError(
+                f"F5 retained topology violates hard boundary: {key}"
+            )
+
+
+def build_equations(
+    snapshot: dict[str, object],
+) -> tuple[
+    list[tuple[str, str, str]],
+    list[dict[tuple[str, str, str], int]],
+    list[str],
+]:
     vars_ = variables()
     equations: list[dict[tuple[str, str, str], int]] = []
     labels: list[str] = []
@@ -97,38 +145,48 @@ def build_equations(report: dict, measure: str):
         equations.append(coeffs)
         labels.append(label)
 
-    for cell in report["cells"]:
-        if cell["measure"] != measure:
-            continue
-        if cell["status"] == "OUTSIDE_BOUNDARY_NOT_APPLICABLE":
-            continue
-        h, i = cell["holder"], cell["issuer"]
-        for component in EQUITY_COMPONENTS:
-            item = cell["F51"]["components"][component]
-            if item["status"] == "OBSERVABLE_OR_EXACT_DERIVATION":
-                add({(component, h, i): 1}, f"direct:{component}:{h}→{i}")
-        f52 = cell["F52"]
-        if f52["status"] in {
-            "OBSERVABLE_OR_EXACT_DERIVATION",
-            "STRUCTURAL_NOT_APPLICABLE_RESIDENT_NONFUND_ISSUER",
-        }:
-            add({("F52", h, i): 1}, f"{f52['status']}:F52:{h}→{i}")
+    topology = snapshot["coefficient_topology"]
 
-    f5_aggregate = {
-        (x["measure"], x["kind"], x["sector"]):
-            x["official_F5_aggregate_million_RON"]
-        for x in report["aggregate_F5_reconciliation"]
+    for component in EQUITY_COMPONENTS:
+        for label in topology["direct_equity_component_cells"][component]:
+            holder, issuer = parse_cell(label)
+            add(
+                {(component, holder, issuer): 1},
+                f"direct:{component}:{label}",
+            )
+
+    structural_issuers = topology["F52"]["structural_nonfund_resident_issuers"]
+    if set(structural_issuers) != {"H", "C", "G", "BNR"}:
+        raise RuntimeError(
+            "Retained F52 structural issuer scope differs from the Phase C contract"
+        )
+    for issuer in structural_issuers:
+        for holder in SECTORS:
+            add(
+                {("F52", holder, issuer): 1},
+                "STRUCTURAL_NOT_APPLICABLE_RESIDENT_NONFUND_ISSUER:"
+                f"F52:{holder}→{issuer}",
+            )
+
+    for label in topology["F52"]["direct_cells"]:
+        holder, issuer = parse_cell(label)
+        add({("F52", holder, issuer): 1}, f"direct:F52:{label}")
+
+    resident_topology = topology["resident_aggregate_equations"]
+    expected_resident = {
+        f"{sector}:{entry}"
+        for sector in RESIDENT
+        for entry in ("A", "L")
     }
+    if set(resident_topology) != expected_resident:
+        raise RuntimeError("Incomplete F5 resident aggregate topology")
 
-    for item in report["sector_F51_equals_components_controls"]:
-        if item["measure"] != measure:
-            continue
-        sector = item["sector"]
-        entry = item["entry"]
+    for address, instruments in resident_topology.items():
+        sector, entry = address.split(":")
         kind = "holder_total" if entry == "A" else "issuer_total"
 
-        if f5_aggregate[(measure, kind, sector)] is not None:
-            coeffs = {}
+        if "F5" in instruments:
+            coeffs: dict[tuple[str, str, str], int] = {}
             for component in COMPONENTS:
                 if entry == "A":
                     for issuer in SECTORS:
@@ -138,7 +196,7 @@ def build_equations(report: dict, measure: str):
                         coeffs[(component, holder, sector)] = 1
             add(coeffs, f"W0:F5:{kind}:{sector}")
 
-        if item["F51_million_RON"] is not None:
+        if "F51" in instruments:
             coeffs = {}
             for component in EQUITY_COMPONENTS:
                 if entry == "A":
@@ -150,25 +208,33 @@ def build_equations(report: dict, measure: str):
             add(coeffs, f"W0:F51:{kind}:{sector}")
 
         for component in EQUITY_COMPONENTS:
-            if item[f"{component}_million_RON"] is None:
+            if component not in instruments:
                 continue
             if entry == "A":
                 coeffs = {
-                    (component, sector, issuer): 1 for issuer in SECTORS
+                    (component, sector, issuer): 1
+                    for issuer in SECTORS
                 }
             else:
                 coeffs = {
-                    (component, holder, sector): 1 for holder in SECTORS
+                    (component, holder, sector): 1
+                    for holder in SECTORS
                 }
             add(coeffs, f"W0:{component}:{kind}:{sector}")
 
-    for item in report["total_F51_equals_components_controls"]:
-        if item["measure"] != measure:
-            continue
-        area = item["area"]
-        entry = item["entry"]
+    total_topology = topology["total_aggregate_equations"]
+    expected_total = {
+        f"{area}:{entry}"
+        for area in ("W0", "W1")
+        for entry in ("A", "L")
+    }
+    if set(total_topology) != expected_total:
+        raise RuntimeError("Incomplete F5 total aggregate topology")
 
-        if item["F5_million_RON"] is not None:
+    for address, instruments in total_topology.items():
+        area, entry = address.split(":")
+
+        if "F5" in instruments:
             add(
                 {
                     var: 1
@@ -178,7 +244,7 @@ def build_equations(report: dict, measure: str):
                 f"{area}:F5:{entry}",
             )
 
-        if item["F51_million_RON"] is not None:
+        if "F51" in instruments:
             add(
                 {
                     var: 1
@@ -189,17 +255,20 @@ def build_equations(report: dict, measure: str):
             )
 
         for component in EQUITY_COMPONENTS:
-            if item[f"{component}_million_RON"] is not None:
+            if component in instruments:
                 add(
-                    {var: 1 for var in subset(component, area, entry)},
+                    {
+                        var: 1
+                        for var in subset(component, area, entry)
+                    },
                     f"{area}:{component}:{entry}",
                 )
 
     return vars_, equations, labels
 
 
-def analyze(report: dict, measure: str) -> dict:
-    vars_, equations, labels = build_equations(report, measure)
+def analyze(snapshot: dict[str, object]) -> dict[str, object]:
+    vars_, equations, labels = build_equations(snapshot)
     rank, nullspace = rref_nullspace(equations, vars_)
     index = {v: i for i, v in enumerate(vars_)}
 
@@ -208,6 +277,7 @@ def analyze(report: dict, measure: str) -> dict:
         if all(vector[i] == 0 for vector in nullspace):
             unique_components.append(f"{var[0]}:{var[1]}→{var[2]}")
 
+    unique_f52 = []
     unique_f51 = []
     unique_f5 = []
     for holder in SECTORS:
@@ -222,6 +292,13 @@ def analyze(report: dict, measure: str) -> dict:
                 index[(component, holder, issuer)]
                 for component in COMPONENTS
             ]
+            f52_index = index[("F52", holder, issuer)]
+
+            if all(
+                vector[f52_index] == 0
+                for vector in nullspace
+            ):
+                unique_f52.append(f"{holder}→{issuer}")
             if all(
                 sum(vector[i] for i in f51_indices) == 0
                 for vector in nullspace
@@ -232,15 +309,6 @@ def analyze(report: dict, measure: str) -> dict:
                 for vector in nullspace
             ):
                 unique_f5.append(f"{holder}→{issuer}")
-
-    unique_f52 = []
-    for holder in SECTORS:
-        for issuer in SECTORS:
-            if holder == "X" and issuer == "X":
-                continue
-            i = index[("F52", holder, issuer)]
-            if all(vector[i] == 0 for vector in nullspace):
-                unique_f52.append(f"{holder}→{issuer}")
 
     return {
         "variables": len(vars_),
@@ -262,9 +330,11 @@ def analyze(report: dict, measure: str) -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--phase-c-report",
+        "--topology-snapshot",
         type=Path,
-        default=Path("f5_phase_c_artifacts/f5_equity_subcomponent_bridge_audit.json"),
+        default=Path(
+            "model/accounting/f5_rank_topology_snapshot_2025.json"
+        ),
     )
     parser.add_argument(
         "--out",
@@ -274,30 +344,24 @@ def main() -> None:
     args = parser.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
 
-    report = json.loads(args.phase_c_report.read_text(encoding="utf-8"))
-    if report["instrument"] != "F5":
-        raise RuntimeError("Phase C report is not F5")
-    if report["network_errors_present"]:
-        raise RuntimeError("Phase C network errors block rank-source claims")
+    snapshot = json.loads(
+        args.topology_snapshot.read_text(encoding="utf-8")
+    )
+    validate_snapshot(snapshot)
 
-    stock = analyze(report, "stock")
-    flow = analyze(report, "flow")
+    stock = analyze(snapshot)
+    flow = analyze(snapshot)
 
     result = {
-        "audit_version": "0.1",
+        "audit_version": "0.2",
         "instrument": "F5",
         "phase": "component-aware exact rank/nullspace audit",
+        "topology_snapshot": str(args.topology_snapshot),
+        "source_provenance": snapshot["provenance"],
+        "reproduction_mode": "OFFLINE_RETAINED_COEFFICIENT_TOPOLOGY",
         "benchmark_changed": False,
         "materialization_allowed_by_this_phase": False,
         "behavioural_closure_changed": False,
-        "phase_C_source_summary": {
-            "series_requested": report["series_requested"],
-            "series_status_counts": report["series_status_counts"],
-            "equity_component_cell_status_counts":
-                report["equity_component_cell_status_counts"],
-            "F52_cell_status_counts": report["F52_cell_status_counts"],
-            "network_errors_present": report["network_errors_present"],
-        },
         "stock": stock,
         "flow": flow,
         "disposition": (
@@ -306,10 +370,18 @@ def main() -> None:
             and flow["unique_F5_total_cell_count"] == 0
             else "PARTIAL_F5_TOTAL_IDENTIFICATION_REQUIRES_NEXT_GATE"
         ),
+        "reproduction_boundary": (
+            "Phase D is a coefficient-rank/topology claim. It is reproduced "
+            "offline from the retained equation-admissibility topology extracted "
+            "from the successful Phase C workflow artifact identified by SHA-256. "
+            "No RHS value is needed or introduced by this rank-only gate. Fresh "
+            "source coverage remains separate."
+        ),
         "rule": (
             "Rank is computed on component variables. A total F5 cell is unique "
             "only when its F511+F512+F519+F52 linear form is invariant over every "
-            "exact nullspace basis vector. No RHS rounding residual is forced to zero."
+            "exact nullspace basis vector. No source absence is converted into a "
+            "zero equation."
         ),
     }
     (args.out / "f5_component_aware_rank_audit.json").write_text(
@@ -318,23 +390,32 @@ def main() -> None:
     )
     print(json.dumps({
         "stock": {
-            "variables": stock["variables"],
-            "equations": stock["equations"],
-            "rank": stock["rank"],
-            "nullity": stock["nullity"],
-            "unique_component_variable_count": stock["unique_component_variable_count"],
-            "unique_F51_total_cell_count": stock["unique_F51_total_cell_count"],
-            "unique_F5_total_cell_count": stock["unique_F5_total_cell_count"],
+            key: stock[key]
+            for key in (
+                "variables",
+                "equations",
+                "rank",
+                "nullity",
+                "unique_component_variable_count",
+                "unique_F52_cell_count",
+                "unique_F51_total_cell_count",
+                "unique_F5_total_cell_count",
+            )
         },
         "flow": {
-            "variables": flow["variables"],
-            "equations": flow["equations"],
-            "rank": flow["rank"],
-            "nullity": flow["nullity"],
-            "unique_component_variable_count": flow["unique_component_variable_count"],
-            "unique_F51_total_cell_count": flow["unique_F51_total_cell_count"],
-            "unique_F5_total_cell_count": flow["unique_F5_total_cell_count"],
+            key: flow[key]
+            for key in (
+                "variables",
+                "equations",
+                "rank",
+                "nullity",
+                "unique_component_variable_count",
+                "unique_F52_cell_count",
+                "unique_F51_total_cell_count",
+                "unique_F5_total_cell_count",
+            )
         },
+        "reproduction_mode": result["reproduction_mode"],
         "disposition": result["disposition"],
     }, indent=2))
 
