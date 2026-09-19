@@ -27,12 +27,14 @@
   },
   "demand_measurement": {
     "id": "real_gdp_yoy_growth",
-    "source_series_key": "MNA.Q.Y.RO.W2.S1.S1.B.B1GQ._Z._Z._Z.XDC.LR.N",
-    "source_concept": "Romania real GDP, chain-linked volume, calendar and seasonally adjusted, quarterly",
+    "source_series_key": "MNA.Q.Y.RO.W2.S1.S1.B.B1GQ._Z._Z._Z.EUR.LR.N",
+    "source_concept": "Romania real GDP, chain-linked volume, calendar and seasonally adjusted, quarterly, millions of euro",
     "transformation": "100 * (level[t] / level[t-4] - 1)",
     "missing_rule": "NO_INTERPOLATION; REQUIRE_FINITE_t_AND_t_minus_4",
     "reason": "Use an economy-wide real-demand/activity observable rather than NFC GVA growth, because NFC GVA is the denominator of the selected investment-rate target.",
-    "causal_status": "PREDICTIVE_ACTIVITY_PROXY_NOT_IDENTIFIED_DEMAND_SHOCK"
+    "causal_status": "PREDICTIVE_ACTIVITY_PROXY_NOT_IDENTIFIED_DEMAND_SHOCK",
+    "unit_boundary": "EUR CHAIN-LINKED VOLUME IS USED AS THE DIRECTLY VERIFIED PROVIDER SERIES; YEAR-ON-YEAR GROWTH IS INVARIANT TO A FIXED SCALAR UNIT CONVERSION",
+    "source_verification": "ECB Data Portal series page directly confirms the exact key and adjustment/price semantics."
   },
   "financing_cost_measurement": {
     "id": "nfc_new_business_lending_rate_quarterly_mean",
