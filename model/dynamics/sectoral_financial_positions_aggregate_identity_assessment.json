@@ -66,5 +66,15 @@
     "accounting_spine": "UNCHANGED",
     "accounting_readiness": "UNCHANGED",
     "behavioural_closure": "UNCHANGED_INACTIVE"
+  },
+  "executed_contract_snapshot": "model/dynamics/sectoral_financial_positions_aggregate_identity_contract_executed_2026-09-19.json",
+  "executed_contract_workflow_head_sha": "1fc8620c2981a82cf9bada147fbba9158aaf1461",
+  "executed_contract_blob_sha": "20c1ae829cdfff6c77e46193a0d68edc8f94326d",
+  "post_run_methodology_review": "model/dynamics/sectoral_financial_positions_esa_f1_applicability_review.json",
+  "nonretroactivity": {
+    "executed_contract_may_be_rewritten_by_review": false,
+    "phase_B_result_reinterpreted": false,
+    "later_phase_C_D_results_reinterpreted": false,
+    "readiness_change": 0
   }
 }
