@@ -81,5 +81,16 @@ class ProspectiveMonetaryConfirmationStatusTests(unittest.TestCase):
         )
 
 
+    def test_model_contract_registers_prospective_status(self) -> None:
+        model = load("model/registries/model_contract.json")
+        self.assertEqual(
+            model["calibration_validation"][
+                "prospective_monetary_confirmation_status"
+            ],
+            "model/calibration_validation/prospective_monetary_confirmation_status.json",
+        )
+
+
+
 if __name__ == "__main__":
     unittest.main()
