@@ -384,11 +384,11 @@ class RemainingReferenceModeBlockerTests(unittest.TestCase):
         self.assertEqual(mode["status"], "PARTIAL_SERIES_AVAILABLE")
         self.assertEqual(
             mode["eurostat_counterpart_discovery_probe_status"],
-            "PREREGISTERED_MANUAL_NOT_EXECUTED",
+            "EXECUTED_PASS_SEMANTIC_REVIEW_FAIL_INSTRUMENT_SCOPE",
         )
         self.assertEqual(
             mode["eurostat_counterpart_discovery_probe_effect"],
-            "NONE_UNTIL_RETAINED_RESULT_AND_SEPARATE_MAPPING_LINEAGE_REVIEW",
+            "NO_REOPEN; discovery confirmed Romania counterpart data, but frozen semantic review failed because the public instrument set does not cover complete RMD F2-F8.",
         )
         self.assertTrue(
             screening["decision"]["eurostat_counterpart_probe_justified"]
@@ -403,12 +403,18 @@ class RemainingReferenceModeBlockerTests(unittest.TestCase):
         )
         self.assertEqual(
             assessment["eurostat_counterpart_discovery_probe"]["status"],
-            "PREREGISTERED_MANUAL_NOT_EXECUTED",
+            "EXECUTED_PASS_SEMANTIC_REVIEW_FAIL_INSTRUMENT_SCOPE",
         )
         self.assertFalse(
             assessment["eurostat_counterpart_discovery_probe"][
                 "formal_reference_mode_gate"
             ]
+        )
+        self.assertEqual(
+            assessment["eurostat_counterpart_discovery_probe"][
+                "raw_response_sha256"
+            ],
+            "547c9e65c60900aa259ba547efb60faedbaa22e8d8a66e1caed6cbd2cbd189ae",
         )
         self.assertEqual(
             assessment["disposition"]["further_internal_source_recovery"],

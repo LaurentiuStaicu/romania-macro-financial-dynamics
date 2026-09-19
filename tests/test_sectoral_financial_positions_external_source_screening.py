@@ -21,17 +21,17 @@ class SectoralFinancialPositionsExternalSourceScreeningTests(unittest.TestCase):
         by_id = {item["id"]: item for item in self.review["screened_sources"]}
         eurostat = by_id["EUROSTAT_QUARTERLY_COUNTERPART_FINANCIAL_ACCOUNTS"]
         self.assertEqual(eurostat["dataset_code"], "nasq_10_f_cp")
-        self.assertFalse(eurostat["romania_exact_observation_coverage_retained"])
+        self.assertTrue(eurostat["romania_exact_observation_coverage_retained"])
         self.assertEqual(
             eurostat["status"],
-            "PRIORITY_CANDIDATE_FOR_PREREGISTERED_ROMANIA_SCHEMA_COVERAGE_PROBE_NOT_REOPEN_EVIDENCE",
+            "DISCOVERY_PASS_SEMANTIC_REVIEW_FAIL_INSTRUMENT_SCOPE_NO_REOPEN",
         )
         self.assertTrue(
             self.review["decision"]["eurostat_counterpart_probe_justified"]
         )
         self.assertEqual(
             self.review["decision"]["discovery_priority"][0],
-            "EUROSTAT_NASQ_10_F_CP",
+            "OECD_COUNTERPART_DATAFLOWS",
         )
 
     def test_eurostat_lineage_is_republication_not_independent_measurement(self) -> None:
