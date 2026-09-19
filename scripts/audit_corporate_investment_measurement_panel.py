@@ -64,6 +64,32 @@ def load_level_csv(path: Path) -> dict[str, float]:
     return values
 
 
+def load_ecb_raw_monthly_csv(path: Path, *, expected_key: str) -> dict[str, float]:
+    values: dict[str, float] = {}
+    with path.open("r", encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+        required = {"TIME_PERIOD", "OBS_VALUE"}
+        if not required.issubset(set(reader.fieldnames or [])):
+            raise ValueError(f"missing ECB raw columns: {path}")
+        for row in reader:
+            key = (row.get("KEY") or "").strip()
+            if key and key != expected_key:
+                raise ValueError(f"provider KEY mismatch in {path}: {key}")
+            period = (row.get("TIME_PERIOD") or "").strip()
+            raw = row.get("OBS_VALUE")
+            if not period or raw in (None, ""):
+                continue
+            value = float(raw)
+            if not math.isfinite(value):
+                raise ValueError(f"non-finite observation in {path}: {period}")
+            if period in values:
+                raise ValueError(f"duplicate period in {path}: {period}")
+            values[period] = value
+    if not values:
+        raise ValueError(f"empty retained ECB raw source: {path}")
+    return values
+
+
 def lag_quarter(period: str, quarters: int) -> str:
     idx = quarter_index(period) - quarters
     year, q0 = divmod(idx, 4)
@@ -137,11 +163,14 @@ def main() -> None:
     contract = json.loads(CONTRACT.read_text(encoding="utf-8"))
     core = ROOT / contract["retained_source_vintages"]["core"]
     supplemental = ROOT / contract["retained_source_vintages"]["supplemental"]
+    rate_screening = (
+        ROOT / contract["retained_source_vintages"]["financing_rate_screening"]
+    )
 
     paths = {
         "target": core / contract["inputs"]["target"],
         "grants": core / contract["inputs"]["grants"],
-        "lending_rate_monthly": core / contract["inputs"]["lending_rate_monthly"],
+        "lending_rate_raw": rate_screening / contract["inputs"]["lending_rate_raw"],
         "nfc_gva": supplemental / contract["inputs"]["nfc_gva"],
         "real_gdp": supplemental / contract["inputs"]["real_gdp"],
     }
@@ -151,7 +180,10 @@ def main() -> None:
 
     target = load_level_csv(paths["target"])
     grants = load_level_csv(paths["grants"])
-    monthly_rate = load_level_csv(paths["lending_rate_monthly"])
+    monthly_rate = load_ecb_raw_monthly_csv(
+        paths["lending_rate_raw"],
+        expected_key=contract["inputs"]["lending_rate_series_key"],
+    )
     gva = load_level_csv(paths["nfc_gva"])
     real_gdp = load_level_csv(paths["real_gdp"])
 
@@ -178,7 +210,7 @@ def main() -> None:
                     "nfc_investment_rate": f"{target[period]:.12g}",
                     "real_gdp_yoy_growth": f"{gdp_yoy[period]:.12g}",
                     "investment_grants_support_intensity": f"{support[period]:.12g}",
-                    "nfc_new_business_lending_rate_quarterly_mean": f"{rate_q[period]:.12g}",
+                    "nfc_new_business_lending_rate_up_to_one_year_quarterly_mean": f"{rate_q[period]:.12g}",
                 }
             )
 
@@ -186,6 +218,16 @@ def main() -> None:
         name: sha256(path)
         for name, path in paths.items()
     }
+    expected_indices = list(
+        range(quarter_index(complete[0]), quarter_index(complete[-1]) + 1)
+    )
+    actual_indices = [quarter_index(period) for period in complete]
+    panel_contiguous = actual_indices == expected_indices
+    if not panel_contiguous:
+        raise RuntimeError(
+            "aligned measurement panel is not quarterly contiguous over common window"
+        )
+
     audit = {
         "audit_version": "0.1",
         "mechanism_id": contract["mechanism_id"],
@@ -212,7 +254,7 @@ def main() -> None:
                 "first_period": min(support, key=quarter_index),
                 "last_period": max(support, key=quarter_index),
             },
-            "nfc_new_business_lending_rate_quarterly_mean": {
+            "nfc_new_business_lending_rate_up_to_one_year_quarterly_mean": {
                 "rows": len(rate_q),
                 "first_period": min(rate_q, key=quarter_index),
                 "last_period": max(rate_q, key=quarter_index),
@@ -224,6 +266,7 @@ def main() -> None:
             "last_period": complete[-1],
             "periods": complete,
             "sha256": sha256(panel_path),
+            "quarterly_contiguous": panel_contiguous,
         },
         "transformations": contract["transformations"],
         "hard_rules": contract["hard_rules"],
