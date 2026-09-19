@@ -56,11 +56,11 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         step = self.readiness["current_next_step"]
         self.assertEqual(
             step["mechanism_id"],
-            "aggregate_bank_credit_response",
+            "external_fx_refinancing_feedback",
         )
         self.assertEqual(
             step["action"],
-            "RETAIN_AND_INSPECT_BNR_BLS_MAY_2025_XLSX_NO_ESTIMATION",
+            "SCREEN_OFFICIAL_CURRENCY_AND_RESIDUAL_MATURITY_SOURCES_NO_ESTIMATION",
         )
         self.assertFalse(step["calibration_cycle_open"])
 
