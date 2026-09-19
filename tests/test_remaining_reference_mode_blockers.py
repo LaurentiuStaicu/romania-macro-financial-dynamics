@@ -316,6 +316,21 @@ class RemainingReferenceModeBlockerTests(unittest.TestCase):
             "FROZEN_UNTIL_REOPEN_TRIGGER",
         )
         self.assertEqual(
+            mode["post_run_s1n_boundary_diagnostic_status"],
+            "PREREGISTERED_NOT_EXECUTED",
+        )
+        self.assertEqual(
+            mode["post_run_s1n_boundary_diagnostic_contract"],
+            "model/dynamics/"
+            "sectoral_financial_positions_s1n_boundary_diagnostic_contract.json",
+        )
+        s1n_contract = load(mode["post_run_s1n_boundary_diagnostic_contract"])
+        self.assertFalse(s1n_contract["formal_reference_mode_gate"])
+        self.assertEqual(
+            s1n_contract["result_semantics"]["readiness_count_change"],
+            0,
+        )
+        self.assertEqual(
             phase_d["localization"]["stock"][
                 "max_absolute_total_economy_external_residual_million_RON"
             ],

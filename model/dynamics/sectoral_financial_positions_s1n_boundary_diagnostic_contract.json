@@ -13,7 +13,25 @@
       "nasq_10_f_tr"
     ],
     "quarterly_financial_data_origin": "Eurostat states that quarterly financial sector-account data are sent by the ECB.",
-    "interpretation_limit": "The existence of the S1N code in the framework does not establish that Romania publishes the exact S1N F/F1 series required by this diagnostic."
+    "interpretation_limit": "The existence of the S1N code in the framework does not establish that Romania publishes the exact S1N F/F1 series required by this diagnostic.",
+    "sources": [
+      {
+        "institution": "Eurostat",
+        "url": "https://ec.europa.eu/eurostat/cache/website/sector-accounts/sequence-accounts/",
+        "relevance": "Institutional-sector sequence displays S1N alongside S1M/S13/S12/S11/S1/S2 in financial balance sheets."
+      },
+      {
+        "institution": "Eurostat",
+        "url": "https://ec.europa.eu/eurostat/cache/metadata/en/nasq_10_f_esms.htm",
+        "relevance": "Quarterly financial flows/stocks metadata for nasq_10_f; states that the data are reported quarterly to the ECB and, once validated, transmitted to Eurostat."
+      },
+      {
+        "institution": "Eurostat vocabulary",
+        "url": "https://dd.eionet.europa.eu/vocabulary/eurostat/sectpart/view",
+        "relevance": "S1N is a valid sector code labelled Not sectorised."
+      }
+    ],
+    "independence_note": "Eurostat nasq_10_f is not treated as an independent measurement replication of ECB QSA. Eurostat metadata state that quarterly financial flows/stocks are reported to the ECB and then transmitted to Eurostat after validation. Eurostat is used here only as an external framework/distribution cross-check that exposed the S1N boundary question."
   },
   "nonretroactivity": {
     "phase_A_reinterpreted": false,
