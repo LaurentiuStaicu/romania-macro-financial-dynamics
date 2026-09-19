@@ -64,7 +64,7 @@
       "government_effective_interest_rate",
       "sectoral_financial_positions"
     ],
-    "rule": "Reference modes are empirical or explicitly hypothesised behaviour-over-time targets. For the current integrated quantitative closure gate, a required mode is ready only under the registry's explicit ready status or a separately contracted qualitative exception. Two required modes remain blockers. Missing or partial reference modes block integrated behavioural-closure validation but do not invalidate the accounting core.",
+    "rule": "Reference modes are empirical or explicitly hypothesised behaviour-over-time targets. For the current integrated quantitative closure gate, a required mode is ready only under the registry's explicit ready status or a separately contracted qualitative exception. One required mode remains a blocker. Missing or partial reference modes block integrated behavioural-closure validation but do not invalidate the accounting core.",
     "ready_statuses_for_integrated_quantitative_closure": [
       "OBSERVED_SERIES_AVAILABLE"
     ],
@@ -78,10 +78,10 @@
       "credit_flow",
       "government_debt_stock",
       "government_interest_burden",
+      "government_refinancing_need",
       "government_effective_interest_rate"
     ],
     "current_blocking_variables": [
-      "government_refinancing_need",
       "sectoral_financial_positions"
     ]
   },
