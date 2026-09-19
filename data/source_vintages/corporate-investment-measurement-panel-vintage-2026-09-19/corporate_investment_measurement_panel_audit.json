@@ -1,0 +1,110 @@
+{
+  "audit_version": "0.1",
+  "mechanism_id": "corporate_investment_response",
+  "phase": "Corporate Investment — Offline Measurement Panel",
+  "status": "PASS_OFFLINE_MEASUREMENT_PANEL_READY_FOR_STRUCTURAL_SELECTION_DESIGN",
+  "input_files": {
+    "target": "data/source_vintages/corporate-investment-source-family-vintage-2026-09-19/nfc_investment_rate_quarterly_level.csv",
+    "grants": "data/source_vintages/corporate-investment-source-family-vintage-2026-09-19/nfc_investment_grants_quarterly_level.csv",
+    "lending_rate_raw": "data/source_vintages/corporate-investment-financing-rate-screening-vintage-2026-09-19/up_to_one_year_fixation.csv",
+    "nfc_gva": "data/source_vintages/corporate-investment-supplemental-source-vintage-2026-09-19/nfc_gva_quarterly_level.csv",
+    "real_gdp": "data/source_vintages/corporate-investment-supplemental-source-vintage-2026-09-19/real_gdp_quarterly_level.csv"
+  },
+  "input_sha256": {
+    "target": "769135772a75dbd400fd5203de8e299eb4a7a685248633033ac43cbe6f5a2ecc",
+    "grants": "1ce450e416722d47b969cb0d35d1e01aab17366b86e437879d05325188933920",
+    "lending_rate_raw": "eb80c64535727f194348a0ba7c04356cea761884273b332af55eac79addcf1c0",
+    "nfc_gva": "7548019bdac61708e8f40eb400160d6e1784526ae24690616e3d3a87304350f9",
+    "real_gdp": "36be216728430bcee0c3fc78d8d282645ccd71d416ede47e50ed73e8cc5e4ff4"
+  },
+  "derived_series_coverage": {
+    "target": {
+      "rows": 106,
+      "first_period": "1999-Q4",
+      "last_period": "2026-Q1"
+    },
+    "real_gdp_yoy_growth": {
+      "rows": 122,
+      "first_period": "1996-Q1",
+      "last_period": "2026-Q2"
+    },
+    "investment_grants_support_intensity": {
+      "rows": 106,
+      "first_period": "1999-Q4",
+      "last_period": "2026-Q1"
+    },
+    "nfc_new_business_lending_rate_up_to_one_year_quarterly_mean": {
+      "rows": 35,
+      "first_period": "2017-Q4",
+      "last_period": "2026-Q2"
+    }
+  },
+  "complete_panel": {
+    "rows": 34,
+    "first_period": "2017-Q4",
+    "last_period": "2026-Q1",
+    "periods": [
+      "2017-Q4",
+      "2018-Q1",
+      "2018-Q2",
+      "2018-Q3",
+      "2018-Q4",
+      "2019-Q1",
+      "2019-Q2",
+      "2019-Q3",
+      "2019-Q4",
+      "2020-Q1",
+      "2020-Q2",
+      "2020-Q3",
+      "2020-Q4",
+      "2021-Q1",
+      "2021-Q2",
+      "2021-Q3",
+      "2021-Q4",
+      "2022-Q1",
+      "2022-Q2",
+      "2022-Q3",
+      "2022-Q4",
+      "2023-Q1",
+      "2023-Q2",
+      "2023-Q3",
+      "2023-Q4",
+      "2024-Q1",
+      "2024-Q2",
+      "2024-Q3",
+      "2024-Q4",
+      "2025-Q1",
+      "2025-Q2",
+      "2025-Q3",
+      "2025-Q4",
+      "2026-Q1"
+    ],
+    "sha256": "d8d3765fe9e83bd29620de1d02e914626a5f5e1b4071e005ff138b55f127ba69",
+    "quarterly_contiguous": true
+  },
+  "transformations": {
+    "target_investment_rate": "USE_PROVIDER_PUBLISHED_LEVEL_UNCHANGED",
+    "real_gdp_yoy_growth": "100 * (real_gdp[t] / real_gdp[t-4] - 1)",
+    "investment_grants_support_intensity": "100 * SUM(grants[t-3:t]) / SUM(nfc_gva[t-3:t])",
+    "nfc_new_business_lending_rate_up_to_one_year_quarterly_mean": "ARITHMETIC_MEAN_OF_EXACTLY_THREE_MONTHLY_VALUES_WITHIN_QUARTER"
+  },
+  "hard_rules": {
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_lag_selection": true,
+    "no_autoregressive_order_selection": true,
+    "no_sign_gate_evaluation": true,
+    "no_holdout_opening": true,
+    "no_causal_claim": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true,
+    "offline_only": true
+  },
+  "parameter_estimation_performed": false,
+  "model_selection_performed": false,
+  "lag_selection_performed": false,
+  "holdout_opened": false,
+  "causal_claim": false,
+  "system_dynamics_activation": false,
+  "behavioural_closure_change": false
+}
