@@ -1,14 +1,9 @@
 name: BNR Household DSTI Workbook Access Probe
 
-# One-shot PR bootstrap to establish provider access and retain exact bytes.
-# After this reviewed run, live probing must be moved to manual-only.
+# Historical source acquisition is retained immutably in-repository.
+# Any future provider refresh is manual evidence for a new vintage only.
 on:
-  pull_request:
-    paths:
-      - "model/calibration_validation/bnr_household_dsti_workbook_probe_contract.json"
-      - "scripts/audit_bnr_household_dsti_workbook_probe.py"
-      - "tests/test_bnr_household_dsti_workbook_probe.py"
-      - ".github/workflows/bnr-household-dsti-workbook-probe.yml"
+  workflow_dispatch:
 
 permissions:
   contents: read
