@@ -45,13 +45,29 @@
       "status": "CANDIDATE_FOR_PREREGISTERED_COUNTRY_COVERAGE_PROBE_NOT_REOPEN_EVIDENCE"
     },
     {
-      "id": "EUROSTAT_INSTITUTIONAL_SECTOR_ACCOUNTS",
+      "id": "EUROSTAT_QUARTERLY_COUNTERPART_FINANCIAL_ACCOUNTS",
       "institution": "Eurostat",
-      "official_url": "https://ec.europa.eu/eurostat/en/web/sector-accounts",
-      "semantic_fit": "HIGH_FOR_SECTOR_AND_INSTRUMENT_AGGREGATES",
-      "source_lineage": "EUROPEAN_SECTOR_ACCOUNTS_CHAIN_OVERLAPS_EXISTING_ECB_QSA_EVIDENCE",
-      "exact_new_counterpart_boundary_identified": false,
-      "status": "NO_SEPARATE_REOPEN_TRIGGER_IDENTIFIED_IN_CURRENT_SCREENING"
+      "dataset_code": "nasq_10_f_cp",
+      "official_metadata_url": "https://ec.europa.eu/eurostat/cache/metadata/en/nasq_10_f_esms.htm",
+      "statistics_api_base": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/nasq_10_f_cp",
+      "semantic_fit": "HIGH_FOR_EXPLICIT_QUARTERLY_WHO_TO_WHOM_DISCOVERY",
+      "positive_evidence": [
+        "Eurostat quarterly financial-flows/stocks metadata explicitly identifies nasq_10_f_cp as Financial accounts: counterpart information.",
+        "The mandatory core quarterly dataset includes who-to-whom tables for deposits and short-term/long-term loans, with mandatory backdata from 2012-Q4.",
+        "Counterpart-sector details for securities are mandatory from 2013-Q4.",
+        "The reference area covers all EU Member States and dissemination frequency is quarterly."
+      ],
+      "lineage_boundary": [
+        "Quarterly financial-account data are reported to the ECB, validated there and transmitted to Eurostat for republication.",
+        "Therefore Eurostat is not assumed to be a statistically independent source from the existing European financial-accounts chain.",
+        "Its scientific value here is potential access to an explicit counterpart dissemination table that was not yet retained in the RMD source-recovery chain."
+      ],
+      "scope_limit": [
+        "Metadata does not establish complete mandatory counterpart coverage for every RMD instrument F2-F8.",
+        "No conclusion about Romania row-level availability, sector mapping, units, counterpart orientation or instrument completeness is allowed before a retained probe."
+      ],
+      "romania_exact_observation_coverage_retained": false,
+      "status": "PRIORITY_CANDIDATE_FOR_PREREGISTERED_ROMANIA_SCHEMA_COVERAGE_PROBE_NOT_REOPEN_EVIDENCE"
     },
     {
       "id": "BNR_NATIONAL_FINANCIAL_ACCOUNTS_PUBLICATIONS",
@@ -66,8 +82,13 @@
     "immediate_reference_mode_reopen_authorized": false,
     "reference_mode_promotion_authorized": false,
     "accounting_readiness_change": false,
-    "next_admissible_action": "Run a separately preregistered manual OECD country-coverage discovery probe for Romania on DF_T725R_Q and DF_T625R_Q. Retain raw responses and metadata only. If non-empty Romania data are obtained, perform a separate source-lineage and semantic-coverage review before any formal reference-mode gate.",
-    "oecd_probe_justified": true
+    "next_admissible_action": "Run a separately preregistered manual Eurostat nasq_10_f_cp Romania schema/coverage probe first, retaining the raw JSON-stat response and dimension metadata without mapping or reconciliation. If non-empty Romania counterpart observations are retained, perform a separate lineage/semantic/instrument-coverage review. Keep the OECD counterpart probe as a secondary discovery path; neither source may promote the reference mode from discovery alone.",
+    "oecd_probe_justified": true,
+    "eurostat_counterpart_probe_justified": true,
+    "discovery_priority": [
+      "EUROSTAT_NASQ_10_F_CP",
+      "OECD_COUNTERPART_DATAFLOWS"
+    ]
   },
   "hard_rules": {
     "no_reinterpretation_of_historical_phase_A_D": true,
