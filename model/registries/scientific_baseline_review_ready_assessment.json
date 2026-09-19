@@ -1,0 +1,54 @@
+{
+  "assessment_version": "0.1",
+  "assessed_on": "2026-09-19",
+  "stage": "Scientific Baseline Human Review Transition",
+  "status": "REVIEW_READY_MERGE_DECISION_PENDING",
+  "predecessor": "model/registries/scientific_baseline_consolidation_terminal_assessment.json",
+  "decision": {
+    "human_continuation_authorized": true,
+    "authorized_scope": "MARK_CONSOLIDATED_STACK_READY_FOR_REVIEW",
+    "pull_requests": [
+      48,
+      49,
+      50,
+      51,
+      52
+    ],
+    "all_marked_ready_for_review": true,
+    "merge_authorized": false,
+    "release_or_version_change_authorized": false
+  },
+  "evidence": {
+    "stack_linear_order": [
+      "main <- PR #48",
+      "PR #48 <- PR #49",
+      "PR #49 <- PR #50",
+      "PR #50 <- PR #51",
+      "PR #51 <- PR #52"
+    ],
+    "all_open": true,
+    "all_mergeable_at_transition": true,
+    "unresolved_review_threads": 0,
+    "current_rulesets_detected": 0,
+    "branch_protection_read_note": "The connected GitHub integration cannot read the branch-protection endpoint (HTTP 403), so merge requirements must continue to be evaluated from GitHub PR merge state/check results rather than inferred.",
+    "github_stacked_pr_rule": "Merge from the bottom up; all lower layers must satisfy the stack-base requirements."
+  },
+  "scientific_effects": {
+    "scientific_tree_changed_by_ready_transition": false,
+    "accounting_state_changed": false,
+    "reference_mode_state_changed": false,
+    "mechanism_state_changed": false,
+    "calibration_or_refit_authorized": false,
+    "system_dynamics_activation": false,
+    "behavioural_closure_activation": false
+  },
+  "next_state": {
+    "id": "MERGE_DECISION_PENDING",
+    "review_ready": true,
+    "merge_decision_required": true,
+    "automatic_merge_authorized": false,
+    "merge_to_main_authorized_by_this_assessment": false,
+    "release_or_tag_authorized": false,
+    "version_change_authorized": false
+  }
+}

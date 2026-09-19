@@ -8,9 +8,17 @@ The **Validation Recovery / Empirical Basis Expansion** stage has completed its 
 
 ### Scientific baseline consolidation / merge readiness
 
-The scientific baseline itself is green, but PR #47 is **not review/merge-ready**. The frozen merge-readiness assessment is `model/registries/scientific_baseline_merge_readiness_assessment.json`. At the assessed head, the PR contained 870 commits, 483 changed files and 240,418 added lines. These exceed GitHub's documented review-display limits (300 files in a diff, 20,000 loadable diff lines and 250 commits in compare listings), so `mergeable=true` and green CI are not treated as sufficient evidence of reviewability. The PR must remain draft until a non-destructive consolidation/splitting strategy preserves the exact terminal scientific tree and provenance while producing a reviewable change series.
+The scientific baseline consolidation stage is now **complete** under `model/registries/scientific_baseline_consolidation_terminal_assessment.json`. The original PR #47 remains draft as the complete chronological audit history; its original reviewability failure is retained historically in `model/registries/scientific_baseline_merge_readiness_assessment.json`.
 
-The large `data/source_vintages` payload is not deleted merely to shrink the PR: multiple invariant tests deliberately freeze exact reviewed artifacts by file set, byte size and SHA-256 so canonical reproduction remains offline. Public metadata has been repaired without a version change: `README.md` now reports **Evidence-Triggered Baseline Hold**, while `releases/v0.1.0.md` explicitly describes the historical v0.1.0 snapshot. No merge, release, tag or version change is authorized by the merge-readiness gate.
+The validated scientific content was repartitioned non-destructively into stacked PRs #48–#51. The terminal Git tree of PR #51 is exactly `f8ca0b757b4be46cc19b36564e9f0eed69ef95ce`, identical to the validated terminal tree of PR #47. Clean-checkout Scientific CI at PR #51 passed build/install, scientific invariant tests, Accounting Spine readiness, dimensional consistency, System Dynamics conformity, cross-registry baseline auditing, offline provenance verification and retained validation-artifact reproduction.
+
+GitHub's documented diff limits still prevent complete visual rendering of some immutable machine-produced provenance. This is an irreducible UI constraint rather than a scientific-integrity failure: for example, `bls_2025_nov_cells.json` alone contains 25,293 added lines and 620,446 bytes, exceeding the documented 20,000-line / 500 KB single-file diff limits. Such retained source vintages are therefore reviewed by frozen file set, byte size, SHA-256 identity and offline deterministic tests rather than by destructive reformatting or deletion.
+
+The consolidation terminal state was **CONSOLIDATION_COMPLETE_HUMAN_REVIEW_DECISION_PENDING**. A subsequent human continuation decision has now advanced PRs #48–#52 from Draft to **Ready for review**, recorded in `model/registries/scientific_baseline_review_ready_assessment.json`. The current repository-governance state is **REVIEW_READY_MERGE_DECISION_PENDING**.
+
+This transition changes repository review state only. No accounting classification, reference-mode status, empirical mechanism, calibration gate, System Dynamics feedback or behavioural closure has changed.
+
+A subsequent human continuation decision has authorized the reviewed stack #48–#52 for bottom-up merge into `main`, recorded in `model/registries/scientific_baseline_merge_authorization.json`. The current repository-governance state is **MERGE_AUTHORIZED_INTEGRATION_PENDING**. This authorization is limited to repository integration: release, tag, version changes, calibration/refit, holdout opening, System Dynamics feedback activation and behavioural closure remain unauthorized.
 
 ## Canonical modeling paradigm
 
