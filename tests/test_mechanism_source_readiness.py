@@ -60,7 +60,7 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         )
         self.assertEqual(
             step["action"],
-            "PREREGISTER_FX_INFLATION_TRANSFORMS_LAGS_AND_WINDOWS_NO_ESTIMATION",
+            "IMPLEMENT_FX_INFLATION_OFFLINE_TRANSFORM_DESIGN_BUILDER_NO_ESTIMATION",
         )
         self.assertFalse(step["calibration_cycle_open"])
 
@@ -81,11 +81,11 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         fx = mechanisms["exchange_rate_pass_through_to_inflation"]
         self.assertEqual(
             fx["source_readiness"],
-            "EXACT_MONTHLY_LEVEL_SOURCE_VINTAGE_RETAINED_TRANSFORM_AND_LAG_PREREGISTRATION_PENDING",
+            "SOURCE_VINTAGE_AND_TRANSFORM_LAG_WINDOWS_FROZEN_OFFLINE_BUILDER_PENDING",
         )
         self.assertEqual(
             fx["priority_group"],
-            "TRANSFORM_LAG_AND_WINDOWS_PREREGISTRATION_PENDING",
+            "OFFLINE_TRANSFORM_DESIGN_BUILDER_PENDING",
         )
         self.assertFalse(fx["estimation_or_refit_allowed"])
 
