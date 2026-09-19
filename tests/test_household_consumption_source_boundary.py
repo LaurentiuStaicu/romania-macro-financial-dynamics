@@ -48,6 +48,22 @@ class HouseholdConsumptionSourceBoundaryTests(unittest.TestCase):
         self.assertIn("loans-to-disposable-income", prohibited)
         self.assertIn("regulatory debt-service cap", prohibited)
 
+    def test_bnr_housing_dsti_alternative_is_observed_but_narrower(self) -> None:
+        alt = self.review["debt_service_boundary"]["bnr_dsti_alternative"]
+        self.assertEqual(
+            alt["status"],
+            "OFFICIAL_HOUSING_LOAN_DSTI_LEVEL_OBSERVATIONS_CONFIRMED_MACHINE_READABLE_LONGITUDINAL_HISTORY_NOT_RETAINED",
+        )
+        self.assertIn("housing-loan", alt["concept"].lower())
+        self.assertIn("must remain separate", alt["semantic_limit"])
+        self.assertEqual(
+            alt["publication_level_boundary_review"],
+            "model/calibration_validation/bnr_household_dsti_level_publication_boundary_review.json",
+        )
+        self.assertFalse(
+            self.review["source_admissibility"]["registered_full_form_admissible"]
+        )
+
     def test_borrowing_rate_family_cannot_be_selected_post_hoc(self) -> None:
         rate = self.review["borrowing_rate_boundary"]
         keys = {item["series_key"] for item in rate["examples"]}
