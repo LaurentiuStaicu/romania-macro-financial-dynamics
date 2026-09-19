@@ -75,10 +75,11 @@
     {
       "id": "government_refinancing_need",
       "status": "PARTIAL_SERIES_AVAILABLE",
-      "role": "Reference mode for refinancing pressure, distinct from maturity alone.",
-      "source": "Ministry of Finance maturity/refixing and issuance information; matched realized repricing remains incomplete",
+      "role": "Partially observed reference boundary for government refinancing/liquidity pressure, explicitly distinct from maturity, refixing, gross financing need projections, and realized matched repricing events.",
+      "source": "Ministry of Finance maturity/refixing and financing-need information; exact stable-vintage realized refinancing target remains unresolved.",
       "time_resolution": "instrument_or_period_specific",
-      "current_endogeneity": "UNRESOLVED_BEHAVIOURAL_DRIVER"
+      "current_endogeneity": "UNRESOLVED_BEHAVIOURAL_DRIVER",
+      "assessment": "model/dynamics/government_refinancing_need_reference_assessment.json"
     },
     {
       "id": "government_effective_interest_rate",
@@ -94,10 +95,11 @@
     {
       "id": "sectoral_financial_positions",
       "status": "PARTIAL_SERIES_AVAILABLE",
-      "role": "Reference modes for holder-by-issuer financial stocks and transactions by instrument.",
-      "source": "ECB QSA Accounting Spine; F3 materialized, other instruments incomplete",
+      "role": "Partial reference boundary for holder-by-issuer financial stocks and transactions by instrument; readiness is governed by the canonical Accounting Readiness Gate.",
+      "source": "ECB QSA Accounting Spine and retained instrument-specific recovery artifacts; only F3 is canonically complete across stock and flow.",
       "time_resolution": "quarterly",
-      "current_endogeneity": "ACCOUNTING_CORE"
+      "current_endogeneity": "ACCOUNTING_CORE",
+      "assessment": "model/dynamics/sectoral_financial_positions_reference_assessment.json"
     }
   ],
   "closure_rule": "Integrated behavioural closure may not be declared validated until the reference modes required by each active loop have explicit observed targets or a documented reason why only qualitative/reference-pattern validation is possible.",
