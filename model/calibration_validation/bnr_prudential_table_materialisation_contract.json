@@ -1,0 +1,147 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "mechanism_id": "aggregate_bank_credit_response",
+  "phase": "BNR Prudential Table Source Enumeration and Materialisation Preregistration",
+  "purpose": "Preregister a definitionally matched BNR-population source path for quarterly total-capital and NPL controls before any values are extracted or inspected for model use. The contract separates source enumeration, byte retention, semantic review and deterministic table extraction; no stage authorizes credit-response estimation.",
+  "upstream_boundary_review": "model/calibration_validation/bank_credit_prudential_population_boundary_review.json",
+  "source_family": {
+    "institution": "National Bank of Romania",
+    "publication": "Monthly Bulletin / Statistical Section / 11. Banking risk indicators / 11.1 Main prudential indicators",
+    "population": "Banks that are Romanian legal entities.",
+    "population_requirement": "The source or frozen layout-family evidence must preserve the BNR footnote that the indicators cover only banks that are Romanian legal entities. Foreign-bank branches may not be silently added.",
+    "regulatory_breaks": [
+      {
+        "effective": "2014-06",
+        "framework": "Commission Implementing Regulation (EU) No 680/2014 supervisory reporting"
+      },
+      {
+        "effective": "2021-06",
+        "framework": "Commission Implementing Regulation (EU) 2021/451 replaces No 680/2014"
+      }
+    ]
+  },
+  "target_window": {
+    "frequency": "quarterly",
+    "start_period": "2014-Q4",
+    "end_period": "2025-Q4",
+    "expected_quarter_count": 45,
+    "quarter_end_months": [
+      3,
+      6,
+      9,
+      12
+    ],
+    "reason": "Starts after the June-2014 supervisory-reporting break and ends at the last complete calendar year before this preregistration. Extension beyond 2025-Q4 requires a new frozen source vintage, not silent append."
+  },
+  "target_variables": {
+    "total_capital_ratio": {
+      "canonical_label_ro": "Rata fondurilor proprii totale (fostul indicator de solvabilitate)",
+      "unit": "percent",
+      "intended_model_role": "Endogenous prudential capital/solvency state candidate; not an exogenous credit-supply shock.",
+      "required": true
+    },
+    "npl_ratio": {
+      "canonical_label_ro": "Rata creditelor neperformante potrivit definiției ABE",
+      "unit": "percent",
+      "intended_model_role": "Endogenous credit-risk state candidate; not an exogenous credit-supply shock.",
+      "required": true
+    },
+    "cet1_ratio_crosscheck": {
+      "canonical_label_ro": "Rata fondurilor proprii de nivel 1 de bază",
+      "unit": "percent",
+      "intended_model_role": "Semantic/control-family crosscheck only. It may not replace total capital ratio after outcomes are seen.",
+      "required_for_crosscheck": true
+    }
+  },
+  "pilot_structure_evidence": [
+    {
+      "period_family": "2023",
+      "url": "https://www.bnr.ro/files/d/Pubs_ro/Lunare/2023/2023bl06.pdf",
+      "role": "Official BNR Monthly Bulletin layout-family evidence only; not a canonical value source until byte-retained under this contract."
+    },
+    {
+      "period_family": "2024",
+      "url": "https://www.bnr.ro/files/d/Pubs_ro/Lunare/2024/2024bl05.pdf",
+      "role": "Official BNR Monthly Bulletin layout-family evidence only; not a canonical value source until byte-retained under this contract."
+    },
+    {
+      "period_family": "2025",
+      "url": "https://www.bnr.ro/uploads/2025-03-07buletinlunarnr.012025_documentpdf_545_1741348451.pdf",
+      "role": "Official BNR Monthly Bulletin layout-family evidence showing the target table, reporting breaks and Romanian-legal-entity population footnote."
+    }
+  ],
+  "source_enumeration_rules": {
+    "enumerate_exact_official_pdf_urls_before_value_extraction": true,
+    "one_selected_source_per_target_quarter": true,
+    "selection_precedence": "For each target quarter select the latest official BNR Monthly Bulletin, as of the frozen source-enumeration date, that explicitly reports that quarter and still exposes the target table. Selection is based only on publication/revision precedence and source semantics, never on numerical fit.",
+    "retain_discarded_candidates_and_reason": true,
+    "no_url_pattern_generation": true,
+    "no_directory_bruteforce": true,
+    "no_value_peeking_during_source_selection": true,
+    "minimum_required_quarter_coverage": 45,
+    "incomplete_enumeration_effect": "BLOCK_MATERIALISATION_NO_MODEL_EFFECT"
+  },
+  "byte_retention_rules": {
+    "retain_exact_pdf_bytes": true,
+    "compute_sha256": true,
+    "record_url": true,
+    "record_retrieved_at_utc": true,
+    "record_http_status": true,
+    "record_content_type": true,
+    "require_pdf_signature": true,
+    "source_revision_status_must_be_retained": true
+  },
+  "extraction_rules": {
+    "extraction_method": "Deterministic PDF text/table extraction from retained official BNR PDF bytes.",
+    "ocr_allowed": false,
+    "chart_digitisation_allowed": false,
+    "manual_numeric_transcription_allowed": false,
+    "exact_table_heading_required": "11.1. Principalii indicatori de prudențialitate",
+    "exact_variable_labels_required": true,
+    "quarter_mapping_rule": "Only explicit March/June/September/December rows or exact annual December rows may map to Q1/Q2/Q3/Q4. A yearly summary may map only to Q4 when the publication methodology explicitly identifies annual data as December/end-period.",
+    "provisional_marker_policy": "Retain provisional/revised markers as provenance metadata. Never strip a marker silently.",
+    "missing_symbol_policy": "x, ellipsis, confidentiality markers or blank cells remain missing/non-applicable according to the publication legend; never convert them to zero.",
+    "decimal_policy": "Preserve published decimal precision; no smoothing, interpolation or residual reconstruction.",
+    "duplicate_quarter_policy": "If more than one retained publication reports a quarter, only the preregistered source-precedence winner enters the candidate series; all alternatives remain provenance evidence."
+  },
+  "semantic_validation_gate": {
+    "require_population_boundary_match": true,
+    "require_all_45_quarters_for_both_primary_variables": true,
+    "require_cet1_crosscheck_where_published": true,
+    "require_reporting_break_metadata": true,
+    "require_exact_source_hashes": true,
+    "require_no_duplicate_quarters": true,
+    "require_no_nonfinite_promoted_values": true,
+    "compare_against_retained_cbd2_only_as_diagnostic": true,
+    "numerical_similarity_never_authorizes_population_bridge": true
+  },
+  "promotion_boundary": {
+    "output_status_if_pass": "BNR_MATCHED_PRUDENTIAL_CANDIDATE_SERIES_READY_FOR_SEPARATE_PROMOTION_REVIEW",
+    "canonical_series_mutation_in_this_contract": false,
+    "mechanism_estimation_authorized": false,
+    "structural_selection_authorized": false,
+    "lag_selection_authorized": false,
+    "holdout_opening_authorized": false,
+    "system_dynamics_activation": false,
+    "behavioural_closure_change": false
+  },
+  "hard_rules": {
+    "no_live_source_acquisition_on_pull_request": true,
+    "no_cbd2_direct_substitution": true,
+    "no_cet1_substitution_for_total_capital": true,
+    "no_interpolation": true,
+    "no_forward_fill": true,
+    "no_chart_digitisation": true,
+    "no_ocr": true,
+    "no_manual_numeric_transcription": true,
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_lag_selection": true,
+    "no_holdout_opening": true,
+    "no_causal_claim": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "execution_policy": "MANUAL_ONLY_SOURCE_ENUMERATION_AND_ACQUISITION_THEN_OFFLINE_DETERMINISTIC_EXTRACTION"
+}
