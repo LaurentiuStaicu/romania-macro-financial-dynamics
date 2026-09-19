@@ -72,6 +72,22 @@ class MechanismSourceReadinessTests(unittest.TestCase):
             item["id"]: item for item in self.readiness["mechanisms"]
         }
 
+        aggregate_credit = mechanisms["aggregate_bank_credit_response"]
+        self.assertEqual(
+            aggregate_credit["source_readiness"],
+            "BLS_MULTI_ROUND_SEMANTIC_MAPPING_AVAILABLE_WITH_EXPLICIT_COVERAGE_GAPS",
+        )
+        self.assertEqual(aggregate_credit["observed_round_count"], 8)
+        self.assertEqual(
+            aggregate_credit["missing_rounds"],
+            ["2023-Q2", "2023-Q3", "2024-Q2", "2025-Q2"],
+        )
+        self.assertEqual(
+            aggregate_credit["cross_round_mapping_audit"],
+            "model/calibration_validation/bnr_bls_cross_round_mapping_audit.json",
+        )
+        self.assertFalse(aggregate_credit["estimation_or_refit_allowed"])
+
         investment = mechanisms["corporate_investment_response"]
         self.assertEqual(
             investment["source_readiness"],
