@@ -3,7 +3,7 @@
   "reviewed_on": "2026-09-19",
   "mechanism_id": "external_fx_refinancing_feedback",
   "purpose": "Determine which parts of Romania's external-debt exposure are directly observable without treating reporting currency as debt denomination or original maturity as a refinancing schedule.",
-  "verdict": "SECTOR_AND_ORIGINAL_MATURITY_EXTERNAL_DEBT_OBSERVABLE_CURRENCY_DENOMINATION_RESIDUAL_MATURITY_AND_HEDGING_UNRESOLVED",
+  "verdict": "SECTOR_ORIGINAL_MATURITY_AND_PARTIAL_AGGREGATE_CURRENCY_RISK_MARGINS_OBSERVED_JOINT_CURRENCY_RESIDUAL_MATURITY_HEDGING_UNRESOLVED",
   "exact_source_examples": [
     {
       "institution": "ECB",
@@ -43,7 +43,11 @@
     "debt_currency_denomination_available_from_confirmed_series": false,
     "hedging_positions_available": false,
     "matched_interest_or_coupon_schedule_available": false,
-    "gross_external_debt_excluding_FDI_note": "Several confirmed TXD/FGED series exclude direct-investment debt. They may not be silently treated as total external debt if the mechanism requires all FX-sensitive liabilities."
+    "gross_external_debt_excluding_FDI_note": "Several confirmed TXD/FGED series exclude direct-investment debt. They may not be silently treated as total external debt if the mechanism requires all FX-sensitive liabilities.",
+    "aggregate_external_debt_currency_composition_published_by_bnr": true,
+    "s13_currency_and_refinancing_risk_margins_available": true,
+    "joint_currency_by_sector_available": false,
+    "joint_currency_x_residual_maturity_by_sector_available": false
   },
   "scientific_distinctions": {
     "reporting_unit_is_not_currency_denomination": true,
@@ -61,8 +65,8 @@
     "Use external-debt stock changes as refinancing flows."
   ],
   "admissible_next_step": {
-    "action": "SEARCH_FOR_CURRENCY_DENOMINATION_RESIDUAL_MATURITY_AND_HEDGING_OR_EXPLICIT_BOUNDS",
-    "rule": "Reopen quantitative specification only if official/reproducible evidence provides currency denomination and residual-maturity/refinancing timing on compatible sector boundaries, with hedging either observed or explicitly bounded. Otherwise retain the mechanism as DEFERRED and the feedback architecture as an open chain."
+    "action": "REOPEN_ONLY_ON_JOINT_SECTOR_CURRENCY_RESIDUAL_MATURITY_OR_HEDGING_EVIDENCE",
+    "rule": "The new BNR/MoF evidence improves aggregate and S13 risk margins but still cannot identify the joint exposure required by this feedback. Do not repeatedly re-probe existing marginal sources; reopen only on a source capable of changing joint identification."
   },
   "disposition": {
     "mechanism_classification": "DEFERRED",
@@ -72,5 +76,6 @@
     "feedback_topology": "OPEN_CHAIN",
     "validated_reference_behavioural_mechanisms_change": 0,
     "behavioural_closure": "UNCHANGED_INACTIVE"
-  }
+  },
+  "official_source_screening": "model/calibration_validation/external_fx_refinancing_source_screening_2026-09-19.json"
 }
