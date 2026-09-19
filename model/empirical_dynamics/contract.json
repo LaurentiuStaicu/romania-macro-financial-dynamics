@@ -44,12 +44,14 @@
     "active_calibration_cycle_open": false,
     "validated_reference_behavioural_mechanisms": 0,
     "activated_mechanisms_after_disposition": [],
-    "candidate_mechanisms_after_disposition": [
-      "monetary_policy_lending_rate_pass_through"
-    ],
-    "deferred_mechanisms_after_disposition": [
+    "rule": "The frozen validation-recovery disposition governs current mechanism status. Pre-recovery admission to calibration does not survive as ACTIVATED after the evaluation cycle closes unless the disposition explicitly authorizes it.",
+    "previous_calibration_admissions": [
+      "monetary_policy_lending_rate_pass_through",
       "government_refinancing_effective_rate"
     ],
-    "rule": "The frozen validation-recovery disposition governs current mechanism status. Pre-recovery admission to calibration does not survive as ACTIVATED after the evaluation cycle closes unless the disposition explicitly authorizes it."
+    "current_status_of_previous_admissions": {
+      "monetary_policy_lending_rate_pass_through": "CANDIDATE",
+      "government_refinancing_effective_rate": "DEFERRED"
+    }
   }
 }
