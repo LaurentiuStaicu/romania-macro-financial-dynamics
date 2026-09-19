@@ -1,0 +1,83 @@
+{
+  "contract_version": "0.1",
+  "phase": "Reference Mode Recovery — Sectoral Financial Positions / Phase C source-precision reconciliation",
+  "purpose": "Determine whether the three Phase B stock reconciliation failures are fully compatible with the ECB-published numerical precision of the exact F-minus-F1 source series, without relaxing the preregistered Phase B fixed tolerance or choosing any new residual threshold post hoc.",
+  "prerequisites": {
+    "phase_A": "model/dynamics/sectoral_financial_positions_strict_gate_assessment.json",
+    "phase_B_contract": "model/dynamics/sectoral_financial_positions_aggregate_identity_contract.json",
+    "phase_B_assessment": "model/dynamics/sectoral_financial_positions_aggregate_identity_assessment.json",
+    "required_phase_B_verdict": "AGGREGATE_IDENTITY_GATE_FAILED_STRICT_STOCK_RECONCILIATION_NO_PROMOTION",
+    "phase_B_residual_values_may_tune_phase_C_rule": false
+  },
+  "official_metadata_basis": {
+    "source": "ECB Data Portal SDMX",
+    "attribute": "DECIMALS",
+    "interpretation": "Number of decimal places associated with the published series/observations.",
+    "documentation": [
+      "https://data.ecb.europa.eu/help/api/overview",
+      "https://www.ecb.europa.eu/stats/ecb_statistics/sdmx/html/tutorial.en.html"
+    ]
+  },
+  "rounding_model": {
+    "unit": "million_RON",
+    "per_series_half_rounding_width_formula": "0.5 * 10^(-DECIMALS)",
+    "computational_epsilon_million_RON": 1e-9,
+    "residual_identity": "For each measure and period, represented-system residual is the exact linear combination of unique QSA source observations after algebraically cancelling repeated source terms. The admissible rounding envelope is the sum over those unique source observations of abs(coefficient) * half_rounding_width.",
+    "pass_condition": "abs(system_residual) <= rounding_envelope + computational_epsilon",
+    "no_fixed_tolerance_replacement": true,
+    "no_use_of_phase_B_max_residual": true
+  },
+  "algebraic_system_identity": {
+    "resident_sectors_after_F_plus_BNR_cancellation": [
+      "S1M",
+      "S11",
+      "S12",
+      "S13"
+    ],
+    "external_sector": "W1 total economy",
+    "represented_value_per_address": "total F minus F1, except preregistered structural F1 absence for H/S1M and C/S11",
+    "coefficient_pattern": {
+      "resident_assets": "+1",
+      "resident_liabilities": "-1",
+      "external_resident_assets": "-1",
+      "external_resident_liabilities": "+1"
+    },
+    "note": "S121 contributions cancel exactly between RMD F = S12-S121 and BNR = S121 in the system sum, so S121 is retained for sector-level outputs but contributes zero coefficient to the system residual and rounding envelope."
+  },
+  "source_requirements": {
+    "reuse_phase_B_series_family": true,
+    "measures": [
+      "LE",
+      "F"
+    ],
+    "instruments": [
+      "F",
+      "F1"
+    ],
+    "mandatory_DECIMALS_for_every_available_mandatory_series": true,
+    "DECIMALS_must_be_single_nonnegative_integer_per_series": true,
+    "mandatory_total_F_and_F1_rules_unchanged_from_phase_B": true,
+    "H_C_F1_structural_rule_unchanged": true,
+    "minimum_common_observation_count": 40,
+    "required_benchmark_periods": [
+      "2025-Q1",
+      "2025-Q2",
+      "2025-Q3",
+      "2025-Q4"
+    ]
+  },
+  "promotion_rule": "Phase C may support promotion only if Phase B source-coverage and structural-applicability conditions still pass, all required DECIMALS metadata are valid, every common-quarter stock and flow system residual lies within its metadata-derived rounding envelope, at least 40 common quarters including all 2025 quarters remain available, and no accounting or behavioural boundary changes. A Phase C pass reclassifies the small Phase B stock discrepancies as publication-precision-consistent; it does not retroactively make the fixed 0.1 million RON Phase B gate pass.",
+  "negative_result_rule": "Any required missing DECIMALS metadata, invalid precision attribute, source-coverage regression, structural-applicability contradiction, benchmark gap, or residual outside its metadata-derived envelope leaves sectoral_financial_positions PARTIAL_SERIES_AVAILABLE.",
+  "hard_rules": {
+    "no_phase_B_threshold_relaxation": true,
+    "no_new_fixed_residual_tolerance": true,
+    "no_phase_B_residual_based_parameter_choice": true,
+    "no_missing_DECIMALS_imputation": true,
+    "no_missing_source_to_zero": true,
+    "no_bilateral_allocation": true,
+    "no_accounting_readiness_change": true,
+    "no_accounting_benchmark_mutation": true,
+    "no_behavioural_activation": true,
+    "network_errors_block_positive_claim": true
+  }
+}
