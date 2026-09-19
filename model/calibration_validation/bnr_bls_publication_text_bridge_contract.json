@@ -1,0 +1,54 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "mechanism_id": "aggregate_bank_credit_response",
+  "phase": "BNR BLS Missing-Round Official-Publication Text Bridge",
+  "purpose": "Retain only official BNR publication-text evidence for the four calendar quarters absent from the canonical workbook-derived BLS panel. This bridge distinguishes direct reported net percentages and exact status-quo implications from incomplete response-share narratives. It is corroboration/source-recovery evidence only and may not silently substitute publication-rounded values for workbook-cell precision.",
+  "canonical_panel": "data/processed/bnr_bls_realised_rounds.csv",
+  "canonical_mapping_audit": "model/calibration_validation/bnr_bls_cross_round_mapping_audit.json",
+  "target_missing_quarters": [
+    "2023-Q2",
+    "2023-Q3",
+    "2024-Q2",
+    "2025-Q2"
+  ],
+  "observables": [
+    "nfc_credit_standards",
+    "nfc_loan_demand",
+    "household_mortgage_credit_standards",
+    "household_consumer_credit_standards",
+    "household_mortgage_loan_demand",
+    "household_consumer_loan_demand"
+  ],
+  "admissible_evidence_classes": {
+    "DIRECT_REPORTED_NET_PERCENTAGE": "The publication text explicitly reports the target net percentage.",
+    "DIRECT_STATUS_QUO_IMPLIES_ZERO": "The publication states that all responding institutions reported no change, which implies an exact zero balance under the BNR net-percentage definition.",
+    "INCOMPLETE_NARRATIVE_ONLY": "The publication text describes direction or response shares but does not identify a unique publication-precision net percentage.",
+    "ROUNDED_SHARE_BALANCE_DIAGNOSTIC_ONLY": "A balance can be computed from publication-rounded response shares, but it is diagnostic only and cannot replace the original workbook value."
+  },
+  "precision_rule": {
+    "preserve_publication_precision": true,
+    "no_false_extra_decimals": true,
+    "publication_rounded_values_are_not_workbook_precision": true,
+    "canonical_panel_substitution_allowed": false
+  },
+  "derivation_rule": {
+    "chart_digitisation_allowed": false,
+    "ocr_allowed": false,
+    "interpolation_allowed": false,
+    "infer_unreported_response_category_allowed": false,
+    "rounded_share_balance_may_be_retained_as_noncanonical_diagnostic": true
+  },
+  "hard_rules": {
+    "no_canonical_panel_overwrite": true,
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_lag_selection": true,
+    "no_holdout_opening": true,
+    "no_nfc_household_signal_aggregation": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "pass_effect": "OFFICIAL_PUBLICATION_TEXT_EVIDENCE_RETAINED_WITH_PRECISION_BOUNDARY",
+  "next_gate": "Recover and retain exact official workbook bytes/cell values for the missing canonical quarters. Publication-text evidence may be used to validate identity, sign and approximate/reporting-precision values, not to manufacture workbook precision."
+}
