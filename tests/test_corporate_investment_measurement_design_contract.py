@@ -40,6 +40,10 @@ class CorporateInvestmentMeasurementDesignContractTests(unittest.TestCase):
         self.assertIn("D92", support["source_series_key"])
 
     def test_transformations_are_frozen_without_estimation(self) -> None:
+        self.assertEqual(
+            self.c["demand_measurement"]["source_series_key"],
+            "MNA.Q.Y.RO.W2.S1.S1.B.B1GQ._Z._Z._Z.EUR.LR.N",
+        )
         self.assertIn(
             "t-4",
             self.c["demand_measurement"]["transformation"],
