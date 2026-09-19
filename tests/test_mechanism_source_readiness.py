@@ -134,11 +134,11 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         household = mechanisms["household_consumption_response"]
         self.assertEqual(
             household["source_readiness"],
-            "COMPLETE_DSTI_TEXT_WINDOW_BUT_AGGREGATE_CONSUMPTION_POPULATION_ALIGNMENT_BLOCKED",
+            "COMPLETE_DSTI_TEXT_WINDOW_PUBLIC_POPULATION_BRIDGE_SCREENED_NOT_FOUND",
         )
         self.assertEqual(
             household["priority_group"],
-            "DEFER_UNTIL_BORROWER_BURDEN_POPULATION_ALIGNMENT",
+            "DEFER_UNTIL_NEW_OBSERVED_POPULATION_BRIDGE_SOURCE",
         )
         self.assertEqual(
             household["debt_service_source_screening"],
@@ -164,7 +164,10 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         )
         self.assertFalse(household["registered_macro_dsr_identified"])
         self.assertTrue(household["alternative_housing_loan_burden_observed"])
-        self.assertEqual(household["population_alignment_status"], "BLOCKED")
+        self.assertEqual(
+            household["population_alignment_status"],
+            "BLOCKED_NO_OBSERVED_PUBLIC_BRIDGE_IDENTIFIED",
+        )
         self.assertFalse(
             household["housing_dsti_directly_admissible_in_registered_aggregate_consumption_form"]
         )
@@ -172,6 +175,11 @@ class MechanismSourceReadinessTests(unittest.TestCase):
             household["borrower_burden_population_alignment_review"],
             "model/calibration_validation/household_consumption_borrower_burden_alignment_review.json",
         )
+        self.assertEqual(
+            household["population_bridge_source_screening"],
+            "model/calibration_validation/household_consumption_population_bridge_source_screening.json",
+        )
+        self.assertFalse(household["public_population_bridge_found"])
         self.assertFalse(household["estimation_or_refit_allowed"])
         fiscal = mechanisms["fiscal_primary_balance_reaction"]
         self.assertEqual(
