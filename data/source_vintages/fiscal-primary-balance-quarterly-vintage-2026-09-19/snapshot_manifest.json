@@ -1,0 +1,70 @@
+{
+  "snapshot_version": "0.1",
+  "snapshot_id": "fiscal-primary-balance-quarterly-vintage-2026-09-19",
+  "fetched_at_utc": "2026-09-19T08:15:38Z",
+  "source_vintage_contract": "data/provenance/source_vintage_contract.json",
+  "fetcher_script": "scripts/audit_fiscal_primary_balance_materialisation.py",
+  "fetcher_script_sha256": "7a6dc16c89b2b959a37f3829f3c072377296c5d99dfa0a8241ccc066095524b8",
+  "workflow_context": {
+    "github_sha": "bf2314456295c6ac3950cfde2640de58bffe2c2f",
+    "github_run_id": "35431513915",
+    "github_event_name": "pull_request"
+  },
+  "raw_sources": [
+    {
+      "name": "B9",
+      "institution": "Eurostat",
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/gov_10q_ggnfa?lang=en&freq=Q&unit=PC_GDP&s_adj=NSA&sector=S13&na_item=B9&geo=RO&sinceTimePeriod=2000-Q1",
+      "accept": "application/json",
+      "status": 200,
+      "content_type": "application/json",
+      "bytes": 7504,
+      "sha256": "6bdefb865bdfb90e0f61c6afe54ce119fd56b9de12a6d8c10b4fcf254c49e365",
+      "path": "raw/gov_10q_ggnfa_RO_B9_NSA_PC_GDP.json",
+      "dataset_updated": "2026-07-21T11:00:00+0200"
+    },
+    {
+      "name": "D41PAY",
+      "institution": "Eurostat",
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/gov_10q_ggnfa?lang=en&freq=Q&unit=PC_GDP&s_adj=NSA&sector=S13&na_item=D41PAY&geo=RO&sinceTimePeriod=2000-Q1",
+      "accept": "application/json",
+      "status": 200,
+      "content_type": "application/json",
+      "bytes": 7397,
+      "sha256": "db9928f8134424c784ba875affd4aba56f7ca2b09c390495bfddfbd3bc972a90",
+      "path": "raw/gov_10q_ggnfa_RO_D41PAY_NSA_PC_GDP.json",
+      "dataset_updated": "2026-07-21T11:00:00+0200"
+    }
+  ],
+  "normalized_outputs": [
+    {
+      "path": "fiscal_primary_balance_quarterly_source.csv",
+      "sha256": "0b855058e3a0937c3759628fbb97e30895a211d07285bef4be29b819e552237f",
+      "derived_from_raw_sha256": [
+        "6bdefb865bdfb90e0f61c6afe54ce119fd56b9de12a6d8c10b4fcf254c49e365",
+        "db9928f8134424c784ba875affd4aba56f7ca2b09c390495bfddfbd3bc972a90"
+      ],
+      "normalizer": "scripts/audit_fiscal_primary_balance_materialisation.py",
+      "normalizer_sha256": "7a6dc16c89b2b959a37f3829f3c072377296c5d99dfa0a8241ccc066095524b8",
+      "rows": 105
+    }
+  ],
+  "audit_report": {
+    "path": "fiscal_primary_balance_materialisation_audit.json",
+    "sha256": "63d6135d988f1db2dcd60c0e23659d2f3d2d685a7c307a241b290d04d310845a"
+  },
+  "matched_dataset_updated": "2026-07-21T11:00:00+0200",
+  "hard_boundaries": {
+    "no_seasonally_adjusted_B9_with_NSA_interest": true,
+    "no_cash_budget_substitution": true,
+    "no_structural_primary_balance_label": true,
+    "no_output_gap_construction": true,
+    "no_debt_gap_construction": true,
+    "no_regime_inference": true,
+    "no_parameter_estimation": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true,
+    "live_provider_work_manual_only": true
+  },
+  "canonical_promotion": "REQUIRES_EXPLICIT_REPOSITORY_REVIEW_AND_COMMIT"
+}

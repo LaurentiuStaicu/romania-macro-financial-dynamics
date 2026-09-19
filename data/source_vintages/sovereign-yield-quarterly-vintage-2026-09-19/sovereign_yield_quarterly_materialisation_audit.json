@@ -1,0 +1,106 @@
+{
+  "audit_version": "0.1",
+  "phase": "Sovereign Yield Response — Quarterly Source Materialisation",
+  "mechanism_id": "sovereign_yield_spread_response",
+  "estimation_authorized": false,
+  "generated_at_utc": "2026-09-19T08:01:16Z",
+  "fetcher_script": "scripts/audit_sovereign_yield_quarterly_materialisation.py",
+  "fetcher_script_sha256": "7a567a169ebc2ee480a6a147426cf67a178c25e0e6da0492dbdd0c5f409fe975",
+  "source_requests": {
+    "romania_yield": {
+      "url": "https://data-api.ecb.europa.eu/service/data/IRS/M.RO.L.L40.CI.0000.RON.N.Z?format=csvdata&startPeriod=2005-04",
+      "http_status": 200,
+      "content_type": "text/csv",
+      "last_modified": "Thu, 10 Sep 2026 08:00:00 GMT",
+      "path": "raw/ecb_irs_ro_10y.csv",
+      "sha256": "b0178a3531008afbef8a807bedc116ef04b9b93cafef7edbe3306f0c3a7e0236",
+      "bytes": 183373
+    },
+    "germany_yield": {
+      "url": "https://data-api.ecb.europa.eu/service/data/IRS/M.DE.L.L40.CI.0000.EUR.N.Z?format=csvdata&startPeriod=2005-04",
+      "http_status": 200,
+      "content_type": "text/csv",
+      "last_modified": "Thu, 10 Sep 2026 08:00:00 GMT",
+      "path": "raw/ecb_irs_de_10y.csv",
+      "sha256": "b59b7cf028a9c88d4689bdf4b1b843ae234716242dfae4402091e26d072a5547",
+      "bytes": 92945
+    },
+    "new_ciss": {
+      "url": "https://data-api.ecb.europa.eu/service/data/CISS/D.U2.Z0Z.4F.EC.SS_CIN.IDX?format=csvdata&startPeriod=2005-04-01",
+      "http_status": 200,
+      "content_type": "text/csv",
+      "last_modified": "Wed, 16 Sep 2026 09:27:59 GMT",
+      "path": "raw/ecb_new_ciss_u2.csv",
+      "sha256": "7cb6375ed871ecb6251fc490432e8ba3090f0f20e9db7de29f6361d0269df803",
+      "bytes": 1575862
+    },
+    "b9": {
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/gov_10q_ggnfa?lang=en&freq=Q&unit=PC_GDP&s_adj=SCA&sector=S13&na_item=B9&geo=RO",
+      "http_status": 200,
+      "content_type": "application/json",
+      "last_modified": null,
+      "path": "raw/eurostat_gov_10q_ggnfa_ro_b9_sca_pc_gdp.json",
+      "sha256": "1cdb39849af044a91bf7cff52d2c8edf671f11f174f1ef184b08869f028b4f3c",
+      "bytes": 8359
+    }
+  },
+  "source_metadata": {
+    "eurostat_b9": {
+      "updated": "2026-07-21T11:00:00+0200",
+      "label": "Quarterly non-financial accounts for general government",
+      "id": [
+        "freq",
+        "unit",
+        "s_adj",
+        "sector",
+        "na_item",
+        "geo",
+        "time"
+      ],
+      "size": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        125
+      ]
+    },
+    "retained_debt_snapshot_sha256": "08546f460740106f90fae3895926866e8028a972da87149c428fd1334dd152f0"
+  },
+  "transformations": {
+    "romania_yield": "Arithmetic mean of the three published monthly observations in each calendar quarter.",
+    "germany_yield": "Arithmetic mean of the three published monthly observations in each calendar quarter.",
+    "new_ciss": "First compute an arithmetic mean over all finite published daily observations inside each calendar month; then compute an equal-weight arithmetic mean of the three monthly means for the quarter.",
+    "debt": "None; use the directly published quarterly observation.",
+    "b9": "None; use the directly published quarterly observation."
+  },
+  "quarterly_coverage": {
+    "romania_yield_complete_quarters": 85,
+    "germany_yield_complete_quarters": 85,
+    "new_ciss_complete_quarters": 86,
+    "b9_quarters": 125,
+    "debt_quarters": 105,
+    "common_complete_quarters": 84,
+    "first_common_quarter": "2005-Q2",
+    "last_common_quarter": "2026-Q1"
+  },
+  "output": {
+    "path": "sovereign_yield_quarterly_source.csv",
+    "sha256": "670d604a5cfd1cc1d2c7e2d6cdc1425c0e076e4f641ce082e29d406ba95ccceb",
+    "rows": 84
+  },
+  "hard_boundaries": {
+    "no_regression_or_parameter_estimation": true,
+    "no_lag_selection": true,
+    "no_spread_relabeling": true,
+    "no_fiscal_sign_flip_in_source_layer": true,
+    "no_monthly_forward_fill_of_fiscal_data": true,
+    "no_issuance_or_refinancing_proxy_added": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "disposition": "SOURCE_MATERIALISATION_EVIDENCE_READY_FOR_REPOSITORY_REVIEW",
+  "interpretation": "This run materializes source evidence only. It does not estimate a sovereign-yield equation, identify causal fiscal coefficients, validate a behavioural mechanism, or activate a feedback loop."
+}

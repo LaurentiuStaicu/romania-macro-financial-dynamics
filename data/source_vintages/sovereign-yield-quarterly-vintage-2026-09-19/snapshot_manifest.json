@@ -1,0 +1,103 @@
+{
+  "snapshot_version": "0.1",
+  "snapshot_id": "sovereign-yield-quarterly-vintage-2026-09-19",
+  "fetched_at_utc": "2026-09-19T08:01:16Z",
+  "source_vintage_contract": "data/provenance/source_vintage_contract.json",
+  "fetcher_script": "scripts/audit_sovereign_yield_quarterly_materialisation.py",
+  "fetcher_script_sha256": "7a567a169ebc2ee480a6a147426cf67a178c25e0e6da0492dbdd0c5f409fe975",
+  "workflow_context": {
+    "github_sha": "f19dc2e30cf8ca3fa3ae276e02c70df5e41fb951",
+    "github_run_id": "35430852609",
+    "github_event_name": "pull_request"
+  },
+  "raw_sources": [
+    {
+      "name": "romania_yield",
+      "institution": "European Central Bank / ESCB",
+      "url": "https://data-api.ecb.europa.eu/service/data/IRS/M.RO.L.L40.CI.0000.RON.N.Z?format=csvdata&startPeriod=2005-04",
+      "accept": "*/*",
+      "status": 200,
+      "content_type": "text/csv",
+      "last_modified": "Thu, 10 Sep 2026 08:00:00 GMT",
+      "bytes": 183373,
+      "sha256": "b0178a3531008afbef8a807bedc116ef04b9b93cafef7edbe3306f0c3a7e0236",
+      "path": "raw/ecb_irs_ro_10y.csv"
+    },
+    {
+      "name": "germany_yield",
+      "institution": "European Central Bank / ESCB",
+      "url": "https://data-api.ecb.europa.eu/service/data/IRS/M.DE.L.L40.CI.0000.EUR.N.Z?format=csvdata&startPeriod=2005-04",
+      "accept": "*/*",
+      "status": 200,
+      "content_type": "text/csv",
+      "last_modified": "Thu, 10 Sep 2026 08:00:00 GMT",
+      "bytes": 92945,
+      "sha256": "b59b7cf028a9c88d4689bdf4b1b843ae234716242dfae4402091e26d072a5547",
+      "path": "raw/ecb_irs_de_10y.csv"
+    },
+    {
+      "name": "new_ciss",
+      "institution": "European Central Bank / ESCB",
+      "url": "https://data-api.ecb.europa.eu/service/data/CISS/D.U2.Z0Z.4F.EC.SS_CIN.IDX?format=csvdata&startPeriod=2005-04-01",
+      "accept": "*/*",
+      "status": 200,
+      "content_type": "text/csv",
+      "last_modified": "Wed, 16 Sep 2026 09:27:59 GMT",
+      "bytes": 1575862,
+      "sha256": "7cb6375ed871ecb6251fc490432e8ba3090f0f20e9db7de29f6361d0269df803",
+      "path": "raw/ecb_new_ciss_u2.csv"
+    },
+    {
+      "name": "b9",
+      "institution": "Eurostat",
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/gov_10q_ggnfa?lang=en&freq=Q&unit=PC_GDP&s_adj=SCA&sector=S13&na_item=B9&geo=RO",
+      "accept": "*/*",
+      "status": 200,
+      "content_type": "application/json",
+      "last_modified": null,
+      "bytes": 8359,
+      "sha256": "1cdb39849af044a91bf7cff52d2c8edf671f11f174f1ef184b08869f028b4f3c",
+      "path": "raw/eurostat_gov_10q_ggnfa_ro_b9_sca_pc_gdp.json"
+    }
+  ],
+  "repository_inputs": [
+    {
+      "path": "model/dynamics/government_debt_stock_reference_snapshot.json",
+      "sha256": "08546f460740106f90fae3895926866e8028a972da87149c428fd1334dd152f0",
+      "role": "quarterly Maastricht debt-to-GDP control"
+    }
+  ],
+  "normalized_outputs": [
+    {
+      "path": "sovereign_yield_quarterly_source.csv",
+      "sha256": "670d604a5cfd1cc1d2c7e2d6cdc1425c0e076e4f641ce082e29d406ba95ccceb",
+      "derived_from_raw_sha256": [
+        "b0178a3531008afbef8a807bedc116ef04b9b93cafef7edbe3306f0c3a7e0236",
+        "b59b7cf028a9c88d4689bdf4b1b843ae234716242dfae4402091e26d072a5547",
+        "7cb6375ed871ecb6251fc490432e8ba3090f0f20e9db7de29f6361d0269df803",
+        "1cdb39849af044a91bf7cff52d2c8edf671f11f174f1ef184b08869f028b4f3c"
+      ],
+      "repository_input_sha256": [
+        "08546f460740106f90fae3895926866e8028a972da87149c428fd1334dd152f0"
+      ],
+      "normalizer": "scripts/audit_sovereign_yield_quarterly_materialisation.py",
+      "normalizer_sha256": "7a567a169ebc2ee480a6a147426cf67a178c25e0e6da0492dbdd0c5f409fe975",
+      "rows": 84
+    }
+  ],
+  "audit_report": {
+    "path": "sovereign_yield_quarterly_materialisation_audit.json",
+    "sha256": "00bc3cd5fd3168abc6c0f0a9cf11431654e79f1e5340316feab3a719f2326440"
+  },
+  "hard_boundaries": {
+    "no_regression_or_parameter_estimation": true,
+    "no_lag_selection": true,
+    "no_spread_relabeling": true,
+    "no_fiscal_sign_flip_in_source_layer": true,
+    "no_monthly_forward_fill_of_fiscal_data": true,
+    "no_issuance_or_refinancing_proxy_added": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "canonical_promotion": "REQUIRES_EXPLICIT_REPOSITORY_REVIEW_AND_COMMIT"
+}

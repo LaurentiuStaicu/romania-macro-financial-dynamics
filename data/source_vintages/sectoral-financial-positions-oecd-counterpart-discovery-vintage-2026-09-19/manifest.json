@@ -1,0 +1,59 @@
+{
+  "manifest_version": "0.1",
+  "retained_on": "2026-09-19",
+  "reference_mode": "sectoral_financial_positions",
+  "source": "OECD quarterly counterpart financial accounts and balance sheets",
+  "query": {
+    "reference_area": "ROU",
+    "frequency": "Q",
+    "start_period": "2014-Q1",
+    "end_period": "2026-Q1",
+    "all_other_dimensions": "ALL_AVAILABLE_VALUES"
+  },
+  "github_actions": {
+    "workflow_run_id": 35450526372,
+    "workflow_run_attempt": 2,
+    "job_id": 105916924062,
+    "head_branch": "audit/scientific-integrity-2026-09-18",
+    "head_sha": "2c5c8900a48a0c73c75634ede8f548a4bfe98185",
+    "artifact_id": 10586683826,
+    "artifact_name": "manual-oecd-counterpart-probe-720586b97ba5006a3d5b9846a69e9987e0a263c6",
+    "artifact_zip_size_bytes": 2313748,
+    "artifact_zip_sha256": "045265e3a32f9ec28c713029b9d8f7e5495ed50c9f3b411aa3696a680f60550e",
+    "artifact_expires_at": "2026-12-18T15:03:00Z"
+  },
+  "exact_artifact_files": {
+    "stocks_structure": {
+      "file_name": "stocks_counterpart_structure.xml",
+      "byte_count": 3343213,
+      "sha256": "d1f8acf6976d030d82bb84c3dc61595ab685807926a9c34a0dddc50e3ba18bad"
+    },
+    "stocks_csv": {
+      "file_name": "stocks_counterpart_romania.csv",
+      "byte_count": 86125057,
+      "sha256": "039d910150ece7d264284ffc8dfb713e99d255cb17bd366b66decfa214c4ae5f"
+    },
+    "flows_structure": {
+      "file_name": "flows_counterpart_structure.xml",
+      "byte_count": 3343196,
+      "sha256": "87d7c995086d89908ee91c0ae8d0f7da46af413c2a188dc521ff1d531b16e01e"
+    },
+    "flows_csv": {
+      "file_name": "flows_counterpart_romania.csv",
+      "byte_count": 84480865,
+      "sha256": "7585836c1b3b181fa233fbc21243813498911215b5ac9b28e7073da17e52629a"
+    },
+    "source_report": {
+      "file_name": "sectoral_financial_positions_oecd_counterpart_probe.json",
+      "sha256": "75035d5ceb3ab613c8fc55ead49f702657cfd6014473241c1d92bf42f270d848"
+    }
+  },
+  "exact_raw_files_repository_resident": false,
+  "retained_in_exact_workflow_artifact": true,
+  "preservation_note": "The exact first-run SDMX structures and Romania CSV payloads are identified by immutable file hashes plus the GitHub Actions artifact digest. Compact audit and semantic inventory are repository-resident; no provider re-query is needed to identify the reviewed vintage.",
+  "compact_audit_path": "data/source_vintages/sectoral-financial-positions-oecd-counterpart-discovery-vintage-2026-09-19/sectoral_financial_positions_oecd_counterpart_probe.json",
+  "semantic_inventory_path": "data/source_vintages/sectoral-financial-positions-oecd-counterpart-discovery-vintage-2026-09-19/semantic_inventory.json",
+  "scientific_result": "DISCOVERY_PASS_SEMANTIC_REVIEW_REQUIRED",
+  "readiness_change": 0,
+  "behavioural_closure_change": false
+}

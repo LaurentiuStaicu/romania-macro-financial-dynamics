@@ -1,0 +1,204 @@
+{
+  "audit_version": "0.1",
+  "phase": "BNR Legacy XLS — Deterministic Cell Extraction Diagnostic",
+  "status": "PASS_LEGACY_XLS_TABULAR_EXTRACTION_PATH_AVAILABLE",
+  "engine": {
+    "package": "xlrd",
+    "version": "2.0.2",
+    "distribution_filename": "xlrd-2.0.2-py2.py3-none-any.whl",
+    "distribution_sha256": "ea762c3d29f4cca48d82df517b6d89fbce4db3107f9d78713e48cd321d5c9aa9"
+  },
+  "source_vintage": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19",
+  "workbooks": [
+    {
+      "source_id": "bls_2023_feb",
+      "source_path": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19/bls_2023_feb.xls",
+      "source_bytes": 98304,
+      "source_sha256": "a79f26ef2a30aa54826979f08b3b9d5186b135ec291070d3cbe18e31df897e35",
+      "output_path": "bls_2023_feb_cells.json",
+      "output_bytes": 427610,
+      "output_sha256": "752b82fa65e318df388730d0ca1bd632489c5e9d5e28b4daa641f04e8c38113a",
+      "sheet_count": 2,
+      "sheet_names": [
+        "companii",
+        "populatie"
+      ],
+      "non_empty_cell_count": 2477,
+      "anchor_hit_counts": {
+        "C01": 1,
+        "C05": 1,
+        "P01": 1,
+        "P06": 1,
+        "P13": 1,
+        "P0303": 2,
+        "P1103": 1
+      }
+    },
+    {
+      "source_id": "bls_2023_may",
+      "source_path": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19/bls_2023_may.xls",
+      "source_bytes": 81920,
+      "source_sha256": "a0b5b0727b8208af1f576ff4128dae7268555f4122ff777a612f0817f92cdd41",
+      "output_path": "bls_2023_may_cells.json",
+      "output_bytes": 418997,
+      "output_sha256": "465c8a3785d4ad0d563cb38e5e55d2c95c95f2094219146cded4fd5d81c58e29",
+      "sheet_count": 2,
+      "sheet_names": [
+        "Companies",
+        "Households"
+      ],
+      "non_empty_cell_count": 2461,
+      "anchor_hit_counts": {
+        "C01": 1,
+        "C05": 1,
+        "P01": 1,
+        "P06": 1,
+        "P13": 1,
+        "P0303": 2,
+        "P1103": 1
+      }
+    },
+    {
+      "source_id": "bls_2024_feb",
+      "source_path": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19/bls_2024_feb.xls",
+      "source_bytes": 81408,
+      "source_sha256": "c62be9d1e9b17ea0c01ed1de9d7c86bae36f061e08fdf5bd14b71fc6a3b6de75",
+      "output_path": "bls_2024_feb_cells.json",
+      "output_bytes": 418730,
+      "output_sha256": "eb1dcd54d8eb9bea36cbd4b97a0ed98d097367a54bea46d978252876d40dbbc3",
+      "sheet_count": 2,
+      "sheet_names": [
+        "Companies",
+        "Households"
+      ],
+      "non_empty_cell_count": 2461,
+      "anchor_hit_counts": {
+        "C01": 1,
+        "C05": 1,
+        "P01": 1,
+        "P06": 1,
+        "P13": 1,
+        "P0303": 2,
+        "P1103": 1
+      }
+    },
+    {
+      "source_id": "bls_2024_may",
+      "source_path": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19/bls_2024_may.xls",
+      "source_bytes": 81920,
+      "source_sha256": "c85887dcb7bce9745f3b4baf90e78eceed5ca8e5392150d246e679e428406a98",
+      "output_path": "bls_2024_may_cells.json",
+      "output_bytes": 418866,
+      "output_sha256": "63f1b51c2afaa2d5ac458786cd106fc34a445cc0f4d8b8d20b55c030449f963d",
+      "sheet_count": 2,
+      "sheet_names": [
+        "Companies",
+        "Households"
+      ],
+      "non_empty_cell_count": 2461,
+      "anchor_hit_counts": {
+        "C01": 1,
+        "C05": 1,
+        "P01": 1,
+        "P06": 1,
+        "P13": 1,
+        "P0303": 2,
+        "P1103": 1
+      }
+    },
+    {
+      "source_id": "bls_2024_nov",
+      "source_path": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19/bls_2024_nov.xls",
+      "source_bytes": 81408,
+      "source_sha256": "d396414440ba3bcea7fa9b319880a2e701fe7ce4dfbd6a145abc8dfb7f3b6dac",
+      "output_path": "bls_2024_nov_cells.json",
+      "output_bytes": 418844,
+      "output_sha256": "5a0a9d3bb080cfc62464f6e8808d67971a1c2b3eb7ce273ffd10e1f1085e070c",
+      "sheet_count": 2,
+      "sheet_names": [
+        "Companies",
+        "Households"
+      ],
+      "non_empty_cell_count": 2461,
+      "anchor_hit_counts": {
+        "C01": 1,
+        "C05": 1,
+        "P01": 1,
+        "P06": 1,
+        "P13": 1,
+        "P0303": 2,
+        "P1103": 1
+      }
+    },
+    {
+      "source_id": "bls_2025_feb",
+      "source_path": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19/bls_2025_feb.xls",
+      "source_bytes": 98304,
+      "source_sha256": "2202f9d703f47d807549c35e2aba0ce9850fa862cd0fda8b95063637f67cd451",
+      "output_path": "bls_2025_feb_cells.json",
+      "output_bytes": 427420,
+      "output_sha256": "fb400b4b1afbe85dcbb405c2791d99706848015d79cf7535a8a5d3e75f0fb492",
+      "sheet_count": 2,
+      "sheet_names": [
+        "companii",
+        "populatie"
+      ],
+      "non_empty_cell_count": 2477,
+      "anchor_hit_counts": {
+        "C01": 1,
+        "C05": 1,
+        "P01": 1,
+        "P06": 1,
+        "P13": 1,
+        "P0303": 2,
+        "P1103": 1
+      }
+    },
+    {
+      "source_id": "bls_2025_nov",
+      "source_path": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19/bls_2025_nov.xls",
+      "source_bytes": 135680,
+      "source_sha256": "eaae97b82bc416d51124917a0dcf3c60991045cb14c0441b2c87457004d07e7a",
+      "output_path": "bls_2025_nov_cells.json",
+      "output_bytes": 620446,
+      "output_sha256": "d3d2f259dccc9a80ab0b58c2e42e3ff50285a5c1f40bfaff82c59aaa3472334c",
+      "sheet_count": 2,
+      "sheet_names": [
+        "companii",
+        "populatie"
+      ],
+      "non_empty_cell_count": 3602,
+      "anchor_hit_counts": {
+        "C01": 1,
+        "C05": 1,
+        "P01": 1,
+        "P06": 1,
+        "P13": 1,
+        "P0303": 2,
+        "P1103": 1
+      }
+    }
+  ],
+  "all_seven_workbooks_parsed": true,
+  "behavioural_variable_selection_performed": false,
+  "longitudinal_series_materialised": false,
+  "dsti_level_claim": false,
+  "parameter_estimation_performed": false,
+  "model_selection_performed": false,
+  "model_outcomes_accessed": false,
+  "system_dynamics_activation": false,
+  "behavioural_closure_change": false,
+  "hard_rules": {
+    "no_behavioural_variable_selection": true,
+    "no_longitudinal_series_materialisation": true,
+    "no_dsti_level_claim": true,
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_model_outcome_access": true,
+    "no_holdout_opening": true,
+    "no_causal_claim": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true,
+    "offline_source_bytes_only": true
+  }
+}

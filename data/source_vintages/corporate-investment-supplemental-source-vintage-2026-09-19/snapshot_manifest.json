@@ -1,0 +1,117 @@
+{
+  "snapshot_version": "0.1",
+  "snapshot_id": "corporate-investment-supplemental-source-vintage-2026-09-19",
+  "fetched_at_utc": "2026-09-19T09:46:48Z",
+  "source_vintage_contract": "data/provenance/source_vintage_contract.json",
+  "measurement_design_contract": "model/calibration_validation/corporate_investment_measurement_design_contract.json",
+  "materializer_script": "scripts/audit_corporate_investment_supplemental_materialisation.py",
+  "materializer_script_sha256": "0a55f0325c9a3127530e0aec4b50971139b49d394f8069dbb784d578112fa2d3",
+  "workflow_context": {
+    "github_sha": "715a6d161bded091d23c09ae3a0d668c1f13345e",
+    "github_run_id": "35435626901",
+    "github_event_name": "pull_request"
+  },
+  "raw_sources": [
+    {
+      "id": "nfc_gva",
+      "series_key": "QSA.Q.N.RO.W0.S11.S1._Z.B.B1G._Z._Z._Z.XDC._T.S.V.N._T",
+      "url": "https://data-api.ecb.europa.eu/service/data/QSA/Q.N.RO.W0.S11.S1._Z.B.B1G._Z._Z._Z.XDC._T.S.V.N._T?format=csvdata",
+      "http_status": 200,
+      "content_type": "text/csv",
+      "last_modified": "Tue, 28 Jul 2026 07:17:20 GMT",
+      "raw_path": "raw/nfc_gva.csv",
+      "raw_sha256": "2ee731d22e45f91b44c47f3374374a902887ba04e9533e34729a52427175429c",
+      "raw_bytes": 71667,
+      "metadata": {
+        "series_keys": [
+          "QSA.Q.N.RO.W0.S11.S1._Z.B.B1G._Z._Z._Z.XDC._T.S.V.N._T"
+        ],
+        "units": [],
+        "titles": [
+          "Gross value added of Non financial corporations"
+        ],
+        "adjustments": [
+          "N"
+        ],
+        "prices": [
+          "V"
+        ],
+        "observation_count": 109,
+        "first_period": "1999-Q1",
+        "last_period": "2026-Q1"
+      },
+      "role": "denominator source for preregistered trailing-four-quarter investment-grants-support intensity"
+    },
+    {
+      "id": "real_gdp",
+      "series_key": "MNA.Q.Y.RO.W2.S1.S1.B.B1GQ._Z._Z._Z.EUR.LR.N",
+      "url": "https://data-api.ecb.europa.eu/service/data/MNA/Q.Y.RO.W2.S1.S1.B.B1GQ._Z._Z._Z.EUR.LR.N?format=csvdata",
+      "http_status": 200,
+      "content_type": "text/csv",
+      "last_modified": "Mon, 07 Sep 2026 07:52:59 GMT",
+      "raw_path": "raw/real_gdp.csv",
+      "raw_sha256": "624e4d732bee5946caa1107e7620c3f710098a628ac45e851c3ccff3a4e4afe7",
+      "raw_bytes": 50857,
+      "metadata": {
+        "series_keys": [
+          "MNA.Q.Y.RO.W2.S1.S1.B.B1GQ._Z._Z._Z.EUR.LR.N"
+        ],
+        "units": [],
+        "titles": [
+          "Gross domestic product at market prices, volume"
+        ],
+        "adjustments": [
+          "Y"
+        ],
+        "prices": [
+          "LR"
+        ],
+        "observation_count": 126,
+        "first_period": "1995-Q1",
+        "last_period": "2026-Q2"
+      },
+      "role": "level source for preregistered year-on-year real activity growth"
+    }
+  ],
+  "normalized_outputs": [
+    {
+      "source_id": "nfc_gva",
+      "path": "nfc_gva_quarterly_level.csv",
+      "sha256": "7548019bdac61708e8f40eb400160d6e1784526ae24690616e3d3a87304350f9",
+      "rows": 109,
+      "first_period": "1999-Q1",
+      "last_period": "2026-Q1",
+      "derived_from_raw_sha256": [
+        "2ee731d22e45f91b44c47f3374374a902887ba04e9533e34729a52427175429c"
+      ],
+      "transformations": []
+    },
+    {
+      "source_id": "real_gdp",
+      "path": "real_gdp_quarterly_level.csv",
+      "sha256": "36be216728430bcee0c3fc78d8d282645ccd71d416ede47e50ed73e8cc5e4ff4",
+      "rows": 126,
+      "first_period": "1995-Q1",
+      "last_period": "2026-Q2",
+      "derived_from_raw_sha256": [
+        "624e4d732bee5946caa1107e7620c3f710098a628ac45e851c3ccff3a4e4afe7"
+      ],
+      "transformations": []
+    }
+  ],
+  "audit_report": {
+    "path": "corporate_investment_supplemental_materialisation_audit.json",
+    "sha256": "4b8f9f397ca524551f29c06ef1e09b40e1501b5aea0785f140878b1b0eaafb42"
+  },
+  "hard_boundaries": {
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_lag_selection": true,
+    "no_holdout_opening": true,
+    "no_causal_claim": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true,
+    "live_provider_work_manual_only": true
+  },
+  "canonical_promotion": "REQUIRES_EXPLICIT_REPOSITORY_REVIEW_AND_COMMIT"
+}

@@ -1,0 +1,140 @@
+{
+  "audit_version": "0.1",
+  "generated_at_utc": "2026-09-19T14:57:25Z",
+  "phase": "Eurostat nasq_10_f_cp — Romania Schema and Recent-Coverage Discovery Probe",
+  "reference_mode": "sectoral_financial_positions",
+  "formal_reference_mode_gate": false,
+  "dataset_code": "nasq_10_f_cp",
+  "request_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/nasq_10_f_cp?lang=en&geo=RO&sinceTimePeriod=2025-Q1&untilTimePeriod=2026-Q1",
+  "http_status": 200,
+  "error": null,
+  "content_type": "application/json",
+  "bytes": 1127348,
+  "sha256": "547c9e65c60900aa259ba547efb60faedbaa22e8d8a66e1caed6cbd2cbd189ae",
+  "parse_error": null,
+  "api_message": null,
+  "dimension_ids": [
+    "freq",
+    "unit",
+    "sector2",
+    "sector",
+    "stk_flow",
+    "finpos",
+    "na_item",
+    "geo",
+    "time"
+  ],
+  "dimension_sizes": [
+    1,
+    3,
+    16,
+    15,
+    3,
+    2,
+    12,
+    1,
+    5
+  ],
+  "category_codes_by_dimension": {
+    "freq": [
+      "Q"
+    ],
+    "unit": [
+      "MIO_EUR",
+      "MIO_NAC",
+      "PC_GDP"
+    ],
+    "sector2": [
+      "S1",
+      "S11",
+      "S12",
+      "S121_S122_S123",
+      "S121",
+      "S125_S126_S127",
+      "S124",
+      "S125",
+      "S126",
+      "S127",
+      "S128",
+      "S128_S129",
+      "S129",
+      "S13",
+      "S14_S15",
+      "S2"
+    ],
+    "sector": [
+      "S1",
+      "S11",
+      "S12",
+      "S121_S122_S123",
+      "S121",
+      "S125_S126_S127",
+      "S124",
+      "S125",
+      "S126",
+      "S127",
+      "S128",
+      "S128_S129",
+      "S129",
+      "S13",
+      "S14_S15"
+    ],
+    "stk_flow": [
+      "TRN",
+      "STK",
+      "KA"
+    ],
+    "finpos": [
+      "ASS",
+      "LIAB"
+    ],
+    "na_item": [
+      "F22_F29",
+      "F3",
+      "F3_FDI",
+      "F31",
+      "F32",
+      "F4",
+      "F4_FDI",
+      "F41",
+      "F42",
+      "F511",
+      "F511_FDI",
+      "F52"
+    ],
+    "geo": [
+      "RO"
+    ],
+    "time": [
+      "2025-Q1",
+      "2025-Q2",
+      "2025-Q3",
+      "2025-Q4",
+      "2026-Q1"
+    ]
+  },
+  "non_null_observation_count": 64995,
+  "geo_codes": [
+    "RO"
+  ],
+  "time_codes": [
+    "2025-Q1",
+    "2025-Q2",
+    "2025-Q3",
+    "2025-Q4",
+    "2026-Q1"
+  ],
+  "discovery_gate_pass": true,
+  "scientific_result_state": "PASS",
+  "disposition": "EUROSTAT_ROMANIA_COUNTERPART_SCHEMA_AND_RECENT_DATA_RETAINED_FOR_EXPLICIT_MAPPING_LINEAGE_REVIEW_ONLY",
+  "semantic_mapping_performed": false,
+  "instrument_mapping_performed": false,
+  "counterpart_orientation_mapping_performed": false,
+  "historical_coverage_claim_performed": false,
+  "reconciliation_test_performed": false,
+  "historical_phase_A_D_reinterpreted": false,
+  "reference_mode_promotion": false,
+  "accounting_readiness_change": false,
+  "system_dynamics_activation": false,
+  "behavioural_closure_change": false
+}

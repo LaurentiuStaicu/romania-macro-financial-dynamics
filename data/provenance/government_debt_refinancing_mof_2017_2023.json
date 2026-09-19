@@ -1,0 +1,105 @@
+{
+  "provenance_version": "0.1",
+  "retrieved_or_verified_date": "2026-09-19",
+  "variable": "government_refinancing_need",
+  "series_status": "PARTIAL_OBSERVED_SERIES_NOT_CLOSURE_READY",
+  "canonical_empirical_mapping": "Annual Ministry of Finance 'Refinancing of Government Public Debt' amount in billion RON, retained separately from the broader gross financing need.",
+  "definition": {
+    "ministry_definition": "Principal/capital repayments and refinancing of government securities on account of government debt under national legislation, calculated on the stated year-end debt balance; includes state guarantees and excludes temporary financing.",
+    "gross_financing_need_relation": "Gross financing need is the central-public-administration budget deficit plus the Ministry refinancing amount in the cited tables.",
+    "semantic_limits": [
+      "the annual refinancing amount is an aggregate financing-pressure/reference quantity, not matched realized principal linked to specific maturing instruments",
+      "it does not distinguish refinancing from contractual interest-rate refixing at instrument level",
+      "it does not identify the repricing share m[t] used by the deferred government effective-rate mechanism",
+      "gross financing need is not substituted for the refinancing component"
+    ]
+  },
+  "sources": [
+    {
+      "id": "mof_annual_debt_report_2018",
+      "institution": "Romania Ministry of Finance",
+      "url": "https://www.mfinante.gov.ro/static/10/Mfp/buletin/executii/raportanualprivindDPG31dec2018engl.pdf",
+      "observed": {
+        "2017": {
+          "refinancing_bn_RON": 40.3,
+          "gross_financing_need_bn_RON": 66.2,
+          "status": "FINAL_ANNUAL_REPORT"
+        },
+        "2018": {
+          "refinancing_bn_RON": 43.4,
+          "gross_financing_need_bn_RON": 70.3,
+          "status": "FINAL_ANNUAL_REPORT"
+        }
+      }
+    },
+    {
+      "id": "mof_annual_debt_report_2019",
+      "institution": "Romania Ministry of Finance",
+      "url": "https://www.mfinante.gov.ro/static/10/Mfp/buletin/executii/raportanualprivindDPG31dec2019engl24072020.pdf",
+      "observed": {
+        "2019": {
+          "refinancing_bn_RON": 47.2,
+          "gross_financing_need_bn_RON": 93.3,
+          "status": "OPERATIVE_EXECUTION"
+        }
+      }
+    },
+    {
+      "id": "mof_strategy_2021_2023",
+      "institution": "Romania Ministry of Finance",
+      "url": "https://www.mfinante.gov.ro/static/10/Mfp/buletin/executii/Strategie2021-2023_en.pdf",
+      "observed": {
+        "2020": {
+          "refinancing_bn_RON": 46.6,
+          "gross_financing_need_bn_RON": 148,
+          "status": "OPERATIVE_EXECUTION"
+        }
+      }
+    },
+    {
+      "id": "mof_annual_debt_report_2022",
+      "institution": "Romania Ministry of Finance",
+      "url": "https://www.mfinante.gov.ro/static/10/Mfp/buletin/executii/Raportprivinddatoriapublicaguv_31122022en.pdf",
+      "observed": {
+        "2021": {
+          "refinancing_bn_RON": 53.5,
+          "gross_financing_need_bn_RON": 136.5,
+          "status": "FINAL_ANNUAL_REPORT"
+        },
+        "2022": {
+          "refinancing_bn_RON": 78.9,
+          "gross_financing_need_bn_RON": 160.6,
+          "status": "FINAL_ANNUAL_REPORT"
+        }
+      }
+    },
+    {
+      "id": "mof_strategy_2024_2026",
+      "institution": "Romania Ministry of Finance",
+      "url": "https://www.mfinante.gov.ro/static/10/Mfp/buletin/executii/Strategiedeadministrareadatorieipubliceguvernamentale2024_2026en.pdf",
+      "observed": {
+        "2023": {
+          "refinancing_bn_RON": 95.8,
+          "gross_financing_need_bn_RON": 186.4,
+          "status": "OPERATIVE_EXECUTION"
+        }
+      }
+    }
+  ],
+  "coverage": {
+    "first_period": "2017",
+    "last_period": "2023",
+    "observation_count": 7,
+    "final_annual_report_observations": 4,
+    "operative_execution_observations": 3,
+    "forecast_observations": 0
+  },
+  "hard_boundaries": {
+    "no_forecast_values_in_observed_partial_series": true,
+    "no_gross_financing_need_substitution": true,
+    "no_maturity_share_substitution": true,
+    "no_refixing_share_substitution": true,
+    "no_repricing_parameter_inference": true,
+    "no_behavioural_activation": true
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "review_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "mechanism_id": "aggregate_bank_credit_response",
+  "phase": "BNR BLS Missing-Round Workbook Source-Vintage Promotion Review",
+  "source_probe_contract": "model/calibration_validation/bnr_bls_missing_round_workbook_recovery_contract.json",
+  "source_workflow": ".github/workflows/scientific-ci.yml",
+  "source_workflow_run_id": 35451238428,
+  "source_workflow_run_attempt": 2,
+  "source_job_id": 105919928141,
+  "source_head_branch": "audit/scientific-integrity-2026-09-18",
+  "source_branch_head_before_execution": "e4b3a36ff277816c831aabdc14e5d34dbb7cca99",
+  "source_artifact_id": 10587121563,
+  "source_artifact_name": "manual-bnr-bls-missing-round-recovery-a63736553757b5896cf748cc1d5f12497b005d70",
+  "source_artifact_zip_sha256": "974b97275fdd8c8d57f1a5dbcca67d3aef70ff397a996957bc9eaa2b6b779827",
+  "destination": "data/source_vintages/bnr-bls-missing-round-recovery-vintage-2026-09-19",
+  "expected_files": [
+    {
+      "path": "2023-q2-candidate-1.xls",
+      "quarter": "2023-Q2",
+      "bytes": 81920,
+      "sha256": "aec840a2c7c56037a4f971d0bc3b4c3a9aa05a8a2a4c8d486d10a70e6e4a91a9",
+      "signature": "OLE2_CFBF_D0CF11E0A1B11AE1"
+    },
+    {
+      "path": "2023-q3-candidate-1.xls",
+      "quarter": "2023-Q3",
+      "bytes": 81920,
+      "sha256": "44694ed4cef41fecdbab818532a67abeda739dd55c693a8537ecc65fc1d69f5c",
+      "signature": "OLE2_CFBF_D0CF11E0A1B11AE1"
+    },
+    {
+      "path": "2024-q2-candidate-1.xls",
+      "quarter": "2024-Q2",
+      "bytes": 81408,
+      "sha256": "ee2d2e2d8bf88ba93a0f2ab01fc9950179f29dd79ebe5b4c251c5177cf749a4e",
+      "signature": "OLE2_CFBF_D0CF11E0A1B11AE1"
+    },
+    {
+      "path": "bnr_bls_missing_round_workbook_recovery.json",
+      "bytes": 4803,
+      "sha256": "4f0f59a717f64fb22d1711a10196e2985ac53838ba7ba824700b34c553921ae9",
+      "signature": "JSON"
+    }
+  ],
+  "recovered_quarters": ["2023-Q2", "2023-Q3", "2024-Q2"],
+  "pending_quarters": ["2025-Q2"],
+  "review_result": "APPROVED_FOR_IMMUTABLE_SOURCE_VINTAGE_RETENTION_ONLY",
+  "promotion_effect": {
+    "retain_exact_workbook_bytes": true,
+    "retain_exact_probe_audit": true,
+    "canonical_panel_append_authorized": false,
+    "value_extraction_authorized": false,
+    "parameter_estimation_authorized": false,
+    "model_selection_authorized": false,
+    "holdout_opening_authorized": false,
+    "system_dynamics_activation": false,
+    "behavioural_closure_change": false
+  },
+  "required_next_gate_after_retention": [
+    "Verify exact quarter identity from workbook content.",
+    "Verify the six preregistered BLS observables against the existing cross-round semantic mapping or freeze a separate coordinate bridge if any layout differs.",
+    "Perform deterministic cell extraction only after that semantic/coordinate gate passes.",
+    "Regenerate and audit the canonical panel without interpolation or synthetic quarters."
+  ],
+  "hard_rules": {
+    "no_live_url_refetch_in_promotion": true,
+    "artifact_id_and_zip_hash_are_frozen": true,
+    "exact_file_set_and_individual_hashes_required": true,
+    "destination_must_not_preexist": true,
+    "no_canonical_panel_mutation": true,
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_lag_selection": true,
+    "no_holdout_opening": true,
+    "no_synthetic_quarter_creation": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  }
+}
