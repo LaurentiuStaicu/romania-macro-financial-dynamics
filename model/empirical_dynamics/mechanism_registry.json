@@ -371,10 +371,10 @@
       "classification": "DEFERRED",
       "maps_to_dynamic_core_loop": "government_refinancing_interest_loop",
       "central_feedback": false,
-      "functional_form": "Delta primary_balance = f(debt_gap, output_gap, institutional/fiscal-package regime)",
+      "functional_form": "No admitted fiscal-reaction behavioural form. The preregistered annual lagged-state primary-balance candidate was tested on 2010-2017 and failed before holdout.",
       "implementation": null,
       "parameters": [],
-      "estimation_plan": "Keep the fiscal reaction DEFERRED. The matched quarterly primary-balance measurement boundary is now frozen as B9 + D41PAY using Eurostat gov_10q_ggnfa, S13, NSA, PC_GDP fetched in the same live run. First retain that source snapshot. Then freeze debt-gap, output-gap and dated institutional/discretionary fiscal-regime measurement in a separate preregistered contract before any reaction-function estimation. Do not impose a stable Taylor-style fiscal rule from accounting observability alone.",
+      "estimation_plan": "Freeze the 2026-09-19 annual tested form at FAIL_BEFORE_HOLDOUT. Do not inspect 2018-2024 final-evaluation performance, search alternative lags or target transformations, add regime coefficients, or reinterpret the negative output-gap sign after observing the selection result. Reopen only in a separately preregistered cycle triggered by genuinely new measurement or identification evidence.",
       "observables": [
         "primary_balance",
         "debt_to_gdp",
@@ -388,15 +388,20 @@
       ],
       "limits": [
         "large discretionary packages and EDP constraints create regime shifts",
-        "short sample for a stable reaction function",
-        "observed B9, interest expenditure and debt do not identify a stable fiscal reaction without a matched primary-balance boundary and output-gap measurement model"
+        "the exact actual-only national annual sample is short",
+        "AMECO/EUCAM output gap is model-based and revision-sensitive rather than directly observed potential output",
+        "the tested lagged-state annual form underperformed naive primary-balance persistence and failed the preregistered output-gap sign-consistency gate"
       ],
       "rejection_or_degradation_criteria": [
-        "reaction coefficients regime-unstable",
-        "rule obscures discrete policy measures or performs worse than explicit exogenous fiscal-package representation"
+        "tested annual form failed before holdout on predictive and parameter-domain gates",
+        "any future reopening requires genuinely new evidence and a separately preregistered cycle rather than post-result respecification"
       ],
       "source_boundary_review": "model/calibration_validation/fiscal_primary_balance_source_boundary_review.json",
-      "primary_balance_materialisation_contract": "model/calibration_validation/fiscal_primary_balance_materialisation_contract.json"
+      "primary_balance_materialisation_contract": "model/calibration_validation/fiscal_primary_balance_materialisation_contract.json",
+      "annual_measurement_boundary": "model/calibration_validation/fiscal_reaction_annual_measurement_boundary_review.json",
+      "annual_source_vintage": "data/source_vintages/fiscal-reaction-ameco-actual-vintage-2026-09-19",
+      "annual_structural_selection_contract": "model/calibration_validation/fiscal_reaction_annual_structural_selection_contract.json",
+      "annual_structural_selection_result": "model/calibration_validation/fiscal_reaction_annual_structural_selection_result.json"
     },
     {
       "id": "monetary_policy_reaction_function",
