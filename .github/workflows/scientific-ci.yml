@@ -55,6 +55,9 @@ jobs:
       - name: Run System Dynamics conformity gate explicitly
         run: python scripts/audit_system_dynamics_conformity.py
 
+      - name: Audit cross-registry scientific baseline manifest
+        run: python scripts/audit_scientific_baseline_manifest.py
+
       - name: Verify retained source-vintage provenance state offline
         run: python scripts/verify_validation_recovery_provenance.py
 
