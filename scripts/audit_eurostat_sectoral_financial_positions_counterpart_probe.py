@@ -126,6 +126,33 @@ def inspect_json_stat(payload: dict) -> dict:
     }
 
 
+def discovery_gate_passes(
+    *,
+    status: int | None,
+    parse_error: str | None,
+    summary: dict,
+    rule: dict,
+) -> bool:
+    required_dimensions = set(rule["required_dimension_ids"])
+    codes = summary["category_codes_by_dimension"]
+    required_counterpart = rule["required_counterpart_dimension"]
+    required_stock_flow = set(rule["required_stock_flow_codes"])
+    required_financial_positions = set(
+        rule["required_financial_position_codes"]
+    )
+    return (
+        status == rule["required_http_status"]
+        and parse_error is None
+        and required_dimensions <= set(summary["dimension_ids"])
+        and required_counterpart in summary["dimension_ids"]
+        and required_stock_flow <= set(codes.get("stk_flow", []))
+        and required_financial_positions <= set(codes.get("finpos", []))
+        and rule["required_geo_identity"] in summary["geo_codes"]
+        and summary["non_null_observation_count"]
+        >= rule["minimum_non_null_observations"]
+    )
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     contract = json.loads(CONTRACT.read_text(encoding="utf-8"))
@@ -162,14 +189,11 @@ def main() -> None:
             parse_error = f"{type(exc).__name__}:{exc}"
 
     rule = contract["discovery_pass_rule"]
-    required_dimensions = set(rule["required_dimension_ids"])
-    pass_gate = (
-        status == rule["required_http_status"]
-        and parse_error is None
-        and required_dimensions <= set(summary["dimension_ids"])
-        and rule["required_geo_identity"] in summary["geo_codes"]
-        and summary["non_null_observation_count"]
-        >= rule["minimum_non_null_observations"]
+    pass_gate = discovery_gate_passes(
+        status=status,
+        parse_error=parse_error,
+        summary=summary,
+        rule=rule,
     )
 
     audit = {

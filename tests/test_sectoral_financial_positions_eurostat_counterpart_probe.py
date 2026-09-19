@@ -4,6 +4,7 @@ import unittest
 
 from scripts.audit_eurostat_sectoral_financial_positions_counterpart_probe import (
     category_codes,
+    discovery_gate_passes,
     inspect_json_stat,
     non_null_observation_count,
 )
@@ -74,6 +75,92 @@ class EurostatSectoralFinancialPositionsCounterpartProbeLogicTests(unittest.Test
         self.assertEqual(
             summary["category_codes_by_dimension"]["sectpart"],
             ["S1", "S2"],
+        )
+
+    def test_discovery_gate_requires_counterpart_and_accounting_semantics(self) -> None:
+        rule = {
+            "required_http_status": 200,
+            "required_dimension_ids": [
+                "freq",
+                "unit",
+                "sector2",
+                "sector",
+                "stk_flow",
+                "finpos",
+                "na_item",
+                "geo",
+                "time",
+            ],
+            "required_counterpart_dimension": "sector2",
+            "required_stock_flow_codes": ["STK", "TRN"],
+            "required_financial_position_codes": ["ASS", "LIAB"],
+            "required_geo_identity": "RO",
+            "minimum_non_null_observations": 1,
+        }
+        summary = {
+            "dimension_ids": list(rule["required_dimension_ids"]),
+            "category_codes_by_dimension": {
+                "stk_flow": ["KA", "STK", "TRN"],
+                "finpos": ["ASS", "LIAB"],
+            },
+            "geo_codes": ["RO"],
+            "non_null_observation_count": 2,
+        }
+        self.assertTrue(
+            discovery_gate_passes(
+                status=200,
+                parse_error=None,
+                summary=summary,
+                rule=rule,
+            )
+        )
+
+        without_counterpart = {
+            **summary,
+            "dimension_ids": [
+                item for item in summary["dimension_ids"]
+                if item != "sector2"
+            ],
+        }
+        self.assertFalse(
+            discovery_gate_passes(
+                status=200,
+                parse_error=None,
+                summary=without_counterpart,
+                rule=rule,
+            )
+        )
+
+        without_transactions = {
+            **summary,
+            "category_codes_by_dimension": {
+                **summary["category_codes_by_dimension"],
+                "stk_flow": ["KA", "STK"],
+            },
+        }
+        self.assertFalse(
+            discovery_gate_passes(
+                status=200,
+                parse_error=None,
+                summary=without_transactions,
+                rule=rule,
+            )
+        )
+
+        without_liabilities = {
+            **summary,
+            "category_codes_by_dimension": {
+                **summary["category_codes_by_dimension"],
+                "finpos": ["ASS"],
+            },
+        }
+        self.assertFalse(
+            discovery_gate_passes(
+                status=200,
+                parse_error=None,
+                summary=without_liabilities,
+                rule=rule,
+            )
         )
 
     def test_json_stat_missing_dimension_metadata_is_rejected(self) -> None:
