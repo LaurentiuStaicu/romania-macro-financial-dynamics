@@ -123,7 +123,8 @@
       "assessment": "model/dynamics/sectoral_financial_positions_reference_assessment.json",
       "boundary_review": "model/dynamics/sectoral_financial_positions_boundary_review.json",
       "strict_source_gate_assessment": "model/dynamics/sectoral_financial_positions_strict_gate_assessment.json",
-      "aggregate_identity_assessment": "model/dynamics/sectoral_financial_positions_aggregate_identity_assessment.json"
+      "aggregate_identity_assessment": "model/dynamics/sectoral_financial_positions_aggregate_identity_assessment.json",
+      "rounding_consistency_assessment": "model/dynamics/sectoral_financial_positions_rounding_consistency_assessment.json"
     }
   ],
   "closure_rule": "Integrated behavioural closure may not be declared validated until the reference modes required by each active loop have explicit observed targets or a documented reason why only qualitative/reference-pattern validation is possible.",
