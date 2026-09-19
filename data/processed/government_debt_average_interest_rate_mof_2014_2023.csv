@@ -1,0 +1,11 @@
+period,average_interest_rate_pct,source_id,definition_status
+2014,4.3,mof_strategy_2016_2018,MoF year-end portfolio average interest rate
+2015,4.1,mof_strategy_2016_2018,MoF year-end portfolio average interest rate
+2016,3.7,mof_strategy_2017_2019,MoF year-end portfolio average interest rate
+2017,3.4,mof_strategy_2018_2020,MoF year-end portfolio average interest rate
+2018,3.7,mof_strategy_2019_2021,MoF year-end portfolio average interest rate
+2019,3.8,mof_strategy_2021_2023,MoF year-end portfolio average interest rate
+2020,3.3,mof_strategy_2021_2023,MoF year-end portfolio average interest rate
+2021,3.1,mof_strategy_2022_2024,MoF year-end portfolio average interest rate
+2022,3.3,mof_strategy_2023_2025,MoF year-end portfolio average interest rate
+2023,4.2,mof_strategy_2024_2026,MoF year-end portfolio average interest rate
