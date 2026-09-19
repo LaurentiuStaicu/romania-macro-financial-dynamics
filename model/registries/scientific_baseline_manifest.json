@@ -1,5 +1,5 @@
 {
-  "manifest_version": "0.5",
+  "manifest_version": "0.6",
   "baseline_id": "scientific-integrity-2026-09-19",
   "purpose": "Single canonical cross-registry snapshot of RMD scientific maturity. Values in this manifest must agree with the authoritative accounting, dynamics, reference-mode, empirical-mechanism and validation registries; the manifest is not an independent source of scientific truth.",
   "authority": {
@@ -18,7 +18,8 @@
     "sectoral_financial_positions_external_source_screening": "model/dynamics/sectoral_financial_positions_external_source_screening.json",
     "mechanism_reopen_conditions": "model/calibration_validation/mechanism_reopen_conditions_registry.json",
     "reference_mode_recovery_terminal_assessment": "model/dynamics/reference_mode_recovery_terminal_assessment.json",
-    "sectoral_financial_positions_bnr_cnf_source_screening": "model/dynamics/sectoral_financial_positions_bnr_cnf_source_screening.json"
+    "sectoral_financial_positions_bnr_cnf_source_screening": "model/dynamics/sectoral_financial_positions_bnr_cnf_source_screening.json",
+    "validation_recovery_stage_terminal_assessment": "model/registries/validation_recovery_stage_terminal_assessment.json"
   },
   "canonical_state": {
     "accounting": {
@@ -112,6 +113,14 @@
       "reopen_registry_entry_count": 11,
       "all_reopen_conditions_registered": true,
       "reopen_governance_state": "DECLARED_TRIGGER_REQUIRED_NO_AUTOMATIC_ESTIMATION"
+    },
+    "scientific_stage": {
+      "name": "Validation Recovery / Empirical Basis Expansion",
+      "status": "STAGE_COMPLETE_EVIDENCE_TRIGGERED_BASELINE_HOLD",
+      "next_operational_state": "EVIDENCE_TRIGGERED_BASELINE_HOLD",
+      "active_autonomous_empirical_task": null,
+      "model_complete": false,
+      "release_ready": false
     }
   },
   "hard_invariants": [
@@ -130,6 +139,8 @@
     "Every non-rejected behavioural mechanism has exactly one canonical reopen-condition entry with governing evidence and explicit non-reopen conditions.",
     "Reopening a behavioural mechanism authorizes only its declared next evidence/identification gate and never automatically authorizes estimation/refit, holdout inspection, causal claims, System Dynamics activation or behavioural closure.",
     "Reference-mode recovery may complete at a documented public-evidence boundary below 10/10 only when every missing mode has an explicit blocker, exhausted admissible current-public-source paths and declared reopen triggers.",
-    "The annual BNR counterpart stock matrix may be used as semantic evidence only; it may not be interpolated to quarters or used to substitute for the required quarterly stock-and-financial-transaction history."
+    "The annual BNR counterpart stock matrix may be used as semantic evidence only; it may not be interpolated to quarters or used to substitute for the required quarterly stock-and-financial-transaction history.",
+    "Completion of the current recovery stage does not imply model completion, calibration, causal identification, integrated reference-mode closure, behavioural closure or release readiness.",
+    "When the stage is in EVIDENCE_TRIGGERED_BASELINE_HOLD, no new empirical calibration/refit or boundary relaxation may start without satisfying a declared reopen trigger."
   ]
 }
