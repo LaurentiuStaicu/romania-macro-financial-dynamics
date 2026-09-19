@@ -1,5 +1,5 @@
 {
-  "contract_version": "0.2",
+  "contract_version": "0.3",
   "frozen_on": "2026-09-19",
   "mechanism_id": "aggregate_bank_credit_response",
   "phase": "BNR Prudential Table Source Enumeration and Materialisation Preregistration",
@@ -23,16 +23,27 @@
   },
   "target_window": {
     "frequency": "quarterly",
-    "start_period": "2014-Q4",
+    "start_period": "2015-Q4",
     "end_period": "2025-Q4",
-    "expected_quarter_count": 45,
+    "expected_quarter_count": 41,
     "quarter_end_months": [
       3,
       6,
       9,
       12
     ],
-    "reason": "Starts after the June-2014 supervisory-reporting break and ends at the last complete calendar year before this preregistration. Extension beyond 2025-Q4 requires a new frozen source vintage, not silent append."
+    "common_window_basis": "The target is a two-variable matched prudential panel. BNR methodology states that the NPL ratio according to the EBA definition is calculated starting in December 2015; therefore 2015-Q4 is the earliest admissible common quarter for total-capital and EBA-NPL controls.",
+    "semantic_evidence": {
+      "source": "BNR Monthly Bulletin February 2017, methodological notes",
+      "url": "https://bnr.ro/files/d/Pubs_ro/Lunare/2017bl/2017bl02.pdf",
+      "statement": "Starting with December 2015 BNR calculates the non-performing loan ratio according to the EBA definition."
+    },
+    "pre_common_capital_only_window": {
+      "start_period": "2014-Q4",
+      "end_period": "2015-Q3",
+      "role": "Optional source-semantic diagnostic only; it cannot enter the matched prudential panel because the EBA-defined NPL target does not yet exist.",
+      "promotion_to_matched_panel_allowed": false
+    }
   },
   "target_variables": {
     "total_capital_ratio": {
@@ -79,7 +90,7 @@
     "no_url_pattern_generation": true,
     "no_directory_bruteforce": true,
     "no_value_peeking_during_source_selection": true,
-    "minimum_required_quarter_coverage": 45,
+    "minimum_required_quarter_coverage": 41,
     "incomplete_enumeration_effect": "BLOCK_MATERIALISATION_NO_MODEL_EFFECT",
     "year_level_source_selection": true,
     "primary_publication_rule": "January Y+1 Monthly Bulletin for year Y",
@@ -116,14 +127,17 @@
   },
   "semantic_validation_gate": {
     "require_population_boundary_match": true,
-    "require_all_45_quarters_for_both_primary_variables": true,
+    "require_all_45_quarters_for_both_primary_variables": false,
     "require_cet1_crosscheck_where_published": true,
     "require_reporting_break_metadata": true,
     "require_exact_source_hashes": true,
     "require_no_duplicate_quarters": true,
     "require_no_nonfinite_promoted_values": true,
     "compare_against_retained_cbd2_only_as_diagnostic": true,
-    "numerical_similarity_never_authorizes_population_bridge": true
+    "numerical_similarity_never_authorizes_population_bridge": true,
+    "require_all_common_window_quarters_for_both_primary_variables": true,
+    "expected_common_window_quarter_count": 41,
+    "no_pre_december_2015_eba_npl_backcast": true
   },
   "promotion_boundary": {
     "output_status_if_pass": "BNR_MATCHED_PRUDENTIAL_CANDIDATE_SERIES_READY_FOR_SEPARATE_PROMOTION_REVIEW",
@@ -150,7 +164,8 @@
     "no_holdout_opening": true,
     "no_causal_claim": true,
     "no_system_dynamics_activation": true,
-    "no_behavioural_closure_change": true
+    "no_behavioural_closure_change": true,
+    "no_pre_december_2015_eba_npl_backcast": true
   },
   "execution_policy": "MANUAL_ONLY_SOURCE_ENUMERATION_AND_ACQUISITION_THEN_OFFLINE_DETERMINISTIC_EXTRACTION"
 }
