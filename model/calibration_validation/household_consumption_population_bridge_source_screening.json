@@ -129,7 +129,7 @@
     "no_behavioural_closure_change": true
   },
   "disposition": {
-    "population_bridge_status": "BLOCKED_NO_OBSERVED_PUBLIC_BRIDGE_IDENTIFIED",
+    "population_bridge_status": "BLOCKED_NO_OBSERVED_OFFICIAL_BRIDGE_IDENTIFIED",
     "household_consumption_estimation_authorized": false,
     "registered_full_form_source_admissible": false,
     "validated_reference_behavioural_mechanisms_change": 0,
