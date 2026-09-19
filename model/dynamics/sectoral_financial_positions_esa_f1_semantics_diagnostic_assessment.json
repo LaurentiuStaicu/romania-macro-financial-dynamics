@@ -43,14 +43,14 @@
     },
     "subcomponent_interpretation": {
       "resident_S12_S121_F1_liability": "Entirely F12/SDR on the published QSA series examined in Phase C; F11 liability is zero.",
-      "phase_b_persistent_stock_residual": "Explained by omission of the published resident F12 liability from the Phase B represented-boundary formula.",
-      "phase_b_2021_Q3_flow_residual": "Explained by the published F12 liability transaction of about 10,323.47 million RON in 2021-Q3."
+      "exploratory_reaudit_persistent_stock_residual": "Explained by omission of the published resident F12 liability from the exploratory structural-zero represented-boundary formula.",
+      "exploratory_reaudit_2021_Q3_flow_residual": "Explained by the published F12 liability transaction of about 10,323.47 million RON in 2021-Q3."
     },
     "external_orientation": {
       "S121_F1_assets_equal_W1_F1_assets_max_abs_difference_million_RON": 0,
       "S121_F11_assets_equal_W1_F11_assets_max_abs_difference_million_RON": 0,
       "S121_F12_assets_equal_W1_F12_assets_max_abs_difference_million_RON": 0,
-      "interpretation": "The retained data support the existing W1 asset-side counterpart mapping for S121 F1/F11/F12. The principal Phase B error was the resident F1 liability structural-zero assumption, not a wholesale W1 orientation failure."
+      "interpretation": "The retained data support the existing W1 asset-side counterpart mapping for S121 F1/F11/F12. The principal error in the exploratory structural-zero re-audit was omission of published resident F1/F12 liabilities, not a wholesale W1 orientation failure."
     }
   },
   "corrected_methodological_conclusion": {

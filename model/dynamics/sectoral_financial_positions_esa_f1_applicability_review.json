@@ -2,7 +2,7 @@
   "review_version": "0.1",
   "identified_on": "2026-09-19",
   "status": "POST_RUN_F1_ZERO_REFINEMENT_REJECTED_NONRETROACTIVE",
-  "subject": "ESA-consistent F1 applicability for aggregate sectoral financial positions",
+  "subject": "Post-run F1 structural-zero applicability hypothesis for aggregate sectoral financial positions",
   "historical_phase_B": {
     "workflow_run_id": 35413214512,
     "workflow_head_sha": "1fc8620c2981a82cf9bada147fbba9158aaf1461",
@@ -21,62 +21,6 @@
       "SDRs are held by official holders; SDR allocation liabilities are recorded against the rest of the world rather than as ordinary H/C resident liabilities.",
       "Therefore a future contract can justify a narrower structural-zero scope than the historical Phase B contract, but only prospectively."
     ]
-  },
-  "proposed_future_rules": {
-    "H": {
-      "source_sector": "S1M",
-      "F1_rule": "STRUCTURAL_NOT_APPLICABLE_BOTH_SIDES",
-      "basis": "ESA 2010 confines monetary gold to monetary authorities/international financial organisations and SDRs to official holders. H/NPISH therefore has no F1 asset or liability in the RMD institutional boundary."
-    },
-    "C": {
-      "source_sector": "S11",
-      "F1_rule": "STRUCTURAL_NOT_APPLICABLE_BOTH_SIDES",
-      "basis": "ESA 2010 confines monetary gold to monetary authorities/international financial organisations and SDRs to official holders. S11 therefore has no F1 asset or liability."
-    },
-    "F": {
-      "source_formula": "S12 - S121",
-      "F1_rule": "ASSET_SOURCE_REQUIRED_FOR_S12_AND_S121; LIABILITY_STRUCTURAL_ZERO",
-      "basis": "F is S12-S121. F1 assets must be removed explicitly from both S12 and S121. Resident F1 liabilities are structurally zero because monetary gold has no counterpart liability and SDR allocations are liabilities of the rest of the world."
-    },
-    "G": {
-      "source_sector": "S13",
-      "F1_rule": "ASSET_SOURCE_REQUIRED; LIABILITY_STRUCTURAL_ZERO",
-      "basis": "Central-government institutions can be monetary authorities under ESA 2010, so S13 F1 assets cannot be assumed zero. Resident F1 liabilities are structural zero under the monetary-gold/SDR recording rules."
-    },
-    "BNR": {
-      "source_sector": "S121",
-      "F1_rule": "ASSET_SOURCE_REQUIRED; LIABILITY_STRUCTURAL_ZERO",
-      "basis": "S121 F1 assets are in scope and must be removed explicitly. Resident F1 liabilities are structural zero; SDR allocation liability is recorded in the rest of world."
-    },
-    "X": {
-      "source_area": "W1",
-      "F1_rule": "ASSET_AND_LIABILITY_SOURCE_REQUIRED",
-      "basis": "Rest-of-world F1 can include the counterpart to monetary-authority transactions and SDR liabilities, so both W1 external sides are explicitly sourced."
-    }
-  },
-  "proposed_future_construction": {
-    "H": "Use W0 S1M total F directly; F1 is structurally not applicable under the preregistered ESA rule.",
-    "C": "Use W0 S11 total F directly; F1 is structurally not applicable under the preregistered ESA rule.",
-    "F": "Assets: (W0 S12 F - W0 S12 F1) - (W0 S121 F - W0 S121 F1). Liabilities: W0 S12 F - W0 S121 F because resident F1 liabilities are structural zero.",
-    "G": "Assets: W0 S13 F - W0 S13 F1. Liabilities: W0 S13 F because resident F1 liabilities are structural zero.",
-    "BNR": "Assets: W0 S121 F - W0 S121 F1. Liabilities: W0 S121 F because resident F1 liabilities are structural zero.",
-    "X": "For W1 S1/S1, compute resident external F-F1 separately for A and L; set X assets = resident external liabilities and X liabilities = resident external assets.",
-    "net": "assets - liabilities",
-    "stock_and_flow": "Apply the same exact identity independently to LE stocks and F financial transactions; never difference stocks to create flows."
-  },
-  "proposed_future_consistency_changes": {
-    "mandatory_F1_for": [
-      "S12 assets",
-      "S121 assets",
-      "S13 assets",
-      "W1 total-economy assets",
-      "W1 total-economy liabilities"
-    ],
-    "structural_zero_scope": {
-      "H_F1_assets_and_liabilities": "ESA2010 structural not applicable",
-      "C_F1_assets_and_liabilities": "ESA2010 structural not applicable",
-      "resident_F1_liabilities_for_F_G_BNR": "ESA2010 monetary-gold no-counterpart-liability plus SDR liability recorded in rest of world"
-    }
   },
   "nonretroactivity": {
     "phase_A_reinterpreted": false,
@@ -124,5 +68,61 @@
     "W1_wholesale_orientation_swap": "NOT_SUPPORTED",
     "historical_A_D_reinterpreted": false
   },
-  "proposed_future_rules_status": "SUPERSEDED_REJECTED_PROPOSAL_RETAINED_FOR_AUDIT_TRAIL_ONLY"
+  "rejected_post_run_proposal_rules": {
+    "H": {
+      "source_sector": "S1M",
+      "F1_rule": "STRUCTURAL_NOT_APPLICABLE_BOTH_SIDES",
+      "basis": "ESA 2010 confines monetary gold to monetary authorities/international financial organisations and SDRs to official holders. H/NPISH therefore has no F1 asset or liability in the RMD institutional boundary."
+    },
+    "C": {
+      "source_sector": "S11",
+      "F1_rule": "STRUCTURAL_NOT_APPLICABLE_BOTH_SIDES",
+      "basis": "ESA 2010 confines monetary gold to monetary authorities/international financial organisations and SDRs to official holders. S11 therefore has no F1 asset or liability."
+    },
+    "F": {
+      "source_formula": "S12 - S121",
+      "F1_rule": "ASSET_SOURCE_REQUIRED_FOR_S12_AND_S121; LIABILITY_STRUCTURAL_ZERO",
+      "basis": "F is S12-S121. F1 assets must be removed explicitly from both S12 and S121. Resident F1 liabilities are structurally zero because monetary gold has no counterpart liability and SDR allocations are liabilities of the rest of the world."
+    },
+    "G": {
+      "source_sector": "S13",
+      "F1_rule": "ASSET_SOURCE_REQUIRED; LIABILITY_STRUCTURAL_ZERO",
+      "basis": "Central-government institutions can be monetary authorities under ESA 2010, so S13 F1 assets cannot be assumed zero. Resident F1 liabilities are structural zero under the monetary-gold/SDR recording rules."
+    },
+    "BNR": {
+      "source_sector": "S121",
+      "F1_rule": "ASSET_SOURCE_REQUIRED; LIABILITY_STRUCTURAL_ZERO",
+      "basis": "S121 F1 assets are in scope and must be removed explicitly. Resident F1 liabilities are structural zero; SDR allocation liability is recorded in the rest of world."
+    },
+    "X": {
+      "source_area": "W1",
+      "F1_rule": "ASSET_AND_LIABILITY_SOURCE_REQUIRED",
+      "basis": "Rest-of-world F1 can include the counterpart to monetary-authority transactions and SDR liabilities, so both W1 external sides are explicitly sourced."
+    }
+  },
+  "rejected_post_run_proposal_construction": {
+    "H": "Use W0 S1M total F directly; F1 is structurally not applicable under the preregistered ESA rule.",
+    "C": "Use W0 S11 total F directly; F1 is structurally not applicable under the preregistered ESA rule.",
+    "F": "Assets: (W0 S12 F - W0 S12 F1) - (W0 S121 F - W0 S121 F1). Liabilities: W0 S12 F - W0 S121 F because resident F1 liabilities are structural zero.",
+    "G": "Assets: W0 S13 F - W0 S13 F1. Liabilities: W0 S13 F because resident F1 liabilities are structural zero.",
+    "BNR": "Assets: W0 S121 F - W0 S121 F1. Liabilities: W0 S121 F because resident F1 liabilities are structural zero.",
+    "X": "For W1 S1/S1, compute resident external F-F1 separately for A and L; set X assets = resident external liabilities and X liabilities = resident external assets.",
+    "net": "assets - liabilities",
+    "stock_and_flow": "Apply the same exact identity independently to LE stocks and F financial transactions; never difference stocks to create flows."
+  },
+  "rejected_post_run_proposal_consistency_changes": {
+    "mandatory_F1_for": [
+      "S12 assets",
+      "S121 assets",
+      "S13 assets",
+      "W1 total-economy assets",
+      "W1 total-economy liabilities"
+    ],
+    "structural_zero_scope": {
+      "H_F1_assets_and_liabilities": "ESA2010 structural not applicable",
+      "C_F1_assets_and_liabilities": "ESA2010 structural not applicable",
+      "resident_F1_liabilities_for_F_G_BNR": "ESA2010 monetary-gold no-counterpart-liability plus SDR liability recorded in rest of world"
+    }
+  },
+  "rejected_post_run_proposal_status": "RETAINED_FOR_AUDIT_TRAIL_DO_NOT_USE_AS_ACTIVE_METHOD"
 }

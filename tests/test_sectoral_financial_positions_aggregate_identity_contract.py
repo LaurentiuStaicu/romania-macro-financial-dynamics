@@ -153,6 +153,11 @@ class SectoralFinancialPositionsAggregateIdentityContractTests(unittest.TestCase
         self.assertFalse(semantics["formal_gate"])
         self.assertEqual(semantics["readiness_effect"], 0)
         self.assertIn("non-zero F12/SDR liabilities", semantics["conclusion"])
+        self.assertNotIn("proposed_future_rules", self.review)
+        self.assertEqual(
+            self.review["rejected_post_run_proposal_status"],
+            "RETAINED_FOR_AUDIT_TRAIL_DO_NOT_USE_AS_ACTIVE_METHOD",
+        )
 
 
 
