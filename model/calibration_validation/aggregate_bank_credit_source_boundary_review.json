@@ -150,8 +150,25 @@
     ],
     "provider_access_observation": "GitHub Actions successfully retrieved seven exact official BNR BLS workbooks from 2023-2025 as valid OLE2 XLS files; the prior web-layer Request Rejected behavior was an access-path limitation, not missing files.",
     "historical_coverage_claimed": false,
-    "next_required_step": "Retain and inspect the exact May-2025 BNR XLSX workbook(s) with a deterministic spreadsheet reader. Use them to freeze sheet/range semantics for realised NFC and household credit standards, loan demand and DSTI before attempting any broader BLS extraction.",
-    "retained_raw_vintage": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19"
+    "next_required_step": "Reopen BLS history only if official multi-round machine-readable XLSX data are found or a deterministic reviewed legacy-XLS extraction path becomes available. Do not guess archive URLs, manually transcribe XLS files or digitise charts.",
+    "retained_raw_vintage": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19",
+    "may_2025_xlsx_bridge": {
+      "status": "EXACT_TWO_XLSX_WORKBOOKS_RETAINED_AND_LAYOUT_REVIEWED",
+      "retained_vintage": "data/source_vintages/bnr-bls-may2025-xlsx-vintage-2026-09-19",
+      "promotion_review": "model/calibration_validation/bnr_bls_may2025_xlsx_promotion_review.json",
+      "layout_review": "model/calibration_validation/bnr_bls_may2025_xlsx_layout_review.json",
+      "round": "2025-Q1 / reference date 31/03/2025",
+      "exact_realised_observables": {
+        "nfc_credit_standards_net_pct": 11.71,
+        "nfc_loan_demand_net_pct": 22.55,
+        "household_mortgage_credit_standards_net_pct": -19.74,
+        "household_consumer_credit_standards_net_pct": 15.38,
+        "household_mortgage_loan_demand_net_pct": 35.23,
+        "household_consumer_loan_demand_net_pct": -17.12
+      },
+      "interpretation": "The XLSX round demonstrates deterministic supply/demand semantics and sector separation but contains only one survey round. It is not a historical BLS time series.",
+      "dsti_limit": "P0303/P1103 are lending-term change questions about maximum debt-service-to-income, not levels of borrower DSTI."
+    }
   },
   "external_prudential_source_screening": {
     "status": "CANDIDATE_MACHINE_READABLE_CONTROLS_IDENTIFIED_SEMANTIC_ALIGNMENT_PENDING",
