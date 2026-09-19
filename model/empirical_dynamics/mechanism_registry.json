@@ -202,7 +202,10 @@
         "candidate loses to demand-only baseline out of sample",
         "parameter instability around EU-fund cycles"
       ],
-      "source_boundary_review": "model/calibration_validation/corporate_investment_source_boundary_review.json"
+      "source_boundary_review": "model/calibration_validation/corporate_investment_source_boundary_review.json",
+      "measurement_design_contract": "model/calibration_validation/corporate_investment_measurement_design_contract.json",
+      "retained_source_vintage": "data/source_vintages/corporate-investment-source-family-vintage-2026-09-19",
+      "measurement_design_status": "PREREGISTERED_MEASUREMENT_ONLY_NO_BEHAVIOURAL_FORM_ADMITTED"
     },
     {
       "id": "aggregate_bank_credit_response",
