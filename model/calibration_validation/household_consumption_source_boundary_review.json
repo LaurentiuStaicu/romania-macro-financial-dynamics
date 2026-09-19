@@ -58,10 +58,29 @@
       "interpretation": "Regulatory borrower debt-service caps or indebtedness thresholds describe lending rules, not an observed aggregate household DSR history; they may not be inserted as the macro state variable."
     },
     "bnr_dsti_alternative": {
-      "status": "OFFICIAL_BORROWER_LEVEL_MEASURE_IDENTIFIED_MACHINE_READABLE_HISTORY_NOT_RETAINED",
-      "concept": "BNR household debt service-to-income for new and outstanding loan portfolios",
-      "semantic_limit": "Not definitionally identical to a macro household-sector DSR; any use requires a new candidate-family measurement contract.",
-      "next_gate": "Retain exact official BNR DSTI history without chart digitisation."
+      "status": "OFFICIAL_HOUSING_LOAN_DSTI_LEVEL_OBSERVATIONS_CONFIRMED_MACHINE_READABLE_LONGITUDINAL_HISTORY_NOT_RETAINED",
+      "concept": "BNR bank-average DSTI levels for new and outstanding housing-loan portfolios",
+      "semantic_limit": "Observed housing-loan borrower/portfolio burden, not definitionally identical to a macro household-sector DSR; new-loan and outstanding-loan measures must remain separate.",
+      "next_gate": "Retain exact machine-readable longitudinal housing-loan DSTI levels, separately for new and outstanding loans, or preregister a publication-text-only alternative borrower-burden candidate family before any estimation.",
+      "publication_level_boundary_review": "model/calibration_validation/bnr_household_dsti_level_publication_boundary_review.json",
+      "confirmed_text_observation_examples": {
+        "2024-Q1": {
+          "new_housing_loans": 34,
+          "outstanding_housing_loans": 41
+        },
+        "2024-Q2": {
+          "new_housing_loans": 34.6,
+          "outstanding_housing_loans": 41
+        },
+        "2024-Q3": {
+          "new_housing_loans": 34.8,
+          "outstanding_housing_loans": 40.9
+        },
+        "2025-Q2": {
+          "new_housing_loans": 37,
+          "outstanding_housing_loans": 42
+        }
+      }
     }
   },
   "transformation_boundary": {
@@ -74,7 +93,8 @@
   "source_admissibility": {
     "registered_full_form_admissible": false,
     "reasons": [
-      "No exact Romania household DSR has been retained.",
+      "The registered macro household DSR term is not identified by an exact Romania household-sector DSR source.",
+      "BNR housing-loan DSTI levels are now directly observed for multiple quarters, but they define a narrower borrower/portfolio burden concept and no exact machine-readable longitudinal level history has been retained.",
       "The household borrowing-rate concept is not uniquely defined by the registry and must be frozen ex ante.",
       "Real/nominal and seasonal transformations for consumption and disposable income have not yet been frozen."
     ],
@@ -91,7 +111,7 @@
   ],
   "disposition": {
     "mechanism_classification": "CANDIDATE",
-    "source_readiness": "CORE_QSA_SOURCES_CONFIRMED_REGISTERED_FORM_BLOCKED_BY_DSR_AND_RATE_BOUNDARY",
+    "source_readiness": "CORE_QSA_SOURCES_CONFIRMED_BNR_HOUSING_DSTI_LEVELS_OBSERVED_REGISTERED_MACRO_DSR_AND_RATE_BOUNDARIES_STILL_INCOMPLETE",
     "active_calibration_cycle_open": false,
     "estimation_or_refit_allowed": false,
     "central_feedback": false,
@@ -99,5 +119,6 @@
     "behavioural_closure": "UNCHANGED_INACTIVE",
     "accounting_spine": "UNCHANGED"
   },
-  "debt_service_source_screening": "model/calibration_validation/debt_service_source_screening.json"
+  "debt_service_source_screening": "model/calibration_validation/debt_service_source_screening.json",
+  "debt_service_level_publication_boundary_review": "model/calibration_validation/bnr_household_dsti_level_publication_boundary_review.json"
 }
