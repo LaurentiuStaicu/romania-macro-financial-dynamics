@@ -1,0 +1,18 @@
+{
+  "gate_version": "0.1",
+  "authorized_on": "2026-09-19",
+  "mechanism_id": "corporate_investment_response",
+  "contract": "model/calibration_validation/corporate_investment_structural_selection_contract.json",
+  "source_panel": "data/source_vintages/corporate-investment-measurement-panel-vintage-2026-09-19/corporate_investment_measurement_panel.csv",
+  "source_csv_sha256": "d8d3765fe9e83bd29620de1d02e914626a5f5e1b4071e005ff138b55f127ba69",
+  "authorized_scope": "STRUCTURAL_SELECTION_2022Q1_TO_2023Q4_ONLY",
+  "selection_execution_authorized": true,
+  "selection_execution_consumed": false,
+  "final_evaluation_authorized": false,
+  "holdout_window": "2024-Q1..2026-Q1",
+  "holdout_access_prohibited": true,
+  "causal_claim_authorized": false,
+  "system_dynamics_activation_authorized": false,
+  "behavioural_closure_change_authorized": false,
+  "rule": "This is a single bounded authorization for the preregistered structural-selection window only. It does not authorize opening, reading or reporting final-evaluation performance."
+}
