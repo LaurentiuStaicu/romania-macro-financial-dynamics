@@ -57,7 +57,7 @@ class MechanismReopenConditionsRegistryTests(unittest.TestCase):
     def test_selective_reopen_preserves_closed_calibration(self):
         self.assertEqual(
             self.r["current_baseline_action"],
-            "MATERIALISE_CAPB_REALTIME_VINTAGE_SOURCE_EVIDENCE",
+            "MANUAL_DISPATCH_CAPB_REALTIME_VINTAGE_MATERIALISATION",
         )
         self.assertTrue(self.r["selective_reopen_active"])
         self.assertEqual(
@@ -101,7 +101,7 @@ class MechanismReopenConditionsRegistryTests(unittest.TestCase):
         self.assertTrue(entry["reopen_trigger_satisfied"])
         self.assertEqual(
             entry["source_readiness"],
-            "REOPENED_NEW_MEASUREMENT_EVIDENCE_CAPB_REALTIME_VINTAGE_MATERIALISATION",
+            "REOPENED_CAPB_SOURCE_GATE_READY_MANUAL_MATERIALISATION_PENDING",
         )
         self.assertEqual(
             entry["reopen_authorized_scope"],

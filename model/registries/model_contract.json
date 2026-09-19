@@ -87,7 +87,7 @@
     "release_ready": false,
     "latest_reopen_trigger_monitoring": "model/registries/reopen_trigger_monitoring_2026_09_19.json",
     "latest_reopen_trigger_monitoring_status": "NO_DECLARED_REOPEN_TRIGGER_SATISFIED_BASELINE_HOLD_CONTINUES",
-    "active_autonomous_empirical_task": "FISCAL_PRIMARY_BALANCE_CAPB_REALTIME_VINTAGE_MATERIALISATION",
+    "active_autonomous_empirical_task": null,
     "latest_reopen_trigger_assessment": "model/registries/fiscal_capb_reopen_assessment_2026_09_19.json",
     "latest_reopen_trigger_assessment_status": "FISCAL_PRIMARY_BALANCE_REOPEN_TRIGGER_SATISFIED_PREREGISTRATION_ONLY",
     "latest_reopen_trigger_monitoring_superseded_for": [
@@ -95,7 +95,10 @@
     ],
     "selective_reopen_active": true,
     "selective_reopen_mechanism": "fiscal_primary_balance_reaction",
-    "selective_reopen_scope": "CAPB_REALTIME_VINTAGE_SOURCE_MATERIALISATION_AND_TIMING_ADJUDICATION_ONLY"
+    "selective_reopen_scope": "CAPB_REALTIME_VINTAGE_SOURCE_MATERIALISATION_AND_TIMING_ADJUDICATION_ONLY",
+    "active_manual_empirical_gate": "FISCAL_PRIMARY_BALANCE_CAPB_REALTIME_VINTAGE_MATERIALISATION",
+    "selective_reopen_execution_state": "READY_MANUAL_WORKFLOW_DISPATCH_REQUIRED_NOT_EXECUTED",
+    "fiscal_capb_materialisation_execution_readiness": "model/registries/fiscal_capb_materialisation_execution_readiness_2026_09_19.json"
   },
   "repository_governance": {
     "merge_readiness_assessment": "model/registries/scientific_baseline_merge_readiness_assessment.json",

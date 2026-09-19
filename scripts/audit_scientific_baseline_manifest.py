@@ -486,7 +486,7 @@ def main() -> None:
         "Baseline must require reopen conditions for every mechanism",
     )
     expected_reopen_governance_state = (
-        "DECLARED_TRIGGER_SATISFIED_SOURCE_GATE_ONLY_NO_ESTIMATION"
+        "DECLARED_TRIGGER_SATISFIED_MANUAL_SOURCE_GATE_NO_ESTIMATION"
         if state["scientific_stage"].get("selective_reopen_active", False)
         else "DECLARED_TRIGGER_REQUIRED_NO_AUTOMATIC_ESTIMATION"
     )
@@ -553,12 +553,17 @@ def main() -> None:
         )
         check(
             readiness["current_next_step"]["action"]
-            == "MATERIALISE_CAPB_REALTIME_VINTAGE_SOURCE_EVIDENCE",
-            "Selective reopen action is outside the frozen CAPB source gate",
+            == "MANUAL_DISPATCH_CAPB_REALTIME_VINTAGE_MATERIALISATION",
+            "Selective reopen action is outside the frozen CAPB manual source gate",
+        )
+        check(
+            readiness["current_next_step"].get("execution_mode")
+            == "MANUAL_ONLY_LIVE_SOURCE_EVIDENCE",
+            "Selective CAPB gate must remain manual-only",
         )
         check(
             readiness_state["current_empirical_queue_state"]
-            == "SELECTIVE_REOPEN_FISCAL_CAPB_SOURCE_MATERIALISATION_ACTIVE",
+            == "SELECTIVE_REOPEN_FISCAL_CAPB_MANUAL_SOURCE_GATE_READY",
             "Selective reopen empirical queue-state label is stale",
         )
         fiscal_reopen = (
@@ -635,9 +640,13 @@ def main() -> None:
     )
     if stage_state.get("selective_reopen_active", False):
         check(
-            stage_state["active_autonomous_empirical_task"]
+            stage_state["active_autonomous_empirical_task"] is None,
+            "Manual-only selective gate may not be labelled autonomous",
+        )
+        check(
+            stage_state.get("active_manual_empirical_gate")
             == "FISCAL_PRIMARY_BALANCE_CAPB_REALTIME_VINTAGE_MATERIALISATION",
-            "Selective reopen active task is stale",
+            "Selective reopen manual gate is stale",
         )
         check(
             stage_state.get("selective_reopen_mechanism")

@@ -278,8 +278,8 @@
     {
       "id": "fiscal_primary_balance_reaction",
       "classification": "DEFERRED",
-      "source_readiness": "REOPENED_NEW_MEASUREMENT_EVIDENCE_CAPB_REALTIME_VINTAGE_MATERIALISATION",
-      "next_admissible_action": "Materialise exact Romania AMECO UBLGBPS across the preregistered official release vintages, retaining archive bytes, exact matched-row bytes, release metadata and SHA-256. Then perform a separate real-time information-set/timing adjudication. Do not estimate, refit, inspect the untouched 2018-2024 final evaluation window, or reuse the failed form.",
+      "source_readiness": "REOPENED_CAPB_SOURCE_GATE_READY_MANUAL_MATERIALISATION_PENDING",
+      "next_admissible_action": "Manually dispatch the frozen AMECO CAPB real-time vintage materialisation workflow, retain and review its artifact, then perform the separate information-set/timing adjudication. No estimation/refit or prior final-evaluation opening is authorized.",
       "blockers": [
         "The new CAPB/structural-primary-balance measurement trigger is satisfied, but the exact release-by-release source vintage has not yet been retained in the repository.",
         "Forecast-versus-actual and information-availability semantics must be adjudicated release by release before a new estimation sample can be defined.",
@@ -288,7 +288,7 @@
       ],
       "source_boundary_review": "model/calibration_validation/fiscal_primary_balance_source_boundary_review.json",
       "estimation_or_refit_allowed": false,
-      "priority_group": "SELECTIVE_REOPEN_SOURCE_MATERIALISATION",
+      "priority_group": "SELECTIVE_REOPEN_MANUAL_SOURCE_MATERIALISATION",
       "materialisation_contract": "model/calibration_validation/fiscal_primary_balance_materialisation_contract.json",
       "materialiser_workflow": ".github/workflows/fiscal-primary-balance-materialisation.yml",
       "retained_source_vintage": "data/source_vintages/fiscal-primary-balance-quarterly-vintage-2026-09-19",
@@ -306,7 +306,9 @@
       "capb_realtime_vintage_contract": "model/calibration_validation/fiscal_reaction_capb_realtime_vintage_contract.json",
       "capb_realtime_vintage_materialiser": "scripts/materialise_fiscal_reaction_capb_realtime_vintages.py",
       "capb_realtime_vintage_workflow": ".github/workflows/fiscal-reaction-capb-realtime-vintage-materialisation.yml",
-      "capb_live_execution_policy": "MANUAL_ONLY_LIVE_SOURCE_EVIDENCE"
+      "capb_live_execution_policy": "MANUAL_ONLY_LIVE_SOURCE_EVIDENCE",
+      "capb_materialisation_execution_readiness": "model/registries/fiscal_capb_materialisation_execution_readiness_2026_09_19.json",
+      "capb_live_execution_state": "READY_MANUAL_WORKFLOW_DISPATCH_REQUIRED_NOT_EXECUTED"
     },
     {
       "id": "monetary_policy_reaction_function",
@@ -353,11 +355,12 @@
   "priority_rule": "Priority is determined by the shortest scientifically admissible path to new independent evidence, not by a desire to activate a feedback loop. Waiting mechanisms remain frozen; source-incomplete mechanisms are not fit with proxies.",
   "current_next_step": {
     "mechanism_id": "fiscal_primary_balance_reaction",
-    "action": "MATERIALISE_CAPB_REALTIME_VINTAGE_SOURCE_EVIDENCE",
-    "reason": "A declared reopen trigger is satisfied by the exact Romania AMECO UBLGBPS measurement family plus official archived forecast vintages. The next admissible gate is source materialisation and timing adjudication only; calibration remains closed.",
+    "action": "MANUAL_DISPATCH_CAPB_REALTIME_VINTAGE_MATERIALISATION",
+    "reason": "The selective fiscal reopen and source tooling are integrated and green. Live AMECO acquisition is contractually manual-only; no retained CAPB vintage exists yet.",
     "calibration_cycle_open": false,
+    "execution_mode": "MANUAL_ONLY_LIVE_SOURCE_EVIDENCE",
     "reopen_conditions_registry": "model/calibration_validation/mechanism_reopen_conditions_registry.json",
-    "authorized_scope": "CAPB_REALTIME_VINTAGE_SOURCE_MATERIALISATION_AND_TIMING_ADJUDICATION_ONLY"
+    "authorized_scope": "CAPB_REALTIME_VINTAGE_SOURCE_MATERIALISATION_ONLY"
   },
   "coverage_rule": {
     "scope": "ALL_NON_REJECTED_MECHANISMS",
