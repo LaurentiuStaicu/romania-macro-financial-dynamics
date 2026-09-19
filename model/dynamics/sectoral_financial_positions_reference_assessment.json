@@ -57,7 +57,7 @@
     "exploratory_f1_semantics_diagnostic": "REJECTS_RESIDENT_F1_LIABILITY_ZERO_NO_PROMOTION",
     "exploratory_f1_zero_refinement": "REJECTED_BY_PUBLISHED_QSA_SDR_LIABILITIES",
     "s1n_boundary_diagnostic": "EXECUTED_NEGATIVE_NO_REOPEN_EVIDENCE",
-    "external_source_screening": "OECD_COUNTERPART_COUNTRY_DISCOVERY_PREREGISTERED_NO_REOPEN_YET"
+    "external_source_screening": "EUROSTAT_PRIORITY_AND_OECD_SECONDARY_DISCOVERY_PREREGISTERED_NO_REOPEN_YET"
   },
   "boundary_review": "model/dynamics/sectoral_financial_positions_boundary_review.json",
   "strict_source_gate_contract": "model/dynamics/sectoral_financial_positions_reference_contract.json",
@@ -104,5 +104,13 @@
     "formal_reference_mode_gate": false,
     "current_effect": "NONE_UNTIL_RETAINED_RESULT_AND_SEPARATE_SEMANTIC_LINEAGE_REVIEW",
     "rationale": "OECD counterpart stocks/flows could expose a useful Romania sector-counterpart boundary, but OECD documents the quarterly financial sector-accounts collection as OECD-ECB. Discovery therefore tests coverage only; it cannot establish independent reopen evidence or promotion by itself."
+  },
+  "eurostat_counterpart_discovery_probe": {
+    "status": "PREREGISTERED_MANUAL_NOT_EXECUTED",
+    "contract": "model/dynamics/sectoral_financial_positions_eurostat_counterpart_probe_contract.json",
+    "workflow": ".github/workflows/sectoral-financial-positions-eurostat-counterpart-probe.yml",
+    "formal_reference_mode_gate": false,
+    "current_effect": "NONE_UNTIL_RETAINED_RESULT_AND_SEPARATE_MAPPING_LINEAGE_REVIEW",
+    "rationale": "Eurostat nasq_10_f_cp explicitly disseminates quarterly counterpart information and is therefore the priority source-access discovery path. However, Eurostat metadata states that quarterly financial-account data are validated by ECB and transmitted to Eurostat, so a successful probe establishes public granularity/coverage rather than independent measurement."
   }
 }
