@@ -199,6 +199,18 @@ class AggregateBankCreditSourceBoundaryTests(unittest.TestCase):
             review["prudential_population_boundary_review"],
             "model/calibration_validation/bank_credit_prudential_population_boundary_review.json",
         )
+        self.assertEqual(
+            review["bnr_prudential_table_source_enumeration"],
+            "model/calibration_validation/bnr_prudential_table_source_enumeration.json",
+        )
+        self.assertEqual(
+            screen["source_enumeration_status"],
+            "INCOMPLETE_SOURCE_ENUMERATION_NO_MODEL_EFFECT",
+        )
+        self.assertEqual(
+            screen["exact_primary_years_identified"],
+            [2019, 2022, 2024],
+        )
 
     def test_no_system_dynamics_activation_follows_from_source_feasibility(self) -> None:
         review = load(
