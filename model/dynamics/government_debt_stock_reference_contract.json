@@ -1,0 +1,55 @@
+{
+  "contract_version": "0.1",
+  "phase": "Reference Mode Recovery — Government Debt Stock",
+  "purpose": "Test whether Eurostat publishes a definitionally explicit quarterly observed series for Romania general-government consolidated gross debt that can serve as the government_debt_stock reference mode without being confused with the market-valued/non-consolidated financial-accounts balance-sheet stock or with instrument-level Accounting Spine cells.",
+  "source": {
+    "institution": "Eurostat",
+    "dataset": "gov_10q_ggdebt — Quarterly government debt",
+    "api": "Eurostat dissemination statistics API",
+    "frequency": "Q",
+    "geo": "RO",
+    "sector": "S13",
+    "na_item": "GD",
+    "concept": "Quarterly general-government consolidated gross debt at nominal/face value outstanding at quarter end (Maastricht debt)",
+    "units_to_probe": [
+      "MIO_NAC",
+      "PC_GDP"
+    ],
+    "requested_start": "2000-Q1",
+    "requested_end": "2026-Q1"
+  },
+  "reference_mode": {
+    "id": "government_debt_stock",
+    "required_benchmark_periods": [
+      "2025-Q1",
+      "2025-Q2",
+      "2025-Q3",
+      "2025-Q4"
+    ],
+    "minimum_observation_count_per_unit": 40,
+    "preferred_time_resolution": "quarterly"
+  },
+  "concept_boundary": {
+    "GD_is_consolidated_gross_debt": true,
+    "GD_is_nominal_face_value": true,
+    "GD_is_not_total_financial_accounts_liabilities": true,
+    "GD_is_not_market_value_F3_plus_F4_plus_other_liabilities": true,
+    "GD_does_not_complete_the_Accounting_Spine": true,
+    "GD_does_not_identify_holder_by_issuer_counterparts": true,
+    "PC_GDP_is_a_normalized_debt_reference_not_a_stock_unit_for_accounting_conservation": true
+  },
+  "hard_rules": {
+    "reference_mode_source_audit_only": true,
+    "no_accounting_benchmark_mutation": true,
+    "no_instrument_allocation": true,
+    "no_holder_issuer_allocation": true,
+    "no_missing_to_zero": true,
+    "network_errors_block_positive_coverage_claims": true,
+    "non_finite_observations_block_promotion": true,
+    "all_required_2025_quarters_must_be_observed": true,
+    "both_units_must_pass_independently": true,
+    "behavioural_closure_may_change": false
+  },
+  "promotion_rule": "The reference mode may be promoted from PARTIAL_SERIES_AVAILABLE to OBSERVED_SERIES_AVAILABLE only after an immutable successful audit artifact is retained, both MIO_NAC and PC_GDP contain all four 2025 quarters with finite observations, each requested unit has at least the minimum observation count, no network or parse error is present, and a repository assessment records the workflow run, artifact identifier and SHA-256. Promotion changes only reference-mode observability; it does not complete the Accounting Spine, alter canonical holder-by-issuer matrices, or activate any behavioural mechanism.",
+  "negative_result_rule": "If the exact S13 GD series is unavailable, incomplete at the required benchmark window, or cannot be retained reproducibly, government_debt_stock remains PARTIAL_SERIES_AVAILABLE and no Financial Accounts or debt-security-only subtotal may be silently relabelled as total government debt."
+}
