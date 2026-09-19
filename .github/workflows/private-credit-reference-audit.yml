@@ -1,12 +1,9 @@
 name: Private Credit Reference Audit
 
+# Live-source refresh is intentionally manual. The canonical scientific state is
+# reproduced offline from retained snapshots/assessments in Scientific CI.
+# A transient provider/network failure must not rewrite a validated vintage.
 on:
-  pull_request:
-    paths:
-      - "model/dynamics/private_credit_reference_contract.json"
-      - "scripts/audit_ecb_private_credit_reference.py"
-      - "tests/test_private_credit_reference_contract.py"
-      - ".github/workflows/private-credit-reference-audit.yml"
   workflow_dispatch:
 
 permissions:
