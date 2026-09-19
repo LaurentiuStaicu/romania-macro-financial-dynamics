@@ -229,8 +229,8 @@
   "priority_rule": "Priority is determined by the shortest scientifically admissible path to new independent evidence, not by a desire to activate a feedback loop. Waiting mechanisms remain frozen; source-incomplete mechanisms are not fit with proxies.",
   "current_next_step": {
     "mechanism_id": "SCIENTIFIC_BASELINE",
-    "action": "CONSOLIDATE_POST_SCREENING_MECHANISM_READINESS_AND_INVARIANTS",
-    "reason": "Every registered behavioural mechanism is now either frozen after a preregistered failure, waiting for prospective events, or blocked by an explicit new-source/measurement/identification trigger. The scientifically useful next action is to consolidate this state into executable cross-registry invariants before any new empirical cycle.",
+    "action": "HOLD_CLOSED_BASELINE_UNTIL_DECLARED_REOPEN_TRIGGER",
+    "reason": "Cross-registry mechanism readiness is now consolidated and executable in Scientific CI. All non-rejected behavioural mechanisms are either frozen after preregistered failure, waiting for prospective identifying events, or blocked by explicit source/measurement/identification triggers. No new empirical cycle should open merely because the queue is exhausted.",
     "calibration_cycle_open": false
   },
   "coverage_rule": {
