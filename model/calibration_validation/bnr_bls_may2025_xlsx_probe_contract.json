@@ -1,0 +1,40 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "mechanism_id": "aggregate_bank_credit_response",
+  "phase": "BNR BLS May-2025 XLSX Identity and Access Probe",
+  "purpose": "Fetch the two exact official BNR May-2025 Bank Lending Survey XLSX URLs that are publicly indexed, retain bytes and hashes, verify XLSX/ZIP signatures, and determine whether they are identical aliases or distinct workbooks before any sheet/range selection or value extraction.",
+  "candidates": [
+    {
+      "id": "may_2025_english_slug",
+      "url": "https://www.bnr.ro/uploads/2025-06-13blst1may2025_xls_547_1749803028.xlsx",
+      "discovery_basis": "Official BNR URL publicly indexed by search."
+    },
+    {
+      "id": "may_2025_romanian_slug",
+      "url": "https://www.bnr.ro/uploads/2025-06-13sondajblst1mai2025_xls_547_1749802943.xlsx",
+      "discovery_basis": "Official BNR URL publicly indexed by search."
+    }
+  ],
+  "rules": {
+    "retain_exact_response_bytes": true,
+    "compute_sha256": true,
+    "require_http_200": true,
+    "require_zip_pk_signature": true,
+    "compare_candidate_hashes": true,
+    "no_workbook_parsing_in_live_probe": true,
+    "no_sheet_selection": true,
+    "no_value_extraction": true,
+    "no_model_outcome_access": true
+  },
+  "hard_rules": {
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_bls_series_construction": true,
+    "no_dsti_semantic_selection": true,
+    "no_credit_standard_or_demand_selection": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "pass_effect": "EXACT_XLSX_BYTES_READY_FOR_EXPLICIT_REPOSITORY_REVIEW_AND_OFFLINE_LAYOUT_INSPECTION_ONLY"
+}
