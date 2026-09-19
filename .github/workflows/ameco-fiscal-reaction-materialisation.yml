@@ -1,0 +1,41 @@
+name: AMECO Fiscal Reaction Annual Source Materialisation
+
+# Live provider materialisation is manual-only. The PR label is a one-shot
+# bootstrap trigger before this workflow reaches the default branch.
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [labeled]
+
+permissions:
+  contents: read
+
+jobs:
+  materialise-ameco-fiscal-reaction-source:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.label.name == 'run-ameco-fiscal-materialisation' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify frozen AMECO materialisation contract
+        run: python -m unittest tests.test_fiscal_reaction_ameco_materialisation_contract -v
+
+      - name: Run live AMECO annual source materialisation
+        env:
+          FISCAL_REACTION_AMECO_MATERIALISATION_OUT: fiscal_reaction_ameco_materialisation_artifacts
+        run: python scripts/audit_ameco_fiscal_reaction_materialisation.py
+
+      - name: Upload AMECO annual source evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ameco-fiscal-reaction-materialisation-${{ github.sha }}
+          path: fiscal_reaction_ameco_materialisation_artifacts/
+          if-no-files-found: error
+          retention-days: 90
