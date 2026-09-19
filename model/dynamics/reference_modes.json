@@ -14,7 +14,13 @@
       "role": "Observed forcing in early monetary-transmission validation; later endogenization requires a separately validated monetary-policy reaction function.",
       "source": "BIS / BNR policy-rate series retained by validation recovery",
       "time_resolution": "monthly",
-      "current_endogeneity": "EXOGENOUS_OBSERVED_INPUT"
+      "current_endogeneity": "EXOGENOUS_OBSERVED_INPUT",
+      "evidence": {
+        "normalized_series": "data/raw/validation_recovery/policy_rate_bis_monthly.csv",
+        "role_freeze": "data/provenance/validation_recovery_split.json",
+        "vintage_status": "data/provenance/validation_recovery_vintage_status.json",
+        "provenance_status": "NORMALIZED_SERIES_RECONCILED_RAW_BIS_TRANSPORT_ENVELOPE_NOT_EXACTLY_RECOVERED"
+      }
     },
     {
       "id": "household_lending_rate",
@@ -22,7 +28,13 @@
       "role": "Reference mode for household monetary pass-through.",
       "source": "ECB MIR household housing new-business RON rate",
       "time_resolution": "monthly",
-      "current_endogeneity": "OBSERVED_TARGET"
+      "current_endogeneity": "OBSERVED_TARGET",
+      "evidence": {
+        "normalized_series": "data/raw/validation_recovery/household_housing_mir_monthly.csv",
+        "role_freeze": "data/provenance/validation_recovery_split.json",
+        "vintage_status": "data/provenance/validation_recovery_vintage_status.json",
+        "provenance_status": "ECB_RAW_BYTE_IDENTICAL_RECOVERED_AND_NORMALIZED_SERIES_RECONCILED"
+      }
     },
     {
       "id": "nfc_lending_rate",
@@ -30,7 +42,13 @@
       "role": "Reference mode for NFC monetary pass-through.",
       "source": "ECB MIR NFC new-business RON rate, including short-fixation target used in validation recovery",
       "time_resolution": "monthly",
-      "current_endogeneity": "OBSERVED_TARGET"
+      "current_endogeneity": "OBSERVED_TARGET",
+      "evidence": {
+        "normalized_series": "data/raw/validation_recovery/nfc_upto1y_mir_monthly.csv",
+        "role_freeze": "data/provenance/validation_recovery_split.json",
+        "vintage_status": "data/provenance/validation_recovery_vintage_status.json",
+        "provenance_status": "ECB_RAW_BYTE_IDENTICAL_RECOVERED_AND_NORMALIZED_SERIES_RECONCILED"
+      }
     },
     {
       "id": "credit_stock",
