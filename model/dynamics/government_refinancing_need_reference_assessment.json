@@ -38,7 +38,7 @@
     }
   },
   "blocker": {
-    "reason": "A directly observed annual Ministry refinancing series is now materialized for 2017-2023, but it contains only seven low-frequency observations and mixes final annual-report values with explicitly labelled operative-execution values. No preregistered closure criterion existed that would justify treating this short mixed-vintage series as a quantitatively ready integrated reference target after observing it. It remains scientifically useful partial evidence. The aggregate series also does not identify matched realized repricing events or the transition share m[t].",
+    "reason": "A directly observed annual Ministry refinancing series is materialized for 2017-2023, but it contains only seven low-frequency observations and mixes final annual-report values with explicitly labelled operative-execution values. Additional IMF/MoF screening on 2026-09-19 confirms a longer historical GFN concept, but not an exact stable observed series that can be merged without post-hoc boundary changes: the IMF 2014-2024 history is graphical, the exact DSA table has only 2024 as Actual before projections, and Ministry 2024 financing-plan values are revision-sensitive and include pre-funding. The mode therefore remains partial.",
     "current_data_are_not_zero": true,
     "current_data_are_not_absent": true,
     "blocker_is_definition_and_vintage_consistency": false,
@@ -53,12 +53,19 @@
     "infer the government repricing parameter m[t] from aggregate financing needs"
   ],
   "reopen_condition": {
-    "primary": "Preregister a promotion criterion before adding further annual observations or revising vintages. The criterion must specify required historical length, accepted FINAL versus OPERATIVE status, revision handling and the exact Ministry refinancing concept.",
+    "primary": "Preregister a promotion criterion before adding further annual observations or revising vintages. Promotion evidence must be an exact historical series/table/API or longer Ministry realized-refinancing history with explicit actual-versus-forecast status, stable concept/boundary, frozen revision-vintage handling and a predeclared sufficiency rule.",
     "acceptable_paths": [
       "A dedicated gross-financing-need reference mode explicitly defined as a liquidity-pressure flow, with historical-versus-forecast status and revisions frozen by contract.",
       "A realized refinancing/repricing series with matched principal and event semantics on the Ministry portfolio boundary."
     ],
-    "behavioural_activation_still_requires": "The separate government repricing-ledger completeness, reconciliation, parameter-identification and prospective-validation gates."
+    "behavioural_activation_still_requires": "The separate government repricing-ledger completeness, reconciliation, parameter-identification and prospective-validation gates.",
+    "evidence_that_does_not_satisfy_trigger": [
+      "graphical digitization of IMF historical GFN charts",
+      "projected IMF DSA gross financing needs treated as historical observations",
+      "Ministry financing-plan totals revised within the year",
+      "prefunding-inclusive plan totals treated as realized annual refinancing",
+      "gross financing need substituted for the Ministry refinancing component"
+    ]
   },
   "disposition": {
     "status": "PARTIAL_SERIES_AVAILABLE",
@@ -77,5 +84,6 @@
     "final_annual_report_observations": 4,
     "operative_execution_observations": 3,
     "forecast_observations": 0
-  }
+  },
+  "external_source_screening": "model/dynamics/government_refinancing_need_external_source_screening.json"
 }
