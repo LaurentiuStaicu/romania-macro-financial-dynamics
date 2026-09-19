@@ -49,21 +49,25 @@
     {
       "id": "exchange_rate_pass_through_to_inflation",
       "classification": "CANDIDATE",
-      "source_readiness": "EXACT_FX_HICP_TOTAL_IMPORT_UVI_BOUNDARIES_FROZEN_MATERIALISATION_PENDING",
-      "next_admissible_action": "Materialise one exact common monthly level-only source vintage for ECB EXR.M.RON.EUR.SP00.A, Eurostat prc_hicp_minr I25/TOTAL/RO, and Eurostat ext_st_27_2020msbec IMP/WORLD/TOTAL/IVU/RO. Retain raw bytes and hashes. Do not choose transforms, lags, regimes or estimate coefficients.",
+      "source_readiness": "EXACT_MONTHLY_LEVEL_SOURCE_VINTAGE_RETAINED_TRANSFORM_AND_LAG_PREREGISTRATION_PENDING",
+      "next_admissible_action": "Preregister the monthly transformations, current-regime start boundary, fixed lag-horizon candidate set, seasonal treatment, structural-selection window and untouched evaluation window using only methodological evidence and the retained 2002-01..2026-06 level source vintage. Do not inspect fitted coefficients or evaluation performance yet.",
       "blockers": [
-        "No exact common retained source vintage across FX, current ECOICOP-v2 HICP and total-import/world UVI exists yet.",
-        "Inflation, FX and external-price transformations are intentionally not frozen until raw source completeness and revision metadata are retained.",
-        "Lag horizon, regime boundary, structural-selection and untouched evaluation windows remain unregistered and therefore estimation remains prohibited."
+        "The exact common monthly level vintage is now retained, but the inflation/FX/UVI transformations are intentionally not yet frozen.",
+        "A current-regime start boundary and treatment of the August-2005 inflation-targeting break must be fixed before fit.",
+        "The lag horizon/candidate family, seasonal treatment, structural-selection window and untouched final-evaluation window remain unregistered.",
+        "Source retention does not identify causal exchange-rate shocks; managed-float intervention and common inflation shocks remain potential endogeneity/confounding channels."
       ],
       "source_boundary_review": "model/calibration_validation/fx_inflation_pass_through_source_boundary_review.json",
       "external_price_screening": "model/calibration_validation/fx_inflation_external_price_control_screening.json",
       "estimation_or_refit_allowed": false,
-      "priority_group": "SOURCE_MATERIALISATION_PENDING",
+      "priority_group": "TRANSFORM_LAG_AND_WINDOWS_PREREGISTRATION_PENDING",
       "external_price_control_contract": "model/calibration_validation/fx_inflation_external_price_control_contract.json",
       "monthly_materialisation_contract": "model/calibration_validation/fx_inflation_monthly_materialisation_contract.json",
       "materialiser_script": "scripts/audit_fx_inflation_monthly_materialisation.py",
-      "materialiser_workflow": ".github/workflows/fx-inflation-monthly-materialisation.yml"
+      "materialiser_workflow": ".github/workflows/fx-inflation-monthly-materialisation.yml",
+      "retained_source_vintage": "data/source_vintages/fx-inflation-monthly-levels-vintage-2026-09-19",
+      "promotion_review": "model/calibration_validation/fx_inflation_source_vintage_promotion_review.json",
+      "live_execution_policy": "MANUAL_ONLY_LIVE_SOURCE_EVIDENCE"
     },
     {
       "id": "sovereign_yield_spread_response",
@@ -192,8 +196,8 @@
   "priority_rule": "Priority is determined by the shortest scientifically admissible path to new independent evidence, not by a desire to activate a feedback loop. Waiting mechanisms remain frozen; source-incomplete mechanisms are not fit with proxies.",
   "current_next_step": {
     "mechanism_id": "exchange_rate_pass_through_to_inflation",
-    "action": "MATERIALISE_FX_HICP_TOTAL_IMPORT_UVI_NO_ESTIMATION",
-    "reason": "The external-price product boundary and the current ECOICOP-v2 HICP boundary are now frozen from live provider evidence. The next admissible task is exact raw-source retention and common-level materialisation only; transformations, lag selection and coefficient estimation remain prohibited.",
+    "action": "PREREGISTER_FX_INFLATION_TRANSFORMS_LAGS_AND_WINDOWS_NO_ESTIMATION",
+    "reason": "The exact current-source monthly level vintage is retained for 2002-01 through 2026-06. The shortest admissible next step is to freeze transforms, regime boundary, lag family, seasonality and evaluation windows before any model fit.",
     "calibration_cycle_open": false
   },
   "coverage_rule": {
