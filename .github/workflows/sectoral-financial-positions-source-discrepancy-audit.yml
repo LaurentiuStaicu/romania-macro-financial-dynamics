@@ -1,12 +1,9 @@
 name: Sectoral Financial Positions Source Discrepancy Diagnostic
 
+
+# Phase D is a retained diagnostic. Live reruns are manual-only; the canonical
+# finding is reproduced offline from the committed assessment and tests.
 on:
-  pull_request:
-    paths:
-      - "model/dynamics/sectoral_financial_positions_source_discrepancy_contract.json"
-      - "scripts/audit_ecb_sectoral_financial_positions_source_discrepancy.py"
-      - "tests/test_sectoral_financial_positions_source_discrepancy_contract.py"
-      - ".github/workflows/sectoral-financial-positions-source-discrepancy-audit.yml"
   workflow_dispatch:
 
 permissions:
