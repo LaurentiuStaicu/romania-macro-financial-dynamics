@@ -52,15 +52,15 @@ class MechanismSourceReadinessTests(unittest.TestCase):
             self.readiness["coverage_rule"]["missing_entries_allowed"]
         )
 
-    def test_next_step_is_offline_runner_implementation_not_calibration(self) -> None:
+    def test_next_step_advances_after_failed_sovereign_form(self) -> None:
         step = self.readiness["current_next_step"]
         self.assertEqual(
             step["mechanism_id"],
-            "sovereign_yield_spread_response",
+            "fiscal_primary_balance_reaction",
         )
         self.assertEqual(
             step["action"],
-            "IMPLEMENT_OFFLINE_SOVEREIGN_SELECTION_RUNNER_NO_EXECUTION",
+            "RUN_MANUAL_PRIMARY_BALANCE_SOURCE_MATERIALISER_AND_RETAIN_EVIDENCE",
         )
         self.assertFalse(step["calibration_cycle_open"])
 
@@ -70,7 +70,7 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         sovereign = mechanisms["sovereign_yield_spread_response"]
         self.assertEqual(
             sovereign["source_readiness"],
-            "SOURCE_VINTAGE_RETAINED_STRUCTURAL_SELECTION_CONTRACT_FROZEN_RUNNER_PENDING",
+            "FROZEN_TESTED_FORM_FAILED_BEFORE_HOLDOUT",
         )
         self.assertEqual(
             sovereign["live_execution_policy"],
