@@ -4,15 +4,12 @@ name: Sectoral Financial Positions S1N Boundary Diagnostic
 # cannot rewrite historical A-D, promote the reference mode, or change readiness.
 on:
   workflow_dispatch:
-  pull_request:
-    types: [labeled]
 
 permissions:
   contents: read
 
 jobs:
   s1n-boundary-diagnostic:
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.label.name == 'run-sectoral-s1n-diagnostic' }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
