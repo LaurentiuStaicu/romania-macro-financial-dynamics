@@ -82,11 +82,14 @@
     },
     {
       "id": "government_effective_interest_rate",
-      "status": "SOURCE_IDENTIFIED_NOT_MATERIALIZED",
-      "role": "Reference mode for effective-rate dynamics; must not be substituted by marginal yield.",
-      "source": "Government interest expenditure and debt-stock data subject to accounting-concept reconciliation",
-      "time_resolution": "quarterly_or_annual_TBD",
-      "current_endogeneity": "UNRESOLVED"
+      "status": "OBSERVED_SERIES_AVAILABLE",
+      "role": "Observed annual year-end Ministry of Finance government-debt portfolio average interest-rate reference target. The source metric is a portfolio cost indicator and is not Eurostat apparent cost, a marginal sovereign yield, or an inferred repricing rate.",
+      "source": "Romania Ministry of Finance government debt-management strategies; retained 2014-2023 annual series and explicit source provenance.",
+      "time_resolution": "annual",
+      "current_endogeneity": "OBSERVED_TARGET",
+      "assessment": "model/dynamics/government_effective_interest_rate_reference_assessment.json",
+      "retained_series": "data/processed/government_debt_average_interest_rate_mof_2014_2023.csv",
+      "provenance": "data/provenance/government_debt_average_interest_rate_mof_2014_2023.json"
     },
     {
       "id": "sectoral_financial_positions",
