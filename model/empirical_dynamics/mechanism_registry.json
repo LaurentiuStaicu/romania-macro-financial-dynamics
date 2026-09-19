@@ -301,10 +301,10 @@
       "classification": "CANDIDATE",
       "maps_to_dynamic_core_loop": null,
       "central_feedback": false,
-      "functional_form": "No admitted pass-through form yet. Candidate family will model monthly HICP inflation from preregistered RON/EUR depreciation lags conditional on retained total-import/world UVI changes and inflation persistence.",
+      "functional_form": "No admitted pass-through behavioural form. The preregistered monthly AR(2)+seasonal+UVI+FX-block candidate was tested on 2015-2020 and failed before holdout.",
       "implementation": null,
       "parameters": [],
-      "estimation_plan": "Calibration remains closed. The exact common monthly level source vintage is retained for 2002-01..2026-06 using ECB EXR.M.RON.EUR.SP00.A, Eurostat prc_hicp_minr I25/coicop18=TOTAL/RO, and Eurostat ext_st_27_2020msbec IMP/WORLD/TOTAL/IVU/RO. Next freeze the monthly transformations, August-2005 inflation-targeting/current-regime boundary, seasonal treatment, fixed lag-horizon candidate set, structural-selection window and untouched final-evaluation window. Compare any FX candidate against an inflation-persistence plus external-price baseline. Do not interpret predictive improvement as causal pass-through and do not import historical coefficients.",
+      "estimation_plan": "Freeze the 2026-09-19 tested monthly form at FAIL_BEFORE_HOLDOUT. Do not inspect 2021-01..2026-06 final-evaluation performance or search alternative transforms, AR orders, FX lag blocks, external-price lags, regime dummies or asymmetries on the same evidence cycle. Reopen only under a separately preregistered cycle triggered by genuinely new measurement or identification evidence.",
       "observables": [
         "HICP ECOICOP-v2 TOTAL index (2025=100)",
         "RON/EUR ECB monthly-average exchange rate",
@@ -317,23 +317,23 @@
         "ecb_convergence_2026_ro"
       ],
       "limits": [
-        "documented pass-through regime dependence, including the August-2005 inflation-targeting break",
-        "energy, tax, administered-price and common external-price shocks can confound predictive FX coefficients",
-        "managed-float intervention makes the observed exchange rate endogenous to policy and macro conditions",
-        "the import UVI is a composition-sensitive external-price proxy rather than a pure transaction-price import-price index",
-        "inflation/FX/UVI transforms, seasonality and lag horizon must be frozen before untouched evaluation data are opened"
+        "managed-float intervention and macro-policy responses make observed RON/EUR changes endogenous",
+        "UVI is a composition-sensitive external-price proxy rather than a direct transaction-price import-price index",
+        "the tested FX form showed stable positive cumulative coefficients but essentially no incremental predictive gain over the external-price baseline",
+        "final-evaluation months 2021-01..2026-06 remain unopened"
       ],
       "rejection_or_degradation_criteria": [
-        "frozen FX candidate family fails to improve on inflation-persistence plus external-price baselines",
-        "lag-weight or cumulative-pass-through signs are unstable across preregistered selection origins",
-        "current-regime evaluation fails despite selection-window admissibility",
-        "identifiability or conditioning gates fail"
+        "tested monthly FX form failed incremental predictive gates before holdout",
+        "any future reopening requires new evidence and a separately preregistered cycle rather than post-result lag or transform search"
       ],
       "source_boundary_review": "model/calibration_validation/fx_inflation_pass_through_source_boundary_review.json",
       "external_price_control_contract": "model/calibration_validation/fx_inflation_external_price_control_contract.json",
       "monthly_materialisation_contract": "model/calibration_validation/fx_inflation_monthly_materialisation_contract.json",
       "retained_source_vintage": "data/source_vintages/fx-inflation-monthly-levels-vintage-2026-09-19",
-      "source_vintage_promotion_review": "model/calibration_validation/fx_inflation_source_vintage_promotion_review.json"
+      "source_vintage_promotion_review": "model/calibration_validation/fx_inflation_source_vintage_promotion_review.json",
+      "transform_lag_window_contract": "model/calibration_validation/fx_inflation_transform_lag_window_contract.json",
+      "structural_selection_contract": "model/calibration_validation/fx_inflation_structural_selection_contract.json",
+      "structural_selection_result": "model/calibration_validation/fx_inflation_structural_selection_result.json"
     },
     {
       "id": "credit_risk_npl_response",
