@@ -52,15 +52,15 @@ class MechanismSourceReadinessTests(unittest.TestCase):
             self.readiness["coverage_rule"]["missing_entries_allowed"]
         )
 
-    def test_next_step_advances_after_failed_sovereign_form(self) -> None:
+    def test_next_step_advances_after_failed_fiscal_form(self) -> None:
         step = self.readiness["current_next_step"]
         self.assertEqual(
             step["mechanism_id"],
-            "fiscal_primary_balance_reaction",
+            "exchange_rate_pass_through_to_inflation",
         )
         self.assertEqual(
             step["action"],
-            "IMPLEMENT_ANNUAL_FISCAL_REACTION_OFFLINE_RUNNER_NO_ESTIMATION",
+            "RESOLVE_EXTERNAL_PRICE_PRODUCT_BOUNDARY_NO_ESTIMATION",
         )
         self.assertFalse(step["calibration_cycle_open"])
 
@@ -70,12 +70,13 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         fiscal = mechanisms["fiscal_primary_balance_reaction"]
         self.assertEqual(
             fiscal["source_readiness"],
-            "ANNUAL_AMECO_SOURCE_AND_FORM_FROZEN_RUNNER_IMPLEMENTATION_PENDING",
+            "FROZEN_TESTED_ANNUAL_FORM_FAILED_BEFORE_HOLDOUT",
         )
         self.assertEqual(
             fiscal["priority_group"],
-            "OFFLINE_RUNNER_IMPLEMENTATION_PENDING",
+            "FREEZE_TESTED_FORM_UNTIL_NEW_EVIDENCE",
         )
+        self.assertFalse(fiscal["estimation_or_refit_allowed"])
 
         sovereign = mechanisms["sovereign_yield_spread_response"]
         self.assertEqual(
