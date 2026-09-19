@@ -23,14 +23,16 @@ class BNRPrudentialInteractiveDatabaseDiscoveryTests(unittest.TestCase):
             self.assertTrue(req[key])
 
     def test_current_result_is_inconclusive_not_absence(self):
-        self.assertEqual(self.r["status"],"OFFICIAL_DATABASE_SURFACE_CONFIRMED_TARGET_SERIES_NOT_IDENTIFIED_IN_PUBLIC_INDEX")
+        self.assertEqual(self.r["status"],"OFFICIAL_DATABASE_CONFIRMED_TARGET_SERIES_NOT_IDENTIFIED_STAGE_FROZEN")
         self.assertFalse(self.r["web_search_screening"]["exact_target_machine_readable_series_identified"])
         self.assertFalse(self.r["web_search_screening"]["search_index_non_discovery_is_absence"])
-        self.assertEqual(self.r["disposition"]["interactive_database_path_status"],"OPEN_REOPEN_TRIGGER_NOT_YET_MATERIALISABLE")
+        self.assertEqual(self.r["disposition"]["interactive_database_path_status"],"FROZEN_INCONCLUSIVE_UNTIL_NEW_OFFICIAL_CATALOG_OR_EXPORT_EVIDENCE")
 
-    def test_pdf_path_remains_active_and_model_cycle_closed(self):
+    def test_pdf_path_is_frozen_and_model_cycle_closed(self):
         d=self.r["disposition"]
-        self.assertTrue(d["pdf_path_remains_active"])
+        self.assertFalse(d["pdf_path_remains_active"])
+        self.assertTrue(d["stage_closed"])
+        self.assertTrue(d["reopen_requires_new_official_evidence"])
         for key in ("source_byte_acquisition_authorized","numeric_extraction_authorized","canonical_series_mutation_authorized","structural_selection_authorized","estimation_or_refit_authorized"):
             self.assertFalse(d[key])
 
@@ -40,6 +42,13 @@ class BNRPrudentialInteractiveDatabaseDiscoveryTests(unittest.TestCase):
         credit=next(x for x in self.m["mechanisms"] if x["id"]=="aggregate_bank_credit_response")
         self.assertEqual(credit["bnr_prudential_interactive_database_discovery_review"],path)
         self.assertEqual(self.a["bnr_prudential_interactive_database_discovery_review"],path)
+        self.assertEqual(
+            self.r["terminal_assessment"],
+            "model/calibration_validation/bnr_prudential_source_discovery_terminal_assessment.json",
+        )
+        self.assertTrue(
+            self.r["hard_rules"]["no_repeat_same_discovery_without_new_official_trigger"]
+        )
 
 if __name__=="__main__":
     unittest.main()
