@@ -1,5 +1,5 @@
 {
-  "contract_version": "0.1",
+  "contract_version": "0.2",
   "frozen_on": "2026-09-19",
   "mechanism_id": "corporate_investment_response",
   "phase": "Corporate Investment — Offline Measurement Panel",
@@ -7,20 +7,22 @@
   "measurement_design_contract": "model/calibration_validation/corporate_investment_measurement_design_contract.json",
   "retained_source_vintages": {
     "core": "data/source_vintages/corporate-investment-source-family-vintage-2026-09-19",
-    "supplemental": "data/source_vintages/corporate-investment-supplemental-source-vintage-2026-09-19"
+    "supplemental": "data/source_vintages/corporate-investment-supplemental-source-vintage-2026-09-19",
+    "financing_rate_screening": "data/source_vintages/corporate-investment-financing-rate-screening-vintage-2026-09-19"
   },
   "inputs": {
     "target": "nfc_investment_rate_quarterly_level.csv",
     "grants": "nfc_investment_grants_quarterly_level.csv",
-    "lending_rate_monthly": "nfc_new_business_lending_rate_monthly_level.csv",
     "nfc_gva": "nfc_gva_quarterly_level.csv",
-    "real_gdp": "real_gdp_quarterly_level.csv"
+    "real_gdp": "real_gdp_quarterly_level.csv",
+    "lending_rate_raw": "up_to_one_year_fixation.csv",
+    "lending_rate_series_key": "MIR.M.RO.B.A2A.F.R.A.2240.RON.N"
   },
   "transformations": {
     "target_investment_rate": "USE_PROVIDER_PUBLISHED_LEVEL_UNCHANGED",
     "real_gdp_yoy_growth": "100 * (real_gdp[t] / real_gdp[t-4] - 1)",
     "investment_grants_support_intensity": "100 * SUM(grants[t-3:t]) / SUM(nfc_gva[t-3:t])",
-    "nfc_new_business_lending_rate_quarterly_mean": "ARITHMETIC_MEAN_OF_EXACTLY_THREE_MONTHLY_VALUES_WITHIN_QUARTER"
+    "nfc_new_business_lending_rate_up_to_one_year_quarterly_mean": "ARITHMETIC_MEAN_OF_EXACTLY_THREE_MONTHLY_VALUES_WITHIN_QUARTER"
   },
   "completeness_rules": {
     "quarter_sequence_must_be_consecutive": true,
@@ -30,14 +32,15 @@
     "lending_rate_requires_exactly_three_distinct_finite_months": true,
     "interpolation_allowed": false,
     "forward_fill_allowed": false,
-    "missing_to_zero_allowed": false
+    "missing_to_zero_allowed": false,
+    "panel_must_be_quarterly_contiguous_over_reported_common_window": true
   },
   "panel_columns": [
     "period",
     "nfc_investment_rate",
     "real_gdp_yoy_growth",
     "investment_grants_support_intensity",
-    "nfc_new_business_lending_rate_quarterly_mean"
+    "nfc_new_business_lending_rate_up_to_one_year_quarterly_mean"
   ],
   "hard_rules": {
     "no_parameter_estimation": true,
@@ -56,5 +59,12 @@
     "audit": "corporate_investment_measurement_panel_audit.json"
   },
   "pass_effect": "MEASUREMENT_PANEL_READY_FOR_PREREGISTERED_STRUCTURAL_SELECTION_DESIGN_ONLY",
-  "next_gate": "Freeze an explicit structural-selection contract, including candidate equation family, baseline, lag/order choices, selection and final-evaluation windows, parameter-domain gates and failure criteria, before any fit."
+  "next_gate": "Freeze an explicit structural-selection contract, including candidate equation family, baseline, lag/order choices, selection and final-evaluation windows, parameter-domain gates and failure criteria, before any fit.",
+  "measurement_iteration": {
+    "prior_artifact_id": 10581749703,
+    "prior_complete_rows": 18,
+    "prior_common_window": "2018-Q1 to 2026-Q1 with gaps",
+    "prior_disposition": "BLOCKED_SPARSE_TOTAL_FIXATION_RATE",
+    "remediation_basis": "Financing-rate source continuity screening only; no investment-model outcomes used."
+  }
 }
