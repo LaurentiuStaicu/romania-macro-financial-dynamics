@@ -42,7 +42,8 @@
     "screened_source_summary": {
       "ECB_HFCS": "Conceptually suitable household finance/consumption microdata. BNR is an HFCN member institution, but Romania is not identified as a participating country dataset in the 2017, 2021 or latest 2023 HFCS waves.",
       "INS_ABF_TEMPO": "Quarterly household budget/consumption source exists, but no public mortgage-borrower-status breakdown or DSTI-consumption linkage was identified.",
-      "ECB_CES": "High-frequency spending/income survey, but no Romania country series was identified and it would not itself map mortgage-borrower DSTI to S1M consumption."
+      "ECB_CES": "High-frequency spending/income survey, but no Romania country series was identified and it would not itself map mortgage-borrower DSTI to S1M consumption.",
+      "EUROSTAT_HBS_2020_SUF": "Romania scientific-use household microdata are available with consumption, income and weights, but the released 2020 SUF manual does not identify a mortgage/loan-status field. Owner-occupier imputed rent is not a mortgage-borrower identifier."
     }
   },
   "borrowing_rate_alignment": {
@@ -62,7 +63,7 @@
       "id": "BORROWER_SUBPOPULATION_TARGET",
       "requirement": "Identify an observed consumption/income target for a housing-borrower population aligned to the BNR DSTI boundary.",
       "effect": "Would define a different empirical target/mechanism and requires separate preregistration; it may not silently replace the registered aggregate mechanism.",
-      "current_screening_status": "NOT_IDENTIFIED"
+      "current_screening_status": "ROMANIA_HBS_MICRODATA_AVAILABLE_BUT_REQUIRED_MORTGAGE_BORROWER_IDENTIFIER_NOT_IDENTIFIED"
     },
     {
       "id": "REPRESENTATIVENESS_BRIDGE",
@@ -77,7 +78,9 @@
     "Selecting the mortgage borrowing rate because it improves fit.",
     "Using housing-loan share of bank credit without a borrower-to-aggregate consumption mapping.",
     "Combining housing and consumer-loan rates or DSTI measures with post-hoc weights.",
-    "Relabelling S1M aggregate consumption as mortgage-borrower consumption."
+    "Relabelling S1M aggregate consumption as mortgage-borrower consumption.",
+    "Using owner-occupier status or imputed rent from HBS as a mortgage-borrower proxy.",
+    "Using Romania HBS consumption/income microdata without an observed mortgage-borrower identifier."
   ],
   "hard_rules": {
     "no_parameter_estimation": true,
