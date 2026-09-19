@@ -92,15 +92,17 @@
     },
     {
       "id": "government_refinancing_need",
-      "status": "PARTIAL_SERIES_AVAILABLE",
-      "role": "Partially observed annual reference mode for government-debt refinancing/liquidity pressure, using the Ministry of Finance refinancing component and explicitly distinct from gross financing need, maturity, refixing, and matched repricing events.",
-      "source": "Romania Ministry of Finance annual debt reports/strategies; retained 2017-2023 observed partial series with FINAL versus OPERATIVE status preserved.",
+      "status": "OBSERVED_SERIES_AVAILABLE",
+      "role": "Observed annual government-debt refinancing/liquidity-pressure reference mode using the Ministry of Finance principal-repayment/refinancing component. It is explicitly distinct from gross financing need, pre-financing, maturity/refixing shares and matched repricing events.",
+      "source": "Romania Ministry of Finance annual/monthly public-debt reports and completed-year execution sources; retained continuous 2013-2024 observed history under a frozen revision-precedence contract.",
       "time_resolution": "annual",
-      "current_endogeneity": "OBSERVED_PARTIAL_DRIVER",
+      "current_endogeneity": "OBSERVED_TARGET",
       "assessment": "model/dynamics/government_refinancing_need_reference_assessment.json",
-      "retained_series": "data/processed/government_debt_refinancing_mof_2017_2023.csv",
-      "provenance": "data/provenance/government_debt_refinancing_mof_2017_2023.json",
-      "external_source_screening": "model/dynamics/government_refinancing_need_external_source_screening.json"
+      "retained_series": "data/processed/government_debt_refinancing_mof_2013_2024.csv",
+      "provenance": "data/provenance/government_debt_refinancing_mof_2013_2024.json",
+      "external_source_screening": "model/dynamics/government_refinancing_need_external_source_screening.json",
+      "promotion_contract": "model/dynamics/government_refinancing_need_promotion_contract.json",
+      "promotion_assessment": "model/dynamics/government_refinancing_need_promotion_assessment.json"
     },
     {
       "id": "government_effective_interest_rate",
