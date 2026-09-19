@@ -72,6 +72,8 @@ class SystemDynamicsConformityTests(unittest.TestCase):
                 "policy_rate",
                 "household_lending_rate",
                 "nfc_lending_rate",
+                "government_debt_stock",
+                "government_interest_burden",
             },
         )
         self.assertEqual(
@@ -79,8 +81,6 @@ class SystemDynamicsConformityTests(unittest.TestCase):
             {
                 "credit_stock",
                 "credit_flow",
-                "government_debt_stock",
-                "government_interest_burden",
                 "government_refinancing_need",
                 "government_effective_interest_rate",
                 "sectoral_financial_positions",
