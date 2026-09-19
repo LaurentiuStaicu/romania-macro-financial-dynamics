@@ -32,7 +32,7 @@
     "F8": "Aggregate-only rank boundary; zero unconditional unique bilateral cells."
   },
   "blocker": {
-    "reason": "The original holder-by-issuer boundary remains blocked by Accounting Readiness. A narrower aggregate behaviour-over-time boundary has now passed source coverage twice by different routes but not the required scientific gate: Phase A explicit F2-F8 construction failed because eight exact component series were unavailable; Phase B exact total-F-minus-F1 construction recovered all 34 mandatory series across 45 common quarters but failed system reconciliation, with persistent material stock residuals and one large 2021-Q3 flow discontinuity. No tolerance, orientation or applicability rule is changed post-result. The mode remains PARTIAL_SERIES_AVAILABLE.",
+    "reason": "The original holder-by-issuer boundary remains blocked by canonical Accounting Readiness. The preregistered aggregate recovery path A-D also remains negative: Phase A explicit F2-F8 aggregation failed on eight unavailable component series; historical Phase B exact F-minus-F1 aggregation resolved mandatory coverage and produced 45 common quarters but failed the frozen stock reconciliation gate; Phase C showed that five stock residuals also exceeded the ECB DECIMALS-derived rounding envelope; and Phase D localized those discrepancies primarily to resident-sector additivity versus direct S1 rather than to the S1-rest-of-world relation. A later ESA-consistent F1-applicability refinement was identified post-run and then executed once as exploratory evidence; all 34 mandatory series were available but system reconciliation failed by economically material margins, so it does not rescue the mode and cannot reinterpret A-D. The mode remains PARTIAL_SERIES_AVAILABLE and further internal source reinterpretation is frozen until a declared reopen trigger.",
     "blocker_is_structural_identification_not_missing_value_imputation": true
   },
   "prohibited_shortcuts": [
@@ -52,7 +52,8 @@
     "rounding_consistency_gate": "FAILED_NO_PROMOTION",
     "source_discrepancy_diagnostic": "LOCALIZED_RESIDENT_SECTOR_ADDITIVITY_NO_PROMOTION",
     "further_internal_source_recovery": "FROZEN_UNTIL_REOPEN_TRIGGER",
-    "phase_b": "SOURCE_COVERAGE_PASS_RECONCILIATION_FAIL_NO_PROMOTION"
+    "phase_b": "SOURCE_COVERAGE_PASS_RECONCILIATION_FAIL_NO_PROMOTION",
+    "exploratory_esa_f1_reaudit": "RECONCILIATION_FAIL_NO_PROMOTION"
   },
   "boundary_review": "model/dynamics/sectoral_financial_positions_boundary_review.json",
   "strict_source_gate_contract": "model/dynamics/sectoral_financial_positions_reference_contract.json",
@@ -69,8 +70,11 @@
     "current_status_changed": false,
     "readiness_count_change": 0,
     "reopen_authorized": false,
-    "rule": "A future corrected F1-applicability test requires a new separately preregistered phase. The historical Phase B contract and A-D evidence chain remain immutable."
+    "rule": "A future corrected F1-applicability test requires a new separately preregistered phase. The historical Phase B contract and A-D evidence chain remain immutable.",
+    "exploratory_reaudit_formal_gate": false
   },
-  "phase_b_contract": "model/dynamics/sectoral_financial_positions_aggregate_identity_contract.json",
-  "phase_b_assessment": "model/dynamics/sectoral_financial_positions_phase_b_assessment.json"
+  "historical_phase_b_contract": "model/dynamics/sectoral_financial_positions_aggregate_identity_contract.json",
+  "historical_phase_b_executed_contract_snapshot": "model/dynamics/sectoral_financial_positions_aggregate_identity_contract_executed_2026-09-19.json",
+  "historical_phase_b_assessment": "model/dynamics/sectoral_financial_positions_aggregate_identity_assessment.json",
+  "exploratory_esa_f1_reaudit_assessment": "model/dynamics/sectoral_financial_positions_esa_f1_applicability_reaudit_assessment.json"
 }
