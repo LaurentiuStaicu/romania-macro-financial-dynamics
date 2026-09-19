@@ -36,7 +36,7 @@ class SectoralFinancialPositionsReferenceContractTests(unittest.TestCase):
         source = self.contract["source"]
         self.assertEqual(source["dataset"].split(" — ")[0], "QSA")
         self.assertEqual(source["reference_area"], "RO")
-        self.assertEqual(source["represented_total_formula"], "F minus F1")
+        self.assertEqual(source["represented_total_formula"], "Explicit sum F2+F3+F4+F5+F6+F7+F8")
         self.assertEqual(
             source["resident_sector_mapping"]["F"],
             [["S12", 1.0], ["S121", -1.0]],
@@ -49,6 +49,10 @@ class SectoralFinancialPositionsReferenceContractTests(unittest.TestCase):
             self.review["proposed_reference_boundary"]["represented_instruments"],
             ["F2", "F3", "F4", "F5", "F6", "F7", "F8"],
         )
+        self.assertEqual(source["instrument_dimensions"]["F2"]["maturity"], "T")
+        self.assertEqual(source["instrument_dimensions"]["F5"]["maturity"], "_Z")
+        self.assertEqual(source["instrument_dimensions"]["F6"]["maturity"], "_Z")
+        self.assertEqual(source["instrument_dimensions"]["F8"]["maturity"], "T")
 
     def test_stock_and_flow_semantics_cannot_be_conflated(self) -> None:
         construction = self.contract["construction"]
@@ -56,6 +60,7 @@ class SectoralFinancialPositionsReferenceContractTests(unittest.TestCase):
         self.assertIn("separately published QSA concepts", construction["stock_flow_semantics"])
         self.assertTrue(rules["no_stock_difference_flow_proxy"])
         self.assertTrue(rules["no_BF90_total_substitution_without_F1_exclusion"])
+        self.assertTrue(rules["no_total_F_minus_assumed_F1_zero"])
         self.assertTrue(rules["no_missing_to_zero"])
         self.assertTrue(rules["no_interpolation"])
 
