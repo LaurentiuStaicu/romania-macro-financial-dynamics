@@ -49,10 +49,12 @@
     {
       "id": "exchange_rate_pass_through_to_inflation",
       "classification": "CANDIDATE",
-      "source_readiness": "PRIMARY_FX_HICP_IDENTIFIED_EXTERNAL_PRICE_EXACT_SERIES_PENDING",
-      "next_admissible_action": "Materialize ECB RON/EUR and Romania HICP raw vintages, then recover the preregistered Romania euro-denominated import-UVI fallback exact series tuple or record source-control failure.",
+      "source_readiness": "PRIMARY_FX_HICP_IDENTIFIED_EXTERNAL_PRICE_MEMBER_STATE_DATASET_FOUND_PRODUCT_BOUNDARY_UNRESOLVED",
+      "next_admissible_action": "Resolve the external-price product boundary in a new preregistered contract: the exact Member-State short-term dataset ext_st_27_2020msbec is known, but the documented products are CAP/CNS/CTR/INT rather than the previously preregistered total-import control. Do not select a BEC category from fit.",
       "blockers": [
-        "Romania sts_inpi_m coverage not confirmed; ITGS euro-denominated UVI source family is preregistered but exact series tuple remains unresolved."
+        "Romania sts_inpi_m coverage remains unconfirmed.",
+        "Eurostat ext_st_27_2020msbec is the exact monthly Member-State BEC short-term family, but it does not satisfy the preregistered total-goods product boundary.",
+        "Choosing intermediate, capital, consumer non-durables or transport-related goods requires a new ex-ante product-boundary contract."
       ],
       "source_boundary_review": "model/calibration_validation/fx_inflation_pass_through_source_boundary_review.json",
       "external_price_screening": "model/calibration_validation/fx_inflation_external_price_control_screening.json",

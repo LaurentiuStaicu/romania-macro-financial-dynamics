@@ -29,7 +29,7 @@
   },
   "external_price_control_screen": {
     "screening": "model/calibration_validation/fx_inflation_external_price_control_screening.json",
-    "current_decision": "PREFERRED_STS_INPI_RO_NOT_CONFIRMED_FALLBACK_ITGS_EUR_UVI_PREREGISTERED",
+    "current_decision": "PREFERRED_STS_INPI_RO_NOT_CONFIRMED_MEMBER_STATE_UVI_DATASET_IDENTIFIED_BUT_TOTAL_PRODUCT_BOUNDARY_MISMATCH",
     "calibration_may_open": false
   },
   "transformation_boundary": {
@@ -57,7 +57,7 @@
       "Retain the exact ECB EXR monthly RON/EUR series with provider key, vintage metadata and raw-source hash.",
       "Retain the exact Eurostat Romania HICP CP00 monthly series with dataset dimensions, vintage metadata and raw-source hash.",
       "Establish whether Romania has a definitionally suitable exact industrial import-price series in sts_inpi_m; record a pass or explicit unavailability.",
-      "If the preferred import-price control is unavailable, preregister a replacement external-price control before inspecting pass-through fit.",
+      "If the preferred import-price control remains unavailable, write a new preregistered control contract choosing and justifying a specific Member-State BEC product or another exact Romanian external-price measure before materialisation; ext_st_27_2020msbec may not be treated as a total-import index.",
       "Freeze inflation transform, lag horizon, estimation start date/regime boundary, structural-selection window and untouched evaluation window before estimation."
     ],
     "prohibited_shortcuts": [

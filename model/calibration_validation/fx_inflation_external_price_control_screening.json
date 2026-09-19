@@ -17,7 +17,7 @@
   "preregistered_fallback": {
     "source_family": "Eurostat International Trade in Goods Statistics — Indices by SITC/BEC/CPA",
     "target": "Romania monthly import unit-value index for total imports/world, expressed in euro",
-    "status": "SOURCE_FAMILY_CONFIRMED_EXACT_SERIES_CODE_PENDING_MATERIALISATION",
+    "status": "DATASET_IDENTIFIED_PREREGISTERED_TOTAL_PRODUCT_BOUNDARY_NOT_AVAILABLE",
     "rationale": [
       "Eurostat documents monthly and annual unit-value indices for imports and exports of each EU country, with coverage starting from January 2002 in the current user manual.",
       "The indices are available in euro, national currency and US dollars.",
@@ -32,7 +32,20 @@
       "unit = unit-value index denominated in euro",
       "frequency = monthly"
     ],
-    "materialisation_rule": "Do not estimate until the exact Eurostat dataset identifier, complete dimension tuple, coverage, revisions/vintage, raw-source hash and missingness are retained. If the exact requested UVI cannot be reproduced, return to SOURCE_CONTROL_UNRESOLVED rather than selecting a fit-improving substitute."
+    "materialisation_rule": "The current fallback gate fails at product-boundary resolution: ext_st_27_2020msbec is the documented Member-State monthly short-term family, but it exposes high-level BEC products rather than the preregistered total-goods control. Do not choose CAP/CNS/CTR/INT from model fit. A new preregistered external-price-control contract must select and justify a product concept before any series is materialised for estimation.",
+    "dataset_identifier": "ext_st_27_2020msbec",
+    "dataset_label": "Member States EU27 (from 2020) trade by BEC product group",
+    "documented_member_state_product_boundary": {
+      "source": "Eurostat 2026 User manual on international trade in goods statistics, short-term indicators dataset tree",
+      "high_level_BEC_products": [
+        "CAP",
+        "CNS",
+        "CTR",
+        "INT"
+      ],
+      "total_goods_product_in_documented_member_state_short_term_family": false,
+      "interpretation": "The preregistered total-import UVI cannot be claimed from this dataset. Selecting one BEC product would change the product boundary and requires a new ex-ante control contract."
+    }
   },
   "methodological_limits": {
     "UVI_is_not_direct_import_price_index": true,
@@ -41,10 +54,12 @@
     "no_RON_denomination_switch_after_fit": true,
     "no_EU_or_euro_area_aggregate_substitution_for_Romania": true,
     "no_global_commodity_index_substitution_without_new_contract": true,
-    "no_post_fit_control_selection": true
+    "no_post_fit_control_selection": true,
+    "no_BEC_product_selection_without_new_contract": true,
+    "member_state_short_term_dataset_may_not_be_relabelled_total_imports": true
   },
   "disposition": {
-    "external_price_control_status": "FALLBACK_SOURCE_FAMILY_PREREGISTERED_EXACT_SERIES_PENDING",
+    "external_price_control_status": "MEMBER_STATE_UVI_DATASET_IDENTIFIED_TOTAL_PRODUCT_BOUNDARY_MISMATCH_NEW_CONTROL_CONTRACT_REQUIRED",
     "calibration_cycle_open": false,
     "mechanism_classification": "CANDIDATE",
     "central_feedback": false,

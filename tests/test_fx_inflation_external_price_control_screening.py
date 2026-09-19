@@ -27,7 +27,21 @@ class FxInflationExternalPriceControlScreeningTests(unittest.TestCase):
         )
         self.assertEqual(
             screening["preregistered_fallback"]["status"],
-            "SOURCE_FAMILY_CONFIRMED_EXACT_SERIES_CODE_PENDING_MATERIALISATION",
+            "DATASET_IDENTIFIED_PREREGISTERED_TOTAL_PRODUCT_BOUNDARY_NOT_AVAILABLE",
+        )
+        self.assertEqual(
+            screening["preregistered_fallback"]["dataset_identifier"],
+            "ext_st_27_2020msbec",
+        )
+        documented = screening["preregistered_fallback"][
+            "documented_member_state_product_boundary"
+        ]
+        self.assertEqual(
+            documented["high_level_BEC_products"],
+            ["CAP", "CNS", "CTR", "INT"],
+        )
+        self.assertFalse(
+            documented["total_goods_product_in_documented_member_state_short_term_family"]
         )
         self.assertFalse(screening["disposition"]["calibration_cycle_open"])
         self.assertFalse(review["external_price_control_screen"]["calibration_may_open"])
@@ -47,6 +61,10 @@ class FxInflationExternalPriceControlScreeningTests(unittest.TestCase):
         )
         self.assertTrue(limits["UVI_is_not_direct_import_price_index"])
         self.assertTrue(limits["composition_effects_possible"])
+        self.assertTrue(limits["no_BEC_product_selection_without_new_contract"])
+        self.assertTrue(
+            limits["member_state_short_term_dataset_may_not_be_relabelled_total_imports"]
+        )
 
     def test_no_geographic_or_proxy_substitution_is_allowed(self) -> None:
         screening = load(
