@@ -141,7 +141,10 @@
       "oecd_counterpart_discovery_probe_contract": "model/dynamics/sectoral_financial_positions_oecd_counterpart_probe_contract.json",
       "oecd_counterpart_discovery_probe_status": "PREREGISTERED_MANUAL_NOT_EXECUTED",
       "oecd_counterpart_discovery_probe_effect": "NONE_UNTIL_RETAINED_RESULT_AND_SEPARATE_SEMANTIC_LINEAGE_REVIEW",
-      "external_reopen_screening_summary": "OECD quarterly counterpart stock/flow dataflows are a preregistered discovery candidate only; OECD documents the quarterly financial sector-accounts collection as OECD-ECB, so country coverage alone cannot establish independent reopen evidence."
+      "external_reopen_screening_summary": "Eurostat nasq_10_f_cp is the priority discovery candidate because it explicitly disseminates quarterly financial-account counterpart information, but Eurostat metadata states the data are validated by ECB and republished, so discovery can establish public counterpart coverage—not statistical independence. OECD counterpart dataflows remain a secondary discovery path with the same lineage caution.",
+      "eurostat_counterpart_discovery_probe_contract": "model/dynamics/sectoral_financial_positions_eurostat_counterpart_probe_contract.json",
+      "eurostat_counterpart_discovery_probe_status": "PREREGISTERED_MANUAL_NOT_EXECUTED",
+      "eurostat_counterpart_discovery_probe_effect": "NONE_UNTIL_RETAINED_RESULT_AND_SEPARATE_MAPPING_LINEAGE_REVIEW"
     }
   ],
   "closure_rule": "Integrated behavioural closure may not be declared validated until the reference modes required by each active loop have explicit observed targets or a documented reason why only qualitative/reference-pattern validation is possible.",
