@@ -18,31 +18,18 @@
       "classification": "CANDIDATE",
       "maps_to_dynamic_core_loop": "monetary_credit_transmission_loop",
       "central_feedback": false,
-      "functional_form": "r_lend[t] = r_lend[t-1] + lambda * (alpha + beta * policy_rate[t] - r_lend[t-1])",
-      "implementation": "partial_adjustment_rate",
+      "functional_form": "household_housing candidate: lend[t] = lend[t-1] + beta * (policy[t]-policy[t-1]); no NFC form is selected",
+      "implementation": null,
       "parameters": [
         {
-          "id": "alpha",
-          "status": "TO_ESTIMATE_0.5",
-          "unit": "percentage_point"
-        },
-        {
-          "id": "beta",
-          "status": "TO_ESTIMATE_0.5",
+          "id": "beta_household_housing",
+          "status": "FROZEN_CANDIDATE_NOT_VALIDATED",
+          "value": 0.49746478873239447,
           "unit": "dimensionless",
-          "interpretation": "long-run policy-to-lending-rate pass-through"
-        },
-        {
-          "id": "lambda",
-          "status": "TO_ESTIMATE_0.5",
-          "unit": "fraction_per_observation",
-          "bounds": [
-            0,
-            1
-          ]
+          "interpretation": "Frozen coefficient fitted through 2025-01 for the household housing delta-policy candidate; it remains a candidate parameter because the final holdout contained zero policy-rate changes."
         }
       ],
-      "estimation_plan": "Estimate separately for household and corporate RON new-business lending rates using time-ordered monthly data; assess lag/partial-adjustment alternatives and parameter stability.",
+      "estimation_plan": "Do not respecify the frozen household delta-policy form before its first prospective confirmation on genuinely new policy-rate variation. NFC requires a newly preregistered model/data cycle before any form can be selected.",
       "observables": [
         "BNR_policy_rate_or_definitionally_matched_policy_instrument",
         "MIR.M.RO.B.A2C.A.R.A.2250.RON.N",
@@ -69,6 +56,25 @@
         "status": "CANDIDATE",
         "source": "model/calibration_validation/validation_recovery_disposition.json",
         "interpretation": "The household delta-policy form passed structural selection but the fresh holdout contained no policy-rate movement and could not distinguish the candidate from persistence. NFC tested forms failed structural selection before holdout. The generic pass-through mechanism therefore remains a candidate and is not an active central feedback."
+      },
+      "validation_recovery_selected_form": {
+        "source": "model/calibration_validation/validation_recovery_holdout.json",
+        "target": "household_housing",
+        "candidate": "delta_policy_contemporaneous",
+        "equation": "lend[t] = lend[t-1] + beta * (policy[t]-policy[t-1])",
+        "frozen_beta": 0.49746478873239447,
+        "holdout_nonzero_policy_changes": 0,
+        "passes_all_final_holdout_gates": false,
+        "final_verdict": "CANDIDATE",
+        "causal_claim": false
+      },
+      "validation_recovery_nfc": {
+        "source": "model/calibration_validation/validation_recovery_selection_freeze.json",
+        "target": "nfc_upto1y",
+        "selected_candidate": null,
+        "final_holdout_opened": false,
+        "status": "CANDIDATE",
+        "reason": "No preregistered NFC candidate passed all structural-selection gates; the final NFC holdout remains unopened."
       }
     },
     {
