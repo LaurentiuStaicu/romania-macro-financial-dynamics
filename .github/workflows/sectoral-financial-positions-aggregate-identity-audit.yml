@@ -1,0 +1,40 @@
+name: Sectoral Financial Positions Aggregate Identity Audit
+
+
+# Phase B live QSA refresh is manual after the retained immutable run. The
+# historical scientific result is reproduced offline from the committed
+# assessment and invariant tests.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit-sectoral-financial-positions-phase-b:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify preregistered Phase B aggregate-identity contract
+        run: python -m unittest tests.test_sectoral_financial_positions_aggregate_identity_contract -v
+
+      - name: Probe ECB QSA total-F-minus-F1 aggregate identity
+        env:
+          SECTORAL_POSITIONS_PHASE_B_AUDIT_OUT: sectoral_positions_phase_b_audit_artifacts
+        run: python scripts/audit_ecb_sectoral_financial_positions_aggregate_identity.py
+
+      - name: Upload Phase B source-gate evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sectoral-financial-positions-phase-b-${{ github.sha }}
+          path: sectoral_positions_phase_b_audit_artifacts/
+          if-no-files-found: error
+          retention-days: 90

@@ -1,0 +1,32 @@
+name: FX HICP Current Source Structure Probe
+
+# Manual-only refresh of the current ECOICOP-v2 HICP structure.
+# The retained 2026-09-19 vintage already freezes I25/TOTAL/RO.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe-current-hicp-source-structure:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Probe current Eurostat Romania HICP ECOICOP-v2 structure
+        env:
+          FX_HICP_CURRENT_PROBE_OUT: fx_hicp_current_probe_artifacts
+        run: python scripts/audit_fx_hicp_current_source_structure.py
+      - name: Upload current HICP structure evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fx-hicp-current-structure-probe-${{ github.sha }}
+          path: fx_hicp_current_probe_artifacts/
+          if-no-files-found: error
+          retention-days: 90

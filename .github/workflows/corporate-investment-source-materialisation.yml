@@ -1,0 +1,40 @@
+name: Corporate Investment Source Family Materialisation
+
+# One-shot PR bootstrap for exact source retention only.
+# No target selection, transformation, cross-frequency join or estimation.
+on:
+  pull_request:
+    types: [labeled]
+
+permissions:
+  contents: read
+
+jobs:
+  materialise-corporate-investment-sources:
+    if: ${{ github.event.label.name == 'run-corporate-investment-materialisation' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify frozen source contract
+        run: python -m unittest tests.test_corporate_investment_materialisation_contract -v
+
+      - name: Run exact live source-family materialisation
+        env:
+          CORPORATE_INVESTMENT_MATERIALISATION_OUT: corporate_investment_materialisation_artifacts
+        run: python scripts/audit_corporate_investment_source_materialisation.py
+
+      - name: Upload corporate-investment source evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: corporate-investment-source-materialisation-${{ github.sha }}
+          path: corporate_investment_materialisation_artifacts/
+          if-no-files-found: error
+          retention-days: 90

@@ -1,0 +1,38 @@
+name: Bank Credit Prudential Source Coverage
+
+# Live-provider refresh/coverage diagnostic only. Manual-only by design:
+# provider outcomes may create new evidence but may not open calibration.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  prudential-source-coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify frozen prudential coverage contract
+        run: python -m unittest tests.test_bank_credit_prudential_coverage_contract -v
+
+      - name: Run live CBD2 coverage diagnostic
+        env:
+          BANK_CREDIT_PRUDENTIAL_OUT: bank_credit_prudential_artifacts
+        run: python scripts/audit_ecb_bank_credit_prudential_coverage.py
+
+      - name: Upload prudential source evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bank-credit-prudential-coverage-${{ github.sha }}
+          path: bank_credit_prudential_artifacts/
+          if-no-files-found: error
+          retention-days: 90

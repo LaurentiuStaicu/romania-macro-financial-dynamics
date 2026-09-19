@@ -97,4 +97,4 @@ jobs:
           name: f4-partial-materialization-${{ github.sha }}
           path: generated/
           if-no-files-found: error
-          retention-days: 30
+          retention-days: 90

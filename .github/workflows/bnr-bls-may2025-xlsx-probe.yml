@@ -1,0 +1,31 @@
+name: BNR BLS May 2025 XLSX Identity Probe
+
+# Exact 2025-06-13 source vintage is retained after review.
+# Future provider refreshes are manual evidence for new vintages only.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe-bnr-bls-xlsx:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Verify frozen source-identity contract
+        run: python -m unittest tests.test_bnr_bls_may2025_xlsx_probe -v
+      - name: Fetch exact official XLSX candidates
+        env:
+          BNR_BLS_XLSX_PROBE_OUT: bnr_bls_xlsx_probe_artifacts
+        run: python scripts/audit_bnr_bls_may2025_xlsx_probe.py
+      - name: Upload exact source evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: bnr-bls-may2025-xlsx-probe-${{ github.sha }}
+          path: bnr_bls_xlsx_probe_artifacts/
+          if-no-files-found: error
+          retention-days: 90

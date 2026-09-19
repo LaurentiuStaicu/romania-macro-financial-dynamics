@@ -1,4 +1,4 @@
-name: F8 Other Accounts Coverage Audit
+name: F7 Financial Derivatives Coverage Audit
 
 # Historical scientific conclusions are reproduced from retained repository
 # snapshots/assessments. This workflow intentionally performs a live provider
@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  audit-f8-coverage:
+  audit-f7-coverage:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -21,18 +21,18 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Verify F8 coverage contract
-        run: python -m unittest tests.test_f8_other_accounts_coverage_contract -v
+      - name: Verify F7 coverage contract
+        run: python -m unittest tests.test_f7_financial_derivatives_coverage_contract -v
 
-      - name: Probe exact ECB QSA F8 coverage
+      - name: Probe exact ECB QSA F7 coverage
         env:
-          F8_AUDIT_OUT: f8_audit_artifacts
-        run: python scripts/audit_qsa_f8_other_accounts_coverage.py
+          F7_AUDIT_OUT: f7_audit_artifacts
+        run: python scripts/audit_qsa_f7_financial_derivatives_coverage.py
 
-      - name: Upload F8 coverage evidence
+      - name: Upload F7 source-coverage evidence
         uses: actions/upload-artifact@v4
         with:
-          name: f8-other-accounts-coverage-${{ github.sha }}
-          path: f8_audit_artifacts/
+          name: f7-financial-derivatives-coverage-${{ github.sha }}
+          path: f7_audit_artifacts/
           if-no-files-found: error
           retention-days: 90

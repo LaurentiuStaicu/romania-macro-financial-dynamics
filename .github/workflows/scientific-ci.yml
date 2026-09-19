@@ -11,6 +11,103 @@ permissions:
   contents: read
 
 jobs:
+  manual-eurostat-counterpart-probe:
+    if: ${{ (github.event_name == 'workflow_dispatch' && github.ref_name == 'audit/scientific-integrity-2026-09-18') || (github.event_name == 'pull_request' && github.head_ref == 'audit/scientific-integrity-2026-09-18' && github.run_attempt > 1) }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out selected manual ref
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify frozen Eurostat discovery contract and probe logic
+        run: |
+          python -m unittest tests.test_sectoral_financial_positions_external_source_screening -v
+          python -m unittest tests.test_sectoral_financial_positions_eurostat_counterpart_probe_contract -v
+          python -m unittest tests.test_sectoral_financial_positions_eurostat_counterpart_probe -v
+
+      - name: Run manual Eurostat counterpart discovery probe
+        env:
+          EUROSTAT_COUNTERPART_PROBE_OUT: sectoral_financial_positions_eurostat_counterpart_probe_artifacts
+        run: python scripts/audit_eurostat_sectoral_financial_positions_counterpart_probe.py
+
+      - name: Upload Eurostat source-access evidence only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: manual-eurostat-counterpart-probe-${{ github.sha }}
+          path: sectoral_financial_positions_eurostat_counterpart_probe_artifacts/
+          if-no-files-found: error
+          retention-days: 90
+
+  manual-oecd-counterpart-probe:
+    if: ${{ (github.event_name == 'workflow_dispatch' && github.ref_name == 'audit/scientific-integrity-2026-09-18') || (github.event_name == 'pull_request' && github.head_ref == 'audit/scientific-integrity-2026-09-18' && github.run_attempt > 1) }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out selected manual ref
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify frozen OECD discovery contract and probe logic
+        run: |
+          python -m unittest tests.test_sectoral_financial_positions_external_source_screening -v
+          python -m unittest tests.test_sectoral_financial_positions_oecd_counterpart_probe_contract -v
+          python -m unittest tests.test_sectoral_financial_positions_oecd_counterpart_probe -v
+
+      - name: Run manual OECD counterpart discovery probe
+        env:
+          OECD_SECTORAL_COUNTERPART_PROBE_OUT: sectoral_financial_positions_oecd_counterpart_probe_artifacts
+        run: python scripts/audit_oecd_sectoral_financial_positions_counterpart_probe.py
+
+      - name: Upload OECD source-access evidence only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: manual-oecd-counterpart-probe-${{ github.sha }}
+          path: sectoral_financial_positions_oecd_counterpart_probe_artifacts/
+          if-no-files-found: error
+          retention-days: 90
+
+  manual-bnr-bls-missing-round-recovery:
+    if: ${{ (github.event_name == 'workflow_dispatch' && github.ref_name == 'audit/scientific-integrity-2026-09-18') || (github.event_name == 'pull_request' && github.head_ref == 'audit/scientific-integrity-2026-09-18' && github.run_attempt > 1) }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out selected manual ref
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify frozen BNR BLS missing-round recovery contract
+        run: |
+          python -m unittest tests.test_bnr_bls_missing_round_workbook_recovery_contract -v
+
+      - name: Probe only preregistered official BNR workbook candidates
+        env:
+          BNR_BLS_MISSING_ROUND_RECOVERY_OUT: bnr_bls_missing_round_recovery_artifacts
+        run: python scripts/audit_bnr_bls_missing_round_workbook_recovery.py
+
+      - name: Upload BNR BLS source-acquisition evidence only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: manual-bnr-bls-missing-round-recovery-${{ github.sha }}
+          path: bnr_bls_missing_round_recovery_artifacts/
+          if-no-files-found: error
+          retention-days: 90
+
   verify-baseline:
     runs-on: ubuntu-latest
 
@@ -45,6 +142,18 @@ jobs:
 
       - name: Run scientific invariant tests
         run: python -m unittest discover -s tests -v
+
+      - name: Audit canonical Accounting Spine readiness
+        run: python scripts/audit_accounting_readiness.py
+
+      - name: Recompute dimensional consistency independently
+        run: python scripts/audit_dimensional_consistency.py
+
+      - name: Run System Dynamics conformity gate explicitly
+        run: python scripts/audit_system_dynamics_conformity.py
+
+      - name: Audit cross-registry scientific baseline manifest
+        run: python scripts/audit_scientific_baseline_manifest.py
 
       - name: Verify retained source-vintage provenance state offline
         run: python scripts/verify_validation_recovery_provenance.py

@@ -1,12 +1,9 @@
 name: F5 Equity Subcomponent Bridge Audit
 
+# Historical scientific conclusions are reproduced from retained repository
+# snapshots/assessments. This workflow intentionally performs a live provider
+# refresh only when explicitly requested.
 on:
-  pull_request:
-    paths:
-      - "model/accounting/f5_equity_subcomponent_bridge_contract.json"
-      - "scripts/audit_qsa_f5_equity_subcomponents.py"
-      - "tests/test_f5_equity_subcomponent_bridge_contract.py"
-      - ".github/workflows/f5-equity-subcomponent-bridge-audit.yml"
   workflow_dispatch:
 
 permissions:
@@ -38,4 +35,4 @@ jobs:
           name: f5-equity-subcomponent-bridge-${{ github.sha }}
           path: f5_equity_artifacts/
           if-no-files-found: error
-          retention-days: 30
+          retention-days: 90

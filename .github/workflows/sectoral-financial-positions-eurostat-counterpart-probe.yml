@@ -1,0 +1,35 @@
+name: Sectoral Financial Positions Eurostat Counterpart Discovery Probe
+
+# Live Eurostat acquisition is new source-access evidence only.
+# It is manual and cannot alter the retained scientific baseline by itself.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe-eurostat-counterpart-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Verify frozen Eurostat discovery contract and probe logic
+        run: |
+          python -m unittest tests.test_sectoral_financial_positions_external_source_screening -v
+          python -m unittest tests.test_sectoral_financial_positions_eurostat_counterpart_probe_contract -v
+          python -m unittest tests.test_sectoral_financial_positions_eurostat_counterpart_probe -v
+      - name: Probe Eurostat Romania counterpart schema and recent coverage
+        env:
+          EUROSTAT_COUNTERPART_PROBE_OUT: sectoral_financial_positions_eurostat_counterpart_probe_artifacts
+        run: python scripts/audit_eurostat_sectoral_financial_positions_counterpart_probe.py
+      - name: Upload source-access evidence only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sectoral-financial-positions-eurostat-counterpart-probe-${{ github.sha }}
+          path: sectoral_financial_positions_eurostat_counterpart_probe_artifacts/
+          if-no-files-found: error
+          retention-days: 90
