@@ -3,7 +3,7 @@
   "reviewed_on": "2026-09-19",
   "mechanism_id": "exchange_rate_pass_through_to_inflation",
   "purpose": "Freeze the raw source boundary and sign/coverage rules required before any distributed-lag exchange-rate pass-through estimation for Romania.",
-  "verdict": "FX_HICP_AND_TOTAL_IMPORT_WORLD_UVI_SOURCE_FAMILIES_IDENTIFIED_MATERIALISATION_PENDING",
+  "verdict": "EXACT_FX_HICP_AND_TOTAL_IMPORT_UVI_SOURCE_BOUNDARIES_FROZEN_MATERIALISATION_PENDING",
   "current_classification": "CANDIDATE",
   "primary_sources": {
     "exchange_rate": {
@@ -18,13 +18,25 @@
     },
     "inflation": {
       "institution": "Eurostat",
-      "dataset": "prc_hicp_midx — HICP monthly index",
+      "dataset": "prc_hicp_minr — HICP ECOICOP version 2, monthly indices and rates",
       "geography": "RO",
-      "coicop": "CP00",
-      "concept": "Romania all-items Harmonised Index of Consumer Prices",
-      "source_url": "https://ec.europa.eu/eurostat/databrowser/product/page/prc_hicp_midx",
+      "product_dimension": "coicop18",
+      "product_code": "TOTAL",
+      "unit": "I25",
+      "unit_label": "Index, 2025=100",
+      "concept": "Romania all-items HICP under ECOICOP version 2",
+      "source_url": "https://ec.europa.eu/eurostat/databrowser/view/prc_hicp_minr",
       "frequency": "monthly",
-      "coverage_note": "Eurostat catalogue identifies monthly HICP index coverage beginning in 1996; exact Romania vintage must be retained when materialised."
+      "coverage_note": "Live structure probe on 2026-09-19 reports time coverage 1996-01 through 2026-08 for the Romania dataset query. Exact TOTAL/I25 observations must be retained in the common source vintage.",
+      "migration_note": "The former prc_hicp_midx / ECOICOP v1 dataset is archived and discontinued for current 2026 data; it may not be silently spliced into the current source boundary.",
+      "live_structure_probe": {
+        "workflow_run_id": 35433198466,
+        "artifact_id": 10581101400,
+        "artifact_zip_sha256": "021ec0e4165aab030b726600e391ffb2d278b8d7a1b119d34f966341dc5735b4",
+        "provider_updated": "2026-09-17T11:00:00+0200",
+        "raw_sha256": "439fc80914d3b67b845528bfd606fd0f0cdcde374cbe5a7a96c4b0af9fee4f26",
+        "raw_bytes": 7583353
+      }
     }
   },
   "external_price_control_screen": {
@@ -46,13 +58,14 @@
       "live_probe_coverage": "2002-01 through 2026-06; 294 non-null monthly observations in the 2026-09-19 live structure probe",
       "role": "external-price proxy; not a pure transaction-price import-price index",
       "currency_boundary": "No currency dimension is exposed by this short-term API extract; do not invent or search a currency variant after model fit."
-    }
+    },
+    "contract": "model/calibration_validation/fx_inflation_external_price_control_contract.json"
   },
   "transformation_boundary": {
     "fx_quote": "RON_per_EUR",
     "positive_fx_change_interpretation": "RON depreciation against the euro",
     "fx_change_candidate": "log difference of the monthly-average RON-per-EUR series",
-    "inflation_raw_input": "HICP CP00 monthly index",
+    "inflation_raw_input": "HICP ECOICOP v2 TOTAL, unit I25 (2025=100), monthly index",
     "inflation_transform": "NOT_YET_FROZEN_BEFORE_SOURCE_MATERIALISATION",
     "rationale": "Monthly log change, year-on-year inflation and seasonally adjusted transforms answer different questions. The transform and lag horizon must be preregistered only after raw-source completeness and revision properties are frozen, not chosen from fit."
   },
@@ -70,11 +83,11 @@
   "source_materialisation_gate": {
     "calibration_cycle_open": false,
     "required_before_estimation": [
-      "Retain the exact ECB EXR monthly RON/EUR average series with provider key, vintage metadata and raw-source hash.",
-      "Retain the exact Eurostat Romania HICP CP00 monthly index with its current provider unit/base, dimensions, vintage metadata and raw-source hash.",
-      "Retain the exact Eurostat ext_st_27_2020msbec Romania/imports/WORLD/TOTAL/IVU monthly series with raw-source hash and provider metadata.",
-      "Verify the common finite monthly coverage across FX, HICP and IVU without interpolation, backfill or missing-to-zero treatment.",
-      "Only after source-vintage retention, freeze inflation transform, external-price transform, lag horizon, estimation start/regime boundary, structural-selection window and untouched evaluation window before any estimation."
+      "Retain the exact ECB EXR.M.RON.EUR.SP00.A monthly-average RON/EUR series with raw bytes, provider metadata and SHA-256.",
+      "Retain the exact Eurostat prc_hicp_minr monthly Romania series with unit=I25, coicop18=TOTAL, geo=RO and raw bytes/SHA-256.",
+      "Retain the exact Eurostat ext_st_27_2020msbec monthly series with freq=M, stk_flow=IMP, indic_et=IVU, partner=WORLD, bclas_bec=TOTAL, geo=RO and raw bytes/SHA-256.",
+      "Retain one normalized level-only common-month CSV without interpolation, backfill, missing-to-zero conversion or inflation/FX transformations.",
+      "Only after exact source-vintage retention, freeze inflation transform, external-price transform, FX transform, lag horizon, regime/estimation start, structural-selection window and untouched evaluation window before any coefficient estimation."
     ],
     "prohibited_shortcuts": [
       "Use end-of-period exchange rates when the frozen driver is monthly average without a new source-boundary contract.",
