@@ -130,5 +130,8 @@
     "initial_pull_request_attempt": "SKIPPED",
     "automatic_live_source_acquisition": false,
     "scientific_role": "Manual source acquisition only; this does not open calibration, extract workbook values, append the canonical panel or change mechanism status."
-  }
+  },
+  "source_discovery_terminal_assessment": "model/calibration_validation/bnr_bls_2025q2_source_discovery_terminal_assessment.json",
+  "source_discovery_stage_status": "STAGE_CLOSED_FROZEN_SINGLE_GAP_2025_Q2_UNDER_CURRENT_PUBLIC_DISCOVERY_SURFACE_NO_MODEL_EFFECT",
+  "source_discovery_reopen_policy": "Do not search for or probe a 2025-Q2 workbook candidate again unless new official BNR evidence supplies an exact endpoint or an exact official machine-readable time-series/catalog target. The existing recovery procedure remains the acquisition gate after such a trigger; url_candidates for 2025-Q2 remains empty until then."
 }
