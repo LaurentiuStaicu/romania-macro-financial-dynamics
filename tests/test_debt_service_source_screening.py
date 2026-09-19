@@ -32,7 +32,12 @@ class DebtServiceSourceScreeningTests(unittest.TestCase):
         )
         obs={item["quarter"]:item for item in bnr["confirmed_publication_text_observations"]}
         self.assertEqual(obs["2024-Q2"]["new_housing_loans_dsti_percent"],34.6)
+        self.assertEqual(obs["2024-Q4"]["new_housing_loans_dsti_percent"],35.0)
         self.assertEqual(obs["2025-Q2"]["outstanding_housing_loans_dsti_percent"],42.0)
+        self.assertEqual(len(obs),10)
+        coverage=bnr["publication_text_coverage"]
+        self.assertEqual(coverage["directly_observed_quarters"],10)
+        self.assertEqual(coverage["missing_quarters"],[])
         self.assertFalse(bnr["exact_machine_readable_history_retained"])
 
     def test_screening_does_not_authorize_estimation(self):
