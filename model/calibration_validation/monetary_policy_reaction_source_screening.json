@@ -1,0 +1,81 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "monetary_policy_reaction_function",
+  "phase": "Monetary Policy Reaction Function — Measurement Source Screening",
+  "purpose": "Determine whether Romania has exact, frequency-compatible and semantically defensible inflation-gap, activity-gap and expectations observables for a policy reaction function without converting qualitative survey balances or model-based gaps into observed shocks.",
+  "verdict": "POLICY_TARGET_OBSERVED_EXPECTATIONS_AND_ACTIVITY_GAP_NOT_DEFINITIONALLY_READY_FOR_REACTION_ESTIMATION",
+  "sources": {
+    "inflation_target": {
+      "institution": "National Bank of Romania",
+      "concept": "Flat inflation target",
+      "value_pct": 2.5,
+      "variation_band_pp": 1,
+      "regime_start": "2013-12",
+      "status": "EXACT_POLICY_REGIME_OBSERVED",
+      "role": "Allows an observed inflation-target midpoint for an inflation-gap measurement contract."
+    },
+    "consumer_price_expectations": {
+      "institution": "European Commission DG ECFIN / Eurostat BCS",
+      "dataset": "ei_bsco_m / CONS_006",
+      "concept": "Consumer qualitative balance: price trends over the next 12 months",
+      "frequency": "monthly",
+      "status": "EXACT_QUALITATIVE_EXPECTATIONS_INDICATOR_AVAILABLE",
+      "semantic_limit": "A balance of survey responses is not an expected annual inflation rate in percentage points and cannot be subtracted from the BNR target as if units matched.",
+      "romania_revision_note": "Romania consumer survey publication resumed in April 2024; consistent monthly/quarterly balances were restored using new data from May 2023 and econometric techniques. Disaggregate category/share results were not restored consistently."
+    },
+    "financial_analyst_expectations": {
+      "institution": "National Bank of Romania",
+      "evidence": "BNR research/Inflation Reports document 1-year and 2-year-ahead financial-analyst inflation expectations historically.",
+      "status": "CONCEPT_CONFIRMED_MACHINE_READABLE_CURRENT_SERIES_NOT_RETAINED",
+      "semantic_limit": "Charts/research evidence does not constitute a current immutable machine-readable expectations vintage."
+    },
+    "bnr_inflation_forecast": {
+      "institution": "National Bank of Romania",
+      "concept": "BNR staff/model inflation projection",
+      "status": "AVAILABLE_IN_INFLATION_REPORTS",
+      "semantic_limit": "Central-bank forecast is part of the policy information set/model and is not interchangeable with private-sector expectations; using it in a policy rule would require explicit simultaneity/model-consistency treatment."
+    },
+    "activity_gap_ameco": {
+      "institution": "European Commission DG ECFIN",
+      "dataset": "AMECO potential-output related variables including AVGDGP/OVGDP",
+      "frequency": "annual",
+      "status": "OFFICIAL_MODEL_BASED_ANNUAL_GAP_AVAILABLE",
+      "semantic_limit": "Annual model-based output gap is not a quarterly observed activity gap and may be revised with forecast vintages."
+    },
+    "activity_gap_bnr": {
+      "institution": "National Bank of Romania",
+      "concept": "GDP/aggregate-demand gap used in Inflation Reports",
+      "status": "MODEL_BASED_REPORT_SERIES_NOT_RETAINED_MACHINE_READABLY",
+      "semantic_limit": "A model-based gap may be scientifically useful but requires a retained vintage and explicit real-time/revision treatment before policy-rule estimation."
+    }
+  },
+  "measurement_readiness": {
+    "observed_policy_rate": true,
+    "exact_inflation_target_midpoint": true,
+    "actual_inflation_series_available": true,
+    "unit_compatible_quantitative_private_inflation_expectations": false,
+    "quarterly_activity_gap_retained": false,
+    "real_time_gap_vintages_retained": false,
+    "policy_regime_dates_partially_observed": true,
+    "managed_float_intervention_treatment_frozen": false,
+    "simultaneous_policy_response_identification_frozen": false
+  },
+  "prohibited_shortcuts": [
+    "Do not interpret the CONS_006 qualitative balance as percentage inflation expectations.",
+    "Do not use BNR staff inflation forecasts as private expectations without an explicit structural information-set contract.",
+    "Do not interpolate annual AMECO output gaps to quarters and call them observed quarterly gaps.",
+    "Do not estimate a Taylor-type rule on full-sample revised gaps without real-time-vintage treatment.",
+    "Do not treat observed exchange-rate movements as exogenous policy-rule regressors in a managed-float regime.",
+    "Do not activate the monetary-credit feedback merely because target and policy-rate histories are observed."
+  ],
+  "disposition": {
+    "mechanism_classification": "DEFERRED",
+    "observed_policy_rate_remains_exogenous": true,
+    "estimation_or_refit_allowed": false,
+    "policy_rule_activation": false,
+    "validated_reference_behavioural_mechanisms_change": 0,
+    "behavioural_closure": "UNCHANGED_INACTIVE"
+  },
+  "reopen_trigger": "Retain a machine-readable quantitative expectations series or preregister a qualitative-expectations candidate family with compatible units; retain quarterly activity-gap vintages with revision timing; freeze policy-regime/intervention and simultaneity identification before any reaction-function fit."
+}
