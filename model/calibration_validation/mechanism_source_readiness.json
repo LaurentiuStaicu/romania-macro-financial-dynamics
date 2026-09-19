@@ -114,19 +114,26 @@
     {
       "id": "corporate_investment_response",
       "classification": "CANDIDATE",
-      "source_readiness": "SOURCE_VINTAGE_RETAINED_MEASUREMENT_DESIGN_PREREGISTERED_SUPPLEMENTAL_SOURCES_PENDING",
-      "next_admissible_action": "Materialize the exact Romania S11 gross-value-added and seasonally adjusted real-GDP source vintages, then derive only the preregistered investment-rate, investment-grants-support, real-GDP-growth and quarterly NFC lending-rate measurement series. Do not fit or search lags.",
+      "source_readiness": "FROZEN_TESTED_FORM_FAILED_BEFORE_HOLDOUT",
+      "next_admissible_action": "Do not open the 2024-Q1..2026-Q1 final-evaluation window and do not respecify lags, signs, predictors, target, rate family, interactions or regimes on this evidence cycle. Reopen only through a separately preregistered cycle triggered by genuinely new measurement or identification evidence.",
       "blockers": [
-        "Exact retained NFC investment, D92 investment-grant, investment-rate and NFC new-business lending-rate source families are now present in-repository.",
-        "The next candidate family selects the observed NFC investment-rate target; the legacy gI growth target is not selected for this cycle.",
-        "S11 gross value added and seasonally adjusted real GDP still require exact retained source vintages before the frozen support-intensity and demand-growth transformations can be reproduced offline.",
-        "Lag structure, autoregressive order and final evaluation design remain intentionally unselected until a separate preregistered structural-selection contract."
+        "The preregistered core lagged-driver investment-rate form failed structural selection before holdout.",
+        "Its RMSE was worse than both persistence and the estimated investment-rate AR benchmark.",
+        "The financing-rate coefficient violated the preregistered non-positive domain at every structural-selection origin (domain-consistency fraction 0.0).",
+        "The preregistered support-augmented extension also failed and did not improve on the core form.",
+        "The untouched 2024-Q1..2026-Q1 final-evaluation window may not be opened to rescue this cycle."
       ],
       "estimation_or_refit_allowed": false,
-      "priority_group": "MATERIALISE_SUPPLEMENTAL_MEASUREMENT_SOURCES_NO_ESTIMATION",
+      "priority_group": "FREEZE_TESTED_FORM_UNTIL_NEW_EVIDENCE",
       "source_boundary_review": "model/calibration_validation/corporate_investment_source_boundary_review.json",
       "retained_source_vintage": "data/source_vintages/corporate-investment-source-family-vintage-2026-09-19",
-      "measurement_design_contract": "model/calibration_validation/corporate_investment_measurement_design_contract.json"
+      "measurement_design_contract": "model/calibration_validation/corporate_investment_measurement_design_contract.json",
+      "supplemental_source_vintage": "data/source_vintages/corporate-investment-supplemental-source-vintage-2026-09-19",
+      "financing_rate_screening_vintage": "data/source_vintages/corporate-investment-financing-rate-screening-vintage-2026-09-19",
+      "measurement_panel_vintage": "data/source_vintages/corporate-investment-measurement-panel-vintage-2026-09-19",
+      "structural_selection_contract": "model/calibration_validation/corporate_investment_structural_selection_contract.json",
+      "selection_result": "model/calibration_validation/corporate_investment_structural_selection_result.json",
+      "selection_promotion_review": "model/calibration_validation/corporate_investment_structural_selection_promotion_review.json"
     },
     {
       "id": "credit_risk_npl_response",
@@ -202,9 +209,9 @@
   ],
   "priority_rule": "Priority is determined by the shortest scientifically admissible path to new independent evidence, not by a desire to activate a feedback loop. Waiting mechanisms remain frozen; source-incomplete mechanisms are not fit with proxies.",
   "current_next_step": {
-    "mechanism_id": "corporate_investment_response",
-    "action": "MATERIALISE_SUPPLEMENTAL_S11_GVA_AND_REAL_GDP_SOURCES_NO_ESTIMATION",
-    "reason": "The exact corporate-investment source family has been retained and the measurement boundary is now frozen ex ante. The shortest admissible path to new independent evidence is to retain the two still-missing official source families required by that contract and derive the frozen measurement series without fitting.",
+    "mechanism_id": "household_consumption_response",
+    "action": "SCREEN_OFFICIAL_HOUSEHOLD_DEBT_SERVICE_SOURCES_NO_ESTIMATION",
+    "reason": "The corporate-investment cycle is frozen after failing before holdout. The household-consumption and credit-risk candidates share an unresolved debt-service measurement boundary; an official-source screening can add independent evidence to both without fitting any behavioural equation.",
     "calibration_cycle_open": false
   },
   "coverage_rule": {
