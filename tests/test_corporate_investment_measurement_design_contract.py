@@ -48,9 +48,22 @@ class CorporateInvestmentMeasurementDesignContractTests(unittest.TestCase):
             "t-4",
             self.c["demand_measurement"]["transformation"],
         )
+        self.assertEqual(
+            self.c["financing_cost_measurement"]["source_series_key"],
+            "MIR.M.RO.B.A2A.F.R.A.2240.RON.N",
+        )
         self.assertIn(
             "ARITHMETIC_MEAN",
             self.c["financing_cost_measurement"]["transformation"],
+        )
+        self.assertIn(
+            "NOT_TOTAL_ALL_FIXATIONS_RATE",
+            self.c["financing_cost_measurement"]["semantic_boundary"],
+        )
+        self.assertFalse(
+            self.c["financing_cost_measurement"]["prior_source_disposition"][
+                "predictive_performance_used"
+            ]
         )
         self.assertIn(
             "SUM(D92",
