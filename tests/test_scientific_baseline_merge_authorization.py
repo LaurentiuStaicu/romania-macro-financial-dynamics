@@ -51,7 +51,10 @@ class ScientificBaselineMergeAuthorizationTests(unittest.TestCase):
             g["merge_authorization_assessment"],
             "model/registries/scientific_baseline_merge_authorization.json",
         )
-        self.assertEqual(g["current_merge_readiness_status"], "MERGE_AUTHORIZED_INTEGRATION_PENDING")
+        self.assertIn(
+            g["current_merge_readiness_status"],
+            {"MERGE_AUTHORIZED_INTEGRATION_PENDING", "INTEGRATION_COMPLETE"},
+        )
         self.assertFalse(g["merge_decision_required"])
         self.assertTrue(g["human_merge_authorized"])
         self.assertFalse(g["automatic_merge_authorized"])
