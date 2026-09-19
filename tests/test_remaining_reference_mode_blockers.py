@@ -35,7 +35,15 @@ class RemainingReferenceModeBlockerTests(unittest.TestCase):
             "REMAINS_PARTIAL_SERIES_AVAILABLE",
         )
         self.assertTrue(
-            assessment["blocker"]["blocker_is_definition_and_vintage_consistency"]
+            assessment["blocker"]["blocker_is_short_mixed_vintage_reference_history"]
+        )
+        self.assertEqual(
+            assessment["observed_partial_series"]["observation_count"],
+            7,
+        )
+        self.assertEqual(
+            assessment["observed_partial_series"]["forecast_observations"],
+            0,
         )
         self.assertIn(
             "treat gross financing need as realized principal refinanced",
