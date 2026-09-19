@@ -72,6 +72,7 @@
   "future_candidate_gate": {
     "status": "NOT_OPEN",
     "required_before_preregistration": [
+      "Identify and retain a concrete official machine-readable mortgage-NPL source (series key, export endpoint, table or workbook); publication charts alone are insufficient.",
       "Retain an exact machine-readable mortgage NPL history on a frozen BNR definition.",
       "Retain or formally freeze the housing-loan DSTI measurement history and choose new versus outstanding DSTI ex ante.",
       "Demonstrate reporting-population, bank-coverage and weighting compatibility between NPL and burden measures, or document an explicit non-equivalence boundary.",
@@ -105,5 +106,22 @@
     "estimation_or_refit_allowed": false,
     "validated_reference_behavioural_mechanisms_change": 0,
     "behavioural_closure": "UNCHANGED_INACTIVE"
+  },
+  "machine_readable_source_search": {
+    "status": "EXACT_OFFICIAL_MORTGAGE_NPL_SERIES_NOT_IDENTIFIED_IN_PUBLIC_SEARCH",
+    "screened_surfaces": [
+      "BNR Financial Stability Reports",
+      "BNR interactive database search surface",
+      "BNR Central Credit Register information surface"
+    ],
+    "findings": [
+      "Financial Stability Reports publish mortgage NPL as a distinct series and direct text anchor values.",
+      "A BNR interactive-database surface exists, but no exact mortgage-NPL series identifier or export endpoint was identified in the current search.",
+      "The Central Credit Register is the source behind several borrower/portfolio indicators, but no public machine-readable mortgage-NPL history endpoint was identified."
+    ],
+    "negative_evidence_scope": "This is not evidence that no official machine-readable series exists; it records only that no exact series/export endpoint was identified in the screened public surfaces.",
+    "chart_digitisation_allowed": false,
+    "endpoint_inference_allowed": false,
+    "next_trigger": "A concrete official series key, downloadable table/workbook, API/export endpoint or reproducible data extract for mortgage NPL."
   }
 }
