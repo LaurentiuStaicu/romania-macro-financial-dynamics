@@ -16,7 +16,8 @@
     "validation_disposition": "model/calibration_validation/validation_recovery_disposition.json",
     "prospective_monetary_confirmation_contract": "model/calibration_validation/prospective_monetary_confirmation_contract.json",
     "prospective_monetary_confirmation_status": "model/calibration_validation/prospective_monetary_confirmation_status.json",
-    "scientific_baseline_manifest": "model/registries/scientific_baseline_manifest.json"
+    "scientific_baseline_manifest": "model/registries/scientific_baseline_manifest.json",
+    "sectoral_financial_positions_bnr_quarterly_s13_source_screening": "model/dynamics/sectoral_financial_positions_bnr_quarterly_s13_source_screening.json"
   },
   "terminal_state": {
     "accounting": {
@@ -43,7 +44,7 @@
       "integrated_closure_ready": false,
       "recovery_stage_status": "STAGE_COMPLETE_FROZEN_9_OF_10_UNDER_CURRENT_PUBLIC_EVIDENCE_BOUNDARY",
       "active_unconditional_recovery_task_remains": false,
-      "completion_interpretation": "The sole blocker has exhausted admissible current public source paths without a boundary-valid quarterly stock+transaction source. Readiness is not synthetically promoted."
+      "completion_interpretation": "The sole blocker has exhausted admissible current public source paths without a boundary-valid quarterly non-consolidated sector-by-counterpart stock+transaction source. BNR annual CNF gives exact 2024 counterpart-stock semantics; BNR quarterly S13 gives a long stock/transaction sequence but only for consolidated general government; neither can be promoted to the full RMD boundary."
     },
     "behavioural_mechanisms": {
       "non_rejected_mechanisms": 11,
