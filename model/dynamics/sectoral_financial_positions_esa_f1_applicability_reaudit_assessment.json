@@ -1,0 +1,83 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Exploratory post-run ESA F1 applicability re-audit",
+  "verdict": "EXPLORATORY_ESA_F1_REAUDIT_RECONCILIATION_FAIL_NO_PROMOTION",
+  "formal_reference_mode_gate": false,
+  "reference_mode": "sectoral_financial_positions",
+  "methodology_review": "model/dynamics/sectoral_financial_positions_esa_f1_applicability_review.json",
+  "executed_contract_snapshot": "model/dynamics/sectoral_financial_positions_esa_f1_applicability_reaudit_contract_executed_2026-09-19.json",
+  "source_basis": {
+    "workflow_run_id": 35414165822,
+    "workflow_artifact_id": 10575740521,
+    "workflow_head_sha": "84d0d40c360269449ccc613cdbb6336c23b6c98e",
+    "workflow_artifact_sha256": "48048cdd4c4ce912fc78151791df58821fd18c009b98c50d825449f43ceb7e43",
+    "artifact_retention_until": "2026-12-18T01:56:05Z",
+    "executed_audit_script_path_at_run": "scripts/audit_ecb_sectoral_financial_positions_phase_b.py",
+    "archived_equivalent_script": "scripts/audit_ecb_sectoral_financial_positions_esa_f1_applicability_reaudit.py"
+  },
+  "result": {
+    "series_requested": 34,
+    "series_available": 34,
+    "unavailable_mandatory_series": 0,
+    "network_errors": false,
+    "construction_errors": 0,
+    "stock": {
+      "common_observation_count": 45,
+      "first_common_period": "2015-Q1",
+      "last_common_period": "2026-Q1",
+      "required_2025_quarters_complete": true,
+      "max_absolute_system_residual_million_RON": 17616.435781249835,
+      "system_reconciliation_pass": false
+    },
+    "flow": {
+      "common_observation_count": 45,
+      "first_common_period": "2015-Q1",
+      "last_common_period": "2026-Q1",
+      "required_2025_quarters_complete": true,
+      "max_absolute_system_residual_million_RON": 10323.480820312503,
+      "system_reconciliation_pass": false,
+      "exceptional_period": "2021-Q3",
+      "exceptional_period_residual_million_RON": -10323.480820312503,
+      "max_absolute_residual_excluding_exception_million_RON": 0.020312500442514647
+    },
+    "promotion_eligible": false
+  },
+  "retained_diagnostic_clues": {
+    "2025-Q4": {
+      "system_stock_residual_million_RON": -16171.13999999984,
+      "S121_F1_assets_million_RON": 78601,
+      "W1_F1_assets_million_RON": 78601,
+      "W1_F1_liabilities_million_RON": 16171.2
+    },
+    "interpretation": "The persistent stock residual is on the scale of a reported F1 external component, while almost all flow periods reconcile within rounding tolerance except one large 2021-Q3 outlier. This supports a targeted F1/counterpart-orientation diagnostic but does not establish which QSA entry should be remapped."
+  },
+  "scientific_interpretation": [
+    "This run used the later ESA-consistent F1 applicability refinement after the original Phase A-D source outcomes were already known. It is therefore exploratory/post-run evidence, not a replacement for the preregistered historical Phase B gate.",
+    "The exploratory construction recovered all 34 series required by its revised applicability boundary across 45 common quarters; that source coverage is not the historical Phase B source gate.",
+    "The exploratory construction itself fails system reconciliation by economically material margins and therefore cannot support promotion.",
+    "Almost all exploratory flow periods reconcile near rounding scale except one large 2021-Q3 discontinuity; this remains a diagnostic clue only.",
+    "No orientation, structural-zero rule, tolerance, sector boundary, readiness state, Accounting Spine state or behavioural-closure state may be changed from this post-run evidence.",
+    "The canonical historical Phase B remains model/dynamics/sectoral_financial_positions_aggregate_identity_assessment.json and its downstream Phase C/D chain remains unchanged."
+  ],
+  "prohibited_post_result_changes": [
+    "increase the 0.1 million RON reconciliation tolerance",
+    "drop 2021-Q3 from the formal history without a source-documented break rule",
+    "swap W1 asset/liability orientation to minimize residuals",
+    "tune structural F1 zero rules from observed residuals",
+    "promote because all 34 source series are available",
+    "rename this exploratory re-audit as the historical preregistered Phase B result",
+    "use its large residuals to tune a new orientation or structural-zero rule",
+    "replace the immutable executed Phase B contract with the corrected-applicability contract"
+  ],
+  "disposition": {
+    "status": "PARTIAL_SERIES_AVAILABLE",
+    "readiness_count_change": 0,
+    "historical_phase_B_reinterpreted": false,
+    "historical_phase_C_D_reinterpreted": false,
+    "accounting_readiness": "UNCHANGED",
+    "accounting_spine": "UNCHANGED",
+    "behavioural_closure": "UNCHANGED_INACTIVE",
+    "further_internal_source_recovery": "FROZEN_UNTIL_REOPEN_TRIGGER"
+  },
+  "canonical_historical_phase_b_assessment": "model/dynamics/sectoral_financial_positions_aggregate_identity_assessment.json"
+}

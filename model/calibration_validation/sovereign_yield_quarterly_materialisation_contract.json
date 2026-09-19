@@ -1,0 +1,128 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "mechanism_id": "sovereign_yield_spread_response",
+  "phase": "Sovereign Yield Response — Quarterly Source Materialisation",
+  "purpose": "Create a definitionally aligned quarterly source table for later preregistered selection/validation, without fitting any yield equation or choosing lag structure from outcomes.",
+  "estimation_authorized": false,
+  "target": {
+    "source": "ECB IRS",
+    "series_key": "IRS.M.RO.L.L40.CI.0000.RON.N.Z",
+    "concept": "Romania 10-year long-term convergence yield in RON, monthly average",
+    "quarterly_rule": "Arithmetic mean of the three published monthly observations in each calendar quarter.",
+    "completeness_rule": "A quarter is usable only when all three calendar months are present and finite; no interpolation or partial-quarter mean.",
+    "first_possible_quarter": "2005-Q2"
+  },
+  "common_long_rate_control": {
+    "selected_before_fit": "Germany 10-year convergence yield",
+    "source": "ECB IRS",
+    "series_key": "IRS.M.DE.L.L40.CI.0000.EUR.N.Z",
+    "quarterly_rule": "Arithmetic mean of the three published monthly observations in each calendar quarter.",
+    "completeness_rule": "Require the same three calendar months as the Romania target.",
+    "interpretation": "Common/euro long-rate control only; subtraction from the RON yield is not labelled a pure credit spread."
+  },
+  "financial_stress_control": {
+    "selected_before_fit": "ECB New CISS, euro area",
+    "source": "ECB CISS",
+    "series_key": "CISS.D.U2.Z0Z.4F.EC.SS_CIN.IDX",
+    "aggregation_rule": "First compute an arithmetic mean over all finite published daily observations inside each calendar month; then compute an equal-weight arithmetic mean of the three monthly means for the quarter.",
+    "completeness_rule": "All three calendar months must contain at least one published finite observation. Missing days are not interpolated and months are equal-weighted so differing business-day counts do not mechanically reweight the quarter.",
+    "interpretation": "External financial-stress control; not a sovereign-risk instrument and not causal identification."
+  },
+  "fiscal_controls": {
+    "debt_to_gdp": {
+      "source": "Retained RMD Eurostat gov_10q_ggdebt snapshot",
+      "path": "model/dynamics/government_debt_stock_reference_snapshot.json",
+      "series": "PC_GDP",
+      "timing": "End-of-quarter Maastricht gross debt as percent of GDP.",
+      "aggregation": "None; use the directly published quarterly observation."
+    },
+    "net_lending_borrowing_to_gdp": {
+      "preferred_source": "Eurostat gov_10q_ggnfa",
+      "geo": "RO",
+      "sector": "S13",
+      "item": "B9 net lending (+) / net borrowing (-)",
+      "adjustment": "calendar and seasonally adjusted",
+      "unit": "percent of GDP",
+      "aggregation": "None; use the directly published quarterly observation.",
+      "sign_rule": "Positive values are surplus/net lending; negative values are deficit/net borrowing. Do not silently flip the sign in the source table.",
+      "source_resolution_rule": "Materialisation must retain the exact provider dimension tuple and raw hash. If the requested direct percent-of-GDP series cannot be resolved unambiguously, stop rather than reconstructing a different fiscal concept.",
+      "exact_provider_tuple": {
+        "freq": "Q",
+        "unit": "PC_GDP",
+        "s_adj": "SCA",
+        "sector": "S13",
+        "na_item": "B9",
+        "geo": "RO"
+      },
+      "revision_note": "Eurostat metadata state that Romanian quarterly government non-financial accounts are revised when annual data become available; every live materialisation must therefore retain dataset vintage/update metadata and the raw response hash.",
+      "published_semantic_crosscheck": {
+        "source": "Eurostat Euro indicators, 21 July 2026",
+        "source_url": "https://ec.europa.eu/eurostat/en/web/products-euro-indicators/w/2-21072026-bp",
+        "release_table": "Seasonally adjusted general government surplus (+) / deficit (-), percent of GDP",
+        "romania_values": {
+          "2024-Q1": -9.8,
+          "2024-Q2": -7.8,
+          "2024-Q3": -9.6,
+          "2024-Q4": -9.6,
+          "2025-Q1": -9,
+          "2025-Q2": -8.2,
+          "2025-Q3": -6.9,
+          "2025-Q4": -7.5,
+          "2026-Q1": -3.6
+        },
+        "use": "DIAGNOSTIC_ONLY_NOT_HARD_EQUALITY_GATE",
+        "reason": "The official release confirms sign, unit and seasonal-adjustment semantics, but Romanian quarterly government accounts are revision-sensitive. A later API vintage may legitimately differ."
+      }
+    }
+  },
+  "optional_domestic_rate_baseline": {
+    "source": "Existing retained RMD policy-rate reference mode",
+    "status": "AVAILABLE_BUT_MODEL_ENTRY_NOT_YET_SELECTED",
+    "rule": "The later structural-selection contract must decide ex ante whether the quarterly policy-rate level/change enters the baseline. Do not decide from yield-fit improvement."
+  },
+  "common_history_rule": {
+    "start": "2005-Q2",
+    "end": "latest quarter complete across every mandatory source",
+    "mandatory_inputs": [
+      "Romania 10-year RON yield",
+      "Germany 10-year EUR yield",
+      "ECB New CISS",
+      "Romania Maastricht debt-to-GDP",
+      "Romania seasonally adjusted B9-to-GDP"
+    ],
+    "no_backfill": true,
+    "no_interpolation": true,
+    "no_missing_to_zero": true
+  },
+  "output_schema": [
+    "period",
+    "romania_10y_yield_pct",
+    "germany_10y_yield_pct",
+    "euro_area_new_ciss",
+    "government_debt_pct_gdp",
+    "government_net_lending_borrowing_pct_gdp",
+    "source_completeness"
+  ],
+  "hard_rules": {
+    "no_regression_or_parameter_estimation": true,
+    "no_lag_selection": true,
+    "no_spread_relabeling": true,
+    "no_fiscal_sign_flip_in_source_layer": true,
+    "no_monthly_forward_fill_of_fiscal_data": true,
+    "no_issuance_or_refinancing_proxy_added": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "next_gate": "After exact source materialisation and provenance retention, write a separate structural-selection contract before any coefficient estimation. The later contract must freeze baseline forms, lag structure, estimation/selection window and untouched evaluation window.",
+  "source_endpoints": {
+    "ecb_api_base": "https://data-api.ecb.europa.eu/service/data",
+    "eurostat_api": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/gov_10q_ggnfa"
+  },
+  "source_materialiser": {
+    "script": "scripts/audit_sovereign_yield_quarterly_materialisation.py",
+    "workflow": ".github/workflows/sovereign-yield-quarterly-materialisation.yml",
+    "execution_policy": "MANUAL_ONLY_LIVE_SOURCE_EVIDENCE",
+    "canonical_repository_promotion": "A successful live run creates evidence only. The generated quarterly CSV and provenance must be reviewed and committed explicitly in a later repository step before any structural-selection contract may be opened."
+  }
+}

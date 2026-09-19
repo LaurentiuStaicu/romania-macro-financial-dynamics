@@ -1,0 +1,169 @@
+{
+  "result_version": "0.1-selection",
+  "mechanism_id": "sovereign_yield_spread_response",
+  "source_csv_sha256": "670d604a5cfd1cc1d2c7e2d6cdc1425c0e076e4f641ce082e29d406ba95ccceb",
+  "selection_window": "2017-Q1..2022-Q4",
+  "final_evaluation_window": "2023-Q1..2026-Q1",
+  "final_evaluation_opened": false,
+  "calibration_fits": {
+    "common_market_ar": {
+      "model_id": "common_market_ar",
+      "parameters": {
+        "alpha": 0.6399612285158263,
+        "rho": 0.7249440534186109,
+        "beta_g": 0.3260641551559062,
+        "beta_s": 1.277113871836051
+      },
+      "training_observations": 46,
+      "design_rank": 4,
+      "standardized_condition_number": 3.2331792955123957
+    },
+    "fiscal_augmented_common_market_ar": {
+      "model_id": "fiscal_augmented_common_market_ar",
+      "parameters": {
+        "alpha": 0.9660186150119876,
+        "rho": 0.7492272333628035,
+        "beta_g": 0.23947025793840723,
+        "beta_s": 1.2305358014283625,
+        "beta_d": -0.009243774236848697,
+        "beta_b": 0.007800464292054854
+      },
+      "training_observations": 46,
+      "design_rank": 6,
+      "standardized_condition_number": 8.18263331302837
+    }
+  },
+  "selection_models": {
+    "persistence": {
+      "periods": [
+        "2017-Q1",
+        "2017-Q2",
+        "2017-Q3",
+        "2017-Q4",
+        "2018-Q1",
+        "2018-Q2",
+        "2018-Q3",
+        "2018-Q4",
+        "2019-Q1",
+        "2019-Q2",
+        "2019-Q3",
+        "2019-Q4",
+        "2020-Q1",
+        "2020-Q2",
+        "2020-Q3",
+        "2020-Q4",
+        "2021-Q1",
+        "2021-Q2",
+        "2021-Q3",
+        "2021-Q4",
+        "2022-Q1",
+        "2022-Q2",
+        "2022-Q3",
+        "2022-Q4"
+      ],
+      "metrics": {
+        "n": 24,
+        "rmse": 0.6370839237705781,
+        "mae": 0.4425000000004166,
+        "bias_actual_minus_predicted": 0.19055555555541667
+      },
+      "origin_count": 24
+    },
+    "common_market_ar": {
+      "periods": [
+        "2017-Q1",
+        "2017-Q2",
+        "2017-Q3",
+        "2017-Q4",
+        "2018-Q1",
+        "2018-Q2",
+        "2018-Q3",
+        "2018-Q4",
+        "2019-Q1",
+        "2019-Q2",
+        "2019-Q3",
+        "2019-Q4",
+        "2020-Q1",
+        "2020-Q2",
+        "2020-Q3",
+        "2020-Q4",
+        "2021-Q1",
+        "2021-Q2",
+        "2021-Q3",
+        "2021-Q4",
+        "2022-Q1",
+        "2022-Q2",
+        "2022-Q3",
+        "2022-Q4"
+      ],
+      "metrics": {
+        "n": 24,
+        "rmse": 0.6856644982598649,
+        "mae": 0.5235800310737175,
+        "bias_actual_minus_predicted": 0.3923365062648414
+      },
+      "origin_count": 24
+    },
+    "fiscal_augmented_common_market_ar": {
+      "periods": [
+        "2017-Q1",
+        "2017-Q2",
+        "2017-Q3",
+        "2017-Q4",
+        "2018-Q1",
+        "2018-Q2",
+        "2018-Q3",
+        "2018-Q4",
+        "2019-Q1",
+        "2019-Q2",
+        "2019-Q3",
+        "2019-Q4",
+        "2020-Q1",
+        "2020-Q2",
+        "2020-Q3",
+        "2020-Q4",
+        "2021-Q1",
+        "2021-Q2",
+        "2021-Q3",
+        "2021-Q4",
+        "2022-Q1",
+        "2022-Q2",
+        "2022-Q3",
+        "2022-Q4"
+      ],
+      "metrics": {
+        "n": 24,
+        "rmse": 0.7115564646003317,
+        "mae": 0.5095961932755275,
+        "bias_actual_minus_predicted": 0.32317275635773024
+      },
+      "origin_count": 24
+    }
+  },
+  "candidate_parameter_domain_fractions": {
+    "rho": 1.0,
+    "beta_g": 1.0,
+    "beta_s": 1.0,
+    "beta_d": 0.08333333333333333,
+    "beta_b": 0.7083333333333334
+  },
+  "candidate_rmse_improvement_vs_baselines": {
+    "persistence": -0.11689596621586085,
+    "common_market_ar": -0.03776185934400522
+  },
+  "gates": {
+    "minimum_evaluable_origins": true,
+    "rmse_vs_persistence": false,
+    "rmse_vs_common_market_ar": false,
+    "mae_vs_best_baseline": false,
+    "absolute_bias": true,
+    "fiscal_beta_d_sign_consistency": false,
+    "fiscal_beta_b_sign_consistency": false,
+    "all_parameter_domains": false
+  },
+  "passes_all_selection_gates": false,
+  "selection_verdict": "FAIL_BEFORE_HOLDOUT",
+  "causal_claim_allowed": false,
+  "system_dynamics_activation": false,
+  "behavioural_closure_change": false
+}

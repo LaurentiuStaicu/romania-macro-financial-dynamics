@@ -1,0 +1,106 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "household_consumption_response",
+  "phase": "Household Consumption — Borrower-Burden Population Alignment Gate",
+  "purpose": "Determine whether the observed BNR housing-loan DSTI level series is population- and instrument-aligned with the registered aggregate household-consumption mechanism before any candidate-family preregistration or estimation.",
+  "registered_mechanism": {
+    "functional_form": "gC = alpha + beta_y*gYd - beta_r*real_borrowing_rate - beta_ds*debt_service_ratio",
+    "target_series": "QSA.Q.N.RO.W0.S1M.S1.N.D.P3._Z._Z._Z.XDC._T.S.V.N._T",
+    "income_series": "QSA.Q.N.RO.W0.S1M.S1._Z.B.B6G._Z._Z._Z.XDC._T.S.V.N._T",
+    "reference_sector_code": "S1M",
+    "reference_sector_definition": "Households and non-profit institutions serving households (NPISH), S1M = S14 + S15",
+    "target_scope": "aggregate sector consumption, not borrower-subpopulation consumption"
+  },
+  "candidate_burden_measure": {
+    "source": "BNR Bank Lending Survey publication-text DSTI levels",
+    "boundary_review": "model/calibration_validation/bnr_household_dsti_level_publication_boundary_review.json",
+    "population": "borrowers represented in respondent-bank housing/mortgage-loan portfolios",
+    "instrument_scope": "housing/mortgage loans",
+    "variants": [
+      {
+        "id": "new_housing_loan_dsti",
+        "interpretation": "origination-state burden for housing loans granted in the quarter",
+        "alignment_to_current_consumption_target": "MISALIGNED_SUBPOPULATION_AND_ORIGINATION_FLOW"
+      },
+      {
+        "id": "outstanding_housing_loan_dsti",
+        "interpretation": "burden measure for outstanding/total housing-loan portfolios",
+        "alignment_to_current_consumption_target": "CLOSER_TO_STOCK_BURDEN_BUT_STILL_SUBPOPULATION_MISALIGNED"
+      }
+    ]
+  },
+  "source_comparison": {
+    "sector_coverage_match": false,
+    "borrower_status_match": false,
+    "debt_instrument_coverage_match": false,
+    "target_population_bridge_observed": false,
+    "subgroup_consumption_target_observed": false,
+    "conclusion": "The observed BNR housing-loan DSTI levels are scientifically valid borrower-burden observables but are not directly admissible as the debt_service_ratio driver in the registered aggregate S1M consumption equation. A targeted official-source screening found no observed official bridge, aligned borrower-consumption target or Romania common microdata frame that closes this population boundary.",
+    "official_public_source_screening_completed": true,
+    "screening_result": "BLOCKED_NO_OBSERVED_OFFICIAL_BRIDGE_IDENTIFIED",
+    "screened_source_summary": {
+      "ECB_HFCS": "Conceptually suitable household finance/consumption microdata. BNR is an HFCN member institution, but Romania is not identified as a participating country dataset in the 2017, 2021 or latest 2023 HFCS waves.",
+      "INS_ABF_TEMPO": "Quarterly household budget/consumption source exists, but no public mortgage-borrower-status breakdown or DSTI-consumption linkage was identified.",
+      "ECB_CES": "High-frequency spending/income survey, but no Romania country series was identified and it would not itself map mortgage-borrower DSTI to S1M consumption.",
+      "EUROSTAT_HBS_2020_SUF": "Romania scientific-use household microdata are available with consumption, income and weights, but the released 2020 SUF manual does not identify a mortgage/loan-status field. Owner-occupier imputed rent is not a mortgage-borrower identifier."
+    },
+    "official_source_screening_completed": true
+  },
+  "borrowing_rate_alignment": {
+    "household_consumption_loan_rate": "Would align to consumer-credit pricing but not to the housing-loan DSTI instrument boundary.",
+    "household_house_purchase_rate": "Would align more closely to the housing-loan DSTI instrument boundary but would still leave the aggregate-consumption population mismatch unresolved.",
+    "synthetic_weighted_rate": "Not authorized without a preregistered weighting population and exact compatible exposure weights.",
+    "post_fit_rate_selection_allowed": false
+  },
+  "admissible_reopen_paths": [
+    {
+      "id": "AGGREGATE_BURDEN_SOURCE",
+      "requirement": "Identify an observed Romania burden measure whose population and debt boundary are defensibly aligned with aggregate S1M household consumption.",
+      "effect": "May permit a new aggregate-consumption candidate-family measurement contract; does not itself authorize estimation.",
+      "current_screening_status": "NOT_IDENTIFIED"
+    },
+    {
+      "id": "BORROWER_SUBPOPULATION_TARGET",
+      "requirement": "Identify an observed consumption/income target for a housing-borrower population aligned to the BNR DSTI boundary.",
+      "effect": "Would define a different empirical target/mechanism and requires separate preregistration; it may not silently replace the registered aggregate mechanism.",
+      "current_screening_status": "ROMANIA_HBS_MICRODATA_AVAILABLE_BUT_REQUIRED_MORTGAGE_BORROWER_IDENTIFIER_NOT_IDENTIFIED"
+    },
+    {
+      "id": "REPRESENTATIVENESS_BRIDGE",
+      "requirement": "Retain independently observed evidence capable of mapping housing-loan borrower burden to the aggregate consumption population without synthetic residual allocation.",
+      "effect": "Only after the bridge is frozen may the housing-loan DSTI candidate be reconsidered for aggregate consumption.",
+      "current_screening_status": "NOT_IDENTIFIED"
+    }
+  ],
+  "insufficient_reopen_evidence": [
+    "A longer housing-loan DSTI time series by itself.",
+    "High correlation between housing-loan DSTI and aggregate consumption.",
+    "Selecting the mortgage borrowing rate because it improves fit.",
+    "Using housing-loan share of bank credit without a borrower-to-aggregate consumption mapping.",
+    "Combining housing and consumer-loan rates or DSTI measures with post-hoc weights.",
+    "Relabelling S1M aggregate consumption as mortgage-borrower consumption.",
+    "Using owner-occupier status or imputed rent from HBS as a mortgage-borrower proxy.",
+    "Using Romania HBS consumption/income microdata without an observed mortgage-borrower identifier."
+  ],
+  "hard_rules": {
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_outcome_fit_inspection": true,
+    "no_post_hoc_rate_selection": true,
+    "no_synthetic_population_bridge": true,
+    "no_target_redefinition_without_new_contract": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "disposition": {
+    "population_alignment_status": "BLOCKED_NO_OBSERVED_OFFICIAL_BRIDGE_IDENTIFIED",
+    "housing_dsti_observed": true,
+    "housing_dsti_directly_admissible_in_registered_aggregate_consumption_form": false,
+    "registered_full_form_source_admissible": false,
+    "estimation_or_refit_allowed": false,
+    "validated_reference_behavioural_mechanisms_change": 0,
+    "behavioural_closure": "UNCHANGED_INACTIVE"
+  },
+  "population_bridge_source_screening": "model/calibration_validation/household_consumption_population_bridge_source_screening.json"
+}

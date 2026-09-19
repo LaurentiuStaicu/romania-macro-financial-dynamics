@@ -10,7 +10,7 @@ authors:
 repository-code: "https://github.com/LaurentiuStaicu/romanian-monetary-dynamics"
 url: "https://github.com/LaurentiuStaicu/romanian-monetary-dynamics"
 license: MIT
-abstract: "An empirical stock-flow-consistent system-dynamics research model of Romania's monetary and macro-financial system."
+abstract: "An accounting-constrained stock-flow-consistent dynamic research model of Romania's monetary and macro-financial system, under development toward an endogenous System Dynamics reference model."
 keywords:
   - Romania
   - monetary dynamics

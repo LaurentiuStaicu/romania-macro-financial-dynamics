@@ -1,10 +1,25 @@
 {
-  "contract_version": "0.1",
+  "contract_version": "0.2",
   "phase": "Accounting Empirical Recovery / F5 Phase D — Component-Aware Exact Rank Audit",
-  "purpose": "Compute exact coefficient rank/nullspace for the bilateral F5 component system and test whether any total-F5 holder-by-issuer linear combination is uniquely identified by direct F511 observations, direct/structural F52 evidence, and published aggregate controls.",
-  "component_variables": ["F511", "F512", "F519", "F52"],
+  "purpose": "Compute exact coefficient rank/nullspace for the bilateral F5 component system and test whether any total-F5 holder-by-issuer linear combination is uniquely identified by direct F511 observations, direct/structural F52 evidence, and published aggregate controls, with deterministic offline reproduction of the historical Phase D topology.",
+  "component_variables": [
+    "F511",
+    "F512",
+    "F519",
+    "F52"
+  ],
   "total_cell_linear_form": "F5(holder,issuer) = F511 + F512 + F519 + F52",
-  "source_report": "F5 Phase C bilateral equity subcomponent bridge, regenerated in the same workflow",
+  "inputs": {
+    "phase_C_runtime": "scripts/audit_qsa_f5_equity_subcomponents.py",
+    "retained_rank_topology_snapshot": "model/accounting/f5_rank_topology_snapshot_2025.json",
+    "phase_D_assessment": "model/accounting/f5_component_aware_rank_assessment.json"
+  },
+  "reproduction_boundary": {
+    "rank_gate_mode": "OFFLINE_RETAINED_COEFFICIENT_TOPOLOGY",
+    "live_source_refresh_is_separate": true,
+    "live_source_refresh_workflow": ".github/workflows/f5-equity-subcomponent-bridge-audit.yml",
+    "rule": "Phase D is a coefficient-rank/topology claim. Fresh source coverage may change later, but it must not silently rewrite the historical Phase D rank result. Reopening F5 requires explicit new evidence and a new assessment."
+  },
   "hard_rules": {
     "no_benchmark_mutation": true,
     "no_materialization_in_phase_D": true,
@@ -15,9 +30,11 @@
     "direct_F511_equations_only_from_phase_C_resolved_cells": true,
     "F52_equations_only_from_phase_C_resolved_or_structural_cells": true,
     "F52_structural_scope_must_not_expand": true,
-    "aggregate_equations_only_when_source_value_is_published_or_exactly represented_in_phase_C": true,
+    "aggregate_equations_only_when_source_value_is_published_or_exactly_represented_in_phase_C": true,
     "zero_aggregate_flow_must_not_create_bilateral_zero_equations": true,
     "component_rounding_residuals_must_not_be_forced_to_zero": true,
+    "missing_to_zero_forbidden": true,
+    "historical_rank_reproduction_must_not_require_live_network": true,
     "behavioural_closure_may_change": false
   },
   "expected_variable_count_per_measure": 140,

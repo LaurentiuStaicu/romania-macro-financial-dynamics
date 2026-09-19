@@ -1,0 +1,74 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F6 Phase C — Exact Aggregate-Control Rank Audit",
+  "verdict": "FREEZE_F6_AGGREGATE_ONLY_PUBLIC_DATA_BOUNDARY",
+  "source_basis": {
+    "phase_A_assessment": "model/accounting/f6_insurance_pensions_coverage_assessment.json",
+    "phase_A_audit_head_sha": "8a90fcab4511161c411996512cfd2c83a34eb207",
+    "phase_A_workflow_run_id": 35379249532,
+    "phase_A_workflow_artifact_id": 10560957885,
+    "phase_A_workflow_artifact_sha256": "5fb1324b87df4b3151527ab587479aff7cdb38299d0eef2cb5ea28dcda9f106a",
+    "phase_B_assessment": "model/accounting/f6_bilateral_component_coverage_assessment.json",
+    "phase_B_audit_head_sha": "ba2130931d2efc67388fa2643f708e55da0dd882",
+    "phase_B_workflow_run_id": 35379740677,
+    "phase_B_workflow_artifact_id": 10561013391,
+    "phase_B_workflow_artifact_sha256": "4213f1968593b3f9e29d01f59bdf1de26cd95a1d146ea124883e150f6be21e69",
+    "offline_rank_reproduction": "scripts/audit_f6_aggregate_rank.py",
+    "boundary": "The retained Phase A assessment is sufficient to reproduce exact coefficient rank/nullspace and aggregate RHS accounting offline. This does not recreate the original raw source payloads."
+  },
+  "unconditional_identification": {
+    "stock": {
+      "variables": 35,
+      "equations": 12,
+      "rank": 11,
+      "nullity": 24,
+      "unique_cell_count": 0,
+      "nonunique_cell_count": 35
+    },
+    "flow_2025": {
+      "variables": 35,
+      "equations": 12,
+      "rank": 11,
+      "nullity": 24,
+      "unique_cell_count": 0,
+      "nonunique_cell_count": 35
+    }
+  },
+  "RHS_accounting_identity": {
+    "stock": {
+      "resident_holder_W0_sum_million_RON": 253103.47953125,
+      "W1_assets_million_RON": 5044.41,
+      "domestic_from_assets_million_RON": 248059.06953125,
+      "resident_issuer_W0_sum_million_RON": 249733.748125,
+      "W1_liabilities_million_RON": 1674.68,
+      "domestic_from_liabilities_million_RON": 248059.06812500002,
+      "residual_million_RON": 0.001406249968567863,
+      "status": "PASS_WITHIN_0.1_MILLION_RON"
+    },
+    "flow_2025": {
+      "resident_holder_W0_sum_million_RON": 36519.229966583254,
+      "W1_assets_million_RON": 706.69,
+      "domestic_from_assets_million_RON": 35812.53996658325,
+      "resident_issuer_W0_sum_million_RON": 36017.28068359375,
+      "W1_liabilities_million_RON": 204.74,
+      "domestic_from_liabilities_million_RON": 35812.540683593754,
+      "residual_million_RON": -0.000717010501830373,
+      "status": "PASS_WITHIN_0.1_MILLION_RON"
+    }
+  },
+  "scientific_interpretation": [
+    "The 12 published aggregate equations contain one exact coefficient dependency, giving rank 11 rather than 12.",
+    "No bilateral F6 coordinate is invariant across the unconditional nullspace for either stock or 2025 flow.",
+    "The aggregate asset-side and liability-side domestic totals agree well within the preregistered 0.1 million RON tolerance; the limitation is identification, not an accounting inconsistency.",
+    "No BNR, issuer-applicability, non-negativity or missing-to-zero constraint is introduced. Zero aggregate values are not converted into bilateral zeros.",
+    "Any bilateral numerical completion at this boundary would require an additional evidenced constraint or a synthetic allocation, so no F6 matrix is materialized."
+  ],
+  "disposition": {
+    "F6_status": "FROZEN_AGGREGATE_ONLY_PUBLIC_DATA_BOUNDARY",
+    "bilateral_materialization": false,
+    "benchmark_changed": false,
+    "behavioural_closure": "UNCHANGED_INACTIVE",
+    "accounting_recovery_next_priority": "F7 financial derivatives and employee stock options materiality/source-coverage audit"
+  },
+  "reopen_F6_when": "A definitionally comparable official source provides bilateral F6, bilateral F6 components, or additional exact counterparty constraints sufficient to reduce the unconditional nullspace."
+}

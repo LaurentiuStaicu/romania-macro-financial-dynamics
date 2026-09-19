@@ -1,0 +1,87 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "mechanism_id": "corporate_investment_response",
+  "phase": "Corporate Investment — Exact Source-Family Materialisation",
+  "purpose": "Retain exact provider bytes and level-only normalized series for the already identified Romania NFC investment, NFC investment grants, NFC investment-rate alternative target and NFC new-business lending-rate families. This source gate deliberately does not select the behavioural target, construct investment growth, aggregate the monthly rate to quarters, deflate nominal investment, rename D92 as EU funding, or estimate a corporate-investment equation.",
+  "estimation_authorized": false,
+  "sources": [
+    {
+      "id": "nfc_gfcf",
+      "institution": "ECB Data Portal / Eurostat QSA",
+      "flow": "QSA",
+      "series_key": "QSA.Q.N.RO.W0.S11.S1.N.D.P51G._Z._Z._Z.XDC._T.S.V.N._T",
+      "frequency": "Q",
+      "concept": "Romania S11 gross fixed capital formation, quarterly, non-seasonally adjusted, current prices, domestic currency",
+      "role": "exact sector-specific investment level source; target transformation not selected"
+    },
+    {
+      "id": "nfc_investment_grants",
+      "institution": "ECB Data Portal / Eurostat QSA",
+      "flow": "QSA",
+      "series_key": "QSA.Q.N.RO.W0.S11.S1.N.C.D92._Z._Z._Z.XDC._T.S.V.N._T",
+      "frequency": "Q",
+      "concept": "Romania S11 investment grants receivable D92, quarterly, current prices, domestic currency",
+      "role": "sector-consistent investment-support source; payer origin not identified as EU"
+    },
+    {
+      "id": "nfc_investment_rate",
+      "institution": "ECB Data Portal / Eurostat QSA",
+      "flow": "QSA",
+      "series_key": "QSA.Q.N.RO.W0.S11.S1.N.D.P51G._Z._Z._Z.XDC_R_B1G_CY._T.S.V.C4._T",
+      "frequency": "Q",
+      "concept": "Romania S11 gross fixed capital formation as ratio of NFC gross value added",
+      "role": "exact alternative target source; not selected merely because it is dimensionless"
+    },
+    {
+      "id": "nfc_new_business_lending_rate",
+      "institution": "ECB / ESCB MIR",
+      "flow": "MIR",
+      "series_key": "MIR.M.RO.B.A2A.A.R.A.2240.RON.N",
+      "frequency": "M",
+      "concept": "Romania RON new-business lending rate to non-financial corporations, total amount and fixation, percent per annum",
+      "role": "marginal financing-cost observable; quarterly aggregation and real-rate adjustment not selected"
+    }
+  ],
+  "materialisation_rules": {
+    "retain_all_finite_provider_observations": true,
+    "retain_exact_raw_csv_bytes": true,
+    "retain_raw_sha256": true,
+    "retain_provider_last_modified_where_available": true,
+    "retain_materializer_script_sha256": true,
+    "write_one_normalized_level_csv_per_source": true,
+    "no_cross_frequency_join": true,
+    "no_monthly_to_quarterly_aggregation": true,
+    "no_seasonal_adjustment": true,
+    "no_deflation": true,
+    "no_growth_transformation": true,
+    "no_missing_to_zero": true
+  },
+  "semantic_boundaries": {
+    "total_economy_gfcf_substitution_allowed": false,
+    "d92_may_be_labelled_eu_fund_impulse": false,
+    "investment_rate_may_replace_growth_target_without_new_contract": false,
+    "new_business_rate_may_be_labelled_effective_debt_cost": false
+  },
+  "hard_rules": {
+    "no_target_choice": true,
+    "no_demand_proxy_choice": true,
+    "no_rate_aggregation_choice": true,
+    "no_real_rate_deflator_choice": true,
+    "no_eu_origin_inference": true,
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_causal_claim": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true,
+    "live_provider_work_manual_only": true
+  },
+  "output_files": {
+    "nfc_gfcf": "nfc_gfcf_quarterly_level.csv",
+    "nfc_investment_grants": "nfc_investment_grants_quarterly_level.csv",
+    "nfc_investment_rate": "nfc_investment_rate_quarterly_level.csv",
+    "nfc_new_business_lending_rate": "nfc_new_business_lending_rate_monthly_level.csv"
+  },
+  "pass_effect": "SOURCE_FAMILY_EVIDENCE_READY_FOR_EXPLICIT_REPOSITORY_REVIEW_ONLY",
+  "next_gate": "After exact source-vintage retention, preregister the target family (growth versus investment rate), seasonal/real transformation, demand observable, quarterly rate aggregation/deflator and whether D92 enters a renamed investment-grants-support candidate before any fit."
+}

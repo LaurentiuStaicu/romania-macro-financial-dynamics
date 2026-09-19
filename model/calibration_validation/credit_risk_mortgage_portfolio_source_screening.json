@@ -1,0 +1,127 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "credit_risk_npl_response",
+  "phase": "Credit Risk — Mortgage-Portfolio Source Family Screening",
+  "purpose": "Determine whether official BNR evidence supports a narrower mortgage/housing-loan credit-risk candidate boundary that is more closely aligned to observed borrower-burden measures than the registered aggregate banking-system NPL target. This is source-family screening only: it does not select a new target, digitise charts, estimate a model, or alter the registered mechanism.",
+  "registered_mechanism_boundary": {
+    "current_form": "dNPL = alpha - beta_y*gOutput + beta_ds*debt_service + rho*NPL_lag",
+    "current_target": "aggregate banking-system gross NPL ratio from ECB CBD2",
+    "current_target_status": "EXACT_QUARTERLY_SERIES_CONFIRMED",
+    "target_change_authorized": false
+  },
+  "official_mortgage_npl_evidence": [
+    {
+      "source": "BNR Financial Stability Report, December 2023",
+      "url": "https://www.bnr.ro/files/d/Pubs_ro/RSF/RSF2023_2.pdf",
+      "reference_period": "2023-09",
+      "mortgage_npl_percent": 1.7,
+      "extraction": "DIRECT_REPORT_TEXT",
+      "chart_history_visible": true,
+      "chart_history_start": "2015-09",
+      "chart_digitisation": false,
+      "note": "BNR states that the NPL ratio for mortgage loans remained at 1.7 percent in September 2023; the report chart separately tracks total, mortgage and consumer-loan NPL."
+    },
+    {
+      "source": "BNR Financial Stability Report, June 2024",
+      "url": "https://www.bnr.ro/files/d/Pubs_ro/RSF/RSF%202024_1.pdf",
+      "reference_period": "2024-03",
+      "mortgage_npl_percent": 1.7,
+      "consumer_npl_percent": 5.9,
+      "total_household_bank_loans_npl_percent": 3.3,
+      "extraction": "DIRECT_REPORT_TEXT",
+      "chart_history_visible": true,
+      "chart_history_start": "2018-03",
+      "chart_digitisation": false,
+      "note": "BNR states that real-estate/mortgage loans had a 1.7 percent NPL ratio in March 2024, versus 5.9 percent for consumer loans and 3.3 percent for household bank loans overall."
+    }
+  ],
+  "borrower_burden_family": {
+    "source": "BNR Bank Lending Survey publication-text DSTI levels",
+    "boundary_review": "model/calibration_validation/bnr_household_dsti_level_publication_boundary_review.json",
+    "instrument_scope": "housing/mortgage loans",
+    "variants": [
+      "new_housing_loan_dsti",
+      "outstanding_housing_loan_dsti"
+    ],
+    "complete_text_window": "2023-Q1..2025-Q2",
+    "exact_machine_readable_history_retained": false,
+    "preferred_alignment_candidate_for_future_screening": "outstanding_housing_loan_dsti",
+    "reason": "Outstanding-loan DSTI is closer in stock/population concept to a mortgage NPL stock than new-loan DSTI, but exact reporting-population and aggregation compatibility with the NPL source is not yet demonstrated."
+  },
+  "dti_at_origination_evidence": {
+    "source": "BNR Financial Stability Report, June 2024 / Central Credit Register reporting",
+    "concept": "DTI-O = total borrower debt divided by annual disposable income at loan origination",
+    "introduced_in_crc_reporting": "2022-05",
+    "mortgage_exposure_value_coverage_percent_reported_for_indicator": 25,
+    "status": "OBSERVED_BUT_NOT_DEBT_SERVICE_BURDEN",
+    "reason": "DTI-O is a stock-to-income origination leverage measure, not scheduled debt service relative to income. Limited indicator reporting coverage also prevents treating it as a complete mortgage-portfolio burden series.",
+    "substitution_for_dsti_allowed": false
+  },
+  "portfolio_alignment_assessment": {
+    "instrument_scope_match": "PARTIAL_PROMISING",
+    "mortgage_npl_and_outstanding_dsti_same_broad_instrument_family": true,
+    "exact_reporting_population_match_demonstrated": false,
+    "exact_bank_coverage_match_demonstrated": false,
+    "exact_denominator_weighting_match_demonstrated": false,
+    "exact_machine_readable_joint_history_retained": false,
+    "output_activity_measure_frozen": false,
+    "target_family_preregistered": false,
+    "conclusion": "Official BNR publications establish a scientifically plausible mortgage-portfolio NPL/DSTI source family, but not yet a definitionally reconciled joint panel. It is evidence for a future separately preregistered sector-specific candidate family, not authorization to replace the registered aggregate NPL target."
+  },
+  "future_candidate_gate": {
+    "status": "NOT_OPEN",
+    "required_before_preregistration": [
+      "Identify and retain a concrete official machine-readable mortgage-NPL source (series key, export endpoint, table or workbook); publication charts alone are insufficient.",
+      "Retain an exact machine-readable mortgage NPL history on a frozen BNR definition.",
+      "Retain or formally freeze the housing-loan DSTI measurement history and choose new versus outstanding DSTI ex ante.",
+      "Demonstrate reporting-population, bank-coverage and weighting compatibility between NPL and burden measures, or document an explicit non-equivalence boundary.",
+      "Freeze a mortgage-aligned activity/income observable before fit.",
+      "Preregister lag structure and treatment of recognition, cures, write-offs, sales and regulatory breaks.",
+      "Define untouched structural-selection and final-evaluation windows before inspecting candidate performance."
+    ]
+  },
+  "prohibited_shortcuts": [
+    "Digitise BNR NPL charts to manufacture a canonical mortgage NPL history.",
+    "Treat DTI-O as debt-service burden or DSTI.",
+    "Assume that mortgage NPL and BLS DSTI have identical reporting populations because both concern housing loans.",
+    "Choose aggregate versus mortgage NPL after inspecting model fit.",
+    "Use new-loan DSTI as an outstanding-loan portfolio burden without a separately frozen design.",
+    "Open estimation merely because two publication dates report a mortgage NPL ratio."
+  ],
+  "hard_rules": {
+    "no_target_switch": true,
+    "no_chart_digitisation": true,
+    "no_dti_o_substitution": true,
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_holdout_opening": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "disposition": {
+    "source_family_status": "MORTGAGE_NPL_AND_DSTI_FAMILY_OBSERVED_JOINT_BOUNDARY_NOT_RECONCILED",
+    "registered_mechanism_classification": "DEFERRED",
+    "registered_full_form_source_admissible": false,
+    "estimation_or_refit_allowed": false,
+    "validated_reference_behavioural_mechanisms_change": 0,
+    "behavioural_closure": "UNCHANGED_INACTIVE"
+  },
+  "machine_readable_source_search": {
+    "status": "EXACT_OFFICIAL_MORTGAGE_NPL_SERIES_NOT_IDENTIFIED_IN_PUBLIC_SEARCH",
+    "screened_surfaces": [
+      "BNR Financial Stability Reports",
+      "BNR interactive database search surface",
+      "BNR Central Credit Register information surface"
+    ],
+    "findings": [
+      "Financial Stability Reports publish mortgage NPL as a distinct series and direct text anchor values.",
+      "A BNR interactive-database surface exists, but no exact mortgage-NPL series identifier or export endpoint was identified in the current search.",
+      "The Central Credit Register is the source behind several borrower/portfolio indicators, but no public machine-readable mortgage-NPL history endpoint was identified."
+    ],
+    "negative_evidence_scope": "This is not evidence that no official machine-readable series exists; it records only that no exact series/export endpoint was identified in the screened public surfaces.",
+    "chart_digitisation_allowed": false,
+    "endpoint_inference_allowed": false,
+    "next_trigger": "A concrete official series key, downloadable table/workbook, API/export endpoint or reproducible data extract for mortgage NPL."
+  }
+}

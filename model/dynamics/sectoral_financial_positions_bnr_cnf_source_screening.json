@@ -1,0 +1,124 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "reference_mode": "sectoral_financial_positions",
+  "phase": "BNR National Financial Accounts Counterpart-Matrix Screening",
+  "purpose": "Screen the latest official BNR National Financial Accounts annual publication as a genuinely distinct national dissemination candidate for the sole remaining RMD reference-mode blocker, without changing the frozen quarterly stock+transaction boundary after observing the source.",
+  "official_source": {
+    "institution": "National Bank of Romania",
+    "title": "Conturile nationale financiare - Raport anual 2024",
+    "url": "https://www.bnr.ro/uploads/2024-cnf_documentpdf_545_1766149176.pdf",
+    "data_cutoff": "end-October 2025",
+    "series_statement": "BNR states that ESA 2010 financial-account series for 1995-2024 are available on its website.",
+    "report_window": "2020-2024"
+  },
+  "observed_counterpart_matrix": {
+    "section": "Conturile financiare pe sectoare contraparte (stocuri, 2024)",
+    "period": "2024",
+    "measure": "closing stocks only in the explicit counterpart-matrix section",
+    "unit": "million RON",
+    "consolidation": "non-consolidated",
+    "accounting_entries": [
+      "A",
+      "P"
+    ],
+    "source_sector_codes_visible": [
+      "S11",
+      "S121",
+      "S122+S123",
+      "S124+S125+S126+S127",
+      "S128+S129",
+      "S13",
+      "S14+S15",
+      "S2"
+    ],
+    "financial_instruments_visible": [
+      "AF1",
+      "AF2",
+      "AF3",
+      "AF4",
+      "AF5",
+      "AF6",
+      "AF7",
+      "AF8"
+    ],
+    "rmd_sector_mapping_semantically_available": {
+      "H": "S14+S15",
+      "C": "S11",
+      "BNR": "S121",
+      "G": "S13",
+      "X": "S2",
+      "F": "Exact additive sum of published non-central-bank financial subsector columns S122+S123 + S124+S125+S126+S127 + S128+S129"
+    }
+  },
+  "semantic_review": {
+    "sector_mapping": "PASS_FOR_2024_STOCK_MATRIX",
+    "counterpart_orientation": "PASS_FOR_2024_STOCK_MATRIX",
+    "instrument_mapping_F2_F8": "PASS_FOR_2024_STOCK_MATRIX",
+    "asset_liability_semantics": "PASS",
+    "unit_scaling": "PASS",
+    "consolidation_boundary": "PASS_NON_CONSOLIDATED",
+    "stock_semantics": "PASS",
+    "quarterly_frequency": "FAIL",
+    "financial_transaction_counterpart_history": "FAIL_NOT_PUBLISHED_AS_MATCHED_F2_F8_COUNTERPART_HISTORY_IN_SCREENED_ANNUAL_MATRIX",
+    "common_history_minimum_40_quarters": "FAIL_SINGLE_ANNUAL_COUNTERPART_STOCK_SNAPSHOT"
+  },
+  "relation_to_existing_ecb_qsa_path": {
+    "bnr_annual_report_2024_confirms_quarterly_financial_accounts_are_transmitted_to_ecb": true,
+    "interpretation": "BNR Annual Report 2024 states that the Statistics Directorate periodically transmits financial-account series under the ECB medium-term strategy for quarterly financial accounts and separately annual financial accounts to Eurostat. The annual CNF counterpart matrix is therefore valuable national semantic evidence, but it does not replace the quarterly ECB-QSA history required by the frozen RMD reference contract.",
+    "changed_qsa_dataset_since_retained_2026_09_19_audit_demonstrated": false
+  },
+  "frozen_contract_comparison": {
+    "contract": "model/dynamics/sectoral_financial_positions_external_semantic_lineage_review_contract.json",
+    "required_frequency": "quarterly",
+    "required_common_history_minimum_quarters": 40,
+    "required_measures": [
+      "stock",
+      "financial_transaction"
+    ],
+    "required_instruments": [
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7",
+      "F8"
+    ],
+    "required_sectors": [
+      "H",
+      "C",
+      "F",
+      "G",
+      "X",
+      "BNR"
+    ],
+    "exact_historical_extraction_authorized": false
+  },
+  "verdict": "OFFICIAL_BNR_SEMANTIC_COUNTERPART_STOCK_EVIDENCE_FOUND_BUT_FREQUENCY_AND_TRANSACTION_HISTORY_FAIL_NO_REOPEN_NO_PROMOTION",
+  "disposition": {
+    "reference_mode_status_change": false,
+    "current_status": "PARTIAL_SERIES_AVAILABLE",
+    "readiness_count_change": 0,
+    "current_readiness": "9/10",
+    "exact_historical_extraction_authorized": false,
+    "quarterly_boundary_change_authorized": false,
+    "annual_single_snapshot_substitution_authorized": false,
+    "accounting_readiness_change": false,
+    "behavioural_closure_change": false,
+    "system_dynamics_activation": false
+  },
+  "reopen_trigger_effect": {
+    "source_family_newly_screened": true,
+    "formal_reopen_trigger_satisfied": false,
+    "reason": "The source resolves sector/instrument semantics for one annual stock matrix but does not supply the frozen quarterly stock+financial-transaction history. It therefore cannot satisfy the declared reference-mode reopen condition."
+  },
+  "non_reopen_conditions": [
+    "Treat the 2024 annual stock matrix as a quarterly series.",
+    "Interpolate annual counterpart stocks to quarters.",
+    "Construct financial transactions as stock differences.",
+    "Use aggregate annual financial transactions to stand in for instrument-by-counterpart quarterly transactions.",
+    "Change the frozen quarterly reference-mode boundary merely because the annual BNR matrix is semantically cleaner.",
+    "Treat current ECB QSA pages as a changed-dataset trigger without evidence that their source topology changed after the retained 2026-09-19 audit."
+  ]
+}

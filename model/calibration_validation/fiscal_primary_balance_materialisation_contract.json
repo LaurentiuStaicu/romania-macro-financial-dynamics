@@ -1,0 +1,85 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "mechanism_id": "fiscal_primary_balance_reaction",
+  "phase": "Fiscal Primary Balance — Matched Quarterly Source Materialisation",
+  "purpose": "Materialise Romania's quarterly general-government primary balance from definitionally matched Eurostat B9 and D41PAY observations before any fiscal-reaction estimation.",
+  "estimation_authorized": false,
+  "source": {
+    "institution": "Eurostat",
+    "dataset": "gov_10q_ggnfa",
+    "api": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/gov_10q_ggnfa",
+    "geo": "RO",
+    "sector": "S13",
+    "frequency": "Q",
+    "seasonal_adjustment": "NSA",
+    "unit": "PC_GDP",
+    "start_period": "2000-Q1",
+    "items": {
+      "overall_balance": {
+        "na_item": "B9",
+        "concept": "Net lending (+) / net borrowing (-), percent of quarterly GDP",
+        "sign": "positive = surplus/net lending; negative = deficit/net borrowing"
+      },
+      "interest_expenditure": {
+        "na_item": "D41PAY",
+        "concept": "Interest expenditure/payable, percent of quarterly GDP",
+        "sign": "positive expenditure amount"
+      }
+    }
+  },
+  "measurement_identity": {
+    "equation": "primary_balance_pct_gdp = B9_pct_gdp + D41PAY_pct_gdp",
+    "interpretation": "Because B9 already includes interest expenditure in total expenditure, adding positive D41PAY removes interest from the overall balance. Positive primary balance denotes primary surplus.",
+    "same_boundary_required": true,
+    "same_dataset_update_required": true,
+    "no_sign_flip": true
+  },
+  "official_methodology_basis": {
+    "eurostat_metadata_url": "https://ec.europa.eu/eurostat/cache/metadata/en/gov_10q_ggnfa_esms.htm",
+    "european_commission_dsm_2025_url": "https://economy-finance.ec.europa.eu/publications/debt-sustainability-monitor-2025_en",
+    "note": "Eurostat identifies B9 as net lending/net borrowing and D41PAY as interest expenditure in quarterly S13 non-financial accounts. The European Commission Debt Sustainability Monitor uses B9 and D41PAY from gov_10q_ggnfa on quarterly NSA/PC_GDP boundaries."
+  },
+  "vintage_rules": {
+    "fetch_B9_and_D41PAY_in_same_live_run": true,
+    "require_equal_payload_updated_metadata": true,
+    "retain_raw_bytes_and_sha256": true,
+    "retained_D41_snapshot_role": "DIAGNOSTIC_CROSSCHECK_ONLY_NOT_INPUT",
+    "reason": "A primary-balance series must not mix B9 from a new provider vintage with D41PAY from an older retained vintage."
+  },
+  "completeness_gate": {
+    "common_periods_only": true,
+    "no_interpolation": true,
+    "no_missing_to_zero": true,
+    "no_forward_fill": true,
+    "minimum_common_observations": 80,
+    "first_expected_period": "2000-Q1"
+  },
+  "output_schema": [
+    "period",
+    "net_lending_borrowing_pct_gdp",
+    "interest_expenditure_pct_gdp",
+    "primary_balance_pct_gdp",
+    "source_completeness"
+  ],
+  "hard_rules": {
+    "no_seasonally_adjusted_B9_with_NSA_interest": true,
+    "no_cash_budget_substitution": true,
+    "no_structural_primary_balance_label": true,
+    "no_output_gap_construction": true,
+    "no_debt_gap_construction": true,
+    "no_regime_inference": true,
+    "no_parameter_estimation": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true,
+    "live_provider_work_manual_only": true
+  },
+  "result_effect": {
+    "if_materialisation_passes": "SOURCE_EVIDENCE_READY_FOR_EXPLICIT_REPOSITORY_SNAPSHOT_REVIEW_ONLY",
+    "calibration_cycle_open": false,
+    "mechanism_classification": "DEFERRED",
+    "validated_reference_behavioural_mechanisms_change": 0,
+    "central_feedback_activation": false
+  },
+  "next_gate": "After a retained matched primary-balance snapshot exists, separately preregister debt-gap, output-gap and dated fiscal-regime measurement before any reaction-function structural selection."
+}

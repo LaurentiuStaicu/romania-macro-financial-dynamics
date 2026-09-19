@@ -1,0 +1,76 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "sovereign_yield_spread_response",
+  "snapshot_id": "sovereign-yield-quarterly-vintage-2026-09-19",
+  "verdict": "PASS_EXACT_REVIEWED_ARTIFACT_ELIGIBLE_FOR_PROMOTION",
+  "estimation_authorized": false,
+  "reviewed_workflow": {
+    "run_id": 35430852609,
+    "artifact_id": 10580817110,
+    "artifact_name": "sovereign-yield-quarterly-materialisation-f19dc2e30cf8ca3fa3ae276e02c70df5e41fb951",
+    "artifact_zip_sha256": "cdd67dce3fefdcec773a6f5f1ae17d00794684ad7aaaa1c5d846167a1e022744",
+    "head_sha": "1ce4275bc9c2fb96e15d452211c12437b0272d55"
+  },
+  "expected_files": [
+    {
+      "path": "raw/ecb_irs_de_10y.csv",
+      "bytes": 92945,
+      "sha256": "b59b7cf028a9c88d4689bdf4b1b843ae234716242dfae4402091e26d072a5547"
+    },
+    {
+      "path": "raw/ecb_irs_ro_10y.csv",
+      "bytes": 183373,
+      "sha256": "b0178a3531008afbef8a807bedc116ef04b9b93cafef7edbe3306f0c3a7e0236"
+    },
+    {
+      "path": "raw/ecb_new_ciss_u2.csv",
+      "bytes": 1575862,
+      "sha256": "7cb6375ed871ecb6251fc490432e8ba3090f0f20e9db7de29f6361d0269df803"
+    },
+    {
+      "path": "raw/eurostat_gov_10q_ggnfa_ro_b9_sca_pc_gdp.json",
+      "bytes": 8359,
+      "sha256": "1cdb39849af044a91bf7cff52d2c8edf671f11f174f1ef184b08869f028b4f3c"
+    },
+    {
+      "path": "snapshot_manifest.json",
+      "bytes": 4340,
+      "sha256": "e2ee97e1481bb70ebcea58f13788706e333f561a6b3d59e21ed6d70359c302a5"
+    },
+    {
+      "path": "sovereign_yield_quarterly_materialisation_audit.json",
+      "bytes": 4428,
+      "sha256": "00bc3cd5fd3168abc6c0f0a9cf11431654e79f1e5340316feab3a719f2326440"
+    },
+    {
+      "path": "sovereign_yield_quarterly_source.csv",
+      "bytes": 5623,
+      "sha256": "670d604a5cfd1cc1d2c7e2d6cdc1425c0e076e4f641ce082e29d406ba95ccceb"
+    }
+  ],
+  "coverage": {
+    "rows": 84,
+    "first_period": "2005-Q2",
+    "last_period": "2026-Q1"
+  },
+  "semantic_crosschecks": {
+    "eurostat_release_date": "2026-07-21",
+    "eurostat_b9_2024q1_to_2026q1_matches_official_release": true,
+    "romania_2026q1_b9_pct_gdp": -3.6,
+    "pure_credit_spread_label_allowed": false
+  },
+  "provenance": {
+    "source_vintage_contract": "data/provenance/source_vintage_contract.json",
+    "fetcher_script_sha256": "7a567a169ebc2ee480a6a147426cf67a178c25e0e6da0492dbdd0c5f409fe975",
+    "retained_debt_snapshot_sha256": "08546f460740106f90fae3895926866e8028a972da87149c428fd1334dd152f0"
+  },
+  "hard_boundaries": {
+    "no_regression_or_parameter_estimation": true,
+    "no_lag_selection": true,
+    "no_spread_relabeling": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "promotion_rule": "Only the exact reviewed artifact may be promoted. Promotion must fail on any artifact ZIP, path, byte-size or SHA-256 mismatch."
+}

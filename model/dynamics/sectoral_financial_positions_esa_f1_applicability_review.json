@@ -1,0 +1,128 @@
+{
+  "review_version": "0.1",
+  "identified_on": "2026-09-19",
+  "status": "POST_RUN_F1_ZERO_REFINEMENT_REJECTED_NONRETROACTIVE",
+  "subject": "Post-run F1 structural-zero applicability hypothesis for aggregate sectoral financial positions",
+  "historical_phase_B": {
+    "workflow_run_id": 35413214512,
+    "workflow_head_sha": "1fc8620c2981a82cf9bada147fbba9158aaf1461",
+    "executed_contract_path": "model/dynamics/sectoral_financial_positions_aggregate_identity_contract.json",
+    "executed_contract_blob_sha": "20c1ae829cdfff6c77e46193a0d68edc8f94326d",
+    "immutable_snapshot_path": "model/dynamics/sectoral_financial_positions_aggregate_identity_contract_executed_2026-09-19.json",
+    "rule": "The Phase B/C/D evidence chain must continue to be interpreted under the contract that existed at the Phase B workflow head. A later methodological correction may not rewrite the preregistered experiment."
+  },
+  "official_methodology_basis": {
+    "ESA2010_chapter_5": "https://ec.europa.eu/eurostat/web/esa-2010/financial-transactions",
+    "ESA2010_manual_pdf": "https://ec.europa.eu/eurostat/documents/3859598/5925693/KS-02-13-269-EN.PDF",
+    "ECB_F1_data_category": "https://data.ecb.europa.eu/data/data-categories/macroeconomic-and-sectoral-statistics/sector-accounts/financial-accounts/instrument/monetary-gold-and-sdrs",
+    "findings": [
+      "F1 comprises monetary gold and SDRs.",
+      "Monetary gold is restricted to monetary-authority/international-financial-organisation asset positions and has no ordinary resident-sector counterpart liability.",
+      "SDRs are held by official holders; SDR allocation liabilities are recorded against the rest of the world rather than as ordinary H/C resident liabilities.",
+      "Therefore a future contract can justify a narrower structural-zero scope than the historical Phase B contract, but only prospectively."
+    ]
+  },
+  "nonretroactivity": {
+    "phase_A_reinterpreted": false,
+    "phase_B_reinterpreted": false,
+    "phase_C_reinterpreted": false,
+    "phase_D_reinterpreted": false,
+    "historical_readiness_changed": false,
+    "reference_mode_promoted": false,
+    "accounting_readiness_changed": false,
+    "behavioural_closure_changed": false
+  },
+  "next_action": {
+    "status": "NO_FURTHER_INTERNAL_F1_ADAPTATION",
+    "rule": "Do not rerun, remap or retune F1 semantics from the observed exploratory residuals. Historical A-D remain governed by the immutable Phase B contract. Any future formal reopening requires an external evidence/revision trigger and a new independently preregistered contract before inspecting new outcomes.",
+    "rationale": "The post-run structural-zero refinement was empirically contradicted by published QSA F12/SDR liabilities, while the historical Phase B source-required treatment already preserves those series."
+  },
+  "exploratory_reaudit": {
+    "status": "EXECUTED_AFTER_HISTORICAL_A_D_EXPLORATORY_ONLY",
+    "assessment": "model/dynamics/sectoral_financial_positions_esa_f1_applicability_reaudit_assessment.json",
+    "executed_contract_snapshot": "model/dynamics/sectoral_financial_positions_esa_f1_applicability_reaudit_contract_executed_2026-09-19.json",
+    "workflow_run_id": 35414165822,
+    "workflow_artifact_id": 10575740521,
+    "workflow_head_sha": "84d0d40c360269449ccc613cdbb6336c23b6c98e",
+    "workflow_artifact_sha256": "48048cdd4c4ce912fc78151791df58821fd18c009b98c50d825449f43ceb7e43",
+    "formal_gate": false,
+    "readiness_effect": 0,
+    "result": "RECONCILIATION_FAIL_NO_PROMOTION"
+  },
+  "proposal_status": "REJECTED_BY_PUBLISHED_QSA_SDR_LIABILITY_DIAGNOSTIC",
+  "semantics_diagnostic": {
+    "assessment": "model/dynamics/sectoral_financial_positions_esa_f1_semantics_diagnostic_assessment.json",
+    "executed_contract_snapshot": "model/dynamics/sectoral_financial_positions_esa_f1_semantics_diagnostic_contract_executed_2026-09-19.json",
+    "workflow_run_id": 35414387016,
+    "workflow_artifact_id": 10575447251,
+    "workflow_head_sha": "0e56a86ec34e594250f62544bcd90d1e74212343",
+    "workflow_artifact_sha256": "b8bc8391e0560f838017630001d325a06fe332321c828e7f385428b19154215b",
+    "formal_gate": false,
+    "conclusion": "Published S12/S121 F1 liabilities are non-zero F12/SDR liabilities. The exploratory resident-F1-liability structural-zero refinement is rejected.",
+    "readiness_effect": 0
+  },
+  "current_methodological_conclusion": {
+    "historical_phase_B_treatment": "RETAIN_SOURCE_REQUIRED_F1_ON_BOTH_ASSET_AND_LIABILITY_SIDES_FOR_PUBLISHED_S12_S121_SERIES",
+    "H_C_rule": "Retain the historical preregistered H/C source-absence contradiction-check treatment for the historical evidence chain; do not create new zeros from the later diagnostic.",
+    "resident_F1_liability_zero_rule": "REJECTED",
+    "W1_wholesale_orientation_swap": "NOT_SUPPORTED",
+    "historical_A_D_reinterpreted": false
+  },
+  "rejected_post_run_proposal_rules": {
+    "H": {
+      "source_sector": "S1M",
+      "F1_rule": "STRUCTURAL_NOT_APPLICABLE_BOTH_SIDES",
+      "basis": "ESA 2010 confines monetary gold to monetary authorities/international financial organisations and SDRs to official holders. H/NPISH therefore has no F1 asset or liability in the RMD institutional boundary."
+    },
+    "C": {
+      "source_sector": "S11",
+      "F1_rule": "STRUCTURAL_NOT_APPLICABLE_BOTH_SIDES",
+      "basis": "ESA 2010 confines monetary gold to monetary authorities/international financial organisations and SDRs to official holders. S11 therefore has no F1 asset or liability."
+    },
+    "F": {
+      "source_formula": "S12 - S121",
+      "F1_rule": "ASSET_SOURCE_REQUIRED_FOR_S12_AND_S121; LIABILITY_STRUCTURAL_ZERO",
+      "basis": "F is S12-S121. F1 assets must be removed explicitly from both S12 and S121. Resident F1 liabilities are structurally zero because monetary gold has no counterpart liability and SDR allocations are liabilities of the rest of the world."
+    },
+    "G": {
+      "source_sector": "S13",
+      "F1_rule": "ASSET_SOURCE_REQUIRED; LIABILITY_STRUCTURAL_ZERO",
+      "basis": "Central-government institutions can be monetary authorities under ESA 2010, so S13 F1 assets cannot be assumed zero. Resident F1 liabilities are structural zero under the monetary-gold/SDR recording rules."
+    },
+    "BNR": {
+      "source_sector": "S121",
+      "F1_rule": "ASSET_SOURCE_REQUIRED; LIABILITY_STRUCTURAL_ZERO",
+      "basis": "S121 F1 assets are in scope and must be removed explicitly. Resident F1 liabilities are structural zero; SDR allocation liability is recorded in the rest of world."
+    },
+    "X": {
+      "source_area": "W1",
+      "F1_rule": "ASSET_AND_LIABILITY_SOURCE_REQUIRED",
+      "basis": "Rest-of-world F1 can include the counterpart to monetary-authority transactions and SDR liabilities, so both W1 external sides are explicitly sourced."
+    }
+  },
+  "rejected_post_run_proposal_construction": {
+    "H": "Use W0 S1M total F directly; F1 is structurally not applicable under the preregistered ESA rule.",
+    "C": "Use W0 S11 total F directly; F1 is structurally not applicable under the preregistered ESA rule.",
+    "F": "Assets: (W0 S12 F - W0 S12 F1) - (W0 S121 F - W0 S121 F1). Liabilities: W0 S12 F - W0 S121 F because resident F1 liabilities are structural zero.",
+    "G": "Assets: W0 S13 F - W0 S13 F1. Liabilities: W0 S13 F because resident F1 liabilities are structural zero.",
+    "BNR": "Assets: W0 S121 F - W0 S121 F1. Liabilities: W0 S121 F because resident F1 liabilities are structural zero.",
+    "X": "For W1 S1/S1, compute resident external F-F1 separately for A and L; set X assets = resident external liabilities and X liabilities = resident external assets.",
+    "net": "assets - liabilities",
+    "stock_and_flow": "Apply the same exact identity independently to LE stocks and F financial transactions; never difference stocks to create flows."
+  },
+  "rejected_post_run_proposal_consistency_changes": {
+    "mandatory_F1_for": [
+      "S12 assets",
+      "S121 assets",
+      "S13 assets",
+      "W1 total-economy assets",
+      "W1 total-economy liabilities"
+    ],
+    "structural_zero_scope": {
+      "H_F1_assets_and_liabilities": "ESA2010 structural not applicable",
+      "C_F1_assets_and_liabilities": "ESA2010 structural not applicable",
+      "resident_F1_liabilities_for_F_G_BNR": "ESA2010 monetary-gold no-counterpart-liability plus SDR liability recorded in rest of world"
+    }
+  },
+  "rejected_post_run_proposal_status": "RETAINED_FOR_AUDIT_TRAIL_DO_NOT_USE_AS_ACTIVE_METHOD"
+}

@@ -1,0 +1,95 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F7 Phase A — Financial Derivatives Source-Coverage and Scale Screening",
+  "audit_head_sha": "21f1ae6f74543e748352b5af4a5729a16656c5ed",
+  "workflow_run_id": 35385737702,
+  "workflow_artifact_id": 10563888211,
+  "workflow_artifact_sha256": "b16f907b6b1f21e84d918cb6fe9b87e82baa85b030f374392359a76a31f2dbc6",
+  "verdict": "AGGREGATE_F7_AVAILABLE_BILATERAL_UNAVAILABLE_RANK_REQUIRED",
+  "result": {
+    "series_requested": 148,
+    "series_status_counts": {
+      "AVAILABLE": 25,
+      "HTTP_ERROR": 123
+    },
+    "network_errors_present": false,
+    "bilateral_cells": {
+      "stock": {
+        "resolved": 0,
+        "unresolved": 35,
+        "not_applicable": 1
+      },
+      "flow_2025": {
+        "resolved": 0,
+        "unresolved": 35,
+        "not_applicable": 1
+      }
+    },
+    "aggregate_reconciliation_status_counts": {
+      "BILATERAL_COVERAGE_INCOMPLETE": 16,
+      "CONTROL_UNAVAILABLE": 4
+    },
+    "scale_screening": "NONZERO_AGGREGATE_F7_EVIDENCE",
+    "materiality_verdict": "NOT_ASSIGNED_IN_PHASE_A"
+  },
+  "published_total_economy_controls_million_RON": {
+    "stock": {
+      "W0_assets": 1557.9,
+      "W0_liabilities": 1328.68,
+      "W1_assets": 961.69,
+      "W1_liabilities": 732.47
+    },
+    "flow_2025": {
+      "W0_assets": -6207.09,
+      "W0_liabilities": -6565.39,
+      "W1_assets": -5210.55,
+      "W1_liabilities": -5568.860000000001
+    }
+  },
+  "resident_aggregate_controls_million_RON": {
+    "stock": {
+      "H_assets": 3.29,
+      "H_liabilities": 3.1,
+      "C_assets": 600.37,
+      "C_liabilities": null,
+      "F_assets": 954.2400512695312,
+      "F_liabilities": 1138.02001953125,
+      "G_assets": 0.0,
+      "G_liabilities": 0.0,
+      "BNR_assets": 0.0,
+      "BNR_liabilities": 0.0
+    },
+    "flow_2025": {
+      "H_assets": 4.46,
+      "H_liabilities": -1.2000000000000002,
+      "C_assets": -2138.69,
+      "C_liabilities": -1933.3,
+      "F_assets": -4072.8699340820312,
+      "F_liabilities": null,
+      "G_assets": null,
+      "G_liabilities": 0.0,
+      "BNR_assets": 0.0,
+      "BNR_liabilities": null
+    }
+  },
+  "scientific_interpretation": [
+    "The official ECB QSA F7 dimensions are valid for Romania and return non-zero total-economy stock and transaction controls.",
+    "None of the 35 in-boundary bilateral F7 cells is published or exactly recoverable from the tested W2/W1 orientations for either stock or 2025 flow.",
+    "Observed zero resident aggregates are retained only as aggregate equations. They are not converted into bilateral zeros because no non-negativity or issuer-applicability premise is introduced in Phase A.",
+    "The non-zero aggregate controls demonstrate that F7 cannot be discarded as an all-zero instrument. Phase A does not assign a materiality verdict because no materiality threshold or denominator was preregistered.",
+    "The remaining evidence supports an exact aggregate-control rank/nullspace gate; it does not support synthetic counterpart allocation."
+  ],
+  "next_gate": {
+    "name": "F7 Phase B — exact aggregate-control rank/nullspace audit",
+    "required_checks": [
+      "use every available resident W0 holder/issuer F7 aggregate equation",
+      "use published W0 total-economy and W1 external F7 equations without double-counting their linear dependence",
+      "compute exact rational coefficient rank and nullspace over 35 in-boundary bilateral variables",
+      "report aggregate RHS accounting consistency within the existing 0.1 million RON tolerance",
+      "introduce no bilateral zero from an aggregate zero",
+      "introduce no materiality, issuer-applicability or non-negativity premise",
+      "freeze F7 if no unconditional bilateral coordinate is rank-unique"
+    ],
+    "behavioural_closure_may_change": false
+  }
+}

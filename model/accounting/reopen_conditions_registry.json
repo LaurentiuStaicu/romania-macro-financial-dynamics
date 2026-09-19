@@ -1,0 +1,104 @@
+{
+  "registry_version": "0.1",
+  "purpose": "Canonical reopen-condition registry for incomplete Accounting Spine instruments. It prevents repeated source probing or synthetic completion after a scientifically frozen identification boundary. An instrument reopens only when new evidence matches its declared trigger or an explicit contract revision is scientifically justified.",
+  "accounting_readiness_gate": "model/accounting/accounting_readiness_gate.json",
+  "current_complete_instruments": [
+    "F3"
+  ],
+  "current_incomplete_instruments": [
+    "F2",
+    "F4",
+    "F5",
+    "F6",
+    "F7",
+    "F8"
+  ],
+  "instruments": {
+    "F2": {
+      "current_status": "INCOMPLETE",
+      "governing_assessment": "model/accounting/f21_bpm6_esa_concept_bridge_assessment.json",
+      "frozen_boundary": "F2M is materialized, but F21/total F2 remain incomplete because the Direct-Investment F2 currency-and-deposits subinstrument needed for the exact BPM6-to-ESA bridge is not disseminated.",
+      "reopen_when": "A source with definitionally comparable Direct-Investment F2 subinstrument detail or an equivalent exact ESA/BPM6 bridge becomes available.",
+      "evidence_that_does_not_reopen": [
+        "broad Direct-Investment debt instruments (FA__D__FL)",
+        "the residual gap between known functional components and QSA total F2",
+        "historical proportions or allocation shares",
+        "missing-value-to-zero assumptions"
+      ]
+    },
+    "F4": {
+      "current_status": "PARTIAL_UNCONDITIONAL_CORE_ONLY",
+      "governing_assessment": "model/accounting/f4_exact_complement_rank_assessment.json",
+      "retained_vintage": "data/source_vintages/accounting-f4-partial-2025-vintage-2026-09-18",
+      "frozen_boundary": "F4 has 15 unconditional rank-unique stock cells and 15 unconditional rank-unique flow cells; the remaining bilateral cells are non-unique. The stock ambiguity is concentrated in the F-versus-BNR holder split and the BNR 6.1 million RON asset counterpart allocation; flow remains rank 26/nullity 9.",
+      "reopen_when": "A definitionally comparable official counterpart source or additional exact counterparty constraints make currently non-unique F4 coordinates invariant. For the stock BNR boundary, an official BNR/financial-accounts counterpart source for the 6.1 million RON asset stock, or a separately justified structural-zero adjudication, is required.",
+      "evidence_that_does_not_reopen": [
+        "zero aggregate BNR transactions used as bilateral flow zeros",
+        "allocation of the 6.1 million RON BNR asset row by shares",
+        "conditional BNR-zero stock cells promoted as unconditional",
+        "a fresh live QSA response that reproduces the same coefficient topology"
+      ]
+    },
+    "F5": {
+      "current_status": "FROZEN_AT_PUBLIC_DATA_BOUNDARY",
+      "governing_assessment": "model/accounting/f5_component_aware_rank_assessment.json",
+      "frozen_boundary": "Component-aware exact rank is 73 with nullity 67 for stock and flow. Forty-two component variables are unique, but zero bilateral F51 totals and zero total-F5 cells are invariant.",
+      "reopen_when": [
+        "Official bilateral or counterpart-sector publication for F512 and/or F519.",
+        "Additional official component controls reduce the exact component nullspace enough to make a total-F51 or total-F5 cell invariant.",
+        "A separately justified instrument-specific structural applicability rule supported by ESA/source evidence."
+      ],
+      "evidence_that_does_not_reopen": [
+        "F511-only substitution for F51",
+        "F51 substitution for total F5 where F52 applies",
+        "synthetic allocation of F512/F519",
+        "a live refresh reproducing the same unresolved component topology"
+      ]
+    },
+    "F6": {
+      "current_status": "FROZEN_AGGREGATE_ONLY_PUBLIC_DATA_BOUNDARY",
+      "governing_assessment": "model/accounting/f6_aggregate_rank_assessment.json",
+      "frozen_boundary": "Aggregate controls have exact rank 11/nullity 24 for stock and flow, with zero unconditional rank-unique bilateral cells.",
+      "reopen_when": "A definitionally comparable official source provides bilateral F6, bilateral F6 components, or additional exact counterparty constraints sufficient to reduce the unconditional nullspace.",
+      "evidence_that_does_not_reopen": [
+        "aggregate F62/F63 controls without counterpart structure",
+        "issuer-applicability assumptions not supported by ESA/source evidence",
+        "non-negativity or missing-to-zero completion",
+        "a live refresh reproducing rank 11/nullity 24"
+      ]
+    },
+    "F7": {
+      "current_status": "FROZEN_AGGREGATE_ONLY_PUBLIC_DATA_BOUNDARY",
+      "governing_assessment": "model/accounting/f7_aggregate_rank_assessment.json",
+      "frozen_boundary": "Stock rank is 11/nullity 24 and 2025 flow rank is 10/nullity 25, with zero unconditional rank-unique bilateral cells.",
+      "reopen_when": "A definitionally comparable official source provides bilateral F7 or additional exact counterparty constraints sufficient to reduce the unconditional nullspace.",
+      "evidence_that_does_not_reopen": [
+        "aggregate sector complements treated as bilateral cells",
+        "aggregate zero controls converted to bilateral zeros",
+        "materiality assumptions used to allocate counterparties",
+        "a live refresh reproducing the same rank/nullspace boundary"
+      ]
+    },
+    "F8": {
+      "current_status": "FROZEN_AGGREGATE_ONLY_PUBLIC_DATA_BOUNDARY",
+      "governing_assessment": "model/accounting/f8_aggregate_rank_assessment.json",
+      "frozen_boundary": "Aggregate controls have exact rank 11/nullity 24 for stock and flow, with zero unconditional rank-unique bilateral cells. The BNR zero-liability stock scenario is conditional and unpromoted.",
+      "reopen_when": "A definitionally comparable official source provides bilateral F8, bilateral F81/F89, or additional exact counterparty constraints sufficient to reduce the unconditional nullspace.",
+      "evidence_that_does_not_reopen": [
+        "trade-credit-only substitution for total F8",
+        "conditional BNR stock zeros promoted as unconditional",
+        "aggregate F8=F81+F89 identities without counterpart structure",
+        "a live refresh reproducing rank 11/nullity 24"
+      ]
+    }
+  },
+  "governance": {
+    "no_repeated_live_probe_without_reopen_trigger_or_explicit_refresh_purpose": true,
+    "live_refresh_is_new_vintage_evidence_not_historical_reproduction": true,
+    "unchanged_source_topology_does_not_reopen_a_frozen_boundary": true,
+    "reopen_does_not_imply_materialization": true,
+    "every_reopened_instrument_must_repass_accounting_readiness": true,
+    "no_reopen_condition_may_authorize_synthetic_allocation": true,
+    "behavioural_closure_may_not_override_frozen_accounting_boundaries": true
+  }
+}

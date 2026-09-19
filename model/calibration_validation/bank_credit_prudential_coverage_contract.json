@@ -1,0 +1,101 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "phase": "Aggregate Bank Credit — Prudential Control Source Coverage Diagnostic",
+  "mechanism_id": "aggregate_bank_credit_response",
+  "formal_calibration_gate": false,
+  "purpose": "Determine, before any credit-response estimation, which quarterly Romania prudential controls are actually published on a reproducible ECB CBD2 boundary and preserve the distinction between NPL risk state, total-capital/solvency ratio, and CET1.",
+  "source": {
+    "institution": "European Central Bank / ESCB",
+    "dataset": "CBD2 — Consolidated Banking data",
+    "api": "ECB Data Portal SDMX REST API",
+    "reference_area": "RO",
+    "frequency": "Q",
+    "start_period": "2014-Q4",
+    "candidate_series": {
+      "npl_ratio": {
+        "full_series_key": "CBD2.Q.RO.W0.11._Z._Z.A.F.I3632._Z._Z._Z._Z._Z._Z.PC",
+        "status_before_live_run": "EXACT_SERIES_CONFIRMED_IN_ECB_DATA_PORTAL",
+        "concept": "Gross non-performing loans and advances as percent of total gross loans and advances, domestic banks, FINREP reporters",
+        "role": "Quarterly credit-risk/prudential state candidate; not an exogenous credit-supply shock."
+      },
+      "solvency_ratio": {
+        "full_series_key": "CBD2.Q.RO.W0.11._Z._Z.A.A.I4001._Z._Z._Z._Z._Z._Z.PC",
+        "status_before_live_run": "ITEM_AND_DSD_TUPLE_PREREGISTERED_AVAILABILITY_NOT_CONFIRMED",
+        "concept": "Solvency ratio [%], domestic banks, full sample",
+        "role": "Preferred definitionally aligned candidate for the BNR total capital ratio only if live source coverage and boundary review pass.",
+        "derivation_note": "I4001 is explicitly identified by ECB as Solvency ratio. The Romania key is preregistered by applying the published CBD2 DSD dimensions used by Romania CET1 and by I4001 series for other EU countries. This does not assert that the Romania series exists."
+      },
+      "cet1_ratio": {
+        "full_series_key": "CBD2.Q.RO.W0.11._Z._Z.A.A.I4008._Z._Z._Z._Z._Z._Z.PC",
+        "status_before_live_run": "EXACT_SERIES_CONFIRMED_IN_ECB_DATA_PORTAL",
+        "concept": "Common equity Tier 1 (CET1) ratio, domestic banks, full sample",
+        "role": "Alternative capital-quality state candidate only; it may not replace total-capital/solvency ratio after observing model fit."
+      }
+    }
+  },
+  "bnr_semantic_anchor": {
+    "source": "BNR Monthly Bulletin January 2025, Table 11.1",
+    "source_url": "https://muzeu.bnr.ro/uploads/2025-03-07monthlybulletinno.012025_documentpdf_545_1743160358.pdf",
+    "population": "Credit institutions which are Romanian legal entities.",
+    "concept_statement": "BNR labels Total capital ratio as previously solvency ratio.",
+    "reporting_breaks": [
+      "As of June 2014 indicators are based on Commission Implementing Regulation (EU) No 680/2014 supervisory reporting.",
+      "From June 2021 Regulation (EU) 2021/451 replaces Regulation (EU) No 680/2014."
+    ],
+    "diagnostic_values": {
+      "2023-Q4": {
+        "total_capital_ratio_pct": 23.6,
+        "cet1_ratio_pct": 20.21,
+        "npl_ratio_pct": 2.37
+      },
+      "2024-Q1": {
+        "total_capital_ratio_pct": 22.91,
+        "cet1_ratio_pct": 19.61,
+        "npl_ratio_pct": 2.41
+      },
+      "2024-Q2": {
+        "total_capital_ratio_pct": 24.05,
+        "cet1_ratio_pct": 20.68,
+        "npl_ratio_pct": 2.49
+      },
+      "2024-Q3": {
+        "total_capital_ratio_pct": 24.95,
+        "cet1_ratio_pct": 21.58,
+        "npl_ratio_pct": 2.54
+      },
+      "2024-Q4": {
+        "total_capital_ratio_pct": 23.66,
+        "cet1_ratio_pct": 20.49,
+        "npl_ratio_pct": 2.46
+      }
+    },
+    "comparison_rule": "If CBD2 observations are available for these quarters, report differences versus BNR only as population/consolidation diagnostics. No numerical tolerance is a promotion or variable-selection criterion."
+  },
+  "coverage_interpretation": {
+    "npl_required": true,
+    "solvency_availability_question": true,
+    "cet1_required_as_control_family_crosscheck": true,
+    "if_solvency_available": "Record exact coverage and boundary differences; this authorises a later preregistered variable-boundary decision only, not model estimation.",
+    "if_solvency_unavailable": "Retain total-capital/solvency control as unresolved. CET1 does not become the substitute automatically.",
+    "if_npl_unavailable": "Treat the candidate source boundary as failed/inconsistent with indexed ECB evidence and do not open calibration.",
+    "no_minimum_history_selected_here": true
+  },
+  "hard_rules": {
+    "live_provider_work_manual_only": true,
+    "no_calibration_or_refit": true,
+    "no_CET1_substitution_for_solvency_after_outcomes": true,
+    "no_annual_NPL_forward_fill": true,
+    "no_population_bridge_by_numeric_similarity": true,
+    "no_missing_series_to_zero": true,
+    "no_interpolation": true,
+    "no_causal_claim": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "result_effect": {
+    "calibration_cycle_open": false,
+    "validated_reference_behavioural_mechanisms_change": 0,
+    "central_feedback_activation": false
+  }
+}

@@ -422,16 +422,17 @@
     {
       "instrument": "F6",
       "priority": 6,
-      "stock_matrix_status": "AGGREGATE_ONLY_NO_TOTAL_OR_COMPONENT_BILATERAL_COVERAGE",
-      "flow_matrix_status": "AGGREGATE_ONLY_NO_TOTAL_OR_COMPONENT_BILATERAL_COVERAGE",
+      "stock_matrix_status": "FROZEN_AGGREGATE_ONLY_NO_UNCONDITIONAL_BILATERAL_IDENTIFICATION",
+      "flow_matrix_status": "FROZEN_AGGREGATE_ONLY_NO_UNCONDITIONAL_BILATERAL_IDENTIFICATION",
       "asset_liability_residual": null,
-      "residual_status": "W0_W1_TOTAL_F6_CONTROLS_ONLY_EXACT_RANK_REQUIRED",
+      "residual_status": "ACCOUNTING_RHS_PASS_RANK_11_NULLITY_24_ZERO_UNCONDITIONAL_UNIQUE_CELLS",
       "known_issues": [
         "No tested bilateral total-F6 cell is published for stock or 2025 flow.",
         "No tested bilateral F61/F62/F63/F64/F65/F66 or F63_F64_F65 cell is published in the W2/W1 layer.",
         "F62 and F63 remain useful aggregate controls only; their aggregate publication does not identify counterpart structure.",
-        "Neither exact component representation reconstructs any bilateral F6 cell.",
-        "The next gate computes exact rank/nullspace from the published W0/W1 total-F6 controls before freeze or any further recovery decision."
+        "The exact aggregate-control system has rank 11 over 35 in-boundary variables and nullity 24 for both stock and flow, with zero unconditional rank-unique bilateral cells.",
+        "The stock and 2025-flow aggregate RHS accounting identities pass within 0.1 million RON; the limitation is identification rather than accounting inconsistency.",
+        "No issuer-applicability, non-negativity or missing-to-zero premise is introduced; F6 is frozen rather than synthetically allocated."
       ],
       "coverage_assessment": {
         "status": "TOTAL_F6_AGGREGATES_AVAILABLE_BILATERAL_NOT_PUBLISHED",
@@ -470,20 +471,75 @@
           "stock": 0,
           "flow": 0
         },
-        "next_gate": "F6 exact aggregate-control rank/nullspace audit",
+        "next_gate": "F6 exact aggregate-control rank/nullspace audit — completed",
+        "materialization_allowed": false
+      },
+      "rank_assessment": {
+        "status": "FREEZE_F6_AGGREGATE_ONLY_PUBLIC_DATA_BOUNDARY",
+        "assessment": "model/accounting/f6_aggregate_rank_assessment.json",
+        "stock": {
+          "rank": 11,
+          "nullity": 24,
+          "unique_cells": 0
+        },
+        "flow_2025": {
+          "rank": 11,
+          "nullity": 24,
+          "unique_cells": 0
+        },
+        "RHS_controls": "PASS_STOCK_AND_FLOW_WITHIN_0.1_MILLION_RON",
+        "next_priority": "F7 materiality/source-coverage audit",
         "materialization_allowed": false
       }
     },
     {
       "instrument": "F7",
       "priority": 7,
-      "stock_matrix_status": "TBD_MATERIALITY_CHECK",
-      "flow_matrix_status": "TBD_MATERIALITY_CHECK",
+      "stock_matrix_status": "FROZEN_AGGREGATE_ONLY_NO_UNCONDITIONAL_BILATERAL_IDENTIFICATION",
+      "flow_matrix_status": "FROZEN_AGGREGATE_ONLY_NO_UNCONDITIONAL_BILATERAL_IDENTIFICATION",
       "asset_liability_residual": null,
-      "residual_status": "TBD_UNTIL_MATERIALITY_AND_COMPARABLE_TOTALS_EXIST",
+      "residual_status": "AGGREGATE_RHS_PASS_STOCK_EXACT_FLOW_WITHIN_0.1_RANK_IDENTIFICATION_ZERO_UNIQUE_CELLS",
       "known_issues": [
-        "Include explicitly where material; do not assume immateriality without checking."
-      ]
+        "No tested bilateral F7 cell is published or exactly recoverable for stock or 2025 flow in the tested W2/W1 orientations.",
+        "Total-economy F7 is non-zero in both stock and 2025 transaction controls, so the instrument cannot be treated as an all-zero omission.",
+        "Some resident aggregate controls are unavailable, but W0 total-economy controls provide exact aggregate complements where exactly one sector aggregate is missing.",
+        "Stock aggregate equations have exact rank 11 and nullity 24; flow equations have rank 10 and nullity 25; neither system identifies any unconditional bilateral coordinate.",
+        "Observed aggregate zeros are retained as aggregate equations only and do not become bilateral zero assumptions.",
+        "F7 is frozen at the aggregate-only public-data boundary without a synthetic counterpart allocation."
+      ],
+      "coverage_assessment": {
+        "status": "AGGREGATE_F7_AVAILABLE_BILATERAL_UNAVAILABLE",
+        "assessment": "model/accounting/f7_financial_derivatives_coverage_assessment.json",
+        "stock_cells": {
+          "resolved": 0,
+          "unresolved": 35,
+          "not_applicable": 1
+        },
+        "flow_cells": {
+          "resolved": 0,
+          "unresolved": 35,
+          "not_applicable": 1
+        },
+        "scale_screening": "NONZERO_AGGREGATE_F7_EVIDENCE",
+        "materiality_verdict": "NOT_ASSIGNED_IN_PHASE_A",
+        "materialization_allowed": false
+      },
+      "rank_assessment": {
+        "status": "FREEZE_F7_AGGREGATE_ONLY_PUBLIC_DATA_BOUNDARY",
+        "assessment": "model/accounting/f7_aggregate_rank_assessment.json",
+        "stock": {
+          "rank": 11,
+          "nullity": 24,
+          "unique_cells": 0
+        },
+        "flow_2025": {
+          "rank": 10,
+          "nullity": 25,
+          "unique_cells": 0
+        },
+        "RHS_controls": "PASS_STOCK_EXACT_FLOW_WITHIN_0.1_MILLION_RON",
+        "materialization_allowed": false
+      }
     }
   ],
   "b9f_reconciliation": {
@@ -642,6 +698,26 @@
     {
       "id": "f6_bilateral_component_coverage",
       "status": "NEGATIVE_ZERO_BILATERAL_F6_COMPONENT_CELLS"
+    },
+    {
+      "id": "f6_exact_rank_identification",
+      "status": "PASS_RANK_11_NULLITY_24_ZERO_UNCONDITIONAL_UNIQUE_CELLS"
+    },
+    {
+      "id": "f6_freeze_aggregate_only",
+      "status": "ENFORCED_NO_SYNTHETIC_BILATERAL_ALLOCATION"
+    },
+    {
+      "id": "f7_total_instrument_coverage",
+      "status": "NEGATIVE_BILATERAL_RESULT_NONZERO_AGGREGATE_F7_AVAILABLE"
+    },
+    {
+      "id": "f7_exact_rank_identification",
+      "status": "PASS_STOCK_RANK_11_NULLITY_24_FLOW_RANK_10_NULLITY_25_ZERO_UNCONDITIONAL_UNIQUE_CELLS"
+    },
+    {
+      "id": "f7_freeze_aggregate_only",
+      "status": "ENFORCED_NO_SYNTHETIC_BILATERAL_ALLOCATION"
     }
   ]
 }

@@ -1,11 +1,19 @@
 {
-  "contract_version": "0.1",
+  "contract_version": "0.2",
   "phase": "Accounting Empirical Recovery / F8 Phase C — Exact Aggregate-Control Rank Audit",
-  "purpose": "Quantify exactly how much of the 35-cell in-boundary F8 matrix is identified by published W0/W1 total-F8 controls after direct and component-bilateral source coverage both failed.",
+  "purpose": "Quantify exactly how much of the 35-cell in-boundary F8 matrix is identified by published W0/W1 total-F8 controls after direct and component-bilateral source coverage both failed, and reproduce that historical identification result deterministically from retained evidence.",
   "inputs": {
     "phase_A_runtime": "scripts/audit_qsa_f8_other_accounts_coverage.py",
     "phase_A_assessment": "model/accounting/f8_other_accounts_coverage_assessment.json",
-    "phase_B_assessment": "model/accounting/f8_bilateral_component_bridge_assessment.json"
+    "phase_B_assessment": "model/accounting/f8_bilateral_component_bridge_assessment.json",
+    "retained_rank_source_snapshot": "model/accounting/f8_rank_source_snapshot_2025.json",
+    "phase_C_assessment": "model/accounting/f8_aggregate_rank_assessment.json"
+  },
+  "reproduction_boundary": {
+    "rank_gate_mode": "OFFLINE_RETAINED_SOURCE_SNAPSHOT",
+    "live_source_refresh_is_separate": true,
+    "live_source_refresh_workflow": ".github/workflows/f8-other-accounts-coverage-audit.yml",
+    "rule": "A fresh ECB QSA query may reveal publication or availability changes, but it must not silently rewrite or invalidate the historical Phase C rank result. Reopening F8 requires explicit new evidence and a new assessment."
   },
   "canonical_variables": "35 in-boundary holder→issuer F8 cells over H/C/F/G/X/BNR; X→X is outside the Romanian national-accounts boundary",
   "equation_families": [
@@ -33,6 +41,8 @@
     "conditional_BNR_zero_stock_cells_must_not_be_promoted": true,
     "zero_BNR_aggregate_flow_must_not_create_bilateral_flow_zeros": true,
     "no_synthetic_allocation": true,
+    "missing_to_zero_forbidden": true,
+    "historical_rank_reproduction_must_not_require_live_network": true,
     "behavioural_closure_may_change": false
   },
   "reconciliation_tolerance_million_RON": 0.1,

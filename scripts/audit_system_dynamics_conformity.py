@@ -3,6 +3,13 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+try:
+    from scripts.audit_dimensional_consistency import audit_registry
+except ModuleNotFoundError:
+    # Direct execution via "python scripts/audit_system_dynamics_conformity.py"
+    # puts scripts/ rather than the repository root on sys.path.
+    from audit_dimensional_consistency import audit_registry
+
 ROOT = Path(__file__).resolve().parents[1]
 
 REQUIRED_REFERENCE_MODES = {
@@ -57,6 +64,390 @@ def check(condition: bool, message: str) -> None:
         raise RuntimeError(message)
 
 
+def normalized_link_sign(raw: str) -> int:
+    if raw.startswith("+"):
+        return 1
+    if raw.startswith("-"):
+        return -1
+    raise RuntimeError(f"Unsupported causal-link sign: {raw!r}")
+
+
+def path_is_contiguous(path: list[dict[str, str]]) -> bool:
+    return bool(path) and all(
+        path[index - 1]["to"] == path[index]["from"]
+        for index in range(1, len(path))
+    )
+
+
+def path_is_closed(path: list[dict[str, str]]) -> bool:
+    return bool(path) and path[-1]["to"] == path[0]["from"]
+
+
+def implied_loop_polarity(path: list[dict[str, str]]) -> str:
+    if not path_is_closed(path):
+        raise RuntimeError("Loop polarity is undefined for an open causal path")
+    product = 1
+    for link in path:
+        product *= normalized_link_sign(str(link["sign"]))
+    return "reinforcing" if product > 0 else "balancing"
+
+
+def declared_polarity_base(value: str) -> str | None:
+    if value.startswith("reinforcing"):
+        return "reinforcing"
+    if value.startswith("balancing"):
+        return "balancing"
+    return None
+
+
+def reference_mode_readiness(
+    references: dict,
+    required_modes: set[str],
+) -> dict[str, object]:
+    modes = references.get("modes", [])
+    mode_ids = [str(mode["id"]) for mode in modes]
+    if len(mode_ids) != len(set(mode_ids)):
+        raise RuntimeError("Reference-mode registry contains duplicate IDs")
+
+    vocabulary = set(references.get("status_vocabulary", []))
+    by_id = {str(mode["id"]): mode for mode in modes}
+    missing = required_modes - set(by_id)
+    if missing:
+        raise RuntimeError(
+            f"Reference-mode registry missing: {sorted(missing)}"
+        )
+
+    policy = references.get("closure_readiness_policy", {})
+    ready_statuses = set(
+        policy.get(
+            "ready_statuses_for_integrated_quantitative_closure",
+            [],
+        )
+    )
+    if not ready_statuses:
+        raise RuntimeError("Reference-mode closure readiness has no ready statuses")
+    if not ready_statuses <= vocabulary:
+        raise RuntimeError(
+            "Reference-mode ready statuses are outside the declared vocabulary"
+        )
+
+    required_exception_fields = set(
+        policy.get("qualitative_exception_required_fields", [])
+    )
+    exceptions = policy.get("current_qualitative_exceptions", [])
+    exception_ids: set[str] = set()
+    for item in exceptions:
+        if not isinstance(item, dict):
+            raise RuntimeError(
+                "Reference-mode qualitative exceptions must be structured objects"
+            )
+        missing_fields = required_exception_fields - set(item)
+        if missing_fields:
+            raise RuntimeError(
+                "Reference-mode qualitative exception missing fields: "
+                f"{sorted(missing_fields)}"
+            )
+        exception_id = str(item["id"])
+        if exception_id not in required_modes:
+            raise RuntimeError(
+                f"Qualitative exception targets non-required mode {exception_id}"
+            )
+        if exception_id in exception_ids:
+            raise RuntimeError(
+                f"Duplicate qualitative reference-mode exception: {exception_id}"
+            )
+        if not str(item["validation_basis"]).strip() or not str(
+            item["justification"]
+        ).strip():
+            raise RuntimeError(
+                f"Qualitative exception {exception_id} lacks substantive basis"
+            )
+        exception_ids.add(exception_id)
+
+    ready: list[str] = []
+    blockers: list[str] = []
+    statuses: dict[str, str] = {}
+    for mode_id in sorted(required_modes):
+        status = str(by_id[mode_id]["status"])
+        if status not in vocabulary:
+            raise RuntimeError(
+                f"Reference mode {mode_id} has unsupported status {status}"
+            )
+        statuses[mode_id] = status
+        if status in ready_statuses or mode_id in exception_ids:
+            ready.append(mode_id)
+        else:
+            blockers.append(mode_id)
+
+    return {
+        "status": "READY" if not blockers else "BLOCKED",
+        "ready_modes": ready,
+        "blocking_modes": blockers,
+        "mode_statuses": statuses,
+        "ready_statuses": sorted(ready_statuses),
+        "qualitative_exception_ids": sorted(exception_ids),
+    }
+
+
+def empirical_activation_governance(
+    contract: dict,
+    registry: dict,
+    disposition: dict,
+) -> dict[str, object]:
+    mechanisms = registry.get("mechanisms", [])
+    mechanism_ids = [str(item["id"]) for item in mechanisms]
+    if len(mechanism_ids) != len(set(mechanism_ids)):
+        raise RuntimeError("Empirical mechanism registry contains duplicate IDs")
+
+    vocabulary = set(registry.get("status_vocabulary", []))
+    by_id = {str(item["id"]): item for item in mechanisms}
+    for mechanism_id, item in by_id.items():
+        classification = str(item["classification"])
+        if classification not in vocabulary:
+            raise RuntimeError(
+                f"Empirical mechanism {mechanism_id} has unsupported status "
+                f"{classification}"
+            )
+
+    contract_activated = set(contract.get("activated_mechanisms", []))
+    registry_activated = {
+        mechanism_id
+        for mechanism_id, item in by_id.items()
+        if item["classification"] == "ACTIVATED"
+    }
+    if contract_activated != registry_activated:
+        raise RuntimeError(
+            "Empirical contract activated-mechanism list disagrees with registry"
+        )
+
+    post = contract.get("post_validation_disposition", {})
+    previous = set(post.get("previous_calibration_admissions", []))
+    status_map = post.get("current_status_of_previous_admissions", {})
+    if set(status_map) != previous:
+        raise RuntimeError(
+            "Post-validation status map does not cover exactly the previous admissions"
+        )
+    missing_previous = previous - set(by_id)
+    if missing_previous:
+        raise RuntimeError(
+            "Post-validation governance references unknown mechanisms: "
+            f"{sorted(missing_previous)}"
+        )
+    for mechanism_id, expected_status in status_map.items():
+        actual = str(by_id[mechanism_id]["classification"])
+        if actual != expected_status:
+            raise RuntimeError(
+                f"Post-validation status for {mechanism_id} is {actual}, "
+                f"expected {expected_status}"
+            )
+        evidence = by_id[mechanism_id].get(
+            "validation_recovery_disposition"
+        )
+        if not isinstance(evidence, dict):
+            raise RuntimeError(
+                f"{mechanism_id} lacks explicit validation-recovery disposition"
+            )
+        if str(evidence.get("status")) != expected_status:
+            raise RuntimeError(
+                f"{mechanism_id} embedded recovery status disagrees with registry"
+            )
+        if not str(evidence.get("source", "")).strip():
+            raise RuntimeError(
+                f"{mechanism_id} recovery disposition lacks a source"
+            )
+
+    activated_after = set(
+        post.get("activated_mechanisms_after_disposition", [])
+    )
+    if activated_after != contract_activated:
+        raise RuntimeError(
+            "Post-validation activated set disagrees with empirical contract"
+        )
+
+    validated = int(
+        disposition["validated_reference_behavioural_mechanisms"]
+    )
+    if int(post.get("validated_reference_behavioural_mechanisms", -1)) != validated:
+        raise RuntimeError(
+            "Empirical post-validation count disagrees with validation disposition"
+        )
+
+    active_cycle = bool(post.get("active_calibration_cycle_open"))
+    if not active_cycle and contract_activated:
+        raise RuntimeError(
+            "Closed calibration cycle cannot retain ACTIVATED mechanisms"
+        )
+
+    central_feedback = {
+        mechanism_id
+        for mechanism_id, item in by_id.items()
+        if item.get("central_feedback") is True
+    }
+    if not central_feedback <= registry_activated:
+        raise RuntimeError(
+            "Only mechanisms in an open ACTIVATED calibration cycle may be "
+            "labelled central_feedback"
+        )
+
+    return {
+        "active_calibration_cycle_open": active_cycle,
+        "activated_mechanisms": sorted(registry_activated),
+        "previous_calibration_admissions": sorted(previous),
+        "current_status_of_previous_admissions": {
+            key: status_map[key] for key in sorted(status_map)
+        },
+        "central_feedback_mechanisms": sorted(central_feedback),
+        "validated_reference_behavioural_mechanisms": validated,
+    }
+
+
+def validation_recovery_registry_alignment(
+    registry: dict,
+    holdout: dict,
+    selection_freeze: dict,
+    government_assessment: dict,
+) -> dict[str, object]:
+    by_id = {
+        str(item["id"]): item
+        for item in registry.get("mechanisms", [])
+    }
+
+    monetary_id = "monetary_policy_lending_rate_pass_through"
+    government_id = "government_refinancing_effective_rate"
+    if monetary_id not in by_id or government_id not in by_id:
+        raise RuntimeError(
+            "Empirical registry lacks a mechanism required by validation recovery"
+        )
+
+    monetary = by_id[monetary_id]
+    if monetary["classification"] != holdout["final_mechanism_verdict"]:
+        raise RuntimeError(
+            "Monetary registry status disagrees with final household holdout verdict"
+        )
+    if monetary.get("central_feedback") is not False:
+        raise RuntimeError(
+            "Unvalidated monetary candidate may not be central_feedback"
+        )
+
+    selected = monetary.get("validation_recovery_selected_form")
+    if not isinstance(selected, dict):
+        raise RuntimeError(
+            "Monetary registry lacks the frozen validation-recovery selected form"
+        )
+    exact_fields = (
+        "target",
+        "candidate",
+        "equation",
+        "holdout_nonzero_policy_changes",
+        "passes_all_final_holdout_gates",
+        "causal_claim",
+    )
+    for field in exact_fields:
+        if selected.get(field) != holdout.get(field):
+            raise RuntimeError(
+                f"Monetary registry frozen field {field} disagrees with holdout"
+            )
+    if selected.get("final_verdict") != holdout["final_mechanism_verdict"]:
+        raise RuntimeError(
+            "Monetary registry final verdict disagrees with holdout"
+        )
+    if abs(
+        float(selected["frozen_beta"]) - float(holdout["frozen_beta"])
+    ) > 1e-15:
+        raise RuntimeError(
+            "Monetary registry frozen beta disagrees with holdout"
+        )
+    if monetary.get("functional_form") != (
+        "household_housing candidate: "
+        + holdout["equation"]
+        + "; no NFC form is selected"
+    ):
+        raise RuntimeError(
+            "Monetary registry functional form is stale relative to recovery"
+        )
+    parameters = monetary.get("parameters", [])
+    if len(parameters) != 1:
+        raise RuntimeError(
+            "Frozen household monetary candidate must expose exactly one parameter"
+        )
+    beta = parameters[0]
+    if beta.get("id") != "beta_household_housing":
+        raise RuntimeError(
+            "Monetary registry exposes the wrong frozen candidate parameter"
+        )
+    if beta.get("status") != "FROZEN_CANDIDATE_NOT_VALIDATED":
+        raise RuntimeError(
+            "Monetary beta must remain explicitly candidate/not validated"
+        )
+    if abs(float(beta["value"]) - float(holdout["frozen_beta"])) > 1e-15:
+        raise RuntimeError(
+            "Monetary registry parameter value disagrees with holdout"
+        )
+
+    nfc = monetary.get("validation_recovery_nfc")
+    if not isinstance(nfc, dict):
+        raise RuntimeError(
+            "Monetary registry lacks the frozen NFC selection disposition"
+        )
+    frozen_nfc = selection_freeze["targets"]["nfc_upto1y"]
+    if nfc.get("selected_candidate") != frozen_nfc["selected_candidate"]:
+        raise RuntimeError(
+            "NFC registry selected form disagrees with selection freeze"
+        )
+    if nfc.get("final_holdout_opened") is not False:
+        raise RuntimeError(
+            "NFC registry may not claim an opened final holdout"
+        )
+    if nfc.get("status") != holdout["nfc_verdict"]:
+        raise RuntimeError(
+            "NFC registry status disagrees with final recovery disposition"
+        )
+
+    government = by_id[government_id]
+    if government["classification"] != government_assessment["final_verdict"]:
+        raise RuntimeError(
+            "Government registry status disagrees with repricing-ledger verdict"
+        )
+    if government.get("central_feedback") is not False:
+        raise RuntimeError(
+            "Deferred government mechanism may not be central_feedback"
+        )
+    if government_assessment["candidate_eligibility"] is not False:
+        raise RuntimeError(
+            "Government assessment unexpectedly grants candidate eligibility"
+        )
+    if government_assessment["estimation"]["run"] is not False:
+        raise RuntimeError(
+            "Government registry governance assumes estimation remained blocked"
+        )
+    government_disposition = government.get(
+        "validation_recovery_disposition"
+    )
+    if not isinstance(government_disposition, dict):
+        raise RuntimeError(
+            "Government registry lacks explicit recovery disposition"
+        )
+    if government_disposition.get("status") != "DEFERRED":
+        raise RuntimeError(
+            "Government embedded recovery status must remain DEFERRED"
+        )
+
+    return {
+        "monetary_household_status": monetary["classification"],
+        "monetary_household_candidate": selected["candidate"],
+        "monetary_household_frozen_beta": selected["frozen_beta"],
+        "monetary_holdout_nonzero_policy_changes":
+            selected["holdout_nonzero_policy_changes"],
+        "nfc_selected_candidate": nfc["selected_candidate"],
+        "nfc_final_holdout_opened": nfc["final_holdout_opened"],
+        "government_status": government["classification"],
+        "government_candidate_eligibility":
+            government_assessment["candidate_eligibility"],
+        "government_estimation_run":
+            government_assessment["estimation"]["run"],
+    }
+
+
 def main() -> None:
     model = load("model/registries/model_contract.json")
     core = load("model/dynamics/core_contract.json")
@@ -67,6 +458,18 @@ def main() -> None:
     disposition = load(
         "model/calibration_validation/validation_recovery_disposition.json"
     )
+    empirical_contract = load("model/empirical_dynamics/contract.json")
+    empirical_registry = load("model/empirical_dynamics/mechanism_registry.json")
+    validation_holdout = load(
+        "model/calibration_validation/validation_recovery_holdout.json"
+    )
+    validation_selection_freeze = load(
+        "model/calibration_validation/validation_recovery_selection_freeze.json"
+    )
+    government_repricing_assessment = load(
+        "model/calibration_validation/government_repricing_ledger_assessment.json"
+    )
+    accounting_readiness = load("model/accounting/accounting_readiness_gate.json")
 
     check(
         model["dynamic_core"]["accounting_spine_is_hard_constraint"] is True,
@@ -84,23 +487,162 @@ def main() -> None:
         core["behavioural_closure"]["active"] is False,
         "Core behavioural closure unexpectedly active",
     )
+    check(
+        model["dynamic_core"]["canonical_multi_instrument_stock_initialization_ready"]
+        is False,
+        "Canonical multi-instrument stock initialization is not yet empirically ready",
+    )
+    check(
+        model["dynamic_core"]["canonical_full_2025_stock_flow_benchmark_ready"]
+        is False,
+        "Canonical full stock-flow benchmark is not yet empirically ready",
+    )
+    check(
+        accounting_readiness["hard_rules"][
+            "behavioural_closure_may_not_override_accounting_readiness"
+        ]
+        is True,
+        "Behavioural closure must not override incomplete Accounting Spine readiness",
+    )
 
-    loops = feedback["loops"]
-    check(loops, "Feedback registry must contain the candidate feedback architecture")
-    for loop in loops:
+    empirical_governance = empirical_activation_governance(
+        empirical_contract,
+        empirical_registry,
+        disposition,
+    )
+    recovery_alignment = validation_recovery_registry_alignment(
+        empirical_registry,
+        validation_holdout,
+        validation_selection_freeze,
+        government_repricing_assessment,
+    )
+    check(
+        model["empirical_dynamics"]["active_calibration_cycle_open"]
+        is empirical_governance["active_calibration_cycle_open"],
+        "Model contract active-calibration-cycle state is stale",
+    )
+    check(
+        model["empirical_dynamics"]["activated_mechanisms_count"]
+        == len(empirical_governance["activated_mechanisms"]),
+        "Model contract activated-mechanism count is stale",
+    )
+    check(
+        model["empirical_dynamics"][
+            "validation_disposition_governs_current_status"
+        ]
+        is True,
+        "Current empirical mechanism status must be governed by frozen validation disposition",
+    )
+    empirical_gate = gate["empirical_activation_governance"]
+    check(
+        empirical_gate["current_active_calibration_cycle_open"]
+        is empirical_governance["active_calibration_cycle_open"],
+        "SD gate active-calibration-cycle state disagrees with empirical governance",
+    )
+    check(
+        set(empirical_gate["current_activated_mechanisms"])
+        == set(empirical_governance["activated_mechanisms"]),
+        "SD gate activated-mechanism set disagrees with empirical governance",
+    )
+    check(
+        empirical_gate["validated_reference_behavioural_mechanisms"]
+        == empirical_governance["validated_reference_behavioural_mechanisms"],
+        "SD gate validated-mechanism count disagrees with frozen disposition",
+    )
+
+    structures = feedback["loops"]
+    check(structures, "Feedback registry must contain the candidate feedback architecture")
+
+    delay_registry = {item["id"]: item for item in feedback["delay_candidates"]}
+    closed_loop_ids: list[str] = []
+    open_chain_ids: list[str] = []
+
+    for structure in structures:
+        structure_id = structure["id"]
+        status = structure["scientific_status"]
         check(
-            loop["scientific_status"] == "BEHAVIOURAL_CANDIDATE",
-            f"{loop['id']} is not explicitly a behavioural candidate",
+            status in {"BEHAVIOURAL_CANDIDATE", "BEHAVIOURAL_CANDIDATE_OPEN_CHAIN"},
+            f"{structure_id} has unsupported scientific status {status}",
         )
         check(
-            loop["quantitatively_active"] is False,
-            f"{loop['id']} is quantitatively active before conformity gates pass",
+            structure["quantitatively_active"] is False,
+            f"{structure_id} is quantitatively active before conformity gates pass",
         )
-        check(bool(loop.get("path")), f"{loop['id']} lacks an explicit loop path")
+
+        path = structure.get("path")
+        check(bool(path), f"{structure_id} lacks an explicit causal path")
         check(
-            bool(loop.get("polarity_hypothesis")),
-            f"{loop['id']} lacks a polarity hypothesis",
+            path_is_contiguous(path),
+            f"{structure_id} causal path is not contiguous",
         )
+
+        for link in path:
+            normalized_link_sign(str(link["sign"]))
+
+        for delay_id in structure.get("delay_candidates", []):
+            check(
+                delay_id in delay_registry,
+                f"{structure_id} references unknown delay candidate {delay_id}",
+            )
+            delay = delay_registry[delay_id]
+            check(
+                delay["active"] is False,
+                f"{structure_id} has an active delay before feedback activation",
+            )
+
+        if status == "BEHAVIOURAL_CANDIDATE":
+            check(
+                structure.get("topology_status") == "CLOSED_CANDIDATE_LOOP",
+                f"{structure_id} must declare CLOSED_CANDIDATE_LOOP topology",
+            )
+            check(
+                path_is_closed(path),
+                f"{structure_id} is labelled as a loop but its path is open",
+            )
+            declared = declared_polarity_base(
+                str(structure.get("polarity_hypothesis", ""))
+            )
+            check(
+                declared is not None,
+                f"{structure_id} lacks a reinforcing/balancing polarity hypothesis",
+            )
+            implied = implied_loop_polarity(path)
+            check(
+                declared == implied,
+                (
+                    f"{structure_id} declared polarity {declared!r} conflicts with "
+                    f"signed-path polarity {implied!r}"
+                ),
+            )
+            closed_loop_ids.append(structure_id)
+        else:
+            check(
+                structure.get("topology_status") == "OPEN_CHAIN",
+                f"{structure_id} open candidate must declare OPEN_CHAIN topology",
+            )
+            check(
+                not path_is_closed(path),
+                f"{structure_id} is classified as open but its path is closed",
+            )
+            check(
+                structure.get("polarity_hypothesis") == "not_applicable_until_closed",
+                f"{structure_id} must not assign loop polarity before closure",
+            )
+            check(
+                bool(structure.get("activation_blocker")),
+                f"{structure_id} open chain lacks an explicit activation blocker",
+            )
+            open_chain_ids.append(structure_id)
+
+    topology_gate = gate["feedback_topology_gate"]
+    check(
+        set(topology_gate["closed_loop_candidates"]) == set(closed_loop_ids),
+        "Conformity gate closed-loop list does not match feedback registry",
+    )
+    check(
+        set(topology_gate["open_feedback_chains"]) == set(open_chain_ids),
+        "Conformity gate open-chain list does not match feedback registry",
+    )
 
     activation = feedback["activation_gate"]
     missing_activation = REQUIRED_FEEDBACK_GATE_FIELDS - set(activation)
@@ -130,10 +672,11 @@ def main() -> None:
         "First-order delay equation must not be classified as an accounting identity",
     )
 
-    unit_checks = units["equation_checks"]
+    dimensional_errors = audit_registry(units)
     check(
-        unit_checks and all(item["status"] == "CONSISTENT" for item in unit_checks),
-        "Dimensional-consistency registry contains a failing equation",
+        not dimensional_errors,
+        "Recomputed dimensional-consistency audit failed: "
+        + "; ".join(dimensional_errors),
     )
 
     required_tests = set(core["required_tests"])
@@ -157,6 +700,60 @@ def main() -> None:
         "Reference-mode registry lacks a closure rule",
     )
 
+    reference_readiness = reference_mode_readiness(
+        references,
+        REQUIRED_REFERENCE_MODES,
+    )
+    reference_gate = gate["reference_mode_gate"]
+    check(
+        set(reference_gate["required_variables"]) == REQUIRED_REFERENCE_MODES,
+        "Conformity-gate required reference modes differ from the canonical set",
+    )
+    check(
+        set(
+            reference_gate[
+                "ready_statuses_for_integrated_quantitative_closure"
+            ]
+        )
+        == set(reference_readiness["ready_statuses"]),
+        "Conformity-gate ready statuses differ from reference-mode policy",
+    )
+    check(
+        set(reference_gate["qualitative_exceptions_registered"])
+        == set(reference_readiness["qualitative_exception_ids"]),
+        "Conformity-gate qualitative exceptions differ from registry policy",
+    )
+    check(
+        reference_gate["current_closure_readiness"]
+        == reference_readiness["status"],
+        "Declared reference-mode closure readiness disagrees with the registry",
+    )
+    check(
+        set(reference_gate["current_ready_variables"])
+        == set(reference_readiness["ready_modes"]),
+        "Declared ready reference modes disagree with the registry",
+    )
+    check(
+        set(reference_gate["current_blocking_variables"])
+        == set(reference_readiness["blocking_modes"]),
+        "Declared blocking reference modes disagree with the registry",
+    )
+    check(
+        model["dynamic_core"]["reference_mode_closure_ready"]
+        is (reference_readiness["status"] == "READY"),
+        "Model contract reference-mode readiness disagrees with the registry",
+    )
+    check(
+        model["dynamic_core"]["reference_mode_ready_count"]
+        == len(reference_readiness["ready_modes"]),
+        "Model contract reference-mode ready count is stale",
+    )
+    check(
+        model["dynamic_core"]["reference_mode_required_count"]
+        == len(REQUIRED_REFERENCE_MODES),
+        "Model contract reference-mode required count is stale",
+    )
+
     check(
         gate["behavioural_closure"][
             "must_not_be_activated_for_methodological_completeness"
@@ -165,7 +762,7 @@ def main() -> None:
         "Conformity gate must prohibit closure for cosmetic methodological completeness",
     )
     check(
-        gate["reference_mode_gate"]["required_before_behavioural_closure"] is True,
+        reference_gate["required_before_behavioural_closure"] is True,
         "Reference modes must be required before behavioural closure",
     )
     check(
@@ -175,15 +772,23 @@ def main() -> None:
 
     report = {
         "Accounting / Stock-Flow Core": "PASS_WITH_EMPIRICAL_COMPLETENESS_LIMIT",
-        "Feedback Architecture": "PASS_AS_QUALITATIVE_CANDIDATE_ARCHITECTURE",
+        "Canonical Multi-Instrument Stock Initialization": "BLOCKED_INCOMPLETE",
+        "Canonical Full 2025 Stock-Flow Benchmark": "BLOCKED_INCOMPLETE",
+        "Feedback Architecture": "PASS_WITH_OPEN_CHAIN_EXPLICITLY_BLOCKED",
         "Behavioural Closure": "PASS_INACTIVE",
         "Empirical Parameterization": "PARTIAL",
         "Validation": "PARTIAL",
         "complete_endogenous_system_dynamics_model": False,
         "validated_reference_behavioural_mechanisms":
             disposition["validated_reference_behavioural_mechanisms"],
-        "candidate_feedback_loops": [loop["id"] for loop in loops],
+        "closed_candidate_feedback_loops": closed_loop_ids,
+        "open_candidate_feedback_chains": open_chain_ids,
         "reference_modes_registered": sorted(mode_ids),
+        "reference_mode_closure_readiness": reference_readiness["status"],
+        "reference_mode_ready_variables": reference_readiness["ready_modes"],
+        "reference_mode_blocking_variables": reference_readiness["blocking_modes"],
+        "empirical_activation_governance": empirical_governance,
+        "validation_recovery_registry_alignment": recovery_alignment,
     }
     print(json.dumps(report, indent=2))
 

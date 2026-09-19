@@ -1,0 +1,362 @@
+{
+  "registry_version": "0.1",
+  "assessed_on": "2026-09-19",
+  "purpose": "Operational source-readiness map for behavioural-mechanism research. It ranks only the next admissible empirical action; it is not a ranking of economic importance, model truth, causal evidence or validation status.",
+  "global_state": {
+    "active_calibration_cycle_open": false,
+    "validated_reference_behavioural_mechanisms": 0,
+    "behavioural_closure_active": false,
+    "reference_mode_readiness": "9/10",
+    "remaining_reference_mode_blocker": "sectoral_financial_positions"
+  },
+  "mechanisms": [
+    {
+      "id": "monetary_policy_lending_rate_pass_through",
+      "classification": "CANDIDATE",
+      "source_readiness": "SOURCE_AND_FORM_FROZEN_WAITING_FOR_PROSPECTIVE_IDENTIFYING_EVENTS",
+      "next_admissible_action": "Monitor future BNR policy-rate decisions only; open event-month MIR response values solely under the prospective confirmation contract after a non-zero event and official release.",
+      "blockers": [
+        "No non-zero policy-rate event yet in the reserved prospective window."
+      ],
+      "estimation_or_refit_allowed": false,
+      "priority_group": "WAIT_FOR_EXTERNAL_EVENT"
+    },
+    {
+      "id": "government_refinancing_effective_rate",
+      "classification": "DEFERRED",
+      "source_readiness": "STRUCTURALLY_INCOMPLETE_PUBLIC_REPRICING_LEDGER",
+      "next_admissible_action": "Reopen only if an official/reproducible source supplies same-boundary opening principal and matched refinancing/reset rates across material debt blocks.",
+      "blockers": [
+        "Opening principal, realized repriced principal, and matched old/new rates are not available on a reconciled public boundary."
+      ],
+      "estimation_or_refit_allowed": false,
+      "priority_group": "DEFER_UNTIL_NEW_SOURCE"
+    },
+    {
+      "id": "aggregate_bank_credit_response",
+      "classification": "CANDIDATE",
+      "source_readiness": "BLS_CANONICAL_11_OF_12_EXACT_WORKBOOK_RECOVERY_RETAINED_SINGLE_GAP_2025_Q2",
+      "next_admissible_action": "Keep calibration closed. The matched BNR prudential source-discovery stage and the sole remaining BLS 2025-Q2 exact-source discovery stage are both frozen under the current public surface. Reopen the prudential path only on its declared new-official-evidence triggers. Reopen the BLS path only if BNR exposes an exact 2025-Q2 workbook endpoint or an exact official machine-readable time-series/catalog target with matching realised-round semantics.",
+      "blockers": [
+        "The canonical realised BNR BLS panel now contains 11 exact observed rounds from 2022-Q4 through 2025-Q3; only 2025-Q2 remains missing.",
+        "Exact 2023-Q2, 2023-Q3 and 2024-Q2 workbooks are retained with hashes, all six preregistered observables are semantically mapped, and those three rounds are canonically promoted without interpolation.",
+        "For 2025-Q2 the official publication text is complete but rounded; the exact official workbook endpoint/bytes remain unretained. The current public discovery surface is exhausted for exact endpoint identity and is frozen until a declared new-official-evidence trigger; rounded publication values may not replace workbook-cell precision.",
+        "Official definitions reject direct CBD2-to-BNR substitution: BNR prudential indicators cover Romanian-legal-entity banks, while CBD2 sector 11 covers domestic banking groups/stand-alone banks under a consolidated domestic-control framework. A new matched source or exact BNR-table history is required.",
+        "The aggregate reduced form still mixes credit demand and supply, while NPL and capital ratios are endogenous prudential state variables; source completeness alone does not identify a bank-supply channel.",
+        "No NFC/household synthetic aggregation, interpolation, forward-fill, credit-equation estimation, model selection or holdout opening is authorized."
+      ],
+      "source_boundary_review": "model/calibration_validation/aggregate_bank_credit_source_boundary_review.json",
+      "estimation_or_refit_allowed": false,
+      "priority_group": "DEFER_UNTIL_FINAL_BLS_GAP_OR_NEW_MATCHED_PRUDENTIAL_SOURCE",
+      "prudential_coverage_contract": "model/calibration_validation/bank_credit_prudential_coverage_contract.json",
+      "retained_prudential_vintage": "data/source_vintages/bank-credit-prudential-coverage-vintage-2026-09-19",
+      "prudential_promotion_review": "model/calibration_validation/bank_credit_prudential_coverage_promotion_review.json",
+      "retained_bnr_bls_raw_vintage": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19",
+      "retained_bnr_bls_xlsx_vintage": "data/source_vintages/bnr-bls-may2025-xlsx-vintage-2026-09-19",
+      "bnr_bls_xlsx_layout_review": "model/calibration_validation/bnr_bls_may2025_xlsx_layout_review.json",
+      "legacy_xls_extraction_contract": "model/calibration_validation/bnr_legacy_xls_cell_extraction_contract.json",
+      "legacy_xls_extraction_assessment": "model/calibration_validation/bnr_legacy_xls_cell_extraction_assessment.json",
+      "retained_legacy_xls_extraction_vintage": "data/source_vintages/bnr-legacy-xls-cell-extraction-vintage-2026-09-19",
+      "cross_round_mapping_contract": "model/calibration_validation/bnr_bls_cross_round_mapping_contract.json",
+      "retained_realised_round_panel": "data/processed/bnr_bls_realised_rounds.csv",
+      "cross_round_mapping_audit": "model/calibration_validation/bnr_bls_cross_round_mapping_audit.json",
+      "cross_round_mapping_workflow": ".github/workflows/bnr-bls-cross-round-mapping.yml",
+      "observed_round_count": 11,
+      "expected_quarter_count_between_bounds": 12,
+      "missing_rounds": [
+        "2025-Q2"
+      ],
+      "publication_text_bridge_contract": "model/calibration_validation/bnr_bls_publication_text_bridge_contract.json",
+      "publication_text_bridge": "model/calibration_validation/bnr_bls_publication_text_bridge.json",
+      "publication_text_fully_covered_rounds": [
+        "2023-Q3",
+        "2024-Q2",
+        "2025-Q2"
+      ],
+      "publication_text_partial_rounds": [
+        "2023-Q2"
+      ],
+      "publication_text_direct_or_exact_status_quo_observations": 20,
+      "canonical_missing_rounds": [
+        "2025-Q2"
+      ],
+      "missing_round_recovery_contract": "model/calibration_validation/bnr_bls_missing_round_workbook_recovery_contract.json",
+      "missing_round_recovery_script": "scripts/audit_bnr_bls_missing_round_workbook_recovery.py",
+      "missing_round_recovery_workflow": ".github/workflows/bnr-bls-missing-round-workbook-recovery.yml",
+      "missing_round_recovery_execution_policy": "MANUAL_ONLY_LIVE_SOURCE_ACQUISITION",
+      "recovery_endpoint_status": {
+        "2023-Q2": "RECOVERED_EXACT_OLE2_WORKBOOK_RETAINED_SEMANTICALLY_MAPPED_AND_CANONICALLY_PROMOTED",
+        "2023-Q3": "RECOVERED_EXACT_OLE2_WORKBOOK_RETAINED_SEMANTICALLY_MAPPED_AND_CANONICALLY_PROMOTED",
+        "2024-Q2": "RECOVERED_EXACT_OLE2_WORKBOOK_RETAINED_SEMANTICALLY_MAPPED_AND_CANONICALLY_PROMOTED",
+        "2025-Q2": "OFFICIAL_ANNEX_EXISTENCE_KNOWN_EXACT_URL_UNIDENTIFIED"
+      },
+      "recovered_exact_rounds": [
+        "2023-Q2",
+        "2023-Q3",
+        "2024-Q2"
+      ],
+      "retained_missing_round_recovery_vintage": "data/source_vintages/bnr-bls-missing-round-recovery-vintage-2026-09-19",
+      "missing_round_semantic_review": "model/calibration_validation/bnr_bls_missing_round_semantic_mapping_audit.json",
+      "panel_regeneration_candidate_contract": "model/calibration_validation/bnr_bls_panel_regeneration_candidate_contract.json",
+      "canonical_panel_promotion_review": "model/calibration_validation/bnr_bls_canonical_panel_promotion_review.json",
+      "canonical_panel_sha256": "c5dad2c9577431e9765bc02b166e8d5a2b4c4b4c8e761fbb5bbce50f4e6498ff",
+      "prudential_population_boundary_review": "model/calibration_validation/bank_credit_prudential_population_boundary_review.json",
+      "prudential_population_boundary_status": "DIRECT_CBD2_TO_BNR_POPULATION_EQUIVALENCE_REJECTED_NEW_MATCHED_SOURCE_REQUIRED",
+      "bnr_prudential_table_materialisation_contract": "model/calibration_validation/bnr_prudential_table_materialisation_contract.json",
+      "bnr_prudential_table_source_enumeration": "model/calibration_validation/bnr_prudential_table_source_enumeration.json",
+      "bnr_prudential_source_enumeration_status": "FROZEN_INCOMPLETE_3_OF_11_CURRENT_PUBLIC_DISCOVERY_EXHAUSTED_NO_MODEL_EFFECT",
+      "bnr_prudential_exact_primary_years_identified": [
+        2019,
+        2022,
+        2024
+      ],
+      "bnr_prudential_exact_primary_identified_count": 3,
+      "bnr_prudential_required_year_count": 11,
+      "bnr_prudential_interactive_database_discovery_review": "model/calibration_validation/bnr_prudential_interactive_database_discovery_review.json",
+      "bnr_prudential_interactive_database_discovery_status": "OFFICIAL_DATABASE_CONFIRMED_TARGET_SERIES_NOT_IDENTIFIED_STAGE_FROZEN",
+      "bnr_prudential_source_discovery_terminal_assessment": "model/calibration_validation/bnr_prudential_source_discovery_terminal_assessment.json",
+      "bnr_prudential_source_discovery_stage_status": "STAGE_CLOSED_FROZEN_INCOMPLETE_UNDER_CURRENT_PUBLIC_DISCOVERY_SURFACE_NO_MODEL_EFFECT",
+      "bnr_bls_2025q2_source_discovery_terminal_assessment": "model/calibration_validation/bnr_bls_2025q2_source_discovery_terminal_assessment.json",
+      "bnr_bls_2025q2_source_discovery_stage_status": "STAGE_CLOSED_FROZEN_SINGLE_GAP_2025_Q2_UNDER_CURRENT_PUBLIC_DISCOVERY_SURFACE_NO_MODEL_EFFECT"
+    },
+    {
+      "id": "exchange_rate_pass_through_to_inflation",
+      "classification": "CANDIDATE",
+      "source_readiness": "FROZEN_TESTED_FORM_FAILED_BEFORE_HOLDOUT",
+      "next_admissible_action": "Do not open 2021-01..2026-06 final evaluation and do not respecify transforms, AR order, FX lag blocks, external-price lags, regime dummies or asymmetry on this evidence cycle. Reopen only through a separately preregistered cycle justified by genuinely new measurement or identification evidence, such as an exact Romania transaction-price import-price index, an independently justified exogenous FX-shock design, or new regime-identification evidence.",
+      "blockers": [
+        "The preregistered FX candidate failed structural selection before holdout.",
+        "Incremental RMSE improvement over the mandatory external-price baseline was approximately 0.014%, below the preregistered 2% gate.",
+        "The FX candidate underperformed the AR(2)+seasonal baseline on RMSE and was slightly worse than the external-price baseline on MAE.",
+        "Positive cumulative FX sign consistency and good conditioning were insufficient to overcome the predictive-gain failures.",
+        "The 2021-01..2026-06 final-evaluation window remains unopened and cannot be used to rescue or respecify this cycle."
+      ],
+      "source_boundary_review": "model/calibration_validation/fx_inflation_pass_through_source_boundary_review.json",
+      "external_price_screening": "model/calibration_validation/fx_inflation_external_price_control_screening.json",
+      "estimation_or_refit_allowed": false,
+      "priority_group": "FREEZE_TESTED_FORM_UNTIL_NEW_EVIDENCE",
+      "external_price_control_contract": "model/calibration_validation/fx_inflation_external_price_control_contract.json",
+      "monthly_materialisation_contract": "model/calibration_validation/fx_inflation_monthly_materialisation_contract.json",
+      "materialiser_script": "scripts/audit_fx_inflation_monthly_materialisation.py",
+      "materialiser_workflow": ".github/workflows/fx-inflation-monthly-materialisation.yml",
+      "retained_source_vintage": "data/source_vintages/fx-inflation-monthly-levels-vintage-2026-09-19",
+      "promotion_review": "model/calibration_validation/fx_inflation_source_vintage_promotion_review.json",
+      "live_execution_policy": "MANUAL_ONLY_LIVE_SOURCE_EVIDENCE",
+      "transform_lag_window_contract": "model/calibration_validation/fx_inflation_transform_lag_window_contract.json",
+      "structural_selection_contract": "model/calibration_validation/fx_inflation_structural_selection_contract.json",
+      "selection_result": "model/calibration_validation/fx_inflation_structural_selection_result.json",
+      "selection_execution_gate": "model/calibration_validation/fx_inflation_selection_execution_gate.json"
+    },
+    {
+      "id": "sovereign_yield_spread_response",
+      "classification": "CANDIDATE",
+      "source_readiness": "FROZEN_TESTED_FORM_FAILED_BEFORE_HOLDOUT",
+      "next_admissible_action": "Do not open 2023-Q1..2026-Q1 final-evaluation performance and do not respecify on the same evidence cycle. Reopen sovereign-yield modelling only under a separately preregistered cycle triggered by genuinely new measurement or identification evidence, such as an exact retained domestic policy-rate vintage or an independently justified issuance/refinancing observable.",
+      "blockers": [
+        "The preregistered fiscal-augmented common-market AR form failed structural selection before holdout.",
+        "Its RMSE was worse than both persistence and the common-market AR baseline.",
+        "The preregistered fiscal coefficient sign-consistency gates failed.",
+        "Post-result lag search, variable addition, sign changes or final-holdout inspection are prohibited in this cycle."
+      ],
+      "source_boundary_review": "model/calibration_validation/sovereign_yield_source_boundary_review.json",
+      "materialisation_contract": "model/calibration_validation/sovereign_yield_quarterly_materialisation_contract.json",
+      "estimation_or_refit_allowed": false,
+      "priority_group": "FREEZE_TESTED_FORM_UNTIL_NEW_EVIDENCE",
+      "materialiser_script": "scripts/audit_sovereign_yield_quarterly_materialisation.py",
+      "materialiser_workflow": ".github/workflows/sovereign-yield-quarterly-materialisation.yml",
+      "live_execution_policy": "MANUAL_ONLY_LIVE_SOURCE_EVIDENCE",
+      "retained_source_vintage": "data/source_vintages/sovereign-yield-quarterly-vintage-2026-09-19",
+      "promotion_review": "model/calibration_validation/sovereign_yield_source_vintage_promotion_review.json",
+      "structural_selection_contract": "model/calibration_validation/sovereign_yield_structural_selection_contract.json",
+      "selection_result": "model/calibration_validation/sovereign_yield_structural_selection_result.json"
+    },
+    {
+      "id": "household_consumption_response",
+      "classification": "CANDIDATE",
+      "source_readiness": "COMPLETE_DSTI_TEXT_WINDOW_OFFICIAL_POPULATION_BRIDGE_SCREENED_NOT_FOUND",
+      "next_admissible_action": "Keep household-consumption estimation closed. Reopen only if new official evidence satisfies one of three frozen triggers: (1) an observed Romania aggregate household burden measure aligned to S1M consumption, (2) an independently observed representativeness bridge from housing-loan borrowers to the aggregate consumption population, or (3) an observed housing-borrower consumption/income target under a separately preregistered mechanism. Screening now includes ECB HFCS, INS ABF/TEMPO, Eurostat HBS 2020 scientific-use microdata and ECB CES; none supplies the required Romania mortgage-borrower-to-S1M bridge. Do not replace it with owner-occupier status, cross-country transfer, synthetic weights or fit-selected proxies.",
+      "blockers": [
+        "BNR publication text directly observes both new-loan and outstanding housing-loan DSTI levels for every quarter from 2023-Q1 through 2025-Q2.",
+        "The registered household-consumption target is aggregate QSA S1M (households plus NPISH), whereas BNR DSTI covers respondent-bank housing/mortgage-loan borrower portfolios.",
+        "A targeted official-source screening found no observed Romania bridge from the housing-loan borrower population to aggregate S1M consumption.",
+        "ECB HFCS is conceptually suitable and BNR is an HFCN member institution, but no Romania country dataset is identified in the 2017, 2021 or latest 2023 waves.",
+        "INS ABF/TEMPO supplies quarterly household budget/consumption aggregates, but no public mortgage-borrower-status breakdown or common DSTI-consumption linkage was identified.",
+        "Eurostat HBS 2020 scientific-use files include Romania household consumption, income and weights, but the released SUF manual identifies no mortgage/loan-status field; owner-occupier status is not an admissible borrower proxy.",
+        "ECB CES does not provide an identified Romania country series capable of closing this population boundary.",
+        "New-loan and outstanding-loan DSTI are definitionally distinct and may not be synthetically merged.",
+        "Selecting a mortgage, consumer-credit or synthetic weighted borrowing rate cannot repair the population mismatch and remains prohibited post hoc.",
+        "The registered macro DSR term remains unidentified; estimation and behavioural closure remain closed."
+      ],
+      "estimation_or_refit_allowed": false,
+      "priority_group": "DEFER_UNTIL_NEW_OBSERVED_POPULATION_BRIDGE_SOURCE",
+      "source_boundary_review": "model/calibration_validation/household_consumption_source_boundary_review.json",
+      "debt_service_source_screening": "model/calibration_validation/debt_service_source_screening.json",
+      "retained_bnr_dsti_workbook_vintage": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19",
+      "bnr_dsti_promotion_review": "model/calibration_validation/bnr_household_dsti_workbook_promotion_review.json",
+      "legacy_xls_extraction_contract": "model/calibration_validation/bnr_legacy_xls_cell_extraction_contract.json",
+      "legacy_xls_extraction_assessment": "model/calibration_validation/bnr_legacy_xls_cell_extraction_assessment.json",
+      "retained_legacy_xls_extraction_vintage": "data/source_vintages/bnr-legacy-xls-cell-extraction-vintage-2026-09-19",
+      "dsti_level_publication_boundary_review": "model/calibration_validation/bnr_household_dsti_level_publication_boundary_review.json",
+      "confirmed_publication_text_quarters": [
+        "2023-Q1",
+        "2023-Q2",
+        "2023-Q3",
+        "2023-Q4",
+        "2024-Q1",
+        "2024-Q2",
+        "2024-Q3",
+        "2024-Q4",
+        "2025-Q1",
+        "2025-Q2"
+      ],
+      "registered_macro_dsr_identified": false,
+      "alternative_housing_loan_burden_observed": true,
+      "publication_text_window": {
+        "start": "2023-Q1",
+        "end": "2025-Q2",
+        "expected_quarters": 10,
+        "observed_quarters": 10,
+        "missing_quarters": [],
+        "coverage_fraction": 1,
+        "exact_machine_readable_history_retained": false
+      },
+      "borrower_burden_population_alignment_review": "model/calibration_validation/household_consumption_borrower_burden_alignment_review.json",
+      "population_alignment_status": "BLOCKED_NO_OBSERVED_OFFICIAL_BRIDGE_IDENTIFIED",
+      "housing_dsti_directly_admissible_in_registered_aggregate_consumption_form": false,
+      "population_bridge_source_screening": "model/calibration_validation/household_consumption_population_bridge_source_screening.json",
+      "official_population_bridge_found": false
+    },
+    {
+      "id": "corporate_investment_response",
+      "classification": "CANDIDATE",
+      "source_readiness": "FROZEN_TESTED_FORM_FAILED_BEFORE_HOLDOUT",
+      "next_admissible_action": "Do not open the 2024-Q1..2026-Q1 final-evaluation window and do not respecify lags, signs, predictors, target, rate family, interactions or regimes on this evidence cycle. Reopen only through a separately preregistered cycle triggered by genuinely new measurement or identification evidence.",
+      "blockers": [
+        "The preregistered core lagged-driver investment-rate form failed structural selection before holdout.",
+        "Its RMSE was worse than both persistence and the estimated investment-rate AR benchmark.",
+        "The financing-rate coefficient violated the preregistered non-positive domain at every structural-selection origin (domain-consistency fraction 0.0).",
+        "The preregistered support-augmented extension also failed and did not improve on the core form.",
+        "The untouched 2024-Q1..2026-Q1 final-evaluation window may not be opened to rescue this cycle."
+      ],
+      "estimation_or_refit_allowed": false,
+      "priority_group": "FREEZE_TESTED_FORM_UNTIL_NEW_EVIDENCE",
+      "source_boundary_review": "model/calibration_validation/corporate_investment_source_boundary_review.json",
+      "retained_source_vintage": "data/source_vintages/corporate-investment-source-family-vintage-2026-09-19",
+      "measurement_design_contract": "model/calibration_validation/corporate_investment_measurement_design_contract.json",
+      "supplemental_source_vintage": "data/source_vintages/corporate-investment-supplemental-source-vintage-2026-09-19",
+      "financing_rate_screening_vintage": "data/source_vintages/corporate-investment-financing-rate-screening-vintage-2026-09-19",
+      "measurement_panel_vintage": "data/source_vintages/corporate-investment-measurement-panel-vintage-2026-09-19",
+      "structural_selection_contract": "model/calibration_validation/corporate_investment_structural_selection_contract.json",
+      "selection_result": "model/calibration_validation/corporate_investment_structural_selection_result.json",
+      "selection_promotion_review": "model/calibration_validation/corporate_investment_structural_selection_promotion_review.json"
+    },
+    {
+      "id": "credit_risk_npl_response",
+      "classification": "DEFERRED",
+      "source_readiness": "AGGREGATE_NPL_EXACT_MORTGAGE_PORTFOLIO_FAMILY_OBSERVED_JOINT_BOUNDARY_AND_ACTIVITY_UNRESOLVED",
+      "next_admissible_action": "Keep credit-risk estimation closed. Reopen only through one of two explicit source paths: retain an aggregate Romania debt-service burden aligned to the exact aggregate NPL target, or retain exact machine-readable mortgage NPL plus housing-loan burden histories and preregister a new mortgage-specific target/form after reconciling reporting population, coverage and weighting. DTI-O may not substitute for debt service, BNR charts may not be digitised, and aggregate versus mortgage target may not be chosen after fit.",
+      "blockers": [
+        "The exact quarterly aggregate Romania NPL ratio remains retained from ECB CBD2.",
+        "BNR official publications separately observe mortgage NPL, including 1.7 percent in September 2023 and March 2024, but no exact machine-readable mortgage NPL history is retained.",
+        "BNR housing-loan DSTI levels are observed in publication text for 2023-Q1..2025-Q2; outstanding-loan DSTI is conceptually closer to a mortgage NPL stock, but exact source-population/coverage/weighting compatibility is not demonstrated.",
+        "BNR DTI-O is debt-to-income at origination, not debt-service burden, and the June-2024 report states that the indicator covered about 25 percent of mortgage exposure value.",
+        "The aggregate NPL target has no matched aggregate debt-service burden.",
+        "A mortgage-specific target has not been preregistered and may not silently replace the aggregate target.",
+        "The output/activity observable remains unfrozen for either boundary.",
+        "Lag structure and treatment of NPL recognition, cures, write-offs, sales and regulatory/portfolio breaks remain unresolved."
+      ],
+      "source_boundary_review": "model/calibration_validation/credit_risk_npl_source_boundary_review.json",
+      "estimation_or_refit_allowed": false,
+      "priority_group": "DEFER_UNTIL_MATCHED_AGGREGATE_OR_MORTGAGE_PORTFOLIO_SOURCE",
+      "debt_service_source_screening": "model/calibration_validation/debt_service_source_screening.json",
+      "mortgage_portfolio_source_screening": "model/calibration_validation/credit_risk_mortgage_portfolio_source_screening.json",
+      "mortgage_npl_publication_observed": true,
+      "mortgage_npl_exact_machine_readable_history_retained": false,
+      "mortgage_target_selected": false,
+      "dti_o_debt_service_substitution_allowed": false
+    },
+    {
+      "id": "fiscal_primary_balance_reaction",
+      "classification": "DEFERRED",
+      "source_readiness": "FROZEN_TESTED_ANNUAL_FORM_FAILED_BEFORE_HOLDOUT",
+      "next_admissible_action": "Do not open 2018-2024 final evaluation and do not respecify the annual fiscal-reaction form on the same evidence cycle. Reopen only through a separately preregistered cycle justified by genuinely new measurement or identification evidence, such as a cyclically adjusted primary-balance vintage, longer real-time historical vintages, or an independently justified regime/identification design.",
+      "blockers": [
+        "The preregistered lagged-state annual candidate failed structural selection before holdout.",
+        "Candidate RMSE was worse than naive primary-balance persistence over 2010-2017.",
+        "The preregistered non-negative output-gap coefficient domain failed at every expanding-origin fit.",
+        "The 2018-2024 final-evaluation window remains unopened and cannot be used to rescue or respecify this cycle."
+      ],
+      "source_boundary_review": "model/calibration_validation/fiscal_primary_balance_source_boundary_review.json",
+      "estimation_or_refit_allowed": false,
+      "priority_group": "FREEZE_TESTED_FORM_UNTIL_NEW_EVIDENCE",
+      "materialisation_contract": "model/calibration_validation/fiscal_primary_balance_materialisation_contract.json",
+      "materialiser_workflow": ".github/workflows/fiscal-primary-balance-materialisation.yml",
+      "retained_source_vintage": "data/source_vintages/fiscal-primary-balance-quarterly-vintage-2026-09-19",
+      "annual_measurement_boundary": "model/calibration_validation/fiscal_reaction_annual_measurement_boundary_review.json",
+      "annual_materialisation_contract": "model/calibration_validation/fiscal_reaction_ameco_materialisation_contract.json",
+      "annual_materialiser_script": "scripts/audit_ameco_fiscal_reaction_materialisation.py",
+      "annual_materialiser_workflow": ".github/workflows/ameco-fiscal-reaction-materialisation.yml",
+      "retained_annual_source_vintage": "data/source_vintages/fiscal-reaction-ameco-actual-vintage-2026-09-19",
+      "annual_promotion_review": "model/calibration_validation/fiscal_reaction_ameco_source_vintage_promotion_review.json",
+      "annual_structural_selection_contract": "model/calibration_validation/fiscal_reaction_annual_structural_selection_contract.json",
+      "annual_selection_result": "model/calibration_validation/fiscal_reaction_annual_structural_selection_result.json",
+      "annual_selection_execution_gate": "model/calibration_validation/fiscal_reaction_annual_selection_execution_gate.json"
+    },
+    {
+      "id": "monetary_policy_reaction_function",
+      "classification": "DEFERRED",
+      "source_readiness": "QUANTITATIVE_EXPECTATIONS_AND_QUARTERLY_GAP_CONCEPTS_OBSERVED_FORMATION_TIME_AND_REAL_TIME_VINTAGES_NOT_RETAINED",
+      "next_admissible_action": "Keep the policy rate observed/exogenous. The formation-time expectations / real-time GDP-gap source-discovery stage is frozen under the current public surface. Reopen only on new official BNR evidence that supplies a machine-readable analyst-expectations history indexed by survey formation date, a machine-readable quarterly GDP-gap vintage history with information cutoffs/revisions, or equivalent stable official series/API/data-annex mappings. Only after both measurement prerequisites are retained may regime/intervention and simultaneity identification be preregistered; no reaction-function fit is currently authorized.",
+      "blockers": [
+        "BNR flat inflation target 2.5% ±1 pp and policy-rate history are observed.",
+        "DG ECFIN CONS_006 remains a qualitative response balance and is not percentage inflation expectations.",
+        "BNR publications confirm quantitative financial-analyst inflation expectations at 1-year and 2-year horizons in percent, but no immutable machine-readable formation-date history has been retained.",
+        "Historical BNR analyst-expectations charts may plot observations at the horizon to which they refer rather than at survey formation date; this mapping cannot be used directly in a policy-information set.",
+        "BNR Inflation Reports publish a quarterly model-based GDP gap and expose report information cutoffs, but no retained real-time vintage history has been materialized.",
+        "The BNR GDP-gap path is revised between forecast rounds, so later revised values may not be treated as if known at earlier policy decisions.",
+        "Managed-float intervention, policy-regime changes and simultaneous policy responses remain untreated."
+      ],
+      "estimation_or_refit_allowed": false,
+      "priority_group": "DEFER_UNTIL_FORMATION_TIME_EXPECTATIONS_AND_REAL_TIME_GAP_VINTAGES",
+      "source_boundary_review": "model/calibration_validation/monetary_policy_reaction_source_screening.json",
+      "quantitative_analyst_expectations_concept_observed": true,
+      "quantitative_expectations_machine_readable_formation_time_history_retained": false,
+      "quarterly_bnr_gap_observed_in_reports": true,
+      "real_time_gap_vintages_retained": false,
+      "monetary_policy_reaction_source_discovery_terminal_assessment": "model/calibration_validation/monetary_policy_reaction_source_discovery_terminal_assessment.json",
+      "monetary_policy_reaction_source_discovery_stage_status": "STAGE_CLOSED_FROZEN_UNDER_CURRENT_PUBLIC_DISCOVERY_SURFACE_NO_MODEL_EFFECT"
+    },
+    {
+      "id": "external_fx_refinancing_feedback",
+      "classification": "DEFERRED",
+      "source_readiness": "PARTIAL_AGGREGATE_AND_S13_RISK_MARGINS_RETAINED_JOINT_EXPOSURE_UNIDENTIFIED",
+      "next_admissible_action": "Reopen only on a new official source capable of identifying joint sector × currency × residual-maturity/refinancing exposure or sector hedging. Do not repeatedly combine existing marginal sources.",
+      "blockers": [
+        "ECB BPS identifies sector and original maturity but retains currency denominator All currencies.",
+        "BNR publishes aggregate external-debt currency composition, not a joint sector-by-currency matrix.",
+        "MoF publishes S13 currency-risk and one-year refinancing margins, but not the joint currency-by-principal-due schedule with matched old/new rates.",
+        "IMF reserve-template residual-maturity data apply to central-bank foreign-currency liquidity positions, not the broader external-debt sectors.",
+        "Sector hedging remains unobserved."
+      ],
+      "estimation_or_refit_allowed": false,
+      "priority_group": "DEFER_UNTIL_JOINT_EXPOSURE_SOURCE",
+      "source_boundary_review": "model/calibration_validation/external_fx_refinancing_source_boundary_review.json",
+      "official_source_screening": "model/calibration_validation/external_fx_refinancing_source_screening_2026-09-19.json"
+    }
+  ],
+  "priority_rule": "Priority is determined by the shortest scientifically admissible path to new independent evidence, not by a desire to activate a feedback loop. Waiting mechanisms remain frozen; source-incomplete mechanisms are not fit with proxies.",
+  "current_next_step": {
+    "mechanism_id": "SCIENTIFIC_BASELINE",
+    "action": "HOLD_CLOSED_BASELINE_UNTIL_DECLARED_REOPEN_TRIGGER",
+    "reason": "Cross-registry mechanism readiness is now consolidated and executable in Scientific CI. All non-rejected behavioural mechanisms are either frozen after preregistered failure, waiting for prospective identifying events, or blocked by explicit source/measurement/identification triggers. No new empirical cycle should open merely because the queue is exhausted.",
+    "calibration_cycle_open": false,
+    "reopen_conditions_registry": "model/calibration_validation/mechanism_reopen_conditions_registry.json"
+  },
+  "coverage_rule": {
+    "scope": "ALL_NON_REJECTED_MECHANISMS",
+    "rule": "Every mechanism whose registry classification is CANDIDATE, DEFERRED or ACTIVATED must have exactly one source-readiness entry. REJECTED shortcuts are excluded because they have no admissible estimation path unless separately reopened.",
+    "duplicate_entries_allowed": false,
+    "missing_entries_allowed": false
+  },
+  "mechanism_reopen_conditions_registry": "model/calibration_validation/mechanism_reopen_conditions_registry.json"
+}

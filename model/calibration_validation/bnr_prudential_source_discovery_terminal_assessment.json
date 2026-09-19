@@ -1,0 +1,111 @@
+{
+  "assessment_version": "0.1",
+  "assessed_on": "2026-09-19",
+  "mechanism_id": "aggregate_bank_credit_response",
+  "stage": "BNR Matched Prudential Source Discovery and Exact Source Enumeration",
+  "status": "STAGE_CLOSED_FROZEN_INCOMPLETE_UNDER_CURRENT_PUBLIC_DISCOVERY_SURFACE_NO_MODEL_EFFECT",
+  "scope": "Close the source-discovery stage for the definitionally matched BNR prudential controls without manufacturing URLs, promoting unmatched CBD2 data, peeking at model outcomes, or extracting numeric values before the source map is reproducible.",
+  "semantic_anchor": {
+    "source_family": "BNR Monthly Bulletin, Statistical Section, 11.1 Main prudential indicators",
+    "population": "Banks that are Romanian legal entities; the bulletin footnote is the governing population boundary.",
+    "common_window": "2015-Q4..2025-Q4",
+    "expected_quarters": 41,
+    "npl_inception": "BNR methodological notes state that the NPL ratio according to the EBA definition is calculated starting in December 2015.",
+    "cbd2_substitution": "REJECTED_POPULATION_AND_CONSOLIDATION_MISMATCH"
+  },
+  "discovery_channels": [
+    {
+      "id": "monthly_bulletin_exact_pdf_enumeration",
+      "artifact": "model/calibration_validation/bnr_prudential_table_source_enumeration.json",
+      "result": "FROZEN_INCOMPLETE_3_OF_11_EXACT_PRIMARIES",
+      "exact_primary_years_identified": [
+        2019,
+        2022,
+        2024
+      ],
+      "unresolved_primary_years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2020,
+        2021,
+        2023,
+        2025
+      ],
+      "fallback_evidence": "February 2017 bulletin is independently identified for methodology/layout evidence but remains non-selected because January 2017 primary status is unresolved.",
+      "search_index_non_discovery_is_absence": false
+    },
+    {
+      "id": "bnr_interactive_database_discovery",
+      "contract": "model/calibration_validation/bnr_prudential_interactive_database_discovery_contract.json",
+      "review": "model/calibration_validation/bnr_prudential_interactive_database_discovery_review.json",
+      "result": "OFFICIAL_DATABASE_CONFIRMED_TARGET_MACHINE_READABLE_SERIES_NOT_IDENTIFIED",
+      "official_surface_confirmed": true,
+      "stable_target_series_identifier_found": false,
+      "exact_population_metadata_for_target_found": false,
+      "target_export_or_api_found": false,
+      "search_index_non_discovery_is_absence": false
+    }
+  ],
+  "official_public_surface_findings": [
+    {
+      "url": "https://www.bnr.ro/1074-baza-de-date-interactiva",
+      "finding": "BNR exposes the official interactive database as a statistics service, but the current public crawl surface does not expose a complete series catalogue for the target prudential controls."
+    },
+    {
+      "url": "https://www.bnr.ro/2381-date-statistice",
+      "finding": "The current BNR statistics navigation exposes banking-risk pages for the Credit Risk Register and Payment Incidents Register and separately exposes the interactive database; this does not prove prudential-series absence, but no exact target series identifier is exposed in the audited public surface."
+    },
+    {
+      "url": "https://bnr.ro/files/d/Pubs_ro/Lunare/2017bl/2017bl02.pdf",
+      "finding": "BNR methodological notes define the EBA NPL ratio and state that it is calculated starting with December 2015."
+    },
+    {
+      "url": "https://www.bnr.ro/files/d/Pubs_ro/Lunare/2023/2023bl03.pdf",
+      "finding": "BNR Monthly Bulletin Table 11.1 publishes exact prudential-table values and states the Romanian-legal-entity-bank population boundary."
+    }
+  ],
+  "exhaustion_assessment": {
+    "current_public_discovery_surface_exhausted": true,
+    "same_query_repetition_authorized": false,
+    "url_pattern_generation_authorized": false,
+    "timestamp_bruteforce_authorized": false,
+    "internal_endpoint_guessing_authorized": false,
+    "fallback_activation_from_search_omission_authorized": false,
+    "reason": "The admissible public discovery channels have been searched without yielding either the complete 11-year exact primary PDF map or a stable official machine-readable target series. Repeating the same search/index probes cannot improve scientific identification without new provider-side evidence."
+  },
+  "terminal_disposition": {
+    "active_prudential_discovery_task_remains": false,
+    "pdf_path_status": "FROZEN_INCOMPLETE_3_OF_11_UNTIL_NEW_OFFICIAL_LINK_EVIDENCE",
+    "interactive_database_path_status": "FROZEN_INCONCLUSIVE_UNTIL_NEW_OFFICIAL_CATALOG_OR_EXPORT_EVIDENCE",
+    "source_byte_acquisition_authorized": false,
+    "numeric_extraction_authorized": false,
+    "canonical_series_mutation_authorized": false,
+    "structural_selection_authorized": false,
+    "estimation_or_refit_authorized": false,
+    "holdout_opening_authorized": false,
+    "system_dynamics_activation": false,
+    "behavioural_closure_change": false
+  },
+  "reopen_triggers": [
+    "BNR exposes an exact official primary Monthly Bulletin URL for any unresolved year through an archive/search/browser surface.",
+    "BNR exposes a stable interactive-database dataset/series identifier or official CSV/XLS/XML/API export for the total-capital ratio and EBA NPL ratio with the Romanian-legal-entity-bank population documented.",
+    "BNR publishes a machine-readable prudential dataset or metadata catalogue that establishes the same population and variable definitions.",
+    "BNR publishes an explicit population/consolidation bridge to another official machine-readable source."
+  ],
+  "non_reopen_conditions": [
+    "Repeating the same search-engine queries without a new official clue.",
+    "Guessing historical PDF filenames, directories, upload timestamps or internal endpoints.",
+    "Using a February/December fallback solely because the January primary is not indexed.",
+    "Using numerical similarity between CBD2 and BNR values.",
+    "Using third-party reproductions as canonical source evidence."
+  ],
+  "model_effect": {
+    "mechanism_classification_change": false,
+    "active_calibration_cycle_open": false,
+    "validated_reference_behavioural_mechanisms_change": 0,
+    "bank_credit_feedback_activation": false,
+    "accounting_spine_change": false
+  }
+}

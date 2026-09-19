@@ -8,6 +8,7 @@ zero and are never silently imputed.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from math import isfinite
 from typing import Any, Iterable, Mapping
 
 SECTOR_IDS = ("H", "C", "F", "G", "X", "BNR")
@@ -49,8 +50,13 @@ class AccountingCell:
             raise ValueError(f"Unknown cell status: {self.status}")
         if self.status in {"TBD", "SOURCE_SERIES_IDENTIFIED", "NOT_APPLICABLE"} and self.value is not None:
             raise ValueError(f"Status {self.status} must not carry a numeric value")
-        if self.status in {"OBSERVED", "DERIVED"} and self.value is None:
-            raise ValueError(f"Status {self.status} requires a numeric value")
+        if self.status in {"OBSERVED", "DERIVED"}:
+            if self.value is None:
+                raise ValueError(f"Status {self.status} requires a numeric value")
+            if isinstance(self.value, bool) or not isinstance(self.value, (int, float)):
+                raise ValueError(f"Status {self.status} requires a real numeric value")
+            if not isfinite(float(self.value)):
+                raise ValueError(f"Status {self.status} requires a finite numeric value")
         if self.status == "SOURCE_SERIES_IDENTIFIED" and not self.source_series_key:
             raise ValueError("SOURCE_SERIES_IDENTIFIED requires source_series_key")
 

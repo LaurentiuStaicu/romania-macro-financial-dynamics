@@ -1,0 +1,114 @@
+{
+  "result_version": "0.1-selection",
+  "mechanism_id": "fiscal_primary_balance_reaction",
+  "source_csv_sha256": "4d6ab4c737ffb50d48d4866539e6f069b03bc90945bc7a645ac4bd7f88ef2193",
+  "selection_window": "2010..2017",
+  "final_evaluation_window": "2018..2024",
+  "final_evaluation_opened": false,
+  "calibration_fits": {
+    "primary_balance_ar": {
+      "model_id": "primary_balance_ar",
+      "parameters": {
+        "alpha": -0.2905723920114771,
+        "rho": 1.3924122104402021
+      },
+      "training_observations": 14,
+      "design_rank": 2,
+      "standardized_condition_number": 1.0
+    },
+    "lagged_state_fiscal_balance_ar": {
+      "model_id": "lagged_state_fiscal_balance_ar",
+      "parameters": {
+        "alpha": -0.7509801595523848,
+        "rho": 1.2425841348765447,
+        "beta_d": 0.030129912184381935,
+        "beta_y": -0.06666027356007576
+      },
+      "training_observations": 14,
+      "design_rank": 4,
+      "standardized_condition_number": 2.351493062416839
+    }
+  },
+  "selection_models": {
+    "persistence": {
+      "years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017
+      ],
+      "metrics": {
+        "n": 8,
+        "rmse": 1.5488643666933848,
+        "mae": 1.37066625,
+        "bias_actual_minus_predicted": 0.77288625
+      },
+      "origin_count": 8
+    },
+    "primary_balance_ar": {
+      "years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017
+      ],
+      "metrics": {
+        "n": 8,
+        "rmse": 2.336245339056758,
+        "mae": 1.7676087285540774,
+        "bias_actual_minus_predicted": 1.2659617676787853
+      },
+      "origin_count": 8
+    },
+    "lagged_state_fiscal_balance_ar": {
+      "years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017
+      ],
+      "metrics": {
+        "n": 8,
+        "rmse": 1.8731177049460743,
+        "mae": 1.294419427451687,
+        "bias_actual_minus_predicted": -0.19015010849723973
+      },
+      "origin_count": 8
+    }
+  },
+  "candidate_parameter_domain_fractions": {
+    "rho": 0.875,
+    "beta_d": 1.0,
+    "beta_y": 0.0
+  },
+  "candidate_rmse_improvement_vs_baselines": {
+    "persistence": -0.20934908519131756,
+    "primary_balance_ar": 0.1982358729060828
+  },
+  "gates": {
+    "minimum_evaluable_origins": true,
+    "rmse_vs_persistence": false,
+    "rmse_vs_primary_balance_ar": true,
+    "mae_vs_best_baseline": true,
+    "absolute_bias": true,
+    "all_parameter_domains": false
+  },
+  "passes_all_selection_gates": false,
+  "selection_verdict": "FAIL_BEFORE_HOLDOUT",
+  "causal_claim_allowed": false,
+  "debt_sustainability_claim_allowed": false,
+  "system_dynamics_activation": false,
+  "behavioural_closure_change": false
+}

@@ -1,0 +1,171 @@
+{
+  "contract_version": "0.3",
+  "frozen_on": "2026-09-19",
+  "mechanism_id": "aggregate_bank_credit_response",
+  "phase": "BNR Prudential Table Source Enumeration and Materialisation Preregistration",
+  "purpose": "Preregister a definitionally matched BNR-population source path for quarterly total-capital and NPL controls before any values are extracted or inspected for model use. The contract separates source enumeration, byte retention, semantic review and deterministic table extraction; no stage authorizes credit-response estimation.",
+  "upstream_boundary_review": "model/calibration_validation/bank_credit_prudential_population_boundary_review.json",
+  "source_family": {
+    "institution": "National Bank of Romania",
+    "publication": "Monthly Bulletin / Statistical Section / 11. Banking risk indicators / 11.1 Main prudential indicators",
+    "population": "Banks that are Romanian legal entities.",
+    "population_requirement": "The source or frozen layout-family evidence must preserve the BNR footnote that the indicators cover only banks that are Romanian legal entities. Foreign-bank branches may not be silently added.",
+    "regulatory_breaks": [
+      {
+        "effective": "2014-06",
+        "framework": "Commission Implementing Regulation (EU) No 680/2014 supervisory reporting"
+      },
+      {
+        "effective": "2021-06",
+        "framework": "Commission Implementing Regulation (EU) 2021/451 replaces No 680/2014"
+      }
+    ]
+  },
+  "target_window": {
+    "frequency": "quarterly",
+    "start_period": "2015-Q4",
+    "end_period": "2025-Q4",
+    "expected_quarter_count": 41,
+    "quarter_end_months": [
+      3,
+      6,
+      9,
+      12
+    ],
+    "common_window_basis": "The target is a two-variable matched prudential panel. BNR methodology states that the NPL ratio according to the EBA definition is calculated starting in December 2015; therefore 2015-Q4 is the earliest admissible common quarter for total-capital and EBA-NPL controls.",
+    "semantic_evidence": {
+      "source": "BNR Monthly Bulletin February 2017, methodological notes",
+      "url": "https://bnr.ro/files/d/Pubs_ro/Lunare/2017bl/2017bl02.pdf",
+      "statement": "Starting with December 2015 BNR calculates the non-performing loan ratio according to the EBA definition."
+    },
+    "pre_common_capital_only_window": {
+      "start_period": "2014-Q4",
+      "end_period": "2015-Q3",
+      "role": "Optional source-semantic diagnostic only; it cannot enter the matched prudential panel because the EBA-defined NPL target does not yet exist.",
+      "promotion_to_matched_panel_allowed": false
+    }
+  },
+  "target_variables": {
+    "total_capital_ratio": {
+      "canonical_label_ro": "Rata fondurilor proprii totale (fostul indicator de solvabilitate)",
+      "unit": "percent",
+      "intended_model_role": "Endogenous prudential capital/solvency state candidate; not an exogenous credit-supply shock.",
+      "required": true
+    },
+    "npl_ratio": {
+      "canonical_label_ro": "Rata creditelor neperformante potrivit definiției ABE",
+      "unit": "percent",
+      "intended_model_role": "Endogenous credit-risk state candidate; not an exogenous credit-supply shock.",
+      "required": true
+    },
+    "cet1_ratio_crosscheck": {
+      "canonical_label_ro": "Rata fondurilor proprii de nivel 1 de bază",
+      "unit": "percent",
+      "intended_model_role": "Semantic/control-family crosscheck only. It may not replace total capital ratio after outcomes are seen.",
+      "required_for_crosscheck": true
+    }
+  },
+  "pilot_structure_evidence": [
+    {
+      "period_family": "2023",
+      "url": "https://www.bnr.ro/files/d/Pubs_ro/Lunare/2023/2023bl06.pdf",
+      "role": "Official BNR Monthly Bulletin layout-family evidence only; not a canonical value source until byte-retained under this contract."
+    },
+    {
+      "period_family": "2024",
+      "url": "https://www.bnr.ro/files/d/Pubs_ro/Lunare/2024/2024bl05.pdf",
+      "role": "Official BNR Monthly Bulletin layout-family evidence only; not a canonical value source until byte-retained under this contract."
+    },
+    {
+      "period_family": "2025",
+      "url": "https://www.bnr.ro/uploads/2025-03-07buletinlunarnr.012025_documentpdf_545_1741348451.pdf",
+      "role": "Official BNR Monthly Bulletin layout-family evidence showing the target table, reporting breaks and Romanian-legal-entity population footnote."
+    }
+  ],
+  "source_enumeration_rules": {
+    "enumerate_exact_official_pdf_urls_before_value_extraction": true,
+    "one_selected_source_per_target_quarter": true,
+    "selection_precedence": "For each calendar year Y, first try the official BNR January Y+1 Monthly Bulletin as the single source for all four quarter-end observations of Y, provided it explicitly reports the full Jan-Dec Y monthly table and target semantics. If that source is unavailable or lacks the required table, use the fixed fallback order December Y, then February Y+1. A fallback may be used only for documented source/layout absence, never because of numerical values.",
+    "retain_discarded_candidates_and_reason": true,
+    "no_url_pattern_generation": true,
+    "no_directory_bruteforce": true,
+    "no_value_peeking_during_source_selection": true,
+    "minimum_required_quarter_coverage": 41,
+    "incomplete_enumeration_effect": "BLOCK_MATERIALISATION_NO_MODEL_EFFECT",
+    "year_level_source_selection": true,
+    "primary_publication_rule": "January Y+1 Monthly Bulletin for year Y",
+    "fixed_fallback_order": [
+      "December Y Monthly Bulletin",
+      "February Y+1 Monthly Bulletin"
+    ],
+    "no_quarter_specific_source_cherry_picking": true,
+    "fallback_requires_documented_non_value_reason": true,
+    "freeze_year_source_map_before_numeric_extraction": true
+  },
+  "byte_retention_rules": {
+    "retain_exact_pdf_bytes": true,
+    "compute_sha256": true,
+    "record_url": true,
+    "record_retrieved_at_utc": true,
+    "record_http_status": true,
+    "record_content_type": true,
+    "require_pdf_signature": true,
+    "source_revision_status_must_be_retained": true
+  },
+  "extraction_rules": {
+    "extraction_method": "Deterministic PDF text/table extraction from retained official BNR PDF bytes.",
+    "ocr_allowed": false,
+    "chart_digitisation_allowed": false,
+    "manual_numeric_transcription_allowed": false,
+    "exact_table_heading_required": "11.1. Principalii indicatori de prudențialitate",
+    "exact_variable_labels_required": true,
+    "quarter_mapping_rule": "Only explicit March/June/September/December rows or exact annual December rows may map to Q1/Q2/Q3/Q4. A yearly summary may map only to Q4 when the publication methodology explicitly identifies annual data as December/end-period.",
+    "provisional_marker_policy": "Retain provisional/revised markers as provenance metadata. Never strip a marker silently.",
+    "missing_symbol_policy": "x, ellipsis, confidentiality markers or blank cells remain missing/non-applicable according to the publication legend; never convert them to zero.",
+    "decimal_policy": "Preserve published decimal precision; no smoothing, interpolation or residual reconstruction.",
+    "duplicate_quarter_policy": "If more than one retained publication reports a quarter, only the preregistered source-precedence winner enters the candidate series; all alternatives remain provenance evidence."
+  },
+  "semantic_validation_gate": {
+    "require_population_boundary_match": true,
+    "require_all_45_quarters_for_both_primary_variables": false,
+    "require_cet1_crosscheck_where_published": true,
+    "require_reporting_break_metadata": true,
+    "require_exact_source_hashes": true,
+    "require_no_duplicate_quarters": true,
+    "require_no_nonfinite_promoted_values": true,
+    "compare_against_retained_cbd2_only_as_diagnostic": true,
+    "numerical_similarity_never_authorizes_population_bridge": true,
+    "require_all_common_window_quarters_for_both_primary_variables": true,
+    "expected_common_window_quarter_count": 41,
+    "no_pre_december_2015_eba_npl_backcast": true
+  },
+  "promotion_boundary": {
+    "output_status_if_pass": "BNR_MATCHED_PRUDENTIAL_CANDIDATE_SERIES_READY_FOR_SEPARATE_PROMOTION_REVIEW",
+    "canonical_series_mutation_in_this_contract": false,
+    "mechanism_estimation_authorized": false,
+    "structural_selection_authorized": false,
+    "lag_selection_authorized": false,
+    "holdout_opening_authorized": false,
+    "system_dynamics_activation": false,
+    "behavioural_closure_change": false
+  },
+  "hard_rules": {
+    "no_live_source_acquisition_on_pull_request": true,
+    "no_cbd2_direct_substitution": true,
+    "no_cet1_substitution_for_total_capital": true,
+    "no_interpolation": true,
+    "no_forward_fill": true,
+    "no_chart_digitisation": true,
+    "no_ocr": true,
+    "no_manual_numeric_transcription": true,
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_lag_selection": true,
+    "no_holdout_opening": true,
+    "no_causal_claim": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true,
+    "no_pre_december_2015_eba_npl_backcast": true
+  },
+  "execution_policy": "MANUAL_ONLY_SOURCE_ENUMERATION_AND_ACQUISITION_THEN_OFFLINE_DETERMINISTIC_EXTRACTION"
+}

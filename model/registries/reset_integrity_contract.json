@@ -1,0 +1,54 @@
+{
+  "contract_version": "0.1",
+  "name": "Reset Integrity Contract",
+  "reset_commit": "921716af9cb875a82790b4f00340e1febeb30c2f",
+  "purpose": "Keep the post-reset repository focused on the scientific model core. Product/UI surfaces removed by Reset v0.1 may not silently re-enter the repository; any top-level scope expansion must be explicit and reviewable.",
+  "allowed_top_level_paths": [
+    ".github",
+    ".gitignore",
+    "CHANGELOG.md",
+    "CITATION.cff",
+    "LICENSE",
+    "README.md",
+    "STATUS.md",
+    "assets",
+    "data",
+    "model",
+    "pyproject.toml",
+    "releases",
+    "scripts",
+    "src",
+    "tests"
+  ],
+  "required_scientific_roots": [
+    "data",
+    "model",
+    "scripts",
+    "src",
+    "tests"
+  ],
+  "prohibited_product_roots": [
+    "web",
+    "ui",
+    "gui",
+    "app",
+    "flatpak",
+    "packaging",
+    "dist",
+    "build"
+  ],
+  "prohibited_historical_roots": [
+    "versions",
+    "legacy",
+    "archive"
+  ],
+  "rules": {
+    "top_level_scope_expansion_requires_contract_change": true,
+    "product_or_end_user_surface_may_not_reappear_silently": true,
+    "generated_build_outputs_may_not_be_committed_as_top_level_roots": true,
+    "scientific_evidence_and_provenance_may_not_be_removed_to_satisfy_reset": true,
+    "reset_integrity_does_not_freeze_scientific_development": true
+  },
+  "interpretation": "This gate constrains repository scope, not scientific conclusions. Adding a genuinely necessary scientific directory is allowed only by explicitly updating this contract and documenting why the reset boundary should expand.",
+  "scientific_baseline_manifest": "model/registries/scientific_baseline_manifest.json"
+}

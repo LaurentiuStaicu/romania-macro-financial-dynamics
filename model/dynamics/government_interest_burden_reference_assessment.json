@@ -1,0 +1,64 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Reference Mode Recovery — Government Interest Burden",
+  "verdict": "PROMOTE_TO_OBSERVED_SERIES_AVAILABLE",
+  "reference_mode": "government_interest_burden",
+  "source_basis": {
+    "contract": "model/dynamics/government_interest_burden_reference_contract.json",
+    "audit_script": "scripts/audit_eurostat_government_interest_burden_reference.py",
+    "retained_snapshot": "model/dynamics/government_interest_burden_reference_snapshot.json",
+    "workflow_run_id": 35409234883,
+    "workflow_artifact_id": 10573525409,
+    "workflow_head_sha": "a694fd0fd8df7dade623cf9c01cbc875026ea9e8",
+    "workflow_artifact_sha256": "af4ff5c7b8768049c6a841e1d221e81fdd82cbffa8108ac527999a635c09dde0",
+    "audit_report_sha256": "072415769e017d3889227c1cc205c32dbe684d82966fb3f682f7455e2f3d6d8e",
+    "dataset_updated": "2026-07-21T11:00:00+0200"
+  },
+  "coverage": {
+    "MIO_NAC": {
+      "observations": 105,
+      "first_period": "2000-Q1",
+      "last_period": "2026-Q1",
+      "all_required_2025_quarters_present": true,
+      "non_finite_observations": 0,
+      "raw_source_sha256": "4905f7ed98e136b7c705c68bab96fef6edfae9cf8d87e0c7101f1d69f7438581"
+    },
+    "PC_GDP": {
+      "observations": 105,
+      "first_period": "2000-Q1",
+      "last_period": "2026-Q1",
+      "all_required_2025_quarters_present": true,
+      "non_finite_observations": 0,
+      "raw_source_sha256": "db9928f8134424c784ba875affd4aba56f7ca2b09c390495bfddfbd3bc972a90"
+    }
+  },
+  "benchmark_2025": {
+    "MIO_NAC": {
+      "2025-Q1": 12327.2,
+      "2025-Q2": 13176.7,
+      "2025-Q3": 14704.1,
+      "2025-Q4": 14303.3
+    },
+    "PC_GDP": {
+      "2025-Q1": 3.3,
+      "2025-Q2": 3.0,
+      "2025-Q3": 2.8,
+      "2025-Q4": 2.5
+    }
+  },
+  "scientific_interpretation": [
+    "Eurostat gov_10q_ggnfa directly publishes the preregistered S13 D41PAY quarterly series for Romania in both million national currency and percent of GDP.",
+    "The retained source gate passes independently for both requested units with 105 finite observations from 2000-Q1 through 2026-Q1 and complete 2025 quarterly coverage.",
+    "MIO_NAC is retained as the nominal ESA interest-expenditure reference mode; PC_GDP is retained as a normalized burden reference.",
+    "Neither series is interpreted as an effective interest rate, marginal sovereign yield, cash-interest payment measure or refinancing-share estimate.",
+    "This promotion improves reference-mode observability only. It does not validate or activate the government refinancing/effective-rate mechanism and does not change behavioural closure."
+  ],
+  "disposition": {
+    "previous_status": "SOURCE_IDENTIFIED_NOT_MATERIALIZED",
+    "new_status": "OBSERVED_SERIES_AVAILABLE",
+    "time_resolution": "quarterly",
+    "behavioural_closure": "UNCHANGED_INACTIVE",
+    "government_refinancing_effective_rate_mechanism": "UNCHANGED_DEFERRED",
+    "validated_reference_behavioural_mechanisms": 0
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "household_consumption_response",
+  "phase": "Household Consumption — Borrower-Population Bridge Source Screening",
+  "purpose": "Screen official household-level and household-budget sources for an observed Romania bridge between BNR housing-loan borrower DSTI and the registered aggregate S1M household-consumption target. This is source screening only; it does not construct weights, infer borrower consumption, or open estimation.",
+  "target_bridge": {
+    "source_population": "BNR respondent-bank housing/mortgage-loan borrowers represented by new/outstanding housing-loan DSTI",
+    "target_population": "ESA S1M households + NPISH aggregate consumption",
+    "required_observation": "An independently observed mapping, common microdata frame, or aligned borrower-subpopulation consumption/income target that links the housing-borrower burden population to the registered consumption population."
+  },
+  "screened_sources": [
+    {
+      "id": "ECB_HFCS",
+      "institution": "European Central Bank / Household Finance and Consumption Network",
+      "source_url": "https://www.ecb.europa.eu/stats/ecb_surveys/hfcs/html/index.en.html",
+      "conceptual_fit": "HIGH_IF_ROMANIA_PARTICIPATED",
+      "evidence": {
+        "household_level_finances_and_consumption": true,
+        "debt_service_to_income_available_in_hfcs_framework": true,
+        "consumption_and_saving_module": true
+      },
+      "romania_status": "HFCN_MEMBER_INSTITUTION_BUT_NO_ROMANIA_COUNTRY_DATASET_IN_2017_2021_OR_2023_WAVES_IDENTIFIED",
+      "participation_evidence": [
+        "The ECB 2021-wave methodological report lists Banca Națională a României among HFCN member institutions, so network membership must not be confused with a Romania country dataset.",
+        "The ECB 2017-wave methodology states that the third wave covered all 19 euro-area countries plus Croatia, Hungary and Poland; Romania was not a participating survey country.",
+        "The ECB 2021-wave methodology states that the fourth wave covered all 19 euro-area countries plus Croatia, Czech Republic and Hungary; Romania was not a participating survey country.",
+        "The ECB 2023-wave results/methodology published in June 2026 state that the fifth wave covered the 20 euro-area countries at the time of collection plus Czech Republic and Hungary; Romania was not a participating survey country."
+      ],
+      "bridge_status": "NO_ROMANIA_HFCS_COUNTRY_DATASET_IN_RELEVANT_AVAILABLE_WAVES",
+      "reason": "HFCS is conceptually suitable and BNR participates in the HFCN network, but no Romania HFCS country dataset is identified in the 2017, 2021 or latest 2023 waves. Network membership therefore does not supply the required Romania microdata bridge."
+    },
+    {
+      "id": "INS_ABF_TEMPO",
+      "institution": "Institutul Național de Statistică",
+      "source_family": "Ancheta Bugetelor de Familie (ABF) / TEMPO",
+      "example_urls": [
+        "https://statistici.insse.ro/tempoins/index.jsp?ind=BUF113J&lang=ro&page=tempo3",
+        "https://statistici.insse.ro/tempoins/?ind=BUF110I&lang=ro&page=tempo3"
+      ],
+      "evidence": {
+        "quarterly_frequency_available": true,
+        "household_consumption_observed": true,
+        "household_budget_survey_since_2001": true,
+        "public_breakdowns_identified": [
+          "social category",
+          "residence environment",
+          "macroregion/region",
+          "product/consumption category"
+        ]
+      },
+      "mortgage_borrower_status_public_breakdown_identified": false,
+      "common_dsti_consumption_microdata_link_identified": false,
+      "bridge_status": "PUBLIC_AGGREGATES_DO_NOT_SUPPLY_OBSERVED_MORTGAGE_BORROWER_TO_AGGREGATE_BRIDGE",
+      "reason": "Public TEMPO ABF tables provide quarterly consumption/budget measures and social/regional breakdowns, but no mortgage-borrower-status grouping or BNR-DSTI linkage was identified. A separate Eurostat HBS 2020 scientific-use microdata screening confirms Romania microdata availability but likewise identifies no mortgage/loan-status field in the released SUF manual."
+    },
+    {
+      "id": "ECB_CES",
+      "institution": "European Central Bank",
+      "source_url": "https://data.ecb.europa.eu/data/data-categories/ecb-surveys/consumer-expectations-survey-ces/income-and-consumption",
+      "conceptual_fit": "POTENTIALLY_USEFUL_FOR_HIGH_FREQUENCY_SPENDING_BUT_GEOGRAPHICALLY_UNAVAILABLE",
+      "romania_status": "ROMANIA_NOT_PRESENT_IN_PUBLISHED_COUNTRY_SET_IDENTIFIED",
+      "bridge_status": "NOT_AVAILABLE_FOR_ROMANIA",
+      "reason": "Published CES income/spending series cover participating euro-area countries; no Romania country series was identified, and the survey would not by itself map BNR mortgage-borrower DSTI to aggregate S1M consumption."
+    },
+    {
+      "id": "EUROSTAT_HBS_2020_SUF",
+      "institution": "Eurostat / national Household Budget Survey scientific-use files",
+      "source_url": "https://ec.europa.eu/eurostat/web/microdata/collections-research/household-budget-survey",
+      "user_manual_url": "https://ec.europa.eu/eurostat/documents/203647/7610424/HBS_2020_UserManual.pdf",
+      "access_class": "SCIENTIFIC_USE_MICRODATA_RESEARCH_ACCESS",
+      "romania_status": "ROMANIA_2020_SUF_AVAILABLE",
+      "evidence": {
+        "romania_in_2020_scientific_use_country_list": true,
+        "household_file_contains_consumption_expenditure": true,
+        "household_file_contains_income": true,
+        "household_and_member_files_linkable": true,
+        "household_sample_weight_available": true,
+        "owner_occupier_imputed_rent_variable_available": true
+      },
+      "mortgage_borrower_status_variable_identified_in_2020_suf_manual": false,
+      "mortgage_or_loan_variable_string_identified_in_2020_suf_manual": false,
+      "bridge_status": "ROMANIA_MICRODATA_AVAILABLE_BUT_NO_MORTGAGE_BORROWER_IDENTIFIER_IDENTIFIED",
+      "reason": "The 2020 HBS scientific-use files provide Romania household-level consumption and income and could support borrower-subpopulation analysis if a mortgage-borrower identifier existed. The released SUF record layout and manual screening identify no mortgage/loan-status field; owner-occupier imputed rent identifies housing tenure-related consumption treatment, not mortgage indebtedness.",
+      "admissibility": "DO_NOT_USE_OWNER_OCCUPIER_STATUS_AS_MORTGAGE_BORROWER_PROXY"
+    }
+  ],
+  "screening_result": {
+    "observed_population_bridge_found": false,
+    "aligned_borrower_consumption_target_found": false,
+    "aligned_common_microdata_frame_found": false,
+    "aggregate_burden_source_found": false,
+    "conclusion": "No official source identified in this screening closes the population boundary between BNR housing-loan DSTI and aggregate S1M consumption for Romania. HFCS has no Romania country dataset in the 2017, 2021 or latest 2023 wave. Romania HBS 2020 scientific-use microdata do contain household consumption and income, but no mortgage-borrower identifier is identified in the released SUF manual; public INS ABF tables also lack mortgage-borrower stratification."
+  },
+  "admissible_future_paths": [
+    {
+      "id": "INS_ABF_MICRODATA_BORROWER_STATUS",
+      "trigger": "A future official HBS/ABF microdata release or documentation must expose mortgage-borrower status together with compatible consumption/income variables and survey weights; owner-occupier status alone is insufficient.",
+      "status": "SCREENED_EUROSTAT_HBS_2020_SUF_NO_MORTGAGE_BORROWER_FIELD_IDENTIFIED"
+    },
+    {
+      "id": "BNR_BORROWER_CONSUMPTION_LINK",
+      "trigger": "BNR or another official source publishes a borrower-level or borrower-group consumption/income measure aligned to housing-loan DSTI.",
+      "status": "NOT_IDENTIFIED"
+    },
+    {
+      "id": "AGGREGATE_HOUSEHOLD_DSR",
+      "trigger": "An observed Romania household-sector debt-service burden aligned to S1M becomes available.",
+      "status": "NOT_IDENTIFIED"
+    }
+  ],
+  "insufficient_evidence": [
+    "Quarterly aggregate consumption from ABF or QSA without borrower-status stratification.",
+    "HFCS variable definitions from countries other than Romania.",
+    "Mortgage debt shares, homeownership rates or loan-stock shares used as synthetic population weights.",
+    "Correlation between housing-loan DSTI and aggregate consumption.",
+    "A longer DSTI time series without a population bridge.",
+    "Owner-occupier status or imputed rent used as a proxy for mortgage-borrower status.",
+    "Romania HBS consumption/income microdata without an observed mortgage-borrower identifier."
+  ],
+  "hard_rules": {
+    "no_synthetic_population_weights": true,
+    "no_cross_country_hfcs_transfer": true,
+    "no_post_hoc_proxy_selection": true,
+    "no_target_redefinition": true,
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "disposition": {
+    "population_bridge_status": "BLOCKED_NO_OBSERVED_OFFICIAL_BRIDGE_IDENTIFIED",
+    "household_consumption_estimation_authorized": false,
+    "registered_full_form_source_admissible": false,
+    "validated_reference_behavioural_mechanisms_change": 0,
+    "behavioural_closure": "UNCHANGED_INACTIVE"
+  }
+}

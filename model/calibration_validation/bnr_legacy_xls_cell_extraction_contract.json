@@ -1,0 +1,107 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "phase": "BNR Legacy XLS — Deterministic Cell Extraction Diagnostic",
+  "purpose": "Establish a deterministic, reviewable extraction path for the seven exact retained BNR Bank Lending Survey legacy OLE2/XLS workbooks. Every non-empty workbook cell is serialized with sheet/coordinate/type/value before any model-facing field selection. This phase does not select BLS variables, infer longitudinal semantics, construct DSTI levels, estimate parameters, inspect model outcomes, or activate behavioural feedback.",
+  "source_vintage": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19",
+  "source_probe": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19/bnr_household_dsti_workbook_probe.json",
+  "extraction_engine": {
+    "package": "xlrd",
+    "version": "2.0.2",
+    "allowed_format": "xls",
+    "distribution_archive_sha256_recorded_at_execution": true,
+    "provider": "PyPI",
+    "semantic_note": "xlrd reads historical .xls/BIFF workbooks and exposes cached formula results; charts and embedded objects are outside this tabular extraction boundary."
+  },
+  "files": [
+    {
+      "id": "bls_2023_feb",
+      "path": "bls_2023_feb.xls",
+      "bytes": 98304,
+      "sha256": "a79f26ef2a30aa54826979f08b3b9d5186b135ec291070d3cbe18e31df897e35"
+    },
+    {
+      "id": "bls_2023_may",
+      "path": "bls_2023_may.xls",
+      "bytes": 81920,
+      "sha256": "a0b5b0727b8208af1f576ff4128dae7268555f4122ff777a612f0817f92cdd41"
+    },
+    {
+      "id": "bls_2024_feb",
+      "path": "bls_2024_feb.xls",
+      "bytes": 81408,
+      "sha256": "c62be9d1e9b17ea0c01ed1de9d7c86bae36f061e08fdf5bd14b71fc6a3b6de75"
+    },
+    {
+      "id": "bls_2024_may",
+      "path": "bls_2024_may.xls",
+      "bytes": 81920,
+      "sha256": "c85887dcb7bce9745f3b4baf90e78eceed5ca8e5392150d246e679e428406a98"
+    },
+    {
+      "id": "bls_2024_nov",
+      "path": "bls_2024_nov.xls",
+      "bytes": 81408,
+      "sha256": "d396414440ba3bcea7fa9b319880a2e701fe7ce4dfbd6a145abc8dfb7f3b6dac"
+    },
+    {
+      "id": "bls_2025_feb",
+      "path": "bls_2025_feb.xls",
+      "bytes": 98304,
+      "sha256": "2202f9d703f47d807549c35e2aba0ce9850fa862cd0fda8b95063637f67cd451"
+    },
+    {
+      "id": "bls_2025_nov",
+      "path": "bls_2025_nov.xls",
+      "bytes": 135680,
+      "sha256": "eaae97b82bc416d51124917a0dcf3c60991045cb14c0441b2c87457004d07e7a"
+    }
+  ],
+  "extraction_rules": {
+    "verify_exact_source_bytes_before_open": true,
+    "fail_on_source_hash_or_size_mismatch": true,
+    "fail_on_workbook_parse_error": true,
+    "serialize_every_non_empty_cell": true,
+    "preserve_sheet_order": true,
+    "preserve_cell_coordinates": true,
+    "preserve_cell_type": true,
+    "convert_excel_dates_to_iso8601": true,
+    "retain_numeric_values_without_rounding": true,
+    "no_formula_recalculation": true,
+    "no_chart_or_image_extraction": true,
+    "no_manual_transcription": true,
+    "no_cell_selection_by_model_outcome": true,
+    "no_missing_to_zero": true
+  },
+  "preregistered_anchor_tokens": [
+    "C01",
+    "C05",
+    "P01",
+    "P06",
+    "P13",
+    "P0303",
+    "P1103"
+  ],
+  "anchor_rule": "Anchor tokens are diagnostic schema markers only. Their occurrence may be reported, but no value cell may be admitted to a model series until a separate reviewed cross-round semantic mapping contract is frozen.",
+  "pass_gate": {
+    "all_seven_workbooks_parse": true,
+    "all_source_bytes_match": true,
+    "at_least_one_sheet_per_workbook": true,
+    "at_least_one_non_empty_cell_per_workbook": true
+  },
+  "hard_rules": {
+    "no_behavioural_variable_selection": true,
+    "no_longitudinal_series_materialisation": true,
+    "no_dsti_level_claim": true,
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_model_outcome_access": true,
+    "no_holdout_opening": true,
+    "no_causal_claim": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true,
+    "offline_source_bytes_only": true
+  },
+  "pass_effect": "LEGACY_XLS_TABULAR_EXTRACTION_PATH_AVAILABLE_FOR_EXPLICIT_SEMANTIC_REVIEW_ONLY",
+  "fail_effect": "KEEP_LEGACY_XLS_EXTRACTION_NON_CANONICAL_AND_RETAIN_EXISTING_MECHANISM_BLOCKERS"
+}

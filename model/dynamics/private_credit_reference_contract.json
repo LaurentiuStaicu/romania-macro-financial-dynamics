@@ -1,0 +1,92 @@
+{
+  "contract_version": "0.1",
+  "phase": "Reference Mode Recovery — Private Non-Financial Credit Stock and Flow",
+  "purpose": "Test whether ECB BSI directly publishes definitionally aligned monthly loan stocks and financial transactions for Romania domestic NFCs and households/NPISH, allowing transparent S11 + S14/S15 reference modes for credit_stock and credit_flow without using stock differences as flows or silently including other financial sectors.",
+  "source": {
+    "institution": "European Central Bank / ESCB",
+    "dataset": "BSI — Balance Sheet Items",
+    "api": "ECB Data Portal SDMX 2.1 REST API",
+    "frequency": "M",
+    "reference_area": "RO",
+    "adjustment": "N",
+    "reference_sector": "A",
+    "balance_sheet_item": "A20",
+    "maturity": "A",
+    "counterpart_area": "U6",
+    "currency": "Z01",
+    "suffix": "E",
+    "unit": "Millions of Euro",
+    "components": {
+      "nfc_stock": {
+        "series_key": "BSI.M.RO.N.A.A20.A.1.U6.2240.Z01.E",
+        "counterpart_sector": "2240",
+        "sector_concept": "Non-Financial corporations (S.11)",
+        "data_type": "1",
+        "data_type_concept": "Outstanding amounts at the end of the period (stocks)"
+      },
+      "households_npish_stock": {
+        "series_key": "BSI.M.RO.N.A.A20.A.1.U6.2250.Z01.E",
+        "counterpart_sector": "2250",
+        "sector_concept": "Households and NPISH (S.14 and S.15)",
+        "data_type": "1",
+        "data_type_concept": "Outstanding amounts at the end of the period (stocks)"
+      },
+      "nfc_flow": {
+        "series_key": "BSI.M.RO.N.A.A20.A.4.U6.2240.Z01.E",
+        "counterpart_sector": "2240",
+        "sector_concept": "Non-Financial corporations (S.11)",
+        "data_type": "4",
+        "data_type_concept": "Financial transactions (flows)"
+      },
+      "households_npish_flow": {
+        "series_key": "BSI.M.RO.N.A.A20.A.4.U6.2250.Z01.E",
+        "counterpart_sector": "2250",
+        "sector_concept": "Households and NPISH (S.14 and S.15)",
+        "data_type": "4",
+        "data_type_concept": "Financial transactions (flows)"
+      }
+    },
+    "requested_start": "2003-01",
+    "requested_end": "2026-08"
+  },
+  "reference_modes": {
+    "credit_stock": {
+      "aggregation": "nfc_stock + households_npish_stock for months observed in both components",
+      "preferred_time_resolution": "monthly"
+    },
+    "credit_flow": {
+      "aggregation": "nfc_flow + households_npish_flow for months observed in both components",
+      "preferred_time_resolution": "monthly"
+    },
+    "required_benchmark_months": [
+      "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06",
+      "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12"
+    ],
+    "minimum_component_observation_count": 120
+  },
+  "concept_boundary": {
+    "aggregate_scope_is_S11_plus_S14_S15": true,
+    "aggregate_excludes_other_financial_sectors": true,
+    "stock_is_end_of_period_outstanding_amount": true,
+    "flow_is_ECB_financial_transaction": true,
+    "flow_is_not_stock_first_difference": true,
+    "flow_is_not_gross_new_lending_originations": true,
+    "components_must_share_month_and_unit_before_addition": true,
+    "no_currency_conversion_in_this_gate": true
+  },
+  "hard_rules": {
+    "source_audit_only_no_behavioural_activation": true,
+    "no_accounting_spine_mutation": true,
+    "no_missing_component_to_zero": true,
+    "no_interpolation": true,
+    "no_stock_difference_flow_proxy": true,
+    "no_other_sector_completion": true,
+    "network_errors_block_positive_coverage_claims": true,
+    "non_finite_observations_block_promotion": true,
+    "all_required_2025_months_must_be_observed_in_all_components": true,
+    "both_reference_modes_promote_together_only_if_all_four_components_pass": true,
+    "behavioural_closure_may_change": false
+  },
+  "promotion_rule": "credit_stock and credit_flow may both be promoted to OBSERVED_SERIES_AVAILABLE only after an immutable successful audit artifact is retained; all four exact ECB BSI component series contain finite observations for every required 2025 month and at least the minimum observation count; stock and flow aggregates are formed only from same-month S11 plus S14/S15 observations in the common published unit; no network or parse error occurs; and a repository assessment records workflow run, artifact identifier and SHA-256. Promotion changes reference-mode observability only and does not activate the bank-credit or monetary-credit feedback loops.",
+  "negative_result_rule": "If any exact component is unavailable, insufficiently long, incomplete in the required 2025 window or unreproducible, both reference modes retain their previous status. No stock difference, broader 2200 sector aggregate, interpolation, or missing-to-zero rule may substitute silently."
+}

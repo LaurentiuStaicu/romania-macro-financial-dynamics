@@ -1,0 +1,56 @@
+{
+  "contract_version": "0.1",
+  "phase": "Reference Mode Recovery — Government Interest Burden",
+  "purpose": "Test whether Eurostat publishes a definitionally explicit quarterly observed series for Romania general-government interest expenditure that can serve as the government_interest_burden reference mode without being confused with an effective interest rate, cash interest paid, marginal sovereign yield, or a refinancing parameter.",
+  "source": {
+    "institution": "Eurostat",
+    "dataset": "gov_10q_ggnfa — Quarterly non-financial accounts for general government",
+    "dataset_doi": "10.2908/GOV_10Q_GGNFA",
+    "api": "Eurostat dissemination statistics API",
+    "frequency": "Q",
+    "geo": "RO",
+    "sector": "S13",
+    "seasonal_adjustment": "NSA",
+    "na_item": "D41PAY",
+    "concept": "Interest, expenditure",
+    "units_to_probe": [
+      "MIO_NAC",
+      "PC_GDP"
+    ],
+    "requested_start": "2000-Q1",
+    "requested_end": "2026-Q1"
+  },
+  "reference_mode": {
+    "id": "government_interest_burden",
+    "required_benchmark_periods": [
+      "2025-Q1",
+      "2025-Q2",
+      "2025-Q3",
+      "2025-Q4"
+    ],
+    "minimum_observation_count_per_unit": 40,
+    "preferred_time_resolution": "quarterly"
+  },
+  "concept_boundary": {
+    "D41PAY_is_ESA_interest_expenditure": true,
+    "D41PAY_is_not_cash_interest_paid": true,
+    "D41PAY_is_not_effective_interest_rate": true,
+    "D41PAY_is_not_marginal_sovereign_yield": true,
+    "D41PAY_does_not_identify_refinancing_share": true,
+    "PC_GDP_is_a_normalized_burden_reference_not_an_interest_rate": true
+  },
+  "hard_rules": {
+    "source_audit_only_no_behavioural_activation": true,
+    "no_government_refinancing_parameter_estimation": true,
+    "no_effective_rate_derivation_in_this_gate": true,
+    "no_cash_accrual_substitution": true,
+    "no_missing_to_zero": true,
+    "network_errors_block_positive_coverage_claims": true,
+    "non_finite_observations_block_promotion": true,
+    "all_required_2025_quarters_must_be_observed": true,
+    "both_units_must_pass_independently": true,
+    "behavioural_closure_may_change": false
+  },
+  "promotion_rule": "The reference mode may be promoted from SOURCE_IDENTIFIED_NOT_MATERIALIZED to OBSERVED_SERIES_AVAILABLE only after an immutable successful audit artifact is retained, both MIO_NAC and PC_GDP contain all four 2025 quarters with finite observations, each requested unit has at least the minimum observation count, no network or parse error is present, and a repository assessment records the workflow run, artifact identifier and SHA-256. Promotion changes only reference-mode observability; it does not activate any behavioural mechanism or validate the government refinancing/effective-rate mechanism.",
+  "negative_result_rule": "If the exact D41PAY series is unavailable, incomplete at the required benchmark window, or cannot be retained reproducibly, government_interest_burden remains SOURCE_IDENTIFIED_NOT_MATERIALIZED and no proxy may be substituted silently."
+}

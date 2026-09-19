@@ -1,0 +1,105 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "mechanism_id": "aggregate_bank_credit_response",
+  "phase": "BNR BLS Missing-Round — Semantic Coordinate and Round-Identity Review",
+  "purpose": "Admit only the six already-preregistered realised BLS observables from the three retained missing-round cell extractions. Question IDs, value coordinates, metric-label rules and sign conventions are inherited unchanged from the existing cross-round mapping contract. Round identity anomalies are preserved explicitly and resolved only through frozen official BNR publication metadata where the workbook header is stale or invalid.",
+  "mapping_authority": "model/calibration_validation/bnr_bls_cross_round_mapping_contract.json",
+  "extraction_vintage": "data/source_vintages/bnr-bls-missing-round-cell-extraction-vintage-2026-09-19",
+  "rounds": [
+    {
+      "source_id": "bls_2023_aug",
+      "file": "bls_2023_aug_cells.json",
+      "target_quarter": "2023-Q2",
+      "workbook_header": {
+        "sheet": "Companies",
+        "cell": "A1",
+        "raw_value": "31/03/2023",
+        "status": "STALE_RELATIVE_TO_OFFICIAL_PUBLICATION_QUARTER"
+      },
+      "round_authority": "OFFICIAL_BNR_PUBLICATION_QUARTER",
+      "official_publication": {
+        "url": "https://www.bnr.ro/files/d/Pubs_ro/SondajCreditare/BLS%20august%202023_RO.pdf",
+        "title": "Sondaj privind creditarea companiilor nefinanciare și a populației",
+        "declared_period": "Trimestrul II 2023",
+        "publication_month": "August 2023"
+      }
+    },
+    {
+      "source_id": "bls_2023_nov",
+      "file": "bls_2023_nov_cells.json",
+      "target_quarter": "2023-Q3",
+      "workbook_header": {
+        "sheet": "Companies",
+        "cell": "A1",
+        "raw_value": "30/09/2023",
+        "status": "VALID_AND_QUARTER_CONSISTENT"
+      },
+      "round_authority": "WORKBOOK_COMPANIES_A1",
+      "official_publication": null
+    },
+    {
+      "source_id": "bls_2024_aug",
+      "file": "bls_2024_aug_cells.json",
+      "target_quarter": "2024-Q2",
+      "workbook_header": {
+        "sheet": "Companies",
+        "cell": "A1",
+        "raw_value": "31/06/2024",
+        "status": "INVALID_CALENDAR_DATE_BUT_QUARTER_IDENTIFIED_BY_OFFICIAL_PUBLICATION"
+      },
+      "round_authority": "OFFICIAL_BNR_PUBLICATION_QUARTER",
+      "official_publication": {
+        "url": "https://www.bnr.ro/files/d/Pubs_ro/SondajCreditare/BLS%20august%202024_RO.pdf",
+        "title": "Sondaj privind creditarea companiilor nefinanciare și a populației",
+        "declared_period": "Trimestrul II 2024",
+        "publication_month": "August 2024"
+      }
+    }
+  ],
+  "inherited_semantic_rules": {
+    "use_mapping_authority_realised_observables_verbatim": true,
+    "use_mapping_authority_sheet_aliases_verbatim": true,
+    "use_mapping_authority_metric_labels_verbatim": true,
+    "use_mapping_authority_sign_conventions_verbatim": true,
+    "no_new_observable_coordinates": true,
+    "no_model_outcome_based_selection": true
+  },
+  "round_identity_rules": {
+    "preserve_raw_workbook_header": true,
+    "never_silently_normalise_invalid_or_stale_dates": true,
+    "official_publication_override_allowed_only_when_frozen_above": true,
+    "official_publication_override_sets_quarter_only_not_numeric_observables": true,
+    "workbook_authority_requires_parseable_date_and_exact_target_quarter": true
+  },
+  "dsti_boundary": {
+    "verify_question_ids": {
+      "P0303": "A59",
+      "P1103": "A212"
+    },
+    "materialise_as_borrower_dsti_level": false
+  },
+  "pass_gate": {
+    "all_three_round_identities_resolved_under_frozen_rule": true,
+    "all_six_preregistered_observables_pass_each_round": true,
+    "all_question_ids_match": true,
+    "all_metric_labels_allowed": true,
+    "all_values_numeric": true,
+    "dsti_boundary_markers_present": true
+  },
+  "hard_rules": {
+    "no_canonical_panel_mutation": true,
+    "no_interpolation": true,
+    "no_synthetic_quarter_creation": true,
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_lag_selection": true,
+    "no_holdout_opening": true,
+    "no_causal_claim": true,
+    "no_dsti_level_claim": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "pass_effect": "THREE_MISSING_BLS_ROUNDS_READY_FOR_EXPLICIT_CANONICAL_PANEL_REGENERATION_REVIEW_ONLY",
+  "fail_effect": "KEEP_FAILED_ROUNDS_OUT_OF_CANONICAL_PANEL"
+}

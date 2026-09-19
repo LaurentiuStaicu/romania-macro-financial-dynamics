@@ -1,0 +1,102 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "corporate_investment_response",
+  "snapshot_id": "corporate-investment-source-family-vintage-2026-09-19",
+  "verdict": "PASS_EXACT_REVIEWED_ARTIFACT_ELIGIBLE_FOR_PROMOTION",
+  "estimation_authorized": false,
+  "reviewed_workflow": {
+    "run_id": 35434758190,
+    "artifact_id": 10581133050,
+    "artifact_name": "corporate-investment-source-materialisation-bfbc6a9d8c2ed55889d4e5c6d17dc5c925b5ed7e",
+    "artifact_zip_sha256": "0902a9a575cc1f322341a93e72422dd4cf06ce966b719103d9442f8d6c2f93e6",
+    "pr_merge_sha": "bfbc6a9d8c2ed55889d4e5c6d17dc5c925b5ed7e",
+    "source_branch_head_sha": "2bd58ae128f73b6788c1546bea3fc6e405f26c62"
+  },
+  "expected_files": [
+    {
+      "path": "corporate_investment_materialisation_audit.json",
+      "bytes": 6948,
+      "sha256": "fea0a9831eb15d18e78da931d20a0edff13a4973c45ed5c3d5339e1f961d12c4"
+    },
+    {
+      "path": "nfc_gfcf_quarterly_level.csv",
+      "bytes": 4885,
+      "sha256": "60921e146554f07f3e84ce7cee8c893d1515e7d9e6af811d498d6e9017d16544"
+    },
+    {
+      "path": "nfc_investment_grants_quarterly_level.csv",
+      "bytes": 4701,
+      "sha256": "1ce450e416722d47b969cb0d35d1e01aab17366b86e437879d05325188933920"
+    },
+    {
+      "path": "nfc_investment_rate_quarterly_level.csv",
+      "bytes": 5419,
+      "sha256": "769135772a75dbd400fd5203de8e299eb4a7a685248633033ac43cbe6f5a2ecc"
+    },
+    {
+      "path": "nfc_new_business_lending_rate_monthly_level.csv",
+      "bytes": 3715,
+      "sha256": "9cbfacc2d88be0c0dc32d6795a9dbbd3e8a6f3b6aa5a6ecda8f72214246db8ac"
+    },
+    {
+      "path": "raw/nfc_gfcf.csv",
+      "bytes": 74879,
+      "sha256": "661f6006856c602fcfa4415a23bddb0d7deea501b20965578323225f368be187"
+    },
+    {
+      "path": "raw/nfc_investment_grants.csv",
+      "bytes": 73714,
+      "sha256": "dfa5d6a25842149d02604e6f1d9a5dddb619b470517491679e6808633c0a4d34"
+    },
+    {
+      "path": "raw/nfc_investment_rate.csv",
+      "bytes": 85968,
+      "sha256": "49979b25deb9df1436d4a6381a98f0e9eb784d24321977d5f042d950a93c4445"
+    },
+    {
+      "path": "raw/nfc_new_business_lending_rate.csv",
+      "bytes": 110687,
+      "sha256": "c477b14e6770564000d015d00ce7f06314013108949f30cfce474315c4597796"
+    },
+    {
+      "path": "snapshot_manifest.json",
+      "bytes": 7012,
+      "sha256": "0a653b18711500abdeb96e5650955bcdf5fad51a4c6228f82eba52e9bc8c0076"
+    }
+  ],
+  "coverage": {
+    "nfc_gfcf": {
+      "rows": 109,
+      "first_period": "1999-Q1",
+      "last_period": "2026-Q1"
+    },
+    "nfc_investment_grants": {
+      "rows": 109,
+      "first_period": "1999-Q1",
+      "last_period": "2026-Q1"
+    },
+    "nfc_investment_rate": {
+      "rows": 106,
+      "first_period": "1999-Q4",
+      "last_period": "2026-Q1"
+    },
+    "nfc_new_business_lending_rate": {
+      "rows": 88,
+      "first_period": "2017-09",
+      "last_period": "2026-07"
+    }
+  },
+  "hard_boundaries": {
+    "target_selected": false,
+    "cross_frequency_join_performed": false,
+    "rate_aggregation_performed": false,
+    "growth_or_deflation_transform_performed": false,
+    "no_eu_origin_inference": true,
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "promotion_rule": "Only artifact 10581133050 with the exact ZIP digest and per-file byte sizes/SHA-256 values above may be committed as this source vintage."
+}

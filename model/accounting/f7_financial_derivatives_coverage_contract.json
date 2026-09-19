@@ -1,0 +1,58 @@
+{
+  "contract_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F7 Phase A — Financial Derivatives Source-Coverage and Scale Screening",
+  "instrument": "F7",
+  "meaning": "Financial derivatives and employee stock options under ESA 2010",
+  "benchmark_stock_period": "2025-Q4",
+  "benchmark_flow_period": "2025-Q1..2025-Q4",
+  "purpose": "Determine exact ECB QSA publication coverage for canonical RMD F7 holder-by-issuer cells and retain aggregate F7 magnitudes for later materiality assessment without assuming that missing, zero, or small aggregates imply bilateral zeros or irrelevance.",
+  "official_dimension_evidence": {
+    "source": "ECB Data Portal QSA financial-derivatives series for Romania",
+    "example_series_key": "QSA.Q.N.RO.W0.S1M.S1.N.A.LE.F7.T._Z.XDC._T.S.V.N._T",
+    "maturity": "T",
+    "expenditure": "_Z",
+    "unit": "XDC",
+    "currency_denominator": "_T",
+    "consolidation": "N",
+    "valuation": "S",
+    "prices": "V",
+    "transformation": "N",
+    "custom_breakdown": "_T"
+  },
+  "sector_mapping": {
+    "H": "S1M",
+    "C": "S11",
+    "G": "S13",
+    "BNR": "S121",
+    "F": "S12 - S121",
+    "X": "rest-of-world counterpart"
+  },
+  "source_orientations": {
+    "domestic_holder_asset": "W2; reference sector=holder; counterpart sector=issuer; entry=A",
+    "domestic_issuer_liability": "W2; reference sector=issuer; counterpart sector=holder; entry=L",
+    "resident_holder_to_X": "W1; reference sector=holder; counterpart sector=S1; entry=A",
+    "X_holder_to_resident_issuer": "W1; reference sector=issuer; counterpart sector=S1; entry=L"
+  },
+  "hard_rules": {
+    "no_benchmark_mutation": true,
+    "no_materialization_in_phase_A": true,
+    "no_missing_to_zero": true,
+    "no_synthetic_allocation": true,
+    "F_composite_only_by_exact_S12_minus_S121": true,
+    "annual_flow_only_by_exact_Q1_Q2_Q3_Q4_sum": true,
+    "dual_W2_orientations_must_be_probed": true,
+    "orientation_conflict_blocks_cell": true,
+    "W0_holder_and_issuer_controls_required_where_published": true,
+    "W1_total_economy_controls_required_where_published": true,
+    "X_to_X_is_outside_Romanian_national_accounts_boundary": true,
+    "network_errors_block_positive_coverage_claims": true,
+    "zero_aggregate_does_not_imply_bilateral_zeros": true,
+    "small_aggregate_does_not_imply_immateriality": true,
+    "materiality_threshold_may_not_be_invented_in_phase_A": true,
+    "behavioural_closure_may_change": false
+  },
+  "reconciliation_tolerance_million_RON": 0.1,
+  "scale_screening_rule": "Record published aggregate F7 stocks and annual 2025 transactions. Phase A may report whether non-zero aggregate evidence exists, but it must not classify F7 as material or immaterial without an explicit later materiality criterion and denominator.",
+  "promotion_rule": "A later F7 rank/materialization gate may use a bilateral cell only if an exact F7 source orientation is available, required composite-sector source terms exist, dual orientations agree where both are published, and accounting controls support the identified cell. This phase records coverage only.",
+  "system_dynamics_conformity": "Accounting-only recovery. No behavioural feedback, delay, nonlinearity or closure status may change."
+}

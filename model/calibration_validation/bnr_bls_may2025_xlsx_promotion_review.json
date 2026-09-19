@@ -1,0 +1,48 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "aggregate_bank_credit_response",
+  "snapshot_id": "bnr-bls-may2025-xlsx-vintage-2026-09-19",
+  "verdict": "PASS_TWO_DISTINCT_OFFICIAL_XLSX_WORKBOOKS_ELIGIBLE_FOR_PROMOTION",
+  "estimation_authorized": false,
+  "reviewed_workflow": {
+    "run_id": 35437502639,
+    "artifact_id": 10582926685,
+    "artifact_name": "bnr-bls-may2025-xlsx-probe-7bd81bd6b7cb2cb361731a3e5b07da6a9f496647",
+    "artifact_zip_sha256": "29952b777efd05eadd5313b41a0ab87e36c4e45a41f615561010e1b5e1f891dd",
+    "source_branch_head_sha": "4bd2cfbbcb3c5841b41331443775b3053412d94b"
+  },
+  "expected_files": [
+    {
+      "path": "bnr_bls_may2025_xlsx_probe.json",
+      "bytes": 1958,
+      "sha256": "60395f2bb371297277a64118dd7216a3359578de8cf9addbeb49238386d0fd84"
+    },
+    {
+      "path": "may_2025_english_slug.xlsx",
+      "bytes": 35620,
+      "sha256": "e3ecfc7fcdb5817c8feec00b7ae5b8bd7421e613ba4b69cb3d3eec2dff2297c6"
+    },
+    {
+      "path": "may_2025_romanian_slug.xlsx",
+      "bytes": 38004,
+      "sha256": "3b11d735150ef1048d8c5bc8f0b02993b13bd98a223de743f62d711128e1b271"
+    }
+  ],
+  "source_identity": {
+    "accessible_xlsx_count": 2,
+    "byte_identical_aliases": false,
+    "english_workbook_last_modified": "Fri, 13 Jun 2025 08:23:48 GMT",
+    "romanian_workbook_last_modified": "Fri, 13 Jun 2025 08:22:23 GMT"
+  },
+  "offline_layout_review_status": "COMPLETED_WITH_ARTIFACT_TOOL_SEMANTIC_LAYOUT_ONLY",
+  "hard_boundaries": {
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_historical_series_claim": true,
+    "no_legacy_xls_conversion": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "promotion_rule": "Only artifact 10582926685 with the exact ZIP digest and exact per-file byte/SHA-256 values above may be committed as this May-2025 XLSX source vintage."
+}

@@ -1,0 +1,48 @@
+{
+  "context_version": "0.1",
+  "screened_on": "2026-09-19",
+  "purpose": "External methodological context for the frozen sectoral_financial_positions public-data boundary. This file does not alter any RMD gate, tolerance, source formula or readiness status.",
+  "sources": [
+    {
+      "institution": "European Central Bank",
+      "title": "Euro area and national quarterly financial accounts – Quality report 2024",
+      "url": "https://www.ecb.europa.eu/pub/euroareafinancialaccounts/html/ecb.eaqfa202506.en.html",
+      "relevant_findings": [
+        "Internal consistency covers accounting identities and hierarchical relationships between aggregates and components.",
+        "Aggregation consistency requires the transmitted total economy to equal the sum of sectors/subsectors.",
+        "Horizontal consistency requires the sum of financial assets to equal the sum of liabilities for each financial instrument.",
+        "Romania satisfied 96% of the validation rules over Q4 2012 to Q2 2024 in the report's Annex 1 table.",
+        "The report describes minor internal-consistency exceptions for Romania and notes that national financial accounts are derived from multiple source systems and may require balancing/reconciliation."
+      ]
+    },
+    {
+      "institution": "European Central Bank",
+      "title": "Sector accounts",
+      "url": "https://www.ecb.europa.eu/stats/macroeconomic_and_sectoral/sector_accounts/html/index.en.html",
+      "relevant_findings": [
+        "Sector accounts are disseminated as a complete and consistent quarterly framework covering resident institutional sectors and their interactions with the rest of the world.",
+        "The concepts and definitions are aligned with ESA 2010."
+      ]
+    }
+  ],
+  "relationship_to_rmd_evidence": {
+    "canonical_assessment": "model/dynamics/sectoral_financial_positions_reference_assessment.json",
+    "source_discrepancy_assessment": "model/dynamics/sectoral_financial_positions_source_discrepancy_assessment.json",
+    "rounding_consistency_assessment": "model/dynamics/sectoral_financial_positions_rounding_consistency_assessment.json",
+    "interpretation": "The ECB methodology independently supports using aggregation and horizontal consistency as hard diagnostics. It also establishes that small national validation inconsistencies can exist in published/transmitted financial accounts. This context supports freezing the observed RMD discrepancy as a public-source limitation rather than allocating residuals, but it does not establish an alternative numeric tolerance and therefore cannot promote the reference mode."
+  },
+  "hard_boundaries": {
+    "no_tolerance_change": true,
+    "no_residual_allocation": true,
+    "no_source_formula_change": true,
+    "no_reference_mode_status_change": true,
+    "no_readiness_count_change": true,
+    "no_accounting_readiness_change": true,
+    "no_behavioural_closure_change": true
+  },
+  "disposition": {
+    "sectoral_financial_positions_status": "PARTIAL_SERIES_AVAILABLE",
+    "readiness_count_change": 0,
+    "further_internal_source_recovery": "FROZEN_UNTIL_REOPEN_TRIGGER"
+  }
+}

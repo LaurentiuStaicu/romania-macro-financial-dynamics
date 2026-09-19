@@ -1,0 +1,148 @@
+{
+  "manifest_version": "0.7",
+  "baseline_id": "scientific-integrity-2026-09-19",
+  "purpose": "Single canonical cross-registry snapshot of RMD scientific maturity. Values in this manifest must agree with the authoritative accounting, dynamics, reference-mode, empirical-mechanism and validation registries; the manifest is not an independent source of scientific truth.",
+  "authority": {
+    "model_contract": "model/registries/model_contract.json",
+    "reset_integrity_contract": "model/registries/reset_integrity_contract.json",
+    "accounting_readiness_gate": "model/accounting/accounting_readiness_gate.json",
+    "accounting_reopen_conditions": "model/accounting/reopen_conditions_registry.json",
+    "system_dynamics_conformity_gate": "model/dynamics/system_dynamics_conformity_gate.json",
+    "reference_modes": "model/dynamics/reference_modes.json",
+    "empirical_contract": "model/empirical_dynamics/contract.json",
+    "mechanism_registry": "model/empirical_dynamics/mechanism_registry.json",
+    "validation_disposition": "model/calibration_validation/validation_recovery_disposition.json",
+    "prospective_confirmation_contract": "model/calibration_validation/prospective_monetary_confirmation_contract.json",
+    "prospective_confirmation_status": "model/calibration_validation/prospective_monetary_confirmation_status.json",
+    "mechanism_source_readiness": "model/calibration_validation/mechanism_source_readiness.json",
+    "sectoral_financial_positions_external_source_screening": "model/dynamics/sectoral_financial_positions_external_source_screening.json",
+    "mechanism_reopen_conditions": "model/calibration_validation/mechanism_reopen_conditions_registry.json",
+    "reference_mode_recovery_terminal_assessment": "model/dynamics/reference_mode_recovery_terminal_assessment.json",
+    "sectoral_financial_positions_bnr_cnf_source_screening": "model/dynamics/sectoral_financial_positions_bnr_cnf_source_screening.json",
+    "validation_recovery_stage_terminal_assessment": "model/registries/validation_recovery_stage_terminal_assessment.json",
+    "sectoral_financial_positions_bnr_quarterly_s13_source_screening": "model/dynamics/sectoral_financial_positions_bnr_quarterly_s13_source_screening.json"
+  },
+  "canonical_state": {
+    "accounting": {
+      "complete_stock_and_flow_instruments": [
+        "F3"
+      ],
+      "incomplete_instruments": [
+        "F2",
+        "F4",
+        "F5",
+        "F6",
+        "F7",
+        "F8"
+      ],
+      "multi_instrument_stock_initialization_ready": false,
+      "full_2025_stock_flow_benchmark_ready": false
+    },
+    "reference_modes": {
+      "required_count": 10,
+      "ready_count": 9,
+      "closure_ready": false,
+      "ready": [
+        "policy_rate",
+        "household_lending_rate",
+        "nfc_lending_rate",
+        "credit_stock",
+        "credit_flow",
+        "government_debt_stock",
+        "government_interest_burden",
+        "government_refinancing_need",
+        "government_effective_interest_rate"
+      ],
+      "blockers": [
+        "sectoral_financial_positions"
+      ],
+      "external_counterpart_screening_state": "EXHAUSTED_NO_SEMANTICALLY_ADMISSIBLE_CURRENT_PUBLIC_SOURCE",
+      "sectoral_financial_positions_external_counterpart_recovery_state": "FROZEN_UNTIL_NEW_SOURCE_OR_CHANGED_DATASET_TRIGGER",
+      "external_counterpart_exact_historical_extraction_authorized": false,
+      "recovery_stage_status": "STAGE_COMPLETE_FROZEN_9_OF_10_UNDER_CURRENT_PUBLIC_EVIDENCE_BOUNDARY",
+      "recovery_substage_complete": true,
+      "next_operational_state": "EVIDENCE_TRIGGERED_BASELINE_HOLD",
+      "final_blocker_public_source_completion_status": "EUROSTAT_INSTRUMENT_SCOPE_FAIL_OECD_S121_SCOPE_FAIL_BNR_ANNUAL_FREQUENCY_TRANSACTION_HISTORY_FAIL_BNR_QUARTERLY_S13_SECTOR_COUNTERPART_CONSOLIDATION_FAIL"
+    },
+    "system_dynamics": {
+      "complete_endogenous_system_dynamics_model": false,
+      "behavioural_closure_active": false,
+      "closed_candidate_feedback_loops": [
+        "government_refinancing_interest_loop",
+        "government_issuance_yield_loop",
+        "bank_credit_balance_sheet_loop",
+        "monetary_credit_transmission_loop"
+      ],
+      "open_candidate_feedback_chains": [
+        "external_fx_refinancing_loop"
+      ]
+    },
+    "empirical_validation": {
+      "active_calibration_cycle_open": false,
+      "activated_mechanisms_count": 0,
+      "validated_reference_behavioural_mechanisms": 0,
+      "monetary_pass_through_status": "CANDIDATE",
+      "government_refinancing_effective_rate_status": "DEFERRED",
+      "prospective_confirmation_status": "WAIT_FOR_NEW_POLICY_RATE_EVENT"
+    },
+    "source_reproduction": {
+      "canonical_reproduction_requires_live_network": false,
+      "live_refreshes_are_new_vintage_evidence": true,
+      "live_refresh_workflows_manual_only": true
+    },
+    "mechanism_readiness": {
+      "non_rejected_mechanism_count": 11,
+      "readiness_entry_count": 11,
+      "classification_counts": {
+        "CANDIDATE": 6,
+        "DEFERRED": 5,
+        "ACTIVATED": 0
+      },
+      "estimation_or_refit_allowed_count": 0,
+      "priority_group_counts": {
+        "WAIT_FOR_EXTERNAL_EVENT": 1,
+        "DEFER_UNTIL_NEW_SOURCE": 1,
+        "FREEZE_TESTED_FORM_UNTIL_NEW_EVIDENCE": 4,
+        "DEFER_UNTIL_NEW_OBSERVED_POPULATION_BRIDGE_SOURCE": 1,
+        "DEFER_UNTIL_MATCHED_AGGREGATE_OR_MORTGAGE_PORTFOLIO_SOURCE": 1,
+        "DEFER_UNTIL_FORMATION_TIME_EXPECTATIONS_AND_REAL_TIME_GAP_VINTAGES": 1,
+        "DEFER_UNTIL_JOINT_EXPOSURE_SOURCE": 1,
+        "DEFER_UNTIL_FINAL_BLS_GAP_OR_NEW_MATCHED_PRUDENTIAL_SOURCE": 1
+      },
+      "current_empirical_queue_state": "ALL_REGISTERED_MECHANISMS_FROZEN_WAITING_OR_EXPLICITLY_BLOCKED",
+      "calibration_cycle_open": false,
+      "reopen_registry_entry_count": 11,
+      "all_reopen_conditions_registered": true,
+      "reopen_governance_state": "DECLARED_TRIGGER_REQUIRED_NO_AUTOMATIC_ESTIMATION"
+    },
+    "scientific_stage": {
+      "name": "Validation Recovery / Empirical Basis Expansion",
+      "status": "STAGE_COMPLETE_EVIDENCE_TRIGGERED_BASELINE_HOLD",
+      "next_operational_state": "EVIDENCE_TRIGGERED_BASELINE_HOLD",
+      "active_autonomous_empirical_task": null,
+      "model_complete": false,
+      "release_ready": false
+    }
+  },
+  "hard_invariants": [
+    "Accounting Spine remains a hard constraint.",
+    "Partial/component/aggregate-only artifacts do not count as complete canonical instruments.",
+    "Missing/TBD values are not zero.",
+    "Behavioural closure remains inactive unless all declared activation gates pass.",
+    "No stale ACTIVATED label survives a CANDIDATE/DEFERRED validation disposition.",
+    "Reference-mode readiness is derived from the canonical registry rather than manually promoted.",
+    "A live provider refresh may create evidence for a new vintage but may not rewrite a retained historical result.",
+    "Prospective monetary response values remain inaccessible until the frozen event and release gates authorize inspection.",
+    "Every non-rejected behavioural mechanism has exactly one readiness entry and no duplicate readiness ownership.",
+    "A closed calibration cycle with zero activated mechanisms may not contain any mechanism authorized for estimation or refit.",
+    "After exhaustive source screening, a new empirical cycle requires a declared evidence/reopen trigger; queue exhaustion is not permission to respecify a failed form.",
+    "The exhausted sectoral-financial-position external counterpart path may reopen only on a declared new-source or changed-dataset trigger; repeating the same Eurostat/OECD source boundary is not scientific progress.",
+    "Every non-rejected behavioural mechanism has exactly one canonical reopen-condition entry with governing evidence and explicit non-reopen conditions.",
+    "Reopening a behavioural mechanism authorizes only its declared next evidence/identification gate and never automatically authorizes estimation/refit, holdout inspection, causal claims, System Dynamics activation or behavioural closure.",
+    "Reference-mode recovery may complete at a documented public-evidence boundary below 10/10 only when every missing mode has an explicit blocker, exhausted admissible current-public-source paths and declared reopen triggers.",
+    "The annual BNR counterpart stock matrix may be used as semantic evidence only; it may not be interpolated to quarters or used to substitute for the required quarterly stock-and-financial-transaction history.",
+    "Completion of the current recovery stage does not imply model completion, calibration, causal identification, integrated reference-mode closure, behavioural closure or release readiness.",
+    "When the stage is in EVIDENCE_TRIGGERED_BASELINE_HOLD, no new empirical calibration/refit or boundary relaxation may start without satisfying a declared reopen trigger.",
+    "BNR quarterly S13 financial accounts are a valid national quarterly control but do not satisfy the full non-consolidated RMD sector-by-counterpart boundary and may not be promoted as the complete sectoral-financial-position reference mode."
+  ]
+}

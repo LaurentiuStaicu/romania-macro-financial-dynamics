@@ -1,0 +1,99 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Reference Mode Recovery — Sectoral Financial Positions / Phase A strict explicit-instrument gate",
+  "verdict": "STRICT_F2_F8_AGGREGATE_GATE_FAILED_NO_PROMOTION",
+  "reference_mode": "sectoral_financial_positions",
+  "boundary_review": "model/dynamics/sectoral_financial_positions_boundary_review.json",
+  "contract": "model/dynamics/sectoral_financial_positions_reference_contract.json",
+  "source_basis": {
+    "audit_script": "scripts/audit_ecb_sectoral_financial_positions_reference.py",
+    "workflow_run_id": 35412734353,
+    "workflow_artifact_id": 10575295232,
+    "workflow_head_sha": "8d809294faabf3d06c5c1c05f68b267df7f4c44e",
+    "workflow_artifact_sha256": "df2ee99771addc49eb5c7a718928a372276e667fde5ec9a9e127e9e3e36ad307",
+    "artifact_retention_until": "2026-12-18T01:28:02Z"
+  },
+  "result": {
+    "series_requested": 168,
+    "series_available": 160,
+    "series_http_error": 8,
+    "network_errors_observed": false,
+    "missing_component_addresses": 5,
+    "stock_common_observation_count": 0,
+    "flow_common_observation_count": 0,
+    "all_required_2025_quarters_available": false,
+    "promotion_eligible": false
+  },
+  "unavailable_exact_series": [
+    "Q.N.RO.W0.S11.S1.N.A.F.F5._Z._Z.XDC._T.S.V.N._T",
+    "Q.N.RO.W0.S13.S1.N.L.F.F4.T._Z.XDC._T.S.V.N._T",
+    "Q.N.RO.W0.S13.S1.N.L.F.F6._Z._Z.XDC._T.S.V.N._T",
+    "Q.N.RO.W0.S13.S1.N.L.F.F7.T._Z.XDC._T.S.V.N._T",
+    "Q.N.RO.W0.S13.S1.N.L.F.F8.T._Z.XDC._T.S.V.N._T",
+    "Q.N.RO.W0.S13.S1.N.L.LE.F2.T._Z.XDC._T.S.V.N._T",
+    "Q.N.RO.W0.S1M.S1.N.L.F.F2.T._Z.XDC._T.S.V.N._T",
+    "Q.N.RO.W0.S1M.S1.N.L.LE.F2.T._Z.XDC._T.S.V.N._T"
+  ],
+  "missing_address_interpretation": [
+    {
+      "address": "C / assets / financial transactions",
+      "missing_instruments": [
+        "F5"
+      ],
+      "implication": "The strict explicit-instrument asset-transaction sum for C cannot be formed."
+    },
+    {
+      "address": "G / liabilities / financial transactions",
+      "missing_instruments": [
+        "F4",
+        "F6",
+        "F7",
+        "F8"
+      ],
+      "implication": "The strict explicit-instrument liability-transaction sum for G cannot be formed."
+    },
+    {
+      "address": "G / liabilities / stock",
+      "missing_instruments": [
+        "F2"
+      ],
+      "implication": "The strict explicit-instrument liability stock sum for G cannot be formed."
+    },
+    {
+      "address": "H / liabilities / financial transactions",
+      "missing_instruments": [
+        "F2"
+      ],
+      "implication": "The strict explicit-instrument liability-transaction sum for H cannot be formed."
+    },
+    {
+      "address": "H / liabilities / stock",
+      "missing_instruments": [
+        "F2"
+      ],
+      "implication": "The strict explicit-instrument liability stock sum for H cannot be formed."
+    }
+  ],
+  "scientific_interpretation": [
+    "The boundary review remains conceptually valid: aggregate sector positions are legitimate behaviour-over-time targets distinct from bilateral Accounting Spine completion.",
+    "However the preregistered strict materialization rule required every F2-F8 component to be directly published for each required sector/side. Eight exact QSA series are unavailable, so five aggregate addresses cannot be formed without an additional structural/applicability rule or a different exact published aggregate identity.",
+    "No unavailable component is converted to zero and no residual is allocated. The absence of a complete strict sum is therefore a valid negative source-coverage result rather than an accounting inconsistency.",
+    "Because no complete six-sector series exists under the preregistered strict gate, stock/flow system reconciliation cannot be evaluated and no promotion is allowed."
+  ],
+  "prohibited_post_result_shortcuts": [
+    "convert the eight unavailable series to zero because they appear economically small or structurally implausible",
+    "drop H, G or C from the required sector boundary after observing source gaps",
+    "replace financial transactions with first differences of stocks",
+    "use a total-F series without a separately preregistered instrument-boundary treatment",
+    "treat the 160 available component series as sufficient for promotion"
+  ],
+  "disposition": {
+    "previous_status": "PARTIAL_SERIES_AVAILABLE",
+    "new_status": "PARTIAL_SERIES_AVAILABLE",
+    "readiness_count_change": 0,
+    "accounting_spine": "UNCHANGED_INCOMPLETE_MULTI_INSTRUMENT",
+    "accounting_readiness": "UNCHANGED",
+    "behavioural_closure": "UNCHANGED_INACTIVE",
+    "next_justified_path": "A separately preregistered Phase B may test a direct published aggregate identity only if it preserves the RMD F2-F8 instrument boundary without missing-to-zero assumptions. Phase A values may not be used to tune the Phase B promotion criterion."
+  }
+}

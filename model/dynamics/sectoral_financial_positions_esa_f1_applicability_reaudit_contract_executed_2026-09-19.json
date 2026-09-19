@@ -1,0 +1,141 @@
+{
+  "contract_version": "0.1",
+  "phase": "Reference Mode Recovery — Sectoral Financial Positions / Phase B exact aggregate identity",
+  "purpose": "Test a mathematically equivalent QSA aggregate route to the exact RMD F2-F8 sectoral boundary after Phase A showed that eight individual component series are not disseminated. Phase B uses directly published total financial instruments F and explicitly removes F1 where required; it may not reinterpret unavailable Phase A components as zero.",
+  "prerequisite": {
+    "boundary_review": "model/dynamics/sectoral_financial_positions_boundary_review.json",
+    "failed_phase_A": "model/dynamics/sectoral_financial_positions_strict_gate_assessment.json",
+    "phase_A_verdict_required": "STRICT_F2_F8_AGGREGATE_GATE_FAILED_NO_PROMOTION",
+    "phase_A_values_may_tune_phase_B_thresholds": false
+  },
+  "methodological_basis": {
+    "ESA2010": "Financial transactions/assets are classified into F1 through F8; monetary gold and SDRs are F1, while the RMD represented boundary is F2-F8.",
+    "exact_identity": "represented_F2_to_F8 = total_financial_instruments_F - F1",
+    "structural_applicability": {
+      "H": {
+        "source_sector": "S1M",
+        "F1_rule": "STRUCTURAL_NOT_APPLICABLE_BOTH_SIDES",
+        "basis": "ESA 2010 confines monetary gold to monetary authorities/international financial organisations and SDRs to official holders. H/NPISH therefore has no F1 asset or liability in the RMD institutional boundary."
+      },
+      "C": {
+        "source_sector": "S11",
+        "F1_rule": "STRUCTURAL_NOT_APPLICABLE_BOTH_SIDES",
+        "basis": "ESA 2010 confines monetary gold to monetary authorities/international financial organisations and SDRs to official holders. S11 therefore has no F1 asset or liability."
+      },
+      "F": {
+        "source_formula": "S12 - S121",
+        "F1_rule": "ASSET_SOURCE_REQUIRED_FOR_S12_AND_S121; LIABILITY_STRUCTURAL_ZERO",
+        "basis": "F is S12-S121. F1 assets must be removed explicitly from both S12 and S121. Resident F1 liabilities are structurally zero because monetary gold has no counterpart liability and SDR allocations are liabilities of the rest of the world."
+      },
+      "G": {
+        "source_sector": "S13",
+        "F1_rule": "ASSET_SOURCE_REQUIRED; LIABILITY_STRUCTURAL_ZERO",
+        "basis": "Central-government institutions can be monetary authorities under ESA 2010, so S13 F1 assets cannot be assumed zero. Resident F1 liabilities are structural zero under the monetary-gold/SDR recording rules."
+      },
+      "BNR": {
+        "source_sector": "S121",
+        "F1_rule": "ASSET_SOURCE_REQUIRED; LIABILITY_STRUCTURAL_ZERO",
+        "basis": "S121 F1 assets are in scope and must be removed explicitly. Resident F1 liabilities are structural zero; SDR allocation liability is recorded in the rest of world."
+      },
+      "X": {
+        "source_area": "W1",
+        "F1_rule": "ASSET_AND_LIABILITY_SOURCE_REQUIRED",
+        "basis": "Rest-of-world F1 can include the counterpart to monetary-authority transactions and SDR liabilities, so both W1 external sides are explicitly sourced."
+      }
+    },
+    "official_methodology_sources": [
+      "https://ec.europa.eu/eurostat/documents/3859598/5925693/KS-02-13-269-EN.PDF",
+      "https://data.ecb.europa.eu/data/data-categories/macroeconomic-and-sectoral-statistics/sector-accounts/financial-accounts/instrument/monetary-gold-and-sdrs"
+    ]
+  },
+  "source": {
+    "institution": "European Central Bank / ESCB",
+    "dataset": "QSA — Quarterly Sector Accounts",
+    "api": "ECB Data Portal SDMX 2.1 REST API",
+    "frequency": "Q",
+    "adjustment": "N",
+    "reference_area": "RO",
+    "required_instruments": [
+      "F",
+      "F1"
+    ],
+    "instrument_dimensions": {
+      "F": {
+        "maturity": "_Z",
+        "expenditure": "_Z"
+      },
+      "F1": {
+        "maturity": "_Z",
+        "expenditure": "_Z"
+      }
+    },
+    "measures": {
+      "stock": {
+        "sto": "LE"
+      },
+      "flow": {
+        "sto": "F"
+      }
+    },
+    "requested_start": "2014-Q1",
+    "requested_end": "2026-Q2",
+    "unit": "XDC",
+    "unit_multiplier": 6
+  },
+  "construction": {
+    "H": "Use W0 S1M total F directly; F1 is structurally not applicable under the preregistered ESA rule.",
+    "C": "Use W0 S11 total F directly; F1 is structurally not applicable under the preregistered ESA rule.",
+    "F": "Assets: (W0 S12 F - W0 S12 F1) - (W0 S121 F - W0 S121 F1). Liabilities: W0 S12 F - W0 S121 F because resident F1 liabilities are structural zero.",
+    "G": "Assets: W0 S13 F - W0 S13 F1. Liabilities: W0 S13 F because resident F1 liabilities are structural zero.",
+    "BNR": "Assets: W0 S121 F - W0 S121 F1. Liabilities: W0 S121 F because resident F1 liabilities are structural zero.",
+    "X": "For W1 S1/S1, compute resident external F-F1 separately for A and L; set X assets = resident external liabilities and X liabilities = resident external assets.",
+    "net": "assets - liabilities",
+    "stock_and_flow": "Apply the same exact identity independently to LE stocks and F financial transactions; never difference stocks to create flows."
+  },
+  "consistency_gates": {
+    "required_sectors": [
+      "H",
+      "C",
+      "F",
+      "G",
+      "X",
+      "BNR"
+    ],
+    "required_benchmark_periods": [
+      "2025-Q1",
+      "2025-Q2",
+      "2025-Q3",
+      "2025-Q4"
+    ],
+    "minimum_common_observation_count": 40,
+    "mandatory_total_F_series_all_addresses": true,
+    "mandatory_F1_for": [
+      "S12 assets",
+      "S121 assets",
+      "S13 assets",
+      "W1 total-economy assets",
+      "W1 total-economy liabilities"
+    ],
+    "system_stock_residual_max_abs_million_RON": 0.1,
+    "system_flow_residual_max_abs_million_RON": 0.1,
+    "system_identity": "sum H+C+F+G+BNR+X net represented position/transactions must reconcile to zero on the F2-F8 boundary.",
+    "structural_zero_scope": {
+      "H_F1_assets_and_liabilities": "ESA2010 structural not applicable",
+      "C_F1_assets_and_liabilities": "ESA2010 structural not applicable",
+      "resident_F1_liabilities_for_F_G_BNR": "ESA2010 monetary-gold no-counterpart-liability plus SDR liability recorded in rest of world"
+    }
+  },
+  "hard_rules": {
+    "no_phase_A_missing_component_to_zero": true,
+    "no_structural_zero_beyond_preregistered_H_and_C_F1_rule": true,
+    "no_bilateral_allocation": true,
+    "no_accounting_benchmark_mutation": true,
+    "no_accounting_readiness_promotion": true,
+    "no_stock_difference_flow_proxy": true,
+    "no_interpolation": true,
+    "no_behavioural_activation": true,
+    "network_errors_block_positive_claim": true
+  },
+  "promotion_rule": "Promote sectoral_financial_positions only if all mandatory total-F and mandatory-F1 source series are finite over at least 40 common quarters including all 2025 quarters, every structural-zero use is limited to the preregistered ESA 2010 scope, the exact same-period formulas produce all six sectors for both stock and flow, and both system reconciliation gates pass within 0.1 million RON. Promotion changes only aggregate reference-mode observability; bilateral Accounting Spine readiness and behavioural closure remain unchanged.",
+  "negative_result_rule": "Any mandatory F/F1 source gap, nonzero contradiction to the preregistered H/C F1 applicability rule, benchmark gap, insufficient common history or system-reconciliation failure leaves the mode PARTIAL. Phase A component gaps may not be patched directly."
+}

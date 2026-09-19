@@ -1,0 +1,91 @@
+{
+  "gate_version": "0.1",
+  "name": "Canonical Accounting Readiness Gate",
+  "purpose": "Prevent partial empirical recovery, component artifacts, aggregate-only evidence or rank constraints from being mistaken for a complete canonical multi-instrument Accounting Spine.",
+  "canonical_benchmark": "model/accounting/benchmark_2025.json",
+  "reconciliation_ledger": "model/accounting/reconciliation_2025.json",
+  "canonical_instruments": [
+    "F3",
+    "F2",
+    "F4",
+    "F8",
+    "F5",
+    "F6",
+    "F7"
+  ],
+  "complete_cell_statuses": [
+    "OBSERVED",
+    "DERIVED",
+    "NOT_APPLICABLE"
+  ],
+  "boundary_rule": {
+    "cells_per_instrument_matrix": 36,
+    "in_boundary_cells_per_instrument_matrix": 35,
+    "outside_boundary_address": "X→X",
+    "complete_matrix_requires_X_to_X_NOT_APPLICABLE": true,
+    "all_other_cells_must_be_finite_OBSERVED_or_DERIVED": true
+  },
+  "current_expected_state": {
+    "canonical_complete_stock_instruments": [
+      "F3"
+    ],
+    "canonical_complete_stock_and_flow_instruments": [
+      "F3"
+    ],
+    "canonical_incomplete_instruments": [
+      "F2",
+      "F4",
+      "F8",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "canonical_multi_instrument_stock_initialization_ready": false,
+    "canonical_full_2025_stock_flow_benchmark_ready": false
+  },
+  "noncanonical_recovery_artifacts": [
+    {
+      "scope": "F2M deposits component only",
+      "path": "model/accounting/f2m_component_2025.json",
+      "may_count_as_complete_F2": false
+    },
+    {
+      "scope": "F4 unconditional rank-unique partial core only",
+      "path": "model/accounting/f4_partial_2025.json",
+      "may_count_as_complete_F4": false
+    },
+    {
+      "scope": "F5 component/control evidence",
+      "path": "model/accounting/f5_component_aware_rank_assessment.json",
+      "may_count_as_complete_F5": false
+    },
+    {
+      "scope": "F6 aggregate-only identification boundary",
+      "path": "model/accounting/f6_aggregate_rank_assessment.json",
+      "may_count_as_complete_F6": false
+    },
+    {
+      "scope": "F7 aggregate-only identification boundary",
+      "path": "model/accounting/f7_aggregate_rank_assessment.json",
+      "may_count_as_complete_F7": false
+    },
+    {
+      "scope": "F8 aggregate-only identification boundary",
+      "path": "model/accounting/f8_aggregate_rank_assessment.json",
+      "may_count_as_complete_F8": false
+    }
+  ],
+  "hard_rules": {
+    "partial_or_component_artifact_is_not_canonical_completion": true,
+    "aggregate_rank_constraint_is_not_bilateral_materialization": true,
+    "missing_or_TBD_is_not_zero": true,
+    "canonical_readiness_must_be_computed_from_benchmark_cells": true,
+    "reconciliation_labels_must_not_overstate_canonical_completion": true,
+    "instrument_specific_simulation_requires_explicit_boundary": true,
+    "instrument_specific_simulation_must_not_be_described_as_full_RMD": true,
+    "full_RMD_empirical_state_claim_requires_all_canonical_instruments_complete": true,
+    "behavioural_closure_may_not_override_accounting_readiness": true
+  },
+  "interpretation": "The gate is an accounting-readiness classification, not a requirement to invent missing instruments. A scientifically valid frozen or partial recovery outcome remains valid; it simply does not count as a complete canonical bilateral matrix.",
+  "reopen_conditions_registry": "model/accounting/reopen_conditions_registry.json"
+}

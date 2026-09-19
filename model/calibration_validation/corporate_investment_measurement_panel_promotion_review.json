@@ -1,0 +1,50 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "corporate_investment_response",
+  "snapshot_id": "corporate-investment-measurement-panel-vintage-2026-09-19",
+  "verdict": "PASS_EXACT_REVIEWED_DERIVED_PANEL_ELIGIBLE_FOR_PROMOTION",
+  "estimation_authorized": false,
+  "reviewed_workflow": {
+    "run_id": 35435978264,
+    "artifact_id": 10582279137,
+    "artifact_name": "corporate-investment-measurement-panel-c3cab39f7e9b3762b003aefaa0e23440aad0e16f",
+    "artifact_zip_sha256": "52b6cf33101d80b2ed868d15cbc63a8ed9cc319a4eb7803e77d8742a26d92e6f",
+    "source_branch_head_sha": "d1730a15e2f9e224265e49f8ba82f982e56f36a3"
+  },
+  "expected_files": [
+    {
+      "path": "corporate_investment_measurement_panel.csv",
+      "bytes": 2247,
+      "sha256": "d8d3765fe9e83bd29620de1d02e914626a5f5e1b4071e005ff138b55f127ba69"
+    },
+    {
+      "path": "corporate_investment_measurement_panel_audit.json",
+      "bytes": 3755,
+      "sha256": "be243ec0a4d14c3822a9954740db1a91e6d090551607f35e17b27e15364da458"
+    }
+  ],
+  "complete_panel": {
+    "rows": 34,
+    "first_period": "2017-Q4",
+    "last_period": "2026-Q1",
+    "quarterly_contiguous": true
+  },
+  "input_sha256": {
+    "target": "769135772a75dbd400fd5203de8e299eb4a7a685248633033ac43cbe6f5a2ecc",
+    "grants": "1ce450e416722d47b969cb0d35d1e01aab17366b86e437879d05325188933920",
+    "lending_rate_raw": "eb80c64535727f194348a0ba7c04356cea761884273b332af55eac79addcf1c0",
+    "nfc_gva": "7548019bdac61708e8f40eb400160d6e1784526ae24690616e3d3a87304350f9",
+    "real_gdp": "36be216728430bcee0c3fc78d8d282645ccd71d416ede47e50ed73e8cc5e4ff4"
+  },
+  "hard_boundaries": {
+    "parameter_estimation_performed": false,
+    "model_selection_performed": false,
+    "lag_selection_performed": false,
+    "holdout_opened": false,
+    "causal_claim": false,
+    "system_dynamics_activation": false,
+    "behavioural_closure_change": false
+  },
+  "promotion_rule": "Only artifact 10582279137 with the exact ZIP digest and exact two-file byte/SHA-256 set above may be committed as this derived measurement-panel vintage."
+}

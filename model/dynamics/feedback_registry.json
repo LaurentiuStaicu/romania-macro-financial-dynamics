@@ -1,7 +1,7 @@
 {
-  "registry_version": "0.2",
-  "purpose": "Qualitative feedback skeleton for the Dynamic Core. Every loop remains a behavioural candidate until its evidence, equation and parameter gates are passed.",
-  "status_rule": "Presence in this registry does not establish causality, parameter sign stability, empirical materiality, predictive validity, or System Dynamics activation. A loop remains quantitatively inactive until every item in activation_gate passes.",
+  "registry_version": "0.3",
+  "purpose": "Qualitative feedback skeleton for the Dynamic Core. Closed loops and explicitly open candidate feedback chains are distinguished. No structure is quantitatively active until its evidence, equation, parameter and conformity gates pass.",
+  "status_rule": "Presence in this registry does not establish causality, parameter sign stability, empirical materiality, predictive validity, or System Dynamics activation. CLOSED_CANDIDATE_LOOP means only that the declared signed path is topologically closed. OPEN_CHAIN means the structure must not be represented or activated as a feedback loop until an evidence-supported closing path exists.",
   "loops": [
     {
       "id": "government_refinancing_interest_loop",
@@ -36,7 +36,8 @@
       ],
       "delay_candidates": [
         "debt_service_maturity_delay"
-      ]
+      ],
+      "topology_status": "CLOSED_CANDIDATE_LOOP"
     },
     {
       "id": "government_issuance_yield_loop",
@@ -77,7 +78,8 @@
       "delay_candidates": [
         "portfolio_reallocation_delay",
         "debt_service_maturity_delay"
-      ]
+      ],
+      "topology_status": "CLOSED_CANDIDATE_LOOP"
     },
     {
       "id": "bank_credit_balance_sheet_loop",
@@ -85,7 +87,7 @@
         "en": "Bank credit–balance-sheet loop",
         "ro": "Bucla credit–bilanț bancar"
       },
-      "polarity_hypothesis": "mixed_candidate",
+      "polarity_hypothesis": "balancing_candidate",
       "scientific_status": "BEHAVIOURAL_CANDIDATE",
       "quantitatively_active": false,
       "path": [
@@ -113,7 +115,8 @@
       "delay_candidates": [
         "credit_risk_recognition_delay",
         "credit_supply_adjustment_delay"
-      ]
+      ],
+      "topology_status": "CLOSED_CANDIDATE_LOOP"
     },
     {
       "id": "monetary_credit_transmission_loop",
@@ -153,7 +156,8 @@
       ],
       "delay_candidates": [
         "monetary_transmission_delay"
-      ]
+      ],
+      "topology_status": "CLOSED_CANDIDATE_LOOP"
     },
     {
       "id": "external_fx_refinancing_loop",
@@ -161,8 +165,8 @@
         "en": "External FX–refinancing loop",
         "ro": "Bucla curs valutar–refinanțare externă"
       },
-      "polarity_hypothesis": "reinforcing_candidate",
-      "scientific_status": "BEHAVIOURAL_CANDIDATE",
+      "polarity_hypothesis": "not_applicable_until_closed",
+      "scientific_status": "BEHAVIOURAL_CANDIDATE_OPEN_CHAIN",
       "quantitatively_active": false,
       "path": [
         {
@@ -189,7 +193,9 @@
       "delay_candidates": [
         "refinancing_maturity_delay",
         "fx_pass_through_delay"
-      ]
+      ],
+      "topology_status": "OPEN_CHAIN",
+      "activation_blocker": "The retained path ends at exchange_rate_pressure rather than returning to exchange_rate_depreciation. No closing causal link is inferred merely to create a loop; closure requires explicit evidence and specification."
     }
   ],
   "delay_candidates": [

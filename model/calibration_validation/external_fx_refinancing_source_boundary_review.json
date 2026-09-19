@@ -1,0 +1,81 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "external_fx_refinancing_feedback",
+  "purpose": "Determine which parts of Romania's external-debt exposure are directly observable without treating reporting currency as debt denomination or original maturity as a refinancing schedule.",
+  "verdict": "SECTOR_ORIGINAL_MATURITY_AND_PARTIAL_AGGREGATE_CURRENCY_RISK_MARGINS_OBSERVED_JOINT_CURRENCY_RESIDUAL_MATURITY_HEDGING_UNRESOLVED",
+  "exact_source_examples": [
+    {
+      "institution": "ECB",
+      "dataset": "BPS — Balance of Payments and International Investment Position / external debt",
+      "series_key": "BPS.Q.N.RO.W1.S13.S1.LE.L.FA.TXD.FGED.L.EUR._T._X.N.ALL",
+      "concept": "Gross external debt excluding FDI of general government, long-term original maturity, Romania, quarterly",
+      "status": "EXACT_SERIES_CONFIRMED",
+      "unit_of_measure": "EUR",
+      "currency_denominator": "All currencies (_T)",
+      "semantic_limit": "EUR is the reporting unit. Currency denominator _T means the series does not identify whether the underlying debt is denominated in EUR, RON, USD or another currency."
+    },
+    {
+      "institution": "ECB",
+      "dataset": "BPS",
+      "series_key": "BPS.Q.N.RO.W1.S122.S1.LE.L.FA.TXD.FGED.S.EUR._T._X.N.ALL",
+      "concept": "Gross external debt excluding FDI of deposit-taking corporations except the central bank, short-term original maturity, Romania, quarterly",
+      "status": "EXACT_SERIES_CONFIRMED",
+      "unit_of_measure": "EUR",
+      "currency_denominator": "All currencies (_T)",
+      "semantic_limit": "Short-term refers to original maturity up to one year, not residual maturity or the amount contractually due in the next model period."
+    },
+    {
+      "institution": "ECB",
+      "dataset": "BPS",
+      "series_key": "BPS.Q.N.RO.W1.S1.S1.LE.L.FA._T.FGED._Z.RON._T._X.N.ALL",
+      "concept": "Gross external debt of total economy, Romania, quarterly, reported in Romanian lei",
+      "status": "EXACT_SERIES_CONFIRMED",
+      "unit_of_measure": "RON",
+      "currency_denominator": "All currencies (_T)",
+      "semantic_limit": "Changing the reporting unit from EUR to RON does not reveal debt currency composition. The currency-denominator dimension remains all currencies."
+    }
+  ],
+  "source_boundary_findings": {
+    "sector_breakdown_available": true,
+    "original_maturity_breakdown_available": true,
+    "residual_maturity_schedule_available": false,
+    "debt_currency_denomination_available_from_confirmed_series": false,
+    "hedging_positions_available": false,
+    "matched_interest_or_coupon_schedule_available": false,
+    "gross_external_debt_excluding_FDI_note": "Several confirmed TXD/FGED series exclude direct-investment debt. They may not be silently treated as total external debt if the mechanism requires all FX-sensitive liabilities.",
+    "aggregate_external_debt_currency_composition_published_by_bnr": true,
+    "s13_currency_and_refinancing_risk_margins_available": true,
+    "joint_currency_by_sector_available": false,
+    "joint_currency_x_residual_maturity_by_sector_available": false
+  },
+  "scientific_distinctions": {
+    "reporting_unit_is_not_currency_denomination": true,
+    "original_maturity_is_not_residual_maturity": true,
+    "gross_external_debt_stock_is_not_refinancing_need": true,
+    "fx_debt_stock_is_not_unhedged_fx_exposure": true,
+    "public_and_private_sector_boundaries_must_remain_separate": true
+  },
+  "prohibited_shortcuts": [
+    "Infer foreign-currency share from the fact that an external-debt series is reported in EUR.",
+    "Infer RON-denominated debt share from a series whose unit of measure is RON while currency denominator remains All currencies.",
+    "Treat short-term original maturity as principal due within the next quarter.",
+    "Apply the contemporaneous exchange-rate move to all gross external debt as if none were hedged.",
+    "Combine S13, banks and other sectors into one feedback coefficient without a sector aggregation contract.",
+    "Use external-debt stock changes as refinancing flows."
+  ],
+  "admissible_next_step": {
+    "action": "REOPEN_ONLY_ON_JOINT_SECTOR_CURRENCY_RESIDUAL_MATURITY_OR_HEDGING_EVIDENCE",
+    "rule": "The new BNR/MoF evidence improves aggregate and S13 risk margins but still cannot identify the joint exposure required by this feedback. Do not repeatedly re-probe existing marginal sources; reopen only on a source capable of changing joint identification."
+  },
+  "disposition": {
+    "mechanism_classification": "DEFERRED",
+    "source_readiness": "SECTOR_AND_ORIGINAL_MATURITY_OBSERVED_CURRENCY_RESIDUAL_MATURITY_HEDGING_UNRESOLVED",
+    "estimation_or_refit_allowed": false,
+    "central_feedback": false,
+    "feedback_topology": "OPEN_CHAIN",
+    "validated_reference_behavioural_mechanisms_change": 0,
+    "behavioural_closure": "UNCHANGED_INACTIVE"
+  },
+  "official_source_screening": "model/calibration_validation/external_fx_refinancing_source_screening_2026-09-19.json"
+}

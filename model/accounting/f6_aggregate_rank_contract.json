@@ -1,0 +1,34 @@
+{
+  "contract_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F6 Phase C — Exact Aggregate-Control Rank Audit",
+  "purpose": "Quantify exactly how much of the 35-cell in-boundary F6 matrix is identified by the retained published W0/W1 total-F6 controls after direct and bilateral-component coverage both failed.",
+  "inputs": {
+    "phase_A_assessment": "model/accounting/f6_insurance_pensions_coverage_assessment.json",
+    "phase_B_assessment": "model/accounting/f6_bilateral_component_coverage_assessment.json"
+  },
+  "canonical_variables": "35 in-boundary holder→issuer F6 cells over H/C/F/G/X/BNR; X→X is outside the Romanian national-accounts boundary",
+  "equation_families": [
+    "5 resident W0 holder asset totals",
+    "5 resident W0 issuer liability totals",
+    "1 W1 total asset equation for resident holders→X",
+    "1 W1 total liability equation for X→resident issuers"
+  ],
+  "known_accounting_dependency": "sum(resident W0 holder assets) - W1 assets equals sum(resident W0 issuer liabilities) - W1 liabilities, subject to published precision",
+  "hard_rules": {
+    "no_benchmark_mutation": true,
+    "no_materialization_in_phase_C": true,
+    "rank_and_nullity_must_use_exact_rational_coefficient_arithmetic": true,
+    "unique_cell_status_requires_zero_loading_on_every_nullspace_basis_vector": true,
+    "aggregate_RHS_identity_residual_must_be_reported": true,
+    "published_rounding_residuals_must_not_be_forced_to_zero": true,
+    "no_unconditional_bilateral_value_from_aggregate_equations_unless_rank_unique": true,
+    "no_issuer_applicability_zero_in_unconditional_system": true,
+    "zero_aggregate_stock_or_flow_must_not_create_bilateral_zero_equations": true,
+    "no_synthetic_allocation": true,
+    "behavioural_closure_may_change": false
+  },
+  "reconciliation_tolerance_million_RON": 0.1,
+  "offline_reproduction_boundary": "This gate reproduces exact linear identification and RHS accounting from retained Phase A assessment values. It does not replace or recreate the original source-vintage raw payloads.",
+  "disposition_rule": "If no unconditional bilateral coordinate is rank-unique and the aggregate RHS identity passes tolerance, freeze F6 at the aggregate-only public-data boundary and advance recovery to F7 rather than inventing a matrix.",
+  "system_dynamics_conformity": "Accounting-only recovery; no feedback, delay, behavioural equation or closure status changes."
+}

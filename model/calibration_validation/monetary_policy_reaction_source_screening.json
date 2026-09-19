@@ -1,0 +1,107 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "monetary_policy_reaction_function",
+  "phase": "Monetary Policy Reaction Function — Measurement Source Screening",
+  "purpose": "Determine whether Romania has exact, frequency-compatible and semantically defensible inflation-gap, activity-gap and expectations observables for a policy reaction function without converting qualitative survey balances or model-based gaps into observed shocks.",
+  "verdict": "POLICY_TARGET_OBSERVED_QUANTITATIVE_ANALYST_EXPECTATIONS_CONCEPT_CONFIRMED_QUARTERLY_BNR_GAP_VISIBLE_FORMATION_TIME_AND_REAL_TIME_VINTAGES_NOT_RETAINED",
+  "sources": {
+    "inflation_target": {
+      "institution": "National Bank of Romania",
+      "concept": "Flat inflation target",
+      "value_pct": 2.5,
+      "variation_band_pp": 1,
+      "regime_start": "2013-12",
+      "status": "EXACT_POLICY_REGIME_OBSERVED",
+      "role": "Allows an observed inflation-target midpoint for an inflation-gap measurement contract."
+    },
+    "consumer_price_expectations": {
+      "institution": "European Commission DG ECFIN / Eurostat BCS",
+      "dataset": "ei_bsco_m / CONS_006",
+      "concept": "Consumer qualitative balance: price trends over the next 12 months",
+      "frequency": "monthly",
+      "status": "EXACT_QUALITATIVE_EXPECTATIONS_INDICATOR_AVAILABLE",
+      "semantic_limit": "A balance of survey responses is not an expected annual inflation rate in percentage points and cannot be subtracted from the BNR target as if units matched.",
+      "romania_revision_note": "Romania consumer survey publication resumed in April 2024; consistent monthly/quarterly balances were restored using new data from May 2023 and econometric techniques. Disaggregate category/share results were not restored consistently."
+    },
+    "financial_analyst_expectations": {
+      "institution": "National Bank of Romania",
+      "evidence": [
+        "BNR/NBR publications display a quantitative financial-analyst survey with 1-year-ahead and 2-year-ahead inflation expectations in percent.",
+        "A March-2023 NBR presentation shows quarterly history through 2022-Q4 plus January-February 2023 observations.",
+        "Historical BNR research notes that charted expectations can be shifted to the period to which they refer, rather than plotted at the date when they were formed."
+      ],
+      "status": "QUANTITATIVE_1Y_2Y_SERIES_CONCEPT_CONFIRMED_MACHINE_READABLE_FORMATION_TIME_HISTORY_NOT_RETAINED",
+      "semantic_limit": "The quantitative concept is unit-compatible with percentage inflation, but charts/presentations do not constitute an immutable formation-date dataset. The historical display convention may shift observations to target horizon, so direct chart extraction would risk look-ahead misdating.",
+      "horizon_mapping_boundary": "A policy reaction function requires expectations indexed by the information/formation date available to policymakers. Horizon-shifted chart coordinates are not a formation-time vintage and may not be read as such.",
+      "current_public_search_status": "NO_CURRENT_MACHINE_READABLE_BNR_ANALYST_EXPECTATIONS_DATASET_OR_FORMATION_DATE_VINTAGE_IDENTIFIED",
+      "chart_digitisation_allowed": false
+    },
+    "bnr_inflation_forecast": {
+      "institution": "National Bank of Romania",
+      "concept": "BNR staff/model inflation projection",
+      "status": "AVAILABLE_IN_INFLATION_REPORTS",
+      "semantic_limit": "Central-bank forecast is part of the policy information set/model and is not interchangeable with private-sector expectations; using it in a policy rule would require explicit simultaneity/model-consistency treatment."
+    },
+    "activity_gap_ameco": {
+      "institution": "European Commission DG ECFIN",
+      "dataset": "AMECO potential-output related variables including AVGDGP/OVGDP",
+      "frequency": "annual",
+      "status": "OFFICIAL_MODEL_BASED_ANNUAL_GAP_AVAILABLE",
+      "semantic_limit": "Annual model-based output gap is not a quarterly observed activity gap and may be revised with forecast vintages."
+    },
+    "activity_gap_bnr": {
+      "institution": "National Bank of Romania",
+      "concept": "GDP/aggregate-demand gap used in Inflation Reports",
+      "status": "QUARTERLY_MODEL_BASED_REPORT_VINTAGES_OBSERVED_MACHINE_READABLE_REAL_TIME_HISTORY_NOT_RETAINED",
+      "semantic_limit": "The gap is a model-based real-time policy-information variable, not directly observed output. A policy-rule dataset must retain report/decision vintages and map each estimate to the information set available at the policy decision date; a later revised path may not be backfilled as if known in real time.",
+      "evidence": [
+        "BNR Inflation Reports publish a quarterly GDP gap path in percent of potential GDP.",
+        "The November-2024 Inflation Report states that the macro projection used information available through 29 October 2024.",
+        "The same report compares the current GDP-gap assessment with the previous forecast round, demonstrating vintage/revision dependence."
+      ],
+      "latest_reviewed_report": "BNR Inflation Report, November 2024",
+      "latest_reviewed_information_cutoff": "2024-10-29",
+      "frequency": "quarterly",
+      "chart_digitisation_allowed": false
+    }
+  },
+  "measurement_readiness": {
+    "observed_policy_rate": true,
+    "exact_inflation_target_midpoint": true,
+    "actual_inflation_series_available": true,
+    "unit_compatible_quantitative_private_inflation_expectations": true,
+    "quarterly_activity_gap_retained": false,
+    "real_time_gap_vintages_retained": false,
+    "policy_regime_dates_partially_observed": true,
+    "managed_float_intervention_treatment_frozen": false,
+    "simultaneous_policy_response_identification_frozen": false,
+    "quantitative_expectations_concept_observed": true,
+    "quantitative_expectations_machine_readable_formation_time_history_retained": false,
+    "quarterly_bnr_activity_gap_observed_in_reports": true
+  },
+  "prohibited_shortcuts": [
+    "Do not interpret the CONS_006 qualitative balance as percentage inflation expectations.",
+    "Do not use BNR staff inflation forecasts as private expectations without an explicit structural information-set contract.",
+    "Do not interpolate annual AMECO output gaps to quarters and call them observed quarterly gaps.",
+    "Do not estimate a Taylor-type rule on full-sample revised gaps without real-time-vintage treatment.",
+    "Do not treat observed exchange-rate movements as exogenous policy-rule regressors in a managed-float regime.",
+    "Do not activate the monetary-credit feedback merely because target and policy-rate histories are observed.",
+    "Do not digitise the financial-analyst expectations chart or treat target-horizon-shifted chart positions as survey formation dates.",
+    "Do not digitise the BNR GDP-gap chart into a pseudo real-time series.",
+    "Do not backfill later revised BNR GDP-gap estimates into earlier policy-decision information sets."
+  ],
+  "disposition": {
+    "mechanism_classification": "DEFERRED",
+    "observed_policy_rate_remains_exogenous": true,
+    "estimation_or_refit_allowed": false,
+    "policy_rule_activation": false,
+    "validated_reference_behavioural_mechanisms_change": 0,
+    "behavioural_closure": "UNCHANGED_INACTIVE",
+    "source_readiness": "QUANTITATIVE_EXPECTATIONS_AND_QUARTERLY_GAP_CONCEPTS_OBSERVED_FORMATION_TIME_AND_REAL_TIME_VINTAGES_NOT_RETAINED"
+  },
+  "reopen_trigger": "Retain a machine-readable quantitative financial-analyst expectations history indexed by survey formation date (or a reproducible source preserving that mapping); retain quarterly BNR activity-gap vintages with information cutoffs/revision timing; then freeze policy-regime/intervention and simultaneity identification before any reaction-function fit.",
+  "source_discovery_terminal_assessment": "model/calibration_validation/monetary_policy_reaction_source_discovery_terminal_assessment.json",
+  "source_discovery_stage_status": "STAGE_CLOSED_FROZEN_UNDER_CURRENT_PUBLIC_DISCOVERY_SURFACE_NO_MODEL_EFFECT",
+  "source_discovery_reopen_policy": "Do not repeat the same public-source searches or infer hidden endpoints. Reopen source discovery only when new official BNR evidence exposes a machine-readable formation-date expectations history, a real-time GDP-gap vintage history, stable target series/API metadata, or an official data annex preserving the required time semantics."
+}

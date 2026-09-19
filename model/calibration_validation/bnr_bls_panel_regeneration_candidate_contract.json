@@ -1,0 +1,80 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "mechanism_id": "aggregate_bank_credit_response",
+  "phase": "BNR BLS — Canonical Realised-Round Panel Regeneration Candidate",
+  "purpose": "Construct an isolated candidate panel by adding only the three semantic-reviewed missing BLS rounds to the existing canonical eight-round panel. The current canonical panel must remain byte-unchanged during this gate. No interpolation, synthetic dates, parameter estimation, model selection, holdout access or behavioural activation is permitted.",
+  "current_canonical_panel": "data/processed/bnr_bls_realised_rounds.csv",
+  "current_canonical_audit": "model/calibration_validation/bnr_bls_cross_round_mapping_audit.json",
+  "semantic_review": "model/calibration_validation/bnr_bls_missing_round_semantic_mapping_audit.json",
+  "expected_current_state": {
+    "observed_round_count": 8,
+    "observed_quarters": [
+      "2022-Q4",
+      "2023-Q1",
+      "2023-Q4",
+      "2024-Q1",
+      "2024-Q3",
+      "2024-Q4",
+      "2025-Q1",
+      "2025-Q3"
+    ],
+    "missing_quarters": [
+      "2023-Q2",
+      "2023-Q3",
+      "2024-Q2",
+      "2025-Q2"
+    ]
+  },
+  "authorized_additions": [
+    "2023-Q2",
+    "2023-Q3",
+    "2024-Q2"
+  ],
+  "expected_candidate_state": {
+    "observed_round_count": 11,
+    "expected_quarter_count_between_bounds": 12,
+    "coverage_fraction": 0.9166666666666666,
+    "missing_quarters": [
+      "2025-Q2"
+    ]
+  },
+  "reference_date_policy": {
+    "quarter_is_primary_period_identifier": true,
+    "workbook_date_authority": "If semantic review authority is WORKBOOK_COMPANIES_A1, retain the exact raw workbook date as reference_date.",
+    "publication_quarter_authority": "If semantic review authority is OFFICIAL_BNR_PUBLICATION_QUARTER, leave reference_date empty rather than fabricate a day-level date. Preserve the raw workbook header and publication evidence in the audit.",
+    "no_synthetic_quarter_end_date": true,
+    "no_silent_date_normalisation": true,
+    "blank_reference_date_is_missing_exact_day_not_missing_quarter": true
+  },
+  "candidate_output_files": {
+    "panel": "bnr_bls_realised_rounds_candidate.csv",
+    "audit": "bnr_bls_panel_regeneration_candidate_audit.json"
+  },
+  "pass_gate": {
+    "existing_eight_rows_preserved_exactly": true,
+    "exactly_three_authorized_rows_added": true,
+    "no_existing_quarter_replaced": true,
+    "candidate_has_exactly_eleven_unique_rounds": true,
+    "only_2025_q2_remains_missing": true,
+    "canonical_panel_byte_hash_unchanged_during_gate": true,
+    "semantic_review_must_pass_all_six_observables_per_added_round": true
+  },
+  "hard_rules": {
+    "no_canonical_panel_mutation": true,
+    "no_interpolation": true,
+    "no_forward_fill": true,
+    "no_synthetic_quarter_creation": true,
+    "no_synthetic_reference_date": true,
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_lag_selection": true,
+    "no_holdout_opening": true,
+    "no_causal_claim": true,
+    "no_nfc_household_signal_aggregation": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "pass_effect": "ELEVEN_OF_TWELVE_BLS_ROUNDS_READY_FOR_EXPLICIT_CANONICAL_PROMOTION_REVIEW_ONLY",
+  "fail_effect": "RETAIN_EXISTING_EIGHT_ROUND_CANONICAL_PANEL_UNCHANGED"
+}

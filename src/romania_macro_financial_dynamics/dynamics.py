@@ -15,6 +15,7 @@ from typing import Iterable, Mapping
 from .accounting import AccountingCell, INSTRUMENT_PRIORITY, SECTOR_IDS
 
 DEFAULT_DT_YEARS = 0.25
+MAX_EULER_DELAY_DT_FRACTION = 1.0 / 3.0
 
 
 class IncompleteEmpiricalState(ValueError):
@@ -218,6 +219,35 @@ def first_order_delay_derivative(input_value: float, delayed_value: float, tau_y
     return (input_value - delayed_value) / tau_years
 
 
+def first_order_delay_timestep_ratio(dt_years: float, tau_years: float) -> float:
+    """Return dt/tau for explicit-Euler first-order delay adequacy checks."""
+
+    if not all(isfinite(value) for value in (dt_years, tau_years)):
+        raise ValueError("Delay time-step inputs must be finite")
+    if dt_years <= 0:
+        raise ValueError("dt_years must be positive")
+    if tau_years <= 0:
+        raise ValueError("tau_years must be positive")
+    return dt_years / tau_years
+
+
+def first_order_delay_timestep_is_adequate(
+    dt_years: float,
+    tau_years: float,
+    *,
+    max_fraction: float = MAX_EULER_DELAY_DT_FRACTION,
+) -> bool:
+    """Conservative explicit-Euler gate for a first-order delay.
+
+    RMD uses a strict dt/tau < 1/3 reference rule. This is a numerical
+    adequacy guard, not an empirical parameter assumption.
+    """
+
+    if not isfinite(max_fraction) or max_fraction <= 0:
+        raise ValueError("max_fraction must be finite and positive")
+    return first_order_delay_timestep_ratio(dt_years, tau_years) < max_fraction
+
+
 def simulate_first_order_delay_euler(
     *,
     initial: float,
@@ -226,12 +256,22 @@ def simulate_first_order_delay_euler(
     horizon_years: float,
     dt_years: float = DEFAULT_DT_YEARS,
 ) -> float:
-    """Integrate a constant-input first-order delay for structural tests."""
+    """Integrate a constant-input first-order delay for structural tests.
+
+    The reference helper rejects a time step that violates the conservative
+    RMD Euler delay rule instead of returning a numerically unstable or
+    qualitatively distorted path.
+    """
 
     if horizon_years < 0 or not isfinite(horizon_years):
         raise ValueError("horizon_years must be finite and non-negative")
     if dt_years <= 0 or not isfinite(dt_years):
         raise ValueError("dt_years must be finite and positive")
+    if not first_order_delay_timestep_is_adequate(dt_years, tau_years):
+        raise ValueError(
+            "Explicit-Euler delay time step must satisfy dt/tau < 1/3 "
+            "for the RMD reference structural simulation"
+        )
     if horizon_years == 0:
         return initial
 

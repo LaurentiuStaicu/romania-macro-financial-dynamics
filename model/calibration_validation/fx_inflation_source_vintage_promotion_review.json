@@ -1,0 +1,71 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "exchange_rate_pass_through_to_inflation",
+  "snapshot_id": "fx-inflation-monthly-levels-vintage-2026-09-19",
+  "verdict": "PASS_EXACT_REVIEWED_ARTIFACT_ELIGIBLE_FOR_PROMOTION",
+  "estimation_authorized": false,
+  "reviewed_workflow": {
+    "run_id": 35434012648,
+    "artifact_id": 10581262018,
+    "artifact_name": "fx-inflation-monthly-materialisation-17fffeb42d93a48aed0629f1cc9d0577108bcb61",
+    "artifact_zip_sha256": "282b52fb29732d137d81cec6485e8bf1bab17002045ffc1fab01fca5f0bf6f65",
+    "pr_merge_sha": "17fffeb42d93a48aed0629f1cc9d0577108bcb61",
+    "source_branch_head_sha": "2857f62c5b8d3239a29475b811212c94cfa2059a"
+  },
+  "expected_files": [
+    {
+      "path": "fx_inflation_monthly_materialisation_audit.json",
+      "bytes": 4022,
+      "sha256": "a9b31a5e537e32f01fd866b0c024ba514257d3c5bc098763355ddcafeb3d60fb"
+    },
+    {
+      "path": "fx_inflation_monthly_raw_source.csv",
+      "bytes": 15822,
+      "sha256": "bba995fe9e435cc124a5b66c035a5e65085ef705f912bf6c018dcd0d4a4748ea"
+    },
+    {
+      "path": "raw/ecb_exr_m_ron_eur_sp00_a.csv",
+      "bytes": 96338,
+      "sha256": "7354d85c7106f16c3905c885d6cbf2c7581fd2a10652d8f0d8456b79b4f56254"
+    },
+    {
+      "path": "raw/eurostat_ext_st_27_2020msbec_ro_imp_world_total_ivu.json",
+      "bytes": 16090,
+      "sha256": "1c9d9541d69fb3dbd2ddbda4a066e2025c76033840e891e328c19e8022d94604"
+    },
+    {
+      "path": "raw/eurostat_prc_hicp_minr_ro_i25_total.json",
+      "bytes": 21077,
+      "sha256": "e498c33240446913d26402ce8e1a1d30fc0552e989a888f76e684143dc95a0cf"
+    },
+    {
+      "path": "snapshot_manifest.json",
+      "bytes": 4616,
+      "sha256": "db0a2857ffe7a86302b100c15ed9fedbb117180acafd813b924a2eee8d7404fa"
+    }
+  ],
+  "coverage": {
+    "rows": 294,
+    "first_period": "2002-01",
+    "last_period": "2026-06",
+    "transformations_performed": []
+  },
+  "source_boundaries": {
+    "exchange_rate": "EXR.M.RON.EUR.SP00.A",
+    "hicp": "prc_hicp_minr / M / I25 / coicop18=TOTAL / RO",
+    "external_price": "ext_st_27_2020msbec / M / IMP / IVU / WORLD / TOTAL / RO"
+  },
+  "hard_boundaries": {
+    "level_only_materialisation": true,
+    "no_log_difference": true,
+    "no_monthly_or_annual_inflation_transform": true,
+    "no_lag_selection": true,
+    "no_regime_selection": true,
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "promotion_rule": "Only artifact 10581262018 with the exact ZIP digest and per-file byte sizes/SHA-256 values above may be committed as this source vintage."
+}

@@ -1,0 +1,64 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Accounting Empirical Recovery / F7 Phase B — Exact Aggregate-Control Rank Audit",
+  "verdict": "FREEZE_F7_AGGREGATE_ONLY_PUBLIC_DATA_BOUNDARY",
+  "source_basis": {
+    "phase_A_assessment": "model/accounting/f7_financial_derivatives_coverage_assessment.json",
+    "phase_A_workflow_run_id": 35385737702,
+    "phase_A_workflow_artifact_id": 10563888211,
+    "phase_A_workflow_artifact_sha256": "b16f907b6b1f21e84d918cb6fe9b87e82baa85b030f374392359a76a31f2dbc6",
+    "offline_rank_reproduction": "scripts/audit_f7_aggregate_rank.py"
+  },
+  "unconditional_identification": {
+    "stock": {
+      "variables": 35,
+      "equations": 13,
+      "rank": 11,
+      "nullity": 24,
+      "unique_cell_count": 0
+    },
+    "flow_2025": {
+      "variables": 35,
+      "equations": 11,
+      "rank": 10,
+      "nullity": 25,
+      "unique_cell_count": 0
+    }
+  },
+  "RHS_accounting_identity": {
+    "stock": {
+      "domestic_from_assets_million_RON": 596.21,
+      "domestic_from_liabilities_million_RON": 596.21,
+      "residual_million_RON": 0.0,
+      "status": "PASS_WITHIN_0.1_MILLION_RON"
+    },
+    "flow_2025": {
+      "domestic_from_assets_million_RON": -996.54,
+      "domestic_from_liabilities_million_RON": -996.5299999999997,
+      "residual_million_RON": -0.010000000000218279,
+      "status": "PASS_WITHIN_0.1_MILLION_RON"
+    }
+  },
+  "exact_aggregate_complements": {
+    "stock_C_liabilities_million_RON": 187.55998046875015,
+    "flow_G_assets_million_RON": 0.009934082031577418,
+    "rule": "These are aggregate-sector complements from W0 total minus all other published resident-sector aggregates. They are not bilateral cells and are not materialized into the Accounting Spine."
+  },
+  "scientific_interpretation": [
+    "Stock F7 has 13 available aggregate equations but exact coefficient rank 11; flow has 11 equations and rank 10.",
+    "No bilateral coordinate is invariant across the unconditional nullspace for either stock or 2025 flow.",
+    "The stock domestic asset/liability identity is exact at retained precision and the 2025-flow residual is about -0.01 million RON, inside the existing 0.1 million RON tolerance.",
+    "Two missing aggregate sector controls can be recovered only as aggregate complements: stock C liabilities and flow G assets. They do not identify counterpart allocation.",
+    "Zero aggregate G/BNR controls are not converted into bilateral zeros and no non-negativity or issuer-applicability premise is imposed.",
+    "F7 is economically non-zero at aggregate level but bilateral structure is unidentified at the tested public-data boundary."
+  ],
+  "disposition": {
+    "F7_status": "FROZEN_AGGREGATE_ONLY_PUBLIC_DATA_BOUNDARY",
+    "bilateral_materialization": false,
+    "benchmark_changed": false,
+    "materiality_verdict": "NOT_REQUIRED_FOR_FREEZE_AND_NOT_ASSIGNED",
+    "behavioural_closure": "UNCHANGED_INACTIVE",
+    "accounting_recovery_next_priority": "Reassess full Accounting Spine readiness and explicit remaining reopen conditions for F2/F4/F5/F6/F7/F8"
+  },
+  "reopen_F7_when": "A definitionally comparable official source provides bilateral F7 or additional exact counterparty constraints sufficient to reduce the unconditional nullspace."
+}

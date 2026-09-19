@@ -1,0 +1,128 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "aggregate_bank_credit_response",
+  "phase": "BNR BLS May-2025 XLSX Offline Layout Review",
+  "retained_vintage": "data/source_vintages/bnr-bls-may2025-xlsx-vintage-2026-09-19",
+  "inspection_method": "artifact_tool SpreadsheetFile.import_xlsx + worksheet/range inspection; no workbook mutation",
+  "source_workbooks": {
+    "english": {
+      "file": "may_2025_english_slug.xlsx",
+      "sha256": "e3ecfc7fcdb5817c8feec00b7ae5b8bd7421e613ba4b69cb3d3eec2dff2297c6",
+      "sheets": [
+        {
+          "name": "Companies",
+          "used_range": "A1:H322"
+        },
+        {
+          "name": "Households",
+          "used_range": "A1:H335"
+        }
+      ],
+      "round_date_cell": "Companies!A1",
+      "round_date": "31/03/2025"
+    },
+    "romanian": {
+      "file": "may_2025_romanian_slug.xlsx",
+      "sha256": "3b11d735150ef1048d8c5bc8f0b02993b13bd98a223de743f62d711128e1b271",
+      "sheets": [
+        {
+          "name": "companii",
+          "used_range": "A1:M322"
+        },
+        {
+          "name": "populatie",
+          "used_range": "A1:H335"
+        }
+      ],
+      "round_date_cell": "companii!A1",
+      "round_date": "31/03/2025"
+    }
+  },
+  "realised_bls_semantics": {
+    "nfc_credit_standards": {
+      "question_id": "C01",
+      "question_cell": "Companies!B2",
+      "scope": "Total companies / Overall",
+      "net_percentage_cell": "Companies!C13",
+      "net_percentage": 11.71,
+      "sign_convention": "positive = net tightening; negative = net easing"
+    },
+    "nfc_loan_demand": {
+      "question_id": "C05",
+      "question_cell": "Companies!B225",
+      "scope": "Total companies / Overall",
+      "net_percentage_cell": "Companies!C235",
+      "net_percentage": 22.55,
+      "sign_convention": "positive = net increase in demand; negative = net decrease"
+    },
+    "household_mortgage_credit_standards": {
+      "question_id": "P01",
+      "question_cell": "Households!B2",
+      "scope": "Mortgage loans",
+      "net_percentage_cell": "Households!C12",
+      "net_percentage": -19.74,
+      "sign_convention": "positive = net tightening; negative = net easing"
+    },
+    "household_consumer_credit_standards": {
+      "question_id": "P01",
+      "question_cell": "Households!B2",
+      "scope": "Consumer loans and other",
+      "net_percentage_cell": "Households!D12",
+      "net_percentage": 15.38,
+      "sign_convention": "positive = net tightening; negative = net easing"
+    },
+    "household_mortgage_loan_demand": {
+      "question_id": "P06",
+      "question_cell": "Households!B90",
+      "scope": "Mortgage loans",
+      "net_percentage_cell": "Households!C99",
+      "net_percentage": 35.23,
+      "sign_convention": "positive = net increase in demand; negative = net decrease"
+    },
+    "household_consumer_loan_demand": {
+      "question_id": "P13",
+      "question_cell": "Households!B293",
+      "scope": "Total consumer loans and other",
+      "net_percentage_cell": "Households!C303",
+      "net_percentage": -17.12,
+      "sign_convention": "positive = net increase in demand; negative = net decrease"
+    }
+  },
+  "dsti_semantic_check": {
+    "mortgage_term_question": {
+      "question_id": "P0303",
+      "label_cell": "Households!B59",
+      "label": "Maximum debt service to monthly income (lower = tightening; higher = easing)",
+      "response_type": "change in a lending term, reported as bank-response distribution/net percentage",
+      "net_percentage_cell": "Households!E71",
+      "net_percentage": 0
+    },
+    "consumer_term_question": {
+      "question_id": "P1103",
+      "label_cell": "Households!B212",
+      "label": "Maximum debt service to monthly income (lower = tightening; higher = easing)",
+      "response_type": "change in a lending term, reported as bank-response distribution/net percentage",
+      "net_percentage_cell": "Households!C221",
+      "net_percentage": 0
+    },
+    "conclusion": "These workbook fields are not levels of borrower DSTI and must not be substituted for the average/new-loan/outstanding-loan DSTI levels discussed in BNR stability reports."
+  },
+  "history_boundary": {
+    "longitudinal_history_present_in_this_workbook": false,
+    "observation_rounds_in_workbook": 1,
+    "round": "2025-Q1 / 31 March 2025 reference date",
+    "interpretation": "The workbook provides a deterministic schema and one realised survey round, not the multi-quarter historical BLS series required for structural selection.",
+    "legacy_archive_status": "Historical 2023-2025 XLS bytes are retained separately, but no canonical artifact_tool extraction path exists for OLE2 XLS.",
+    "no_history_inference_from_single_round": true
+  },
+  "model_boundary": {
+    "exact_current_round_supply_demand_separation_demonstrated": true,
+    "historical_series_ready": false,
+    "calibration_cycle_open": false,
+    "estimation_authorized": false,
+    "causal_claim_allowed": false,
+    "system_dynamics_activation": false,
+    "behavioural_closure_change": false
+  }
+}
