@@ -12,7 +12,11 @@
     "release_date": "2026-06-03",
     "release_page": "https://economy-finance.ec.europa.eu/economic-research-and-databases/economic-databases/ameco-database_en",
     "actual_only_last_year": 2024,
-    "forecast_years_excluded": [2025, 2026, 2027]
+    "forecast_years_excluded": [
+      2025,
+      2026,
+      2027
+    ]
   },
   "sources": [
     {
@@ -42,7 +46,7 @@
       "code": "ROM.1.0.319.0.UDGG",
       "country": "Romania",
       "variable": "UDGG",
-      "concept": "General government consolidated gross debt: excessive deficit procedure",
+      "concept": "General government consolidated gross debt :- Excessive deficit procedure (based on ESA 2010)",
       "unit": "(Percentage of GDP at current prices (excessive deficit procedure))"
     }
   ],
