@@ -11,6 +11,72 @@ permissions:
   contents: read
 
 jobs:
+  manual-eurostat-counterpart-probe:
+    if: ${{ github.event_name == 'workflow_dispatch' && github.ref_name == 'audit/scientific-integrity-2026-09-18' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out selected manual ref
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify frozen Eurostat discovery contract and probe logic
+        run: |
+          python -m unittest tests.test_sectoral_financial_positions_external_source_screening -v
+          python -m unittest tests.test_sectoral_financial_positions_eurostat_counterpart_probe_contract -v
+          python -m unittest tests.test_sectoral_financial_positions_eurostat_counterpart_probe -v
+
+      - name: Run manual Eurostat counterpart discovery probe
+        env:
+          EUROSTAT_COUNTERPART_PROBE_OUT: sectoral_financial_positions_eurostat_counterpart_probe_artifacts
+        run: python scripts/audit_eurostat_sectoral_financial_positions_counterpart_probe.py
+
+      - name: Upload Eurostat source-access evidence only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: manual-eurostat-counterpart-probe-${{ github.sha }}
+          path: sectoral_financial_positions_eurostat_counterpart_probe_artifacts/
+          if-no-files-found: error
+          retention-days: 90
+
+  manual-oecd-counterpart-probe:
+    if: ${{ github.event_name == 'workflow_dispatch' && github.ref_name == 'audit/scientific-integrity-2026-09-18' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out selected manual ref
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify frozen OECD discovery contract and probe logic
+        run: |
+          python -m unittest tests.test_sectoral_financial_positions_external_source_screening -v
+          python -m unittest tests.test_sectoral_financial_positions_oecd_counterpart_probe_contract -v
+          python -m unittest tests.test_sectoral_financial_positions_oecd_counterpart_probe -v
+
+      - name: Run manual OECD counterpart discovery probe
+        env:
+          OECD_SECTORAL_COUNTERPART_PROBE_OUT: sectoral_financial_positions_oecd_counterpart_probe_artifacts
+        run: python scripts/audit_oecd_sectoral_financial_positions_counterpart_probe.py
+
+      - name: Upload OECD source-access evidence only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: manual-oecd-counterpart-probe-${{ github.sha }}
+          path: sectoral_financial_positions_oecd_counterpart_probe_artifacts/
+          if-no-files-found: error
+          retention-days: 90
+
   verify-baseline:
     runs-on: ubuntu-latest
 

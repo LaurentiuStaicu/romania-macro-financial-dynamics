@@ -94,9 +94,18 @@
     "workflow_dispatch_requires_workflow_on_default_branch": true,
     "default_branch_at_preregistration": "main",
     "workflow_present_on_default_branch_at_preregistration": false,
-    "current_execution_state": "PENDING_DEFAULT_BRANCH_PRESENCE_OR_EQUIVALENT_AUTHORIZED_MANUAL_EXECUTION",
+    "current_execution_state": "READY_FOR_MANUAL_DISPATCH_VIA_EXISTING_DEFAULT_BRANCH_WORKFLOW",
     "no_trigger_broadening_to_bypass_precondition": true,
-    "scientific_effect_while_pending": "NONE",
-    "rationale": "The manual OECD workflow is introduced on the scientific-integrity draft branch and is absent from main. GitHub workflow_dispatch therefore cannot be used for that workflow until it exists on the default branch, or an equivalent explicitly authorized manual path is used. The trigger must not be broadened to pull_request/push merely to obtain live source data."
+    "scientific_effect_while_pending": "NONE_UNTIL_A_RETAINED_MANUAL_RUN_RESULT_IS_REVIEWED",
+    "rationale": "The dedicated OECD probe workflow remains absent from main, but Scientific CI already exists on the default branch with workflow_dispatch. Dispatching Scientific CI against this audit ref uses the branch workflow version, whose OECD probe job is explicitly manual-only and branch-locked. This is an equivalent authorized manual path and does not broaden the probe to pull_request or push events.",
+    "manual_dispatch_bridge": {
+      "workflow": ".github/workflows/scientific-ci.yml",
+      "workflow_exists_on_default_branch": true,
+      "dispatch_ref": "audit/scientific-integrity-2026-09-18",
+      "branch_job": "manual-oecd-counterpart-probe",
+      "activation_condition": "github.event_name == 'workflow_dispatch' && github.ref_name == 'audit/scientific-integrity-2026-09-18'",
+      "automatic_pull_request_or_push_execution": false,
+      "scientific_role": "Equivalent authorized manual execution path. It preserves the frozen probe contract and uploads source-access evidence only."
+    }
   }
 }

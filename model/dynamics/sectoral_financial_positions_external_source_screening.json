@@ -88,17 +88,27 @@
     "immediate_reference_mode_reopen_authorized": false,
     "reference_mode_promotion_authorized": false,
     "accounting_readiness_change": false,
-    "next_admissible_action": "Preserve both strengthened external discovery probes as manual-only. Eurostat nasq_10_f_cp remains first priority; OECD counterpart stocks/flows remain secondary. Execute either only after its workflow definition is present on the default branch or through an equivalent explicitly authorized manual path; do not broaden triggers to pull_request/push merely to obtain live source data. Provider/network/throttling failures are indeterminate and have no scientific effect. A retained PASS authorizes only a separately preregistered lineage/semantic/instrument-coverage review, never direct reference-mode promotion.",
+    "next_admissible_action": "Manually dispatch the existing Scientific CI workflow against audit/scientific-integrity-2026-09-18. On that ref, two branch-locked workflow_dispatch-only jobs run the frozen Eurostat and OECD counterpart discovery probes and upload separate source-access artifacts. Review retained results under PASS / DEFINITIVE_NEGATIVE / INDETERMINATE semantics before any mapping, historical extraction, reference-mode promotion, accounting-readiness change or behavioural activation.",
     "oecd_probe_justified": true,
     "eurostat_counterpart_probe_justified": true,
     "discovery_priority": [
       "EUROSTAT_NASQ_10_F_CP",
       "OECD_COUNTERPART_DATAFLOWS"
     ],
-    "eurostat_probe_execution_state": "PENDING_DEFAULT_BRANCH_PRESENCE_OR_EQUIVALENT_AUTHORIZED_MANUAL_EXECUTION",
+    "eurostat_probe_execution_state": "READY_FOR_MANUAL_DISPATCH_VIA_EXISTING_DEFAULT_BRANCH_WORKFLOW",
     "trigger_broadening_to_bypass_execution_precondition_authorized": false,
-    "oecd_probe_execution_state": "PENDING_DEFAULT_BRANCH_PRESENCE_OR_EQUIVALENT_AUTHORIZED_MANUAL_EXECUTION",
-    "oecd_provider_access_failures_have_no_scientific_effect": true
+    "oecd_probe_execution_state": "READY_FOR_MANUAL_DISPATCH_VIA_EXISTING_DEFAULT_BRANCH_WORKFLOW",
+    "oecd_provider_access_failures_have_no_scientific_effect": true,
+    "manual_dispatch_bridge": {
+      "workflow": ".github/workflows/scientific-ci.yml",
+      "default_branch_presence": true,
+      "dispatch_ref": "audit/scientific-integrity-2026-09-18",
+      "live_jobs": [
+        "manual-eurostat-counterpart-probe",
+        "manual-oecd-counterpart-probe"
+      ],
+      "pull_request_or_push_live_execution": false
+    }
   },
   "hard_rules": {
     "no_reinterpretation_of_historical_phase_A_D": true,

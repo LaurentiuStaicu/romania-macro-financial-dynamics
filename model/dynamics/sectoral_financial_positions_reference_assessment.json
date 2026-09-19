@@ -104,10 +104,11 @@
     "formal_reference_mode_gate": false,
     "current_effect": "NONE_UNTIL_RETAINED_RESULT_AND_SEPARATE_SEMANTIC_LINEAGE_REVIEW",
     "rationale": "OECD counterpart stocks/flows could expose a useful Romania sector-counterpart boundary, but OECD documents the quarterly financial sector-accounts collection as OECD-ECB. Discovery therefore tests coverage only; it cannot establish independent reopen evidence or promotion by itself.",
-    "execution_state": "PENDING_DEFAULT_BRANCH_PRESENCE_OR_EQUIVALENT_AUTHORIZED_MANUAL_EXECUTION",
-    "execution_precondition": "workflow_dispatch definition must exist on the default branch; the OECD workflow is not present on main while PR #47 remains a draft.",
+    "execution_state": "READY_FOR_MANUAL_DISPATCH_VIA_EXISTING_DEFAULT_BRANCH_WORKFLOW",
+    "execution_precondition": "Dispatch the existing default-branch Scientific CI workflow against audit/scientific-integrity-2026-09-18; the branch-only live job is guarded to workflow_dispatch on that exact ref.",
     "no_trigger_bypass": true,
-    "provider_access_failure_effect": "INDETERMINATE_NO_SCIENTIFIC_EFFECT"
+    "provider_access_failure_effect": "INDETERMINATE_NO_SCIENTIFIC_EFFECT",
+    "manual_dispatch_bridge": ".github/workflows/scientific-ci.yml#manual-oecd-counterpart-probe"
   },
   "eurostat_counterpart_discovery_probe": {
     "status": "PREREGISTERED_MANUAL_NOT_EXECUTED",
@@ -116,8 +117,9 @@
     "formal_reference_mode_gate": false,
     "current_effect": "NONE_UNTIL_RETAINED_RESULT_AND_SEPARATE_MAPPING_LINEAGE_REVIEW",
     "rationale": "Eurostat nasq_10_f_cp explicitly disseminates quarterly counterpart information and is therefore the priority source-access discovery path. However, Eurostat metadata states that quarterly financial-account data are validated by ECB and transmitted to Eurostat, so a successful probe establishes public granularity/coverage rather than independent measurement.",
-    "execution_state": "PENDING_DEFAULT_BRANCH_PRESENCE_OR_EQUIVALENT_AUTHORIZED_MANUAL_EXECUTION",
-    "execution_precondition": "workflow_dispatch definition must exist on the default branch; the workflow is not present on main while PR #47 remains a draft.",
-    "no_trigger_bypass": true
+    "execution_state": "READY_FOR_MANUAL_DISPATCH_VIA_EXISTING_DEFAULT_BRANCH_WORKFLOW",
+    "execution_precondition": "Dispatch the existing default-branch Scientific CI workflow against audit/scientific-integrity-2026-09-18; the branch-only live job is guarded to workflow_dispatch on that exact ref.",
+    "no_trigger_bypass": true,
+    "manual_dispatch_bridge": ".github/workflows/scientific-ci.yml#manual-eurostat-counterpart-probe"
   }
 }
