@@ -1,0 +1,98 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "mechanism_id": "aggregate_bank_credit_response",
+  "phase": "BNR BLS Missing-Round Workbook Recovery",
+  "purpose": "Probe only explicitly identified official BNR workbook endpoints for canonical BLS quarters missing from the retained realised-round panel. This phase is source acquisition/identity verification only: it may retain response bytes and hashes but may not parse values, fill panel rows, estimate a credit equation, or infer URLs by brute force.",
+  "canonical_panel": "data/processed/bnr_bls_realised_rounds.csv",
+  "canonical_mapping_audit": "model/calibration_validation/bnr_bls_cross_round_mapping_audit.json",
+  "target_missing_quarters": [
+    "2023-Q2",
+    "2023-Q3",
+    "2024-Q2",
+    "2025-Q2"
+  ],
+  "rounds": [
+    {
+      "quarter": "2023-Q2",
+      "publication": "BNR Bank Lending Survey, August 2023",
+      "publication_url": "https://www.bnr.ro/uploads/2023-8-banklendingsurvey-august2023_documentpdf_545_1733754083.pdf",
+      "url_candidates": [
+        "https://www.bnr.ro/uploads/2023-8-banklendingsurvey-august2023_xls_547_1733754083.xls"
+      ],
+      "discovery_status": "EXACT_ENDPOINT_CONFIRMED_BY_WEB_AS_APPLICATION_VND_MS_EXCEL",
+      "discovery_basis": "The candidate preserves the official publication slug/timestamp and the endpoint was independently fetched on 2026-09-19; the web layer rejected display specifically because Content-Type was application/vnd.ms-excel. Binary bytes/signature are not yet retained."
+    },
+    {
+      "quarter": "2023-Q3",
+      "publication": "BNR Bank Lending Survey, November 2023",
+      "publication_url": "https://www.bnr.ro/uploads/2023-11-banklendingsurvey-november2023_documentpdf_545_1733754070.pdf",
+      "url_candidates": [
+        "https://www.bnr.ro/uploads/2023-11-banklendingsurvey-november2023_xls_547_1733754070.xls"
+      ],
+      "discovery_status": "EXACT_ENDPOINT_CONFIRMED_BY_WEB_AS_APPLICATION_VND_MS_EXCEL",
+      "discovery_basis": "The candidate preserves the official publication slug/timestamp and the endpoint was independently fetched on 2026-09-19; the web layer rejected display specifically because Content-Type was application/vnd.ms-excel. Binary bytes/signature are not yet retained."
+    },
+    {
+      "quarter": "2024-Q2",
+      "publication": "BNR Bank Lending Survey, August 2024",
+      "publication_url": "https://www.bnr.ro/uploads/2024-8-banklendingsurvey-august2024_documentpdf_545_1733753826.pdf",
+      "url_candidates": [
+        "https://www.bnr.ro/uploads/2024-8-banklendingsurvey-august2024_xls_547_1733753826.xls"
+      ],
+      "discovery_status": "CANDIDATE_ENDPOINT_NOT_YET_CONFIRMED",
+      "discovery_basis": "Candidate follows the exact English publication slug and timestamp pattern that is byte-verified for retained February/May/November 2024 BLS workbooks. Current web access did not establish spreadsheet content."
+    },
+    {
+      "quarter": "2025-Q2",
+      "publication": "BNR Bank Lending Survey, August 2025",
+      "publication_url": "https://www.bnr.ro/uploads/2025-11-06blst1august2025_documentpdf_545_1762420562.pdf",
+      "url_candidates": [],
+      "discovery_status": "OFFICIAL_ANNEX_EXISTENCE_KNOWN_EXACT_WORKBOOK_URL_UNIDENTIFIED",
+      "discovery_basis": "The official BNR survey publication/index exposes an XLS annex for the round, but the exact binary annex URL has not been retained. No URL is invented in this contract."
+    }
+  ],
+  "probe_rules": {
+    "max_attempts_per_url": 2,
+    "timeout_seconds": 45,
+    "retain_all_response_bytes": true,
+    "compute_sha256": true,
+    "record_http_status": true,
+    "record_content_type": true,
+    "record_content_disposition": true,
+    "record_last_modified": true,
+    "classify_spreadsheet_only_if_binary_signature_matches": true,
+    "allowed_binary_signatures": [
+      "OLE2_CFBF_D0CF11E0A1B11AE1",
+      "ZIP_PK_0304"
+    ],
+    "no_wildcard_url_generation": true,
+    "no_timestamp_brute_force": true,
+    "no_directory_scraping": true,
+    "no_value_extraction": true,
+    "no_chart_digitisation": true
+  },
+  "promotion_boundary": {
+    "accessible_workbook_does_not_fill_panel": true,
+    "required_before_panel_append": [
+      "Retain exact workbook bytes in an immutable source vintage.",
+      "Freeze workbook identity/hash and source semantics in a promotion review.",
+      "Run deterministic cell extraction under the existing cross-round semantic mapping boundary or a separately frozen coordinate bridge if layout differs.",
+      "Require exact quarter identity and all six preregistered observables.",
+      "Regenerate the canonical panel and audit byte-cleanly with no interpolation."
+    ]
+  },
+  "hard_rules": {
+    "no_canonical_panel_mutation_in_probe": true,
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_lag_selection": true,
+    "no_holdout_opening": true,
+    "no_synthetic_quarter_creation": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "pass_effect": "RECOVERED_WORKBOOK_BYTES_READY_FOR_EXPLICIT_PROMOTION_REVIEW_ONLY",
+  "failure_effect": "NEGATIVE_SOURCE_ACCESS_EVIDENCE_ONLY",
+  "execution_policy": "MANUAL_ONLY_LIVE_SOURCE_ACQUISITION"
+}
