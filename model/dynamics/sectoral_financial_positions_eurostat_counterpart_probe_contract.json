@@ -1,5 +1,5 @@
 {
-  "contract_version": "0.1",
+  "contract_version": "0.2",
   "frozen_on": "2026-09-19",
   "reference_mode": "sectoral_financial_positions",
   "phase": "Eurostat nasq_10_f_cp — Romania Schema and Recent-Coverage Discovery Probe",
@@ -43,7 +43,6 @@
       "time"
     ],
     "effect_if_pass": "EUROSTAT_ROMANIA_COUNTERPART_SCHEMA_AND_RECENT_DATA_RETAINED_FOR_EXPLICIT_MAPPING_LINEAGE_REVIEW_ONLY",
-    "effect_if_fail": "NO_REOPEN_EVIDENCE_FROM_EUROSTAT_COUNTERPART_DISCOVERY_PROBE",
     "required_counterpart_dimension": "sector2",
     "required_stock_flow_codes": [
       "STK",
@@ -53,7 +52,9 @@
       "ASS",
       "LIAB"
     ],
-    "rationale": "A schema-discovery PASS must establish the actual counterpart-account structure, not merely a Romania/time slice. The response must expose frequency, unit, reporting sector, counterpart sector, stock/transaction, asset/liability, instrument, geography and time dimensions; required stock/transaction and asset/liability codes must also be present before a semantic mapping review is authorized."
+    "rationale": "A schema-discovery PASS must establish the actual counterpart-account structure, not merely a Romania/time slice. The response must expose frequency, unit, reporting sector, counterpart sector, stock/transaction, asset/liability, instrument, geography and time dimensions; required stock/transaction and asset/liability codes must also be present before a semantic mapping review is authorized.",
+    "effect_if_definitive_negative": "NO_REOPEN_EVIDENCE_FROM_EUROSTAT_COUNTERPART_DISCOVERY_PROBE",
+    "effect_if_indeterminate": "INDETERMINATE_SOURCE_ACCESS_RETRY_REQUIRED_NO_SCIENTIFIC_EFFECT"
   },
   "retained_outputs": {
     "raw_json_response": true,
@@ -66,7 +67,9 @@
     "category_codes_by_dimension": true,
     "non_null_observation_count": true,
     "time_codes": true,
-    "geo_codes": true
+    "geo_codes": true,
+    "api_message": true,
+    "scientific_result_state": true
   },
   "hard_rules": {
     "no_sector_mapping_in_probe": true,
@@ -82,5 +85,10 @@
     "no_system_dynamics_activation": true,
     "no_behavioural_closure_change": true
   },
-  "next_gate_if_pass": "Preregister a separate Eurostat semantic/instrument-coverage review using the retained dimension codes. Only after that review may an exact historical extraction contract be considered for a fixed RMD boundary."
+  "next_gate_if_pass": "Preregister a separate Eurostat semantic/instrument-coverage review using the retained dimension codes. Only after that review may an exact historical extraction contract be considered for a fixed RMD boundary.",
+  "source_response_semantics": {
+    "PASS": "HTTP 200, parseable JSON-stat, and every frozen schema/data criterion passes.",
+    "DEFINITIVE_NEGATIVE": "Either a parsed HTTP 200 response fails the frozen schema/data gate, or Eurostat returns an explicit 'No results found' response. This supplies negative source-discovery evidence but never changes reference-mode readiness.",
+    "INDETERMINATE": "Network/provider failures, HTTP 413 asynchronous responses, rate limiting, server errors, empty HTTP 200 bodies, parse failures, or query syntax/semantic errors are source-access failures rather than negative scientific evidence and must be retried without changing the scientific baseline."
+  }
 }

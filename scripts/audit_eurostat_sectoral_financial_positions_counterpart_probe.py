@@ -153,6 +153,63 @@ def discovery_gate_passes(
     )
 
 
+def api_message(body: bytes) -> dict | None:
+    if not body:
+        return None
+    try:
+        payload = json.loads(body.decode("utf-8"))
+    except Exception:
+        return None
+    if not isinstance(payload, dict):
+        return None
+    for key in ("warning", "error"):
+        message = payload.get(key)
+        if isinstance(message, dict):
+            return {
+                "kind": key,
+                "status": message.get("status"),
+                "label": message.get("label"),
+            }
+    return None
+
+
+def classify_discovery_result(
+    *,
+    status: int | None,
+    body_present: bool,
+    parse_error: str | None,
+    pass_gate: bool,
+    message: dict | None,
+    rule: dict,
+) -> tuple[str, str]:
+    if status == rule["required_http_status"]:
+        if not body_present or parse_error is not None:
+            return (
+                "INDETERMINATE",
+                rule["effect_if_indeterminate"],
+            )
+        if pass_gate:
+            return "PASS", rule["effect_if_pass"]
+        return (
+            "DEFINITIVE_NEGATIVE",
+            rule["effect_if_definitive_negative"],
+        )
+
+    label = ""
+    if isinstance(message, dict):
+        label = str(message.get("label") or "").lower()
+    if status in {400, 404} and "no results found" in label:
+        return (
+            "DEFINITIVE_NEGATIVE",
+            rule["effect_if_definitive_negative"],
+        )
+
+    return (
+        "INDETERMINATE",
+        rule["effect_if_indeterminate"],
+    )
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     contract = json.loads(CONTRACT.read_text(encoding="utf-8"))
@@ -195,6 +252,15 @@ def main() -> None:
         summary=summary,
         rule=rule,
     )
+    message = api_message(body)
+    scientific_result_state, disposition = classify_discovery_result(
+        status=status,
+        body_present=bool(body),
+        parse_error=parse_error,
+        pass_gate=pass_gate,
+        message=message,
+        rule=rule,
+    )
 
     audit = {
         "audit_version": "0.1",
@@ -213,13 +279,11 @@ def main() -> None:
         "bytes": len(body),
         "sha256": sha256(body) if body else None,
         "parse_error": parse_error,
+        "api_message": message,
         **summary,
         "discovery_gate_pass": pass_gate,
-        "disposition": (
-            rule["effect_if_pass"]
-            if pass_gate
-            else rule["effect_if_fail"]
-        ),
+        "scientific_result_state": scientific_result_state,
+        "disposition": disposition,
         "semantic_mapping_performed": False,
         "instrument_mapping_performed": False,
         "counterpart_orientation_mapping_performed": False,

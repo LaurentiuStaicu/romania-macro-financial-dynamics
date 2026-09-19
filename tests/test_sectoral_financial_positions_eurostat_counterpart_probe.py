@@ -3,7 +3,9 @@ from __future__ import annotations
 import unittest
 
 from scripts.audit_eurostat_sectoral_financial_positions_counterpart_probe import (
+    api_message,
     category_codes,
+    classify_discovery_result,
     discovery_gate_passes,
     inspect_json_stat,
     non_null_observation_count,
@@ -161,6 +163,133 @@ class EurostatSectoralFinancialPositionsCounterpartProbeLogicTests(unittest.Test
                 summary=without_liabilities,
                 rule=rule,
             )
+        )
+
+    def test_api_message_extracts_eurostat_warning_or_error(self) -> None:
+        self.assertEqual(
+            api_message(
+                b'{"warning":{"status":413,"label":"ASYNCHRONOUS_RESPONSE"}}'
+            ),
+            {
+                "kind": "warning",
+                "status": 413,
+                "label": "ASYNCHRONOUS_RESPONSE",
+            },
+        )
+        self.assertEqual(
+            api_message(
+                b'{"error":{"status":"400","label":"No results found"}}'
+            ),
+            {
+                "kind": "error",
+                "status": "400",
+                "label": "No results found",
+            },
+        )
+
+    def test_provider_failures_are_not_negative_scientific_evidence(self) -> None:
+        rule = {
+            "required_http_status": 200,
+            "effect_if_pass": "PASS_EFFECT",
+            "effect_if_definitive_negative": "NEGATIVE_EFFECT",
+            "effect_if_indeterminate": "INDETERMINATE_EFFECT",
+        }
+        self.assertEqual(
+            classify_discovery_result(
+                status=413,
+                body_present=True,
+                parse_error=None,
+                pass_gate=False,
+                message={
+                    "kind": "warning",
+                    "status": 413,
+                    "label": "ASYNCHRONOUS_RESPONSE",
+                },
+                rule=rule,
+            ),
+            ("INDETERMINATE", "INDETERMINATE_EFFECT"),
+        )
+        self.assertEqual(
+            classify_discovery_result(
+                status=None,
+                body_present=False,
+                parse_error=None,
+                pass_gate=False,
+                message=None,
+                rule=rule,
+            ),
+            ("INDETERMINATE", "INDETERMINATE_EFFECT"),
+        )
+        self.assertEqual(
+            classify_discovery_result(
+                status=500,
+                body_present=True,
+                parse_error=None,
+                pass_gate=False,
+                message=None,
+                rule=rule,
+            ),
+            ("INDETERMINATE", "INDETERMINATE_EFFECT"),
+        )
+
+    def test_only_observed_absence_or_parsed_gate_failure_is_negative(self) -> None:
+        rule = {
+            "required_http_status": 200,
+            "effect_if_pass": "PASS_EFFECT",
+            "effect_if_definitive_negative": "NEGATIVE_EFFECT",
+            "effect_if_indeterminate": "INDETERMINATE_EFFECT",
+        }
+        self.assertEqual(
+            classify_discovery_result(
+                status=404,
+                body_present=True,
+                parse_error=None,
+                pass_gate=False,
+                message={
+                    "kind": "error",
+                    "status": "404",
+                    "label": "No results found",
+                },
+                rule=rule,
+            ),
+            ("DEFINITIVE_NEGATIVE", "NEGATIVE_EFFECT"),
+        )
+        self.assertEqual(
+            classify_discovery_result(
+                status=200,
+                body_present=True,
+                parse_error=None,
+                pass_gate=False,
+                message=None,
+                rule=rule,
+            ),
+            ("DEFINITIVE_NEGATIVE", "NEGATIVE_EFFECT"),
+        )
+        self.assertEqual(
+            classify_discovery_result(
+                status=400,
+                body_present=True,
+                parse_error=None,
+                pass_gate=False,
+                message={
+                    "kind": "error",
+                    "status": "400",
+                    "label": "Syntax error",
+                },
+                rule=rule,
+            ),
+            ("INDETERMINATE", "INDETERMINATE_EFFECT"),
+        )
+        self.assertEqual(
+            classify_discovery_result(
+                status=200,
+                body_present=True,
+                parse_error="JSONDecodeError",
+                pass_gate=False,
+                message=None,
+                rule=rule,
+            ),
+            ("INDETERMINATE", "INDETERMINATE_EFFECT"),
         )
 
     def test_json_stat_missing_dimension_metadata_is_rejected(self) -> None:
