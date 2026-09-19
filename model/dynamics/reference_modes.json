@@ -99,7 +99,8 @@
       "current_endogeneity": "OBSERVED_PARTIAL_DRIVER",
       "assessment": "model/dynamics/government_refinancing_need_reference_assessment.json",
       "retained_series": "data/processed/government_debt_refinancing_mof_2017_2023.csv",
-      "provenance": "data/provenance/government_debt_refinancing_mof_2017_2023.json"
+      "provenance": "data/provenance/government_debt_refinancing_mof_2017_2023.json",
+      "external_source_screening": "model/dynamics/government_refinancing_need_external_source_screening.json"
     },
     {
       "id": "government_effective_interest_rate",
