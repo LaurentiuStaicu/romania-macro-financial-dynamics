@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import unittest
 from pathlib import Path
@@ -9,6 +10,14 @@ ASSESSMENT = (
     ROOT / "model" / "dynamics"
     / "sectoral_financial_positions_s1n_boundary_diagnostic_assessment.json"
 )
+VINTAGE = (
+    ROOT / "data" / "source_vintages"
+    / "sectoral-financial-positions-s1n-boundary-vintage-2026-09-19"
+)
+
+
+def sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 class SectoralFinancialPositionsS1NBoundaryAssessmentTests(unittest.TestCase):
@@ -23,6 +32,20 @@ class SectoralFinancialPositionsS1NBoundaryAssessmentTests(unittest.TestCase):
             "71c3b879233b4f088264fc05382c2e6b2c3f906ed9e059d2469f74ee6a267d0f",
         )
         self.assertEqual(len(self.a["expected_files"]), 9)
+
+
+    def test_exact_reviewed_negative_vintage_is_retained_offline(self) -> None:
+        expected = {item["path"] for item in self.a["expected_files"]}
+        actual = {
+            str(path.relative_to(VINTAGE))
+            for path in VINTAGE.rglob("*")
+            if path.is_file()
+        }
+        self.assertEqual(actual, expected)
+        for item in self.a["expected_files"]:
+            path = VINTAGE / item["path"]
+            self.assertEqual(path.stat().st_size, item["bytes"])
+            self.assertEqual(sha256(path), item["sha256"])
 
     def test_result_is_http_negative_not_network_failure(self) -> None:
         outcome = self.a["source_outcome"]
