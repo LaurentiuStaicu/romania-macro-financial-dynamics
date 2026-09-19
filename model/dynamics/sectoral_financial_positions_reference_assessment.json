@@ -56,7 +56,8 @@
     "exploratory_esa_f1_reaudit": "RECONCILIATION_FAIL_NO_PROMOTION",
     "exploratory_f1_semantics_diagnostic": "REJECTS_RESIDENT_F1_LIABILITY_ZERO_NO_PROMOTION",
     "exploratory_f1_zero_refinement": "REJECTED_BY_PUBLISHED_QSA_SDR_LIABILITIES",
-    "s1n_boundary_diagnostic": "EXECUTED_NEGATIVE_NO_REOPEN_EVIDENCE"
+    "s1n_boundary_diagnostic": "EXECUTED_NEGATIVE_NO_REOPEN_EVIDENCE",
+    "external_source_screening": "OECD_COUNTERPART_COUNTRY_DISCOVERY_PREREGISTERED_NO_REOPEN_YET"
   },
   "boundary_review": "model/dynamics/sectoral_financial_positions_boundary_review.json",
   "strict_source_gate_contract": "model/dynamics/sectoral_financial_positions_reference_contract.json",
@@ -94,5 +95,14 @@
     "historical_A_D_reinterpreted": false,
     "reopen_authorized": false,
     "rationale": "The preregistered source-availability question has been answered negatively. S1N does not provide a published Romania QSA F/F1 boundary capable of explaining the frozen residuals, so no formal retest is opened."
+  },
+  "external_source_screening": "model/dynamics/sectoral_financial_positions_external_source_screening.json",
+  "oecd_counterpart_discovery_probe": {
+    "status": "PREREGISTERED_MANUAL_NOT_EXECUTED",
+    "contract": "model/dynamics/sectoral_financial_positions_oecd_counterpart_probe_contract.json",
+    "workflow": ".github/workflows/sectoral-financial-positions-oecd-counterpart-probe.yml",
+    "formal_reference_mode_gate": false,
+    "current_effect": "NONE_UNTIL_RETAINED_RESULT_AND_SEPARATE_SEMANTIC_LINEAGE_REVIEW",
+    "rationale": "OECD counterpart stocks/flows could expose a useful Romania sector-counterpart boundary, but OECD documents the quarterly financial sector-accounts collection as OECD-ECB. Discovery therefore tests coverage only; it cannot establish independent reopen evidence or promotion by itself."
   }
 }
