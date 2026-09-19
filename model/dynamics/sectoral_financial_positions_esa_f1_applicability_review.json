@@ -1,7 +1,7 @@
 {
   "review_version": "0.1",
   "identified_on": "2026-09-19",
-  "status": "FUTURE_METHODOLOGY_CORRECTION_NOT_RETROACTIVE",
+  "status": "POST_RUN_F1_ZERO_REFINEMENT_REJECTED_NONRETROACTIVE",
   "subject": "ESA-consistent F1 applicability for aggregate sectoral financial positions",
   "historical_phase_B": {
     "workflow_run_id": 35413214512,
@@ -89,9 +89,9 @@
     "behavioural_closure_changed": false
   },
   "next_action": {
-    "status": "EXPLORATORY_REAUDIT_RETAINED_NO_FURTHER_RERUN",
-    "rule": "The corrected-applicability run is retained as exploratory evidence only. Do not reinterpret historical A-D or tune F1 orientation/structural-zero rules from its residuals. Any future formal test requires a new independently preregistered phase before opening new source outcomes.",
-    "rationale": "The exploratory run occurred after the original A-D outcomes and showed large reconciliation failures. Its scientific value is diagnostic; it does not authorize adaptive source remapping."
+    "status": "NO_FURTHER_INTERNAL_F1_ADAPTATION",
+    "rule": "Do not rerun, remap or retune F1 semantics from the observed exploratory residuals. Historical A-D remain governed by the immutable Phase B contract. Any future formal reopening requires an external evidence/revision trigger and a new independently preregistered contract before inspecting new outcomes.",
+    "rationale": "The post-run structural-zero refinement was empirically contradicted by published QSA F12/SDR liabilities, while the historical Phase B source-required treatment already preserves those series."
   },
   "exploratory_reaudit": {
     "status": "EXECUTED_AFTER_HISTORICAL_A_D_EXPLORATORY_ONLY",
@@ -104,5 +104,25 @@
     "formal_gate": false,
     "readiness_effect": 0,
     "result": "RECONCILIATION_FAIL_NO_PROMOTION"
-  }
+  },
+  "proposal_status": "REJECTED_BY_PUBLISHED_QSA_SDR_LIABILITY_DIAGNOSTIC",
+  "semantics_diagnostic": {
+    "assessment": "model/dynamics/sectoral_financial_positions_esa_f1_semantics_diagnostic_assessment.json",
+    "executed_contract_snapshot": "model/dynamics/sectoral_financial_positions_esa_f1_semantics_diagnostic_contract_executed_2026-09-19.json",
+    "workflow_run_id": 35414387016,
+    "workflow_artifact_id": 10575447251,
+    "workflow_head_sha": "0e56a86ec34e594250f62544bcd90d1e74212343",
+    "workflow_artifact_sha256": "b8bc8391e0560f838017630001d325a06fe332321c828e7f385428b19154215b",
+    "formal_gate": false,
+    "conclusion": "Published S12/S121 F1 liabilities are non-zero F12/SDR liabilities. The exploratory resident-F1-liability structural-zero refinement is rejected.",
+    "readiness_effect": 0
+  },
+  "current_methodological_conclusion": {
+    "historical_phase_B_treatment": "RETAIN_SOURCE_REQUIRED_F1_ON_BOTH_ASSET_AND_LIABILITY_SIDES_FOR_PUBLISHED_S12_S121_SERIES",
+    "H_C_rule": "Retain the historical preregistered H/C source-absence contradiction-check treatment for the historical evidence chain; do not create new zeros from the later diagnostic.",
+    "resident_F1_liability_zero_rule": "REJECTED",
+    "W1_wholesale_orientation_swap": "NOT_SUPPORTED",
+    "historical_A_D_reinterpreted": false
+  },
+  "proposed_future_rules_status": "SUPERSEDED_REJECTED_PROPOSAL_RETAINED_FOR_AUDIT_TRAIL_ONLY"
 }
