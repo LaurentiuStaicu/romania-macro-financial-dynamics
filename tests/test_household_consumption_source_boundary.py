@@ -56,6 +56,10 @@ class HouseholdConsumptionSourceBoundaryTests(unittest.TestCase):
         )
         self.assertIn("housing-loan", alt["concept"].lower())
         self.assertIn("must remain separate", alt["semantic_limit"])
+        coverage = alt["publication_text_coverage"]
+        self.assertEqual(coverage["directly_observed_quarters"], 10)
+        self.assertEqual(coverage["missing_quarters"], [])
+        self.assertEqual(coverage["coverage_fraction"], 1.0)
         self.assertEqual(
             alt["publication_level_boundary_review"],
             "model/calibration_validation/bnr_household_dsti_level_publication_boundary_review.json",
