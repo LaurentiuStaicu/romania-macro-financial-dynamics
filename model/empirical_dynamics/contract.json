@@ -37,7 +37,9 @@
       "preserve 2026-08 onward monetary observations for the first genuinely identifying new policy-rate episode",
       "do not reopen government repricing estimation until matched instrument-level principal and old/new rate evidence satisfy the frozen ledger gates",
       "materialize missing reference modes before integrated behavioural closure is reconsidered"
-    ]
+    ],
+    "prospective_confirmation_contract": "model/calibration_validation/prospective_monetary_confirmation_contract.json",
+    "prospective_confirmation_status": "model/calibration_validation/prospective_monetary_confirmation_status.json"
   },
   "post_validation_disposition": {
     "source": "model/calibration_validation/validation_recovery_disposition.json",
