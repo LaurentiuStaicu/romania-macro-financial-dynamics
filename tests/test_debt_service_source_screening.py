@@ -20,6 +20,11 @@ class DebtServiceSourceScreeningTests(unittest.TestCase):
     def test_bnr_dsti_is_kept_semantically_separate(self):
         bnr=self.r["bnr_household_dsti"]
         self.assertFalse(bnr["exact_machine_readable_history_retained"])
+        self.assertFalse(bnr["aggregate_s1m_direct_admissibility"])
+        self.assertEqual(
+            bnr["aggregate_consumption_population_alignment_review"],
+            "model/calibration_validation/household_consumption_borrower_burden_alignment_review.json",
+        )
         self.assertTrue(any("not the BIS macro" in x for x in bnr["semantic_boundary"]))
         self.assertTrue(any("New-loan DSTI" in x for x in bnr["semantic_boundary"]))
 
