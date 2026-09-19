@@ -33,7 +33,7 @@
     },
     "reference_modes": {
       "required_count": 10,
-      "ready_count": 8,
+      "ready_count": 9,
       "closure_ready": false,
       "ready": [
         "policy_rate",
@@ -43,10 +43,10 @@
         "credit_flow",
         "government_debt_stock",
         "government_interest_burden",
+        "government_refinancing_need",
         "government_effective_interest_rate"
       ],
       "blockers": [
-        "government_refinancing_need",
         "sectoral_financial_positions"
       ]
     },
