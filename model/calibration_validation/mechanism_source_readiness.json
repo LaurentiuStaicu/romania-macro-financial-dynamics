@@ -35,15 +35,16 @@
     {
       "id": "aggregate_bank_credit_response",
       "classification": "CANDIDATE",
-      "source_readiness": "DIRECT_BLS_SPREADSHEETS_IDENTIFIED_PROVIDER_ACCESS_BLOCKED_MATERIALISATION_PENDING",
+      "source_readiness": "BLS_PROVIDER_ACCESS_BLOCKED_PRUDENTIAL_COVERAGE_DIAGNOSTIC_PREREGISTERED",
       "next_admissible_action": "Enumerate and retain exact official BNR BLS XLS/XLSX rounds and hashes, then materialize realised NFC and household credit-standards and loan-demand histories separately together with harmonised NPL/capital controls.",
       "blockers": [
-        "Official machine-readable BNR BLS files are identified for multiple rounds, but the provider rejects automated spreadsheet retrieval from the current environment.",
-        "Historical spreadsheet coverage has not yet been enumerated completely; missing rounds may not be inferred from URL patterns."
+        "Official BNR BLS spreadsheets are identified but provider access and complete historical enumeration remain unresolved.",
+        "Quarterly Romania NPL and CET1 series are confirmed in ECB CBD2; the preregistered I4001 solvency-ratio Romania tuple still requires live coverage evidence and a population/consolidation bridge before use."
       ],
       "source_boundary_review": "model/calibration_validation/aggregate_bank_credit_source_boundary_review.json",
       "estimation_or_refit_allowed": false,
-      "priority_group": "MATERIALISE_WHEN_PROVIDER_ACCESS_AVAILABLE"
+      "priority_group": "MATERIALISE_WHEN_PROVIDER_ACCESS_AVAILABLE",
+      "prudential_coverage_contract": "model/calibration_validation/bank_credit_prudential_coverage_contract.json"
     },
     {
       "id": "exchange_rate_pass_through_to_inflation",
@@ -101,4 +102,4 @@
     "reason": "The primary yield, benchmark and stress series are identified; debt-to-GDP is already retained; the quarterly B9 source is official and conceptually fixed. This path has the fewest unresolved source-semantics dependencies among mechanisms not waiting on future events.",
     "calibration_cycle_open": false
   }
-}
+}\n

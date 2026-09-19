@@ -195,5 +195,12 @@
       "Prefer a confirmed quarterly Romania solvency-ratio series over substituting CET1 only if its exact CBD2 tuple, coverage and population are retained before model fit."
     ],
     "calibration_effect": "NONE"
+  },
+  "prudential_coverage_diagnostic": {
+    "status": "PREREGISTERED_NOT_EXECUTED",
+    "contract": "model/calibration_validation/bank_credit_prudential_coverage_contract.json",
+    "formal_calibration_gate": false,
+    "calibration_effect": "NONE",
+    "purpose": "Probe the exact quarterly Romania CBD2 NPL, preregistered solvency-ratio candidate, and CET1 series before any prudential variable selection."
   }
-}
+}\n
