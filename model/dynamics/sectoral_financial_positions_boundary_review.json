@@ -6,7 +6,7 @@
   "rationale": [
     "Reference modes are behaviour-over-time targets and need not be identical to the model's complete bilateral state representation.",
     "The Dynamic Core already defines sector_financial_assets, sector_financial_liabilities and sector_net_financial_worth as aggregate auxiliaries derived from bilateral positions.",
-    "ECB QSA directly publishes sector-level total financial assets/liabilities and financial transactions. A boundary-matched RMD aggregate can be constructed as total financial instruments F minus F1, leaving exactly the represented F2-F8 instrument family.",
+    "ECB QSA directly publishes sector-level asset/liability stocks and financial transactions by ESA financial instrument. The RMD aggregate can therefore be built explicitly as F2+F3+F4+F5+F6+F7+F8, avoiding any reliance on an unpublished or structurally assumed F1 zero.",
     "The RMD financial-corporation sector is definitionally S12 minus S121, preserving BNR as a separate S121 sector. H maps to S1M, C to S11 and G to S13.",
     "The rest-of-world sector X can be represented from W1 external positions by reversing the resident external asset/liability orientation: X assets equal resident external liabilities and X liabilities equal resident external assets.",
     "Observed aggregate sector positions can validate aggregate behaviour-over-time while the bilateral Accounting Spine remains incomplete. They must never be used to allocate counterparties or initialize unresolved bilateral cells."
@@ -29,7 +29,7 @@
       "F7",
       "F8"
     ],
-    "source_aggregate_identity": "RMD represented financial boundary = QSA total financial instruments F minus QSA F1.",
+    "source_aggregate_identity": "RMD represented financial boundary = explicit sum of QSA F2+F3+F4+F5+F6+F7+F8.",
     "resident_sector_mapping": {
       "H": "S1M",
       "C": "S11",
@@ -59,7 +59,7 @@
   },
   "preregistration_requirements": [
     "Exact QSA series-key construction and sector mapping must be frozen before the live audit.",
-    "Both stock (LE) and financial-transaction (F) series must be available for F and F1.",
+    "Both stock (LE) and financial-transaction (F) series must be available for every represented instrument F2-F8 needed by each sector-side construction; no unavailable instrument may be converted to zero.",
     "All six RMD sectors must be finite for every required benchmark period.",
     "F = S12 - S121 must be evaluated from exact same-period source values, never from shares.",
     "X orientation must pass the represented-system conservation/reconciliation check.",
