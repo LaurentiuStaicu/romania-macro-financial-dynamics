@@ -1,0 +1,84 @@
+{
+  "assessment_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "reference_mode": "sectoral_financial_positions",
+  "diagnostic_contract": "model/dynamics/sectoral_financial_positions_s1n_boundary_diagnostic_contract.json",
+  "verdict": "EXECUTED_NEGATIVE_NO_REOPEN_EVIDENCE_FROM_S1N",
+  "reviewed_workflow": {
+    "run_id": 35438595460,
+    "artifact_id": 10582468766,
+    "artifact_name": "sectoral-financial-positions-s1n-boundary-047606e9ffeb2e843a76bfac230968a8b4e833da",
+    "artifact_zip_sha256": "71c3b879233b4f088264fc05382c2e6b2c3f906ed9e059d2469f74ee6a267d0f",
+    "source_branch_head_sha": "f5ee884ee626147e1d09505405d7596d47d45cb6",
+    "pull_request_merge_sha": "047606e9ffeb2e843a76bfac230968a8b4e833da"
+  },
+  "expected_files": [
+    {
+      "path": "raw/0b2915e0a5f60aec8441.csv",
+      "bytes": 551,
+      "sha256": "bdea3f35bd93a108bf1f48d6b3ecee694c69fb0dc8222d8f8365c15a65623713"
+    },
+    {
+      "path": "raw/6a841f835f2b2d47ce8e.csv",
+      "bytes": 548,
+      "sha256": "b02d9a91f0fe7bf9d4ef9d734d4ed0501b3aaaafe58e0f025f648b92dcf98ec4"
+    },
+    {
+      "path": "raw/7fa794aa01dae9058589.csv",
+      "bytes": 548,
+      "sha256": "2103ae886622dc5107831d85faee26d1bddc13ec67098594764ad0be2991510c"
+    },
+    {
+      "path": "raw/9d84c00e657fd30d20e1.csv",
+      "bytes": 551,
+      "sha256": "36609f8e513c8e68843b353c1999661cc1455dd9a8599cdb7f8aea5688f0d287"
+    },
+    {
+      "path": "raw/d011170c6aeb45175892.csv",
+      "bytes": 551,
+      "sha256": "65d5c860dd2cdf6444efa8c4557b1e51f5e0d002bb39d36d54d8411e8012aa28"
+    },
+    {
+      "path": "raw/de615d987bae2f3db9b6.csv",
+      "bytes": 554,
+      "sha256": "222ddb2cefe56ff2c244ab661f7cf8155d2b6c13c406acf21b304821eb39ad3a"
+    },
+    {
+      "path": "raw/e2e9d47ac0843d028497.csv",
+      "bytes": 554,
+      "sha256": "c643aa8b1e9c1552c8460ed35cf49e1c3b487982113d967c4a93afe6a4d50422"
+    },
+    {
+      "path": "raw/e90ec43cdcfa3b5ecd65.csv",
+      "bytes": 551,
+      "sha256": "93bb001c40e056b5f1acab628dadbb44ca521cfc4a52142164ad0827f22c334c"
+    },
+    {
+      "path": "sectoral_financial_positions_s1n_boundary_diagnostic.json",
+      "bytes": 7060,
+      "sha256": "ce7500aed27e2620ce70de8d968a3f22761f2fb7da2a2f44c0dbab2b6932ab1e"
+    }
+  ],
+  "source_outcome": {
+    "series_requested": 8,
+    "http_404_count": 8,
+    "network_error_count": 0,
+    "common_stock_observations": 0,
+    "common_flow_observations": 0,
+    "coverage_gate_pass": false,
+    "explanatory_gate_pass": false,
+    "disposition": "NO_REOPEN_EVIDENCE_FROM_S1N"
+  },
+  "interpretation": "All eight preregistered exact Romania QSA S1N F/F1 asset/liability stock/flow queries returned HTTP 404 with the ECB response 'No Series was returned for the query'. This is a negative source-availability result, not a network failure. It supplies no evidence to reopen the historical sectoral-financial-position boundary.",
+  "hard_effects": {
+    "reference_mode_promotion": false,
+    "reference_mode_readiness_change": 0,
+    "historical_A_D_reinterpreted": false,
+    "phase_C_envelope_changed": false,
+    "accounting_readiness_changed": false,
+    "behavioural_closure_changed": false,
+    "residual_allocation_performed": false
+  },
+  "retained_vintage": "data/source_vintages/sectoral-financial-positions-s1n-boundary-vintage-2026-09-19",
+  "promotion_rule": "Only artifact 10582468766 with the exact ZIP digest and exact per-file byte sizes/SHA-256 values above may be retained as this diagnostic vintage."
+}
