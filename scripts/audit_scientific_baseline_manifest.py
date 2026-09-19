@@ -57,6 +57,9 @@ def main() -> None:
     refs = load("model/dynamics/reference_modes.json")
     empirical = load("model/empirical_dynamics/contract.json")
     mechanisms = load("model/empirical_dynamics/mechanism_registry.json")
+    readiness = load(
+        "model/calibration_validation/mechanism_source_readiness.json"
+    )
     disposition = load(
         "model/calibration_validation/validation_recovery_disposition.json"
     )
@@ -218,6 +221,97 @@ def main() -> None:
         "Prospective baseline requires frozen beta",
     )
 
+    # Post-screening mechanism readiness is derived from the registry/readiness map.
+    readiness_state = state["mechanism_readiness"]
+    non_rejected = [
+        item
+        for item in mechanisms["mechanisms"]
+        if item["classification"] != "REJECTED"
+    ]
+    non_rejected_ids = {item["id"] for item in non_rejected}
+    readiness_entries = readiness["mechanisms"]
+    readiness_ids = [item["id"] for item in readiness_entries]
+    check(
+        len(readiness_ids) == len(set(readiness_ids)),
+        "Mechanism readiness contains duplicate mechanism IDs",
+    )
+    check(
+        set(readiness_ids) == non_rejected_ids,
+        "Mechanism readiness coverage is not exactly the non-rejected registry",
+    )
+    check(
+        readiness_state["non_rejected_mechanism_count"] == len(non_rejected),
+        "Baseline non-rejected mechanism count is stale",
+    )
+    check(
+        readiness_state["readiness_entry_count"] == len(readiness_entries),
+        "Baseline readiness-entry count is stale",
+    )
+
+    classification_counts: dict[str, int] = {
+        "CANDIDATE": 0,
+        "DEFERRED": 0,
+        "ACTIVATED": 0,
+    }
+    for item in non_rejected:
+        classification = item["classification"]
+        check(
+            classification in classification_counts,
+            f"Unexpected non-rejected classification: {classification}",
+        )
+        classification_counts[classification] += 1
+    check(
+        readiness_state["classification_counts"] == classification_counts,
+        "Baseline mechanism classification counts are stale",
+    )
+
+    estimation_allowed = [
+        item["id"]
+        for item in readiness_entries
+        if item["estimation_or_refit_allowed"]
+    ]
+    check(
+        readiness_state["estimation_or_refit_allowed_count"]
+        == len(estimation_allowed),
+        "Baseline estimation/refit authorization count is stale",
+    )
+    check(
+        readiness["global_state"]["active_calibration_cycle_open"]
+        is readiness_state["calibration_cycle_open"],
+        "Baseline calibration-cycle flag disagrees with readiness registry",
+    )
+    if not readiness_state["calibration_cycle_open"]:
+        check(
+            not estimation_allowed,
+            "Closed calibration cycle contains estimation/refit authorization",
+        )
+
+    priority_counts: dict[str, int] = {}
+    for item in readiness_entries:
+        group = item["priority_group"]
+        priority_counts[group] = priority_counts.get(group, 0) + 1
+    check(
+        readiness_state["priority_group_counts"] == priority_counts,
+        "Baseline readiness priority-group counts are stale",
+    )
+    check(
+        readiness["current_next_step"]["mechanism_id"] == "SCIENTIFIC_BASELINE",
+        "Post-screening queue has not advanced to scientific-baseline consolidation",
+    )
+    check(
+        readiness["current_next_step"]["calibration_cycle_open"] is False,
+        "Scientific-baseline queue state may not open calibration",
+    )
+    check(
+        readiness_state["current_empirical_queue_state"]
+        == "ALL_REGISTERED_MECHANISMS_FROZEN_WAITING_OR_EXPLICITLY_BLOCKED",
+        "Baseline empirical queue-state label is stale",
+    )
+    check(
+        all(item["priority_group"] for item in readiness_entries),
+        "A mechanism readiness entry lacks an explicit priority/reopen group",
+    )
+
     # Live-source refreshes are not canonical reproduction prerequisites.
     source_state = state["source_reproduction"]
     check(source_state["canonical_reproduction_requires_live_network"] is False, "Baseline may not require live network for canonical reproduction")
@@ -241,6 +335,15 @@ def main() -> None:
         ],
         "prospective_confirmation_status": validation[
             "prospective_confirmation_status"
+        ],
+        "mechanisms_non_rejected": readiness_state[
+            "non_rejected_mechanism_count"
+        ],
+        "mechanisms_estimation_or_refit_allowed": readiness_state[
+            "estimation_or_refit_allowed_count"
+        ],
+        "mechanism_priority_groups": readiness_state[
+            "priority_group_counts"
         ],
         "live_refresh_workflows_manual_only": source_state[
             "live_refresh_workflows_manual_only"
