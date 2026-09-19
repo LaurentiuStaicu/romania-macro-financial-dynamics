@@ -35,16 +35,22 @@
     {
       "id": "aggregate_bank_credit_response",
       "classification": "CANDIDATE",
-      "source_readiness": "BLS_PROVIDER_ACCESS_BLOCKED_PRUDENTIAL_COVERAGE_DIAGNOSTIC_PREREGISTERED",
-      "next_admissible_action": "Enumerate and retain exact official BNR BLS XLS/XLSX rounds and hashes, then materialize realised NFC and household credit-standards and loan-demand histories separately together with harmonised NPL/capital controls.",
+      "source_readiness": "PRUDENTIAL_CBD2_VINTAGE_RETAINED_BLS_RAW_ARCHIVE_PARTIAL_XLSX_EXTRACTION_BRIDGE_NEXT",
+      "next_admissible_action": "Retain the exact official May-2025 BNR Bank Lending Survey XLSX workbook(s), then inspect workbook sheet/range semantics deterministically. Do not yet construct the historical BLS series or estimate a credit-response equation.",
       "blockers": [
-        "Official BNR BLS spreadsheets are identified but provider access and complete historical enumeration remain unresolved.",
-        "Quarterly Romania NPL and CET1 series are confirmed in ECB CBD2; the preregistered I4001 solvency-ratio Romania tuple still requires live coverage evidence and a population/consolidation bridge before use."
+        "Exact quarterly ECB CBD2 NPL, solvency-ratio and CET1 histories are retained for 2014-Q4..2026-Q1.",
+        "The CBD2-to-BNR population/consolidation bridge remains unresolved; numerical similarity is not a bridge.",
+        "Seven official BNR BLS legacy XLS workbooks are retained, but canonical value extraction from OLE2 files is not admitted.",
+        "An exact May-2025 BNR BLS XLSX source is publicly indexed and is the next deterministic layout/extraction bridge.",
+        "Realised NFC and household BLS credit standards and loan demand must remain separate; no synthetic aggregate is authorized."
       ],
       "source_boundary_review": "model/calibration_validation/aggregate_bank_credit_source_boundary_review.json",
       "estimation_or_refit_allowed": false,
-      "priority_group": "MATERIALISE_WHEN_PROVIDER_ACCESS_AVAILABLE",
-      "prudential_coverage_contract": "model/calibration_validation/bank_credit_prudential_coverage_contract.json"
+      "priority_group": "RETAIN_AND_INSPECT_BNR_BLS_XLSX_NO_ESTIMATION",
+      "prudential_coverage_contract": "model/calibration_validation/bank_credit_prudential_coverage_contract.json",
+      "retained_prudential_vintage": "data/source_vintages/bank-credit-prudential-coverage-vintage-2026-09-19",
+      "prudential_promotion_review": "model/calibration_validation/bank_credit_prudential_coverage_promotion_review.json",
+      "retained_bnr_bls_raw_vintage": "data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19"
     },
     {
       "id": "exchange_rate_pass_through_to_inflation",
@@ -216,8 +222,8 @@
   "priority_rule": "Priority is determined by the shortest scientifically admissible path to new independent evidence, not by a desire to activate a feedback loop. Waiting mechanisms remain frozen; source-incomplete mechanisms are not fit with proxies.",
   "current_next_step": {
     "mechanism_id": "aggregate_bank_credit_response",
-    "action": "RUN_PRUDENTIAL_COVERAGE_DIAGNOSTIC_NO_ESTIMATION",
-    "reason": "The household DSTI source bytes are now retained but canonical extraction is a tooling/measurement boundary. The bank-credit mechanism already has a preregistered ECB CBD2 prudential coverage diagnostic that can add independent source evidence without parsing BNR workbooks or fitting a credit equation.",
+    "action": "RETAIN_AND_INSPECT_BNR_BLS_MAY_2025_XLSX_NO_ESTIMATION",
+    "reason": "Prudential coverage is now retained and the remaining high-value source blocker is BLS demand/supply separation. The May-2025 official BNR workbook is available as XLSX, enabling a deterministic sheet/range inspection without converting the legacy XLS archive or opening calibration.",
     "calibration_cycle_open": false
   },
   "coverage_rule": {
