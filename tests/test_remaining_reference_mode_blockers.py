@@ -15,10 +15,13 @@ def load(relative: str) -> dict:
 
 
 class RemainingReferenceModeBlockerTests(unittest.TestCase):
-    def test_refinancing_need_remains_partial_without_semantic_substitution(self) -> None:
+    def test_refinancing_need_is_observed_without_activating_repricing(self) -> None:
         references = load("model/dynamics/reference_modes.json")
         assessment = load(
             "model/dynamics/government_refinancing_need_reference_assessment.json"
+        )
+        promotion = load(
+            "model/dynamics/government_refinancing_need_promotion_assessment.json"
         )
         mechanisms = load("model/empirical_dynamics/mechanism_registry.json")
 
@@ -31,25 +34,25 @@ class RemainingReferenceModeBlockerTests(unittest.TestCase):
             if item["id"] == "government_refinancing_effective_rate"
         )
 
-        self.assertEqual(mode["status"], "PARTIAL_SERIES_AVAILABLE")
+        self.assertEqual(mode["status"], "OBSERVED_SERIES_AVAILABLE")
         self.assertEqual(
             assessment["verdict"],
-            "REMAINS_PARTIAL_SERIES_AVAILABLE",
-        )
-        self.assertTrue(
-            assessment["blocker"]["blocker_is_short_mixed_vintage_reference_history"]
+            "OBSERVED_SERIES_AVAILABLE_AFTER_HISTORICAL_CONTINUITY_GATE",
         )
         self.assertEqual(
-            assessment["observed_partial_series"]["observation_count"],
-            7,
+            promotion["verdict"],
+            "PROMOTE_TO_OBSERVED_SERIES_AVAILABLE",
         )
         self.assertEqual(
-            assessment["observed_partial_series"]["forecast_observations"],
+            assessment["current_observed_series"]["observation_count"],
+            12,
+        )
+        self.assertEqual(
+            assessment["current_observed_series"]["forecast_or_planned_observations"],
             0,
         )
-        self.assertIn(
-            "treat gross financing need as realized principal refinanced",
-            assessment["prohibited_shortcuts"],
+        self.assertFalse(
+            assessment["disposition"]["government_repricing_share_identified"]
         )
         self.assertEqual(mechanism["classification"], "DEFERRED")
         self.assertFalse(mechanism["central_feedback"])
@@ -415,6 +418,49 @@ class RemainingReferenceModeBlockerTests(unittest.TestCase):
             review["next_action"]["status"],
             "NO_FURTHER_INTERNAL_F1_ADAPTATION",
         )
+
+
+
+    def test_promoted_refinancing_series_is_continuous_and_observed_only(self) -> None:
+        contract = load(
+            "model/dynamics/government_refinancing_need_promotion_contract.json"
+        )
+        provenance = load(
+            "data/provenance/government_debt_refinancing_mof_2013_2024.json"
+        )
+        series_path = (
+            ROOT
+            / "data"
+            / "processed"
+            / "government_debt_refinancing_mof_2013_2024.csv"
+        )
+        with series_path.open(encoding="utf-8", newline="") as handle:
+            rows = list(csv.DictReader(handle))
+
+        self.assertEqual([row["period"] for row in rows], [str(y) for y in range(2013, 2025)])
+        self.assertEqual(len(rows), 12)
+        self.assertGreaterEqual(
+            len(rows),
+            contract["promotion_criteria"]["minimum_consecutive_completed_calendar_years"],
+        )
+        accepted = set(contract["accepted_observation_statuses"])
+        self.assertTrue(all(row["observation_status"] in accepted for row in rows))
+        self.assertTrue(
+            all(math.isfinite(float(row["government_debt_refinancing_bn_ron"])) for row in rows)
+        )
+        self.assertEqual(
+            provenance["coverage"]["forecast_or_planned_observations"],
+            0,
+        )
+        self.assertEqual(provenance["definition_bridge"]["status"], "PASS")
+        self.assertTrue(
+            provenance["hard_boundaries"]["no_gross_financing_need_substitution"]
+        )
+        by_year = {row["period"]: float(row["government_debt_refinancing_bn_ron"]) for row in rows}
+        self.assertEqual(by_year["2015"], 53.0256)
+        self.assertEqual(by_year["2016"], 50.8751)
+        self.assertEqual(by_year["2023"], 95.8347)
+        self.assertEqual(by_year["2024"], 95.6546)
 
 
 
