@@ -312,6 +312,12 @@ def main() -> None:
             "execution gate. No estimation performed."
         )
 
+    if args.output.exists():
+        raise SystemExit(
+            "Structural-selection result already exists; frozen execution is "
+            "single-write and may not overwrite retained evidence."
+        )
+
     try:
         result = evaluate_selection(contract)
     except SovereignYieldIdentifiabilityError as exc:
