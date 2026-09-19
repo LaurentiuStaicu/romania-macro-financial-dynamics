@@ -156,5 +156,23 @@ class RemainingReferenceModeBlockerTests(unittest.TestCase):
         )
 
 
+    def test_live_reference_refresh_workflows_are_manual_only(self) -> None:
+        workflow_paths = [
+            ".github/workflows/private-credit-reference-audit.yml",
+            ".github/workflows/government-interest-burden-reference-audit.yml",
+            ".github/workflows/government-debt-stock-reference-audit.yml",
+        ]
+        for relative in workflow_paths:
+            text = (ROOT / relative).read_text(encoding="utf-8")
+            self.assertIn("workflow_dispatch:", text, relative)
+            self.assertNotIn("pull_request:", text, relative)
+            self.assertIn(
+                "retained snapshots/assessments",
+                text,
+                relative,
+            )
+
+
+
 if __name__ == "__main__":
     unittest.main()
