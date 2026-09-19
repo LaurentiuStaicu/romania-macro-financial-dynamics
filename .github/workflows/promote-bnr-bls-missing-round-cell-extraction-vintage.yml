@@ -1,0 +1,80 @@
+name: Promote Reviewed BNR BLS Missing-Round Cell Extraction Vintage
+
+on:
+  pull_request:
+    types: [labeled]
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  promote-reviewed-bnr-bls-missing-round-cell-extraction:
+    if: ${{ github.event.label.name == 'promote-bnr-bls-missing-round-cell-extraction-vintage' && github.event.pull_request.head.ref == 'audit/scientific-integrity-2026-09-18' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 1
+
+      - name: Download exact reviewed extraction artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          curl -L --fail-with-body \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10587291974/zip" \
+            -o /tmp/bnr-bls-missing-round-cell-extraction-reviewed.zip
+          echo "9b75298c240ac63628df8b28342fc267a77d0869dee28e30c5b2d7f53ac4efcf  /tmp/bnr-bls-missing-round-cell-extraction-reviewed.zip" | sha256sum -c -
+
+      - name: Verify exact extraction file set and hashes
+        run: |
+          rm -rf /tmp/bnr-bls-missing-round-cell-extraction-reviewed
+          mkdir -p /tmp/bnr-bls-missing-round-cell-extraction-reviewed
+          unzip -q /tmp/bnr-bls-missing-round-cell-extraction-reviewed.zip -d /tmp/bnr-bls-missing-round-cell-extraction-reviewed
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          root = Path("/tmp/bnr-bls-missing-round-cell-extraction-reviewed")
+          review = json.loads(
+              Path(
+                  "model/calibration_validation/"
+                  "bnr_bls_missing_round_cell_extraction_promotion_review.json"
+              ).read_text(encoding="utf-8")
+          )
+          actual = {
+              str(path.relative_to(root))
+              for path in root.rglob("*")
+              if path.is_file()
+          }
+          expected = {item["path"] for item in review["expected_files"]}
+          if actual != expected:
+              raise SystemExit(
+                  f"file set mismatch: missing={expected-actual}, extra={actual-expected}"
+              )
+          for item in review["expected_files"]:
+              data = (root / item["path"]).read_bytes()
+              if len(data) != item["bytes"]:
+                  raise SystemExit(f"byte-count mismatch: {item['path']}")
+              if hashlib.sha256(data).hexdigest() != item["sha256"]:
+                  raise SystemExit(f"SHA-256 mismatch: {item['path']}")
+              json.loads(data.decode("utf-8"))
+          PY
+
+      - name: Commit immutable cell-extraction source vintage only
+        run: |
+          dest="data/source_vintages/bnr-bls-missing-round-cell-extraction-vintage-2026-09-19"
+          test ! -e "$dest"
+          mkdir -p "$dest"
+          cp -a /tmp/bnr-bls-missing-round-cell-extraction-reviewed/. "$dest/"
+          cp             model/calibration_validation/bnr_bls_missing_round_cell_extraction_promotion_review.json             "$dest/source_vintage_manifest.json"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$dest"
+          git commit -m "data: retain missing-round BLS cell extraction vintage"
+          git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
