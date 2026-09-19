@@ -317,7 +317,7 @@ class RemainingReferenceModeBlockerTests(unittest.TestCase):
         )
         self.assertEqual(
             mode["post_run_s1n_boundary_diagnostic_status"],
-            "PREREGISTERED_NOT_EXECUTED",
+            "EXECUTED_NEGATIVE_NO_REOPEN_EVIDENCE",
         )
         self.assertEqual(
             mode["post_run_s1n_boundary_diagnostic_contract"],
@@ -328,6 +328,28 @@ class RemainingReferenceModeBlockerTests(unittest.TestCase):
         self.assertFalse(s1n_contract["formal_reference_mode_gate"])
         self.assertEqual(
             s1n_contract["result_semantics"]["readiness_count_change"],
+            0,
+        )
+        s1n_assessment = load(
+            mode["post_run_s1n_boundary_diagnostic_assessment"]
+        )
+        self.assertEqual(
+            s1n_assessment["verdict"],
+            "EXECUTED_NEGATIVE_NO_REOPEN_EVIDENCE_FROM_S1N",
+        )
+        self.assertEqual(
+            s1n_assessment["source_outcome"]["http_404_count"],
+            8,
+        )
+        self.assertEqual(
+            s1n_assessment["source_outcome"]["network_error_count"],
+            0,
+        )
+        self.assertFalse(
+            s1n_assessment["hard_effects"]["reference_mode_promotion"]
+        )
+        self.assertEqual(
+            s1n_assessment["hard_effects"]["reference_mode_readiness_change"],
             0,
         )
         self.assertEqual(
