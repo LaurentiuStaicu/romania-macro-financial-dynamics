@@ -1,12 +1,9 @@
 name: F8 Other Accounts Coverage Audit
 
+# Historical scientific conclusions are reproduced from retained repository
+# snapshots/assessments. This workflow intentionally performs a live provider
+# refresh only when explicitly requested.
 on:
-  pull_request:
-    paths:
-      - "model/accounting/f8_other_accounts_coverage_contract.json"
-      - "scripts/audit_qsa_f8_other_accounts_coverage.py"
-      - "tests/test_f8_other_accounts_coverage_contract.py"
-      - ".github/workflows/f8-other-accounts-coverage-audit.yml"
   workflow_dispatch:
 
 permissions:
