@@ -107,6 +107,21 @@
       "estimation_or_refit_allowed": false,
       "priority_group": "SOURCE_BOUNDARY_BLOCKED_NO_ESTIMATION",
       "source_boundary_review": "model/calibration_validation/corporate_investment_source_boundary_review.json"
+    },
+    {
+      "id": "credit_risk_npl_response",
+      "classification": "DEFERRED",
+      "source_readiness": "NPL_EXACT_DEBT_SERVICE_AND_TARGET_BOUNDARY_UNRESOLVED",
+      "next_admissible_action": "Search for an exact Romania borrower debt-service burden on a portfolio boundary compatible with the NPL target; separately preregister aggregate versus sector-specific NPL and the activity variable before any estimation.",
+      "blockers": [
+        "Exact quarterly Romania CBD2 NPL ratio is available from 2014-Q4.",
+        "No exact reconciled Romania household/NFC debt-service burden is retained.",
+        "Output-growth observable and aggregate versus sector-specific NPL target are not frozen.",
+        "Lag structure and treatment of regulatory/portfolio-management breaks remain unresolved."
+      ],
+      "source_boundary_review": "model/calibration_validation/credit_risk_npl_source_boundary_review.json",
+      "estimation_or_refit_allowed": false,
+      "priority_group": "DEFER_UNTIL_DEBT_SERVICE_SOURCE"
     }
   ],
   "priority_rule": "Priority is determined by the shortest scientifically admissible path to new independent evidence, not by a desire to activate a feedback loop. Waiting mechanisms remain frozen; source-incomplete mechanisms are not fit with proxies.",

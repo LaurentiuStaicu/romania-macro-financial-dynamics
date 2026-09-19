@@ -1,0 +1,90 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "credit_risk_npl_response",
+  "purpose": "Determine whether the deferred aggregate NPL response equation has a definitionally complete Romania source boundary before any risk-model estimation.",
+  "verdict": "QUARTERLY_NPL_OBSERVED_DEBT_SERVICE_BURDEN_NOT_IDENTIFIED_ESTIMATION_DEFERRED",
+  "current_registry_form": "dNPL = alpha - beta_y*gOutput + beta_ds*debt_service + rho*NPL_lag",
+  "exact_risk_source": {
+    "institution": "European Central Bank / ESCB",
+    "dataset": "CBD2 — Consolidated Banking data",
+    "series_key": "CBD2.Q.RO.W0.11._Z._Z.A.F.I3632._Z._Z._Z._Z._Z._Z.PC",
+    "concept": "Gross non-performing loans and advances as percent of total gross loans and advances, domestic banks, FINREP reporters, Romania",
+    "frequency": "quarterly",
+    "coverage": "2014-Q4 to 2025-Q3 in the indexed ECB Data Portal evidence reviewed on 2026-09-19",
+    "latest_indexed_example": "2025-Q3 = 3.7504 percent",
+    "status": "EXACT_SERIES_CONFIRMED",
+    "semantic_limit": "The aggregate banking-system NPL ratio is a stock-quality outcome affected by recognition, cures, write-offs, sales and portfolio composition; it is not a pure borrower-default incidence measure."
+  },
+  "sector_specific_npl_family": {
+    "status": "ECB_CBD2_SECTOR_BREAKDOWNS_EXIST_NOT_YET_FROZEN_FOR_ROMANIA_MODEL",
+    "evidence": "CBD2 publishes I3632 with counterpart-sector breakdowns such as S11 in the same consolidated-banking framework.",
+    "rule": "Do not choose aggregate versus NFC/household NPL target after viewing model performance. A future target-boundary contract must freeze the portfolio before estimation."
+  },
+  "debt_service_boundary": {
+    "required_registered_concept": "debt_service_burden",
+    "status": "NO_EXACT_RECONCILED_ROMANIA_BORROWER_DEBT_SERVICE_SERIES_RETAINED",
+    "available_but_non_equivalent_sources": [
+      {
+        "source": "ECB QSA",
+        "concept": "Quarterly loan stocks and financial transactions for households/NFCs",
+        "examples": [
+          "QSA.Q.N.RO.W0.S11.S1.N.L.LE.F4.T._Z.XDC._T.S.V.N._T",
+          "QSA.Q.N.RO.W0.S11.S1.N.L.F.F4.S._Z.XDC._T.S.V.N._T"
+        ],
+        "why_not_debt_service": "Stocks and net loan transactions do not identify scheduled principal repayments plus interest service on the same borrower boundary."
+      },
+      {
+        "source": "BIS Debt service ratios",
+        "status": "ROMANIA_HOUSEHOLD_OR_NFC_DSR_NOT_CONFIRMED_IN_CURRENT_SCREENING",
+        "why_not_use_proxy": "Country coverage or total-private-sector measures may not be silently substituted for an exact Romania household/NFC debt-service burden."
+      }
+    ],
+    "prohibited_measurement_model": "Do not synthesize debt service as debt stock times a lending rate plus assumed amortisation/maturity without a separately preregistered measurement model and independent validation."
+  },
+  "output_growth_boundary": {
+    "registered_concept": "gOutput",
+    "status": "SOURCE_FAMILY_AVAILABLE_VARIABLE_NOT_FROZEN",
+    "candidates": [
+      "real GDP growth",
+      "NFC gross value added growth",
+      "sector-specific activity/output measures"
+    ],
+    "rule": "The activity variable must be selected ex ante on the same target/portfolio boundary before fit; aggregate GDP and NFC GVA are not interchangeable."
+  },
+  "lag_and_stock_dynamics": {
+    "rho_NPL_lag_role": "The lagged NPL ratio is mechanically observable once the target series is fixed, but including rho does not resolve causal identification.",
+    "recognition_delay": "NPL recognition and supervisory/accounting changes may create delays or breaks; lag order must be preregistered, not selected from holdout performance.",
+    "boundary_2014_note": "The harmonised FINREP/EBA-era quarterly series begins in 2014-Q4 in the retained ECB evidence and should not be silently concatenated with older national definitions."
+  },
+  "source_admissibility": {
+    "registered_full_form_admissible": false,
+    "reasons": [
+      "The NPL target is observed exactly, but debt_service_burden is not retained on a definitionally matched borrower/portfolio boundary.",
+      "The output-growth observable is not frozen.",
+      "Aggregate versus sector-specific NPL target is not frozen for the future candidate family.",
+      "Lag structure and treatment of regulatory/portfolio-management breaks are not preregistered."
+    ],
+    "reduced_form_automatically_authorized": false,
+    "reduced_form_rule": "Dropping debt service or estimating an output-plus-lag equation because debt service is unavailable requires a new preregistered candidate-family contract and independent evaluation design."
+  },
+  "prohibited_shortcuts": [
+    "Construct debt service from loan stock multiplied by a new-business lending rate.",
+    "Assume an amortisation schedule or average maturity to manufacture principal service.",
+    "Use loan transactions as principal repayments.",
+    "Use debt-to-income or debt-to-GDP as a debt-service burden.",
+    "Choose aggregate versus sector-specific NPL after model fit.",
+    "Concatenate pre-2014 national NPL definitions with the harmonised FINREP series without an explicit bridge.",
+    "Drop the debt-service term and fit a nested model without preregistration."
+  ],
+  "disposition": {
+    "mechanism_classification": "DEFERRED",
+    "source_readiness": "NPL_EXACT_DEBT_SERVICE_AND_TARGET_BOUNDARY_UNRESOLVED",
+    "active_calibration_cycle_open": false,
+    "estimation_or_refit_allowed": false,
+    "central_feedback": false,
+    "validated_reference_behavioural_mechanisms_change": 0,
+    "behavioural_closure": "UNCHANGED_INACTIVE",
+    "accounting_spine": "UNCHANGED"
+  }
+}

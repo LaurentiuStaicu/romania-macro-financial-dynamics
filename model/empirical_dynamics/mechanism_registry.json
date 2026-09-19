@@ -331,7 +331,7 @@
         "beta_ds",
         "rho"
       ],
-      "estimation_plan": "Require a sufficiently long, definitionally stable NPL series plus debt-service/borrower-risk observables; preferably separate household and NFC risk.",
+      "estimation_plan": "Keep the mechanism DEFERRED. The quarterly Romania CBD2 NPL ratio is exact, but do not estimate the registered equation until a definitionally matched debt-service burden is retained and the target portfolio, activity observable, lag structure and treatment of regulatory breaks are frozen in a new preregistered cycle. Loan stocks, loan transactions, debt ratios, new-business rates or assumed maturities may not manufacture the missing debt-service variable.",
       "observables": [
         "NPL_ratio",
         "output_growth",
@@ -342,12 +342,15 @@
       ],
       "limits": [
         "regulatory definitions and portfolio clean-ups can break comparability",
-        "aggregate NPL is partly a stock-management outcome"
+        "aggregate NPL is partly a stock-management outcome",
+        "the exact quarterly NPL series does not by itself identify borrower debt-service burden or default incidence",
+        "loan stocks/transactions and new-business rates may not be combined with assumed maturity to synthesize debt service without a separate measurement contract"
       ],
       "rejection_or_degradation_criteria": [
         "no stable comparable NPL history",
         "risk parameters non-identifiable or driven by definitional breaks"
-      ]
+      ],
+      "source_boundary_review": "model/calibration_validation/credit_risk_npl_source_boundary_review.json"
     },
     {
       "id": "fiscal_primary_balance_reaction",
