@@ -36,18 +36,18 @@
       "id": "aggregate_bank_credit_response",
       "classification": "CANDIDATE",
       "source_readiness": "BLS_CANONICAL_11_OF_12_EXACT_WORKBOOK_RECOVERY_RETAINED_SINGLE_GAP_2025_Q2",
-      "next_admissible_action": "Keep calibration closed. Reopen BLS recovery only when the exact official 2025-Q2 workbook endpoint is independently identified, then repeat the frozen recovery, retention, semantic-coordinate review and canonical-promotion chain. Separately resolve the CBD2-to-BNR prudential population/consolidation bridge before any sector-specific candidate-selection cycle. Do not estimate the current aggregate credit equation.",
+      "next_admissible_action": "Keep calibration closed. Reopen BLS recovery only if the exact official 2025-Q2 workbook endpoint is independently identified. For prudential controls, do not attempt a CBD2-to-BNR numerical bridge: preregister deterministic extraction of exact BNR Monthly Bulletin prudential tables on the Romanian-legal-entity-bank population, or admit another official source only if population and consolidation equivalence are documented. Do not estimate the current aggregate credit equation.",
       "blockers": [
         "The canonical realised BNR BLS panel now contains 11 exact observed rounds from 2022-Q4 through 2025-Q3; only 2025-Q2 remains missing.",
         "Exact 2023-Q2, 2023-Q3 and 2024-Q2 workbooks are retained with hashes, all six preregistered observables are semantically mapped, and those three rounds are canonically promoted without interpolation.",
         "For 2025-Q2 the official publication text is corroborative, but the exact official workbook endpoint/bytes are not retained; rounded publication values may not replace workbook-cell precision.",
-        "The CBD2-to-BNR prudential population/consolidation bridge remains unresolved; numerical similarity is not a bridge.",
+        "Official definitions reject direct CBD2-to-BNR substitution: BNR prudential indicators cover Romanian-legal-entity banks, while CBD2 sector 11 covers domestic banking groups/stand-alone banks under a consolidated domestic-control framework. A new matched source or exact BNR-table history is required.",
         "The aggregate reduced form still mixes credit demand and supply, while NPL and capital ratios are endogenous prudential state variables; source completeness alone does not identify a bank-supply channel.",
         "No NFC/household synthetic aggregation, interpolation, forward-fill, credit-equation estimation, model selection or holdout opening is authorized."
       ],
       "source_boundary_review": "model/calibration_validation/aggregate_bank_credit_source_boundary_review.json",
       "estimation_or_refit_allowed": false,
-      "priority_group": "DEFER_UNTIL_FINAL_BLS_GAP_OR_PRUDENTIAL_BOUNDARY_BRIDGE",
+      "priority_group": "DEFER_UNTIL_FINAL_BLS_GAP_OR_NEW_MATCHED_PRUDENTIAL_SOURCE",
       "prudential_coverage_contract": "model/calibration_validation/bank_credit_prudential_coverage_contract.json",
       "retained_prudential_vintage": "data/source_vintages/bank-credit-prudential-coverage-vintage-2026-09-19",
       "prudential_promotion_review": "model/calibration_validation/bank_credit_prudential_coverage_promotion_review.json",
@@ -99,7 +99,9 @@
       "missing_round_semantic_review": "model/calibration_validation/bnr_bls_missing_round_semantic_mapping_audit.json",
       "panel_regeneration_candidate_contract": "model/calibration_validation/bnr_bls_panel_regeneration_candidate_contract.json",
       "canonical_panel_promotion_review": "model/calibration_validation/bnr_bls_canonical_panel_promotion_review.json",
-      "canonical_panel_sha256": "c5dad2c9577431e9765bc02b166e8d5a2b4c4b4c8e761fbb5bbce50f4e6498ff"
+      "canonical_panel_sha256": "c5dad2c9577431e9765bc02b166e8d5a2b4c4b4c8e761fbb5bbce50f4e6498ff",
+      "prudential_population_boundary_review": "model/calibration_validation/bank_credit_prudential_population_boundary_review.json",
+      "prudential_population_boundary_status": "DIRECT_CBD2_TO_BNR_POPULATION_EQUIVALENCE_REJECTED_NEW_MATCHED_SOURCE_REQUIRED"
     },
     {
       "id": "exchange_rate_pass_through_to_inflation",
