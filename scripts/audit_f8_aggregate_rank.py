@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 from fractions import Fraction
 from pathlib import Path
 
@@ -96,12 +97,47 @@ def identify(
     }
 
 
+def finite_number(value: object, label: str) -> float:
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        raise RuntimeError(f"{label} is not numeric")
+    numeric = float(value)
+    if not math.isfinite(numeric):
+        raise RuntimeError(f"{label} is non-finite")
+    return numeric
+
+
+def validate_snapshot(snapshot: dict[str, object]) -> None:
+    if snapshot.get("instrument") != "F8":
+        raise RuntimeError("Retained rank source snapshot is not F8")
+    provenance = snapshot.get("provenance")
+    if not isinstance(provenance, dict):
+        raise RuntimeError("F8 snapshot provenance is missing")
+    if provenance.get("network_errors_present") is not False:
+        raise RuntimeError("Retained F8 snapshot must originate from a no-network-error run")
+    if provenance.get("bilateral_total_F8_cells_resolved") != 0:
+        raise RuntimeError("F8 rank gate expects zero bilateral total-F8 cells in the retained source run")
+    if int(provenance.get("series_requested", 0)) <= 0:
+        raise RuntimeError("F8 snapshot source-series count is missing")
+    boundary = snapshot.get("hard_boundary")
+    if not isinstance(boundary, dict):
+        raise RuntimeError("F8 snapshot hard boundary is missing")
+    forbidden_true = (
+        "benchmark_mutation",
+        "bilateral_materialization",
+        "synthetic_allocation",
+        "missing_to_zero",
+        "behavioural_closure_changed",
+    )
+    if any(boundary.get(key) is not False for key in forbidden_true):
+        raise RuntimeError("F8 retained snapshot violates the Phase C scientific boundary")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--phase-a-report",
+        "--source-snapshot",
         type=Path,
-        default=Path("f8_phase_a_artifacts/f8_other_accounts_coverage_audit.json"),
+        default=Path("model/accounting/f8_rank_source_snapshot_2025.json"),
     )
     parser.add_argument(
         "--out",
@@ -111,23 +147,11 @@ def main() -> None:
     args = parser.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
 
-    phase_a = json.loads(args.phase_a_report.read_text(encoding="utf-8"))
-    if phase_a["instrument"] != "F8":
-        raise RuntimeError("Phase A report is not F8")
-    if phase_a["network_errors_present"]:
-        raise RuntimeError("Phase A network errors block a positive rank claim")
-    if phase_a["cell_status_counts"].get("OBSERVABLE_OR_EXACT_DERIVATION", 0) != 0:
-        raise RuntimeError("Phase C expects zero direct bilateral total-F8 cells")
+    snapshot = json.loads(args.source_snapshot.read_text(encoding="utf-8"))
+    validate_snapshot(snapshot)
 
-    aggregate = {
-        (r["measure"], r["kind"], r["sector"]): r
-        for r in phase_a["aggregate_reconciliation"]
-    }
-    totals = {
-        (r["measure"], r["area"], r["entry"], r["instrument"]): r
-        for r in phase_a["total_economy_controls"]
-    }
-
+    aggregate = snapshot["resident_W0_controls_million_RON"]
+    external = snapshot["external_W1_controls_million_RON"]
     vars_ = variables()
     analyses = {}
 
@@ -139,46 +163,40 @@ def main() -> None:
             equations.append(eq)
             labels.append(label)
 
+        holder_controls = aggregate[measure]["holder_total"]
+        issuer_controls = aggregate[measure]["issuer_total"]
+
         for sector in RESIDENT:
-            holder = aggregate[(measure, "holder_total", sector)]
-            issuer = aggregate[(measure, "issuer_total", sector)]
-            if holder["official_aggregate_million_RON"] is None:
-                raise RuntimeError(f"Missing W0 holder control: {measure} {sector}")
-            if issuer["official_aggregate_million_RON"] is None:
-                raise RuntimeError(f"Missing W0 issuer control: {measure} {sector}")
+            finite_number(holder_controls.get(sector), f"W0 holder control {measure} {sector}")
+            finite_number(issuer_controls.get(sector), f"W0 issuer control {measure} {sector}")
             add({(sector, i): 1 for i in SECTORS}, f"W0-holder:{sector}")
             add({(h, sector): 1 for h in SECTORS}, f"W0-issuer:{sector}")
 
-        w1_asset = totals[(measure, "W1", "A", "F8")]["value_million_RON"]
-        w1_liability = totals[(measure, "W1", "L", "F8")]["value_million_RON"]
-        if w1_asset is None or w1_liability is None:
-            raise RuntimeError(f"Missing W1 F8 controls for {measure}")
+        w1_asset = finite_number(external[measure].get("assets"), f"W1 F8 assets {measure}")
+        w1_liability = finite_number(external[measure].get("liabilities"), f"W1 F8 liabilities {measure}")
         add({(h, "X"): 1 for h in RESIDENT}, "W1-assets")
         add({("X", i): 1 for i in RESIDENT}, "W1-liabilities")
 
         base = identify(equations, vars_)
 
         holder_sum = sum(
-            float(aggregate[(measure, "holder_total", s)]["official_aggregate_million_RON"])
+            finite_number(holder_controls[s], f"W0 holder control {measure} {s}")
             for s in RESIDENT
         )
         issuer_sum = sum(
-            float(aggregate[(measure, "issuer_total", s)]["official_aggregate_million_RON"])
+            finite_number(issuer_controls[s], f"W0 issuer control {measure} {s}")
             for s in RESIDENT
         )
-        domestic_from_assets = holder_sum - float(w1_asset)
-        domestic_from_liabilities = issuer_sum - float(w1_liability)
+        domestic_from_assets = holder_sum - w1_asset
+        domestic_from_liabilities = issuer_sum - w1_liability
         identity_residual = domestic_from_assets - domestic_from_liabilities
         identity_status = "PASS" if abs(identity_residual) <= TOL else "FAIL"
 
         conditional = None
         bnr_zero_pass = False
         if measure == "stock":
-            bnr = aggregate[(measure, "issuer_total", "BNR")]
-            bnr_zero_pass = (
-                bnr["official_aggregate_million_RON"] is not None
-                and abs(float(bnr["official_aggregate_million_RON"])) <= TOL
-            )
+            bnr = finite_number(issuer_controls.get("BNR"), "W0 issuer control stock BNR")
+            bnr_zero_pass = abs(bnr) <= TOL
             if bnr_zero_pass:
                 conditional_equations = list(equations)
                 for holder in SECTORS:
@@ -203,30 +221,34 @@ def main() -> None:
         }
 
     report = {
-        "audit_version": "0.1",
+        "audit_version": "0.2",
         "instrument": "F8",
         "phase": "exact aggregate-control rank audit",
+        "source_snapshot": str(args.source_snapshot),
+        "source_provenance": snapshot["provenance"],
+        "reproduction_mode": "OFFLINE_RETAINED_SOURCE_SNAPSHOT",
         "benchmark_changed": False,
         "materialization_allowed_by_this_phase": False,
         "behavioural_closure_changed": False,
-        "phase_A_source_summary": {
-            "series_requested": phase_a["series_requested"],
-            "series_status_counts": phase_a["series_status_counts"],
-            "cell_status_counts": phase_a["cell_status_counts"],
-            "network_errors_present": phase_a["network_errors_present"],
-        },
         "analyses": analyses,
         "disposition": (
             "FREEZE_F8_AGGREGATE_ONLY_PUBLIC_DATA_BOUNDARY"
             if analyses["stock"]["unconditional_identification"]["unique_cell_count"] == 0
             and analyses["flow"]["unconditional_identification"]["unique_cell_count"] == 0
-            else "UNCONDITIONAL_PARTIAL_CORE_EXISTS_REVIEW_BEFORE_NEXT_GATE"
+            and analyses["stock"]["RHS_accounting_identity"]["status"] == "PASS"
+            and analyses["flow"]["RHS_accounting_identity"]["status"] == "PASS"
+            else "REVIEW_REQUIRED"
+        ),
+        "reproduction_boundary": (
+            "Rank/nullspace and RHS accounting are reproduced deterministically from the retained "
+            "aggregate snapshot extracted from the successful immutable workflow artifact identified "
+            "by SHA-256. Fresh ECB QSA source coverage is tested separately and is not allowed to "
+            "silently change this historical Phase C result."
         ),
         "rule": (
-            "Aggregate controls constrain the F8 matrix but do not become bilateral "
-            "observations. A cell is unique only if it has zero loading on every "
-            "exact nullspace basis vector. Conditional BNR stock zeros are reported "
-            "separately and are never promoted by this phase."
+            "Aggregate controls constrain the F8 matrix but do not become bilateral observations. "
+            "A cell is unique only if it has zero loading on every exact nullspace basis vector. "
+            "Conditional BNR stock zeros are reported separately and are never promoted by this phase."
         ),
     }
 
@@ -243,6 +265,7 @@ def main() -> None:
             analyses["stock"]["RHS_accounting_identity"],
         "flow_RHS_identity":
             analyses["flow"]["RHS_accounting_identity"],
+        "reproduction_mode": report["reproduction_mode"],
         "disposition": report["disposition"],
     }, indent=2))
 
