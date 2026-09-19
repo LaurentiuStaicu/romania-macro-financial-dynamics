@@ -1,0 +1,65 @@
+from __future__ import annotations
+
+import json
+import unittest
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def load(relative: str) -> dict:
+    return json.loads((ROOT / relative).read_text(encoding="utf-8"))
+
+
+class MechanismSourceReadinessTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.readiness = load(
+            "model/calibration_validation/mechanism_source_readiness.json"
+        )
+
+    def test_global_state_does_not_confuse_source_readiness_with_validation(self) -> None:
+        state = self.readiness["global_state"]
+        self.assertFalse(state["active_calibration_cycle_open"])
+        self.assertEqual(state["validated_reference_behavioural_mechanisms"], 0)
+        self.assertFalse(state["behavioural_closure_active"])
+        self.assertEqual(state["reference_mode_readiness"], "9/10")
+
+    def test_no_listed_mechanism_is_authorized_for_estimation_or_refit(self) -> None:
+        for mechanism in self.readiness["mechanisms"]:
+            self.assertFalse(
+                mechanism["estimation_or_refit_allowed"],
+                mechanism["id"],
+            )
+
+    def test_next_step_is_materialisation_not_calibration(self) -> None:
+        step = self.readiness["current_next_step"]
+        self.assertEqual(
+            step["mechanism_id"],
+            "sovereign_yield_spread_response",
+        )
+        self.assertEqual(
+            step["action"],
+            "EXACT_QUARTERLY_SOURCE_MATERIALISATION_ONLY",
+        )
+        self.assertFalse(step["calibration_cycle_open"])
+
+    def test_waiting_and_deferred_mechanisms_remain_frozen(self) -> None:
+        mechanisms = {
+            item["id"]: item for item in self.readiness["mechanisms"]
+        }
+        self.assertEqual(
+            mechanisms["monetary_policy_lending_rate_pass_through"][
+                "priority_group"
+            ],
+            "WAIT_FOR_EXTERNAL_EVENT",
+        )
+        self.assertEqual(
+            mechanisms["government_refinancing_effective_rate"][
+                "priority_group"
+            ],
+            "DEFER_UNTIL_NEW_SOURCE",
+        )
+
+
+if __name__ == "__main__":
+    unittest.main()

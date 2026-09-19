@@ -1,0 +1,103 @@
+{
+  "registry_version": "0.1",
+  "assessed_on": "2026-09-19",
+  "purpose": "Operational source-readiness map for behavioural-mechanism research. It ranks only the next admissible empirical action; it is not a ranking of economic importance, model truth, causal evidence or validation status.",
+  "global_state": {
+    "active_calibration_cycle_open": false,
+    "validated_reference_behavioural_mechanisms": 0,
+    "behavioural_closure_active": false,
+    "reference_mode_readiness": "9/10",
+    "remaining_reference_mode_blocker": "sectoral_financial_positions"
+  },
+  "mechanisms": [
+    {
+      "id": "monetary_policy_lending_rate_pass_through",
+      "classification": "CANDIDATE",
+      "source_readiness": "SOURCE_AND_FORM_FROZEN_WAITING_FOR_PROSPECTIVE_IDENTIFYING_EVENTS",
+      "next_admissible_action": "Monitor future BNR policy-rate decisions only; open event-month MIR response values solely under the prospective confirmation contract after a non-zero event and official release.",
+      "blockers": [
+        "No non-zero policy-rate event yet in the reserved prospective window."
+      ],
+      "estimation_or_refit_allowed": false,
+      "priority_group": "WAIT_FOR_EXTERNAL_EVENT"
+    },
+    {
+      "id": "government_refinancing_effective_rate",
+      "classification": "DEFERRED",
+      "source_readiness": "STRUCTURALLY_INCOMPLETE_PUBLIC_REPRICING_LEDGER",
+      "next_admissible_action": "Reopen only if an official/reproducible source supplies same-boundary opening principal and matched refinancing/reset rates across material debt blocks.",
+      "blockers": [
+        "Opening principal, realized repriced principal, and matched old/new rates are not available on a reconciled public boundary."
+      ],
+      "estimation_or_refit_allowed": false,
+      "priority_group": "DEFER_UNTIL_NEW_SOURCE"
+    },
+    {
+      "id": "aggregate_bank_credit_response",
+      "classification": "CANDIDATE",
+      "source_readiness": "SOURCE_FEASIBILITY_PASS_EXACT_BLS_PRUDENTIAL_MATERIALISATION_PENDING",
+      "next_admissible_action": "Materialize exact realised BNR BLS credit-standards and loan-demand series plus harmonised NPL and capital-ratio histories, preserving NFC and household signals separately.",
+      "blockers": [
+        "Exact BLS XLS history is identified conceptually but not yet reproducibly materialized in the current environment."
+      ],
+      "source_boundary_review": "model/calibration_validation/aggregate_bank_credit_source_boundary_review.json",
+      "estimation_or_refit_allowed": false,
+      "priority_group": "MATERIALISE_WHEN_PROVIDER_ACCESS_AVAILABLE"
+    },
+    {
+      "id": "exchange_rate_pass_through_to_inflation",
+      "classification": "CANDIDATE",
+      "source_readiness": "PRIMARY_FX_HICP_IDENTIFIED_EXTERNAL_PRICE_EXACT_SERIES_PENDING",
+      "next_admissible_action": "Materialize ECB RON/EUR and Romania HICP raw vintages, then recover the preregistered Romania euro-denominated import-UVI fallback exact series tuple or record source-control failure.",
+      "blockers": [
+        "Romania sts_inpi_m coverage not confirmed; ITGS euro-denominated UVI source family is preregistered but exact series tuple remains unresolved."
+      ],
+      "source_boundary_review": "model/calibration_validation/fx_inflation_pass_through_source_boundary_review.json",
+      "external_price_screening": "model/calibration_validation/fx_inflation_external_price_control_screening.json",
+      "estimation_or_refit_allowed": false,
+      "priority_group": "SOURCE_MATERIALISATION_PENDING"
+    },
+    {
+      "id": "sovereign_yield_spread_response",
+      "classification": "CANDIDATE",
+      "source_readiness": "QUARTERLY_MATERIALISATION_CONTRACT_FROZEN_PRIMARY_SERIES_IDENTIFIED",
+      "next_admissible_action": "Materialize the frozen quarterly source table: Romania 10y RON yield, Germany 10y EUR benchmark, New CISS, retained debt-to-GDP, and seasonally adjusted B9-to-GDP.",
+      "blockers": [
+        "Exact B9 provider tuple/raw vintage still must be retained; no regression is authorised by the materialisation contract."
+      ],
+      "source_boundary_review": "model/calibration_validation/sovereign_yield_source_boundary_review.json",
+      "materialisation_contract": "model/calibration_validation/sovereign_yield_quarterly_materialisation_contract.json",
+      "estimation_or_refit_allowed": false,
+      "priority_group": "NEXT_REPRODUCIBLE_MATERIALISATION"
+    },
+    {
+      "id": "household_consumption_response",
+      "classification": "CANDIDATE",
+      "source_readiness": "PARTIAL_SOURCE_FEASIBILITY_NOT_PREREGISTERED",
+      "next_admissible_action": "Screen household consumption, disposable income, borrowing-rate and debt-service observables before deciding whether the full registry form or a nested form is source-admissible.",
+      "blockers": [
+        "Romania household debt-service-ratio source has not been established; no synthetic DSR is authorised."
+      ],
+      "estimation_or_refit_allowed": false,
+      "priority_group": "SCREEN_AFTER_HIGHER_PRIORITY_MATERIALISATION"
+    },
+    {
+      "id": "corporate_investment_response",
+      "classification": "CANDIDATE",
+      "source_readiness": "NOT_YET_SOURCE_SCREENED",
+      "next_admissible_action": "Perform source-boundary screening before calibration.",
+      "blockers": [
+        "EU-fund impulse and sector-consistent investment/credit-cost mapping not yet frozen."
+      ],
+      "estimation_or_refit_allowed": false,
+      "priority_group": "SCREEN_LATER"
+    }
+  ],
+  "priority_rule": "Priority is determined by the shortest scientifically admissible path to new independent evidence, not by a desire to activate a feedback loop. Waiting mechanisms remain frozen; source-incomplete mechanisms are not fit with proxies.",
+  "current_next_step": {
+    "mechanism_id": "sovereign_yield_spread_response",
+    "action": "EXACT_QUARTERLY_SOURCE_MATERIALISATION_ONLY",
+    "reason": "The primary yield, benchmark and stress series are identified; debt-to-GDP is already retained; the quarterly B9 source is official and conceptually fixed. This path has the fewest unresolved source-semantics dependencies among mechanisms not waiting on future events.",
+    "calibration_cycle_open": false
+  }
+}
