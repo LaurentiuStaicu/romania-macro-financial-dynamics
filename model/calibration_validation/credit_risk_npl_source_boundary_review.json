@@ -36,8 +36,14 @@
       },
       {
         "source": "BIS Debt service ratios",
-        "status": "ROMANIA_HOUSEHOLD_OR_NFC_DSR_NOT_CONFIRMED_IN_CURRENT_SCREENING",
+        "status": "ROMANIA_NOT_IN_DOCUMENTED_17_COUNTRY_HOUSEHOLD_NFC_DSR_BREAKDOWN",
         "why_not_use_proxy": "Country coverage or total-private-sector measures may not be silently substituted for an exact Romania household/NFC debt-service burden."
+      },
+      {
+        "source": "National Bank of Romania",
+        "concept": "Household borrower/loan-portfolio DSTI for new and outstanding loans",
+        "status": "OFFICIAL_MEASURE_IDENTIFIED_NOT_DEFINITIONALLY_MATCHED_TO_AGGREGATE_NPL_BOUNDARY",
+        "why_not_use_proxy": "Household borrower DSTI cannot represent debt service for an aggregate or NFC-inclusive banking-system NPL target."
       }
     ],
     "prohibited_measurement_model": "Do not synthesize debt service as debt stock times a lending rate plus assumed amortisation/maturity without a separately preregistered measurement model and independent validation."
@@ -86,5 +92,6 @@
     "validated_reference_behavioural_mechanisms_change": 0,
     "behavioural_closure": "UNCHANGED_INACTIVE",
     "accounting_spine": "UNCHANGED"
-  }
+  },
+  "debt_service_source_screening": "model/calibration_validation/debt_service_source_screening.json"
 }
