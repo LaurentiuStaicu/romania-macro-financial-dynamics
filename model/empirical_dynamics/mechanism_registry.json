@@ -428,7 +428,7 @@
       "functional_form": "policy_rate = f(inflation_gap, activity_gap, exchange_rate, expectations, regime)",
       "implementation": null,
       "parameters": [],
-      "estimation_plan": "Treat the policy rate as observed/exogenous for early empirical validation; estimate a reaction function only with explicit policy-regime and endogeneity treatment.",
+      "estimation_plan": "Keep the policy rate observed/exogenous. The 2026-09-19 source screening confirms the 2.5% ±1 pp target but finds no unit-compatible retained quantitative expectations series or quarterly real-time activity-gap vintage. Any future rule requires a separately preregistered expectations/gap/regime/endogeneity cycle.",
       "observables": [
         "policy_rate",
         "inflation_gap",
@@ -443,11 +443,15 @@
       "limits": [
         "simultaneous response to endogenous macro conditions",
         "managed-float and intervention channel",
-        "policy regime changes"
+        "policy regime changes",
+        "DG ECFIN consumer price expectations are qualitative balances rather than percent inflation expectations",
+        "AMECO output gaps are annual model-based values rather than quarterly real-time gaps",
+        "BNR staff forecasts are not private-sector expectations"
       ],
       "rejection_or_degradation_criteria": [
         "cannot identify policy shocks or stable regime-specific coefficients"
-      ]
+      ],
+      "source_boundary_review": "model/calibration_validation/monetary_policy_reaction_source_screening.json"
     },
     {
       "id": "external_fx_refinancing_feedback",
