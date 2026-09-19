@@ -1,13 +1,10 @@
 name: Sectoral Financial Positions Reference Audit
 
+
+# Phase A live QSA source refresh is intentionally manual after the retained
+# immutable run. Canonical scientific state is reproduced offline from the
+# retained assessment/artifact identity and invariant tests.
 on:
-  pull_request:
-    paths:
-      - "model/dynamics/sectoral_financial_positions_boundary_review.json"
-      - "model/dynamics/sectoral_financial_positions_reference_contract.json"
-      - "scripts/audit_ecb_sectoral_financial_positions_reference.py"
-      - "tests/test_sectoral_financial_positions_reference_contract.py"
-      - ".github/workflows/sectoral-financial-positions-reference-audit.yml"
   workflow_dispatch:
 
 permissions:
