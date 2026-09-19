@@ -47,6 +47,23 @@ class HouseholdConsumptionPopulationBridgeSourceScreeningTests(unittest.TestCase
         )
         self.assertFalse(abf["common_dsti_consumption_microdata_link_identified"])
 
+    def test_romania_hbs_microdata_have_consumption_but_no_mortgage_identifier(self) -> None:
+        sources = {item["id"]: item for item in self.review["screened_sources"]}
+        hbs = sources["EUROSTAT_HBS_2020_SUF"]
+        self.assertEqual(hbs["romania_status"], "ROMANIA_2020_SUF_AVAILABLE")
+        self.assertTrue(hbs["evidence"]["household_file_contains_consumption_expenditure"])
+        self.assertTrue(hbs["evidence"]["household_file_contains_income"])
+        self.assertFalse(hbs["mortgage_borrower_status_variable_identified_in_2020_suf_manual"])
+        self.assertFalse(hbs["mortgage_or_loan_variable_string_identified_in_2020_suf_manual"])
+        self.assertEqual(
+            hbs["bridge_status"],
+            "ROMANIA_MICRODATA_AVAILABLE_BUT_NO_MORTGAGE_BORROWER_IDENTIFIER_IDENTIFIED",
+        )
+        self.assertEqual(
+            hbs["admissibility"],
+            "DO_NOT_USE_OWNER_OCCUPIER_STATUS_AS_MORTGAGE_BORROWER_PROXY",
+        )
+
     def test_no_observed_population_bridge_is_promoted(self) -> None:
         result = self.review["screening_result"]
         self.assertFalse(result["observed_population_bridge_found"])
