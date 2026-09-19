@@ -16,8 +16,18 @@ class SectoralFinancialPositionsAggregateIdentityContractTests(unittest.TestCase
         self.contract = load(
             "model/dynamics/sectoral_financial_positions_aggregate_identity_contract.json"
         )
+        self.executed = load(
+            "model/dynamics/"
+            "sectoral_financial_positions_aggregate_identity_contract_executed_2026-09-19.json"
+        )
         self.phase_a = load(
             "model/dynamics/sectoral_financial_positions_strict_gate_assessment.json"
+        )
+        self.phase_b = load(
+            "model/dynamics/sectoral_financial_positions_aggregate_identity_assessment.json"
+        )
+        self.review = load(
+            "model/dynamics/sectoral_financial_positions_esa_f1_applicability_review.json"
         )
 
     def test_phase_b_is_explicitly_downstream_of_failed_phase_a(self) -> None:
@@ -43,23 +53,41 @@ class SectoralFinancialPositionsAggregateIdentityContractTests(unittest.TestCase
             {"F", "F1"},
         )
 
-    def test_only_H_and_C_receive_structural_F1_applicability_rule(self) -> None:
+    def test_executed_phase_b_f1_rules_are_preserved_exactly(self) -> None:
         applicability = self.contract["methodological_basis"][
             "structural_applicability"
         ]
-        self.assertEqual(applicability["H"]["F1_rule"], "STRUCTURAL_NOT_APPLICABLE_BOTH_SIDES")
-        self.assertEqual(applicability["C"]["F1_rule"], "STRUCTURAL_NOT_APPLICABLE_BOTH_SIDES")
+        self.assertEqual(applicability["H"]["F1_rule"], "STRUCTURAL_NOT_APPLICABLE")
+        self.assertEqual(applicability["C"]["F1_rule"], "STRUCTURAL_NOT_APPLICABLE")
         self.assertEqual(
             applicability["F"]["F1_rule"],
-            "ASSET_SOURCE_REQUIRED_FOR_S12_AND_S121; LIABILITY_STRUCTURAL_ZERO",
+            "SOURCE_REQUIRED_FOR_BOTH_S12_AND_S121",
         )
-        self.assertEqual(applicability["G"]["F1_rule"], "ASSET_SOURCE_REQUIRED; LIABILITY_STRUCTURAL_ZERO")
-        self.assertEqual(applicability["BNR"]["F1_rule"], "ASSET_SOURCE_REQUIRED; LIABILITY_STRUCTURAL_ZERO")
-        self.assertEqual(applicability["X"]["F1_rule"], "ASSET_AND_LIABILITY_SOURCE_REQUIRED")
+        self.assertEqual(applicability["G"]["F1_rule"], "SOURCE_REQUIRED")
+        self.assertEqual(applicability["BNR"]["F1_rule"], "SOURCE_REQUIRED")
+        self.assertEqual(applicability["X"]["F1_rule"], "SOURCE_REQUIRED")
         self.assertTrue(
             self.contract["hard_rules"][
                 "no_structural_zero_beyond_preregistered_H_and_C_F1_rule"
             ]
+        )
+
+    def test_thresholds_and_source_requirements_are_frozen_as_executed(self) -> None:
+        gates = self.contract["consistency_gates"]
+        self.assertEqual(gates["minimum_common_observation_count"], 40)
+        self.assertEqual(
+            gates["required_benchmark_periods"],
+            ["2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4"],
+        )
+        self.assertEqual(gates["system_stock_residual_max_abs_million_RON"], 0.1)
+        self.assertEqual(gates["system_flow_residual_max_abs_million_RON"], 0.1)
+        self.assertEqual(
+            set(gates["mandatory_F1_for"]),
+            {"S12", "S121", "S13", "W1_total_economy"},
+        )
+        self.assertEqual(
+            gates["H_C_F1_if_published_must_be_zero_within_million_RON"],
+            0.1,
         )
 
     def test_promotion_gate_preserves_accounting_and_behavioural_boundaries(self) -> None:
@@ -74,26 +102,42 @@ class SectoralFinancialPositionsAggregateIdentityContractTests(unittest.TestCase
         self.assertIn("bilateral Accounting Spine readiness", promotion)
         self.assertIn("behavioural closure remain unchanged", promotion)
 
-    def test_thresholds_are_frozen_before_source_audit(self) -> None:
-        gates = self.contract["consistency_gates"]
-        self.assertEqual(gates["minimum_common_observation_count"], 40)
+    def test_current_historical_contract_matches_immutable_executed_snapshot(self) -> None:
+        self.assertEqual(self.contract, self.executed)
         self.assertEqual(
-            gates["required_benchmark_periods"],
-            ["2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4"],
+            self.phase_b["executed_contract_snapshot"],
+            "model/dynamics/"
+            "sectoral_financial_positions_aggregate_identity_contract_executed_2026-09-19.json",
         )
-        self.assertEqual(gates["system_stock_residual_max_abs_million_RON"], 0.1)
-        self.assertEqual(gates["system_flow_residual_max_abs_million_RON"], 0.1)
         self.assertEqual(
-            set(gates["mandatory_F1_for"]),
-            {
-                "S12 assets",
-                "S121 assets",
-                "S13 assets",
-                "W1 total-economy assets",
-                "W1 total-economy liabilities",
-            },
+            self.phase_b["executed_contract_workflow_head_sha"],
+            "1fc8620c2981a82cf9bada147fbba9158aaf1461",
         )
-        self.assertIn("H_F1_assets_and_liabilities", gates["structural_zero_scope"])
+        self.assertEqual(
+            self.phase_b["executed_contract_blob_sha"],
+            "20c1ae829cdfff6c77e46193a0d68edc8f94326d",
+        )
+
+    def test_post_run_esa_review_cannot_rewrite_a_d_history(self) -> None:
+        self.assertEqual(
+            self.review["status"],
+            "FUTURE_METHODOLOGY_CORRECTION_NOT_RETROACTIVE",
+        )
+        nonretro = self.review["nonretroactivity"]
+        self.assertFalse(nonretro["phase_A_reinterpreted"])
+        self.assertFalse(nonretro["phase_B_reinterpreted"])
+        self.assertFalse(nonretro["phase_C_reinterpreted"])
+        self.assertFalse(nonretro["phase_D_reinterpreted"])
+        self.assertFalse(nonretro["historical_readiness_changed"])
+        self.assertFalse(nonretro["reference_mode_promoted"])
+        self.assertEqual(
+            self.review["next_action"]["status"],
+            "NO_IMMEDIATE_SOURCE_RERUN",
+        )
+        self.assertIn(
+            "new separately preregistered future phase/contract",
+            self.review["next_action"]["rule"],
+        )
 
 
 if __name__ == "__main__":
