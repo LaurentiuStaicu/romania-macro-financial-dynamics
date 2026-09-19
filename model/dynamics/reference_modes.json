@@ -75,11 +75,13 @@
     {
       "id": "government_refinancing_need",
       "status": "PARTIAL_SERIES_AVAILABLE",
-      "role": "Partially observed reference boundary for government refinancing/liquidity pressure, explicitly distinct from maturity, refixing, gross financing need projections, and realized matched repricing events.",
-      "source": "Ministry of Finance maturity/refixing and financing-need information; exact stable-vintage realized refinancing target remains unresolved.",
-      "time_resolution": "instrument_or_period_specific",
-      "current_endogeneity": "UNRESOLVED_BEHAVIOURAL_DRIVER",
-      "assessment": "model/dynamics/government_refinancing_need_reference_assessment.json"
+      "role": "Partially observed annual reference mode for government-debt refinancing/liquidity pressure, using the Ministry of Finance refinancing component and explicitly distinct from gross financing need, maturity, refixing, and matched repricing events.",
+      "source": "Romania Ministry of Finance annual debt reports/strategies; retained 2017-2023 observed partial series with FINAL versus OPERATIVE status preserved.",
+      "time_resolution": "annual",
+      "current_endogeneity": "OBSERVED_PARTIAL_DRIVER",
+      "assessment": "model/dynamics/government_refinancing_need_reference_assessment.json",
+      "retained_series": "data/processed/government_debt_refinancing_mof_2017_2023.csv",
+      "provenance": "data/provenance/government_debt_refinancing_mof_2017_2023.json"
     },
     {
       "id": "government_effective_interest_rate",
