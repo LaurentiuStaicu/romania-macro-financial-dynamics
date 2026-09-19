@@ -1,0 +1,154 @@
+{
+  "snapshot_version": "0.1",
+  "instrument": "F5",
+  "benchmark": "2025",
+  "purpose": "Retained coefficient-topology snapshot for deterministic offline reproduction of the F5 component-aware exact rank/nullspace audit. It records only which Phase C equations were admissible; it carries no synthetic bilateral values and cannot materialize F5.",
+  "provenance": {
+    "source_runtime": "scripts/audit_qsa_f5_equity_subcomponents.py",
+    "successful_audit_head_sha": "835f05f6fd2fca0fd7bb3ea136fd1598f706339a",
+    "workflow_run_id": 35378703118,
+    "workflow_artifact_id": 10561526069,
+    "workflow_artifact_sha256": "575d3a4c6b9cabdaf95c6eb7fa4cec94059aff6e2694e86bbe8f3fe7137b2a9a",
+    "phase_C_report_path_in_artifact": "f5_phase_c_artifacts/f5_equity_subcomponent_bridge_audit.json",
+    "phase_C_report_sha256": "eb315cba8fb8da6e7f4cf2aac0d5fb1a5d22cda92ddd0408eb3fc563405c5612",
+    "phase_C_report_bytes": 298894,
+    "series_requested": 532,
+    "series_status_counts": {
+      "AVAILABLE": 180,
+      "HTTP_ERROR": 352
+    },
+    "network_errors_present": false
+  },
+  "coefficient_topology": {
+    "same_for_stock_and_flow": true,
+    "direct_equity_component_cells": {
+      "F511": [
+        "H→C",
+        "H→G",
+        "H→X",
+        "C→C",
+        "C→G",
+        "C→X",
+        "G→C",
+        "G→G",
+        "G→X",
+        "X→C",
+        "X→G"
+      ],
+      "F512": [],
+      "F519": []
+    },
+    "F52": {
+      "direct_cells": [
+        "H→F",
+        "H→X",
+        "C→F",
+        "C→X",
+        "G→F",
+        "G→X",
+        "X→F"
+      ],
+      "structural_nonfund_resident_issuers": [
+        "H",
+        "C",
+        "G",
+        "BNR"
+      ]
+    },
+    "resident_aggregate_equations": {
+      "H:A": [
+        "F5",
+        "F51",
+        "F511",
+        "F512",
+        "F519"
+      ],
+      "H:L": [
+        "F5",
+        "F51",
+        "F519"
+      ],
+      "C:A": [
+        "F5",
+        "F51",
+        "F511",
+        "F512",
+        "F519"
+      ],
+      "C:L": [
+        "F5",
+        "F51",
+        "F511",
+        "F512",
+        "F519"
+      ],
+      "F:A": [
+        "F5",
+        "F51"
+      ],
+      "F:L": [
+        "F5",
+        "F51"
+      ],
+      "G:A": [
+        "F5",
+        "F51",
+        "F511",
+        "F512",
+        "F519"
+      ],
+      "G:L": [
+        "F5",
+        "F51",
+        "F511",
+        "F512",
+        "F519"
+      ],
+      "BNR:A": [
+        "F5",
+        "F51"
+      ],
+      "BNR:L": [
+        "F5",
+        "F51"
+      ]
+    },
+    "total_aggregate_equations": {
+      "W0:A": [
+        "F5",
+        "F51",
+        "F511",
+        "F512",
+        "F519"
+      ],
+      "W0:L": [
+        "F5",
+        "F51",
+        "F511",
+        "F512",
+        "F519"
+      ],
+      "W1:A": [
+        "F5",
+        "F51",
+        "F511",
+        "F512",
+        "F519"
+      ],
+      "W1:L": [
+        "F5",
+        "F51",
+        "F511",
+        "F512",
+        "F519"
+      ]
+    }
+  },
+  "hard_boundary": {
+    "benchmark_mutation": false,
+    "materialization": false,
+    "synthetic_allocation": false,
+    "missing_to_zero": false,
+    "behavioural_closure_changed": false
+  }
+}
