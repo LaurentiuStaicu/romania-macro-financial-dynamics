@@ -47,10 +47,10 @@
         "new-business rates do not equal effective rates on outstanding stocks"
       ],
       "rejection_or_degradation_criteria": [
-        "beta sign unstable or economically implausible across time-respecting origins",
-        "lambda practically non-identifiable",
-        "fails to improve materially over persistence/naive lending-rate baseline out of sample",
-        "residual dynamics show systematic omitted lag structure"
+        "the frozen household beta becomes unstable or leaves the preregistered admissible domain in a future independently preregistered cycle",
+        "a prospective confirmation window containing genuinely non-zero policy-rate variation fails the frozen predictive gate versus persistence without post-observation respecification",
+        "residual dynamics under identifying policy-rate variation reveal systematic omitted lag or regime structure requiring a newly preregistered candidate cycle",
+        "no NFC form may be promoted without a new preregistered structural-selection cycle because the previous NFC candidates failed before holdout"
       ],
       "validation_recovery_disposition": {
         "status": "CANDIDATE",
@@ -96,7 +96,7 @@
           "interpretation": "share of debt stock repriced/refinanced in period"
         }
       ],
-      "estimation_plan": "Prefer maturity/refinancing schedules; if unavailable, infer only with explicit uncertainty from debt-service/maturity observables. Never tune m merely to fit interest expenditure.",
+      "estimation_plan": "Do not estimate at the current public-data boundary. Reopen only if same-boundary instrument/block evidence supplies opening outstanding principal, realized repriced/refinanced or reset principal, and matched old/new effective rates sufficient to pass the frozen government repricing-ledger gates. Maturity shares, refixing targets, aggregate financing needs, issue sizes, or one auction yield may not substitute for the missing matched repricing structure.",
       "observables": [
         "government_debt_stock",
         "government_interest_expenditure",
