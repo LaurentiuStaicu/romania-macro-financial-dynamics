@@ -17,7 +17,8 @@
     "original_holder_by_issuer_boundary_blocked_by_accounting_readiness": true,
     "aggregate_recovery_path_result": "FAILED_FROZEN_NO_PROMOTION",
     "internal_qsa_recovery_state": "FROZEN_UNTIL_REOPEN_TRIGGER",
-    "external_counterpart_recovery_state": "EXHAUSTED_NO_SEMANTICALLY_AND_FREQUENCY_COMPLETE_CURRENT_PUBLIC_SOURCE"
+    "external_counterpart_recovery_state": "EXHAUSTED_NO_SEMANTICALLY_ADMISSIBLE_CURRENT_PUBLIC_SOURCE",
+    "current_public_source_completion_status": "EUROSTAT_INSTRUMENT_SCOPE_FAIL_OECD_S121_SCOPE_FAIL_BNR_ANNUAL_FREQUENCY_TRANSACTION_HISTORY_FAIL"
   },
   "completed_source_paths": [
     {
