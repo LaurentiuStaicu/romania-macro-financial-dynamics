@@ -1,12 +1,9 @@
 name: F7 Financial Derivatives Coverage Audit
 
+# Historical scientific conclusions are reproduced from retained repository
+# snapshots/assessments. This workflow intentionally performs a live provider
+# refresh only when explicitly requested.
 on:
-  pull_request:
-    paths:
-      - "model/accounting/f7_financial_derivatives_coverage_contract.json"
-      - "scripts/audit_qsa_f7_financial_derivatives_coverage.py"
-      - "tests/test_f7_financial_derivatives_coverage_contract.py"
-      - ".github/workflows/f7-financial-derivatives-coverage-audit.yml"
   workflow_dispatch:
 
 permissions:
