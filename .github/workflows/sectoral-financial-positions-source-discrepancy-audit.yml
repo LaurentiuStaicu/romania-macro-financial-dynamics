@@ -1,7 +1,7 @@
 name: Sectoral Financial Positions Source Discrepancy Diagnostic
 
 
-# Phase D is a retained diagnostic. Live reruns are manual-only; the canonical
+# Phase D is a retained diagnostic. Live refresh/reruns are manual-only; the canonical
 # finding is reproduced offline from the committed assessment and tests.
 on:
   workflow_dispatch:
