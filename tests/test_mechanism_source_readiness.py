@@ -52,7 +52,7 @@ class MechanismSourceReadinessTests(unittest.TestCase):
             self.readiness["coverage_rule"]["missing_entries_allowed"]
         )
 
-    def test_next_step_is_structural_preregistration_not_calibration(self) -> None:
+    def test_next_step_is_offline_runner_implementation_not_calibration(self) -> None:
         step = self.readiness["current_next_step"]
         self.assertEqual(
             step["mechanism_id"],
@@ -60,7 +60,7 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         )
         self.assertEqual(
             step["action"],
-            "WRITE_SOVEREIGN_YIELD_STRUCTURAL_SELECTION_CONTRACT_NO_ESTIMATION",
+            "IMPLEMENT_OFFLINE_SOVEREIGN_SELECTION_RUNNER_NO_EXECUTION",
         )
         self.assertFalse(step["calibration_cycle_open"])
 
@@ -70,7 +70,7 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         sovereign = mechanisms["sovereign_yield_spread_response"]
         self.assertEqual(
             sovereign["source_readiness"],
-            "EXACT_SOURCE_VINTAGE_RETAINED_STRUCTURAL_SELECTION_PREREGISTRATION_PENDING",
+            "SOURCE_VINTAGE_RETAINED_STRUCTURAL_SELECTION_CONTRACT_FROZEN_RUNNER_PENDING",
         )
         self.assertEqual(
             sovereign["live_execution_policy"],
