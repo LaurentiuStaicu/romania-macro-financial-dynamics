@@ -240,7 +240,7 @@ class RemainingReferenceModeBlockerTests(unittest.TestCase):
         self.assertTrue(
             provenance["hard_boundaries"]["no_prefinancing_substitution"]
         )
-        self.assertIn("maturity", excluded)
+        self.assertIn("debt maturing within one year", excluded)
         self.assertIn("refixing", excluded)
         self.assertIn("m[t]", excluded)
         self.assertIn("PROJECTION", discarded_statuses)
