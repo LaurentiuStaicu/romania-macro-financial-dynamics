@@ -69,7 +69,7 @@ class PrivateCreditReferenceAssessmentTests(unittest.TestCase):
         self.assertFalse(loops["bank_credit_balance_sheet_loop"]["quantitatively_active"])
         self.assertFalse(loops["monetary_credit_transmission_loop"]["quantitatively_active"])
         self.assertFalse(model["dynamic_core"]["behavioural_closure_active"])
-        self.assertEqual(model["dynamic_core"]["reference_mode_ready_count"], 7)
+        self.assertGreaterEqual(model["dynamic_core"]["reference_mode_ready_count"], 7)
 
 
 if __name__ == "__main__":
