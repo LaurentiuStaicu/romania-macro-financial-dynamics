@@ -1,16 +1,20 @@
 name: Sovereign Yield Quarterly Source Materialisation
 
 # Live provider refresh/materialisation is intentionally manual-only.
-# A run creates new-vintage source evidence; canonical Scientific CI remains
-# offline and must never rewrite retained empirical state from provider calls.
+# Before this workflow exists on the default branch, an explicit PR label
+# provides a one-shot manual trigger for source-evidence review. Unlabeled PR
+# activity and ordinary synchronisation must never call live providers.
 on:
   workflow_dispatch:
+  pull_request:
+    types: [labeled]
 
 permissions:
   contents: read
 
 jobs:
   materialise-sovereign-yield-sources:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.label.name == 'run-live-sovereign-yield' }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
