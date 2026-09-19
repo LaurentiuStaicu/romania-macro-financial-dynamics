@@ -1,16 +1,9 @@
 name: F4 Exact Complement and Rank Audit
 
+# Historical scientific conclusions are reproduced from retained repository
+# snapshots/assessments. This workflow intentionally performs a live provider
+# refresh only when explicitly requested.
 on:
-  pull_request:
-    paths:
-      - "model/accounting/f4_exact_complement_rank_contract.json"
-      - "model/accounting/f4_loans_coverage_contract.json"
-      - "scripts/audit_qsa_f4_loans_coverage.py"
-      - "scripts/audit_f4_exact_complement_rank.py"
-      - "tests/test_f4_exact_complement_rank_contract.py"
-      - ".github/workflows/f4-exact-complement-rank-audit.yml"
-      - "model/accounting/reconciliation_2025.json"
-      - "STATUS.md"
   workflow_dispatch:
 
 permissions:
