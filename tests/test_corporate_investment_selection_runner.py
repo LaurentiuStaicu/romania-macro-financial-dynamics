@@ -13,7 +13,21 @@ class CorporateInvestmentSelectionRunnerTests(unittest.TestCase):
             prerequisites["source_sha256"],
             "d8d3765fe9e83bd29620de1d02e914626a5f5e1b4071e005ff138b55f127ba69",
         )
-        self.assertFalse(runner.execution_is_authorized(contract))
+        if runner.EXECUTION_GATE.exists():
+            gate = __import__("json").loads(
+                runner.EXECUTION_GATE.read_text(encoding="utf-8")
+            )
+            self.assertEqual(
+                gate["authorized_scope"],
+                "STRUCTURAL_SELECTION_2022Q1_TO_2023Q4_ONLY",
+            )
+            self.assertFalse(gate["final_evaluation_authorized"])
+            self.assertEqual(
+                gate["source_csv_sha256"],
+                contract["prerequisite_measurement_panel"]["csv_sha256"],
+            )
+        else:
+            self.assertFalse(runner.execution_is_authorized(contract))
 
     def test_selection_reader_never_reads_final_holdout(self):
         contract = runner.load_contract()
