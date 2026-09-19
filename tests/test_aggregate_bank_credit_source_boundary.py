@@ -86,6 +86,30 @@ class AggregateBankCreditSourceBoundaryTests(unittest.TestCase):
         self.assertIn("clean exogenous bank-supply instrument", prohibited)
         self.assertIn("digitise", prohibited)
 
+    def test_exact_bls_spreadsheets_are_catalogued_without_claiming_history(self) -> None:
+        review = load(
+            "model/calibration_validation/"
+            "aggregate_bank_credit_source_boundary_review.json"
+        )
+        catalog = review["bls_machine_readable_source_catalog"]
+        self.assertEqual(
+            catalog["status"],
+            "DIRECT_OFFICIAL_SPREADSHEETS_IDENTIFIED_"
+            "PROVIDER_ACCESS_BLOCKED_IN_CURRENT_ENVIRONMENT",
+        )
+        self.assertFalse(catalog["historical_coverage_claimed"])
+        self.assertGreaterEqual(len(catalog["files"]), 6)
+        for item in catalog["files"]:
+            self.assertTrue(item["content_not_materialised"])
+            self.assertTrue(
+                item["url"].endswith(".xls")
+                or item["url"].endswith(".xlsx")
+            )
+        self.assertIn(
+            "not evidence of missing files",
+            catalog["provider_access_observation"],
+        )
+
     def test_no_system_dynamics_activation_follows_from_source_feasibility(self) -> None:
         review = load(
             "model/calibration_validation/"

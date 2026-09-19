@@ -61,6 +61,7 @@
   "source_materialisation_gate": {
     "calibration_cycle_open": false,
     "required_before_any_estimation": [
+      "Enumerate and retain the exact official BNR BLS spreadsheet rounds needed for the chosen history; every included file requires its original URL, bytes/hash, survey round and realised-versus-expected column semantics.",
       "Exact retained quarterly realised BNR Bank Lending Survey credit-standard series for NFCs and households, with source provenance.",
       "Exact retained quarterly realised BNR Bank Lending Survey loan-demand series for NFCs and households, with source provenance.",
       "Exact retained harmonised NPL-ratio history with methodological break metadata; no silent concatenation of pre-EBA definitions.",
@@ -93,5 +94,50 @@
     "validated_reference_behavioural_mechanisms_change": 0,
     "behavioural_closure": "UNCHANGED_INACTIVE",
     "accounting_spine": "UNCHANGED"
+  },
+  "bls_machine_readable_source_catalog": {
+    "status": "DIRECT_OFFICIAL_SPREADSHEETS_IDENTIFIED_PROVIDER_ACCESS_BLOCKED_IN_CURRENT_ENVIRONMENT",
+    "discovery_date": "2026-09-19",
+    "files": [
+      {
+        "round": "2023 May",
+        "url": "https://www.bnr.ro/uploads/2023-5-banklendingsurvey-may2023_xls_547_1733754096.xls",
+        "format": "xls",
+        "content_not_materialised": true
+      },
+      {
+        "round": "2024 February",
+        "url": "https://www.bnr.ro/uploads/2024-2-banklendingsurvey-february2024_xls_547_1733753857.xls",
+        "format": "xls",
+        "content_not_materialised": true
+      },
+      {
+        "round": "2024 May",
+        "url": "https://www.bnr.ro/uploads/2024-5-banklendingsurvey-may2024_xls_547_1733753844.xls",
+        "format": "xls",
+        "content_not_materialised": true
+      },
+      {
+        "round": "2024 November",
+        "url": "https://www.bnr.ro/uploads/2024-11-banklendingsurvey-november2024_xls_547_1733753815.xls",
+        "format": "xls",
+        "content_not_materialised": true
+      },
+      {
+        "round": "2025 May",
+        "url": "https://www.bnr.ro/uploads/2025-06-13blst1may2025_xls_547_1749803028.xlsx",
+        "format": "xlsx",
+        "content_not_materialised": true
+      },
+      {
+        "round": "2025 Q3 / November release",
+        "url": "https://www.bnr.ro/uploads/2025-12-09sondajblst3-noiembrie2025_xls_547_1765281659.xls",
+        "format": "xls",
+        "content_not_materialised": true
+      }
+    ],
+    "provider_access_observation": "The official BNR URLs are indexed publicly but return a Request Rejected response to automated access from the current environment. This is an access limitation, not evidence of missing files or missing observations.",
+    "historical_coverage_claimed": false,
+    "next_required_step": "Enumerate the official BNR survey spreadsheet archive and retain exact file bytes/hashes before constructing any canonical BLS history. Do not infer missing rounds from URL patterns."
   }
 }

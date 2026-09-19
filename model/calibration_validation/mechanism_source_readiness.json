@@ -35,10 +35,11 @@
     {
       "id": "aggregate_bank_credit_response",
       "classification": "CANDIDATE",
-      "source_readiness": "SOURCE_FEASIBILITY_PASS_EXACT_BLS_PRUDENTIAL_MATERIALISATION_PENDING",
-      "next_admissible_action": "Materialize exact realised BNR BLS credit-standards and loan-demand series plus harmonised NPL and capital-ratio histories, preserving NFC and household signals separately.",
+      "source_readiness": "DIRECT_BLS_SPREADSHEETS_IDENTIFIED_PROVIDER_ACCESS_BLOCKED_MATERIALISATION_PENDING",
+      "next_admissible_action": "Enumerate and retain exact official BNR BLS XLS/XLSX rounds and hashes, then materialize realised NFC and household credit-standards and loan-demand histories separately together with harmonised NPL/capital controls.",
       "blockers": [
-        "Exact BLS XLS history is identified conceptually but not yet reproducibly materialized in the current environment."
+        "Official machine-readable BNR BLS files are identified for multiple rounds, but the provider rejects automated spreadsheet retrieval from the current environment.",
+        "Historical spreadsheet coverage has not yet been enumerated completely; missing rounds may not be inferred from URL patterns."
       ],
       "source_boundary_review": "model/calibration_validation/aggregate_bank_credit_source_boundary_review.json",
       "estimation_or_refit_allowed": false,
