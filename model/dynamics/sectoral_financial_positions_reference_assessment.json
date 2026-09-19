@@ -111,6 +111,9 @@
     "workflow": ".github/workflows/sectoral-financial-positions-eurostat-counterpart-probe.yml",
     "formal_reference_mode_gate": false,
     "current_effect": "NONE_UNTIL_RETAINED_RESULT_AND_SEPARATE_MAPPING_LINEAGE_REVIEW",
-    "rationale": "Eurostat nasq_10_f_cp explicitly disseminates quarterly counterpart information and is therefore the priority source-access discovery path. However, Eurostat metadata states that quarterly financial-account data are validated by ECB and transmitted to Eurostat, so a successful probe establishes public granularity/coverage rather than independent measurement."
+    "rationale": "Eurostat nasq_10_f_cp explicitly disseminates quarterly counterpart information and is therefore the priority source-access discovery path. However, Eurostat metadata states that quarterly financial-account data are validated by ECB and transmitted to Eurostat, so a successful probe establishes public granularity/coverage rather than independent measurement.",
+    "execution_state": "PENDING_DEFAULT_BRANCH_PRESENCE_OR_EQUIVALENT_AUTHORIZED_MANUAL_EXECUTION",
+    "execution_precondition": "workflow_dispatch definition must exist on the default branch; the workflow is not present on main while PR #47 remains a draft.",
+    "no_trigger_bypass": true
   }
 }

@@ -90,5 +90,17 @@
     "PASS": "HTTP 200, parseable JSON-stat, and every frozen schema/data criterion passes.",
     "DEFINITIVE_NEGATIVE": "Either a parsed HTTP 200 response fails the frozen schema/data gate, or Eurostat returns an explicit 'No results found' response. This supplies negative source-discovery evidence but never changes reference-mode readiness.",
     "INDETERMINATE": "Network/provider failures, HTTP 413 asynchronous responses, rate limiting, server errors, empty HTTP 200 bodies, parse failures, or query syntax/semantic errors are source-access failures rather than negative scientific evidence and must be retried without changing the scientific baseline."
+  },
+  "execution_policy": {
+    "workflow": ".github/workflows/sectoral-financial-positions-eurostat-counterpart-probe.yml",
+    "trigger": "workflow_dispatch",
+    "live_source_refresh_manual_only": true,
+    "workflow_dispatch_requires_workflow_on_default_branch": true,
+    "default_branch_at_preregistration": "main",
+    "workflow_present_on_default_branch_at_preregistration": false,
+    "current_execution_state": "PENDING_DEFAULT_BRANCH_PRESENCE_OR_EQUIVALENT_AUTHORIZED_MANUAL_EXECUTION",
+    "no_trigger_broadening_to_bypass_precondition": true,
+    "scientific_effect_while_pending": "NONE",
+    "rationale": "GitHub workflow_dispatch only triggers when the workflow definition exists on the default branch. The preregistered probe workflow is currently introduced by the scientific-integrity draft branch and is absent from main; live execution must therefore wait for an authorized default-branch presence or an equivalent manual execution path. Converting the probe to pull_request/push merely to obtain live data would violate the retained manual-only live-refresh policy."
   }
 }

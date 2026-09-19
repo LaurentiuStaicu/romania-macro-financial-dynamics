@@ -48,6 +48,34 @@ class SectoralFinancialPositionsEurostatCounterpartProbeContractTests(unittest.T
         self.assertTrue(hard["no_accounting_readiness_change"])
         self.assertTrue(hard["no_historical_phase_A_D_reinterpretation"])
 
+    def test_manual_execution_precondition_cannot_be_bypassed(self) -> None:
+        policy = self.contract["execution_policy"]
+        self.assertEqual(policy["trigger"], "workflow_dispatch")
+        self.assertTrue(policy["live_source_refresh_manual_only"])
+        self.assertTrue(
+            policy["workflow_dispatch_requires_workflow_on_default_branch"]
+        )
+        self.assertEqual(policy["default_branch_at_preregistration"], "main")
+        self.assertFalse(
+            policy["workflow_present_on_default_branch_at_preregistration"]
+        )
+        self.assertTrue(policy["no_trigger_broadening_to_bypass_precondition"])
+        self.assertEqual(policy["scientific_effect_while_pending"], "NONE")
+
+    def test_provider_access_failures_are_not_negative_evidence_by_contract(self) -> None:
+        semantics = self.contract["source_response_semantics"]
+        rule = self.contract["discovery_pass_rule"]
+        self.assertIn("413", semantics["INDETERMINATE"])
+        self.assertIn("Network", semantics["INDETERMINATE"])
+        self.assertEqual(
+            rule["effect_if_indeterminate"],
+            "INDETERMINATE_SOURCE_ACCESS_RETRY_REQUIRED_NO_SCIENTIFIC_EFFECT",
+        )
+        self.assertEqual(
+            rule["effect_if_definitive_negative"],
+            "NO_REOPEN_EVIDENCE_FROM_EUROSTAT_COUNTERPART_DISCOVERY_PROBE",
+        )
+
     def test_pass_only_authorizes_mapping_lineage_review(self) -> None:
         rule = self.contract["discovery_pass_rule"]
         self.assertEqual(rule["required_geo_identity"], "RO")
