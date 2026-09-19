@@ -69,7 +69,9 @@
   "metadata_consistency": {
     "readme_current_status_before_repair": "STALE_VALIDATION_RECOVERY_IN_PROGRESS",
     "v0_1_0_release_note_current_wording_before_repair": "AMBIGUOUS_HISTORICAL_CURRENT_STAGE_WORDING",
-    "required_repair": "Update README to current evidence-triggered hold and make v0.1.0 release note explicitly historical."
+    "required_repair": "COMPLETED",
+    "readme_current_status_after_repair": "EVIDENCE_TRIGGERED_BASELINE_HOLD",
+    "v0_1_0_release_note_after_repair": "EXPLICIT_HISTORICAL_SNAPSHOT_WORDING"
   },
   "blockers": [
     "The PR is too large for complete GitHub diff rendering/review under documented platform limits.",
@@ -92,9 +94,10 @@
   "merge_readiness": {
     "scientific_integrity_ready": true,
     "github_reviewability_ready": false,
-    "metadata_consistency_ready_after_repair": false,
+    "metadata_consistency_ready_after_repair": true,
     "overall_merge_ready": false,
     "human_merge_decision_authorized_by_this_assessment": false
   },
-  "recommended_next_state": "DRAFT_CONSOLIDATION_REQUIRED_BEFORE_REVIEW_READY"
+  "recommended_next_state": "DRAFT_CONSOLIDATION_REQUIRED_BEFORE_REVIEW_READY",
+  "assessment_snapshot_note": "PR size metrics are frozen from head 24f7d03a2408c22069fa8ad48260b190114874a6 before this merge-readiness gate and metadata-repair commits; subsequent gate-only commits can only increase commit/file/diff size and therefore cannot invalidate the reviewability FAIL conclusion."
 }
