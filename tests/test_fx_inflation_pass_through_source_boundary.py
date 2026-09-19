@@ -70,7 +70,7 @@ class FxInflationPassThroughSourceBoundaryTests(unittest.TestCase):
         )
         self.assertFalse(screen["calibration_may_open"])
         self.assertIn(
-            "before inspecting model fit",
+            "after inspecting model fit",
             screening["purpose"],
         )
         self.assertIn("euro-area import prices", prohibited)
