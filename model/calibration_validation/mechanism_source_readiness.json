@@ -278,17 +278,17 @@
     {
       "id": "fiscal_primary_balance_reaction",
       "classification": "DEFERRED",
-      "source_readiness": "FROZEN_TESTED_ANNUAL_FORM_FAILED_BEFORE_HOLDOUT",
-      "next_admissible_action": "Do not open 2018-2024 final evaluation and do not respecify the annual fiscal-reaction form on the same evidence cycle. Reopen only through a separately preregistered cycle justified by genuinely new measurement or identification evidence, such as a cyclically adjusted primary-balance vintage, longer real-time historical vintages, or an independently justified regime/identification design.",
+      "source_readiness": "REOPENED_NEW_MEASUREMENT_EVIDENCE_CAPB_REALTIME_VINTAGE_MATERIALISATION",
+      "next_admissible_action": "Materialise exact Romania AMECO UBLGBPS across the preregistered official release vintages, retaining archive bytes, exact matched-row bytes, release metadata and SHA-256. Then perform a separate real-time information-set/timing adjudication. Do not estimate, refit, inspect the untouched 2018-2024 final evaluation window, or reuse the failed form.",
       "blockers": [
-        "The preregistered lagged-state annual candidate failed structural selection before holdout.",
-        "Candidate RMSE was worse than naive primary-balance persistence over 2010-2017.",
-        "The preregistered non-negative output-gap coefficient domain failed at every expanding-origin fit.",
-        "The 2018-2024 final-evaluation window remains unopened and cannot be used to rescue or respecify this cycle."
+        "The new CAPB/structural-primary-balance measurement trigger is satisfied, but the exact release-by-release source vintage has not yet been retained in the repository.",
+        "Forecast-versus-actual and information-availability semantics must be adjudicated release by release before a new estimation sample can be defined.",
+        "No new fiscal structural-selection equation, lag convention, regime term or evaluation window has been preregistered.",
+        "The untouched 2018-2024 final-evaluation window from the failed prior cycle remains closed and cannot be reused to choose the new specification."
       ],
       "source_boundary_review": "model/calibration_validation/fiscal_primary_balance_source_boundary_review.json",
       "estimation_or_refit_allowed": false,
-      "priority_group": "FREEZE_TESTED_FORM_UNTIL_NEW_EVIDENCE",
+      "priority_group": "SELECTIVE_REOPEN_SOURCE_MATERIALISATION",
       "materialisation_contract": "model/calibration_validation/fiscal_primary_balance_materialisation_contract.json",
       "materialiser_workflow": ".github/workflows/fiscal-primary-balance-materialisation.yml",
       "retained_source_vintage": "data/source_vintages/fiscal-primary-balance-quarterly-vintage-2026-09-19",
@@ -300,7 +300,13 @@
       "annual_promotion_review": "model/calibration_validation/fiscal_reaction_ameco_source_vintage_promotion_review.json",
       "annual_structural_selection_contract": "model/calibration_validation/fiscal_reaction_annual_structural_selection_contract.json",
       "annual_selection_result": "model/calibration_validation/fiscal_reaction_annual_structural_selection_result.json",
-      "annual_selection_execution_gate": "model/calibration_validation/fiscal_reaction_annual_selection_execution_gate.json"
+      "annual_selection_execution_gate": "model/calibration_validation/fiscal_reaction_annual_selection_execution_gate.json",
+      "selective_reopen_active": true,
+      "capb_reopen_assessment": "model/registries/fiscal_capb_reopen_assessment_2026_09_19.json",
+      "capb_realtime_vintage_contract": "model/calibration_validation/fiscal_reaction_capb_realtime_vintage_contract.json",
+      "capb_realtime_vintage_materialiser": "scripts/materialise_fiscal_reaction_capb_realtime_vintages.py",
+      "capb_realtime_vintage_workflow": ".github/workflows/fiscal-reaction-capb-realtime-vintage-materialisation.yml",
+      "capb_live_execution_policy": "MANUAL_ONLY_LIVE_SOURCE_EVIDENCE"
     },
     {
       "id": "monetary_policy_reaction_function",
@@ -346,11 +352,12 @@
   ],
   "priority_rule": "Priority is determined by the shortest scientifically admissible path to new independent evidence, not by a desire to activate a feedback loop. Waiting mechanisms remain frozen; source-incomplete mechanisms are not fit with proxies.",
   "current_next_step": {
-    "mechanism_id": "SCIENTIFIC_BASELINE",
-    "action": "HOLD_CLOSED_BASELINE_UNTIL_DECLARED_REOPEN_TRIGGER",
-    "reason": "Cross-registry mechanism readiness is now consolidated and executable in Scientific CI. All non-rejected behavioural mechanisms are either frozen after preregistered failure, waiting for prospective identifying events, or blocked by explicit source/measurement/identification triggers. No new empirical cycle should open merely because the queue is exhausted.",
+    "mechanism_id": "fiscal_primary_balance_reaction",
+    "action": "MATERIALISE_CAPB_REALTIME_VINTAGE_SOURCE_EVIDENCE",
+    "reason": "A declared reopen trigger is satisfied by the exact Romania AMECO UBLGBPS measurement family plus official archived forecast vintages. The next admissible gate is source materialisation and timing adjudication only; calibration remains closed.",
     "calibration_cycle_open": false,
-    "reopen_conditions_registry": "model/calibration_validation/mechanism_reopen_conditions_registry.json"
+    "reopen_conditions_registry": "model/calibration_validation/mechanism_reopen_conditions_registry.json",
+    "authorized_scope": "CAPB_REALTIME_VINTAGE_SOURCE_MATERIALISATION_AND_TIMING_ADJUDICATION_ONLY"
   },
   "coverage_rule": {
     "scope": "ALL_NON_REJECTED_MECHANISMS",
