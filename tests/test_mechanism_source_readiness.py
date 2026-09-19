@@ -60,13 +60,23 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         )
         self.assertEqual(
             step["action"],
-            "RUN_MANUAL_PRIMARY_BALANCE_SOURCE_MATERIALISER_AND_RETAIN_EVIDENCE",
+            "PREREGISTER_FISCAL_GAP_AND_REGIME_MEASUREMENT_BOUNDARY_NO_ESTIMATION",
         )
         self.assertFalse(step["calibration_cycle_open"])
 
         mechanisms = {
             item["id"]: item for item in self.readiness["mechanisms"]
         }
+        fiscal = mechanisms["fiscal_primary_balance_reaction"]
+        self.assertEqual(
+            fiscal["source_readiness"],
+            "MATCHED_PRIMARY_BALANCE_VINTAGE_RETAINED_OUTPUT_GAP_DEBT_GAP_REGIMES_UNRESOLVED",
+        )
+        self.assertEqual(
+            fiscal["priority_group"],
+            "MEASUREMENT_AND_REGIME_PREREGISTRATION_PENDING",
+        )
+
         sovereign = mechanisms["sovereign_yield_spread_response"]
         self.assertEqual(
             sovereign["source_readiness"],
