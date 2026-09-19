@@ -35,16 +35,17 @@
     {
       "id": "aggregate_bank_credit_response",
       "classification": "CANDIDATE",
-      "source_readiness": "BLS_CANONICAL_8_OF_12_PLUS_OFFICIAL_PUBLICATION_TEXT_BRIDGE_EXACT_WORKBOOK_GAPS_REMAIN",
-      "next_admissible_action": "Recover and retain exact official BNR BLS workbook bytes and exact cell values for 2023-Q2, 2023-Q3, 2024-Q2 and 2025-Q2 before any structural-selection contract, prioritising 2023-Q2 because its household publication text does not identify unique exact net percentages. Use the official-publication bridge only for semantic/sign/reporting-precision corroboration; do not promote publication-rounded values into the canonical panel, interpolate gaps, aggregate NFC/household signals, or fit a credit equation.",
+      "source_readiness": "BLS_CANONICAL_8_OF_12_PUBLICATION_BRIDGE_COMPLETE_ENOUGH_FOR_CORROBORATION_MISSING_WORKBOOK_RECOVERY_CONTRACT_FROZEN",
+      "next_admissible_action": "Execute the frozen manual-only BNR BLS missing-round workbook recovery contract for 2023-Q2, 2023-Q3 and 2024-Q2 using only preregistered exact candidates, and add 2025-Q2 only after its exact official annex URL is independently identified. A successful probe may retain workbook bytes only; panel append still requires immutable promotion review plus deterministic six-observable extraction. Do not promote publication-rounded values, infer URLs, interpolate quarters, aggregate NFC/household signals, or fit a credit equation.",
       "blockers": [
         "Exact quarterly ECB CBD2 NPL, solvency-ratio and CET1 histories are retained for 2014-Q4..2026-Q1.",
         "The CBD2-to-BNR population/consolidation bridge remains unresolved; numerical similarity is not a bridge.",
         "Cross-round BNR BLS semantics for C01/C05/P01/P06/P13 are frozen and deterministically materialized for eight canonical observed rounds from 2022-Q4 through 2025-Q3.",
         "Official BNR publication text directly confirms all six preregistered observables for 2023-Q3, 2024-Q2 and 2025-Q2, and the two NFC observables for 2023-Q2.",
         "The four 2023-Q2 household observables are not uniquely identified at canonical precision from publication text; reported response shares are insufficient substitutes for workbook-cell net percentages.",
+        "A manual-only missing-round recovery contract is frozen. Exact candidate endpoints are preregistered for 2023-Q2, 2023-Q3 and 2024-Q2; 2025-Q2 remains without an independently retained exact annex URL.",
         "Exact workbook-cell precision remains unrecovered for all four canonical missing quarters 2023-Q2, 2023-Q3, 2024-Q2 and 2025-Q2. Publication-rounded values may corroborate but may not overwrite the canonical panel.",
-        "No interpolation, forward-fill, inferred missing response category, synthetic NFC/household aggregation, credit-equation estimation or model selection is authorized."
+        "No interpolation, forward-fill, inferred missing response category, wildcard/timestamp brute force, synthetic NFC/household aggregation, credit-equation estimation or model selection is authorized."
       ],
       "source_boundary_review": "model/calibration_validation/aggregate_bank_credit_source_boundary_review.json",
       "estimation_or_refit_allowed": false,
@@ -86,7 +87,17 @@
         "2023-Q3",
         "2024-Q2",
         "2025-Q2"
-      ]
+      ],
+      "missing_round_recovery_contract": "model/calibration_validation/bnr_bls_missing_round_workbook_recovery_contract.json",
+      "missing_round_recovery_script": "scripts/audit_bnr_bls_missing_round_workbook_recovery.py",
+      "missing_round_recovery_workflow": ".github/workflows/bnr-bls-missing-round-workbook-recovery.yml",
+      "missing_round_recovery_execution_policy": "MANUAL_ONLY_LIVE_SOURCE_ACQUISITION",
+      "recovery_endpoint_status": {
+        "2023-Q2": "EXACT_ENDPOINT_CONFIRMED_BY_WEB_AS_APPLICATION_VND_MS_EXCEL_BINARY_NOT_RETAINED",
+        "2023-Q3": "EXACT_ENDPOINT_CONFIRMED_BY_WEB_AS_APPLICATION_VND_MS_EXCEL_BINARY_NOT_RETAINED",
+        "2024-Q2": "CANDIDATE_ENDPOINT_PREREGISTERED_BINARY_NOT_CONFIRMED",
+        "2025-Q2": "OFFICIAL_ANNEX_EXISTENCE_KNOWN_EXACT_URL_UNIDENTIFIED"
+      }
     },
     {
       "id": "exchange_rate_pass_through_to_inflation",
