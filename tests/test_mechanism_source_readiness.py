@@ -56,11 +56,11 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         step = self.readiness["current_next_step"]
         self.assertEqual(
             step["mechanism_id"],
-            "household_consumption_response",
+            "aggregate_bank_credit_response",
         )
         self.assertEqual(
             step["action"],
-            "ENUMERATE_AND_RETAIN_BNR_HOUSEHOLD_DSTI_HISTORY_NO_ESTIMATION",
+            "RUN_PRUDENTIAL_COVERAGE_DIAGNOSTIC_NO_ESTIMATION",
         )
         self.assertFalse(step["calibration_cycle_open"])
 
@@ -94,11 +94,11 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         household = mechanisms["household_consumption_response"]
         self.assertEqual(
             household["source_readiness"],
-            "BIS_SECTORAL_DSR_UNAVAILABLE_BNR_DSTI_ALTERNATIVE_IDENTIFIED_HISTORY_NOT_RETAINED",
+            "BNR_DSTI_WORKBOOK_VINTAGE_RETAINED_LEGACY_XLS_EXTRACTION_NOT_CANONICAL",
         )
         self.assertEqual(
             household["priority_group"],
-            "RETAIN_BNR_DSTI_HISTORY_NO_ESTIMATION",
+            "DEFER_UNTIL_DETERMINISTIC_LEGACY_XLS_EXTRACTION_PATH",
         )
         self.assertEqual(
             household["debt_service_source_screening"],
