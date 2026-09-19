@@ -64,22 +64,23 @@
     {
       "id": "sovereign_yield_spread_response",
       "classification": "CANDIDATE",
-      "source_readiness": "EXACT_SOURCE_VINTAGE_RETAINED_STRUCTURAL_SELECTION_PREREGISTRATION_PENDING",
-      "next_admissible_action": "Write a separate sovereign-yield structural-selection contract that freezes baseline forms, candidate lag structure, selection window, untouched evaluation window and benchmark comparison before any coefficient estimation. Do not estimate or activate the mechanism yet.",
+      "source_readiness": "SOURCE_VINTAGE_RETAINED_STRUCTURAL_SELECTION_CONTRACT_FROZEN_RUNNER_PENDING",
+      "next_admissible_action": "Implement a deterministic offline structural-selection runner that enforces the frozen sovereign-yield contract exactly. Add unit tests for windows, information timing, gates and holdout non-access. Do not execute coefficient estimation until that runner has passed CI and a bounded execution gate is explicitly opened.",
       "blockers": [
-        "The exact quarterly source vintage is now retained immutably in the repository and passes the frozen provenance review.",
-        "Baseline forms, lag structure, structural-selection window and untouched evaluation window are not yet preregistered.",
-        "No regression or parameter estimation is authorised until that separate selection contract is frozen."
+        "The exact source vintage is retained and the structural-selection contract is frozen.",
+        "No contract-enforcing offline selection runner has yet passed CI.",
+        "Final-evaluation data must remain performance-unopened unless every structural-selection gate passes."
       ],
       "source_boundary_review": "model/calibration_validation/sovereign_yield_source_boundary_review.json",
       "materialisation_contract": "model/calibration_validation/sovereign_yield_quarterly_materialisation_contract.json",
       "estimation_or_refit_allowed": false,
-      "priority_group": "STRUCTURAL_SELECTION_PREREGISTRATION_PENDING",
+      "priority_group": "OFFLINE_SELECTION_RUNNER_IMPLEMENTATION_PENDING",
       "materialiser_script": "scripts/audit_sovereign_yield_quarterly_materialisation.py",
       "materialiser_workflow": ".github/workflows/sovereign-yield-quarterly-materialisation.yml",
       "live_execution_policy": "MANUAL_ONLY_LIVE_SOURCE_EVIDENCE",
       "retained_source_vintage": "data/source_vintages/sovereign-yield-quarterly-vintage-2026-09-19",
-      "promotion_review": "model/calibration_validation/sovereign_yield_source_vintage_promotion_review.json"
+      "promotion_review": "model/calibration_validation/sovereign_yield_source_vintage_promotion_review.json",
+      "structural_selection_contract": "model/calibration_validation/sovereign_yield_structural_selection_contract.json"
     },
     {
       "id": "household_consumption_response",
@@ -175,8 +176,8 @@
   "priority_rule": "Priority is determined by the shortest scientifically admissible path to new independent evidence, not by a desire to activate a feedback loop. Waiting mechanisms remain frozen; source-incomplete mechanisms are not fit with proxies.",
   "current_next_step": {
     "mechanism_id": "sovereign_yield_spread_response",
-    "action": "WRITE_SOVEREIGN_YIELD_STRUCTURAL_SELECTION_CONTRACT_NO_ESTIMATION",
-    "reason": "The exact reviewed 84-quarter source vintage is now retained with raw bytes, SHA-256 lineage and deterministic normalized output. The next admissible step is preregistration of structural selection; calibration and behavioural activation remain closed.",
+    "action": "IMPLEMENT_OFFLINE_SOVEREIGN_SELECTION_RUNNER_NO_EXECUTION",
+    "reason": "Source vintage and structural-selection specification are frozen. The next safe step is executable enforcement of the preregistered model forms, windows, information timing and gates; estimation remains closed until the runner itself passes CI.",
     "calibration_cycle_open": false
   },
   "coverage_rule": {
