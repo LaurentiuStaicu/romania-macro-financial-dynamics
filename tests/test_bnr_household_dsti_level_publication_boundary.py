@@ -37,10 +37,26 @@ class BNRHouseholdDSTILevelPublicationBoundaryTests(unittest.TestCase):
         self.assertEqual(rows["2024-Q1"]["new_housing_loans_dsti_percent"], 34.0)
         self.assertEqual(rows["2024-Q2"]["new_housing_loans_dsti_percent"], 34.6)
         self.assertEqual(rows["2024-Q3"]["outstanding_housing_loans_dsti_percent"], 40.9)
+        self.assertEqual(rows["2024-Q4"]["new_housing_loans_dsti_percent"], 35.0)
+        self.assertEqual(rows["2024-Q4"]["outstanding_housing_loans_dsti_percent"], 41.0)
         self.assertEqual(rows["2025-Q2"]["outstanding_housing_loans_dsti_percent"], 42.0)
+        self.assertEqual(len(rows), 10)
         for row in rows.values():
             self.assertEqual(row["extraction"], "DIRECT_REPORT_TEXT")
             self.assertFalse(row["chart_digitisation"])
+
+    def test_publication_text_window_is_complete_but_not_machine_readable(self) -> None:
+        coverage = self.review["publication_text_coverage"]
+        self.assertEqual(coverage["window_start"], "2023-Q1")
+        self.assertEqual(coverage["window_end"], "2025-Q2")
+        self.assertEqual(coverage["expected_quarters"], 10)
+        self.assertEqual(coverage["directly_observed_quarters"], 10)
+        self.assertEqual(coverage["missing_quarters"], [])
+        self.assertEqual(coverage["coverage_fraction"], 1.0)
+        self.assertTrue(coverage["complete_longitudinal_history"])
+        self.assertFalse(
+            self.review["machine_readable_boundary"]["exact_longitudinal_level_history_retained"]
+        )
 
     def test_chart_history_is_not_promoted_to_machine_readable_series(self) -> None:
         continuity = self.review["continuity_evidence"]
