@@ -20,6 +20,8 @@ The canonical validation disposition records **0 validated reference behavioural
 
 The household housing-lending pass-through form remains a candidate. Structural-selection evidence supports a parsimonious response form, but the fresh final holdout contains no policy-rate movement and therefore cannot independently distinguish the candidate from persistence.
 
+The prospective confirmation window reserved from 2026-08 remains unopened. The BNR decision of 2026-08-10 kept the policy rate unchanged at 6.50%, and the next scheduled monetary-policy meeting is 2026-10-08. Therefore no non-zero policy-rate event exists in the reserved window as of 2026-09-19. Only the policy driver has been checked; reserved MIR response values remain uninspected, the frozen beta is unchanged, and elapsed time alone is not treated as validation evidence.
+
 The NFC short-fixation lending pass-through candidates fail the preregistered structural-selection improvement gate before the final holdout is opened.
 
 The government refinancing/effective-rate mechanism is deferred. At the present aggregation and public-data boundary, the required repricing parameter is not point-identifiable. The government repricing ledger fails the completeness gate before estimation, and no synthetic allocation is permitted to fill the missing instrument-level structure.
