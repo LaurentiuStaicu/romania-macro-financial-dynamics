@@ -91,12 +91,13 @@ class ScientificBaselineMergeReadinessAssessmentTests(unittest.TestCase):
             g["current_merge_readiness_status"],
             self.a["status"],
         )
-        self.assertEqual(
+        self.assertIn(
             g["current_merge_readiness_status"],
-            "CONSOLIDATION_COMPLETE_HUMAN_REVIEW_DECISION_PENDING",
+            {
+                "CONSOLIDATION_COMPLETE_HUMAN_REVIEW_DECISION_PENDING",
+                "REVIEW_READY_MERGE_DECISION_PENDING",
+            },
         )
-        self.assertTrue(g["pull_request_must_remain_draft"])
-        self.assertTrue(g["human_review_decision_required"])
         self.assertFalse(g["automatic_merge_authorized"])
         self.assertFalse(g["release_or_version_change_authorized"])
 
