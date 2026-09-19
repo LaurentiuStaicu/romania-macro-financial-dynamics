@@ -49,30 +49,28 @@
   },
   "output_gap_boundary": {
     "registered_concept": "output_gap",
-    "status": "MODEL_BASED_LATENT_OR_ESTIMATED_VARIABLE_NOT_DIRECTLY_OBSERVED",
-    "rule": "Do not treat real GDP growth, unemployment, or deviation from a deterministic trend as an output gap without a separately preregistered measurement method.",
-    "implication": "A fiscal reaction coefficient on an estimated output gap inherits measurement-model uncertainty and does not become structurally identified merely because fiscal accounts are observed."
+    "status": "ANNUAL_AMECO_EUCAM_SOURCE_VINTAGE_RETAINED_MODEL_BASED_MEASURE",
+    "source_variable": "AVGDGP",
+    "retained_source_vintage": "data/source_vintages/fiscal-reaction-ameco-actual-vintage-2026-09-19",
+    "coverage": "1995-2024 actual-only",
+    "rule": "Use the retained annual AMECO/EUCAM output-gap estimate only on the annual reaction boundary. Do not interpolate it to quarters, relabel GDP growth, or treat the latent/model-based estimate as directly observed potential output.",
+    "implication": "The source measurement is now frozen, but coefficient identification still requires a separately preregistered annual candidate family and must acknowledge output-gap measurement uncertainty."
   },
   "regime_boundary": {
-    "status": "DISCRETE_POLICY_AND_INSTITUTIONAL_REGIMES_REQUIRED",
-    "required_examples": [
-      "Excessive Deficit Procedure / fiscal-governance regime status",
-      "major discretionary tax or expenditure packages",
-      "pandemic/emergency fiscal regimes where relevant",
-      "one-off capital transfers or exceptional measures where material"
-    ],
-    "rule": "Regime indicators must be coded from dated institutional/policy evidence before coefficient estimation. Do not infer breaks from residuals and then treat them as exogenous."
+    "status": "EX_ANTE_TIMELINE_FROZEN_COEFFICIENTS_NOT_AUTHORIZED",
+    "annual_measurement_boundary": "model/calibration_validation/fiscal_reaction_annual_measurement_boundary_review.json",
+    "rule": "The EDP, general-escape-clause and post-2024 governance dates are retained as ex-ante institutional evidence, but separate regime coefficients are not authorized in the first short annual cycle because of overlap and weak identification."
   },
   "source_admissibility": {
     "registered_full_form_admissible": false,
     "reasons": [
-      "The matched quarterly primary-balance series is now retained exactly on gov_10q_ggnfa / S13 / NSA / PC_GDP.",
-      "The output gap is not directly observed and no measurement source/model is frozen.",
-      "Institutional/fiscal-package regimes are not encoded ex ante.",
-      "The registered debt_gap concept is not frozen; observed debt-to-GDP is not automatically a debt gap."
+      "The exact matched quarterly primary-balance vintage remains retained as accounting evidence, but quarterly reaction estimation is rejected because the official frozen output gap is annual.",
+      "A source-consistent AMECO annual actual-only vintage for UBLGI, AVGDGP and UDGG is now retained for 1995-2024.",
+      "The former fixed debt-gap concept is rejected; the annual boundary permits lagged debt-to-GDP level only in a separately preregistered candidate family.",
+      "Regime dates are frozen ex ante but separate regime coefficients are not currently authorized."
     ],
     "simple_taylor_style_rule_automatically_authorized": false,
-    "rule": "Observed debt and fiscal balances do not authorize a stable Taylor-style fiscal rule. Estimation requires a new preregistered regime-aware candidate family and independent validation."
+    "rule": "Source completion does not authorize a fiscal reaction equation. The target transformation, timing, baseline, windows and identifiability gates must be preregistered before any fit."
   },
   "prohibited_shortcuts": [
     "Add seasonally adjusted B9 to non-seasonally adjusted D41PAY.",
@@ -84,11 +82,13 @@
   ],
   "disposition": {
     "mechanism_classification": "DEFERRED",
-    "source_readiness": "MATCHED_PRIMARY_BALANCE_VINTAGE_RETAINED_OUTPUT_GAP_DEBT_GAP_REGIMES_UNRESOLVED",
+    "source_readiness": "ANNUAL_AMECO_ACTUAL_SOURCE_VINTAGE_RETAINED_STRUCTURAL_SELECTION_PREREGISTRATION_PENDING",
     "active_calibration_cycle_open": false,
     "estimation_or_refit_allowed": false,
     "central_feedback": false,
     "validated_reference_behavioural_mechanisms_change": 0,
     "behavioural_closure": "UNCHANGED_INACTIVE"
-  }
+  },
+  "annual_reaction_boundary": "model/calibration_validation/fiscal_reaction_annual_measurement_boundary_review.json",
+  "retained_annual_source_vintage": "data/source_vintages/fiscal-reaction-ameco-actual-vintage-2026-09-19"
 }
