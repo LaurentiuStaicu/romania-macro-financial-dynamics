@@ -1,0 +1,72 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "reference_mode": "sectoral_financial_positions",
+  "phase": "OECD Quarterly Counterpart Financial Accounts — Romania Country-Coverage Discovery Probe",
+  "formal_reference_mode_gate": false,
+  "source_screening": "model/dynamics/sectoral_financial_positions_external_source_screening.json",
+  "purpose": "Query only the official OECD quarterly counterpart financial-account dataflows for Romania, retain raw country-scoped responses and their SDMX structures, and determine whether non-empty Romania observations exist for both stocks and flows. This is discovery/source-access evidence only. It does not map OECD sectors/instruments to RMD, assess reconciliation, reinterpret the historical ECB-QSA evidence chain, or authorize promotion.",
+  "provider": {
+    "institution": "OECD",
+    "api_documentation": "https://www.oecd.org/en/data/insights/data-explainers/2024/09/api.html",
+    "base_data_url": "https://sdmx.oecd.org/public/rest/data",
+    "dataflows": [
+      {
+        "id": "stocks_counterpart",
+        "flow_ref": "OECD.SDD.NAD,DSD_NASEC20@DF_T725R_Q",
+        "structure_url": "https://sdmx.oecd.org/public/rest/dataflow/OECD.SDD.NAD/DSD_NASEC20@DF_T725R_Q/?references=all"
+      },
+      {
+        "id": "flows_counterpart",
+        "flow_ref": "OECD.SDD.NAD,DSD_NASEC20@DF_T625R_Q",
+        "structure_url": "https://sdmx.oecd.org/public/rest/dataflow/OECD.SDD.NAD/DSD_NASEC20@DF_T625R_Q/?references=all"
+      }
+    ]
+  },
+  "query_scope": {
+    "reference_area": "ROU",
+    "frequency": "Q",
+    "start_period": "2014-Q1",
+    "end_period": "2026-Q1",
+    "all_other_key_dimensions": "ALL_AVAILABLE_VALUES",
+    "dimension_order_source": "derive from returned SDMX DataStructure; do not hard-code key positions",
+    "response_format": "csvfilewithlabels",
+    "dimension_at_observation": "AllDimensions"
+  },
+  "discovery_pass_rule": {
+    "required_dataflows": [
+      "stocks_counterpart",
+      "flows_counterpart"
+    ],
+    "each_required_http_status": 200,
+    "each_required_nonempty_csv": true,
+    "each_required_romania_identity_present": true,
+    "effect_if_pass": "ROMANIA_COUNTRY_DATA_RETAINED_FOR_EXPLICIT_SEMANTIC_AND_LINEAGE_REVIEW_ONLY",
+    "effect_if_fail": "NO_REOPEN_EVIDENCE_FROM_OECD_COUNTRY_COVERAGE_PROBE"
+  },
+  "retained_outputs": {
+    "raw_structure_xml": true,
+    "raw_country_csv": true,
+    "sha256": true,
+    "byte_count": true,
+    "csv_header": true,
+    "csv_data_row_count": true,
+    "constructed_dimension_order": true,
+    "constructed_query_key": true,
+    "request_url": true
+  },
+  "hard_rules": {
+    "no_sector_mapping_in_probe": true,
+    "no_instrument_mapping_in_probe": true,
+    "no_reconciliation_test_in_probe": true,
+    "no_missing_to_zero": true,
+    "no_residual_allocation": true,
+    "no_post_result_sector_dropping": true,
+    "no_historical_phase_A_D_reinterpretation": true,
+    "no_reference_mode_promotion": true,
+    "no_accounting_readiness_change": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "next_gate_if_pass": "Retain the exact probe artifact, then preregister a separate lineage/semantic-coverage review before any formal reference-mode gate. That review must establish Romania source lineage, sector definitions, counterpart orientation, instrument scope F2-F8, stock/flow semantics, units and coverage without using fit or reconciliation outcomes to redefine the mapping."
+}
