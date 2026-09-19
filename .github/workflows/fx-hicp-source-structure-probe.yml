@@ -1,6 +1,7 @@
-name: FX HICP Source Structure Probe
+name: FX HICP Current Source Structure Probe
 
-# One-shot PR bootstrap probe. No transform selection and no model fit.
+# One-shot PR bootstrap probe of the current ECOICOP-v2 HICP dataset.
+# No transform selection and no model fit.
 on:
   pull_request:
     types: [labeled]
@@ -9,8 +10,8 @@ permissions:
   contents: read
 
 jobs:
-  probe-hicp-source-structure:
-    if: ${{ github.event.label.name == 'run-fx-hicp-structure-probe' }}
+  probe-current-hicp-source-structure:
+    if: ${{ github.event.label.name == 'run-fx-hicp-current-structure-probe' }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -21,16 +22,16 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Probe exact Eurostat Romania CP00 HICP structure
+      - name: Probe current Eurostat Romania HICP ECOICOP-v2 structure
         env:
-          FX_HICP_STRUCTURE_PROBE_OUT: fx_hicp_structure_probe_artifacts
-        run: python scripts/audit_fx_hicp_source_structure.py
+          FX_HICP_CURRENT_PROBE_OUT: fx_hicp_current_probe_artifacts
+        run: python scripts/audit_fx_hicp_current_source_structure.py
 
-      - name: Upload HICP structure evidence
+      - name: Upload current HICP structure evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: fx-hicp-structure-probe-${{ github.sha }}
-          path: fx_hicp_structure_probe_artifacts/
+          name: fx-hicp-current-structure-probe-${{ github.sha }}
+          path: fx_hicp_current_probe_artifacts/
           if-no-files-found: error
           retention-days: 90
