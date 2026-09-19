@@ -1,4 +1,4 @@
-name: Promote Reviewed Bank Credit Prudential Coverage Vintage
+name: Promote Reviewed BNR BLS May 2025 XLSX Vintage
 
 on:
   pull_request:
@@ -9,16 +9,14 @@ permissions:
   contents: write
 
 jobs:
-  promote-reviewed-bank-credit-prudential-vintage:
+  promote-reviewed-bnr-bls-xlsx-vintage:
     if: ${{ github.event.label.name == 'promote-corporate-investment-vintage' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Check out PR head branch
-        uses: actions/checkout@v7
+      - uses: actions/checkout@v7
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 1
-
       - name: Download exact reviewed artifact
         env:
           GH_TOKEN: ${{ github.token }}
@@ -27,20 +25,19 @@ jobs:
             -H "Authorization: Bearer ${GH_TOKEN}" \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10582377035/zip" \
-            -o /tmp/bank-credit-prudential-reviewed.zip
-          echo "4168935ee09b3449b76907f92c40aff945190bdc2c581c7a76f4ba29697ea87b  /tmp/bank-credit-prudential-reviewed.zip" | sha256sum -c -
-
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10582926685/zip" \
+            -o /tmp/bnr-bls-xlsx-reviewed.zip
+          echo "29952b777efd05eadd5313b41a0ab87e36c4e45a41f615561010e1b5e1f891dd  /tmp/bnr-bls-xlsx-reviewed.zip" | sha256sum -c -
       - name: Verify reviewed file set and hashes
         run: |
-          rm -rf /tmp/bank-credit-prudential-reviewed
-          mkdir -p /tmp/bank-credit-prudential-reviewed
-          unzip -q /tmp/bank-credit-prudential-reviewed.zip -d /tmp/bank-credit-prudential-reviewed
+          rm -rf /tmp/bnr-bls-xlsx-reviewed
+          mkdir -p /tmp/bnr-bls-xlsx-reviewed
+          unzip -q /tmp/bnr-bls-xlsx-reviewed.zip -d /tmp/bnr-bls-xlsx-reviewed
           python - <<'PY'
           import hashlib,json
           from pathlib import Path
-          root=Path("/tmp/bank-credit-prudential-reviewed")
-          review=json.loads(Path("model/calibration_validation/bank_credit_prudential_coverage_promotion_review.json").read_text())
+          root=Path("/tmp/bnr-bls-xlsx-reviewed")
+          review=json.loads(Path("model/calibration_validation/bnr_bls_may2025_xlsx_promotion_review.json").read_text())
           actual={str(p.relative_to(root)) for p in root.rglob("*") if p.is_file()}
           expected={x["path"] for x in review["expected_files"]}
           if actual != expected:
@@ -49,17 +46,17 @@ jobs:
               data=(root/item["path"]).read_bytes()
               if len(data)!=item["bytes"] or hashlib.sha256(data).hexdigest()!=item["sha256"]:
                   raise SystemExit(f"review mismatch: {item['path']}")
-          print("Reviewed prudential artifact verified.")
+              if item["path"].endswith(".xlsx") and not data.startswith(b"PK\x03\x04"):
+                  raise SystemExit(f"not XLSX/ZIP: {item['path']}")
           PY
-
-      - name: Commit immutable prudential source vintage
+      - name: Commit immutable BNR BLS XLSX vintage
         run: |
-          dest="data/source_vintages/bank-credit-prudential-coverage-vintage-2026-09-19"
+          dest="data/source_vintages/bnr-bls-may2025-xlsx-vintage-2026-09-19"
           test ! -e "$dest"
           mkdir -p "$dest"
-          cp -a /tmp/bank-credit-prudential-reviewed/. "$dest/"
+          cp -a /tmp/bnr-bls-xlsx-reviewed/. "$dest/"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add "$dest"
-          git commit -m "data: retain exact bank-credit prudential coverage vintage"
+          git commit -m "data: retain exact BNR BLS May-2025 XLSX vintage"
           git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
