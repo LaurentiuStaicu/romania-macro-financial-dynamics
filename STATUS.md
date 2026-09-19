@@ -14,7 +14,9 @@ The validated scientific content was repartitioned non-destructively into stacke
 
 GitHub's documented diff limits still prevent complete visual rendering of some immutable machine-produced provenance. This is an irreducible UI constraint rather than a scientific-integrity failure: for example, `bls_2025_nov_cells.json` alone contains 25,293 added lines and 620,446 bytes, exceeding the documented 20,000-line / 500 KB single-file diff limits. Such retained source vintages are therefore reviewed by frozen file set, byte size, SHA-256 identity and offline deterministic tests rather than by destructive reformatting or deletion.
 
-The resulting repository-governance state is **CONSOLIDATION_COMPLETE_HUMAN_REVIEW_DECISION_PENDING**. No accounting classification, reference-mode status, empirical mechanism, calibration gate, System Dynamics feedback or behavioural closure has changed. No automatic draft-to-ready transition, merge, release, tag or version change is authorized by consolidation completion.
+The consolidation terminal state was **CONSOLIDATION_COMPLETE_HUMAN_REVIEW_DECISION_PENDING**. A subsequent human continuation decision has now advanced PRs #48–#52 from Draft to **Ready for review**, recorded in `model/registries/scientific_baseline_review_ready_assessment.json`. The current repository-governance state is **REVIEW_READY_MERGE_DECISION_PENDING**.
+
+This transition changes repository review state only. No accounting classification, reference-mode status, empirical mechanism, calibration gate, System Dynamics feedback or behavioural closure has changed. Merge, release, tag and version changes remain separately unauthorized.
 
 ## Canonical modeling paradigm
 
