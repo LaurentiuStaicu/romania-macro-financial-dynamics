@@ -1,0 +1,143 @@
+{
+  "assessment_version": "0.1",
+  "assessed_on": "2026-09-19",
+  "stage": "Evidence-Triggered Baseline Hold — Reopen Trigger Monitoring",
+  "status": "NO_DECLARED_REOPEN_TRIGGER_SATISFIED_BASELINE_HOLD_CONTINUES",
+  "purpose": "Record a targeted current-public-evidence monitoring pass after scientific-baseline integration. This pass tests only declared reopen conditions and may not create a new model specification, infer missing evidence, inspect reserved outcomes, or reopen calibration merely because time has elapsed.",
+  "governing_registries": {
+    "accounting": "model/accounting/reopen_conditions_registry.json",
+    "behavioural": "model/calibration_validation/mechanism_reopen_conditions_registry.json",
+    "reference_modes": "model/dynamics/reference_modes.json",
+    "integration_terminal_assessment": "model/registries/scientific_baseline_integration_terminal_assessment.json"
+  },
+  "monitoring_scope": {
+    "principle": "Search for genuinely new public evidence or external events that match already-declared reopen triggers. Non-confirmation is not proof of permanent source absence.",
+    "screened_classes": [
+      "prospective monetary-policy event trigger",
+      "exact BNR BLS 2025-Q2 source trigger",
+      "direct Romania industrial import transaction-price index trigger",
+      "Romania household debt-service burden trigger",
+      "government repricing-ledger source trigger",
+      "accounting/reference-mode new-source trigger"
+    ],
+    "repeated_unchanged_source_probe_is_progress": false
+  },
+  "findings": {
+    "prospective_monetary_policy_event": {
+      "status": "NO_REOPEN_UNCHANGED_RATE_MEETING",
+      "evidence": [
+        {
+          "source": "AGERPRES relaying BNR monetary-policy decision",
+          "date": "2026-08-10",
+          "url": "https://agerpres.ro/economic/2026/08/10/x--1583696",
+          "fact": "BNR kept the policy rate at 6.50% on 2026-08-10."
+        },
+        {
+          "source": "BNR official Bluesky account",
+          "date": "2026-08-10",
+          "url": "https://bsky.app/profile/bnr.ro/post/3msq2oyu2sv2b",
+          "fact": "The next BNR monetary-policy meeting was announced for 2026-10-08."
+        }
+      ],
+      "trigger_test": "The prospective contract requires a non-zero BNR policy-rate event before Stage 1 may open.",
+      "conclusion": "No non-zero event has occurred in the reserved prospective window as of this monitoring date; reserved MIR response values remain closed."
+    },
+    "aggregate_bank_credit_bls_2025_q2": {
+      "status": "NO_REOPEN_EXACT_2025_Q2_WORKBOOK_NOT_CONFIRMED",
+      "evidence": [
+        {
+          "source": "BNR indexed workbook result",
+          "url": "https://www.bnr.ro/uploads/2025-06-13sondajblst1mai2025_xls_547_1749802943.xlsx",
+          "fact": "An exact official Q1-2025 BLS workbook is indexed, confirming the workbook publication family."
+        },
+        {
+          "source": "BNR indexed 2026-Q2 BLS publication",
+          "url": "https://www.bnr.ro/uploads/2026-08-25sondajblst2august2026_documentpdf_545_1787649180.pdf",
+          "fact": "A later Q2 survey publication is indexed, but it does not establish the missing exact 2025-Q2 workbook endpoint."
+        }
+      ],
+      "search_result": "Targeted official-domain searches did not identify an exact official 2025-Q2 workbook endpoint or machine-readable catalogue target.",
+      "boundary_rule": "Do not guess BNR filenames, timestamps or internal endpoints and do not substitute rounded publication text for exact workbook cells.",
+      "conclusion": "The declared source-materialisation trigger is not satisfied."
+    },
+    "fx_inflation_direct_import_price": {
+      "status": "NO_REOPEN_ROMANIA_EXACT_TRANSACTION_PRICE_SERIES_NOT_CONFIRMED",
+      "evidence": [
+        {
+          "source": "Eurostat Data Browser teiis016 / sts_inpi_m",
+          "last_data_update": "2026-09-16",
+          "url": "https://ec.europa.eu/eurostat/databrowser/product/page/teiis016",
+          "fact": "The dataset is the correct conceptual family: monthly transaction-price development of imported industrial goods."
+        },
+        {
+          "source": "Eurostat EFC Status Report 2024",
+          "url": "https://ec.europa.eu/eurostat/documents/15920928/17835108/EFC-status-report-2024.pdf/f9bbdd21-47a6-a9e5-2fd7-2fc3c82a01f9?t=1736171924311",
+          "fact": "The PEEI table reports '-' for Romania under industrial import prices for the reference period covered by that report; the report also notes this indicator is mandatory only for euro-area countries."
+        },
+        {
+          "source": "Eurostat Statistics Explained industrial import price overview",
+          "date": "2026-05-22",
+          "url": "https://ec.europa.eu/eurostat/statistics-explained/SEPDF/cache/10675.pdf",
+          "fact": "Non-euro-area EU countries may provide the series voluntarily, so historical non-availability cannot be treated as proof of permanent absence."
+        }
+      ],
+      "conclusion": "A current exact Romania series has not been confirmed. The existence and freshness of sts_inpi_m alone do not satisfy the RMD reopen trigger."
+    },
+    "household_debt_service_burden": {
+      "status": "NO_REOPEN_MATCHED_ROMANIA_HOUSEHOLD_DSR_NOT_CONFIRMED",
+      "evidence": [
+        {
+          "source": "BIS Debt service ratios overview",
+          "url": "https://data.bis.org/topics/DSR",
+          "fact": "BIS publishes total private-sector DSRs for 32 economies and household/NFC breakdowns for 17 economies."
+        },
+        {
+          "source": "BIS bulk downloads / release calendar",
+          "date": "2026-09-14",
+          "url": "https://data.bis.org/bulkdownload",
+          "fact": "The DSR dataset received a 2026-Q1 release on 2026-09-14."
+        }
+      ],
+      "search_result": "The fresh release did not yield a confirmed Romania household DSR series in the indexed public surface used in this pass.",
+      "boundary_rule": "Debt stock or debt-to-income ratios are not substitutes for an observed aggregate debt-service burden aligned to the S1M consumption population.",
+      "conclusion": "Household-consumption and credit-risk reopen triggers remain unsatisfied."
+    },
+    "government_refinancing_effective_rate": {
+      "status": "NO_REOPEN_SAME_BOUNDARY_REPRICING_LEDGER_NOT_IDENTIFIED",
+      "evidence": [
+        {
+          "source": "Romania Ministry of Finance Government Debt Management Strategy 2024-2026",
+          "url": "https://www.mfinante.gov.ro/static/10/Mfp/buletin/executii/Strategiedeadministrareadatorieipubliceguvernamentale2024_2026.pdf",
+          "fact": "The strategy reports portfolio refinancing and interest-rate risk indicators, including debt due/refixing within one year and average time to maturity/refixing."
+        }
+      ],
+      "boundary_rule": "The frozen mechanism requires same-boundary opening principal, realised repriced/refinanced principal, and matched old/new effective rates across material debt blocks.",
+      "conclusion": "The surfaced portfolio risk indicators do not supply the matched repricing ledger required for point identification."
+    },
+    "accounting_and_sectoral_financial_positions": {
+      "status": "NO_REOPEN_NEW_BOUNDARY_ADMISSIBLE_SOURCE_NOT_IDENTIFIED",
+      "conclusion": "This targeted pass identified no new official source that satisfies the frozen bilateral/counterparty requirements for incomplete F2/F4/F5/F6/F7/F8 or the full quarterly non-consolidated sector-by-counterpart stock+transaction reference-mode boundary.",
+      "caveat": "This is a monitoring result, not a proof that no provider-side or future source can exist. Reopen remains evidence-triggered."
+    }
+  },
+  "decision": {
+    "any_declared_reopen_trigger_satisfied": false,
+    "accounting_instrument_reopened": false,
+    "reference_mode_reopened": false,
+    "behavioural_mechanism_reopened": false,
+    "active_calibration_cycle_open": false,
+    "holdout_or_reserved_response_opening_authorized": false,
+    "estimation_or_refit_authorized": false,
+    "system_dynamics_feedback_activation_authorized": false,
+    "behavioural_closure_activation_authorized": false,
+    "current_scientific_state": "EVIDENCE_TRIGGERED_BASELINE_HOLD"
+  },
+  "next_monitoring_conditions": [
+    "A non-zero BNR policy-rate decision followed by the contract-required official MIR response release.",
+    "An exact official BNR 2025-Q2 BLS workbook or exact machine-readable equivalent.",
+    "A current exact Romania sts_inpi_m transaction-price series or another genuinely new preregisterable FX identification source.",
+    "A matched Romania household debt-service burden / population bridge.",
+    "A same-boundary government repricing ledger.",
+    "A genuinely new accounting/reference-mode counterpart source satisfying the frozen sector, instrument, frequency and transaction boundaries."
+  ]
+}
