@@ -12,6 +12,7 @@ class LiveSourceRefreshWorkflowTests(unittest.TestCase):
             ".github/workflows/private-credit-reference-audit.yml",
             ".github/workflows/government-interest-burden-reference-audit.yml",
             ".github/workflows/government-debt-stock-reference-audit.yml",
+            ".github/workflows/provenance-audit.yml",
             ".github/workflows/f4-exact-complement-rank-audit.yml",
             ".github/workflows/f5-equity-subcomponent-bridge-audit.yml",
             ".github/workflows/f7-financial-derivatives-coverage-audit.yml",
