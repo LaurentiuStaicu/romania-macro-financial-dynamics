@@ -121,5 +121,8 @@
     "execution_precondition": "Dispatch the existing default-branch Scientific CI workflow against audit/scientific-integrity-2026-09-18; the branch-only live job is guarded to workflow_dispatch on that exact ref.",
     "no_trigger_bypass": true,
     "manual_dispatch_bridge": ".github/workflows/scientific-ci.yml#manual-eurostat-counterpart-probe"
-  }
+  },
+  "external_semantic_lineage_review_contract": "model/dynamics/sectoral_financial_positions_external_semantic_lineage_review_contract.json",
+  "external_semantic_lineage_review_status": "PREREGISTERED_NOT_OPEN_UNTIL_DISCOVERY_PASS",
+  "external_semantic_lineage_review_effect": "NONE; a PASS authorizes only a separately preregistered exact historical extraction contract."
 }

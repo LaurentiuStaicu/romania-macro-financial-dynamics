@@ -81,7 +81,7 @@
     "no_system_dynamics_activation": true,
     "no_behavioural_closure_change": true
   },
-  "next_gate_if_pass": "Retain the exact probe artifact, then preregister a separate lineage/semantic-coverage review before any formal reference-mode gate. That review must establish Romania source lineage, sector definitions, counterpart orientation, instrument scope F2-F8, stock/flow semantics, units and coverage without using fit or reconciliation outcomes to redefine the mapping.",
+  "next_gate_if_pass": "Apply model/dynamics/sectoral_financial_positions_external_semantic_lineage_review_contract.json to the retained OECD discovery artifact. A semantic-review PASS may authorize only a separately preregistered exact historical extraction contract; it cannot promote the reference mode.",
   "source_response_semantics": {
     "PASS": "Both required OECD dataflows have HTTP 200 structure responses, parse successfully, expose an explicit counterpart dimension, and return HTTP 200 non-empty Romania-scoped CSV data.",
     "DEFINITIVE_NEGATIVE": "A required dataflow has a successful counterpart-structure parse and a successful HTTP 200 CSV response with a valid header but zero data rows for the frozen Romania/time query. Negative source-discovery evidence never changes reference-mode readiness by itself.",

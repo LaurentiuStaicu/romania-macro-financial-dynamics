@@ -88,7 +88,7 @@
     "immediate_reference_mode_reopen_authorized": false,
     "reference_mode_promotion_authorized": false,
     "accounting_readiness_change": false,
-    "next_admissible_action": "Manually dispatch the existing Scientific CI workflow against audit/scientific-integrity-2026-09-18. On that ref, two branch-locked workflow_dispatch-only jobs run the frozen Eurostat and OECD counterpart discovery probes and upload separate source-access artifacts. Review retained results under PASS / DEFINITIVE_NEGATIVE / INDETERMINATE semantics before any mapping, historical extraction, reference-mode promotion, accounting-readiness change or behavioural activation.",
+    "next_admissible_action": "Manually dispatch the existing Scientific CI workflow against audit/scientific-integrity-2026-09-18. The branch-locked jobs run the frozen Eurostat and OECD discovery probes and upload separate source-access artifacts. Any discovery PASS proceeds only to the already-preregistered external Semantic + Lineage Review; mapping is frozen from metadata before historical values or reconciliation residuals may be evaluated.",
     "oecd_probe_justified": true,
     "eurostat_counterpart_probe_justified": true,
     "discovery_priority": [
@@ -108,7 +108,9 @@
         "manual-oecd-counterpart-probe"
       ],
       "pull_request_or_push_live_execution": false
-    }
+    },
+    "post_discovery_semantic_lineage_review_contract": "model/dynamics/sectoral_financial_positions_external_semantic_lineage_review_contract.json",
+    "discovery_pass_effect": "A discovery PASS does not authorize value extraction or promotion. It only opens the frozen Semantic + Lineage Review, which must pass before a separate exact historical extraction contract can be preregistered."
   },
   "hard_rules": {
     "no_reinterpretation_of_historical_phase_A_D": true,

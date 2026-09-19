@@ -1,0 +1,186 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "phase": "External Counterpart Source Semantic + Lineage Review — Sectoral Financial Positions",
+  "reference_mode": "sectoral_financial_positions",
+  "formal_reference_mode_gate": false,
+  "purpose": "Pre-register the post-discovery review that must occur before any Eurostat or OECD counterpart source can be used to define an exact historical extraction for RMD. The review is metadata/semantics/lineage only: it may inspect retained discovery artifacts, source dimension/code metadata and official documentation, but it may not inspect value fit, reconciliation residuals or change RMD readiness.",
+  "eligible_sources": {
+    "EUROSTAT_NASQ_10_F_CP": {
+      "discovery_contract": "model/dynamics/sectoral_financial_positions_eurostat_counterpart_probe_contract.json",
+      "prerequisite_state": "PASS",
+      "source_lineage_classification": "EUROPEAN_FINANCIAL_ACCOUNTS_CHAIN_NOT_INDEPENDENT_MEASUREMENT",
+      "required_source_dimensions": [
+        "reporting institutional sector",
+        "counterpart institutional sector",
+        "financial instrument",
+        "stock versus transaction",
+        "asset versus liability",
+        "reference area",
+        "time",
+        "unit"
+      ]
+    },
+    "OECD_COUNTERPART_DATAFLOWS": {
+      "discovery_contract": "model/dynamics/sectoral_financial_positions_oecd_counterpart_probe_contract.json",
+      "prerequisite_state": "PASS",
+      "source_lineage_classification": "OECD_ECB_QUARTERLY_SECTOR_ACCOUNTS_CHAIN_NOT_ASSUMED_INDEPENDENT",
+      "required_source_dimensions": [
+        "reference area",
+        "institutional sector",
+        "counterpart institutional sector",
+        "financial instrument",
+        "accounting entry",
+        "time",
+        "unit",
+        "frequency"
+      ]
+    }
+  },
+  "frozen_rmd_target": {
+    "canonical_reference_contract": "model/dynamics/sectoral_financial_positions_reference_contract.json",
+    "frequency": "quarterly",
+    "required_rmd_sectors": [
+      "H",
+      "C",
+      "F",
+      "G",
+      "X",
+      "BNR"
+    ],
+    "semantic_sector_targets": {
+      "H": "Households plus NPISH; accept one exact published combined sector or an exact same-period sum of published household and NPISH sectors only.",
+      "C": "Non-financial corporations.",
+      "F": "Financial corporations excluding the central bank; accept exact published equivalent or exact same-period S12 minus S121 identity only when both source concepts are semantically compatible.",
+      "G": "General government.",
+      "BNR": "Central bank.",
+      "X": "Rest of the world."
+    },
+    "required_instruments": [
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7",
+      "F8"
+    ],
+    "instrument_meanings": {
+      "F2": "Currency and deposits",
+      "F3": "Debt securities",
+      "F4": "Loans",
+      "F5": "Equity and investment fund shares",
+      "F6": "Insurance, pension and standardised guarantee schemes",
+      "F7": "Financial derivatives and employee stock options",
+      "F8": "Other accounts receivable/payable"
+    },
+    "required_measures": [
+      "stock",
+      "financial_transaction"
+    ],
+    "required_entries": [
+      "assets",
+      "liabilities"
+    ],
+    "preferred_unit": "national currency with explicit scaling metadata",
+    "required_accounting_boundary": "non-consolidated sector/counterpart positions and transactions compatible with the existing RMD reference boundary"
+  },
+  "review_questions": [
+    {
+      "id": "SECTOR_MAPPING",
+      "pass_condition": "Every required RMD sector H,C,F,G,BNR,X has an explicit source-code construction justified by source labels/metadata, with no residual sector assignment and no post-result sector dropping."
+    },
+    {
+      "id": "COUNTERPART_ORIENTATION",
+      "pass_condition": "The reporting-sector/counterpart-sector orientation is explicit for assets and liabilities so creditor/debtor direction cannot be inferred from numerical signs or reconciliation fit."
+    },
+    {
+      "id": "INSTRUMENT_MAPPING",
+      "pass_condition": "Every required RMD instrument F2-F8 has an exact source concept or an exact additive component construction fixed from source metadata. Broader financial-total or net-financial-asset measures cannot substitute for a missing instrument."
+    },
+    {
+      "id": "STOCK_FLOW_SEMANTICS",
+      "pass_condition": "Closing positions and financial transactions are separately identified source concepts. Stock differences, revaluations, other-volume changes or total changes cannot substitute for financial transactions."
+    },
+    {
+      "id": "ASSET_LIABILITY_SEMANTICS",
+      "pass_condition": "Asset/liability or acquisition/incurrence orientation is explicit from source metadata and may not be inferred from sign."
+    },
+    {
+      "id": "UNIT_SCALING",
+      "pass_condition": "Unit and multiplier/scaling metadata are explicit and sufficient to construct one consistent national-currency unit without value-based reverse engineering."
+    },
+    {
+      "id": "CONSOLIDATION_AND_VALUATION",
+      "pass_condition": "The source boundary is demonstrated compatible with the non-consolidated RMD reference boundary; valuation conventions are recorded and no consolidated series is silently mixed into the target."
+    },
+    {
+      "id": "LINEAGE",
+      "pass_condition": "The dissemination/source lineage is recorded explicitly. Eurostat/ECB or OECD/ECB lineage cannot be described as independent validation merely because the dissemination endpoint differs."
+    }
+  ],
+  "semantic_review_pass_rule": {
+    "all_review_questions_must_pass": true,
+    "mappings_must_be_frozen_before_historical_values_are_evaluated": true,
+    "values_or_reconciliation_residuals_may_not_influence_mapping": true,
+    "missing_required_sector_or_instrument_is_fail": true,
+    "ambiguous_counterpart_orientation_is_fail": true,
+    "ambiguous_unit_or_consolidation_is_fail": true,
+    "effect_if_pass": "AUTHORIZE_SEPARATE_PREREGISTERED_EXACT_HISTORICAL_EXTRACTION_CONTRACT_ONLY",
+    "effect_if_fail": "SOURCE_NOT_SEMANTICALLY_ADMISSIBLE_FOR_RMD_SECTORAL_POSITION_EXTRACTION_NO_READINESS_CHANGE",
+    "effect_if_indeterminate": "SEMANTIC_REVIEW_INDETERMINATE_NO_READINESS_CHANGE"
+  },
+  "exact_historical_extraction_contract_requirements_if_pass": {
+    "must_be_separately_preregistered": true,
+    "required_common_history_minimum_quarters": 40,
+    "required_benchmark_periods": [
+      "2025-Q1",
+      "2025-Q2",
+      "2025-Q3",
+      "2025-Q4"
+    ],
+    "required_sectors": [
+      "H",
+      "C",
+      "F",
+      "G",
+      "X",
+      "BNR"
+    ],
+    "required_instruments": [
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7",
+      "F8"
+    ],
+    "required_measures": [
+      "stock",
+      "financial_transaction"
+    ],
+    "required_entries": [
+      "assets",
+      "liabilities"
+    ],
+    "no_missing_to_zero": true,
+    "no_interpolation": true,
+    "no_stock_difference_flow_proxy": true,
+    "no_residual_balancing": true,
+    "no_post_result_mapping_changes": true,
+    "source_artifact_hashes_required": true,
+    "system_reconciliation_gate_must_be_preregistered_before_value_review": true
+  },
+  "hard_rules": {
+    "no_reference_mode_promotion": true,
+    "no_accounting_readiness_change": true,
+    "no_canonical_benchmark_mutation": true,
+    "no_behavioural_closure_change": true,
+    "no_system_dynamics_activation": true,
+    "no_historical_phase_A_D_reinterpretation": true,
+    "no_value_fit_used_for_semantic_mapping": true,
+    "no_reconciliation_used_for_semantic_mapping": true,
+    "no_source_independence_claim_from_republication": true
+  }
+}

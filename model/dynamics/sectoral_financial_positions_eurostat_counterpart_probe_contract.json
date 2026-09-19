@@ -85,7 +85,7 @@
     "no_system_dynamics_activation": true,
     "no_behavioural_closure_change": true
   },
-  "next_gate_if_pass": "Preregister a separate Eurostat semantic/instrument-coverage review using the retained dimension codes. Only after that review may an exact historical extraction contract be considered for a fixed RMD boundary.",
+  "next_gate_if_pass": "Apply model/dynamics/sectoral_financial_positions_external_semantic_lineage_review_contract.json to the retained Eurostat discovery artifact. A semantic-review PASS may authorize only a separately preregistered exact historical extraction contract; it cannot promote the reference mode.",
   "source_response_semantics": {
     "PASS": "HTTP 200, parseable JSON-stat, and every frozen schema/data criterion passes.",
     "DEFINITIVE_NEGATIVE": "Either a parsed HTTP 200 response fails the frozen schema/data gate, or Eurostat returns an explicit 'No results found' response. This supplies negative source-discovery evidence but never changes reference-mode readiness.",
