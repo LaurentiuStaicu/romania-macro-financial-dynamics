@@ -421,7 +421,7 @@
       "functional_form": "FX debt-service burden = f(currency-specific debt stock, FX move, maturity/refinancing schedule)",
       "implementation": null,
       "parameters": [],
-      "estimation_plan": "Require currency- and maturity-resolved external/public/private debt exposures before activation.",
+      "estimation_plan": "Keep the mechanism DEFERRED. ECB BPS confirms sector- and original-maturity-resolved Romanian external-debt stocks, but the confirmed series have currency denominator 'All currencies'; EUR/RON is only the reporting unit. Original maturity is not a residual-maturity refinancing schedule, and hedging is unobserved. Reopen only with compatible currency-denomination plus residual-maturity/refinancing evidence and an explicit hedging treatment; do not synthesize FX exposure from reporting units.",
       "observables": [
         "currency_specific_debt_stock",
         "exchange_rate",
@@ -434,11 +434,14 @@
       ],
       "limits": [
         "aggregate F4/F3 stocks are insufficient to infer currency exposure",
-        "hedging is unobserved in aggregate accounts"
+        "hedging is unobserved in aggregate accounts",
+        "ECB external-debt reporting unit does not identify debt currency denomination",
+        "original maturity does not identify residual maturity or principal due in the next model period"
       ],
       "rejection_or_degradation_criteria": [
         "currency/maturity exposure cannot be observed or bounded without synthetic allocation"
-      ]
+      ],
+      "source_boundary_review": "model/calibration_validation/external_fx_refinancing_source_boundary_review.json"
     },
     {
       "id": "direct_policy_rate_to_exchange_rate_shortcut",

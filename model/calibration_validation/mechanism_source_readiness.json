@@ -157,16 +157,17 @@
     {
       "id": "external_fx_refinancing_feedback",
       "classification": "DEFERRED",
-      "source_readiness": "AGGREGATE_DEBT_AND_FX_OBSERVED_CURRENCY_MATURITY_HEDGING_EXPOSURE_UNRESOLVED",
-      "next_admissible_action": "Reopen only after currency- and maturity-resolved public/private external debt exposures are retained on a reproducible boundary, together with treatment of hedging and refinancing schedules. Aggregate F3/F4 stocks are insufficient.",
+      "source_readiness": "SECTOR_AND_ORIGINAL_MATURITY_OBSERVED_CURRENCY_RESIDUAL_MATURITY_HEDGING_UNRESOLVED",
+      "next_admissible_action": "Search official sources for debt currency denomination plus residual-maturity/refinancing timing on compatible S13/bank/other-sector boundaries and an explicit hedging treatment. Do not infer FX exposure from EUR/RON reporting units.",
       "blockers": [
-        "Aggregate debt stocks do not identify currency denomination.",
-        "Maturity/refinancing schedules are not retained on the same sector/instrument boundary.",
-        "Hedging of FX exposure is not observed in aggregate accounts.",
-        "No synthetic currency allocation from total debt is authorised."
+        "ECB BPS provides Romania external-debt stocks by sector and original-maturity categories.",
+        "Confirmed BPS series retain currency denominator _T = All currencies; reporting in EUR or RON does not reveal contractual currency denomination.",
+        "Original maturity does not identify residual maturity or principal due in the next quarter.",
+        "Hedging and matched debt-service schedules remain unobserved on the aggregate boundary."
       ],
       "estimation_or_refit_allowed": false,
-      "priority_group": "DEFER_UNTIL_CURRENCY_MATURITY_EXPOSURE_SOURCE"
+      "priority_group": "DEFER_UNTIL_CURRENCY_RESIDUAL_MATURITY_HEDGING_SOURCE",
+      "source_boundary_review": "model/calibration_validation/external_fx_refinancing_source_boundary_review.json"
     }
   ],
   "priority_rule": "Priority is determined by the shortest scientifically admissible path to new independent evidence, not by a desire to activate a feedback loop. Waiting mechanisms remain frozen; source-incomplete mechanisms are not fit with proxies.",
