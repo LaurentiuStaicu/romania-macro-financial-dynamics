@@ -35,16 +35,15 @@
     {
       "id": "aggregate_bank_credit_response",
       "classification": "CANDIDATE",
-      "source_readiness": "LEGACY_XLS_EXTRACTION_RETAINED_SEMANTIC_MAPPING_AND_MISSING_ROUNDS_PENDING",
-      "next_admissible_action": "Use the retained deterministic full-cell extraction to preregister a cross-round mapping for C01/C05/P01/P06/P13 based on the independently reviewed May-2025 XLSX schema; separately enumerate/recover missing BNR survey rounds. Do not interpolate missing quarters, combine NFC/household signals synthetically, or fit a credit equation.",
+      "source_readiness": "BLS_MULTI_ROUND_SEMANTIC_MAPPING_AVAILABLE_WITH_EXPLICIT_COVERAGE_GAPS",
+      "next_admissible_action": "Recover and retain the exact official BNR BLS rounds for 2023-Q2, 2023-Q3, 2024-Q2 and 2025-Q2 before any structural-selection contract. Regenerate the retained panel only from observed official rounds; do not interpolate missing quarters, combine NFC/household signals synthetically, or fit a credit equation.",
       "blockers": [
         "Exact quarterly ECB CBD2 NPL, solvency-ratio and CET1 histories are retained for 2014-Q4..2026-Q1.",
         "The CBD2-to-BNR population/consolidation bridge remains unresolved; numerical similarity is not a bridge.",
-        "The May-2025 BNR XLSX round fixes exact realised standards/demand semantics for NFC and household credit paths.",
-        "A deterministic reviewed xlrd 2.0.2 extraction path now exists for all seven retained legacy OLE2 XLS workbooks, and full-cell extractions are retained immutably.",
-        "Question-ID anchors C01/C05/P01/P06/P13 are coordinate-stable across all seven legacy rounds, but a separate semantic mapping contract is still required before values become model-facing series.",
-        "The retained archive is not yet a complete quarterly history; missing BNR rounds may not be interpolated or inferred.",
-        "No synthetic aggregation of NFC and household BLS signals is authorized."
+        "Cross-round BNR BLS semantics for C01/C05/P01/P06/P13 are now frozen and deterministically materialized for eight observed rounds from 2022-Q4 through 2025-Q3.",
+        "The retained realised-round panel has 8 of 12 calendar quarters between its bounds; exact official BNR BLS rounds remain missing for 2023-Q2, 2023-Q3, 2024-Q2 and 2025-Q2.",
+        "Missing BNR BLS rounds may not be interpolated, forward-filled or inferred from adjacent surveys.",
+        "No synthetic aggregation of NFC and household BLS signals is authorized, and no credit-equation estimation or model selection is open."
       ],
       "source_boundary_review": "model/calibration_validation/aggregate_bank_credit_source_boundary_review.json",
       "estimation_or_refit_allowed": false,
@@ -57,7 +56,19 @@
       "bnr_bls_xlsx_layout_review": "model/calibration_validation/bnr_bls_may2025_xlsx_layout_review.json",
       "legacy_xls_extraction_contract": "model/calibration_validation/bnr_legacy_xls_cell_extraction_contract.json",
       "legacy_xls_extraction_assessment": "model/calibration_validation/bnr_legacy_xls_cell_extraction_assessment.json",
-      "retained_legacy_xls_extraction_vintage": "data/source_vintages/bnr-legacy-xls-cell-extraction-vintage-2026-09-19"
+      "retained_legacy_xls_extraction_vintage": "data/source_vintages/bnr-legacy-xls-cell-extraction-vintage-2026-09-19",
+      "cross_round_mapping_contract": "model/calibration_validation/bnr_bls_cross_round_mapping_contract.json",
+      "retained_realised_round_panel": "data/processed/bnr_bls_realised_rounds.csv",
+      "cross_round_mapping_audit": "model/calibration_validation/bnr_bls_cross_round_mapping_audit.json",
+      "cross_round_mapping_workflow": ".github/workflows/bnr-bls-cross-round-mapping.yml",
+      "observed_round_count": 8,
+      "expected_quarter_count_between_bounds": 12,
+      "missing_rounds": [
+        "2023-Q2",
+        "2023-Q3",
+        "2024-Q2",
+        "2025-Q2"
+      ]
     },
     {
       "id": "exchange_rate_pass_through_to_inflation",
