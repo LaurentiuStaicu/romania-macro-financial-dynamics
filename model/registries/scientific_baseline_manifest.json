@@ -1,5 +1,5 @@
 {
-  "manifest_version": "0.1",
+  "manifest_version": "0.2",
   "baseline_id": "scientific-integrity-2026-09-19",
   "purpose": "Single canonical cross-registry snapshot of RMD scientific maturity. Values in this manifest must agree with the authoritative accounting, dynamics, reference-mode, empirical-mechanism and validation registries; the manifest is not an independent source of scientific truth.",
   "authority": {
@@ -13,7 +13,8 @@
     "mechanism_registry": "model/empirical_dynamics/mechanism_registry.json",
     "validation_disposition": "model/calibration_validation/validation_recovery_disposition.json",
     "prospective_confirmation_contract": "model/calibration_validation/prospective_monetary_confirmation_contract.json",
-    "prospective_confirmation_status": "model/calibration_validation/prospective_monetary_confirmation_status.json"
+    "prospective_confirmation_status": "model/calibration_validation/prospective_monetary_confirmation_status.json",
+    "mechanism_source_readiness": "model/calibration_validation/mechanism_source_readiness.json"
   },
   "canonical_state": {
     "accounting": {
@@ -75,6 +76,28 @@
       "canonical_reproduction_requires_live_network": false,
       "live_refreshes_are_new_vintage_evidence": true,
       "live_refresh_workflows_manual_only": true
+    },
+    "mechanism_readiness": {
+      "non_rejected_mechanism_count": 11,
+      "readiness_entry_count": 11,
+      "classification_counts": {
+        "CANDIDATE": 6,
+        "DEFERRED": 5,
+        "ACTIVATED": 0
+      },
+      "estimation_or_refit_allowed_count": 0,
+      "priority_group_counts": {
+        "WAIT_FOR_EXTERNAL_EVENT": 1,
+        "DEFER_UNTIL_NEW_SOURCE": 1,
+        "DEFER_UNTIL_MACHINE_READABLE_MULTI_ROUND_BLS_HISTORY": 1,
+        "FREEZE_TESTED_FORM_UNTIL_NEW_EVIDENCE": 4,
+        "DEFER_UNTIL_DETERMINISTIC_LEGACY_XLS_EXTRACTION_PATH": 1,
+        "DEFER_UNTIL_DEBT_SERVICE_SOURCE": 1,
+        "DEFER_UNTIL_EXPECTATIONS_GAP_VINTAGE_IDENTIFICATION_CONTRACT": 1,
+        "DEFER_UNTIL_JOINT_EXPOSURE_SOURCE": 1
+      },
+      "current_empirical_queue_state": "ALL_REGISTERED_MECHANISMS_FROZEN_WAITING_OR_EXPLICITLY_BLOCKED",
+      "calibration_cycle_open": false
     }
   },
   "hard_invariants": [
@@ -85,6 +108,9 @@
     "No stale ACTIVATED label survives a CANDIDATE/DEFERRED validation disposition.",
     "Reference-mode readiness is derived from the canonical registry rather than manually promoted.",
     "A live provider refresh may create evidence for a new vintage but may not rewrite a retained historical result.",
-    "Prospective monetary response values remain inaccessible until the frozen event and release gates authorize inspection."
+    "Prospective monetary response values remain inaccessible until the frozen event and release gates authorize inspection.",
+    "Every non-rejected behavioural mechanism has exactly one readiness entry and no duplicate readiness ownership.",
+    "A closed calibration cycle with zero activated mechanisms may not contain any mechanism authorized for estimation or refit.",
+    "After exhaustive source screening, a new empirical cycle requires a declared evidence/reopen trigger; queue exhaustion is not permission to respecify a failed form."
   ]
 }
