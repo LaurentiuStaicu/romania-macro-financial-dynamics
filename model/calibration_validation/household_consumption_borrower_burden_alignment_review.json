@@ -40,7 +40,7 @@
     "official_public_source_screening_completed": true,
     "screening_result": "BLOCKED_NO_OBSERVED_PUBLIC_BRIDGE_IDENTIFIED",
     "screened_source_summary": {
-      "ECB_HFCS": "Conceptually suitable household finance/consumption microdata, but Romania is not identified as a participant in relevant waves.",
+      "ECB_HFCS": "Conceptually suitable household finance/consumption microdata. BNR is an HFCN member institution, but Romania is not identified as a participating country dataset in the 2017, 2021 or latest 2023 HFCS waves.",
       "INS_ABF_TEMPO": "Quarterly household budget/consumption source exists, but no public mortgage-borrower-status breakdown or DSTI-consumption linkage was identified.",
       "ECB_CES": "High-frequency spending/income survey, but no Romania country series was identified and it would not itself map mortgage-borrower DSTI to S1M consumption."
     }
