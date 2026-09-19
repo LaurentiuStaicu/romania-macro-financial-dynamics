@@ -23,7 +23,7 @@ class ReferenceModeEvidenceGovernanceTests(unittest.TestCase):
             item for item in references["modes"]
             if item["status"] in ready_statuses
         ]
-        self.assertEqual(len(ready), 8)
+        self.assertEqual(len(ready), 9)
 
         for mode in ready:
             self.assertTrue(str(mode["source"]).strip(), mode["id"])
