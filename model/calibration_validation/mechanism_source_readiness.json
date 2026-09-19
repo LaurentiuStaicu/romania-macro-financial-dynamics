@@ -49,8 +49,8 @@
     {
       "id": "exchange_rate_pass_through_to_inflation",
       "classification": "CANDIDATE",
-      "source_readiness": "EXACT_MONTHLY_LEVEL_SOURCE_VINTAGE_RETAINED_TRANSFORM_AND_LAG_PREREGISTRATION_PENDING",
-      "next_admissible_action": "Preregister the monthly transformations, current-regime start boundary, fixed lag-horizon candidate set, seasonal treatment, structural-selection window and untouched evaluation window using only methodological evidence and the retained 2002-01..2026-06 level source vintage. Do not inspect fitted coefficients or evaluation performance yet.",
+      "source_readiness": "SOURCE_VINTAGE_AND_TRANSFORM_LAG_WINDOWS_FROZEN_OFFLINE_BUILDER_PENDING",
+      "next_admissible_action": "Implement and test an offline transformation/design builder that exactly enforces the frozen monthly log transforms, August-2005 start, AR(2), calendar-month fixed effects, UVI baseline and FX lag blocks. The default runner must stop at 2020-12, perform no coefficient estimation and expose no 2021-01..2026-06 values.",
       "blockers": [
         "The exact common monthly level vintage is now retained, but the inflation/FX/UVI transformations are intentionally not yet frozen.",
         "A current-regime start boundary and treatment of the August-2005 inflation-targeting break must be fixed before fit.",
@@ -60,14 +60,15 @@
       "source_boundary_review": "model/calibration_validation/fx_inflation_pass_through_source_boundary_review.json",
       "external_price_screening": "model/calibration_validation/fx_inflation_external_price_control_screening.json",
       "estimation_or_refit_allowed": false,
-      "priority_group": "TRANSFORM_LAG_AND_WINDOWS_PREREGISTRATION_PENDING",
+      "priority_group": "OFFLINE_TRANSFORM_DESIGN_BUILDER_PENDING",
       "external_price_control_contract": "model/calibration_validation/fx_inflation_external_price_control_contract.json",
       "monthly_materialisation_contract": "model/calibration_validation/fx_inflation_monthly_materialisation_contract.json",
       "materialiser_script": "scripts/audit_fx_inflation_monthly_materialisation.py",
       "materialiser_workflow": ".github/workflows/fx-inflation-monthly-materialisation.yml",
       "retained_source_vintage": "data/source_vintages/fx-inflation-monthly-levels-vintage-2026-09-19",
       "promotion_review": "model/calibration_validation/fx_inflation_source_vintage_promotion_review.json",
-      "live_execution_policy": "MANUAL_ONLY_LIVE_SOURCE_EVIDENCE"
+      "live_execution_policy": "MANUAL_ONLY_LIVE_SOURCE_EVIDENCE",
+      "transform_lag_window_contract": "model/calibration_validation/fx_inflation_transform_lag_window_contract.json"
     },
     {
       "id": "sovereign_yield_spread_response",
@@ -196,8 +197,8 @@
   "priority_rule": "Priority is determined by the shortest scientifically admissible path to new independent evidence, not by a desire to activate a feedback loop. Waiting mechanisms remain frozen; source-incomplete mechanisms are not fit with proxies.",
   "current_next_step": {
     "mechanism_id": "exchange_rate_pass_through_to_inflation",
-    "action": "PREREGISTER_FX_INFLATION_TRANSFORMS_LAGS_AND_WINDOWS_NO_ESTIMATION",
-    "reason": "The exact current-source monthly level vintage is retained for 2002-01 through 2026-06. The shortest admissible next step is to freeze transforms, regime boundary, lag family, seasonality and evaluation windows before any model fit.",
+    "action": "IMPLEMENT_FX_INFLATION_OFFLINE_TRANSFORM_DESIGN_BUILDER_NO_ESTIMATION",
+    "reason": "The exact monthly source vintage and all transform/lag/window choices are now frozen. Implementation must be verified without estimating coefficients or opening the 2021-2026 final-evaluation window.",
     "calibration_cycle_open": false
   },
   "coverage_rule": {
