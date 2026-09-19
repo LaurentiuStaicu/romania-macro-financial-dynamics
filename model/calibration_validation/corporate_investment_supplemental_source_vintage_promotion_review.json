@@ -1,0 +1,80 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "corporate_investment_response",
+  "snapshot_id": "corporate-investment-supplemental-source-vintage-2026-09-19",
+  "verdict": "PASS_EXACT_REVIEWED_ARTIFACT_ELIGIBLE_FOR_PROMOTION",
+  "estimation_authorized": false,
+  "reviewed_workflow": {
+    "run_id": 35435626901,
+    "artifact_id": 10581859400,
+    "artifact_name": "corporate-investment-supplemental-materialisation-715a6d161bded091d23c09ae3a0d668c1f13345e",
+    "artifact_zip_sha256": "e32ebf8edab4e72e9b6cbfa491411df553e7d96229852ea6645658882bd0f491",
+    "pr_merge_sha": "715a6d161bded091d23c09ae3a0d668c1f13345e",
+    "source_branch_head_sha": "a7076f213218cadb6349b67401bee562884f63dc"
+  },
+  "expected_files": [
+    {
+      "path": "corporate_investment_supplemental_materialisation_audit.json",
+      "bytes": 4029,
+      "sha256": "4b8f9f397ca524551f29c06ef1e09b40e1501b5aea0785f140878b1b0eaafb42"
+    },
+    {
+      "path": "nfc_gva_quarterly_level.csv",
+      "bytes": 4943,
+      "sha256": "7548019bdac61708e8f40eb400160d6e1784526ae24690616e3d3a87304350f9"
+    },
+    {
+      "path": "raw/nfc_gva.csv",
+      "bytes": 71667,
+      "sha256": "2ee731d22e45f91b44c47f3374374a902887ba04e9533e34729a52427175429c"
+    },
+    {
+      "path": "raw/real_gdp.csv",
+      "bytes": 50857,
+      "sha256": "624e4d732bee5946caa1107e7620c3f710098a628ac45e851c3ccff3a4e4afe7"
+    },
+    {
+      "path": "real_gdp_quarterly_level.csv",
+      "bytes": 6436,
+      "sha256": "36be216728430bcee0c3fc78d8d282645ccd71d416ede47e50ed73e8cc5e4ff4"
+    },
+    {
+      "path": "snapshot_manifest.json",
+      "bytes": 4218,
+      "sha256": "a12066e667e879809d025001262d5556f02232214acb8c70adc83e5b6b438470"
+    }
+  ],
+  "coverage": {
+    "nfc_gva": {
+      "rows": 109,
+      "first_period": "1999-Q1",
+      "last_period": "2026-Q1"
+    },
+    "real_gdp": {
+      "rows": 126,
+      "first_period": "1995-Q1",
+      "last_period": "2026-Q2"
+    }
+  },
+  "source_semantics": {
+    "nfc_gva_adjustment": "N",
+    "nfc_gva_prices": "V",
+    "real_gdp_adjustment": "Y",
+    "real_gdp_prices": "LR"
+  },
+  "hard_boundaries": {
+    "cross_source_join_performed": false,
+    "growth_transformation_performed": false,
+    "support_intensity_performed": false,
+    "rate_aggregation_performed": false,
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_lag_selection": true,
+    "no_holdout_opening": true,
+    "no_causal_claim": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "promotion_rule": "Only artifact 10581859400 with the exact ZIP digest and per-file byte sizes/SHA-256 values above may be committed as this supplemental source vintage."
+}
