@@ -1,14 +1,9 @@
 name: BNR BLS May 2025 XLSX Identity Probe
 
-# One-shot source identity/access bootstrap. Offline workbook inspection is
-# separated from this live provider acquisition.
+# Exact 2025-06-13 source vintage is retained after review.
+# Future provider refreshes are manual evidence for new vintages only.
 on:
-  pull_request:
-    paths:
-      - "model/calibration_validation/bnr_bls_may2025_xlsx_probe_contract.json"
-      - "scripts/audit_bnr_bls_may2025_xlsx_probe.py"
-      - "tests/test_bnr_bls_may2025_xlsx_probe.py"
-      - ".github/workflows/bnr-bls-may2025-xlsx-probe.yml"
+  workflow_dispatch:
 
 permissions:
   contents: read
