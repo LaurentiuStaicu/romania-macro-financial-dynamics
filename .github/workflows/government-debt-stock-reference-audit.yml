@@ -1,12 +1,9 @@
 name: Government Debt Stock Reference Audit
 
+# Live-source refresh is intentionally manual. The canonical scientific state is
+# reproduced offline from retained snapshots/assessments in Scientific CI.
+# A transient provider/network failure must not rewrite a validated vintage.
 on:
-  pull_request:
-    paths:
-      - "model/dynamics/government_debt_stock_reference_contract.json"
-      - "scripts/audit_eurostat_government_debt_stock_reference.py"
-      - "tests/test_government_debt_stock_reference_contract.py"
-      - ".github/workflows/government-debt-stock-reference-audit.yml"
   workflow_dispatch:
 
 permissions:
