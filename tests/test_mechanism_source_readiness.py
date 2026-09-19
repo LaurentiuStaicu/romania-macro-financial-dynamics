@@ -56,11 +56,11 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         step = self.readiness["current_next_step"]
         self.assertEqual(
             step["mechanism_id"],
-            "exchange_rate_pass_through_to_inflation",
+            "corporate_investment_response",
         )
         self.assertEqual(
             step["action"],
-            "IMPLEMENT_FX_INFLATION_OFFLINE_TRANSFORM_DESIGN_BUILDER_NO_ESTIMATION",
+            "MATERIALISE_NFC_GFCF_D92_AND_RATE_SOURCES_NO_ESTIMATION",
         )
         self.assertFalse(step["calibration_cycle_open"])
 
@@ -81,11 +81,11 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         fx = mechanisms["exchange_rate_pass_through_to_inflation"]
         self.assertEqual(
             fx["source_readiness"],
-            "SOURCE_VINTAGE_AND_TRANSFORM_LAG_WINDOWS_FROZEN_OFFLINE_BUILDER_PENDING",
+            "FROZEN_TESTED_FORM_FAILED_BEFORE_HOLDOUT",
         )
         self.assertEqual(
             fx["priority_group"],
-            "OFFLINE_TRANSFORM_DESIGN_BUILDER_PENDING",
+            "FREEZE_TESTED_FORM_UNTIL_NEW_EVIDENCE",
         )
         self.assertFalse(fx["estimation_or_refit_allowed"])
 
