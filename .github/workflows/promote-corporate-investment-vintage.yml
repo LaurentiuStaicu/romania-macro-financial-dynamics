@@ -1,4 +1,4 @@
-name: Promote Reviewed BNR Household DSTI Workbook Vintage
+name: Promote Reviewed Bank Credit Prudential Coverage Vintage
 
 on:
   pull_request:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  promote-reviewed-bnr-dsti-vintage:
+  promote-reviewed-bank-credit-prudential-vintage:
     if: ${{ github.event.label.name == 'promote-corporate-investment-vintage' }}
     runs-on: ubuntu-latest
     steps:
@@ -27,44 +27,39 @@ jobs:
             -H "Authorization: Bearer ${GH_TOKEN}" \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10582576588/zip" \
-            -o /tmp/bnr-dsti-reviewed.zip
-          echo "f5efeb0952af48e82c41106bff63908877dcd45176b49a0f085d7ef11d2e109b  /tmp/bnr-dsti-reviewed.zip" | sha256sum -c -
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/10582377035/zip" \
+            -o /tmp/bank-credit-prudential-reviewed.zip
+          echo "4168935ee09b3449b76907f92c40aff945190bdc2c581c7a76f4ba29697ea87b  /tmp/bank-credit-prudential-reviewed.zip" | sha256sum -c -
 
       - name: Verify reviewed file set and hashes
         run: |
-          rm -rf /tmp/bnr-dsti-reviewed
-          mkdir -p /tmp/bnr-dsti-reviewed
-          unzip -q /tmp/bnr-dsti-reviewed.zip -d /tmp/bnr-dsti-reviewed
+          rm -rf /tmp/bank-credit-prudential-reviewed
+          mkdir -p /tmp/bank-credit-prudential-reviewed
+          unzip -q /tmp/bank-credit-prudential-reviewed.zip -d /tmp/bank-credit-prudential-reviewed
           python - <<'PY'
-          import hashlib, json
+          import hashlib,json
           from pathlib import Path
-          root=Path("/tmp/bnr-dsti-reviewed")
-          review=json.loads(Path("model/calibration_validation/bnr_household_dsti_workbook_promotion_review.json").read_text())
+          root=Path("/tmp/bank-credit-prudential-reviewed")
+          review=json.loads(Path("model/calibration_validation/bank_credit_prudential_coverage_promotion_review.json").read_text())
           actual={str(p.relative_to(root)) for p in root.rglob("*") if p.is_file()}
           expected={x["path"] for x in review["expected_files"]}
           if actual != expected:
               raise SystemExit(f"file set mismatch: missing={expected-actual}, extra={actual-expected}")
           for item in review["expected_files"]:
-              p=root/item["path"]
-              data=p.read_bytes()
-              if len(data)!=item["bytes"]:
-                  raise SystemExit(f"byte-size mismatch: {item['path']}")
-              if item["sha256"] and hashlib.sha256(data).hexdigest()!=item["sha256"]:
-                  raise SystemExit(f"sha mismatch: {item['path']}")
-              if item["path"].endswith(".xls") and not data.startswith(bytes.fromhex("D0CF11E0A1B11AE1")):
-                  raise SystemExit(f"not OLE2 xls: {item['path']}")
-          print("Reviewed BNR workbook artifact verified.")
+              data=(root/item["path"]).read_bytes()
+              if len(data)!=item["bytes"] or hashlib.sha256(data).hexdigest()!=item["sha256"]:
+                  raise SystemExit(f"review mismatch: {item['path']}")
+          print("Reviewed prudential artifact verified.")
           PY
 
-      - name: Commit immutable raw workbook vintage
+      - name: Commit immutable prudential source vintage
         run: |
-          dest="data/source_vintages/bnr-household-dsti-workbook-probe-vintage-2026-09-19"
+          dest="data/source_vintages/bank-credit-prudential-coverage-vintage-2026-09-19"
           test ! -e "$dest"
           mkdir -p "$dest"
-          cp -a /tmp/bnr-dsti-reviewed/. "$dest/"
+          cp -a /tmp/bank-credit-prudential-reviewed/. "$dest/"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add "$dest"
-          git commit -m "data: retain exact BNR household DSTI workbook vintage"
+          git commit -m "data: retain exact bank-credit prudential coverage vintage"
           git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
