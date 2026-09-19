@@ -44,6 +44,8 @@ The incomplete-instrument boundaries are now governed by `model/accounting/reope
 
 ## Reference-mode recovery
 
+A cross-registry scientific baseline is now retained in `model/registries/scientific_baseline_manifest.json` and recomputed in Scientific CI. It is deliberately a consistency snapshot, not a second source of truth: the audit derives its assertions from the Accounting Readiness Gate, reference-mode registry, System Dynamics conformity gate, empirical mechanism registry, validation disposition and prospective confirmation contract/status. Any drift in the current maturity state therefore fails CI rather than being silently absorbed by STATUS prose.
+
 Canonical reference-mode readiness: **8/10 observed; 2 blockers**.
 
 Every ready mode now carries a repository evidence pointer. The three original monetary modes link to their retained normalized series, frozen role split and validation-recovery vintage registry; the BIS policy-rate raw transport envelope is explicitly recorded as not byte-identically recovered even though the normalized policy-rate input is reconciled. The five later recovered modes link to their retained assessments/snapshots or MoF provenance.
