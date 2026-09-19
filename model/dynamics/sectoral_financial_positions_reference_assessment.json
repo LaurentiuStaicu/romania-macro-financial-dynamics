@@ -57,7 +57,8 @@
     "exploratory_f1_semantics_diagnostic": "REJECTS_RESIDENT_F1_LIABILITY_ZERO_NO_PROMOTION",
     "exploratory_f1_zero_refinement": "REJECTED_BY_PUBLISHED_QSA_SDR_LIABILITIES",
     "s1n_boundary_diagnostic": "EXECUTED_NEGATIVE_NO_REOPEN_EVIDENCE",
-    "external_source_screening": "EUROSTAT_DISCOVERY_PASS_SEMANTIC_FAIL_OECD_PENDING_NO_REOPEN"
+    "external_source_screening": "EXTERNAL_COUNTERPART_PATH_EXHAUSTED_NO_REOPEN",
+    "further_external_counterpart_recovery": "FROZEN_UNTIL_NEW_SOURCE_OR_CHANGED_DATASET_TRIGGER"
   },
   "boundary_review": "model/dynamics/sectoral_financial_positions_boundary_review.json",
   "strict_source_gate_contract": "model/dynamics/sectoral_financial_positions_reference_contract.json",
@@ -98,17 +99,22 @@
   },
   "external_source_screening": "model/dynamics/sectoral_financial_positions_external_source_screening.json",
   "oecd_counterpart_discovery_probe": {
-    "status": "PREREGISTERED_MANUAL_NOT_EXECUTED",
+    "status": "EXECUTED_PASS_SEMANTIC_REVIEW_FAIL_SECTOR_SCOPE",
     "contract": "model/dynamics/sectoral_financial_positions_oecd_counterpart_probe_contract.json",
     "workflow": ".github/workflows/sectoral-financial-positions-oecd-counterpart-probe.yml",
     "formal_reference_mode_gate": false,
-    "current_effect": "NONE_UNTIL_RETAINED_RESULT_AND_SEPARATE_SEMANTIC_LINEAGE_REVIEW",
+    "current_effect": "NO_REOPEN; DISCOVERY AND INSTRUMENT SCOPE PASS, SEMANTIC SECTOR-SCOPE FAIL",
     "rationale": "OECD counterpart stocks/flows could expose a useful Romania sector-counterpart boundary, but OECD documents the quarterly financial sector-accounts collection as OECD-ECB. Discovery therefore tests coverage only; it cannot establish independent reopen evidence or promotion by itself.",
-    "execution_state": "READY_FOR_MANUAL_DISPATCH_VIA_EXISTING_DEFAULT_BRANCH_WORKFLOW",
+    "execution_state": "EXECUTED_MANUAL_RERUN_ATTEMPT_2",
     "execution_precondition": "Dispatch the existing default-branch Scientific CI workflow against audit/scientific-integrity-2026-09-18; the branch-only live job is guarded to workflow_dispatch on that exact ref.",
     "no_trigger_bypass": true,
     "provider_access_failure_effect": "INDETERMINATE_NO_SCIENTIFIC_EFFECT",
-    "manual_dispatch_bridge": ".github/workflows/scientific-ci.yml#manual-oecd-counterpart-probe"
+    "manual_dispatch_bridge": ".github/workflows/scientific-ci.yml#manual-oecd-counterpart-probe",
+    "retained_vintage": "data/source_vintages/sectoral-financial-positions-oecd-counterpart-discovery-vintage-2026-09-19",
+    "discovery_assessment": "model/dynamics/sectoral_financial_positions_oecd_counterpart_discovery_assessment.json",
+    "discovery_artifact_id": 10586683826,
+    "stocks_raw_sha256": "039d910150ece7d264284ffc8dfb713e99d255cb17bd366b66decfa214c4ae5f",
+    "flows_raw_sha256": "7585836c1b3b181fa233fbc21243813498911215b5ac9b28e7073da17e52629a"
   },
   "eurostat_counterpart_discovery_probe": {
     "status": "EXECUTED_PASS_SEMANTIC_REVIEW_FAIL_INSTRUMENT_SCOPE",
@@ -127,6 +133,6 @@
     "raw_response_sha256": "547c9e65c60900aa259ba547efb60faedbaa22e8d8a66e1caed6cbd2cbd189ae"
   },
   "external_semantic_lineage_review_contract": "model/dynamics/sectoral_financial_positions_external_semantic_lineage_review_contract.json",
-  "external_semantic_lineage_review_status": "EUROSTAT_FAIL_INSTRUMENT_SCOPE_OECD_PENDING",
-  "external_semantic_lineage_review_effect": "Eurostat cannot authorize exact historical extraction; OECD remains the only active external counterpart discovery candidate. Readiness remains unchanged."
+  "external_semantic_lineage_review_status": "EUROSTAT_FAIL_INSTRUMENT_SCOPE_OECD_FAIL_SECTOR_SCOPE",
+  "external_semantic_lineage_review_effect": "Both current official external counterpart candidates fail the frozen semantic boundary for different reasons; no historical extraction or readiness change is authorized."
 }

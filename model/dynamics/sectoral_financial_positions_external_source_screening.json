@@ -41,14 +41,29 @@
         "Therefore an OECD observation is not assumed to be statistically independent from the ECB/European financial-accounts source chain.",
         "A future retained Romania result must record its source metadata/lineage before it can count as a source-reopen trigger."
       ],
-      "romania_exact_observation_coverage_retained": false,
-      "status": "CANDIDATE_FOR_PREREGISTERED_COUNTRY_COVERAGE_PROBE_NOT_REOPEN_EVIDENCE",
+      "romania_exact_observation_coverage_retained": true,
+      "status": "DISCOVERY_PASS_SEMANTIC_REVIEW_FAIL_SECTOR_SCOPE_NO_REOPEN",
       "access_operational_context": {
         "checked_on": "2026-09-19",
         "api_data_download_limit_per_hour": 60,
         "excess_requests": "TEMPORARILY_BLOCKED",
         "interpretation": "Provider throttling/access failures are INDETERMINATE and cannot be treated as absent Romania data."
-      }
+      },
+      "discovery_vintage": "data/source_vintages/sectoral-financial-positions-oecd-counterpart-discovery-vintage-2026-09-19",
+      "discovery_result": {
+        "state": "PASS",
+        "stocks_row_count": 105435,
+        "flows_row_count": 105435,
+        "stocks_raw_sha256": "039d910150ece7d264284ffc8dfb713e99d255cb17bd366b66decfa214c4ae5f",
+        "flows_raw_sha256": "7585836c1b3b181fa233fbc21243813498911215b5ac9b28e7073da17e52629a"
+      },
+      "semantic_lineage_review_assessment": "model/dynamics/sectoral_financial_positions_oecd_counterpart_discovery_assessment.json",
+      "semantic_lineage_review_verdict": "FAIL_REQUIRED_SECTOR_SCOPE_INCOMPLETE",
+      "scope_limit": [
+        "The retained Romania counterpart tables contain exact F2-F8 instrument codes for both stocks and financial transactions.",
+        "Reporting sectors are limited to S1/S11/S12/S13/S1M and counterpart sectors to S1/S11/S12/S13/S1M/S2; S121 central bank is absent.",
+        "Therefore RMD BNR cannot be observed and RMD F = S12 - S121 cannot be constructed without a prohibited assumption."
+      ]
     },
     {
       "id": "EUROSTAT_QUARTERLY_COUNTERPART_FINANCIAL_ACCOUNTS",
@@ -104,15 +119,13 @@
     "immediate_reference_mode_reopen_authorized": false,
     "reference_mode_promotion_authorized": false,
     "accounting_readiness_change": false,
-    "next_admissible_action": "Run the already-preregistered OECD counterpart discovery probe using the manual rerun/workflow-dispatch bridge. Eurostat nasq_10_f_cp passed source/schema discovery for Romania but failed the frozen semantic instrument-scope gate, so it cannot open an exact historical extraction or change readiness.",
+    "next_admissible_action": "Hold the external counterpart recovery path closed. Eurostat passed discovery but failed the frozen F2-F8 instrument scope; OECD passed discovery and complete instrument scope but failed the frozen RMD sector scope because S121 is absent for Romania. Reopen only on a declared new-source or changed-dataset trigger capable of supplying both exact S121 sector separation and complete F2-F8 stocks/transactions. Do not repeat the same source probes merely because readiness remains 9/10.",
     "oecd_probe_justified": true,
     "eurostat_counterpart_probe_justified": true,
-    "discovery_priority": [
-      "OECD_COUNTERPART_DATAFLOWS"
-    ],
+    "discovery_priority": [],
     "eurostat_probe_execution_state": "EXECUTED_PASS_SEMANTIC_REVIEW_FAIL_NO_REOPEN",
     "trigger_broadening_to_bypass_execution_precondition_authorized": false,
-    "oecd_probe_execution_state": "READY_FOR_MANUAL_DISPATCH_VIA_EXISTING_DEFAULT_BRANCH_WORKFLOW",
+    "oecd_probe_execution_state": "EXECUTED_PASS_SEMANTIC_REVIEW_FAIL_NO_REOPEN",
     "oecd_provider_access_failures_have_no_scientific_effect": true,
     "manual_dispatch_bridge": {
       "workflow": ".github/workflows/scientific-ci.yml",
@@ -126,7 +139,11 @@
     },
     "post_discovery_semantic_lineage_review_contract": "model/dynamics/sectoral_financial_positions_external_semantic_lineage_review_contract.json",
     "discovery_pass_effect": "A discovery PASS does not authorize value extraction or promotion. It only opens the frozen Semantic + Lineage Review, which must pass before a separate exact historical extraction contract can be preregistered.",
-    "eurostat_exact_historical_extraction_authorized": false
+    "eurostat_exact_historical_extraction_authorized": false,
+    "oecd_exact_historical_extraction_authorized": false,
+    "external_counterpart_recovery_state": "EXHAUSTED_NO_SEMANTICALLY_ADMISSIBLE_CURRENT_PUBLIC_SOURCE",
+    "current_reference_mode_status": "PARTIAL_SERIES_AVAILABLE",
+    "reference_mode_readiness_change": 0
   },
   "hard_rules": {
     "no_reinterpretation_of_historical_phase_A_D": true,

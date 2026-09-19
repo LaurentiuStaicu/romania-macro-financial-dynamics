@@ -1,0 +1,107 @@
+{
+  "assessment_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "phase": "OECD Counterpart Discovery — Semantic + Lineage Review",
+  "reference_mode": "sectoral_financial_positions",
+  "contract": "model/dynamics/sectoral_financial_positions_external_semantic_lineage_review_contract.json",
+  "discovery_contract": "model/dynamics/sectoral_financial_positions_oecd_counterpart_probe_contract.json",
+  "discovery_vintage": "data/source_vintages/sectoral-financial-positions-oecd-counterpart-discovery-vintage-2026-09-19",
+  "discovery_result": {
+    "state": "PASS",
+    "stocks_row_count": 105435,
+    "flows_row_count": 105435,
+    "stocks_raw_sha256": "039d910150ece7d264284ffc8dfb713e99d255cb17bd366b66decfa214c4ae5f",
+    "flows_raw_sha256": "7585836c1b3b181fa233fbc21243813498911215b5ac9b28e7073da17e52629a",
+    "artifact_id": 10586683826,
+    "artifact_zip_sha256": "045265e3a32f9ec28c713029b9d8f7e5495ed50c9f3b411aa3696a680f60550e"
+  },
+  "value_review_performed": false,
+  "reconciliation_review_performed": false,
+  "review_results": {
+    "SECTOR_MAPPING": {
+      "status": "FAIL",
+      "available_reporting_sectors": [
+        "S1",
+        "S11",
+        "S12",
+        "S13",
+        "S1M"
+      ],
+      "available_counterpart_sectors": [
+        "S1",
+        "S11",
+        "S12",
+        "S13",
+        "S1M",
+        "S2"
+      ],
+      "mappings_supported": {
+        "H": "S1M",
+        "C": "S11",
+        "G": "S13",
+        "X": "counterpart S2 with asset/liability orientation"
+      },
+      "mappings_not_supported": {
+        "BNR": "S121 is absent from retained Romania reporting-sector and counterpart-sector observations.",
+        "F": "RMD F requires financial corporations excluding the central bank (S12 - S121), but S121 is absent, so the exact identity cannot be constructed."
+      },
+      "rule_applied": "Every required RMD sector H,C,F,G,BNR,X must have an explicit source-code construction. Missing S121 is an unconditional semantic-review FAIL and cannot be repaired by residual allocation, treating BNR as zero, or collapsing BNR into F."
+    },
+    "COUNTERPART_ORIENTATION": {
+      "status": "PASS",
+      "evidence": "Separate SECTOR and COUNTERPART_SECTOR dimensions plus ACCOUNTING_ENTRY A/L explicitly identify reporter/counterpart and asset/liability orientation."
+    },
+    "INSTRUMENT_MAPPING": {
+      "status": "PASS",
+      "required_rmd_instruments": [
+        "F2",
+        "F3",
+        "F4",
+        "F5",
+        "F6",
+        "F7",
+        "F8"
+      ],
+      "exact_source_codes_present_in_both_stocks_and_flows": [
+        "F2",
+        "F3",
+        "F4",
+        "F5",
+        "F6",
+        "F7",
+        "F8"
+      ],
+      "evidence": "Retained Romania stocks and flows expose exact total instrument codes F2 through F8 and component detail."
+    },
+    "STOCK_FLOW_SEMANTICS": {
+      "status": "PASS",
+      "evidence": "Separate counterpart dataflows publish stocks with TRANSACTION=LE (closing balance sheet/positions/stocks) and flows with TRANSACTION=F (transactions in financial assets and liabilities)."
+    },
+    "ASSET_LIABILITY_SEMANTICS": {
+      "status": "PASS",
+      "evidence": "ACCOUNTING_ENTRY explicitly contains A assets/net acquisition and L liabilities/net incurrence; N net is also available."
+    },
+    "UNIT_SCALING": {
+      "status": "PASS",
+      "evidence": "UNIT_MEASURE=XDC national currency, UNIT_MULT=6 millions and CURRENCY=RON Romanian leu are explicit in retained Romania data."
+    },
+    "CONSOLIDATION_AND_VALUATION": {
+      "status": "PASS",
+      "evidence": "CONSOLIDATION=N non-consolidated, VALUATION=S standard valuation based on SNA/ESA and PRICE_BASE=V current prices are explicit."
+    },
+    "LINEAGE": {
+      "status": "PASS",
+      "evidence": "OECD documents Quarterly Sector Accounts (Financial part) as an OECD-ECB collection; OECD dissemination is therefore not assumed statistically independent from the European financial-accounts source chain."
+    }
+  },
+  "verdict": "FAIL_REQUIRED_SECTOR_SCOPE_INCOMPLETE",
+  "disposition": "SOURCE_NOT_SEMANTICALLY_ADMISSIBLE_FOR_RMD_SECTORAL_POSITION_EXTRACTION_NO_READINESS_CHANGE",
+  "exact_historical_extraction_authorized": false,
+  "reference_mode_promotion": false,
+  "readiness_count_change": 0,
+  "accounting_readiness_change": false,
+  "historical_phase_A_D_reinterpreted": false,
+  "behavioural_closure_change": false,
+  "external_counterpart_recovery_path": "EXHAUSTED_AT_CURRENT_PUBLIC_SOURCE_BOUNDARY",
+  "next_action": "Keep sectoral_financial_positions at PARTIAL_SERIES_AVAILABLE. Reopen external counterpart recovery only for a new official source or changed public dataset version that provides both the frozen RMD sector split including S121 and the full F2-F8 stock/transaction instrument boundary without prohibited substitutions."
+}

@@ -445,11 +445,11 @@ class RemainingReferenceModeBlockerTests(unittest.TestCase):
         )
         self.assertEqual(
             mode["oecd_counterpart_discovery_probe_status"],
-            "PREREGISTERED_MANUAL_NOT_EXECUTED",
+            "EXECUTED_PASS_SEMANTIC_REVIEW_FAIL_SECTOR_SCOPE",
         )
         self.assertEqual(
             mode["oecd_counterpart_discovery_probe_effect"],
-            "NONE_UNTIL_RETAINED_RESULT_AND_SEPARATE_SEMANTIC_LINEAGE_REVIEW",
+            "NO_REOPEN; discovery and F2-F8 instrument scope passed, but frozen semantic review failed because Romania counterpart tables do not expose S121 central bank required for BNR and F=S12-S121.",
         )
         self.assertFalse(
             screening["decision"]["immediate_reference_mode_reopen_authorized"]
@@ -466,12 +466,16 @@ class RemainingReferenceModeBlockerTests(unittest.TestCase):
         )
         self.assertEqual(
             assessment["oecd_counterpart_discovery_probe"]["status"],
-            "PREREGISTERED_MANUAL_NOT_EXECUTED",
+            "EXECUTED_PASS_SEMANTIC_REVIEW_FAIL_SECTOR_SCOPE",
         )
         self.assertFalse(
             assessment["oecd_counterpart_discovery_probe"][
                 "formal_reference_mode_gate"
             ]
+        )
+        self.assertEqual(
+            assessment["oecd_counterpart_discovery_probe"]["discovery_artifact_id"],
+            10586683826,
         )
         self.assertEqual(
             assessment["disposition"]["further_internal_source_recovery"],
