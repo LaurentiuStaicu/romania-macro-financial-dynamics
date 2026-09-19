@@ -3,7 +3,7 @@
   "reviewed_on": "2026-09-19",
   "mechanism_id": "exchange_rate_pass_through_to_inflation",
   "purpose": "Freeze the raw source boundary and sign/coverage rules required before any distributed-lag exchange-rate pass-through estimation for Romania.",
-  "verdict": "PRIMARY_FX_AND_HICP_SOURCES_IDENTIFIED_CALIBRATION_NOT_OPENED_EXTERNAL_PRICE_CONTROL_PENDING",
+  "verdict": "FX_HICP_AND_TOTAL_IMPORT_WORLD_UVI_SOURCE_FAMILIES_IDENTIFIED_MATERIALISATION_PENDING",
   "current_classification": "CANDIDATE",
   "primary_sources": {
     "exchange_rate": {
@@ -29,8 +29,24 @@
   },
   "external_price_control_screen": {
     "screening": "model/calibration_validation/fx_inflation_external_price_control_screening.json",
-    "current_decision": "PREFERRED_STS_INPI_RO_NOT_CONFIRMED_MEMBER_STATE_UVI_DATASET_IDENTIFIED_BUT_TOTAL_PRODUCT_BOUNDARY_MISMATCH",
-    "calibration_may_open": false
+    "current_decision": "TOTAL_IMPORT_WORLD_IVU_CONFIRMED_EXACTLY_IN_EXT_ST_27_2020MSBEC",
+    "calibration_may_open": false,
+    "exact_control": {
+      "institution": "Eurostat",
+      "dataset": "ext_st_27_2020msbec",
+      "dimensions": {
+        "freq": "M",
+        "stk_flow": "IMP",
+        "indic_et": "IVU",
+        "partner": "WORLD",
+        "bclas_bec": "TOTAL",
+        "geo": "RO"
+      },
+      "provider_label": "Unit value index (2021=100)",
+      "live_probe_coverage": "2002-01 through 2026-06; 294 non-null monthly observations in the 2026-09-19 live structure probe",
+      "role": "external-price proxy; not a pure transaction-price import-price index",
+      "currency_boundary": "No currency dimension is exposed by this short-term API extract; do not invent or search a currency variant after model fit."
+    }
   },
   "transformation_boundary": {
     "fx_quote": "RON_per_EUR",
@@ -54,11 +70,11 @@
   "source_materialisation_gate": {
     "calibration_cycle_open": false,
     "required_before_estimation": [
-      "Retain the exact ECB EXR monthly RON/EUR series with provider key, vintage metadata and raw-source hash.",
-      "Retain the exact Eurostat Romania HICP CP00 monthly series with dataset dimensions, vintage metadata and raw-source hash.",
-      "Establish whether Romania has a definitionally suitable exact industrial import-price series in sts_inpi_m; record a pass or explicit unavailability.",
-      "If the preferred import-price control remains unavailable, write a new preregistered control contract choosing and justifying a specific Member-State BEC product or another exact Romanian external-price measure before materialisation; ext_st_27_2020msbec may not be treated as a total-import index.",
-      "Freeze inflation transform, lag horizon, estimation start date/regime boundary, structural-selection window and untouched evaluation window before estimation."
+      "Retain the exact ECB EXR monthly RON/EUR average series with provider key, vintage metadata and raw-source hash.",
+      "Retain the exact Eurostat Romania HICP CP00 monthly index with its current provider unit/base, dimensions, vintage metadata and raw-source hash.",
+      "Retain the exact Eurostat ext_st_27_2020msbec Romania/imports/WORLD/TOTAL/IVU monthly series with raw-source hash and provider metadata.",
+      "Verify the common finite monthly coverage across FX, HICP and IVU without interpolation, backfill or missing-to-zero treatment.",
+      "Only after source-vintage retention, freeze inflation transform, external-price transform, lag horizon, estimation start/regime boundary, structural-selection window and untouched evaluation window before any estimation."
     ],
     "prohibited_shortcuts": [
       "Use end-of-period exchange rates when the frozen driver is monthly average without a new source-boundary contract.",
@@ -67,7 +83,8 @@
       "Choose lag length after opening untouched evaluation data.",
       "Treat correlation between RON depreciation and inflation as causal pass-through.",
       "Import pre-inflation-targeting or pre-current-regime coefficients as current Romanian parameters.",
-      "Silently substitute euro-area import prices for a missing Romanian import-price series."
+      "Substitute INT, CAP, CONS or CONS_TRA for TOTAL after seeing model performance.",
+      "Infer a RON- or EUR-denominated IVU variant that is not exposed by the exact short-term dataset query."
     ],
     "pass_effect": "Authorises a separately preregistered structural-selection cycle against autoregressive and external-price baselines; no causal or System Dynamics activation follows automatically.",
     "fail_effect": "Retain the mechanism as CANDIDATE and do not estimate an under-controlled distributed-lag equation."
