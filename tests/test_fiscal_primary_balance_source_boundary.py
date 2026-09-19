@@ -31,8 +31,7 @@ class FiscalPrimaryBalanceSourceBoundaryTests(unittest.TestCase):
         boundary = self.review["primary_balance_measurement_boundary"]
         self.assertEqual(
             boundary["current_status"],
-            "MATCHED_NSA_PC_GDP_MATERIALISATION_CONTRACT_FROZEN_"
-            "MANUAL_LIVE_RUN_PENDING",
+            "EXACT_MATCHED_NSA_PC_GDP_SOURCE_VINTAGE_RETAINED",
         )
         self.assertEqual(
             boundary["materialisation_contract"],
