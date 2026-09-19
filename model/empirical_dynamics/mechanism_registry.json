@@ -75,6 +75,12 @@
         "final_holdout_opened": false,
         "status": "CANDIDATE",
         "reason": "No preregistered NFC candidate passed all structural-selection gates; the final NFC holdout remains unopened."
+      },
+      "prospective_confirmation": {
+        "contract": "model/calibration_validation/prospective_monetary_confirmation_contract.json",
+        "status": "model/calibration_validation/prospective_monetary_confirmation_status.json",
+        "current_gate_status": "WAIT_FOR_NEW_POLICY_RATE_EVENT",
+        "classification_may_change_from_this_pointer_alone": false
       }
     },
     {
