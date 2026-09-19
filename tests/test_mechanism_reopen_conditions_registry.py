@@ -54,10 +54,15 @@ class MechanismReopenConditionsRegistryTests(unittest.TestCase):
             for rel in evidence:
                 self.assertTrue((ROOT / rel).is_file(), f"{mechanism_id}: missing {rel}")
 
-    def test_global_closed_baseline_is_preserved(self):
+    def test_selective_reopen_preserves_closed_calibration(self):
         self.assertEqual(
             self.r["current_baseline_action"],
-            "HOLD_CLOSED_BASELINE_UNTIL_DECLARED_REOPEN_TRIGGER",
+            "MATERIALISE_CAPB_REALTIME_VINTAGE_SOURCE_EVIDENCE",
+        )
+        self.assertTrue(self.r["selective_reopen_active"])
+        self.assertEqual(
+            self.r["selective_reopen_mechanism"],
+            "fiscal_primary_balance_reaction",
         )
         self.assertFalse(self.r["current_active_calibration_cycle_open"])
         self.assertEqual(self.r["current_validated_reference_behavioural_mechanisms"], 0)
@@ -90,6 +95,23 @@ class MechanismReopenConditionsRegistryTests(unittest.TestCase):
         )
         self.assertTrue(any("first non-zero BNR policy-rate event" in x for x in entry["reopen_when"]))
         self.assertTrue(any("four distinct non-zero policy-event months" in x for x in entry["reopen_when"]))
+
+    def test_fiscal_reopen_is_source_only_and_matches_readiness(self):
+        entry = self.r["mechanisms"]["fiscal_primary_balance_reaction"]
+        self.assertTrue(entry["reopen_trigger_satisfied"])
+        self.assertEqual(
+            entry["source_readiness"],
+            "REOPENED_NEW_MEASUREMENT_EVIDENCE_CAPB_REALTIME_VINTAGE_MATERIALISATION",
+        )
+        self.assertEqual(
+            entry["reopen_authorized_scope"],
+            "CAPB_REALTIME_VINTAGE_SOURCE_MATERIALISATION_AND_TIMING_ADJUDICATION_ONLY",
+        )
+        self.assertIn(
+            "model/registries/fiscal_capb_reopen_assessment_2026_09_19.json",
+            entry["governing_evidence"],
+        )
+        self.assertFalse(self.s["current_next_step"]["calibration_cycle_open"])
 
     def test_failed_pre_holdout_cycles_cannot_be_reopened_by_post_outcome_respecification(self):
         for mechanism_id in (
