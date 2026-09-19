@@ -84,6 +84,9 @@ def main() -> None:
     prospective_status = load(
         "model/calibration_validation/prospective_monetary_confirmation_status.json"
     )
+    stage_terminal = load(
+        "model/registries/validation_recovery_stage_terminal_assessment.json"
+    )
 
     # Authority paths must exist and the manifest must be registered centrally.
     for label, relative in manifest["authority"].items():
@@ -117,6 +120,28 @@ def main() -> None:
         model["dynamic_core"]["reference_mode_recovery_stage_status"]
         == reference_mode_terminal["status"],
         "Model contract reference-mode recovery stage status is stale",
+    )
+    check(
+        model["scientific_stage"]["terminal_assessment"]
+        == "model/registries/validation_recovery_stage_terminal_assessment.json",
+        "Model contract does not register terminal validation-recovery stage",
+    )
+    check(
+        model["scientific_stage"]["status"] == stage_terminal["status"],
+        "Model contract scientific-stage status is stale",
+    )
+    check(
+        model["scientific_stage"]["next_operational_state"]
+        == stage_terminal["next_operational_state"]["id"],
+        "Model contract scientific-stage next state is stale",
+    )
+    check(
+        model["scientific_stage"]["model_complete"] is False,
+        "Terminal recovery stage may not claim model completion",
+    )
+    check(
+        model["scientific_stage"]["release_ready"] is False,
+        "Terminal recovery stage may not claim release readiness",
     )
 
     # Accounting state is derived from the canonical accounting gate.
@@ -532,6 +557,141 @@ def main() -> None:
         "Reopen registry may not activate behavioural closure",
     )
 
+    # Overall validation-recovery stage is terminal only at an evidence-triggered hold.
+    stage_state = state["scientific_stage"]
+    check(
+        stage_state["name"] == stage_terminal["stage_name"],
+        "Baseline scientific-stage name is stale",
+    )
+    check(
+        stage_state["status"] == stage_terminal["status"],
+        "Baseline scientific-stage status is stale",
+    )
+    check(
+        stage_state["next_operational_state"]
+        == stage_terminal["next_operational_state"]["id"],
+        "Baseline scientific-stage next operational state is stale",
+    )
+    check(
+        stage_state["active_autonomous_empirical_task"]
+        == stage_terminal["next_operational_state"]["active_autonomous_empirical_task"],
+        "Baseline active autonomous empirical task is stale",
+    )
+    check(stage_state["model_complete"] is False, "Stage completion may not imply model completion")
+    check(stage_state["release_ready"] is False, "Stage completion may not imply release readiness")
+
+    for label, relative in stage_terminal["authorities"].items():
+        check(
+            (ROOT / relative).is_file(),
+            f"Terminal stage authority is missing {label}: {relative}",
+        )
+
+    terminal_accounting = stage_terminal["terminal_state"]["accounting"]
+    check(
+        set(terminal_accounting["canonical_complete_stock_and_flow_instruments"])
+        == set(acc["complete_stock_and_flow_instruments"]),
+        "Terminal stage accounting-complete instruments are stale",
+    )
+    check(
+        set(terminal_accounting["incomplete_or_partial_instruments"])
+        == set(acc["incomplete_instruments"]),
+        "Terminal stage accounting-incomplete instruments are stale",
+    )
+    check(
+        terminal_accounting["full_2025_stock_flow_benchmark_ready"]
+        is acc["full_2025_stock_flow_benchmark_ready"],
+        "Terminal stage accounting benchmark readiness is stale",
+    )
+    check(
+        terminal_accounting["active_unconditional_recovery_task_remains"] is False,
+        "Terminal stage may not retain an unconditional accounting recovery task",
+    )
+
+    terminal_refs = stage_terminal["terminal_state"]["reference_modes"]
+    check(terminal_refs["required"] == ref_state["required_count"], "Terminal stage reference required count is stale")
+    check(terminal_refs["ready"] == ref_state["ready_count"], "Terminal stage reference ready count is stale")
+    check(
+        terminal_refs["blocker"] in ref_state["blockers"],
+        "Terminal stage reference blocker is stale",
+    )
+    check(
+        terminal_refs["integrated_closure_ready"] is ref_state["closure_ready"],
+        "Terminal stage reference closure flag is stale",
+    )
+    check(
+        terminal_refs["recovery_stage_status"] == ref_state["recovery_stage_status"],
+        "Terminal stage reference recovery status is stale",
+    )
+    check(
+        terminal_refs["active_unconditional_recovery_task_remains"] is False,
+        "Terminal stage may not retain an unconditional reference-mode recovery task",
+    )
+
+    terminal_mechanisms = stage_terminal["terminal_state"]["behavioural_mechanisms"]
+    check(
+        terminal_mechanisms["non_rejected_mechanisms"]
+        == readiness_state["non_rejected_mechanism_count"],
+        "Terminal stage mechanism count is stale",
+    )
+    check(
+        terminal_mechanisms["candidate"] == readiness_state["classification_counts"]["CANDIDATE"],
+        "Terminal stage candidate count is stale",
+    )
+    check(
+        terminal_mechanisms["deferred"] == readiness_state["classification_counts"]["DEFERRED"],
+        "Terminal stage deferred count is stale",
+    )
+    check(
+        terminal_mechanisms["activated"] == readiness_state["classification_counts"]["ACTIVATED"],
+        "Terminal stage activated count is stale",
+    )
+    check(
+        terminal_mechanisms["validated_reference_behavioural_mechanisms"]
+        == validation["validated_reference_behavioural_mechanisms"],
+        "Terminal stage validated-mechanism count is stale",
+    )
+    check(
+        terminal_mechanisms["estimation_or_refit_allowed"]
+        == readiness_state["estimation_or_refit_allowed_count"],
+        "Terminal stage estimation/refit authorization is stale",
+    )
+    check(
+        terminal_mechanisms["active_calibration_cycle_open"]
+        is readiness_state["calibration_cycle_open"],
+        "Terminal stage calibration-cycle state is stale",
+    )
+
+    terminal_prospective = stage_terminal["terminal_state"]["prospective_monetary_confirmation"]
+    check(
+        terminal_prospective["status"] == validation["prospective_confirmation_status"],
+        "Terminal stage prospective-confirmation status is stale",
+    )
+    check(
+        terminal_prospective["reserved_response_values_may_be_opened_now"] is False,
+        "Terminal stage may not open reserved prospective responses without its event gate",
+    )
+
+    terminal_sd = stage_terminal["terminal_state"]["system_dynamics"]
+    check(
+        terminal_sd["behavioural_closure_active"] is sd_state["behavioural_closure_active"],
+        "Terminal stage behavioural-closure state is stale",
+    )
+    check(
+        terminal_sd["complete_endogenous_system_dynamics_model"]
+        is sd_state["complete_endogenous_system_dynamics_model"],
+        "Terminal stage complete-SD state is stale",
+    )
+    check(
+        terminal_sd["quantitative_feedback_activation_from_stage_completion"] is False,
+        "Stage completion may not activate quantitative feedback",
+    )
+
+    check(stage_terminal["stage_completion_rule"]["all_currently_admissible_tasks_resolved_or_frozen"] is True, "Terminal stage completion rule is not satisfied")
+    check(stage_terminal["stage_completion_rule"]["no_mechanism_estimation_authorized"] is True, "Terminal stage may not authorize mechanism estimation")
+    check(stage_terminal["no_release_effect"]["release_or_tag_authorized"] is False, "Terminal stage may not authorize release/tag")
+    check(stage_terminal["no_release_effect"]["merge_to_main_authorized_by_this_assessment"] is False, "Terminal stage may not authorize merge to main")
+    check(stage_terminal["no_release_effect"]["version_change_authorized"] is False, "Terminal stage may not authorize version change")
+
     # Live-source refreshes are not canonical reproduction prerequisites.
     source_state = state["source_reproduction"]
     check(source_state["canonical_reproduction_requires_live_network"] is False, "Baseline may not require live network for canonical reproduction")
@@ -576,6 +736,10 @@ def main() -> None:
         ],
         "mechanism_reopen_governance_state": readiness_state[
             "reopen_governance_state"
+        ],
+        "scientific_stage_status": stage_state["status"],
+        "scientific_stage_next_operational_state": stage_state[
+            "next_operational_state"
         ],
         "mechanism_priority_groups": readiness_state[
             "priority_group_counts"
