@@ -89,19 +89,24 @@ class ScientificBaselineConsolidationTerminalAssessmentTests(unittest.TestCase):
         self.assertFalse(nxt["release_or_tag_authorized"])
         self.assertFalse(nxt["version_change_authorized"])
 
-    def test_model_contract_points_to_terminal_governance_state(self) -> None:
+    def test_model_contract_retains_terminal_assessment_after_later_review_transition(self) -> None:
         gov = self.model["repository_governance"]
         self.assertEqual(
             gov["consolidation_terminal_assessment"],
             "model/registries/scientific_baseline_consolidation_terminal_assessment.json",
         )
-        self.assertEqual(
-            gov["current_merge_readiness_status"],
-            "CONSOLIDATION_COMPLETE_HUMAN_REVIEW_DECISION_PENDING",
-        )
         self.assertTrue(gov["scientific_review_series_complete"])
-        self.assertTrue(gov["human_review_decision_required"])
-        self.assertTrue(gov["pull_request_must_remain_draft"])
+        self.assertEqual(
+            gov["scientific_review_series_terminal_tree"],
+            "f8ca0b757b4be46cc19b36564e9f0eed69ef95ce",
+        )
+        self.assertIn(
+            gov["current_merge_readiness_status"],
+            {
+                "CONSOLIDATION_COMPLETE_HUMAN_REVIEW_DECISION_PENDING",
+                "REVIEW_READY_MERGE_DECISION_PENDING",
+            },
+        )
         self.assertFalse(gov["automatic_merge_authorized"])
         self.assertFalse(gov["release_or_version_change_authorized"])
 
