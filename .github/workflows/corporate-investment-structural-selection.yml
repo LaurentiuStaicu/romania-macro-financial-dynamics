@@ -1,0 +1,31 @@
+name: Corporate Investment Structural Selection Readiness
+
+on:
+  pull_request:
+    paths:
+      - "model/calibration_validation/corporate_investment_structural_selection_contract.json"
+      - "src/romania_macro_financial_dynamics/corporate_investment_selection.py"
+      - "scripts/run_corporate_investment_structural_selection.py"
+      - "tests/test_corporate_investment_structural_selection_contract.py"
+      - "tests/test_corporate_investment_selection_logic.py"
+      - "tests/test_corporate_investment_selection_runner.py"
+      - ".github/workflows/corporate-investment-structural-selection.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify-selection-readiness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Verify frozen contract and primitives
+        run: |
+          python -m unittest tests.test_corporate_investment_structural_selection_contract -v
+          python -m unittest tests.test_corporate_investment_selection_logic -v
+          python -m unittest tests.test_corporate_investment_selection_runner -v
+      - name: Verify default runner performs no estimation
+        run: python scripts/run_corporate_investment_structural_selection.py
