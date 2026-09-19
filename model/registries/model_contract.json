@@ -77,5 +77,13 @@
     "mechanism_source_readiness": "model/calibration_validation/mechanism_source_readiness.json",
     "mechanism_reopen_conditions_registry": "model/calibration_validation/mechanism_reopen_conditions_registry.json"
   },
-  "scientific_baseline_manifest": "model/registries/scientific_baseline_manifest.json"
+  "scientific_baseline_manifest": "model/registries/scientific_baseline_manifest.json",
+  "scientific_stage": {
+    "name": "Validation Recovery / Empirical Basis Expansion",
+    "terminal_assessment": "model/registries/validation_recovery_stage_terminal_assessment.json",
+    "status": "STAGE_COMPLETE_EVIDENCE_TRIGGERED_BASELINE_HOLD",
+    "next_operational_state": "EVIDENCE_TRIGGERED_BASELINE_HOLD",
+    "model_complete": false,
+    "release_ready": false
+  }
 }
