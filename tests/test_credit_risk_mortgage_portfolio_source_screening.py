@@ -49,6 +49,19 @@ class CreditRiskMortgagePortfolioSourceScreeningTests(unittest.TestCase):
         self.assertFalse(alignment["exact_denominator_weighting_match_demonstrated"])
         self.assertFalse(alignment["exact_machine_readable_joint_history_retained"])
 
+    def test_machine_readable_mortgage_npl_source_is_not_inferred(self) -> None:
+        search = self.review["machine_readable_source_search"]
+        self.assertEqual(
+            search["status"],
+            "EXACT_OFFICIAL_MORTGAGE_NPL_SERIES_NOT_IDENTIFIED_IN_PUBLIC_SEARCH",
+        )
+        self.assertFalse(search["chart_digitisation_allowed"])
+        self.assertFalse(search["endpoint_inference_allowed"])
+        self.assertIn(
+            "not evidence that no official machine-readable series exists",
+            search["negative_evidence_scope"],
+        )
+
     def test_future_sector_target_is_not_selected_or_estimated(self) -> None:
         registered = self.review["registered_mechanism_boundary"]
         disposition = self.review["disposition"]
