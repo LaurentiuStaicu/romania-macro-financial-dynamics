@@ -136,7 +136,15 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         )
         self.assertEqual(
             aggregate_credit["priority_group"],
-            "DEFER_UNTIL_FINAL_BLS_GAP_OR_PRUDENTIAL_BOUNDARY_BRIDGE",
+            "DEFER_UNTIL_FINAL_BLS_GAP_OR_NEW_MATCHED_PRUDENTIAL_SOURCE",
+        )
+        self.assertEqual(
+            aggregate_credit["prudential_population_boundary_status"],
+            "DIRECT_CBD2_TO_BNR_POPULATION_EQUIVALENCE_REJECTED_NEW_MATCHED_SOURCE_REQUIRED",
+        )
+        self.assertEqual(
+            aggregate_credit["prudential_population_boundary_review"],
+            "model/calibration_validation/bank_credit_prudential_population_boundary_review.json",
         )
         self.assertFalse(aggregate_credit["estimation_or_refit_allowed"])
 
