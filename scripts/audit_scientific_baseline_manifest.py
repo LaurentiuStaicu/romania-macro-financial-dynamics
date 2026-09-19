@@ -28,6 +28,11 @@ LIVE_MANUAL_WORKFLOWS = [
     ".github/workflows/f5-equity-subcomponent-bridge-audit.yml",
     ".github/workflows/f7-financial-derivatives-coverage-audit.yml",
     ".github/workflows/f8-other-accounts-coverage-audit.yml",
+    ".github/workflows/sectoral-financial-positions-reference-audit.yml",
+    ".github/workflows/sectoral-financial-positions-aggregate-identity-audit.yml",
+    ".github/workflows/sectoral-financial-positions-rounding-consistency-audit.yml",
+    ".github/workflows/sectoral-financial-positions-source-discrepancy-audit.yml",
+    ".github/workflows/sectoral-financial-positions-esa-f1-applicability-reaudit.yml",
 ]
 
 
