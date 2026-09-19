@@ -21,6 +21,7 @@ class LiveSourceRefreshWorkflowTests(unittest.TestCase):
             ".github/workflows/sectoral-financial-positions-aggregate-identity-audit.yml",
             ".github/workflows/sectoral-financial-positions-rounding-consistency-audit.yml",
             ".github/workflows/sectoral-financial-positions-source-discrepancy-audit.yml",
+            ".github/workflows/sectoral-financial-positions-esa-f1-applicability-reaudit.yml",
         ]
         for relative in manual_only:
             text = (ROOT / relative).read_text(encoding="utf-8")
@@ -62,6 +63,7 @@ class LiveSourceRefreshWorkflowTests(unittest.TestCase):
             "audit_ecb_sectoral_financial_positions_aggregate_identity.py",
             "audit_ecb_sectoral_financial_positions_rounding_consistency.py",
             "audit_ecb_sectoral_financial_positions_source_discrepancy.py",
+            "audit_ecb_sectoral_financial_positions_esa_f1_applicability_reaudit.py",
         ]
         for script in forbidden:
             self.assertNotIn(script, text)
