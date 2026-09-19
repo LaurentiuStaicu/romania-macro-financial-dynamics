@@ -97,13 +97,13 @@
     {
       "quarter": "2024-Q4",
       "source": "BNR Bank Lending Survey, February 2025",
-      "url": "https://www.luba.ro/static/images/files/sondaj.pdf",
-      "source_identity_note": "Publicly indexed mirror of the BNR February-2025 Bank Lending Survey report; report title, BNR branding and methodology identify the original BNR publication. Exact official BNR file URL was not indexed in the current source search.",
+      "url": "https://www.bnr.ro/uploads/2025-02sondajblsfebruarie_documentpdf_545_1741619302.pdf",
       "new_housing_loans_dsti_percent": 35,
       "outstanding_housing_loans_dsti_percent": 41,
       "publication_precision_dp": 0,
       "extraction": "DIRECT_REPORT_TEXT",
-      "chart_digitisation": false
+      "chart_digitisation": false,
+      "source_identity_note": "Official BNR February-2025 Bank Lending Survey PDF endpoint independently identified by web search."
     },
     {
       "quarter": "2025-Q1",
