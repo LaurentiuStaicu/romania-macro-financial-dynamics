@@ -20,14 +20,15 @@
         "debt_service_to_income_available_in_hfcs_framework": true,
         "consumption_and_saving_module": true
       },
-      "romania_status": "NOT_A_PARTICIPATING_COUNTRY_IN_RELEVANT_HFCS_WAVES_IDENTIFIED",
+      "romania_status": "HFCN_MEMBER_INSTITUTION_BUT_NO_ROMANIA_COUNTRY_DATASET_IN_2017_2021_OR_2023_WAVES_IDENTIFIED",
       "participation_evidence": [
-        "ECB 2021-wave methodology states that the fourth wave covered all 19 euro-area countries plus Croatia, Czech Republic and Hungary; Romania is not listed.",
-        "ECB 2017-wave FAQ states that the third wave covered 19 euro-area countries plus Croatia, Hungary and Poland; Romania is not listed.",
-        "The current ECB list of national institutions participating in HFCS does not list Romania."
+        "The ECB 2021-wave methodological report lists Banca Națională a României among HFCN member institutions, so network membership must not be confused with a Romania country dataset.",
+        "The ECB 2017-wave methodology states that the third wave covered all 19 euro-area countries plus Croatia, Hungary and Poland; Romania was not a participating survey country.",
+        "The ECB 2021-wave methodology states that the fourth wave covered all 19 euro-area countries plus Croatia, Czech Republic and Hungary; Romania was not a participating survey country.",
+        "The ECB 2023-wave results/methodology published in June 2026 state that the fifth wave covered the 20 euro-area countries at the time of collection plus Czech Republic and Hungary; Romania was not a participating survey country."
       ],
-      "bridge_status": "NOT_AVAILABLE_FOR_ROMANIA",
-      "reason": "The survey contains conceptually suitable household-level finance/consumption variables, but no Romania HFCS microdata frame is identified for the relevant waves."
+      "bridge_status": "NO_ROMANIA_HFCS_COUNTRY_DATASET_IN_RELEVANT_AVAILABLE_WAVES",
+      "reason": "HFCS is conceptually suitable and BNR participates in the HFCN network, but no Romania HFCS country dataset is identified in the 2017, 2021 or latest 2023 waves. Network membership therefore does not supply the required Romania microdata bridge."
     },
     {
       "id": "INS_ABF_TEMPO",
@@ -68,7 +69,7 @@
     "aligned_borrower_consumption_target_found": false,
     "aligned_common_microdata_frame_found": false,
     "aggregate_burden_source_found": false,
-    "conclusion": "No official public source identified in this screening closes the population boundary between BNR housing-loan DSTI and aggregate S1M consumption for Romania."
+    "conclusion": "No official public source identified in this screening closes the population boundary between BNR housing-loan DSTI and aggregate S1M consumption for Romania. HFCS remains conceptually suitable but has no Romania country dataset in the 2017, 2021 or latest 2023 wave; INS ABF public tables identified here do not stratify by mortgage-borrower status."
   },
   "admissible_future_paths": [
     {
