@@ -16,7 +16,9 @@ GitHub's documented diff limits still prevent complete visual rendering of some 
 
 The consolidation terminal state was **CONSOLIDATION_COMPLETE_HUMAN_REVIEW_DECISION_PENDING**. A subsequent human continuation decision has now advanced PRs #48–#52 from Draft to **Ready for review**, recorded in `model/registries/scientific_baseline_review_ready_assessment.json`. The current repository-governance state is **REVIEW_READY_MERGE_DECISION_PENDING**.
 
-This transition changes repository review state only. No accounting classification, reference-mode status, empirical mechanism, calibration gate, System Dynamics feedback or behavioural closure has changed. Merge, release, tag and version changes remain separately unauthorized.
+This transition changes repository review state only. No accounting classification, reference-mode status, empirical mechanism, calibration gate, System Dynamics feedback or behavioural closure has changed.
+
+A subsequent human continuation decision has authorized the reviewed stack #48–#52 for bottom-up merge into `main`, recorded in `model/registries/scientific_baseline_merge_authorization.json`. The current repository-governance state is **MERGE_AUTHORIZED_INTEGRATION_PENDING**. This authorization is limited to repository integration: release, tag, version changes, calibration/refit, holdout opening, System Dynamics feedback activation and behavioural closure remain unauthorized.
 
 ## Canonical modeling paradigm
 
