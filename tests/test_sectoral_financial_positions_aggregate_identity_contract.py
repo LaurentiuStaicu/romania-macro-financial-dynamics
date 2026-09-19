@@ -135,7 +135,7 @@ class SectoralFinancialPositionsAggregateIdentityContractTests(unittest.TestCase
             "NO_FURTHER_INTERNAL_F1_ADAPTATION",
         )
         self.assertIn(
-            "new independently preregistered phase",
+            "new independently preregistered contract",
             self.review["next_action"]["rule"],
         )
         exploratory = self.review["exploratory_reaudit"]
