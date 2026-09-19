@@ -1,0 +1,43 @@
+name: Sectoral Financial Positions Reference Audit
+
+on:
+  pull_request:
+    paths:
+      - "model/dynamics/sectoral_financial_positions_boundary_review.json"
+      - "model/dynamics/sectoral_financial_positions_reference_contract.json"
+      - "scripts/audit_ecb_sectoral_financial_positions_reference.py"
+      - "tests/test_sectoral_financial_positions_reference_contract.py"
+      - ".github/workflows/sectoral-financial-positions-reference-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit-sectoral-financial-positions-reference:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Verify preregistered sectoral-position reference contract
+        run: python -m unittest tests.test_sectoral_financial_positions_reference_contract -v
+
+      - name: Probe exact ECB QSA F2-F8 aggregate sectoral boundary
+        env:
+          SECTORAL_POSITIONS_REFERENCE_AUDIT_OUT: sectoral_positions_reference_audit_artifacts
+        run: python scripts/audit_ecb_sectoral_financial_positions_reference.py
+
+      - name: Upload sectoral-position source-gate evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sectoral-financial-positions-reference-${{ github.sha }}
+          path: sectoral_positions_reference_audit_artifacts/
+          if-no-files-found: error
+          retention-days: 90
