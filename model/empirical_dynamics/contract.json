@@ -8,16 +8,13 @@
     "behavioural_equations_may_not_break_double_entry": true
   },
   "activation_semantics": {
-    "ACTIVATED": "admitted to the calibration/validation set; requires explicit parameters before numerical evaluation",
+    "ACTIVATED": "admitted to a currently open calibration/validation cycle; not validated, not quantitatively active in the System Dynamics reference simulation, and removable/downgradable when the frozen evaluation disposition closes that cycle",
     "CANDIDATE": "implemented/documented for testing but excluded from the central calibrated model until its evidence and identifiability gates pass",
     "DEFERRED": "not numerically active because observability, identification or scope is insufficient",
     "REJECTED": "form excluded because it is structurally/causally under-specified or contradicted by the modelling contract"
   },
-  "activated_mechanisms": [
-    "monetary_policy_lending_rate_pass_through",
-    "government_refinancing_effective_rate"
-  ],
-  "central_calibration_rule": "Calibration begins with the smallest activated model. Candidate mechanisms may be promoted only using structural-selection data, never by inspecting the final holdout.",
+  "activated_mechanisms": [],
+  "central_calibration_rule": "No behavioural mechanism is currently in an open central calibration cycle. Future admission requires a newly declared calibration/validation cycle with frozen selection/evaluation boundaries; CANDIDATE or DEFERRED mechanisms may not drive the reference simulation.",
   "parameter_rule": "No coefficient has a convenience default. Parameters are either observed/data-derived with provenance, externally sourced with explicit transferability limits, or estimated under the declared calibration protocol.",
   "observability_rule": "Every admitted mechanism must list target and driver observables or be downgraded/deferred.",
   "causality_rule": "Predictive/associational fit is not sufficient to label a coefficient causal. Policy/endogeneity-sensitive mechanisms remain explicitly qualified.",
@@ -27,13 +24,32 @@
     "mixed_frequency": "aggregation/alignment must be predeclared within each evaluation origin to avoid future-information leakage"
   },
   "next_stage": {
-    "id": "calibration_validation",
-    "name": "Calibration & Validation",
+    "id": "prospective_confirmation_and_reference_mode_recovery",
+    "name": "Prospective Confirmation / Reference-Mode Data Recovery",
     "required_separation": [
       "calibration_data",
       "structural_selection_data",
-      "evaluation_holdout_data"
+      "evaluation_holdout_data",
+      "prospectively_reserved_confirmation_data"
     ],
-    "holdout_rule": "An inspected evaluation holdout cannot subsequently be reported as independent validation."
+    "holdout_rule": "An inspected evaluation holdout cannot subsequently be reported as independent validation. The frozen household form may be tested on prospectively reserved observations only under its existing no-respecification rule.",
+    "current_priorities": [
+      "preserve 2026-08 onward monetary observations for the first genuinely identifying new policy-rate episode",
+      "do not reopen government repricing estimation until matched instrument-level principal and old/new rate evidence satisfy the frozen ledger gates",
+      "materialize missing reference modes before integrated behavioural closure is reconsidered"
+    ]
+  },
+  "post_validation_disposition": {
+    "source": "model/calibration_validation/validation_recovery_disposition.json",
+    "active_calibration_cycle_open": false,
+    "validated_reference_behavioural_mechanisms": 0,
+    "activated_mechanisms_after_disposition": [],
+    "candidate_mechanisms_after_disposition": [
+      "monetary_policy_lending_rate_pass_through"
+    ],
+    "deferred_mechanisms_after_disposition": [
+      "government_refinancing_effective_rate"
+    ],
+    "rule": "The frozen validation-recovery disposition governs current mechanism status. Pre-recovery admission to calibration does not survive as ACTIVATED after the evaluation cycle closes unless the disposition explicitly authorizes it."
   }
 }
