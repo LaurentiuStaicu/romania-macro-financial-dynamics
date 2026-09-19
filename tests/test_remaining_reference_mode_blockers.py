@@ -378,5 +378,45 @@ class RemainingReferenceModeBlockerTests(unittest.TestCase):
         )
 
 
+    def test_f1_semantics_diagnostic_rejects_zero_refinement_without_promotion(self) -> None:
+        references = load("model/dynamics/reference_modes.json")
+        diagnostic = load(
+            "model/dynamics/sectoral_financial_positions_esa_f1_semantics_diagnostic_assessment.json"
+        )
+        review = load(
+            "model/dynamics/sectoral_financial_positions_esa_f1_applicability_review.json"
+        )
+        mode = next(
+            item for item in references["modes"]
+            if item["id"] == "sectoral_financial_positions"
+        )
+
+        self.assertEqual(mode["status"], "PARTIAL_SERIES_AVAILABLE")
+        self.assertEqual(
+            diagnostic["verdict"],
+            "EXPLORATORY_DIAGNOSTIC_REJECTS_RESIDENT_F1_LIABILITY_ZERO_NO_PROMOTION",
+        )
+        self.assertFalse(diagnostic["formal_reference_mode_gate"])
+        self.assertEqual(
+            diagnostic["corrected_methodological_conclusion"][
+                "resident_S12_S121_F1_liability_zero_hypothesis"
+            ],
+            "REJECTED",
+        )
+        self.assertEqual(
+            diagnostic["disposition"]["readiness_count_change"],
+            0,
+        )
+        self.assertEqual(
+            review["proposal_status"],
+            "REJECTED_BY_PUBLISHED_QSA_SDR_LIABILITY_DIAGNOSTIC",
+        )
+        self.assertEqual(
+            review["next_action"]["status"],
+            "NO_FURTHER_INTERNAL_F1_ADAPTATION",
+        )
+
+
+
 if __name__ == "__main__":
     unittest.main()
