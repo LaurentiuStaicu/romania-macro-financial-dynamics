@@ -1,0 +1,86 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "sovereign_yield_spread_response",
+  "purpose": "Prevent RMD from treating a local-currency long-term yield differential as a pure sovereign credit spread, and freeze the observable source boundary before any fiscal-yield estimation.",
+  "verdict": "YIELD_SOURCE_AVAILABLE_PURE_SPREAD_NOT_IDENTIFIED_CALIBRATION_NOT_OPENED",
+  "observed_yield_source": {
+    "institution": "European Central Bank / ESCB",
+    "dataset": "IRS — Long-term interest rate statistics",
+    "romania_series_key": "IRS.M.RO.L.L40.CI.0000.RON.N.Z",
+    "concept": "Long-term interest rate for convergence purposes, Romanian leu, Romania, 10-year maturity, monthly average",
+    "unit": "percent",
+    "frequency": "monthly",
+    "coverage": "Apr 2005 onward",
+    "source_url": "https://data.ecb.europa.eu/data/datasets/IRS/IRS.M.RO.L.L40.CI.0000.RON.N.Z"
+  },
+  "benchmark_sources": {
+    "germany_10y": {
+      "series_key": "IRS.M.DE.L.L40.CI.0000.EUR.N.Z",
+      "concept": "German long-term convergence interest rate, euro, 10-year maturity, monthly average",
+      "use": "candidate common long-rate benchmark/control, not proof of a same-currency Romanian credit spread"
+    },
+    "euro_area_10y": {
+      "series_key": "IRS.M.U2.L.L40.CI.0000.EUR.N.Z",
+      "concept": "Euro-area long-term convergence interest rate, euro, 10-year maturity, monthly average",
+      "use": "alternative common euro long-rate benchmark/control; benchmark choice must be frozen before model evaluation"
+    },
+    "financial_stress": {
+      "dataset": "ECB CISS",
+      "new_ciss_series_key": "CISS.D.U2.Z0Z.4F.EC.SS_CIN.IDX",
+      "sovciss_series_key": "CISS.M.U2.Z0Z.4F.EC.SOV_EW.IDX",
+      "use": "external/global-euro financial-stress control candidate; frequency aggregation and vintage must be frozen before estimation"
+    }
+  },
+  "semantic_boundary": {
+    "observed_target_name": "Romania long-term RON sovereign yield",
+    "pure_sovereign_credit_spread_observed": false,
+    "prohibited_label": "Do not label Romania RON 10y minus Germany/euro-area EUR 10y as a pure sovereign credit spread.",
+    "reason": "The cross-currency yield differential combines sovereign risk with currency, monetary-policy and inflation-expectation components.",
+    "loop_mapping": "The Dynamic Core loop uses sovereign_yield, so a validated yield-response equation could support that node without claiming decomposition of the yield into a pure credit spread."
+  },
+  "fiscal_source_boundary": {
+    "debt": "Use the already retained official government_debt_stock reference mode / Eurostat Maastricht-debt source when constructing debt-to-GDP controls.",
+    "deficit": "Require an exact official ESA government net-lending/borrowing or deficit-to-GDP source and retained vintage before opening estimation.",
+    "frequency_rule": "Do not forward-fill low-frequency fiscal ratios into monthly observations and then treat the repeated months as independent fiscal information. A mixed-frequency rule or lower-frequency estimation boundary must be preregistered.",
+    "no_issuance_proxy": "Gross issuance or refinancing need may not be inserted as 'supply pressure' without a separately specified and validated source/stock-flow mapping."
+  },
+  "candidate_reformulation": {
+    "current_registry_label": "sovereign_yield_spread_response",
+    "preferred_future_target": "sovereign_yield_response",
+    "provisional_equation_family": "RON_long_yield = f(common_long_rate, fiscal_state, external_financial_stress, macro/monetary_state)",
+    "status": "SOURCE_BOUNDARY_ONLY_FORM_NOT_SELECTED",
+    "rationale": "A yield-level equation is aligned with the feedback-registry sovereign_yield node. A pure spread equation would require a definitionally matched same-currency benchmark or an explicit decomposition not currently observed.",
+    "causal_claim_allowed": false
+  },
+  "source_materialisation_gate": {
+    "calibration_cycle_open": false,
+    "required_before_estimation": [
+      "Retain exact ECB Romania 10-year convergence-yield series with raw-source hash and vintage.",
+      "Retain the ex-ante selected common long-rate benchmark series with raw-source hash and vintage.",
+      "Retain the ex-ante selected ECB financial-stress control and a preregistered aggregation rule if daily data are used.",
+      "Retain exact fiscal debt and deficit controls with frequency/vintage semantics and GDP denominator source.",
+      "Freeze the estimation frequency and mixed-frequency treatment before inspecting predictive results.",
+      "Freeze structural-selection window, benchmark baselines and untouched evaluation window before estimation."
+    ],
+    "prohibited_shortcuts": [
+      "Call a cross-currency RON-minus-EUR yield differential a pure sovereign credit spread.",
+      "Treat debt or deficit coefficients as causal without stronger identification.",
+      "Forward-fill annual or quarterly fiscal ratios to monthly frequency and count repeated months as independent fiscal observations.",
+      "Choose Germany versus euro-area benchmark after viewing fit.",
+      "Choose CISS versus SovCISS after viewing fit.",
+      "Insert issuance/refinancing need as yield supply pressure without a separate source and structural contract.",
+      "Activate the government issuance-yield feedback loop from in-sample fit."
+    ],
+    "pass_effect": "Authorises a separately preregistered predictive yield-response selection/validation cycle only; no causal or System Dynamics activation follows automatically.",
+    "fail_effect": "Retain the mechanism as CANDIDATE and keep the government issuance-yield loop quantitatively inactive."
+  },
+  "disposition": {
+    "mechanism_classification": "CANDIDATE",
+    "central_feedback": false,
+    "active_calibration_cycle_open": false,
+    "validated_reference_behavioural_mechanisms_change": 0,
+    "behavioural_closure": "UNCHANGED_INACTIVE",
+    "accounting_spine": "UNCHANGED"
+  }
+}

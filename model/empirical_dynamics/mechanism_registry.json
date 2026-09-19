@@ -251,7 +251,7 @@
         "beta_f",
         "beta_x"
       ],
-      "estimation_plan": "Estimate only with an external/global-risk control and time-respecting validation; consider regime/break terms. Do not interpret coefficients causally without stronger identification.",
+      "estimation_plan": "Calibration remains closed. Treat the directly observed ECB Romania 10-year RON series as a sovereign-yield target, not a pure credit spread. Before estimation, freeze and retain a common long-rate benchmark, financial-stress control, exact fiscal debt/deficit inputs, estimation frequency and mixed-frequency rule. A future candidate should be framed as a yield-response equation unless a definitionally matched same-currency spread is independently recovered. Predictive success alone does not establish causal fiscal effects or activate the government issuance-yield loop.",
       "observables": [
         "Romania_sovereign_yield_or_spread",
         "debt_to_gdp",
@@ -265,13 +265,16 @@
       "limits": [
         "fiscal variables are endogenous to growth and rates",
         "global risk and ratings/news can dominate",
-        "low-frequency fiscal data constrain identification"
+        "low-frequency fiscal data constrain identification",
+        "a RON-versus-EUR long-rate differential is not a pure sovereign credit spread",
+        "low-frequency fiscal controls require a preregistered mixed-frequency or lower-frequency treatment"
       ],
       "rejection_or_degradation_criteria": [
         "fiscal coefficients are not practically identifiable",
         "simple global-risk/persistence baseline performs as well or better out of sample",
         "parameter signs flip across regimes"
-      ]
+      ],
+      "source_boundary_review": "model/calibration_validation/sovereign_yield_source_boundary_review.json"
     },
     {
       "id": "exchange_rate_pass_through_to_inflation",
