@@ -205,11 +205,23 @@ class AggregateBankCreditSourceBoundaryTests(unittest.TestCase):
         )
         self.assertEqual(
             screen["source_enumeration_status"],
-            "INCOMPLETE_SOURCE_ENUMERATION_NO_MODEL_EFFECT",
+            "FROZEN_INCOMPLETE_3_OF_11_CURRENT_PUBLIC_DISCOVERY_EXHAUSTED_NO_MODEL_EFFECT",
         )
         self.assertEqual(
             screen["exact_primary_years_identified"],
             [2019, 2022, 2024],
+        )
+        self.assertEqual(
+            screen["interactive_database_discovery_status"],
+            "OFFICIAL_DATABASE_CONFIRMED_TARGET_SERIES_NOT_IDENTIFIED_STAGE_FROZEN",
+        )
+        self.assertEqual(
+            screen["discovery_stage_status"],
+            "STAGE_CLOSED_FROZEN_INCOMPLETE_UNDER_CURRENT_PUBLIC_DISCOVERY_SURFACE_NO_MODEL_EFFECT",
+        )
+        self.assertEqual(
+            review["bnr_prudential_source_discovery_terminal_assessment"],
+            "model/calibration_validation/bnr_prudential_source_discovery_terminal_assessment.json",
         )
 
     def test_no_system_dynamics_activation_follows_from_source_feasibility(self) -> None:
