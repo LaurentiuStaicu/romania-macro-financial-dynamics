@@ -98,11 +98,11 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         household = mechanisms["household_consumption_response"]
         self.assertEqual(
             household["source_readiness"],
-            "BNR_DSTI_WORKBOOK_VINTAGE_RETAINED_LEGACY_XLS_EXTRACTION_NOT_CANONICAL",
+            "LEGACY_XLS_EXTRACTION_RETAINED_BLS_DSTI_TERM_CHANGE_NOT_DSTI_LEVEL",
         )
         self.assertEqual(
             household["priority_group"],
-            "DEFER_UNTIL_DETERMINISTIC_LEGACY_XLS_EXTRACTION_PATH",
+            "DEFER_UNTIL_MACHINE_READABLE_DSTI_LEVEL_HISTORY",
         )
         self.assertEqual(
             household["debt_service_source_screening"],
