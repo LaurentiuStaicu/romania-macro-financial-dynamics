@@ -1,0 +1,137 @@
+{
+  "contract_version": "0.1",
+  "phase": "Reference Mode Recovery — Aggregate Sectoral Financial Positions",
+  "purpose": "Test whether ECB QSA supplies a complete quarterly behaviour-over-time reference mode for RMD sector-level financial positions and transactions on the exact represented F2-F8 boundary, while preserving the separate incomplete bilateral Accounting Spine.",
+  "boundary_review": "model/dynamics/sectoral_financial_positions_boundary_review.json",
+  "source": {
+    "institution": "European Central Bank / ESCB",
+    "dataset": "QSA — Quarterly Sector Accounts",
+    "api": "ECB Data Portal SDMX 2.1 REST API",
+    "frequency": "Q",
+    "adjustment": "N",
+    "reference_area": "RO",
+    "counterparty_sector_for_resident_aggregates": "S1",
+    "valuation": "V",
+    "unit": "XDC",
+    "unit_multiplier": 6,
+    "represented_total_formula": "F minus F1",
+    "measures": {
+      "stock": {
+        "sto": "LE",
+        "meaning": "Closing financial balance-sheet position"
+      },
+      "flow": {
+        "sto": "F",
+        "meaning": "Financial transactions"
+      }
+    },
+    "resident_sector_mapping": {
+      "H": [
+        [
+          "S1M",
+          1
+        ]
+      ],
+      "C": [
+        [
+          "S11",
+          1
+        ]
+      ],
+      "F": [
+        [
+          "S12",
+          1
+        ],
+        [
+          "S121",
+          -1
+        ]
+      ],
+      "G": [
+        [
+          "S13",
+          1
+        ]
+      ],
+      "BNR": [
+        [
+          "S121",
+          1
+        ]
+      ]
+    },
+    "rest_of_world": {
+      "area": "W1",
+      "reference_sector": "S1",
+      "counterpart_sector": "S1",
+      "orientation": "X assets = resident external liabilities; X liabilities = resident external assets"
+    },
+    "requested_start": "2014-Q1",
+    "requested_end": "2026-Q2"
+  },
+  "reference_mode": {
+    "id": "sectoral_financial_positions",
+    "preferred_time_resolution": "quarterly",
+    "required_benchmark_periods": [
+      "2025-Q1",
+      "2025-Q2",
+      "2025-Q3",
+      "2025-Q4"
+    ],
+    "minimum_common_observation_count": 40,
+    "required_sectors": [
+      "H",
+      "C",
+      "F",
+      "G",
+      "X",
+      "BNR"
+    ],
+    "required_outputs": [
+      "assets",
+      "liabilities",
+      "net_position"
+    ],
+    "required_measures": [
+      "stock",
+      "flow"
+    ]
+  },
+  "exact_series_key_rule": {
+    "resident": "Q.N.RO.W0.{sector_code}.S1.N.{A_or_L}.{LE_or_F}.{F_or_F1}._Z._Z.XDC._T.S.V.N._T",
+    "external": "Q.N.RO.W1.S1.S1.N.{A_or_L}.{LE_or_F}.{F_or_F1}._Z._Z.XDC._T.S.V.N._T",
+    "source_key_prefix_excluded_from_key": "QSA"
+  },
+  "construction": {
+    "resident_component": "For each sector-code term, represented assets/liabilities = QSA(F) - QSA(F1), same period/entry/measure.",
+    "composite_F": "Apply S12 - S121 after constructing boundary-matched values from same-period observations.",
+    "X": "Construct resident W1 represented assets/liabilities as F-F1; then set X assets = W1 resident liabilities and X liabilities = W1 resident assets.",
+    "net_position": "assets - liabilities",
+    "stock_flow_semantics": "Stock and flow are separately published QSA concepts. Flow may not be constructed as a first difference of stock."
+  },
+  "consistency_gates": {
+    "all_required_2025_quarters_present": true,
+    "minimum_common_history_required": true,
+    "same_unit_and_frequency_required": true,
+    "non_finite_values_forbidden": true,
+    "duplicate_periods_forbidden": true,
+    "resident_F_composite_exact_same_period": true,
+    "X_orientation_must_be_explicit": true,
+    "represented_system_net_position_reconciliation": "For each common stock period, sum H+C+F+G+BNR+X represented net positions must be within 0.1 million RON of zero.",
+    "represented_system_net_transaction_reconciliation": "For each common flow period, sum H+C+F+G+BNR+X represented net transactions must be within 0.1 million RON of zero."
+  },
+  "hard_rules": {
+    "no_bilateral_allocation": true,
+    "no_accounting_benchmark_mutation": true,
+    "no_accounting_readiness_promotion": true,
+    "no_missing_to_zero": true,
+    "no_interpolation": true,
+    "no_stock_difference_flow_proxy": true,
+    "no_BF90_total_substitution_without_F1_exclusion": true,
+    "no_behavioural_activation": true,
+    "network_errors_block_positive_claim": true
+  },
+  "promotion_rule": "Promote sectoral_financial_positions to OBSERVED_SERIES_AVAILABLE only after a successful immutable live-source artifact is retained, every required sector has finite quarterly stock and transaction outputs on the exact F-minus-F1 boundary for at least the minimum common history and all 2025 quarters, both represented-system reconciliation gates pass in every common period within 0.1 million RON, and a repository snapshot/assessment records artifact identity and hashes. Promotion changes only aggregate reference-mode observability; Accounting Spine readiness, bilateral materialization and behavioural closure remain unchanged.",
+  "negative_result_rule": "If any required source component, sector, benchmark period, F composite, X orientation or system reconciliation fails, the existing PARTIAL_SERIES_AVAILABLE status remains. No broader BF90 measure, bilateral allocation, missing-to-zero rule or synthetic residual may rescue the gate."
+}
