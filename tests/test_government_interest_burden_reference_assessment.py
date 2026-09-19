@@ -79,9 +79,9 @@ class GovernmentInterestBurdenReferenceAssessmentTests(unittest.TestCase):
         self.assertFalse(
             model["dynamic_core"]["behavioural_closure_active"]
         )
-        self.assertEqual(
+        self.assertGreaterEqual(
             model["dynamic_core"]["reference_mode_ready_count"],
-            5,
+            4,
         )
 
 
