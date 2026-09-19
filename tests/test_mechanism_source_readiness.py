@@ -152,7 +152,7 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         )
         self.assertEqual(
             aggregate_credit["bnr_prudential_source_enumeration_status"],
-            "INCOMPLETE_SOURCE_ENUMERATION_NO_MODEL_EFFECT",
+            "FROZEN_INCOMPLETE_3_OF_11_CURRENT_PUBLIC_DISCOVERY_EXHAUSTED_NO_MODEL_EFFECT",
         )
         self.assertEqual(
             aggregate_credit["bnr_prudential_exact_primary_years_identified"],
@@ -165,6 +165,18 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         self.assertEqual(
             aggregate_credit["bnr_prudential_required_year_count"],
             11,
+        )
+        self.assertEqual(
+            aggregate_credit["bnr_prudential_interactive_database_discovery_status"],
+            "OFFICIAL_DATABASE_CONFIRMED_TARGET_SERIES_NOT_IDENTIFIED_STAGE_FROZEN",
+        )
+        self.assertEqual(
+            aggregate_credit["bnr_prudential_source_discovery_stage_status"],
+            "STAGE_CLOSED_FROZEN_INCOMPLETE_UNDER_CURRENT_PUBLIC_DISCOVERY_SURFACE_NO_MODEL_EFFECT",
+        )
+        self.assertEqual(
+            aggregate_credit["bnr_prudential_source_discovery_terminal_assessment"],
+            "model/calibration_validation/bnr_prudential_source_discovery_terminal_assessment.json",
         )
         self.assertFalse(aggregate_credit["estimation_or_refit_allowed"])
 
