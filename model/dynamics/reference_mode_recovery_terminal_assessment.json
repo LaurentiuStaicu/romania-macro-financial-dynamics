@@ -1,0 +1,103 @@
+{
+  "assessment_version": "0.1",
+  "assessed_on": "2026-09-19",
+  "stage": "Reference-Mode Recovery",
+  "status": "STAGE_COMPLETE_FROZEN_9_OF_10_UNDER_CURRENT_PUBLIC_EVIDENCE_BOUNDARY",
+  "purpose": "Formally close the current reference-mode recovery substage once every required mode is either retained as an observed series or has a fully characterized blocker, exhausted admissible current-public-source paths, explicit non-reopen conditions and a declared evidence trigger for future reopening. Stage completion is not model completion and does not relax integrated-closure requirements.",
+  "canonical_registry": "model/dynamics/reference_modes.json",
+  "required_reference_modes": 10,
+  "ready_reference_modes": 9,
+  "ready_status": "OBSERVED_SERIES_AVAILABLE",
+  "blocker_count": 1,
+  "blocker": {
+    "id": "sectoral_financial_positions",
+    "status": "PARTIAL_SERIES_AVAILABLE",
+    "required_frequency": "quarterly",
+    "required_boundary": "sectoral financial stocks and financial transactions on the RMD sector/instrument boundary",
+    "original_holder_by_issuer_boundary_blocked_by_accounting_readiness": true,
+    "aggregate_recovery_path_result": "FAILED_FROZEN_NO_PROMOTION",
+    "internal_qsa_recovery_state": "FROZEN_UNTIL_REOPEN_TRIGGER",
+    "external_counterpart_recovery_state": "EXHAUSTED_NO_SEMANTICALLY_AND_FREQUENCY_COMPLETE_CURRENT_PUBLIC_SOURCE"
+  },
+  "completed_source_paths": [
+    {
+      "id": "ECB_QSA_INTERNAL_RECOVERY",
+      "result": "EXHAUSTED_AT_FROZEN_SOURCE_AND_RECONCILIATION_BOUNDARY",
+      "evidence": [
+        "model/dynamics/sectoral_financial_positions_strict_gate_assessment.json",
+        "model/dynamics/sectoral_financial_positions_aggregate_identity_assessment.json",
+        "model/dynamics/sectoral_financial_positions_rounding_consistency_assessment.json",
+        "model/dynamics/sectoral_financial_positions_source_discrepancy_assessment.json",
+        "model/dynamics/sectoral_financial_positions_s1n_boundary_diagnostic_assessment.json"
+      ]
+    },
+    {
+      "id": "EUROSTAT_COUNTERPART",
+      "result": "DISCOVERY_PASS_SEMANTIC_FAIL_INSTRUMENT_SCOPE",
+      "evidence": [
+        "model/dynamics/sectoral_financial_positions_eurostat_counterpart_discovery_assessment.json"
+      ]
+    },
+    {
+      "id": "OECD_COUNTERPART",
+      "result": "DISCOVERY_PASS_SEMANTIC_FAIL_SECTOR_SCOPE_S121",
+      "evidence": [
+        "model/dynamics/sectoral_financial_positions_oecd_counterpart_discovery_assessment.json"
+      ]
+    },
+    {
+      "id": "BNR_NATIONAL_FINANCIAL_ACCOUNTS",
+      "result": "ANNUAL_COUNTERPART_STOCK_SEMANTICS_PASS_QUARTERLY_STOCK_TRANSACTION_HISTORY_FAIL",
+      "evidence": [
+        "model/dynamics/sectoral_financial_positions_bnr_cnf_source_screening.json"
+      ]
+    }
+  ],
+  "bnr_final_screening_evidence": {
+    "official_2024_cnf_url": "https://www.bnr.ro/uploads/2024-cnf_documentpdf_545_1766149176.pdf",
+    "official_2024_annual_report_url": "https://www.bnr.ro/uploads/2025-06-23raportanual2024_documentpdf_545_1750660828.pdf",
+    "findings": [
+      "BNR 2024 CNF explicitly publishes a non-consolidated 2024 stock matrix by counterpart sector with S121 and AF2-AF8.",
+      "The same CNF report states that ESA 2010 series for 1995-2024 are available on the BNR website.",
+      "BNR Annual Report 2024 states that the Statistics Directorate periodically transmits quarterly financial-account series under the ECB strategy and annual financial accounts to Eurostat, and prepared the 2025 benchmark revision.",
+      "The screened BNR annual counterpart matrix does not supply the frozen quarterly stock plus financial-transaction history with at least 40 common quarters."
+    ]
+  },
+  "stage_completion_rule": {
+    "every_required_reference_mode_accounted_for": true,
+    "every_unready_mode_has_explicit_blocker": true,
+    "every_active_current_public_source_path_for_the_blocker_screened": true,
+    "same_source_repetition_disallowed": true,
+    "post_result_boundary_relaxation_disallowed": true,
+    "readiness_may_remain_below_10_at_terminal_public_evidence_boundary": true,
+    "rationale": "Scientific completion of a recovery stage means the evidence boundary and reopen conditions are explicit and reproducible; it does not require manufacturing a missing observed series."
+  },
+  "reopen_triggers": [
+    "A changed ECB QSA dataset/source topology demonstrably adds the missing sector/instrument/transaction coverage after the retained 2026-09-19 audit.",
+    "A new official BNR machine-readable quarterly counterpart dataset supplies S121 and complete F2-F8 stocks and financial transactions on the frozen RMD boundary.",
+    "Eurostat counterpart dissemination expands to the complete F2-F8 quarterly stock/transaction instrument scope while preserving the required sectors including S121.",
+    "OECD counterpart dissemination adds Romania S121/central-bank sector detail while retaining complete F2-F8 quarterly stocks and financial transactions.",
+    "Another official source passes the frozen semantic-lineage contract and a separately preregistered historical-extraction contract."
+  ],
+  "non_reopen_conditions": [
+    "Repeating unchanged ECB QSA, Eurostat or OECD probes.",
+    "Treating the BNR annual 2024 counterpart stock matrix as quarterly history.",
+    "Interpolating annual counterpart stocks to quarters.",
+    "Constructing transactions as stock differences.",
+    "Dropping BNR/S121 or any required instrument after observing source coverage.",
+    "Relaxing the minimum common-history requirement after observing available data.",
+    "Using synthetic residual allocation, missing-to-zero rules or reconciliation fit to choose mappings."
+  ],
+  "disposition": {
+    "reference_mode_recovery_substage_complete": true,
+    "reference_mode_readiness": "9/10",
+    "integrated_reference_mode_closure_ready": false,
+    "sectoral_financial_positions_promoted": false,
+    "accounting_readiness_change": false,
+    "active_calibration_cycle_open": false,
+    "validated_reference_behavioural_mechanisms_change": 0,
+    "system_dynamics_activation": false,
+    "behavioural_closure_change": false,
+    "next_operational_state": "EVIDENCE_TRIGGERED_BASELINE_HOLD"
+  }
+}
