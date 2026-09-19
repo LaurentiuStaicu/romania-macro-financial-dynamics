@@ -100,6 +100,95 @@ def declared_polarity_base(value: str) -> str | None:
     return None
 
 
+def reference_mode_readiness(
+    references: dict,
+    required_modes: set[str],
+) -> dict[str, object]:
+    modes = references.get("modes", [])
+    mode_ids = [str(mode["id"]) for mode in modes]
+    if len(mode_ids) != len(set(mode_ids)):
+        raise RuntimeError("Reference-mode registry contains duplicate IDs")
+
+    vocabulary = set(references.get("status_vocabulary", []))
+    by_id = {str(mode["id"]): mode for mode in modes}
+    missing = required_modes - set(by_id)
+    if missing:
+        raise RuntimeError(
+            f"Reference-mode registry missing: {sorted(missing)}"
+        )
+
+    policy = references.get("closure_readiness_policy", {})
+    ready_statuses = set(
+        policy.get(
+            "ready_statuses_for_integrated_quantitative_closure",
+            [],
+        )
+    )
+    if not ready_statuses:
+        raise RuntimeError("Reference-mode closure readiness has no ready statuses")
+    if not ready_statuses <= vocabulary:
+        raise RuntimeError(
+            "Reference-mode ready statuses are outside the declared vocabulary"
+        )
+
+    required_exception_fields = set(
+        policy.get("qualitative_exception_required_fields", [])
+    )
+    exceptions = policy.get("current_qualitative_exceptions", [])
+    exception_ids: set[str] = set()
+    for item in exceptions:
+        if not isinstance(item, dict):
+            raise RuntimeError(
+                "Reference-mode qualitative exceptions must be structured objects"
+            )
+        missing_fields = required_exception_fields - set(item)
+        if missing_fields:
+            raise RuntimeError(
+                "Reference-mode qualitative exception missing fields: "
+                f"{sorted(missing_fields)}"
+            )
+        exception_id = str(item["id"])
+        if exception_id not in required_modes:
+            raise RuntimeError(
+                f"Qualitative exception targets non-required mode {exception_id}"
+            )
+        if exception_id in exception_ids:
+            raise RuntimeError(
+                f"Duplicate qualitative reference-mode exception: {exception_id}"
+            )
+        if not str(item["validation_basis"]).strip() or not str(
+            item["justification"]
+        ).strip():
+            raise RuntimeError(
+                f"Qualitative exception {exception_id} lacks substantive basis"
+            )
+        exception_ids.add(exception_id)
+
+    ready: list[str] = []
+    blockers: list[str] = []
+    statuses: dict[str, str] = {}
+    for mode_id in sorted(required_modes):
+        status = str(by_id[mode_id]["status"])
+        if status not in vocabulary:
+            raise RuntimeError(
+                f"Reference mode {mode_id} has unsupported status {status}"
+            )
+        statuses[mode_id] = status
+        if status in ready_statuses or mode_id in exception_ids:
+            ready.append(mode_id)
+        else:
+            blockers.append(mode_id)
+
+    return {
+        "status": "READY" if not blockers else "BLOCKED",
+        "ready_modes": ready,
+        "blocking_modes": blockers,
+        "mode_statuses": statuses,
+        "ready_statuses": sorted(ready_statuses),
+        "qualitative_exception_ids": sorted(exception_ids),
+    }
+
+
 def main() -> None:
     model = load("model/registries/model_contract.json")
     core = load("model/dynamics/core_contract.json")
@@ -296,6 +385,60 @@ def main() -> None:
         "Reference-mode registry lacks a closure rule",
     )
 
+    reference_readiness = reference_mode_readiness(
+        references,
+        REQUIRED_REFERENCE_MODES,
+    )
+    reference_gate = gate["reference_mode_gate"]
+    check(
+        set(reference_gate["required_variables"]) == REQUIRED_REFERENCE_MODES,
+        "Conformity-gate required reference modes differ from the canonical set",
+    )
+    check(
+        set(
+            reference_gate[
+                "ready_statuses_for_integrated_quantitative_closure"
+            ]
+        )
+        == set(reference_readiness["ready_statuses"]),
+        "Conformity-gate ready statuses differ from reference-mode policy",
+    )
+    check(
+        set(reference_gate["qualitative_exceptions_registered"])
+        == set(reference_readiness["qualitative_exception_ids"]),
+        "Conformity-gate qualitative exceptions differ from registry policy",
+    )
+    check(
+        reference_gate["current_closure_readiness"]
+        == reference_readiness["status"],
+        "Declared reference-mode closure readiness disagrees with the registry",
+    )
+    check(
+        set(reference_gate["current_ready_variables"])
+        == set(reference_readiness["ready_modes"]),
+        "Declared ready reference modes disagree with the registry",
+    )
+    check(
+        set(reference_gate["current_blocking_variables"])
+        == set(reference_readiness["blocking_modes"]),
+        "Declared blocking reference modes disagree with the registry",
+    )
+    check(
+        model["dynamic_core"]["reference_mode_closure_ready"]
+        is (reference_readiness["status"] == "READY"),
+        "Model contract reference-mode readiness disagrees with the registry",
+    )
+    check(
+        model["dynamic_core"]["reference_mode_ready_count"]
+        == len(reference_readiness["ready_modes"]),
+        "Model contract reference-mode ready count is stale",
+    )
+    check(
+        model["dynamic_core"]["reference_mode_required_count"]
+        == len(REQUIRED_REFERENCE_MODES),
+        "Model contract reference-mode required count is stale",
+    )
+
     check(
         gate["behavioural_closure"][
             "must_not_be_activated_for_methodological_completeness"
@@ -304,7 +447,7 @@ def main() -> None:
         "Conformity gate must prohibit closure for cosmetic methodological completeness",
     )
     check(
-        gate["reference_mode_gate"]["required_before_behavioural_closure"] is True,
+        reference_gate["required_before_behavioural_closure"] is True,
         "Reference modes must be required before behavioural closure",
     )
     check(
@@ -326,6 +469,9 @@ def main() -> None:
         "closed_candidate_feedback_loops": closed_loop_ids,
         "open_candidate_feedback_chains": open_chain_ids,
         "reference_modes_registered": sorted(mode_ids),
+        "reference_mode_closure_readiness": reference_readiness["status"],
+        "reference_mode_ready_variables": reference_readiness["ready_modes"],
+        "reference_mode_blocking_variables": reference_readiness["blocking_modes"],
     }
     print(json.dumps(report, indent=2))
 
