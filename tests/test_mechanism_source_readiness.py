@@ -75,7 +75,7 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         aggregate_credit = mechanisms["aggregate_bank_credit_response"]
         self.assertEqual(
             aggregate_credit["source_readiness"],
-            "BLS_MULTI_ROUND_SEMANTIC_MAPPING_AVAILABLE_WITH_EXPLICIT_COVERAGE_GAPS",
+            "BLS_CANONICAL_8_OF_12_PLUS_OFFICIAL_PUBLICATION_TEXT_BRIDGE_EXACT_WORKBOOK_GAPS_REMAIN",
         )
         self.assertEqual(aggregate_credit["observed_round_count"], 8)
         self.assertEqual(
@@ -85,6 +85,26 @@ class MechanismSourceReadinessTests(unittest.TestCase):
         self.assertEqual(
             aggregate_credit["cross_round_mapping_audit"],
             "model/calibration_validation/bnr_bls_cross_round_mapping_audit.json",
+        )
+        self.assertEqual(
+            aggregate_credit["publication_text_bridge"],
+            "model/calibration_validation/bnr_bls_publication_text_bridge.json",
+        )
+        self.assertEqual(
+            aggregate_credit["publication_text_fully_covered_rounds"],
+            ["2023-Q3", "2024-Q2", "2025-Q2"],
+        )
+        self.assertEqual(
+            aggregate_credit["publication_text_partial_rounds"],
+            ["2023-Q2"],
+        )
+        self.assertEqual(
+            aggregate_credit["publication_text_direct_or_exact_status_quo_observations"],
+            20,
+        )
+        self.assertEqual(
+            aggregate_credit["canonical_missing_rounds"],
+            ["2023-Q2", "2023-Q3", "2024-Q2", "2025-Q2"],
         )
         self.assertFalse(aggregate_credit["estimation_or_refit_allowed"])
 
