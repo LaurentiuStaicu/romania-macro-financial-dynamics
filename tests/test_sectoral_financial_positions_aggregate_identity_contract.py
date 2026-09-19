@@ -47,15 +47,15 @@ class SectoralFinancialPositionsAggregateIdentityContractTests(unittest.TestCase
         applicability = self.contract["methodological_basis"][
             "structural_applicability"
         ]
-        self.assertEqual(applicability["H"]["F1_rule"], "STRUCTURAL_NOT_APPLICABLE")
-        self.assertEqual(applicability["C"]["F1_rule"], "STRUCTURAL_NOT_APPLICABLE")
+        self.assertEqual(applicability["H"]["F1_rule"], "STRUCTURAL_NOT_APPLICABLE_BOTH_SIDES")
+        self.assertEqual(applicability["C"]["F1_rule"], "STRUCTURAL_NOT_APPLICABLE_BOTH_SIDES")
         self.assertEqual(
             applicability["F"]["F1_rule"],
-            "SOURCE_REQUIRED_FOR_BOTH_S12_AND_S121",
+            "ASSET_SOURCE_REQUIRED_FOR_S12_AND_S121; LIABILITY_STRUCTURAL_ZERO",
         )
-        self.assertEqual(applicability["G"]["F1_rule"], "SOURCE_REQUIRED")
-        self.assertEqual(applicability["BNR"]["F1_rule"], "SOURCE_REQUIRED")
-        self.assertEqual(applicability["X"]["F1_rule"], "SOURCE_REQUIRED")
+        self.assertEqual(applicability["G"]["F1_rule"], "ASSET_SOURCE_REQUIRED; LIABILITY_STRUCTURAL_ZERO")
+        self.assertEqual(applicability["BNR"]["F1_rule"], "ASSET_SOURCE_REQUIRED; LIABILITY_STRUCTURAL_ZERO")
+        self.assertEqual(applicability["X"]["F1_rule"], "ASSET_AND_LIABILITY_SOURCE_REQUIRED")
         self.assertTrue(
             self.contract["hard_rules"][
                 "no_structural_zero_beyond_preregistered_H_and_C_F1_rule"
@@ -84,9 +84,16 @@ class SectoralFinancialPositionsAggregateIdentityContractTests(unittest.TestCase
         self.assertEqual(gates["system_stock_residual_max_abs_million_RON"], 0.1)
         self.assertEqual(gates["system_flow_residual_max_abs_million_RON"], 0.1)
         self.assertEqual(
-            gates["H_C_F1_if_published_must_be_zero_within_million_RON"],
-            0.1,
+            set(gates["mandatory_F1_for"]),
+            {
+                "S12 assets",
+                "S121 assets",
+                "S13 assets",
+                "W1 total-economy assets",
+                "W1 total-economy liabilities",
+            },
         )
+        self.assertIn("H_F1_assets_and_liabilities", gates["structural_zero_scope"])
 
 
 if __name__ == "__main__":
