@@ -130,6 +130,22 @@ class AggregateBankCreditSourceBoundaryTests(unittest.TestCase):
             sources["npl_annual_broad_boundary"]["series_key"],
             "CBD2.A.RO.W0.67._Z._Z.A.F.I3632._Z._Z._Z._Z._Z._Z.PC",
         )
+        self.assertEqual(
+            sources["npl_quarterly_domestic_banks"]["series_key"],
+            "CBD2.Q.RO.W0.11._Z._Z.A.F.I3632._Z._Z._Z._Z._Z._Z.PC",
+        )
+        self.assertEqual(
+            sources["cbd2_quarterly_npl_family"]["status"],
+            "EXACT_ROMANIA_QUARTERLY_SERIES_CONFIRMED",
+        )
+        self.assertEqual(
+            sources["solvency_ratio_candidate"]["item_code"],
+            "I4001",
+        )
+        self.assertEqual(
+            sources["solvency_ratio_candidate"]["status"],
+            "ITEM_SEMANTICS_CONFIRMED_ROMANIA_EXACT_QUARTERLY_TUPLE_NOT_YET_CONFIRMED",
+        )
         self.assertIn(
             "Annual frequency",
             sources["npl_annual_broad_boundary"]["semantic_limit"],

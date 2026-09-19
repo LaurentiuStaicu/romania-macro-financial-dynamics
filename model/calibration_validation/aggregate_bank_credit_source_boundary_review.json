@@ -163,15 +163,36 @@
         "semantic_limit": "Annual frequency and the 67-sector population do not match the desired quarterly BNR system-state control; no interpolation or repeated-quarter use is permitted."
       },
       "cbd2_quarterly_npl_family": {
-        "status": "FAMILY_CONFIRMED_EXACT_ROMANIA_SERIES_TUPLE_NOT_YET_RETAINED",
-        "evidence": "ECB CBD2 publishes quarterly I3632 NPL-ratio series for domestic banks and country breakdowns. A Romania-specific exact tuple must be retrieved and its population reconciled to the BNR control before use."
+        "status": "EXACT_ROMANIA_QUARTERLY_SERIES_CONFIRMED",
+        "exact_series_key": "CBD2.Q.RO.W0.11._Z._Z.A.F.I3632._Z._Z._Z._Z._Z._Z.PC",
+        "evidence": "ECB Data Portal explicitly lists Romania among quarterly domestic-bank FINREP I3632 NPL-ratio series."
+      },
+      "npl_quarterly_domestic_banks": {
+        "institution": "ECB / ESCB",
+        "dataset": "CBD2 — Consolidated Banking data",
+        "series_key": "CBD2.Q.RO.W0.11._Z._Z.A.F.I3632._Z._Z._Z._Z._Z._Z.PC",
+        "concept": "Gross non-performing loans and advances as percent of total gross loans and advances, domestic banks, FINREP reporters, Romania, quarterly",
+        "coverage": "2014-Q4 onward in the indexed ECB Data Portal",
+        "confirmed_latest_example": "2025-Q3 = 3.7504 percent in the indexed ECB dataset page",
+        "role": "Candidate quarterly credit-risk/prudential state control.",
+        "semantic_limit": "Domestic banks and FINREP reporters; population/reporting-framework compatibility with BNR system-wide indicators must be documented before use."
+      },
+      "solvency_ratio_candidate": {
+        "institution": "ECB / ESCB",
+        "dataset": "CBD2 — Consolidated Banking data",
+        "item_code": "I4001",
+        "concept": "Solvency ratio [%]",
+        "status": "ITEM_SEMANTICS_CONFIRMED_ROMANIA_EXACT_QUARTERLY_TUPLE_NOT_YET_CONFIRMED",
+        "evidence": "ECB Data Portal explicitly identifies I4001 as Solvency ratio in quarterly CBD2 series for other EU countries; the exact Romania series must be observed directly before registration.",
+        "role": "Potential definitionally closer capital-state control than CET1, pending exact Romania coverage and boundary check."
       }
     },
     "decision_rules": [
       "Do not choose CET1 versus total capital ratio after observing predictive fit.",
       "Do not forward-fill an annual NPL ratio into quarterly observations.",
       "Do not mix domestic-bank-only and domestic-plus-foreign-branch populations without an explicit boundary bridge.",
-      "Any future switch from total capital ratio to CET1 requires a preregistered source/variable contract before model outcomes are inspected."
+      "Any future switch from total capital ratio to CET1 requires a preregistered source/variable contract before model outcomes are inspected.",
+      "Prefer a confirmed quarterly Romania solvency-ratio series over substituting CET1 only if its exact CBD2 tuple, coverage and population are retained before model fit."
     ],
     "calibration_effect": "NONE"
   }
