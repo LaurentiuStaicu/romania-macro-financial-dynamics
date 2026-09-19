@@ -38,10 +38,11 @@
     }
   },
   "blocker": {
-    "reason": "The current reference-mode role is refinancing pressure distinct from maturity alone. Public data provide useful aggregate financing-need, maturity and refixing indicators, but the retained evidence does not provide a definitionally stable, sufficiently long realized refinancing/repricing series on one frozen vintage/boundary, nor matched realized principal needed to distinguish refinancing from contractual refixing. Promoting the mixed forecast/execution gross-financing-need history would silently change the empirical target.",
+    "reason": "A directly observed annual Ministry refinancing series is now materialized for 2017-2023, but it contains only seven low-frequency observations and mixes final annual-report values with explicitly labelled operative-execution values. No preregistered closure criterion existed that would justify treating this short mixed-vintage series as a quantitatively ready integrated reference target after observing it. It remains scientifically useful partial evidence. The aggregate series also does not identify matched realized repricing events or the transition share m[t].",
     "current_data_are_not_zero": true,
     "current_data_are_not_absent": true,
-    "blocker_is_definition_and_vintage_consistency": true
+    "blocker_is_definition_and_vintage_consistency": false,
+    "blocker_is_short_mixed_vintage_reference_history": true
   },
   "prohibited_shortcuts": [
     "treat gross financing need as realized principal refinanced",
@@ -52,7 +53,7 @@
     "infer the government repricing parameter m[t] from aggregate financing needs"
   ],
   "reopen_condition": {
-    "primary": "Preregister one exact reference concept and revision-vintage rule, then retain a reproducible multi-period official series on a stable boundary.",
+    "primary": "Preregister a promotion criterion before adding further annual observations or revising vintages. The criterion must specify required historical length, accepted FINAL versus OPERATIVE status, revision handling and the exact Ministry refinancing concept.",
     "acceptable_paths": [
       "A dedicated gross-financing-need reference mode explicitly defined as a liquidity-pressure flow, with historical-versus-forecast status and revisions frozen by contract.",
       "A realized refinancing/repricing series with matched principal and event semantics on the Ministry portfolio boundary."
@@ -65,5 +66,16 @@
     "government_refinancing_effective_rate_mechanism": "UNCHANGED_DEFERRED",
     "behavioural_closure": "UNCHANGED_INACTIVE",
     "validated_reference_behavioural_mechanisms": 0
+  },
+  "observed_partial_series": {
+    "path": "data/processed/government_debt_refinancing_mof_2017_2023.csv",
+    "provenance": "data/provenance/government_debt_refinancing_mof_2017_2023.json",
+    "concept": "Ministry of Finance annual government-debt refinancing amount, billion RON",
+    "first_period": "2017",
+    "last_period": "2023",
+    "observation_count": 7,
+    "final_annual_report_observations": 4,
+    "operative_execution_observations": 3,
+    "forecast_observations": 0
   }
 }
