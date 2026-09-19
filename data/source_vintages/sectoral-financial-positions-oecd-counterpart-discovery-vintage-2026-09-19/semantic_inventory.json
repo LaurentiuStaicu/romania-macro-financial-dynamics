@@ -1,0 +1,118 @@
+{
+  "inventory_version": "0.1",
+  "derived_on": "2026-09-19",
+  "derivation_rule": "Distinct metadata/code-label pairs only; OBS_VALUE was not used.",
+  "common": {
+    "reporting_sectors": {
+      "S1": "Total economy",
+      "S11": "Non-financial corporations",
+      "S12": "Financial corporations",
+      "S13": "General government",
+      "S1M": "Households and non-profit institutions serving households (NPISH)"
+    },
+    "counterpart_sectors": {
+      "S1": "Total economy",
+      "S11": "Non-financial corporations",
+      "S12": "Financial corporations",
+      "S13": "General government",
+      "S1M": "Households and non-profit institutions serving households (NPISH)",
+      "S2": "Rest of the world"
+    },
+    "absent_required_sector_codes": [
+      "S121"
+    ],
+    "consolidation": {
+      "N": "Non-consolidated"
+    },
+    "accounting_entry": {
+      "A": "Assets (or net acquisition of assets)",
+      "L": "Liabilities (or net incurrence of liabilities)",
+      "N": "Net (assets minus liabilities)"
+    },
+    "instruments": {
+      "F1": "Monetary gold and Special Drawing Rights (SDRs)",
+      "F2": "Currency and deposits",
+      "F21": "Currency",
+      "F22": "Transferable deposits",
+      "F29": "Other deposits",
+      "F2M": "Deposits",
+      "F3": "Debt securities",
+      "F4": "Loans",
+      "F5": "Equity and investment fund shares/units",
+      "F51": "Equity",
+      "F511": "Listed shares",
+      "F512": "Unlisted shares",
+      "F519": "Other equity",
+      "F51M": "Unlisted shares and other equity",
+      "F52": "Investment fund shares/units",
+      "F521": "Money market fund shares/units",
+      "F522": "Non-money market funds investment fund shares/units",
+      "F6": "Insurance, pension and standardized guarantee schemes",
+      "F61": "Non-life insurance technical reserves",
+      "F62": "Life insurance and annuity entitlements",
+      "F63": "Pension entitlements",
+      "F64": "Claims of pension funds on pension managers",
+      "F65": "Entitlements to non-pension benefits",
+      "F66": "Provisions for calls under standardized guarantees",
+      "F6M": "Pension entitlements, claims of pension funds on pension managers and entitlements to non-pension benefits",
+      "F7": "Financial derivatives and employee stock options",
+      "F71": "Financial derivatives",
+      "F72": "Employee stock options",
+      "F8": "Other accounts receivable/payable",
+      "F81": "Trade credits and advances",
+      "F89": "Other accounts receivable/payable, excluding trade credits and advances"
+    },
+    "required_rmd_instrument_codes_present": [
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7",
+      "F8"
+    ],
+    "unit_measure": {
+      "XDC": "National currency"
+    },
+    "unit_multiplier": {
+      "6": "Millions"
+    },
+    "currency": {
+      "RON": "Romanian leu"
+    },
+    "currency_denom": {
+      "_T": "All currencies"
+    },
+    "valuation": {
+      "S": "Standard valuation based on SNA/ESA"
+    },
+    "price_base": {
+      "V": "Current prices"
+    },
+    "transformation": {
+      "N": "Non transformed data"
+    }
+  },
+  "stocks": {
+    "flow_ref": "OECD.SDD.NAD,DSD_NASEC20@DF_T725R_Q",
+    "transaction": {
+      "LE": "Closing balance sheet/positions/stocks"
+    },
+    "row_count": 105435,
+    "raw_csv_bytes": 86125057,
+    "raw_csv_sha256": "039d910150ece7d264284ffc8dfb713e99d255cb17bd366b66decfa214c4ae5f",
+    "structure_bytes": 3343213,
+    "structure_sha256": "d1f8acf6976d030d82bb84c3dc61595ab685807926a9c34a0dddc50e3ba18bad"
+  },
+  "flows": {
+    "flow_ref": "OECD.SDD.NAD,DSD_NASEC20@DF_T625R_Q",
+    "transaction": {
+      "F": "Transactions in financial assets and liabilities"
+    },
+    "row_count": 105435,
+    "raw_csv_bytes": 84480865,
+    "raw_csv_sha256": "7585836c1b3b181fa233fbc21243813498911215b5ac9b28e7073da17e52629a",
+    "structure_bytes": 3343196,
+    "structure_sha256": "87d7c995086d89908ee91c0ae8d0f7da46af413c2a188dc521ff1d531b16e01e"
+  }
+}

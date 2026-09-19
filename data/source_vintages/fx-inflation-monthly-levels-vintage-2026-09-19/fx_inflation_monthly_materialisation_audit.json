@@ -1,0 +1,120 @@
+{
+  "audit_version": "0.1",
+  "phase": "FX Inflation Pass-Through — Exact Monthly Raw Source Materialisation",
+  "mechanism_id": "exchange_rate_pass_through_to_inflation",
+  "generated_at_utc": "2026-09-19T09:11:32Z",
+  "materializer_script": "scripts/audit_fx_inflation_monthly_materialisation.py",
+  "materializer_script_sha256": "d7775966c706a78fdd7fcbeaa2f62b859394e467bc48af875a756af1be1636e0",
+  "status": "SOURCE_MATERIALISATION_EVIDENCE_READY_FOR_REPOSITORY_REVIEW",
+  "estimation_authorized": false,
+  "source_results": {
+    "exchange_rate": {
+      "url": "https://data-api.ecb.europa.eu/service/data/EXR/M.RON.EUR.SP00.A?format=csvdata&startPeriod=1999-01",
+      "http_status": 200,
+      "content_type": "text/csv",
+      "last_modified": "Mon, 31 Aug 2026 14:20:06 GMT",
+      "path": "raw/ecb_exr_m_ron_eur_sp00_a.csv",
+      "sha256": "7354d85c7106f16c3905c885d6cbf2c7581fd2a10652d8f0d8456b79b4f56254",
+      "bytes": 96338,
+      "metadata": {
+        "series_keys": [
+          "EXR.M.RON.EUR.SP00.A"
+        ],
+        "observation_count": 332,
+        "first_period": "1999-01",
+        "last_period": "2026-08"
+      }
+    },
+    "hicp": {
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/prc_hicp_minr?lang=en&freq=M&unit=I25&coicop18=TOTAL&geo=RO",
+      "http_status": 200,
+      "content_type": "application/json",
+      "last_modified": null,
+      "path": "raw/eurostat_prc_hicp_minr_ro_i25_total.json",
+      "sha256": "e498c33240446913d26402ce8e1a1d30fc0552e989a888f76e684143dc95a0cf",
+      "bytes": 21077,
+      "metadata": {
+        "updated": "2026-09-17T11:00:00+0200",
+        "label": "Harmonised index of consumer prices (HICP) - ECOICOP ver.2 - indices and rates of change, monthly data",
+        "id": [
+          "freq",
+          "unit",
+          "coicop18",
+          "geo",
+          "time"
+        ],
+        "size": [
+          1,
+          1,
+          1,
+          1,
+          368
+        ],
+        "observation_count": 368,
+        "first_period": "1996-01",
+        "last_period": "2026-08"
+      }
+    },
+    "external_price": {
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ext_st_27_2020msbec?lang=en&freq=M&stk_flow=IMP&indic_et=IVU&partner=WORLD&bclas_bec=TOTAL&geo=RO",
+      "http_status": 200,
+      "content_type": "application/json",
+      "last_modified": null,
+      "path": "raw/eurostat_ext_st_27_2020msbec_ro_imp_world_total_ivu.json",
+      "sha256": "1c9d9541d69fb3dbd2ddbda4a066e2025c76033840e891e328c19e8022d94604",
+      "bytes": 16090,
+      "metadata": {
+        "updated": "2026-09-15T11:00:00+0200",
+        "label": "Member States EU27 (from 2020) trade by BEC product group",
+        "id": [
+          "freq",
+          "stk_flow",
+          "indic_et",
+          "partner",
+          "bclas_bec",
+          "geo",
+          "time"
+        ],
+        "size": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          295
+        ],
+        "observation_count": 294,
+        "first_period": "2002-01",
+        "last_period": "2026-06"
+      }
+    }
+  },
+  "coverage": {
+    "common_observation_count": 294,
+    "first_common_period": "2002-01",
+    "last_common_period": "2026-06"
+  },
+  "output": {
+    "path": "fx_inflation_monthly_raw_source.csv",
+    "sha256": "bba995fe9e435cc124a5b66c035a5e65085ef705f912bf6c018dcd0d4a4748ea",
+    "rows": 294
+  },
+  "hard_rules": {
+    "level_only_materialisation": true,
+    "no_log_difference": true,
+    "no_monthly_or_annual_inflation_transform": true,
+    "no_lag_selection": true,
+    "no_regime_selection": true,
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_causal_claim": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true,
+    "live_provider_work_manual_only": true
+  },
+  "transformations_performed": [],
+  "calibration_cycle_open": false,
+  "system_dynamics_activation": false,
+  "behavioural_closure_change": false
+}

@@ -1,0 +1,52 @@
+{
+  "audit_version": "0.1",
+  "generated_at_utc": "2026-09-19T10:28:45Z",
+  "phase": "BNR BLS May-2025 XLSX Identity and Access Probe",
+  "mechanism_id": "aggregate_bank_credit_response",
+  "results": [
+    {
+      "id": "may_2025_english_slug",
+      "url": "https://www.bnr.ro/uploads/2025-06-13blst1may2025_xls_547_1749803028.xlsx",
+      "http_status": 200,
+      "error": null,
+      "bytes": 35620,
+      "sha256": "e3ecfc7fcdb5817c8feec00b7ae5b8bd7421e613ba4b69cb3d3eec2dff2297c6",
+      "signature": "ZIP_PK_0304",
+      "xlsx_accessible": true,
+      "retained_path": "may_2025_english_slug.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "content_disposition": null,
+      "last_modified": "Fri, 13 Jun 2025 08:23:48 GMT"
+    },
+    {
+      "id": "may_2025_romanian_slug",
+      "url": "https://www.bnr.ro/uploads/2025-06-13sondajblst1mai2025_xls_547_1749802943.xlsx",
+      "http_status": 200,
+      "error": null,
+      "bytes": 38004,
+      "sha256": "3b11d735150ef1048d8c5bc8f0b02993b13bd98a223de743f62d711128e1b271",
+      "signature": "ZIP_PK_0304",
+      "xlsx_accessible": true,
+      "retained_path": "may_2025_romanian_slug.xlsx",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "content_disposition": null,
+      "last_modified": "Fri, 13 Jun 2025 08:22:23 GMT"
+    }
+  ],
+  "accessible_xlsx_count": 2,
+  "candidate_count": 2,
+  "byte_identical_aliases": false,
+  "workbook_parsing_performed": false,
+  "value_extraction_performed": false,
+  "estimation_authorized": false,
+  "hard_rules": {
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_bls_series_construction": true,
+    "no_dsti_semantic_selection": true,
+    "no_credit_standard_or_demand_selection": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  },
+  "status": "PASS_XLSX_BYTES_READY_FOR_REVIEW"
+}

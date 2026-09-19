@@ -1,0 +1,181 @@
+{
+  "snapshot_version": "0.1",
+  "snapshot_id": "corporate-investment-source-family-vintage-2026-09-19",
+  "fetched_at_utc": "2026-09-19T09:27:57Z",
+  "source_vintage_contract": "data/provenance/source_vintage_contract.json",
+  "materializer_script": "scripts/audit_corporate_investment_source_materialisation.py",
+  "materializer_script_sha256": "3e024fd8989d569e601e1a412df1ac2e278b2b0b55c81022129d746300508f5e",
+  "workflow_context": {
+    "github_sha": "bfbc6a9d8c2ed55889d4e5c6d17dc5c925b5ed7e",
+    "github_run_id": "35434758190",
+    "github_event_name": "pull_request"
+  },
+  "raw_sources": [
+    {
+      "id": "nfc_gfcf",
+      "series_key": "QSA.Q.N.RO.W0.S11.S1.N.D.P51G._Z._Z._Z.XDC._T.S.V.N._T",
+      "url": "https://data-api.ecb.europa.eu/service/data/QSA/Q.N.RO.W0.S11.S1.N.D.P51G._Z._Z._Z.XDC._T.S.V.N._T?format=csvdata",
+      "http_status": 200,
+      "content_type": "text/csv",
+      "last_modified": "Tue, 28 Jul 2026 07:17:20 GMT",
+      "raw_path": "raw/nfc_gfcf.csv",
+      "raw_sha256": "661f6006856c602fcfa4415a23bddb0d7deea501b20965578323225f368be187",
+      "raw_bytes": 74879,
+      "metadata": {
+        "series_keys": [
+          "QSA.Q.N.RO.W0.S11.S1.N.D.P51G._Z._Z._Z.XDC._T.S.V.N._T"
+        ],
+        "units": [],
+        "titles": [
+          "Gross fixed capital formation of Non financial corporations"
+        ],
+        "observation_count": 109,
+        "first_period": "1999-Q1",
+        "last_period": "2026-Q1"
+      },
+      "role": "exact sector-specific investment level source; target transformation not selected"
+    },
+    {
+      "id": "nfc_investment_grants",
+      "series_key": "QSA.Q.N.RO.W0.S11.S1.N.C.D92._Z._Z._Z.XDC._T.S.V.N._T",
+      "url": "https://data-api.ecb.europa.eu/service/data/QSA/Q.N.RO.W0.S11.S1.N.C.D92._Z._Z._Z.XDC._T.S.V.N._T?format=csvdata",
+      "http_status": 200,
+      "content_type": "text/csv",
+      "last_modified": "Tue, 28 Jul 2026 07:17:20 GMT",
+      "raw_path": "raw/nfc_investment_grants.csv",
+      "raw_sha256": "dfa5d6a25842149d02604e6f1d9a5dddb619b470517491679e6808633c0a4d34",
+      "raw_bytes": 73714,
+      "metadata": {
+        "series_keys": [
+          "QSA.Q.N.RO.W0.S11.S1.N.C.D92._Z._Z._Z.XDC._T.S.V.N._T"
+        ],
+        "units": [],
+        "titles": [
+          "Investment grants receivable by Non financial corporations"
+        ],
+        "observation_count": 109,
+        "first_period": "1999-Q1",
+        "last_period": "2026-Q1"
+      },
+      "role": "sector-consistent investment-support source; payer origin not identified as EU"
+    },
+    {
+      "id": "nfc_investment_rate",
+      "series_key": "QSA.Q.N.RO.W0.S11.S1.N.D.P51G._Z._Z._Z.XDC_R_B1G_CY._T.S.V.C4._T",
+      "url": "https://data-api.ecb.europa.eu/service/data/QSA/Q.N.RO.W0.S11.S1.N.D.P51G._Z._Z._Z.XDC_R_B1G_CY._T.S.V.C4._T?format=csvdata",
+      "http_status": 200,
+      "content_type": "text/csv",
+      "last_modified": "Wed, 29 Jul 2026 14:11:49 GMT",
+      "raw_path": "raw/nfc_investment_rate.csv",
+      "raw_sha256": "49979b25deb9df1436d4a6381a98f0e9eb784d24321977d5f042d950a93c4445",
+      "raw_bytes": 85968,
+      "metadata": {
+        "series_keys": [
+          "QSA.Q.N.RO.W0.S11.S1.N.D.P51G._Z._Z._Z.XDC_R_B1G_CY._T.S.V.C4._T"
+        ],
+        "units": [],
+        "titles": [
+          "Gross fixed capital formation of Non financial corporations, ratio of gross value added"
+        ],
+        "observation_count": 106,
+        "first_period": "1999-Q4",
+        "last_period": "2026-Q1"
+      },
+      "role": "exact alternative target source; not selected merely because it is dimensionless"
+    },
+    {
+      "id": "nfc_new_business_lending_rate",
+      "series_key": "MIR.M.RO.B.A2A.A.R.A.2240.RON.N",
+      "url": "https://data-api.ecb.europa.eu/service/data/MIR/M.RO.B.A2A.A.R.A.2240.RON.N?format=csvdata",
+      "http_status": 200,
+      "content_type": "text/csv",
+      "last_modified": "Wed, 02 Sep 2026 13:00:00 GMT",
+      "raw_path": "raw/nfc_new_business_lending_rate.csv",
+      "raw_sha256": "c477b14e6770564000d015d00ce7f06314013108949f30cfce474315c4597796",
+      "raw_bytes": 110687,
+      "metadata": {
+        "series_keys": [
+          "MIR.M.RO.B.A2A.A.R.A.2240.RON.N"
+        ],
+        "units": [
+          "PCPA"
+        ],
+        "titles": [
+          "Bank interest rates - loans to corporations (new business)"
+        ],
+        "observation_count": 88,
+        "first_period": "2017-09",
+        "last_period": "2026-07"
+      },
+      "role": "marginal financing-cost observable; quarterly aggregation and real-rate adjustment not selected"
+    }
+  ],
+  "normalized_outputs": [
+    {
+      "source_id": "nfc_gfcf",
+      "path": "nfc_gfcf_quarterly_level.csv",
+      "sha256": "60921e146554f07f3e84ce7cee8c893d1515e7d9e6af811d498d6e9017d16544",
+      "rows": 109,
+      "first_period": "1999-Q1",
+      "last_period": "2026-Q1",
+      "derived_from_raw_sha256": [
+        "661f6006856c602fcfa4415a23bddb0d7deea501b20965578323225f368be187"
+      ],
+      "transformations": []
+    },
+    {
+      "source_id": "nfc_investment_grants",
+      "path": "nfc_investment_grants_quarterly_level.csv",
+      "sha256": "1ce450e416722d47b969cb0d35d1e01aab17366b86e437879d05325188933920",
+      "rows": 109,
+      "first_period": "1999-Q1",
+      "last_period": "2026-Q1",
+      "derived_from_raw_sha256": [
+        "dfa5d6a25842149d02604e6f1d9a5dddb619b470517491679e6808633c0a4d34"
+      ],
+      "transformations": []
+    },
+    {
+      "source_id": "nfc_investment_rate",
+      "path": "nfc_investment_rate_quarterly_level.csv",
+      "sha256": "769135772a75dbd400fd5203de8e299eb4a7a685248633033ac43cbe6f5a2ecc",
+      "rows": 106,
+      "first_period": "1999-Q4",
+      "last_period": "2026-Q1",
+      "derived_from_raw_sha256": [
+        "49979b25deb9df1436d4a6381a98f0e9eb784d24321977d5f042d950a93c4445"
+      ],
+      "transformations": []
+    },
+    {
+      "source_id": "nfc_new_business_lending_rate",
+      "path": "nfc_new_business_lending_rate_monthly_level.csv",
+      "sha256": "9cbfacc2d88be0c0dc32d6795a9dbbd3e8a6f3b6aa5a6ecda8f72214246db8ac",
+      "rows": 88,
+      "first_period": "2017-09",
+      "last_period": "2026-07",
+      "derived_from_raw_sha256": [
+        "c477b14e6770564000d015d00ce7f06314013108949f30cfce474315c4597796"
+      ],
+      "transformations": []
+    }
+  ],
+  "audit_report": {
+    "path": "corporate_investment_materialisation_audit.json",
+    "sha256": "fea0a9831eb15d18e78da931d20a0edff13a4973c45ed5c3d5339e1f961d12c4"
+  },
+  "hard_boundaries": {
+    "no_target_choice": true,
+    "no_demand_proxy_choice": true,
+    "no_rate_aggregation_choice": true,
+    "no_real_rate_deflator_choice": true,
+    "no_eu_origin_inference": true,
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_causal_claim": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true,
+    "live_provider_work_manual_only": true
+  },
+  "canonical_promotion": "REQUIRES_EXPLICIT_REPOSITORY_REVIEW_AND_COMMIT"
+}

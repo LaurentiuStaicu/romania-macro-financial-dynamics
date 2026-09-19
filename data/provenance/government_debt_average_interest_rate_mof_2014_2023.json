@@ -1,0 +1,138 @@
+{
+  "provenance_version": "0.1",
+  "retrieved_or_verified_date": "2026-09-19",
+  "variable": "government_effective_interest_rate",
+  "canonical_empirical_mapping": "Romania Ministry of Finance published average interest rate of government public debt at year end, direct-government/MoF portfolio boundary defined by each strategy.",
+  "definition": {
+    "source_wording": "Average interest rate of government debt / rata medie de dobândă a datoriei publice guvernamentale",
+    "calculation_note": "MoF strategy footnotes define the portfolio rates using forecast interest payments for the following year relative to the debt stock existing at the end of the reference year, calculated by debt instrument and aggregated over the government-debt portfolio.",
+    "time_semantics": "year-end annual portfolio cost reference",
+    "not_same_as": [
+      "same-year realized cash interest rate",
+      "Eurostat D41PAY divided by Maastricht debt",
+      "Eurostat apparent cost of Maastricht debt",
+      "marginal sovereign market yield",
+      "average yield on new issuance",
+      "repricing/refinancing transition rate"
+    ]
+  },
+  "sources": [
+    {
+      "id": "mof_strategy_2016_2018",
+      "institution": "Romania Ministry of Finance",
+      "url": "https://www.mfinante.gov.ro/static/10/Mfp/buletin/executii/Strategiaadministraredatpubguv20162018.pdf",
+      "table": "Table 2",
+      "observed": {
+        "2014": 4.3,
+        "2015": 4.1
+      }
+    },
+    {
+      "id": "mof_strategy_2017_2019",
+      "institution": "Romania Ministry of Finance",
+      "url": "https://www.mfinante.gov.ro/static/10/Mfp/buletin/executii/Strategiaadmindatpubguv2017_2019_09iunie_21062017.pdf",
+      "table": "Table 2",
+      "observed": {
+        "2015": 4.1,
+        "2016": 3.7
+      }
+    },
+    {
+      "id": "mof_strategy_2018_2020",
+      "institution": "Romania Ministry of Finance",
+      "url": "https://www.mfinante.gov.ro/static/10/Mfp/buletin/executii/strategiaengl2018_2020_28082018.pdf",
+      "table": "Table 2",
+      "observed": {
+        "2016": 3.7,
+        "2017": 3.4
+      }
+    },
+    {
+      "id": "mof_strategy_2019_2021",
+      "institution": "Romania Ministry of Finance",
+      "url": "https://mfinante.gov.ro/documents/35673/173556/strategie2019-2021_01102019.pdf",
+      "table": "Table 2",
+      "observed": {
+        "2017": 3.4,
+        "2018": 3.7
+      }
+    },
+    {
+      "id": "mof_strategy_2021_2023",
+      "institution": "Romania Ministry of Finance",
+      "url": "https://www.mfinante.gov.ro/static/10/Mfp/buletin/executii/Strategie2021-2023_ro.pdf",
+      "table": "Table 2",
+      "observed": {
+        "2019": 3.8,
+        "2020": 3.3
+      }
+    },
+    {
+      "id": "mof_strategy_2022_2024",
+      "institution": "Romania Ministry of Finance",
+      "url": "https://www.mfinante.gov.ro/static/10/Mfp/buletin/executii/Strategiadeadministrareadatpubguv2022-2024RO.pdf",
+      "table": "Table 2",
+      "observed": {
+        "2020": 3.3,
+        "2021": 3.1
+      }
+    },
+    {
+      "id": "mof_strategy_2023_2025",
+      "institution": "Romania Ministry of Finance",
+      "url": "https://www.mfinante.gov.ro/static/10/Mfp/buletin/executii/GovernmentDebtManagementStrategy2023-2025.pdf",
+      "table": "Table 2",
+      "observed": {
+        "2021": 3.1,
+        "2022": 3.3
+      }
+    },
+    {
+      "id": "mof_strategy_2024_2026",
+      "institution": "Romania Ministry of Finance",
+      "url": "https://www.mfinante.gov.ro/static/10/Mfp/buletin/executii/Strategiedeadministrareadatorieipubliceguvernamentale2024_2026en.pdf",
+      "table": "Table 2",
+      "observed": {
+        "2022": 3.3,
+        "2023": 4.2
+      }
+    }
+  ],
+  "overlap_checks": {
+    "2015": [
+      4.1,
+      4.1
+    ],
+    "2016": [
+      3.7,
+      3.7
+    ],
+    "2017": [
+      3.4,
+      3.4
+    ],
+    "2020": [
+      3.3,
+      3.3
+    ],
+    "2021": [
+      3.1,
+      3.1
+    ],
+    "2022": [
+      3.3,
+      3.3
+    ]
+  },
+  "existing_repository_overlap": {
+    "path": "data/processed/government_debt_average_interest_rate_mof_2019_2023.csv",
+    "rule": "All 2019-2023 values must match exactly."
+  },
+  "hard_boundaries": {
+    "no_quarterly_interpolation": true,
+    "no_eurostat_apparent_cost_substitution": true,
+    "no_market_yield_substitution": true,
+    "no_repricing_share_inference": true,
+    "no_behavioural_activation": true
+  }
+}
