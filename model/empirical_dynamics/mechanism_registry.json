@@ -391,7 +391,7 @@
       "functional_form": "No admitted fiscal-reaction behavioural form. The preregistered annual lagged-state primary-balance candidate was tested on 2010-2017 and failed before holdout.",
       "implementation": null,
       "parameters": [],
-      "estimation_plan": "Freeze the 2026-09-19 annual tested form at FAIL_BEFORE_HOLDOUT. Do not inspect 2018-2024 final-evaluation performance, search alternative lags or target transformations, add regime coefficients, or reinterpret the negative output-gap sign after observing the selection result. Reopen only in a separately preregistered cycle triggered by genuinely new measurement or identification evidence.",
+      "estimation_plan": "The prior annual lagged-state form remains frozen at FAIL_BEFORE_HOLDOUT and its 2018-2024 final evaluation remains unopened. A declared new-measurement trigger is now satisfied by AMECO UBLGBPS plus official release vintages. Materialise and adjudicate the real-time CAPB information set under the new source-only contract before proposing any separately preregistered structural-selection form. No estimation/refit is currently authorized.",
       "observables": [
         "primary_balance",
         "debt_to_gdp",
@@ -418,7 +418,10 @@
       "annual_measurement_boundary": "model/calibration_validation/fiscal_reaction_annual_measurement_boundary_review.json",
       "annual_source_vintage": "data/source_vintages/fiscal-reaction-ameco-actual-vintage-2026-09-19",
       "annual_structural_selection_contract": "model/calibration_validation/fiscal_reaction_annual_structural_selection_contract.json",
-      "annual_structural_selection_result": "model/calibration_validation/fiscal_reaction_annual_structural_selection_result.json"
+      "annual_structural_selection_result": "model/calibration_validation/fiscal_reaction_annual_structural_selection_result.json",
+      "selective_reopen_assessment": "model/registries/fiscal_capb_reopen_assessment_2026_09_19.json",
+      "selective_reopen_contract": "model/calibration_validation/fiscal_reaction_capb_realtime_vintage_contract.json",
+      "selective_reopen_scope": "CAPB_REALTIME_VINTAGE_SOURCE_MATERIALISATION_AND_TIMING_ADJUDICATION_ONLY"
     },
     {
       "id": "monetary_policy_reaction_function",
