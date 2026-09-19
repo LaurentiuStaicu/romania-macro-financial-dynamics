@@ -371,6 +371,22 @@ def main() -> None:
         is True,
         "Current empirical mechanism status must be governed by frozen validation disposition",
     )
+    empirical_gate = gate["empirical_activation_governance"]
+    check(
+        empirical_gate["current_active_calibration_cycle_open"]
+        is empirical_governance["active_calibration_cycle_open"],
+        "SD gate active-calibration-cycle state disagrees with empirical governance",
+    )
+    check(
+        set(empirical_gate["current_activated_mechanisms"])
+        == set(empirical_governance["activated_mechanisms"]),
+        "SD gate activated-mechanism set disagrees with empirical governance",
+    )
+    check(
+        empirical_gate["validated_reference_behavioural_mechanisms"]
+        == empirical_governance["validated_reference_behavioural_mechanisms"],
+        "SD gate validated-mechanism count disagrees with frozen disposition",
+    )
 
     structures = feedback["loops"]
     check(structures, "Feedback registry must contain the candidate feedback architecture")
