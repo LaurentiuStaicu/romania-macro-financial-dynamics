@@ -61,5 +61,13 @@
   "rounding_consistency_contract": "model/dynamics/sectoral_financial_positions_rounding_consistency_contract.json",
   "rounding_consistency_assessment": "model/dynamics/sectoral_financial_positions_rounding_consistency_assessment.json",
   "source_discrepancy_contract": "model/dynamics/sectoral_financial_positions_source_discrepancy_contract.json",
-  "source_discrepancy_assessment": "model/dynamics/sectoral_financial_positions_source_discrepancy_assessment.json"
+  "source_discrepancy_assessment": "model/dynamics/sectoral_financial_positions_source_discrepancy_assessment.json",
+  "post_run_esa_f1_applicability_review": "model/dynamics/sectoral_financial_positions_esa_f1_applicability_review.json",
+  "post_run_review_effect": {
+    "historical_A_D_reinterpreted": false,
+    "current_status_changed": false,
+    "readiness_count_change": 0,
+    "reopen_authorized": false,
+    "rule": "A future corrected F1-applicability test requires a new separately preregistered phase. The historical Phase B contract and A-D evidence chain remain immutable."
+  }
 }
