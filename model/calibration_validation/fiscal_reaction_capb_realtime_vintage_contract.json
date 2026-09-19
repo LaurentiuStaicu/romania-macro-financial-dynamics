@@ -1,0 +1,127 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "mechanism_id": "fiscal_primary_balance_reaction",
+  "phase": "Fiscal Reaction Selective Reopen — CAPB Real-Time Vintage Source Materialisation",
+  "purpose": "Freeze a source-only acquisition boundary for Romania AMECO UBLGBPS across official forecast vintages after the declared new-measurement reopen trigger. This contract creates a release-by-release evidence inventory only; it does not fit a model or decide which vintage-year observations are admissible for estimation.",
+  "reopen_assessment": "model/registries/fiscal_capb_reopen_assessment_2026_09_19.json",
+  "estimation_authorized": false,
+  "model_selection_authorized": false,
+  "prior_final_evaluation_opening_authorized": false,
+  "target_series": {
+    "code": "ROM.1.0.319.0.UBLGBPS",
+    "variable": "UBLGBPS",
+    "country": "Romania",
+    "concept": "Structural balance of general government excluding interest; adjustment based on potential GDP; excessive deficit procedure",
+    "role": "cyclically adjusted / structural primary-balance measurement candidate",
+    "unit_expected_contains": "Percentage of potential GDP"
+  },
+  "releases": [
+    {
+      "id": "spring_2022",
+      "label": "Spring 2022",
+      "release_date": "2022-05-16",
+      "source_url": "https://economy-finance.ec.europa.eu/document/download/c5be576e-fbea-45f3-98a5-3cf59d16d70a_en?filename=ameco_spring2022.zip",
+      "release_type": "official_archive"
+    },
+    {
+      "id": "autumn_2022",
+      "label": "Autumn 2022",
+      "release_date": "2022-11-17",
+      "source_url": "https://economy-finance.ec.europa.eu/document/download/b16e473a-04ef-4ec8-b2f8-1e0c30a39d3c_en?filename=ameco_autumn2022.zip",
+      "release_type": "official_archive"
+    },
+    {
+      "id": "spring_2023",
+      "label": "Spring 2023",
+      "release_date": "2023-05-15",
+      "source_url": "https://economy-finance.ec.europa.eu/document/download/adbcba6f-8169-4d6d-80e7-7a365ff6e87d_en?filename=ameco_spring2023.zip",
+      "release_type": "official_archive"
+    },
+    {
+      "id": "autumn_2023",
+      "label": "Autumn 2023",
+      "release_date": "2023-11-27",
+      "source_url": "https://economy-finance.ec.europa.eu/document/download/6a48b097-bd09-496b-908f-404d0e85cff8_en?filename=AMECO_2023_Autumn_Revised.zip",
+      "release_type": "official_archive"
+    },
+    {
+      "id": "spring_2024",
+      "label": "Spring 2024",
+      "release_date": "2024-05-15",
+      "source_url": "https://economy-finance.ec.europa.eu/document/download/ad8d7bd0-c4d9-4860-b597-bb613408d6bd_en?filename=AMECO_2024_Spring_final.zip",
+      "release_type": "official_archive"
+    },
+    {
+      "id": "autumn_2024",
+      "label": "Autumn 2024",
+      "release_date": "2024-11-15",
+      "source_url": "https://economy-finance.ec.europa.eu/document/download/9c2630c3-6c25-456d-b484-6b05c202e8ce_en?filename=ameco0.zip",
+      "release_type": "official_archive"
+    },
+    {
+      "id": "spring_2025",
+      "label": "Spring 2025",
+      "release_date": "2025-05-19",
+      "source_url": "https://economy-finance.ec.europa.eu/document/download/b4b375e7-80a6-4581-b8fd-9c207790cd01_en?filename=ameco0.zip",
+      "release_type": "official_archive"
+    },
+    {
+      "id": "autumn_2025",
+      "label": "Autumn 2025",
+      "release_date": "2025-11-17",
+      "source_url": "https://economy-finance.ec.europa.eu/document/download/92bd1d5e-35e8-4a94-a8b1-8d919ced4cdb_en?filename=ameco-autumn2025.zip",
+      "release_type": "official_archive"
+    },
+    {
+      "id": "spring_2026",
+      "label": "Spring 2026",
+      "release_date": "2026-06-03",
+      "source_url": "https://ec.europa.eu/economy_finance/db_indicators/ameco/documents/ameco17.zip",
+      "release_type": "current_chapter"
+    }
+  ],
+  "extraction_rules": {
+    "recursively_scan_zip_members": true,
+    "maximum_nested_zip_depth": 3,
+    "match_exact_first_field_code": "ROM.1.0.319.0.UBLGBPS",
+    "require_at_least_one_match_per_release": true,
+    "require_one_distinct_matched_row_per_release": true,
+    "byte_identical_duplicate_matches_may_be_retained_as_locations": true,
+    "retain_exact_archive_bytes_and_sha256": true,
+    "retain_exact_matched_row_bytes_and_sha256": true,
+    "retain_all_matching_member_paths": true,
+    "retain_release_label_and_release_date": true,
+    "no_numeric_series_transformation": true,
+    "no_forecast_actual_classification_in_this_gate": true
+  },
+  "output_schema": [
+    "release_id",
+    "release_label",
+    "release_date",
+    "source_url",
+    "archive_sha256",
+    "archive_bytes",
+    "selected_member_path",
+    "matching_member_count",
+    "target_code",
+    "matched_row_sha256",
+    "matched_row_bytes",
+    "status"
+  ],
+  "hard_rules": {
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_value_transform": true,
+    "no_forecast_use_for_estimation": true,
+    "no_later_revision_backfill": true,
+    "no_prior_2018_2024_holdout_opening": true,
+    "no_source_url_guessing": true,
+    "no_missing_to_zero": true,
+    "no_causal_claim": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true,
+    "live_provider_work_manual_only": true
+  },
+  "next_gate": "After successful retained source materialisation, perform a separate information-set/timing adjudication that classifies what each release knew at its release date. Only after that adjudication may a new fiscal structural-selection contract be proposed; estimation remains separately unauthorized."
+}

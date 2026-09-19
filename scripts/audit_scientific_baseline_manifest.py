@@ -485,9 +485,14 @@ def main() -> None:
         readiness_state["all_reopen_conditions_registered"] is True,
         "Baseline must require reopen conditions for every mechanism",
     )
+    expected_reopen_governance_state = (
+        "DECLARED_TRIGGER_SATISFIED_SOURCE_GATE_ONLY_NO_ESTIMATION"
+        if state["scientific_stage"].get("selective_reopen_active", False)
+        else "DECLARED_TRIGGER_REQUIRED_NO_AUTOMATIC_ESTIMATION"
+    )
     check(
         readiness_state["reopen_governance_state"]
-        == "DECLARED_TRIGGER_REQUIRED_NO_AUTOMATIC_ESTIMATION",
+        == expected_reopen_governance_state,
         "Baseline reopen-governance state is stale",
     )
 
@@ -537,18 +542,46 @@ def main() -> None:
         readiness_state["priority_group_counts"] == priority_counts,
         "Baseline readiness priority-group counts are stale",
     )
-    check(
-        readiness["current_next_step"]["mechanism_id"] == "SCIENTIFIC_BASELINE",
-        "Post-screening queue has not advanced to scientific-baseline consolidation",
+    selective_reopen_active = bool(
+        state["scientific_stage"].get("selective_reopen_active", False)
     )
+    if selective_reopen_active:
+        check(
+            readiness["current_next_step"]["mechanism_id"]
+            == "fiscal_primary_balance_reaction",
+            "Selective reopen must point to the declared fiscal mechanism",
+        )
+        check(
+            readiness["current_next_step"]["action"]
+            == "MATERIALISE_CAPB_REALTIME_VINTAGE_SOURCE_EVIDENCE",
+            "Selective reopen action is outside the frozen CAPB source gate",
+        )
+        check(
+            readiness_state["current_empirical_queue_state"]
+            == "SELECTIVE_REOPEN_FISCAL_CAPB_SOURCE_MATERIALISATION_ACTIVE",
+            "Selective reopen empirical queue-state label is stale",
+        )
+        fiscal_reopen = (
+            ROOT / "model" / "registries"
+            / "fiscal_capb_reopen_assessment_2026_09_19.json"
+        )
+        check(
+            fiscal_reopen.is_file(),
+            "Selective fiscal reopen lacks its governing assessment",
+        )
+    else:
+        check(
+            readiness["current_next_step"]["mechanism_id"] == "SCIENTIFIC_BASELINE",
+            "Post-screening queue has not advanced to scientific-baseline consolidation",
+        )
+        check(
+            readiness_state["current_empirical_queue_state"]
+            == "ALL_REGISTERED_MECHANISMS_FROZEN_WAITING_OR_EXPLICITLY_BLOCKED",
+            "Baseline empirical queue-state label is stale",
+        )
     check(
         readiness["current_next_step"]["calibration_cycle_open"] is False,
-        "Scientific-baseline queue state may not open calibration",
-    )
-    check(
-        readiness_state["current_empirical_queue_state"]
-        == "ALL_REGISTERED_MECHANISMS_FROZEN_WAITING_OR_EXPLICITLY_BLOCKED",
-        "Baseline empirical queue-state label is stale",
+        "Scientific queue state may not open calibration",
     )
     check(
         all(item["priority_group"] for item in readiness_entries),
@@ -600,11 +633,27 @@ def main() -> None:
         == stage_terminal["next_operational_state"]["id"],
         "Baseline scientific-stage next operational state is stale",
     )
-    check(
-        stage_state["active_autonomous_empirical_task"]
-        == stage_terminal["next_operational_state"]["active_autonomous_empirical_task"],
-        "Baseline active autonomous empirical task is stale",
-    )
+    if stage_state.get("selective_reopen_active", False):
+        check(
+            stage_state["active_autonomous_empirical_task"]
+            == "FISCAL_PRIMARY_BALANCE_CAPB_REALTIME_VINTAGE_MATERIALISATION",
+            "Selective reopen active task is stale",
+        )
+        check(
+            stage_state.get("selective_reopen_mechanism")
+            == "fiscal_primary_balance_reaction",
+            "Selective reopen mechanism is stale",
+        )
+        check(
+            readiness["current_next_step"]["calibration_cycle_open"] is False,
+            "Selective source gate may not open calibration",
+        )
+    else:
+        check(
+            stage_state["active_autonomous_empirical_task"]
+            == stage_terminal["next_operational_state"]["active_autonomous_empirical_task"],
+            "Baseline active autonomous empirical task is stale",
+        )
     check(stage_state["model_complete"] is False, "Stage completion may not imply model completion")
     check(stage_state["release_ready"] is False, "Stage completion may not imply release readiness")
 

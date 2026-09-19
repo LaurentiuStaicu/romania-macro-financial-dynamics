@@ -1,0 +1,72 @@
+{
+  "assessment_version": "0.1",
+  "assessed_on": "2026-09-19",
+  "mechanism_id": "fiscal_primary_balance_reaction",
+  "status": "FISCAL_PRIMARY_BALANCE_REOPEN_TRIGGER_SATISFIED_PREREGISTRATION_ONLY",
+  "purpose": "Record the first declared post-baseline reopen trigger that is actually satisfied: an exact AMECO cyclically adjusted/structural primary-balance series for Romania plus official historical AMECO vintages. The trigger authorizes only a new preregistered measurement/vintage-materialisation and timing-adjudication cycle.",
+  "supersedes_monitoring_conclusion_for_this_mechanism_only": "model/registries/reopen_trigger_monitoring_2026_09_19.json",
+  "governing_reopen_rule": "A separately preregistered cycle is justified by genuinely new measurement or identification evidence, such as a cyclically adjusted primary-balance vintage, longer real-time historical vintages or an independently justified regime/identification design.",
+  "trigger_evidence": {
+    "current_ameco_database": {
+      "institution": "European Commission DG ECFIN",
+      "database": "AMECO",
+      "current_release": "Spring 2026 Economic Forecast",
+      "last_update": "2026-06-03",
+      "current_chapter_zip": "https://ec.europa.eu/economy_finance/db_indicators/ameco/documents/ameco17.zip",
+      "chapter": "Cyclical adjustment of public finance variables"
+    },
+    "exact_series": {
+      "code": "ROM.1.0.319.0.UBLGBPS",
+      "country": "Romania",
+      "variable": "UBLGBPS",
+      "concept": "Structural balance of general government excluding interest; adjustment based on potential GDP; excessive deficit procedure",
+      "interpretation": "Cyclically adjusted / structural primary balance",
+      "unit": "Percentage of potential GDP at current prices"
+    },
+    "historical_vintages": {
+      "official_archive": "https://economy-finance.ec.europa.eu/economic-research-and-databases/economic-databases/ameco-database/ameco-archive_en",
+      "machine_readable_zip_vintages_available": true,
+      "selected_initial_release_sample": [
+        "Spring 2022",
+        "Autumn 2022",
+        "Spring 2023",
+        "Autumn 2023",
+        "Spring 2024",
+        "Autumn 2024",
+        "Spring 2025",
+        "Autumn 2025",
+        "Spring 2026"
+      ]
+    }
+  },
+  "trigger_decision": {
+    "declared_reopen_trigger_satisfied": true,
+    "reopen_scope": "CAPB_REALTIME_VINTAGE_SOURCE_MATERIALISATION_AND_TIMING_ADJUDICATION_ONLY",
+    "mechanism_classification_after_reopen": "DEFERRED",
+    "active_calibration_cycle_open": false,
+    "parameter_estimation_authorized": false,
+    "refit_authorized": false,
+    "prior_final_evaluation_2018_2024_opening_authorized": false,
+    "causal_claim_authorized": false,
+    "system_dynamics_feedback_activation_authorized": false,
+    "behavioural_closure_activation_authorized": false
+  },
+  "scientific_rationale": [
+    "The previous annual fiscal form failed before its untouched 2018-2024 evaluation window was opened.",
+    "UBLGBPS changes the measurement boundary rather than respecifying the failed equation after observing its result.",
+    "Official release-specific AMECO archives make a real-time/vintage information-set analysis possible without backfilling later revisions into earlier decision dates.",
+    "The source evidence must be materialised and timing semantics adjudicated before any new structural-selection equation, window or sign/domain rule is preregistered."
+  ],
+  "next_gate": "Materialise exact UBLGBPS rows from selected official AMECO releases with archive bytes, matched-row bytes, release metadata and SHA-256. Then perform a separate information-set/timing adjudication before any new structural-selection preregistration.",
+  "hard_rules": {
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_old_holdout_inspection": true,
+    "no_lag_or_predictor_search": true,
+    "no_forecast_to_actual_relabelling": true,
+    "no_later_revision_backfill": true,
+    "no_causal_claim": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true
+  }
+}

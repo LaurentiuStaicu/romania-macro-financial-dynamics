@@ -102,26 +102,30 @@
       "priority_group_counts": {
         "WAIT_FOR_EXTERNAL_EVENT": 1,
         "DEFER_UNTIL_NEW_SOURCE": 1,
-        "FREEZE_TESTED_FORM_UNTIL_NEW_EVIDENCE": 4,
+        "DEFER_UNTIL_FINAL_BLS_GAP_OR_NEW_MATCHED_PRUDENTIAL_SOURCE": 1,
+        "FREEZE_TESTED_FORM_UNTIL_NEW_EVIDENCE": 3,
         "DEFER_UNTIL_NEW_OBSERVED_POPULATION_BRIDGE_SOURCE": 1,
         "DEFER_UNTIL_MATCHED_AGGREGATE_OR_MORTGAGE_PORTFOLIO_SOURCE": 1,
+        "SELECTIVE_REOPEN_SOURCE_MATERIALISATION": 1,
         "DEFER_UNTIL_FORMATION_TIME_EXPECTATIONS_AND_REAL_TIME_GAP_VINTAGES": 1,
-        "DEFER_UNTIL_JOINT_EXPOSURE_SOURCE": 1,
-        "DEFER_UNTIL_FINAL_BLS_GAP_OR_NEW_MATCHED_PRUDENTIAL_SOURCE": 1
+        "DEFER_UNTIL_JOINT_EXPOSURE_SOURCE": 1
       },
-      "current_empirical_queue_state": "ALL_REGISTERED_MECHANISMS_FROZEN_WAITING_OR_EXPLICITLY_BLOCKED",
+      "current_empirical_queue_state": "SELECTIVE_REOPEN_FISCAL_CAPB_SOURCE_MATERIALISATION_ACTIVE",
       "calibration_cycle_open": false,
       "reopen_registry_entry_count": 11,
       "all_reopen_conditions_registered": true,
-      "reopen_governance_state": "DECLARED_TRIGGER_REQUIRED_NO_AUTOMATIC_ESTIMATION"
+      "reopen_governance_state": "DECLARED_TRIGGER_SATISFIED_SOURCE_GATE_ONLY_NO_ESTIMATION"
     },
     "scientific_stage": {
       "name": "Validation Recovery / Empirical Basis Expansion",
       "status": "STAGE_COMPLETE_EVIDENCE_TRIGGERED_BASELINE_HOLD",
       "next_operational_state": "EVIDENCE_TRIGGERED_BASELINE_HOLD",
-      "active_autonomous_empirical_task": null,
+      "active_autonomous_empirical_task": "FISCAL_PRIMARY_BALANCE_CAPB_REALTIME_VINTAGE_MATERIALISATION",
       "model_complete": false,
-      "release_ready": false
+      "release_ready": false,
+      "selective_reopen_active": true,
+      "selective_reopen_mechanism": "fiscal_primary_balance_reaction",
+      "selective_reopen_scope": "CAPB_REALTIME_VINTAGE_SOURCE_MATERIALISATION_AND_TIMING_ADJUDICATION_ONLY"
     }
   },
   "hard_invariants": [
