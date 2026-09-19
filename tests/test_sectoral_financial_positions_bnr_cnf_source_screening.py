@@ -58,7 +58,7 @@ class SectoralFinancialPositionsBNRCNFSourceScreeningTests(unittest.TestCase):
         )
         self.assertEqual(
             self.e["decision"]["current_public_source_completion_status"],
-            "EUROSTAT_INSTRUMENT_SCOPE_FAIL_OECD_S121_SCOPE_FAIL_BNR_ANNUAL_FREQUENCY_TRANSACTION_HISTORY_FAIL",
+            "EUROSTAT_INSTRUMENT_SCOPE_FAIL_OECD_S121_SCOPE_FAIL_BNR_ANNUAL_FREQUENCY_TRANSACTION_HISTORY_FAIL_BNR_QUARTERLY_S13_SECTOR_COUNTERPART_CONSOLIDATION_FAIL",
         )
 
     def test_reference_mode_remains_partial_and_points_to_screening(self):
