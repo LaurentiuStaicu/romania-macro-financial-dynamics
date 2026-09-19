@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   manual-eurostat-counterpart-probe:
-    if: ${{ github.event_name == 'workflow_dispatch' && github.ref_name == 'audit/scientific-integrity-2026-09-18' }}
+    if: ${{ (github.event_name == 'workflow_dispatch' && github.ref_name == 'audit/scientific-integrity-2026-09-18') || (github.event_name == 'pull_request' && github.head_ref == 'audit/scientific-integrity-2026-09-18' && github.run_attempt > 1) }}
     runs-on: ubuntu-latest
 
     steps:
@@ -45,7 +45,7 @@ jobs:
           retention-days: 90
 
   manual-oecd-counterpart-probe:
-    if: ${{ github.event_name == 'workflow_dispatch' && github.ref_name == 'audit/scientific-integrity-2026-09-18' }}
+    if: ${{ (github.event_name == 'workflow_dispatch' && github.ref_name == 'audit/scientific-integrity-2026-09-18') || (github.event_name == 'pull_request' && github.head_ref == 'audit/scientific-integrity-2026-09-18' && github.run_attempt > 1) }}
     runs-on: ubuntu-latest
 
     steps:

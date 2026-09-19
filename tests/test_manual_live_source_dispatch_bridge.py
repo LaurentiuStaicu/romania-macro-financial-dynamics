@@ -15,11 +15,17 @@ class ManualLiveSourceDispatchBridgeTests(unittest.TestCase):
         self.assertIn("workflow_dispatch:", text)
         self.assertIn("manual-eurostat-counterpart-probe:", text)
         self.assertIn("manual-oecd-counterpart-probe:", text)
-        guard = (
+        dispatch_guard = (
             "github.event_name == 'workflow_dispatch' && "
             f"github.ref_name == '{AUDIT_BRANCH}'"
         )
-        self.assertGreaterEqual(text.count(guard), 2)
+        rerun_guard = (
+            "github.event_name == 'pull_request' && "
+            f"github.head_ref == '{AUDIT_BRANCH}' && "
+            "github.run_attempt > 1"
+        )
+        self.assertGreaterEqual(text.count(dispatch_guard), 2)
+        self.assertGreaterEqual(text.count(rerun_guard), 2)
         self.assertIn(
             "scripts/audit_eurostat_sectoral_financial_positions_counterpart_probe.py",
             text,
@@ -47,7 +53,7 @@ class ManualLiveSourceDispatchBridgeTests(unittest.TestCase):
             bridge = policy["manual_dispatch_bridge"]
             self.assertEqual(
                 policy["current_execution_state"],
-                "READY_FOR_MANUAL_DISPATCH_VIA_EXISTING_DEFAULT_BRANCH_WORKFLOW",
+                "READY_FOR_MANUAL_RERUN_OR_WORKFLOW_DISPATCH",
             )
             self.assertEqual(
                 bridge["workflow"],
@@ -61,6 +67,12 @@ class ManualLiveSourceDispatchBridgeTests(unittest.TestCase):
             )
             self.assertIn("workflow_dispatch", bridge["activation_condition"])
             self.assertIn(AUDIT_BRANCH, bridge["activation_condition"])
+            rerun = policy["manual_rerun_bridge"]
+            self.assertEqual(rerun["eligible_event"], "pull_request")
+            self.assertEqual(rerun["required_head_ref"], AUDIT_BRANCH)
+            self.assertEqual(rerun["initial_attempt_behavior"], "SKIP_LIVE_JOB")
+            self.assertIn("github.run_attempt > 1", rerun["activation_condition"])
+            self.assertFalse(rerun["automatic_live_acquisition"])
 
 
 if __name__ == "__main__":
