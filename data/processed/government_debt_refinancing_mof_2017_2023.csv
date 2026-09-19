@@ -1,0 +1,8 @@
+period,government_debt_refinancing_bn_ron,gross_financing_need_bn_ron,observation_status,source_id
+2017,40.3,66.2,FINAL_ANNUAL_REPORT,mof_annual_debt_report_2018
+2018,43.4,70.3,FINAL_ANNUAL_REPORT,mof_annual_debt_report_2018
+2019,47.2,93.3,OPERATIVE_EXECUTION,mof_annual_debt_report_2019
+2020,46.6,148.0,OPERATIVE_EXECUTION,mof_strategy_2021_2023
+2021,53.5,136.5,FINAL_ANNUAL_REPORT,mof_annual_debt_report_2022
+2022,78.9,160.6,FINAL_ANNUAL_REPORT,mof_annual_debt_report_2022
+2023,95.8,186.4,OPERATIVE_EXECUTION,mof_strategy_2024_2026
