@@ -1,5 +1,5 @@
 {
-  "contract_version": "0.1",
+  "contract_version": "0.2",
   "frozen_on": "2026-09-19",
   "mechanism_id": "corporate_investment_response",
   "phase": "Corporate Investment — Measurement Design Preregistration",
@@ -37,14 +37,23 @@
     "source_verification": "ECB Data Portal series page directly confirms the exact key and adjustment/price semantics."
   },
   "financing_cost_measurement": {
-    "id": "nfc_new_business_lending_rate_quarterly_mean",
-    "source_series_key": "MIR.M.RO.B.A2A.A.R.A.2240.RON.N",
-    "source_concept": "RON new-business lending rate to non-financial corporations",
+    "id": "nfc_new_business_lending_rate_up_to_one_year_quarterly_mean",
+    "source_series_key": "MIR.M.RO.B.A2A.F.R.A.2240.RON.N",
+    "source_concept": "RON new-business lending rate to non-financial corporations, variable rate / initial rate fixation up to one year, total amount",
+    "source_selection_basis": "PREREGISTERED_SOURCE_CONTINUITY_GATE_ONLY",
+    "source_selection_result": "model/calibration_validation/corporate_investment_financing_rate_source_screening_result.json",
+    "retained_screening_vintage": "data/source_vintages/corporate-investment-financing-rate-screening-vintage-2026-09-19",
     "transformation": "ARITHMETIC_MEAN_OF_THE_THREE_MONTHLY_OBSERVATIONS_WITHIN_EACH_QUARTER",
     "missing_rule": "REQUIRE_EXACTLY_THREE_FINITE_MONTHS; NO_INTERPOLATION_OR_FORWARD_FILL",
     "real_rate_adjustment": "NONE_IN_THIS_MEASUREMENT_CYCLE",
-    "reason": "Retain the directly observed marginal nominal financing-cost measure instead of inventing a real-rate deflator or treating it as the effective cost on the outstanding debt stock.",
-    "semantic_boundary": "MARGINAL_NEW_BUSINESS_RATE_NOT_EFFECTIVE_STOCK_RATE"
+    "reason": "The broader total-fixation new-business source failed the preregistered continuity gate (19/35 complete quarters), while the up-to-one-year family passed with 35/35 complete quarters. The switch uses source continuity only and does not inspect investment outcomes.",
+    "semantic_boundary": "MARGINAL_NEW_BUSINESS_RATE_UP_TO_ONE_YEAR_FIXATION_NOT_EFFECTIVE_STOCK_RATE_AND_NOT_TOTAL_ALL_FIXATIONS_RATE",
+    "prior_source_disposition": {
+      "series_key": "MIR.M.RO.B.A2A.A.R.A.2240.RON.N",
+      "status": "NOT_SELECTED_DUE_TO_SOURCE_CONTINUITY",
+      "reason": "Only 19 of 35 eligible calendar quarters contained all three finite monthly observations in the frozen source-continuity screening.",
+      "predictive_performance_used": false
+    }
   },
   "investment_support_measurement": {
     "id": "nfc_investment_grants_support_intensity",
@@ -75,19 +84,19 @@
     "behavioural_closure_change_allowed": false
   },
   "next_gate": {
-    "action": "MATERIALISE_SUPPLEMENTAL_S11_GVA_AND_REAL_GDP_SOURCES_AND_DERIVE_FROZEN_MEASUREMENT_SERIES",
+    "action": "REBUILD_OFFLINE_MEASUREMENT_PANEL_WITH_RETAINED_UP_TO_ONE_YEAR_RATE_SOURCE",
     "required_outputs": [
-      "exact retained raw/normalized S11 GVA source",
-      "exact retained raw/normalized real GDP source",
-      "offline-reproducible investment-grants-support intensity",
+      "continuous quarterly investment-rate target panel over common coverage",
       "offline-reproducible real-GDP year-on-year growth",
-      "offline-reproducible quarterly NFC new-business lending-rate mean",
-      "alignment coverage diagnostic only"
+      "offline-reproducible investment-grants-support intensity",
+      "offline-reproducible quarterly mean of the selected up-to-one-year NFC new-business rate",
+      "alignment continuity diagnostic"
     ],
     "forbidden_at_next_gate": [
       "fit coefficients",
       "search lags",
       "inspect reserved evaluation performance",
+      "relabel the selected rate as total all-fixations financing cost",
       "rename D92 as EU funding",
       "activate a feedback loop"
     ]
