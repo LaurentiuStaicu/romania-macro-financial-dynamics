@@ -1,0 +1,93 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "mechanism_id": "corporate_investment_response",
+  "phase": "Corporate Investment — Measurement Design Preregistration",
+  "purpose": "Freeze the measurement family after exact source-vintage retention and before any behavioural fitting. This contract selects an observed NFC investment-intensity target and exact source/transform boundaries for demand, financing cost and investment-grant support. It does not admit a behavioural equation, choose lag structure, open a calibration cycle, inspect an evaluation holdout or activate System Dynamics feedback.",
+  "evidence_basis": {
+    "target_definition": "Eurostat/ECB quarterly sector accounts define the NFC gross investment rate as gross fixed capital formation divided by gross value added.",
+    "d92_definition": "ESA 2010 D.92 investment grants are capital transfers by government or the rest of the world to finance fixed-asset acquisition; EU institutions can be among rest-of-world payers, but aggregate D.92 does not identify EU origin.",
+    "investment_driver_scope": "Demand and financing conditions are retained as candidate explanatory families because they are independently documented investment-relevant channels; this contract treats them as predictive/associational observables, not identified causal shocks."
+  },
+  "retained_source_vintage": "data/source_vintages/corporate-investment-source-family-vintage-2026-09-19",
+  "primary_target": {
+    "id": "nfc_investment_rate",
+    "series_key": "QSA.Q.N.RO.W0.S11.S1.N.D.P51G._Z._Z._Z.XDC_R_B1G_CY._T.S.V.C4._T",
+    "concept": "Romania non-financial-corporation gross fixed capital formation as a ratio of NFC gross value added, quarterly",
+    "role": "PRIMARY_TARGET_FOR_NEXT_CANDIDATE_FAMILY",
+    "transformation": "USE_PROVIDER_PUBLISHED_RATIO_AS_OBSERVED; NO_ADDITIONAL_DEFLATION_OR_SEASONAL_ADJUSTMENT",
+    "reason": "This exact sector-specific observed target avoids importing a non-sector-specific investment deflator into an S11 behavioural target.",
+    "semantic_boundary": "This is investment intensity, not investment growth. The legacy gI growth form is not estimated in this cycle."
+  },
+  "excluded_target_for_this_cycle": {
+    "id": "legacy_gI_growth",
+    "status": "NOT_SELECTED_FOR_THIS_CYCLE",
+    "reason": "Exact S11 GFCF is nominal/current-price and no sector-specific real-investment deflator has been retained. Choosing a deflator after model outcomes would violate the measurement boundary.",
+    "reopening_rule": "A future gI cycle requires a separately preregistered sector-consistent real/volume measurement bridge and untouched evaluation design."
+  },
+  "demand_measurement": {
+    "id": "real_gdp_yoy_growth",
+    "source_series_key": "MNA.Q.Y.RO.W2.S1.S1.B.B1GQ._Z._Z._Z.XDC.LR.N",
+    "source_concept": "Romania real GDP, chain-linked volume, calendar and seasonally adjusted, quarterly",
+    "transformation": "100 * (level[t] / level[t-4] - 1)",
+    "missing_rule": "NO_INTERPOLATION; REQUIRE_FINITE_t_AND_t_minus_4",
+    "reason": "Use an economy-wide real-demand/activity observable rather than NFC GVA growth, because NFC GVA is the denominator of the selected investment-rate target.",
+    "causal_status": "PREDICTIVE_ACTIVITY_PROXY_NOT_IDENTIFIED_DEMAND_SHOCK"
+  },
+  "financing_cost_measurement": {
+    "id": "nfc_new_business_lending_rate_quarterly_mean",
+    "source_series_key": "MIR.M.RO.B.A2A.A.R.A.2240.RON.N",
+    "source_concept": "RON new-business lending rate to non-financial corporations",
+    "transformation": "ARITHMETIC_MEAN_OF_THE_THREE_MONTHLY_OBSERVATIONS_WITHIN_EACH_QUARTER",
+    "missing_rule": "REQUIRE_EXACTLY_THREE_FINITE_MONTHS; NO_INTERPOLATION_OR_FORWARD_FILL",
+    "real_rate_adjustment": "NONE_IN_THIS_MEASUREMENT_CYCLE",
+    "reason": "Retain the directly observed marginal nominal financing-cost measure instead of inventing a real-rate deflator or treating it as the effective cost on the outstanding debt stock.",
+    "semantic_boundary": "MARGINAL_NEW_BUSINESS_RATE_NOT_EFFECTIVE_STOCK_RATE"
+  },
+  "investment_support_measurement": {
+    "id": "nfc_investment_grants_support_intensity",
+    "source_series_key": "QSA.Q.N.RO.W0.S11.S1.N.C.D92._Z._Z._Z.XDC._T.S.V.N._T",
+    "denominator_series_key": "QSA.Q.N.RO.W0.S11.S1._Z.B.B1G._Z._Z._Z.XDC._T.S.V.N._T",
+    "transformation": "100 * SUM(D92[t-3:t]) / SUM(S11_GVA[t-3:t])",
+    "missing_rule": "REQUIRE_FOUR_CONSECUTIVE_FINITE_QUARTERS_IN_BOTH_SERIES; NO_INTERPOLATION; DENOMINATOR_MUST_BE_POSITIVE",
+    "label": "investment_grants_support_intensity",
+    "prohibited_label": "EU_fund_impulse",
+    "reason": "D.92 is sector-consistent investment support but the aggregate recipient-side series does not identify payer origin.",
+    "semantic_boundary": "ASSOCIATIONAL_SUPPORT_INTENSITY_NOT_EU_SPECIFIC_AND_NOT_A_CAUSAL_POLICY_SHOCK"
+  },
+  "timing_and_lag_boundary": {
+    "transformed_series_may_be_materialised": true,
+    "contemporaneous_alignment_may_be_written": true,
+    "lag_structure_selected": false,
+    "lag_search_allowed": false,
+    "rule": "No lag, distributed-lag, autoregressive order, sign gate or interaction may be chosen until a separate structural-selection contract is frozen before fit."
+  },
+  "calibration_boundary": {
+    "calibration_cycle_open": false,
+    "parameter_estimation_allowed": false,
+    "model_selection_allowed": false,
+    "final_evaluation_open_allowed": false,
+    "behaviour_reproduction_claim_allowed": false,
+    "causal_claim_allowed": false,
+    "system_dynamics_activation_allowed": false,
+    "behavioural_closure_change_allowed": false
+  },
+  "next_gate": {
+    "action": "MATERIALISE_SUPPLEMENTAL_S11_GVA_AND_REAL_GDP_SOURCES_AND_DERIVE_FROZEN_MEASUREMENT_SERIES",
+    "required_outputs": [
+      "exact retained raw/normalized S11 GVA source",
+      "exact retained raw/normalized real GDP source",
+      "offline-reproducible investment-grants-support intensity",
+      "offline-reproducible real-GDP year-on-year growth",
+      "offline-reproducible quarterly NFC new-business lending-rate mean",
+      "alignment coverage diagnostic only"
+    ],
+    "forbidden_at_next_gate": [
+      "fit coefficients",
+      "search lags",
+      "inspect reserved evaluation performance",
+      "rename D92 as EU funding",
+      "activate a feedback loop"
+    ]
+  }
+}
