@@ -1,0 +1,88 @@
+{
+  "assessment_version": "0.1",
+  "phase": "Exploratory post-run ESA F1/QSA semantics diagnostic",
+  "verdict": "EXPLORATORY_DIAGNOSTIC_REJECTS_RESIDENT_F1_LIABILITY_ZERO_NO_PROMOTION",
+  "formal_reference_mode_gate": false,
+  "reference_mode": "sectoral_financial_positions",
+  "methodology_review": "model/dynamics/sectoral_financial_positions_esa_f1_applicability_review.json",
+  "exploratory_reaudit": "model/dynamics/sectoral_financial_positions_esa_f1_applicability_reaudit_assessment.json",
+  "executed_contract_snapshot": "model/dynamics/sectoral_financial_positions_esa_f1_semantics_diagnostic_contract_executed_2026-09-19.json",
+  "source_basis": {
+    "workflow_run_id": 35414387016,
+    "workflow_artifact_id": 10575447251,
+    "workflow_head_sha": "0e56a86ec34e594250f62544bcd90d1e74212343",
+    "workflow_artifact_sha256": "b8bc8391e0560f838017630001d325a06fe332321c828e7f385428b19154215b",
+    "artifact_retention_until": "2026-12-18T02:00:37Z",
+    "audit_script": "scripts/audit_ecb_sectoral_financial_positions_phase_c.py"
+  },
+  "result": {
+    "series_requested": 72,
+    "series_available": 48,
+    "series_http_error": 24,
+    "network_errors": false,
+    "diagnostic_only": true,
+    "f1_decomposition": "F1 = F11 + F12 passes within 0.1 million RON wherever all three series are published.",
+    "resident_f1_liability_findings": {
+      "S12": {
+        "stock_2021_Q2_million_RON": 5820.080078125,
+        "stock_2021_Q3_million_RON": 16370.650390625,
+        "stock_2021_Q4_million_RON": 16649.26953125,
+        "flow_2021_Q3_million_RON": 10323.4697265625,
+        "latest_stock_2026_Q1_million_RON": 16417.44921875
+      },
+      "S121": {
+        "stock_2021_Q2_million_RON": 5820.08,
+        "stock_2021_Q3_million_RON": 16370.65,
+        "stock_2021_Q4_million_RON": 16649.27,
+        "flow_2021_Q3_million_RON": 10323.47,
+        "latest_stock_2026_Q1_million_RON": 16417.45
+      },
+      "S13": {
+        "stock_and_flow_F1_liability": "ZERO_ON_PUBLISHED_SERIES"
+      }
+    },
+    "subcomponent_interpretation": {
+      "resident_S12_S121_F1_liability": "Entirely F12/SDR on the published QSA series examined in Phase C; F11 liability is zero.",
+      "phase_b_persistent_stock_residual": "Explained by omission of the published resident F12 liability from the Phase B represented-boundary formula.",
+      "phase_b_2021_Q3_flow_residual": "Explained by the published F12 liability transaction of about 10,323.47 million RON in 2021-Q3."
+    },
+    "external_orientation": {
+      "S121_F1_assets_equal_W1_F1_assets_max_abs_difference_million_RON": 0,
+      "S121_F11_assets_equal_W1_F11_assets_max_abs_difference_million_RON": 0,
+      "S121_F12_assets_equal_W1_F12_assets_max_abs_difference_million_RON": 0,
+      "interpretation": "The retained data support the existing W1 asset-side counterpart mapping for S121 F1/F11/F12. The principal Phase B error was the resident F1 liability structural-zero assumption, not a wholesale W1 orientation failure."
+    }
+  },
+  "corrected_methodological_conclusion": {
+    "resident_S12_S121_F1_liability_zero_hypothesis": "REJECTED",
+    "reason": "Published QSA S12/S121 F1 liabilities are non-zero and decompose to F12/SDR in the retained diagnostic. The exploratory structural-zero refinement is therefore not supported for these QSA series.",
+    "historical_phase_B_source_required_rule": "RETAINED",
+    "historical_phase_B_reinterpreted": false,
+    "historical_phase_C_D_reinterpreted": false
+  },
+  "diagnostic_interpretation": [
+    "F1 = F11 + F12 reconciles within 0.1 million RON wherever all three published series are available.",
+    "Published S12 and S121 F1 liabilities are non-zero around the 2021 SDR allocation and are entirely F12/SDR in the retained diagnostic; F11 liability is zero.",
+    "The very large residuals in the exploratory corrected-applicability re-audit are explained by omitting those published F12 liabilities.",
+    "The W1 asset-side comparisons match S121 F1/F11/F12 exactly in the retained diagnostic, so the exploratory failure is not evidence for a wholesale W1 orientation swap.",
+    "These findings invalidate the post-run resident-liability structural-zero proposal but do not change the historical Phase B/C/D outcomes, which were generated under the earlier source-required contract."
+  ],
+  "hard_limits": [
+    "diagnostic only; no reference-mode promotion",
+    "no historical A-D reinterpretation",
+    "no tolerance change",
+    "no post-result orientation swap",
+    "no missing series converted to zero",
+    "no Accounting Spine materialization or readiness change",
+    "no behavioural closure change"
+  ],
+  "disposition": {
+    "status": "PARTIAL_SERIES_AVAILABLE",
+    "readiness_count_change": 0,
+    "exploratory_f1_zero_refinement": "REJECTED_BY_PUBLISHED_QSA_SDR_LIABILITIES",
+    "historical_phase_B_contract": "RETAINED_IMMUTABLE",
+    "accounting_readiness": "UNCHANGED",
+    "behavioural_closure": "UNCHANGED_INACTIVE",
+    "further_internal_source_recovery": "FROZEN_UNTIL_REOPEN_TRIGGER"
+  }
+}
