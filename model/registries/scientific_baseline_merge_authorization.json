@@ -1,0 +1,58 @@
+{
+  "assessment_version": "0.1",
+  "authorized_on": "2026-09-19",
+  "stage": "Scientific Baseline Merge Integration",
+  "status": "MERGE_AUTHORIZED_INTEGRATION_PENDING",
+  "predecessor": "model/registries/scientific_baseline_review_ready_assessment.json",
+  "authorization": {
+    "human_instruction": "Continue until stage completion",
+    "interpreted_scope": "Complete the already reviewed scientific-baseline integration stage by merging the approved stack into main.",
+    "pull_requests_in_order": [
+      48,
+      49,
+      50,
+      51,
+      52
+    ],
+    "merge_order": "BOTTOM_UP",
+    "target_branch": "main",
+    "merge_method": "merge",
+    "expected_no_release_side_effect": true
+  },
+  "pre_merge_gate": {
+    "all_stack_prs_open": true,
+    "all_stack_prs_ready_for_review": true,
+    "all_stack_prs_mergeable": true,
+    "all_stack_prs_mergeable_state_clean": true,
+    "blocking_review_threads": 0,
+    "blocking_review_findings": 0,
+    "triggered_scientific_ci_green": true,
+    "triggered_accounting_rank_audits_green": true,
+    "main_branch_protected": false
+  },
+  "scientific_effects": {
+    "merge_authorization_changes_scientific_content": false,
+    "accounting_state_changed": false,
+    "reference_mode_state_changed": false,
+    "behavioural_mechanism_state_changed": false,
+    "calibration_or_refit_authorized": false,
+    "holdout_opening_authorized": false,
+    "system_dynamics_feedback_activation": false,
+    "behavioural_closure_activation": false
+  },
+  "prohibited_side_effects": [
+    "release creation",
+    "tag creation",
+    "version bump",
+    "calibration/refit reopening",
+    "holdout opening",
+    "System Dynamics feedback activation",
+    "behavioural closure activation"
+  ],
+  "next_state": {
+    "id": "INTEGRATION_IN_PROGRESS",
+    "merge_to_main_authorized": true,
+    "automatic_release_authorized": false,
+    "version_change_authorized": false
+  }
+}
