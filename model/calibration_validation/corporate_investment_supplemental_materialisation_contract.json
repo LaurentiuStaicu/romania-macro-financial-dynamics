@@ -1,0 +1,64 @@
+{
+  "contract_version": "0.1",
+  "frozen_on": "2026-09-19",
+  "mechanism_id": "corporate_investment_response",
+  "phase": "Corporate Investment — Supplemental Exact Source Materialisation",
+  "purpose": "Retain exact provider bytes and level-only normalized series for the two official sources required by the preregistered corporate-investment measurement design: Romania S11 gross value added and calendar/seasonally adjusted real GDP. This gate does not derive year-on-year growth, construct investment-grant support intensity, aggregate lending rates, join sources, select lags, fit parameters or open evaluation.",
+  "estimation_authorized": false,
+  "measurement_design_contract": "model/calibration_validation/corporate_investment_measurement_design_contract.json",
+  "sources": [
+    {
+      "id": "nfc_gva",
+      "institution": "ECB Data Portal / Eurostat QSA",
+      "flow": "QSA",
+      "series_key": "QSA.Q.N.RO.W0.S11.S1._Z.B.B1G._Z._Z._Z.XDC._T.S.V.N._T",
+      "frequency": "Q",
+      "concept": "Romania S11 gross value added, quarterly, neither seasonally nor calendar adjusted, current prices, domestic currency",
+      "role": "denominator source for preregistered trailing-four-quarter investment-grants-support intensity"
+    },
+    {
+      "id": "real_gdp",
+      "institution": "ECB Data Portal / Eurostat national accounts",
+      "flow": "MNA",
+      "series_key": "MNA.Q.Y.RO.W2.S1.S1.B.B1GQ._Z._Z._Z.EUR.LR.N",
+      "frequency": "Q",
+      "concept": "Romania real GDP, quarterly, calendar and seasonally adjusted, chain-linked volume, millions of euro",
+      "role": "level source for preregistered year-on-year real activity growth"
+    }
+  ],
+  "materialisation_rules": {
+    "retain_all_finite_provider_observations": true,
+    "retain_exact_raw_csv_bytes": true,
+    "retain_raw_sha256": true,
+    "retain_provider_last_modified_where_available": true,
+    "retain_materializer_script_sha256": true,
+    "write_one_normalized_level_csv_per_source": true,
+    "no_cross_source_join": true,
+    "no_growth_transformation": true,
+    "no_trailing_sum_ratio": true,
+    "no_rate_aggregation": true,
+    "no_interpolation": true,
+    "no_missing_to_zero": true
+  },
+  "semantic_boundaries": {
+    "real_gdp_is_activity_proxy_not_identified_demand_shock": true,
+    "nfc_gva_is_denominator_source_not_investment_target": true,
+    "euro_chain_linked_volume_unit_is_not_nominal_euro_gdp": true
+  },
+  "hard_rules": {
+    "no_parameter_estimation": true,
+    "no_model_selection": true,
+    "no_lag_selection": true,
+    "no_holdout_opening": true,
+    "no_causal_claim": true,
+    "no_system_dynamics_activation": true,
+    "no_behavioural_closure_change": true,
+    "live_provider_work_manual_only": true
+  },
+  "output_files": {
+    "nfc_gva": "nfc_gva_quarterly_level.csv",
+    "real_gdp": "real_gdp_quarterly_level.csv"
+  },
+  "pass_effect": "SUPPLEMENTAL_SOURCE_EVIDENCE_READY_FOR_EXPLICIT_REPOSITORY_REVIEW_ONLY",
+  "next_gate": "After exact source-vintage retention, review and pin the immutable artifact, then derive only the transformations frozen by the measurement-design contract offline."
+}
