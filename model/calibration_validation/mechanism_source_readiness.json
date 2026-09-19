@@ -131,20 +131,26 @@
     {
       "id": "fiscal_primary_balance_reaction",
       "classification": "DEFERRED",
-      "source_readiness": "MATCHED_PRIMARY_BALANCE_VINTAGE_RETAINED_OUTPUT_GAP_DEBT_GAP_REGIMES_UNRESOLVED",
-      "next_admissible_action": "Preregister the fiscal-reaction measurement boundary: exact debt-gap reference/target, output-gap source or estimation model, and dated institutional/discretionary fiscal regimes. Prefer independent official sources; do not infer gaps or break dates from the reaction-function residuals.",
+      "source_readiness": "ANNUAL_AMECO_ACTUAL_SOURCE_VINTAGE_RETAINED_STRUCTURAL_SELECTION_PREREGISTRATION_PENDING",
+      "next_admissible_action": "Preregister a parsimonious annual fiscal-reaction candidate family using only the retained 1995-2024 actual AMECO vintage. Freeze the target transformation (primary-balance level versus change), lag/timing rules, non-fiscal baseline, selection/evaluation windows and identifiability gates before any fit. Do not add regime coefficients in the first cycle.",
       "blockers": [
-        "Matched B9 + D41PAY primary balance is retained exactly for 2000-Q1..2026-Q1.",
-        "No debt-gap target/reference definition is frozen.",
-        "No output-gap source or measurement model is frozen.",
-        "EDP/institutional and major discretionary fiscal regimes are not encoded ex ante."
+        "The exact AMECO actual-only source vintage contains only 30 common annual observations (1995-2024), so the first candidate family must be parsimonious and strongly preregistered.",
+        "The former debt-gap concept has been rejected; a future candidate may use lagged debt-to-GDP level only under the annual measurement boundary, not a synthetic 60% gap.",
+        "EDP, pandemic escape-clause and post-2024 framework regimes are dated ex ante but separate regime coefficients are not currently identifiable in this short single-country annual sample.",
+        "No annual structural-selection contract, target transformation, windows or identifiability gates are frozen yet."
       ],
       "source_boundary_review": "model/calibration_validation/fiscal_primary_balance_source_boundary_review.json",
       "estimation_or_refit_allowed": false,
-      "priority_group": "MEASUREMENT_AND_REGIME_PREREGISTRATION_PENDING",
+      "priority_group": "STRUCTURAL_SELECTION_PREREGISTRATION_PENDING",
       "materialisation_contract": "model/calibration_validation/fiscal_primary_balance_materialisation_contract.json",
       "materialiser_workflow": ".github/workflows/fiscal-primary-balance-materialisation.yml",
-      "retained_source_vintage": "data/source_vintages/fiscal-primary-balance-quarterly-vintage-2026-09-19"
+      "retained_source_vintage": "data/source_vintages/fiscal-primary-balance-quarterly-vintage-2026-09-19",
+      "annual_measurement_boundary": "model/calibration_validation/fiscal_reaction_annual_measurement_boundary_review.json",
+      "annual_materialisation_contract": "model/calibration_validation/fiscal_reaction_ameco_materialisation_contract.json",
+      "annual_materialiser_script": "scripts/audit_ameco_fiscal_reaction_materialisation.py",
+      "annual_materialiser_workflow": ".github/workflows/ameco-fiscal-reaction-materialisation.yml",
+      "retained_annual_source_vintage": "data/source_vintages/fiscal-reaction-ameco-actual-vintage-2026-09-19",
+      "annual_promotion_review": "model/calibration_validation/fiscal_reaction_ameco_source_vintage_promotion_review.json"
     },
     {
       "id": "monetary_policy_reaction_function",
@@ -179,8 +185,8 @@
   "priority_rule": "Priority is determined by the shortest scientifically admissible path to new independent evidence, not by a desire to activate a feedback loop. Waiting mechanisms remain frozen; source-incomplete mechanisms are not fit with proxies.",
   "current_next_step": {
     "mechanism_id": "fiscal_primary_balance_reaction",
-    "action": "PREREGISTER_FISCAL_GAP_AND_REGIME_MEASUREMENT_BOUNDARY_NO_ESTIMATION",
-    "reason": "The matched primary-balance source vintage is now retained. The shortest next admissible path is to resolve debt-gap, output-gap and dated fiscal-regime measurement from independent evidence before defining or estimating any reaction function.",
+    "action": "PREREGISTER_ANNUAL_FISCAL_REACTION_STRUCTURAL_SELECTION_NO_ESTIMATION",
+    "reason": "The exact actual-only AMECO annual source vintage is now retained for 1995-2024 and the measurement/regime boundary is frozen. The next admissible step is to freeze one parsimonious candidate family, timing, windows and identifiability gates before any coefficient estimation.",
     "calibration_cycle_open": false
   },
   "coverage_rule": {
