@@ -142,7 +142,7 @@
         "beta_r",
         "beta_ds"
       ],
-      "estimation_plan": "Quarterly reduced-form candidate using ESA household consumption/disposable-income data and matched borrowing/debt-service measures; compare with income-only baseline before admission.",
+      "estimation_plan": "Calibration remains closed. Retain exact household final-consumption and disposable-income QSA sources, but do not estimate the registered equation until an exact Romania household debt-service burden is retained or a new preregistered candidate-family contract explicitly defines a nested form. The household borrowing-rate family, seasonal treatment, real/nominal transformation, deflator and lag structure must be frozen before any structural-selection/evaluation data are opened.",
       "observables": [
         "household_final_consumption",
         "household_disposable_income",
@@ -155,13 +155,16 @@
       ],
       "limits": [
         "fiscal transfers, inflation and confidence can dominate short samples",
-        "disposable-income quarterly comparability must be verified"
+        "disposable-income quarterly comparability must be verified",
+        "Romania household debt-service-ratio source is not yet retained; leverage ratios and prudential borrower caps are not substitutes",
+        "the household borrowing-rate family must be selected ex ante rather than choosing mortgage versus consumer rates from model fit"
       ],
       "rejection_or_degradation_criteria": [
         "rate/debt-service terms practically non-identifiable",
         "does not outperform income-only baseline on untouched evaluation data",
         "coefficient signs unstable across origins"
-      ]
+      ],
+      "source_boundary_review": "model/calibration_validation/household_consumption_source_boundary_review.json"
     },
     {
       "id": "corporate_investment_response",

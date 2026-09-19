@@ -75,13 +75,16 @@
     {
       "id": "household_consumption_response",
       "classification": "CANDIDATE",
-      "source_readiness": "PARTIAL_SOURCE_FEASIBILITY_NOT_PREREGISTERED",
-      "next_admissible_action": "Screen household consumption, disposable income, borrowing-rate and debt-service observables before deciding whether the full registry form or a nested form is source-admissible.",
+      "source_readiness": "CORE_QSA_SOURCES_CONFIRMED_REGISTERED_FORM_BLOCKED_BY_DSR_AND_RATE_BOUNDARY",
+      "next_admissible_action": "Search for and retain an exact Romania household DSR source; in parallel freeze the household borrowing-rate family only through a new source contract. Do not estimate the current or a nested consumption equation.",
       "blockers": [
-        "Romania household debt-service-ratio source has not been established; no synthetic DSR is authorised."
+        "Exact QSA household consumption and gross disposable income are available.",
+        "No exact Romania household DSR has been retained; annual household debt-to-income is not a substitute.",
+        "Housing versus consumption borrowing-rate choice and quarterly aggregation are not yet preregistered."
       ],
       "estimation_or_refit_allowed": false,
-      "priority_group": "SCREEN_AFTER_HIGHER_PRIORITY_MATERIALISATION"
+      "priority_group": "SOURCE_BOUNDARY_BLOCKED_NO_ESTIMATION",
+      "source_boundary_review": "model/calibration_validation/household_consumption_source_boundary_review.json"
     },
     {
       "id": "corporate_investment_response",

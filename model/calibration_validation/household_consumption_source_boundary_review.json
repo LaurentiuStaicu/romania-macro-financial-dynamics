@@ -1,0 +1,96 @@
+{
+  "review_version": "0.1",
+  "reviewed_on": "2026-09-19",
+  "mechanism_id": "household_consumption_response",
+  "purpose": "Determine whether the currently registered quarterly household-consumption response equation is source-admissible for Romania before any structural selection or parameter estimation.",
+  "verdict": "CORE_CONSUMPTION_AND_INCOME_SOURCES_AVAILABLE_FULL_REGISTERED_FORM_NOT_SOURCE_ADMISSIBLE",
+  "current_registry_form": "gC = alpha + beta_y*gYd - beta_r*real_borrowing_rate - beta_ds*debt_service_ratio",
+  "exact_primary_sources": {
+    "household_final_consumption": {
+      "institution": "ECB Data Portal / Eurostat QSA",
+      "dataset": "QSA",
+      "series_key": "QSA.Q.N.RO.W0.S1M.S1.N.D.P3._Z._Z._Z.XDC._T.S.V.N._T",
+      "concept": "Final consumption expenditure of households and NPISH, Romania, quarterly, current prices, non-seasonally adjusted",
+      "source_url": "https://data.ecb.europa.eu/data/datasets/QSA",
+      "status": "EXACT_SERIES_CONFIRMED"
+    },
+    "household_gross_disposable_income": {
+      "institution": "ECB Data Portal / Eurostat QSA",
+      "dataset": "QSA",
+      "series_key": "QSA.Q.N.RO.W0.S1M.S1._Z.B.B6G._Z._Z._Z.XDC._T.S.V.N._T",
+      "seasonally_adjusted_series_key": "QSA.Q.Y.RO.W0.S1M.S1._Z.B.B6G._Z._Z._Z.XDC._T.S.V.N._T",
+      "concept": "Gross disposable income of households and NPISH, Romania, quarterly",
+      "status": "EXACT_SERIES_CONFIRMED",
+      "coverage_note": "The indexed non-seasonally-adjusted series runs from 1999-Q1 through at least 2025-Q3."
+    }
+  },
+  "borrowing_rate_boundary": {
+    "status": "MULTIPLE_DEFINITIONALLY_DISTINCT_MIR_SERIES_AVAILABLE_RATE_AGGREGATION_NOT_FROZEN",
+    "examples": [
+      {
+        "series_key": "MIR.M.RO.B.A2B.A.C.A.2250.RON.N",
+        "concept": "Household consumption-loan APRC, new business, RON, monthly"
+      },
+      {
+        "series_key": "MIR.M.RO.B.A2C.A.R.A.2250.RON.P",
+        "concept": "House-purchase AAR/NDER, pure new loans, RON, monthly"
+      }
+    ],
+    "rule": "Do not select housing, consumption, outstanding-stock or a synthetic weighted borrowing rate after inspecting household-consumption fit. A future source contract must freeze the economically relevant rate family and monthly-to-quarterly aggregation before estimation."
+  },
+  "debt_service_boundary": {
+    "BIS": {
+      "institution": "Bank for International Settlements",
+      "dataset": "Debt service ratios",
+      "documented_scope": "Quarterly total-private-non-financial-sector DSR for 32 economies; household/NFC breakdown for 17 economies.",
+      "romania_household_series_status": "NOT_CONFIRMED_IN_CURRENT_BIS_SCREENING",
+      "interpretation": "Do not treat absence from current indexed search as proof of universal non-publication; it is sufficient to block the registered DSR term until an exact Romania household series is retained."
+    },
+    "available_non_equivalent_Romania_measure": {
+      "source": "ECB QSA",
+      "series_key": "QSA.A.N.RO.W0.S1M.S1.N.L.LE.F4.T._Z.XDC_R_B6G_CY._T.S.V.N._T",
+      "concept": "Household loans as ratio of gross disposable income, annual",
+      "status": "OBSERVED_BUT_NOT_DSR",
+      "reason": "Debt-to-income is a stock-to-income leverage measure. It omits scheduled amortisation and interest-payment burden and therefore cannot substitute for a debt-service ratio."
+    },
+    "historical_microprudential_thresholds": {
+      "status": "NOT_AGGREGATE_TIME_SERIES",
+      "interpretation": "Regulatory borrower debt-service caps or indebtedness thresholds describe lending rules, not an observed aggregate household DSR history; they may not be inserted as the macro state variable."
+    }
+  },
+  "transformation_boundary": {
+    "consumption_and_income_current_price_levels_available": true,
+    "real_growth_transform_not_yet_frozen": true,
+    "seasonal_adjustment_not_yet_frozen": true,
+    "deflator_source_not_yet_frozen": true,
+    "rule": "Do not choose nominal versus real growth, seasonal treatment, deflator, or lag structure from evaluation fit. These belong in a separate preregistered structural-selection contract only after the source boundary is complete."
+  },
+  "source_admissibility": {
+    "registered_full_form_admissible": false,
+    "reasons": [
+      "No exact Romania household DSR has been retained.",
+      "The household borrowing-rate concept is not uniquely defined by the registry and must be frozen ex ante.",
+      "Real/nominal and seasonal transformations for consumption and disposable income have not yet been frozen."
+    ],
+    "nested_form_automatically_authorized": false,
+    "nested_form_rule": "Removing the DSR term or selecting an income-only/rate-only form requires a new preregistered candidate-family contract. Source incompleteness does not authorize dropping variables after seeing outcomes."
+  },
+  "prohibited_shortcuts": [
+    "Use household loans-to-disposable-income as a debt-service ratio.",
+    "Use a regulatory debt-service cap or borrower indebtedness threshold as an aggregate DSR observation.",
+    "Choose mortgage versus consumer borrowing rates after model fit.",
+    "Construct a synthetic household DSR from debt stock, a new-business rate and an assumed maturity without a separately preregistered measurement model.",
+    "Drop the DSR term and fit a nested equation merely because the DSR source is missing.",
+    "Choose seasonal adjustment, deflator or lag structure after opening evaluation outcomes."
+  ],
+  "disposition": {
+    "mechanism_classification": "CANDIDATE",
+    "source_readiness": "CORE_QSA_SOURCES_CONFIRMED_REGISTERED_FORM_BLOCKED_BY_DSR_AND_RATE_BOUNDARY",
+    "active_calibration_cycle_open": false,
+    "estimation_or_refit_allowed": false,
+    "central_feedback": false,
+    "validated_reference_behavioural_mechanisms_change": 0,
+    "behavioural_closure": "UNCHANGED_INACTIVE",
+    "accounting_spine": "UNCHANGED"
+  }
+}
