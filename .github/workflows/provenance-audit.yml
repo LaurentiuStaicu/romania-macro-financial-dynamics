@@ -1,7 +1,7 @@
 name: Provenance Audit
 
 
-# Live-source provenance comparison is intentionally manual. Canonical provenance
+# Live-source provenance refresh/comparison is intentionally manual. Canonical provenance
 # reproducibility is verified offline in Scientific CI from retained manifests,
 # hashes and source-vintage files.
 on:
