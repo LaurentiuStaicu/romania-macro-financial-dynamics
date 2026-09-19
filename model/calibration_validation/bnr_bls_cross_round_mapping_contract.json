@@ -122,9 +122,16 @@
     }
   ],
   "date_rule": {
+    "legacy_round_date_authoritative_sheet": "companies",
     "legacy_round_date_cell": "A1",
+    "household_header_diagnostic_cells": [
+      "A1",
+      "B1"
+    ],
+    "household_header_date_consistency_required": false,
+    "household_header_date_reason": "Retained legacy workbooks contain household-sheet header anomalies: the February-2023 Romanian sheet stores the round date in B1, while the May-2023 English household sheet retains the previous-round date in A1. The companies-sheet A1 value is therefore the frozen round-date authority for the retained legacy family; household header cells are diagnostic only.",
     "format": "DD/MM/YYYY",
-    "quarter_assignment": "calendar quarter containing the retained round reference date"
+    "quarter_assignment": "calendar quarter containing the authoritative retained round reference date"
   },
   "may_2025_rule": {
     "source": "model/calibration_validation/bnr_bls_may2025_xlsx_layout_review.json",
