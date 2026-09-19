@@ -36,15 +36,16 @@
     "debt_instrument_coverage_match": false,
     "target_population_bridge_observed": false,
     "subgroup_consumption_target_observed": false,
-    "conclusion": "The observed BNR housing-loan DSTI levels are scientifically valid borrower-burden observables but are not directly admissible as the debt_service_ratio driver in the registered aggregate S1M consumption equation. A targeted official-source screening found no observed public bridge, aligned borrower-consumption target or Romania common microdata frame that closes this population boundary.",
+    "conclusion": "The observed BNR housing-loan DSTI levels are scientifically valid borrower-burden observables but are not directly admissible as the debt_service_ratio driver in the registered aggregate S1M consumption equation. A targeted official-source screening found no observed official bridge, aligned borrower-consumption target or Romania common microdata frame that closes this population boundary.",
     "official_public_source_screening_completed": true,
-    "screening_result": "BLOCKED_NO_OBSERVED_PUBLIC_BRIDGE_IDENTIFIED",
+    "screening_result": "BLOCKED_NO_OBSERVED_OFFICIAL_BRIDGE_IDENTIFIED",
     "screened_source_summary": {
       "ECB_HFCS": "Conceptually suitable household finance/consumption microdata. BNR is an HFCN member institution, but Romania is not identified as a participating country dataset in the 2017, 2021 or latest 2023 HFCS waves.",
       "INS_ABF_TEMPO": "Quarterly household budget/consumption source exists, but no public mortgage-borrower-status breakdown or DSTI-consumption linkage was identified.",
       "ECB_CES": "High-frequency spending/income survey, but no Romania country series was identified and it would not itself map mortgage-borrower DSTI to S1M consumption.",
       "EUROSTAT_HBS_2020_SUF": "Romania scientific-use household microdata are available with consumption, income and weights, but the released 2020 SUF manual does not identify a mortgage/loan-status field. Owner-occupier imputed rent is not a mortgage-borrower identifier."
-    }
+    },
+    "official_source_screening_completed": true
   },
   "borrowing_rate_alignment": {
     "household_consumption_loan_rate": "Would align to consumer-credit pricing but not to the housing-loan DSTI instrument boundary.",
@@ -93,7 +94,7 @@
     "no_behavioural_closure_change": true
   },
   "disposition": {
-    "population_alignment_status": "BLOCKED_NO_OBSERVED_PUBLIC_BRIDGE_IDENTIFIED",
+    "population_alignment_status": "BLOCKED_NO_OBSERVED_OFFICIAL_BRIDGE_IDENTIFIED",
     "housing_dsti_observed": true,
     "housing_dsti_directly_admissible_in_registered_aggregate_consumption_form": false,
     "registered_full_form_source_admissible": false,
