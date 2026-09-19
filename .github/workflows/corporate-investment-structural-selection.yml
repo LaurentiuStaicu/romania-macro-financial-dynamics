@@ -23,9 +23,13 @@ jobs:
         with:
           python-version: "3.12"
       - name: Verify frozen contract and primitives
+        env:
+          PYTHONPATH: src
         run: |
           python -m unittest tests.test_corporate_investment_structural_selection_contract -v
           python -m unittest tests.test_corporate_investment_selection_logic -v
           python -m unittest tests.test_corporate_investment_selection_runner -v
       - name: Verify default runner performs no estimation
+        env:
+          PYTHONPATH: src
         run: python scripts/run_corporate_investment_structural_selection.py
