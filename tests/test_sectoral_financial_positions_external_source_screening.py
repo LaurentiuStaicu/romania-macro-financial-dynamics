@@ -30,8 +30,12 @@ class SectoralFinancialPositionsExternalSourceScreeningTests(unittest.TestCase):
             self.review["decision"]["eurostat_counterpart_probe_justified"]
         )
         self.assertEqual(
-            self.review["decision"]["discovery_priority"][0],
-            "OECD_COUNTERPART_DATAFLOWS",
+            self.review["decision"]["discovery_priority"],
+            [],
+        )
+        self.assertEqual(
+            self.review["decision"]["external_counterpart_recovery_state"],
+            "EXHAUSTED_NO_SEMANTICALLY_ADMISSIBLE_CURRENT_PUBLIC_SOURCE",
         )
 
     def test_eurostat_lineage_is_republication_not_independent_measurement(self) -> None:
