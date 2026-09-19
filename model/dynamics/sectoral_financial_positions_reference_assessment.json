@@ -32,7 +32,7 @@
     "F8": "Aggregate-only rank boundary; zero unconditional unique bilateral cells."
   },
   "blocker": {
-    "reason": "The requested reference mode is itself the multi-instrument accounting state. Promoting it while six of seven canonical instruments remain incomplete would turn partial/component/aggregate constraints into a fictitious complete observed reference series.",
+    "reason": "The original full bilateral boundary remains blocked by canonical Accounting Readiness. A preregistered narrower aggregate behaviour-over-time boundary was also tested on 2026-09-19 using an explicit F2-F8 QSA sum. That strict source gate recovered 160/168 requested series but eight unavailable exact series left five sector/side aggregate addresses incomplete, so no complete six-sector stock/flow history or system reconciliation could be formed without an additional source identity or structural applicability rule. No unavailable component was converted to zero. The mode therefore remains PARTIAL_SERIES_AVAILABLE.",
     "blocker_is_structural_identification_not_missing_value_imputation": true
   },
   "prohibited_shortcuts": [
@@ -42,10 +42,14 @@
     "allocate unidentified bilateral cells by shares or residual balancing",
     "describe F3-only or partial-instrument diagnostics as the full sectoral financial-position reference mode"
   ],
-  "reopen_condition": "Promote only after the canonical Accounting Readiness Gate establishes complete stock and flow matrices for every instrument required by the declared sectoral-financial-positions boundary, or after an explicit narrower reference-mode boundary is scientifically justified and preregistered.",
+  "reopen_condition": "Promote only after either (a) the canonical Accounting Readiness Gate establishes complete stock and flow matrices for the original holder-by-issuer boundary, or (b) a separately preregistered aggregate reference boundary passes an immutable source gate on the exact RMD instrument scope without missing-to-zero, synthetic allocation, post-result sector dropping or stock-difference flow proxies.",
   "disposition": {
     "status": "PARTIAL_SERIES_AVAILABLE",
     "readiness_count_change": 0,
-    "behavioural_closure": "UNCHANGED_INACTIVE"
-  }
+    "behavioural_closure": "UNCHANGED_INACTIVE",
+    "strict_aggregate_gate": "FAILED_NO_PROMOTION"
+  },
+  "boundary_review": "model/dynamics/sectoral_financial_positions_boundary_review.json",
+  "strict_source_gate_contract": "model/dynamics/sectoral_financial_positions_reference_contract.json",
+  "strict_source_gate_assessment": "model/dynamics/sectoral_financial_positions_strict_gate_assessment.json"
 }
