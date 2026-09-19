@@ -32,7 +32,7 @@
     "F8": "Aggregate-only rank boundary; zero unconditional unique bilateral cells."
   },
   "blocker": {
-    "reason": "The original bilateral boundary remains blocked by Accounting Readiness. A narrower aggregate sectoral reference boundary was then tested through four preregistered stages. Phase A explicit F2-F8 aggregation failed because eight component series were not disseminated. Phase B exact F-minus-F1 aggregation resolved source coverage but failed the frozen stock reconciliation threshold. Phase C showed that five stock residuals also exceed the ECB DECIMALS-derived publication-precision envelope. Phase D localized those discrepancies: in every failing stock quarter the dominant component is resident-sector additivity versus the directly published S1 total, while the S1-rest-of-world identity is much tighter. Direct S1 cannot replace required sector histories and no residual may be allocated post hoc. The mode therefore remains PARTIAL_SERIES_AVAILABLE and further internal reinterpretation is frozen until a declared reopen trigger occurs.",
+    "reason": "The original holder-by-issuer boundary remains blocked by Accounting Readiness. A narrower aggregate behaviour-over-time boundary has now passed source coverage twice by different routes but not the required scientific gate: Phase A explicit F2-F8 construction failed because eight exact component series were unavailable; Phase B exact total-F-minus-F1 construction recovered all 34 mandatory series across 45 common quarters but failed system reconciliation, with persistent material stock residuals and one large 2021-Q3 flow discontinuity. No tolerance, orientation or applicability rule is changed post-result. The mode remains PARTIAL_SERIES_AVAILABLE.",
     "blocker_is_structural_identification_not_missing_value_imputation": true
   },
   "prohibited_shortcuts": [
@@ -51,7 +51,8 @@
     "aggregate_identity_gate": "FAILED_STRICT_STOCK_RECONCILIATION_NO_PROMOTION",
     "rounding_consistency_gate": "FAILED_NO_PROMOTION",
     "source_discrepancy_diagnostic": "LOCALIZED_RESIDENT_SECTOR_ADDITIVITY_NO_PROMOTION",
-    "further_internal_source_recovery": "FROZEN_UNTIL_REOPEN_TRIGGER"
+    "further_internal_source_recovery": "FROZEN_UNTIL_REOPEN_TRIGGER",
+    "phase_b": "SOURCE_COVERAGE_PASS_RECONCILIATION_FAIL_NO_PROMOTION"
   },
   "boundary_review": "model/dynamics/sectoral_financial_positions_boundary_review.json",
   "strict_source_gate_contract": "model/dynamics/sectoral_financial_positions_reference_contract.json",
@@ -69,5 +70,7 @@
     "readiness_count_change": 0,
     "reopen_authorized": false,
     "rule": "A future corrected F1-applicability test requires a new separately preregistered phase. The historical Phase B contract and A-D evidence chain remain immutable."
-  }
+  },
+  "phase_b_contract": "model/dynamics/sectoral_financial_positions_aggregate_identity_contract.json",
+  "phase_b_assessment": "model/dynamics/sectoral_financial_positions_phase_b_assessment.json"
 }
