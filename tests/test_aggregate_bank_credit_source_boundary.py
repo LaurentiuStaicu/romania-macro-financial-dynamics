@@ -94,9 +94,13 @@ class AggregateBankCreditSourceBoundaryTests(unittest.TestCase):
         catalog = review["bls_machine_readable_source_catalog"]
         self.assertEqual(
             catalog["status"],
-            "PARTIAL_RAW_ARCHIVE_RETAINED_LEGACY_XLS_EXTRACTION_PENDING_XLSX_BRIDGE_AVAILABLE",
+            "CANONICAL_11_OF_12_EXACT_REALIZED_ROUNDS_RETAINED_SINGLE_GAP_2025_Q2",
         )
-        self.assertFalse(catalog["historical_coverage_claimed"])
+        self.assertTrue(catalog["historical_coverage_claimed"])
+        self.assertFalse(catalog["historical_coverage_complete"])
+        self.assertEqual(catalog["canonical_observed_round_count"], 11)
+        self.assertEqual(catalog["canonical_expected_round_count"], 12)
+        self.assertEqual(catalog["canonical_missing_rounds"], ["2025-Q2"])
         self.assertGreaterEqual(len(catalog["files"]), 6)
         retained_legacy = 0
         xlsx_candidates = 0
@@ -181,7 +185,20 @@ class AggregateBankCreditSourceBoundaryTests(unittest.TestCase):
         rules = " ".join(screen["decision_rules"]).lower()
         self.assertIn("do not choose cet1 versus total capital ratio", rules)
         self.assertIn("do not forward-fill", rules)
-        self.assertEqual(screen["calibration_effect"], "NONE")
+        self.assertEqual(
+            screen["calibration_effect"],
+            "NONE_DIRECT_SUBSTITUTION_REJECTED",
+        )
+        self.assertFalse(
+            screen["population_boundary_decision"]["direct_cbd2_to_bnr_equivalence"]
+        )
+        self.assertFalse(
+            screen["population_boundary_decision"]["numeric_similarity_can_bridge"]
+        )
+        self.assertEqual(
+            review["prudential_population_boundary_review"],
+            "model/calibration_validation/bank_credit_prudential_population_boundary_review.json",
+        )
 
     def test_no_system_dynamics_activation_follows_from_source_feasibility(self) -> None:
         review = load(
